@@ -1,0 +1,78 @@
+name: Update Salesforce Types
+
+on:
+  schedule:
+    # Run daily at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+  # Also run when Dependabot updates package.json
+  pull_request:
+    paths:
+      - 'package.json'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-types:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install dependencies (fetches @salesforce/types)
+        run: npm ci
+
+      - name: Regenerate Rust types
+        run: |
+          cd sf-wsdl
+          # Use the type definition file from node_modules
+          # The path might vary slightly depending on how @salesforce/types exposes it
+          # Usually it's in dist/ or src/
+          TYPES_PATH="../node_modules/@salesforce/types/src/metadata.ts"
+          
+          if [ ! -f "$TYPES_PATH" ]; then
+            echo "Error: Could not find metadata.ts at $TYPES_PATH"
+            # Try finding it
+            find ../node_modules/@salesforce/types -name "metadata.ts"
+            exit 1
+          fi
+
+          cargo run --bin generate_from_typescript -- --output-dir ../sf-generated-types/src --input-file "$TYPES_PATH"
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --exit-code || echo "changes=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and Push changes
+        if: steps.git-check.outputs.changes == 'true'
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add sf-generated-types/src/
+          
+          # If this is a PR (e.g. from Dependabot), commit to the branch
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+             git commit -m "chore: regenerate types for updated @salesforce/types"
+             git push
+          else
+             # If this is a scheduled run, create a new PR
+             git commit -m "chore: update Salesforce types"
+             git checkout -b update-types-$(date +%Y%m%d)
+             git push origin update-types-$(date +%Y%m%d)
+             gh pr create --title "Update Salesforce Types" --body "Automated update from @salesforce/types"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

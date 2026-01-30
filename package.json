@@ -1,0 +1,12 @@
+{
+  "name": "busbar-sf-types-workspace",
+  "version": "1.0.0",
+  "description": "Workspace for Salesforce Rust type generation",
+  "private": true,
+  "devDependencies": {
+    "@salesforce/types": "^1.2.0"
+  },
+  "scripts": {
+    "generate": "cd sf-wsdl && cargo run --bin generate_from_typescript -- --output-dir ../sf-generated-types/src --input-file ../node_modules/@salesforce/types/src/metadata.ts"
+  }
+}

@@ -1,0 +1,46 @@
+[package]
+name = "sf-wsdl"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "TypeScript to Rust code generation utilities for Salesforce metadata types"
+
+[dependencies]
+# Regex for fallback extraction
+regex.workspace = true
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+
+# TypeScript AST parsing - using oxc
+oxc_parser = "0.36"
+oxc_ast = "0.36"
+oxc_allocator = "0.36"
+oxc_span = "0.36"
+oxc_diagnostics = "0.36"
+
+# Code generation utilities
+convert_case = "0.6"
+
+# Error handling
+thiserror.workspace = true
+anyhow.workspace = true
+
+# Async runtime
+tokio.workspace = true
+
+# HTTP client for fetching from GitHub
+reqwest = { workspace = true, features = ["blocking"] }
+async-trait.workspace = true
+http.workspace = true
+
+# Temporary file handling
+tempfile.workspace = true
+
+[features]
+default = ["build-utils"]
+# Feature for build script utilities
+build-utils = []
