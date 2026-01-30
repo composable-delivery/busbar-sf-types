@@ -749,6 +749,7 @@ pub struct GenerationResult {
 pub fn generate_enum(name: &str, variants: &[String]) -> String {
     let mut output = format!(
         r#"#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum {} {{
     #[default]
 "#,
@@ -798,6 +799,7 @@ pub enum {} {{
 pub fn generate_struct(name: &str, fields: &[FieldDef], defs: &TypeDefinitions) -> String {
     let mut output = format!(
         r#"#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct {} {{
 "#,
@@ -865,6 +867,7 @@ pub fn generate_struct_for_module(
 ) -> String {
     let mut output = format!(
         r#"#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct {} {{
 "#,

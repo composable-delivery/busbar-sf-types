@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 env:
   CARGO_TERM_COLOR: always
@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Rust
         uses: dtolnay/rust-toolchain@stable
         with:
@@ -44,3 +44,12 @@ jobs:
 
       - name: Lint with Clippy
         run: cargo clippy -- -D warnings
+
+      - name: Generate JSON Schemas
+        run: cargo run -p sf-generated-types --bin schema-gen --features "full schemars" -- schemas
+
+      - name: Upload JSON Schemas
+        uses: actions/upload-artifact@v4
+        with:
+          name: salesforce-json-schemas
+          path: schemas/

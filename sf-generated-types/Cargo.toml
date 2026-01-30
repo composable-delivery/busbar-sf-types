@@ -13,9 +13,16 @@ categories = ["development-tools", "encoding"]
 [dependencies]
 serde = { workspace = true, features = ["derive"] }
 serde_json.workspace = true
+schemars = { version = "0.8", optional = true, features = ["derive"] }
+
+[[bin]]
+name = "schema-gen"
+path = "src/bin/schema_gen.rs"
+required-features = ["schemars", "full"]
 
 [features]
 default = ["common"]
+schemars = ["dep:schemars"]
 
 # =============================================================================
 # Core types (always light)
