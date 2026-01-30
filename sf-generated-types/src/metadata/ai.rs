@@ -1272,4 +1272,3 @@ pub struct GenAiPromptTemplateGenerationConfig {
     #[serde(rename = "generationConfigDeveloperName", default)]
     pub generation_config_developer_name: String,
 }
-

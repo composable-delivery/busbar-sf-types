@@ -94,4 +94,3 @@ pub struct BriefcaseDefinition {
     #[serde(default)]
     pub r#type: BriefcaseType,
 }
-

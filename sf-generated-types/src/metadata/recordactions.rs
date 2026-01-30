@@ -303,4 +303,3 @@ pub struct RecordAggregationObjectFilter {
     #[serde(default)]
     pub value: String,
 }
-

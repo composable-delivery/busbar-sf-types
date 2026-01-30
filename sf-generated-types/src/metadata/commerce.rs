@@ -237,4 +237,3 @@ pub struct ProductSpecificationRecType {
     #[serde(rename = "recordType", default)]
     pub record_type: String,
 }
-

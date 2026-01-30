@@ -590,4 +590,3 @@ pub struct BotStepTranslation {
     #[serde(default)]
     pub r#type: BotStepType,
 }
-

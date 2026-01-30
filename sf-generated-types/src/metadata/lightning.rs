@@ -90,4 +90,3 @@ pub struct LightningBoltItems {
     #[serde(default)]
     pub r#type: String,
 }
-

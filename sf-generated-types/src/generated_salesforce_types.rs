@@ -15869,7 +15869,10 @@ pub struct ProductAttributeSet {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct LeadConfigSettings {
-    #[serde(rename = "doesEnableLeadConvertDefaultSubjectBlankTaskCreation", default)]
+    #[serde(
+        rename = "doesEnableLeadConvertDefaultSubjectBlankTaskCreation",
+        default
+    )]
     pub does_enable_lead_convert_default_subject_blank_task_creation: bool,
     #[serde(rename = "doesHideOpportunityInConvertLeadWindow", default)]
     pub does_hide_opportunity_in_convert_lead_window: bool,
@@ -15885,7 +15888,10 @@ pub struct LeadConfigSettings {
     pub enable_org_wide_merge_and_delete: bool,
     #[serde(rename = "shouldLeadConvertRequireValidation", default)]
     pub should_lead_convert_require_validation: bool,
-    #[serde(rename = "shouldSendNotificationEmailWhenLeadOwnerUpdatesViaApexInLEX", default)]
+    #[serde(
+        rename = "shouldSendNotificationEmailWhenLeadOwnerUpdatesViaApexInLEX",
+        default
+    )]
     pub should_send_notification_email_when_lead_owner_updates_via_apex_in_lex: bool,
 }
 
@@ -39620,7 +39626,10 @@ pub struct ReadResult {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct SubscriptionManagementSettings {
-    #[serde(rename = "enableConvertNegativeInvoiceLinesToCreditMemoAndApply", default)]
+    #[serde(
+        rename = "enableConvertNegativeInvoiceLinesToCreditMemoAndApply",
+        default
+    )]
     pub enable_convert_negative_invoice_lines_to_credit_memo_and_apply: bool,
     #[serde(rename = "enablePaymentScheduleAutomation", default)]
     pub enable_payment_schedule_automation: bool,
@@ -40109,7 +40118,10 @@ pub struct MediaAdSalesSettings {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct IndustriesSettings {
-    #[serde(rename = "allowBenefitAssignmentWithInactiveProgramEnrollment", default)]
+    #[serde(
+        rename = "allowBenefitAssignmentWithInactiveProgramEnrollment",
+        default
+    )]
     pub allow_benefit_assignment_with_inactive_program_enrollment: bool,
     #[serde(rename = "allowMultipleProducersToWorkOnSamePolicy", default)]
     pub allow_multiple_producers_to_work_on_same_policy: bool,
@@ -40295,15 +40307,27 @@ pub struct IndustriesSettings {
     pub enable_compliant_data_sharing_for_funding_award_site_users: bool,
     #[serde(rename = "enableCompliantDataSharingForFundingOpportunity", default)]
     pub enable_compliant_data_sharing_for_funding_opportunity: bool,
-    #[serde(rename = "enableCompliantDataSharingForFundingOpportunitySiteUsers", default)]
+    #[serde(
+        rename = "enableCompliantDataSharingForFundingOpportunitySiteUsers",
+        default
+    )]
     pub enable_compliant_data_sharing_for_funding_opportunity_site_users: bool,
     #[serde(rename = "enableCompliantDataSharingForIndividualApplication", default)]
     pub enable_compliant_data_sharing_for_individual_application: bool,
-    #[serde(rename = "enableCompliantDataSharingForIndividualApplicationSiteUsers", default)]
+    #[serde(
+        rename = "enableCompliantDataSharingForIndividualApplicationSiteUsers",
+        default
+    )]
     pub enable_compliant_data_sharing_for_individual_application_site_users: bool,
-    #[serde(rename = "enableCompliantDataSharingForIndividualApplicationTask", default)]
+    #[serde(
+        rename = "enableCompliantDataSharingForIndividualApplicationTask",
+        default
+    )]
     pub enable_compliant_data_sharing_for_individual_application_task: bool,
-    #[serde(rename = "enableCompliantDataSharingForIndividualApplicationTaskSiteUsers", default)]
+    #[serde(
+        rename = "enableCompliantDataSharingForIndividualApplicationTaskSiteUsers",
+        default
+    )]
     pub enable_compliant_data_sharing_for_individual_application_task_site_users: bool,
     #[serde(rename = "enableCompliantDataSharingForInteraction", default)]
     pub enable_compliant_data_sharing_for_interaction: bool,
@@ -40311,9 +40335,15 @@ pub struct IndustriesSettings {
     pub enable_compliant_data_sharing_for_interaction_summary: bool,
     #[serde(rename = "enableCompliantDataSharingForOpportunity", default)]
     pub enable_compliant_data_sharing_for_opportunity: bool,
-    #[serde(rename = "enableCompliantDataSharingForPreliminaryApplicationRef", default)]
+    #[serde(
+        rename = "enableCompliantDataSharingForPreliminaryApplicationRef",
+        default
+    )]
     pub enable_compliant_data_sharing_for_preliminary_application_ref: bool,
-    #[serde(rename = "enableCompliantDataSharingForPreliminaryApplicationRefSiteUsers", default)]
+    #[serde(
+        rename = "enableCompliantDataSharingForPreliminaryApplicationRefSiteUsers",
+        default
+    )]
     pub enable_compliant_data_sharing_for_preliminary_application_ref_site_users: bool,
     #[serde(rename = "enableComprehendMedical", default)]
     pub enable_comprehend_medical: bool,
@@ -40361,7 +40391,10 @@ pub struct IndustriesSettings {
     pub enable_de_dupe_for_ds_pref: bool,
     #[serde(rename = "enableDealManagement", default)]
     pub enable_deal_management: bool,
-    #[serde(rename = "enableDeleteCustomObjectParticipantRecordCompliantDataSharing", default)]
+    #[serde(
+        rename = "enableDeleteCustomObjectParticipantRecordCompliantDataSharing",
+        default
+    )]
     pub enable_delete_custom_object_participant_record_compliant_data_sharing: bool,
     #[serde(rename = "enableDepriveSoqlAccessGuestUserOrgPref", default)]
     pub enable_deprive_soql_access_guest_user_org_pref: bool,
@@ -43861,7 +43894,10 @@ pub struct FlowSettings {
     pub is_flow_block_access_to_session_id_enabled: bool,
     #[serde(rename = "isManageFlowRequiredForAutomationCharts", default)]
     pub is_manage_flow_required_for_automation_charts: bool,
-    #[serde(rename = "isSupportRollbackOnErrorForApexInvocableActionsEnabled", default)]
+    #[serde(
+        rename = "isSupportRollbackOnErrorForApexInvocableActionsEnabled",
+        default
+    )]
     pub is_support_rollback_on_error_for_apex_invocable_actions_enabled: bool,
 }
 
@@ -50405,4 +50441,3 @@ pub struct ExperienceBundle {
     #[serde(rename = "urlPathPrefix", default)]
     pub url_path_prefix: String,
 }
-

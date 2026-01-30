@@ -430,4 +430,3 @@ pub struct ForecastingFilter {
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
 }
-

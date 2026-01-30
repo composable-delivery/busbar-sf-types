@@ -1100,9 +1100,15 @@ mod tests {
         let mut defs = TypeDefinitions::default();
         defs.union_types.insert("FieldType".to_string(), vec![]);
 
-        assert_eq!(resolve_type_monolithic("String", &defs, "MyStruct"), "String");
+        assert_eq!(
+            resolve_type_monolithic("String", &defs, "MyStruct"),
+            "String"
+        );
         assert_eq!(resolve_type_monolithic("bool", &defs, "MyStruct"), "bool");
-        assert_eq!(resolve_type_monolithic("FieldType", &defs, "MyStruct"), "FieldType");
+        assert_eq!(
+            resolve_type_monolithic("FieldType", &defs, "MyStruct"),
+            "FieldType"
+        );
         assert_eq!(
             resolve_type_monolithic("UnknownType", &defs, "MyStruct"),
             "serde_json::Value"
@@ -1110,7 +1116,7 @@ mod tests {
         // Self-reference should use Box
         assert_eq!(
             resolve_type_monolithic("MyStruct", &defs, "MyStruct"),
-            "serde_json::Value"  // MyStruct not in defs, so falls through
+            "serde_json::Value" // MyStruct not in defs, so falls through
         );
     }
 

@@ -105,4 +105,3 @@ pub struct TransactionSecurityAction {
     #[serde(rename = "twoFactorAuthentication", default)]
     pub two_factor_authentication: bool,
 }
-

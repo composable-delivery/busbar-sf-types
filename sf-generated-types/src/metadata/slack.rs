@@ -27,4 +27,3 @@ pub struct SlackRecordLayout {
     #[serde(rename = "viewMode", default)]
     pub view_mode: SlackRecordLayoutViewMode,
 }
-

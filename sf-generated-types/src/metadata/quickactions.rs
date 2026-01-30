@@ -445,4 +445,3 @@ pub struct QuickActionParameters {
     #[serde(default)]
     pub value: String,
 }
-

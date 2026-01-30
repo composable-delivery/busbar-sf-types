@@ -248,4 +248,3 @@ pub struct FieldSrcTrgtRelationship {
     #[serde(rename = "targetFieldName", default)]
     pub target_field_name: String,
 }
-

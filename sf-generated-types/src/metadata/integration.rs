@@ -629,4 +629,3 @@ pub struct ConnectedAppAttribute {
     #[serde(default)]
     pub key: String,
 }
-

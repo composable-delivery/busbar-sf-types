@@ -229,4 +229,3 @@ pub struct SearchCustomization {
     #[serde(rename = "selectedProfile", default)]
     pub selected_profile: Vec<String>,
 }
-

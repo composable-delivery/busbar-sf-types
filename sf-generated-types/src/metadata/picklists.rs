@@ -79,4 +79,3 @@ pub struct PicklistEntry {
     #[serde(default)]
     pub value: String,
 }
-

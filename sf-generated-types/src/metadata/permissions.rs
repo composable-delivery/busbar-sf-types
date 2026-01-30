@@ -697,4 +697,3 @@ pub struct ProfilePasswordPolicy {
     #[serde(default)]
     pub profile: String,
 }
-

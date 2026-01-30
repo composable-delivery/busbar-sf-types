@@ -120,4 +120,3 @@ pub struct VisualizationPlugin {
     #[serde(rename = "visualizationTypes", default)]
     pub visualization_types: Vec<VisualizationType>,
 }
-

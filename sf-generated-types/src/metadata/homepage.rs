@@ -37,4 +37,3 @@ pub struct HomePageLayout {
     #[serde(rename = "wideComponents", default)]
     pub wide_components: Vec<String>,
 }
-

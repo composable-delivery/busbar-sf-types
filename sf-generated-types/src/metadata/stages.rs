@@ -253,4 +253,3 @@ pub struct PathAssistantStep {
     #[serde(rename = "picklistValueName", default)]
     pub picklist_value_name: String,
 }
-

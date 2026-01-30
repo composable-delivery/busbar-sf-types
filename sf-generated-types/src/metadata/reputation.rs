@@ -57,4 +57,3 @@ pub struct ReputationPointsRule {
     #[serde(default)]
     pub points: f64,
 }
-

@@ -130,4 +130,3 @@ pub struct PolicyRuleDefinitionCondition {
     #[serde(rename = "whereClauseConjunction", default)]
     pub where_clause_conjunction: String,
 }
-

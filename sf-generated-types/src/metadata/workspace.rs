@@ -25,4 +25,3 @@ pub struct TabLimitConfig {
     #[serde(rename = "maxNumberOfSubTabs", default)]
     pub max_number_of_sub_tabs: String,
 }
-

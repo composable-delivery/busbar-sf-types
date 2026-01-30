@@ -89,4 +89,3 @@ pub struct ChannelLayoutItem {
     #[serde(default)]
     pub field: String,
 }
-

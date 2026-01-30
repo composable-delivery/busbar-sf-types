@@ -65,4 +65,3 @@ pub struct DigitalExperienceConfig {
     #[serde(default)]
     pub space: String,
 }
-

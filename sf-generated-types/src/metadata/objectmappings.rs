@@ -170,4 +170,3 @@ pub struct ObjectHierarchyRelationship {
     #[serde(rename = "usageType", default)]
     pub usage_type: serde_json::Value,
 }
-

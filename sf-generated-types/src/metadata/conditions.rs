@@ -51,4 +51,3 @@ pub enum ConditionLogic {
     #[default]
     All,
 }
-

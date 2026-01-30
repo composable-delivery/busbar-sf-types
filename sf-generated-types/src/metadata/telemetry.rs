@@ -131,4 +131,3 @@ pub struct TelemetryActnDefStepAttr {
     #[serde(rename = "unitOfMeasure", default)]
     pub unit_of_measure: String,
 }
-

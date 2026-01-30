@@ -942,4 +942,3 @@ pub struct OmniDataTransform {
     #[serde(rename = "xmlOutputTagsOrder", default)]
     pub xml_output_tags_order: String,
 }
-

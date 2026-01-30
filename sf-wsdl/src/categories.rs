@@ -495,11 +495,7 @@ pub const CATEGORIES: &[TypeCategory] = &[
         feature: "integration",
         module_path: "metadata/integration.rs",
         description: "Connected apps, external services, and integrations",
-        patterns: &[
-            "ConnectedApp*",
-            "ExternalService*",
-            "NamedCredential*",
-        ],
+        patterns: &["ConnectedApp*", "ExternalService*", "NamedCredential*"],
         explicit_types: &[
             "ConnectedApp",
             "ConnectedAppOauthConfig",
@@ -525,7 +521,14 @@ pub const CATEGORIES: &[TypeCategory] = &[
         feature: "analytics",
         module_path: "metadata/analytics.rs",
         description: "Wave Analytics, CRM Analytics, Tableau CRM types",
-        patterns: &["Wave*", "Xmd*", "Analytics*", "Lens*", "Dataset*", "Dataflow*"],
+        patterns: &[
+            "Wave*",
+            "Xmd*",
+            "Analytics*",
+            "Lens*",
+            "Dataset*",
+            "Dataflow*",
+        ],
         explicit_types: &[
             "WaveApplication",
             "WaveDataset",
@@ -596,7 +599,14 @@ pub const CATEGORIES: &[TypeCategory] = &[
         feature: "ai",
         module_path: "metadata/ai.rs",
         description: "AI, Machine Learning, Einstein, Prompt Templates",
-        patterns: &["Ml*", "Ai*", "GenAi*", "Prediction*", "Prompt*", "Einstein*"],
+        patterns: &[
+            "Ml*",
+            "Ai*",
+            "GenAi*",
+            "Prediction*",
+            "Prompt*",
+            "Einstein*",
+        ],
         explicit_types: &[
             "MlAIModelType",
             "MlGenerativeModelCapability",
@@ -648,7 +658,13 @@ pub const CATEGORIES: &[TypeCategory] = &[
         feature: "decisions",
         module_path: "metadata/decisions.rs",
         description: "Decision Tables, Expression Sets, Business Rules",
-        patterns: &["Decision*", "Expression*", "Exps*", "Calculation*", "Matrix*"],
+        patterns: &[
+            "Decision*",
+            "Expression*",
+            "Exps*",
+            "Calculation*",
+            "Matrix*",
+        ],
         explicit_types: &[
             "DecisionTable",
             "DecisionTableSortType",
@@ -748,7 +764,14 @@ pub const CATEGORIES: &[TypeCategory] = &[
         feature: "servicecloud",
         module_path: "metadata/servicecloud.rs",
         description: "Service Cloud, Cases, Knowledge, Entitlements, Embedded Service",
-        patterns: &["Embedded*", "Case*", "Knowledge*", "Entitlement*", "LiveAgent*", "LiveChat*"],
+        patterns: &[
+            "Embedded*",
+            "Case*",
+            "Knowledge*",
+            "Entitlement*",
+            "LiveAgent*",
+            "LiveChat*",
+        ],
         explicit_types: &[
             "EmbeddedServiceResourceType",
             "EmbeddedServiceDeploymentFeature",
@@ -947,7 +970,13 @@ pub const CATEGORIES: &[TypeCategory] = &[
         feature: "scheduling",
         module_path: "metadata/scheduling.rs",
         description: "Scheduling, Field Service, Appointments, Territories",
-        patterns: &["Scheduling*", "Appointment*", "Shift*", "Territory*", "FieldService*"],
+        patterns: &[
+            "Scheduling*",
+            "Appointment*",
+            "Shift*",
+            "Territory*",
+            "FieldService*",
+        ],
         explicit_types: &[
             "SchedulingObjectiveType",
             "SchedulingRuleType",
@@ -1028,7 +1057,12 @@ pub const CATEGORIES: &[TypeCategory] = &[
         feature: "quickactions",
         module_path: "metadata/quickactions.rs",
         description: "Quick Actions, Global Actions, Action Links",
-        patterns: &["QuickAction*", "ActionLink*", "ActionPlan*", "ActionLauncher*"],
+        patterns: &[
+            "QuickAction*",
+            "ActionLink*",
+            "ActionPlan*",
+            "ActionLauncher*",
+        ],
         explicit_types: &[
             "QuickActionType",
             "QuickActionParameterType",
@@ -1064,7 +1098,13 @@ pub const CATEGORIES: &[TypeCategory] = &[
         feature: "custommetadata",
         module_path: "metadata/custommetadata.rs",
         description: "Custom Metadata, Custom Labels, Custom Tabs",
-        patterns: &["CustomLabel*", "CustomTab*", "CustomMetadata*", "CustomPermission*", "CustomNotification*"],
+        patterns: &[
+            "CustomLabel*",
+            "CustomTab*",
+            "CustomMetadata*",
+            "CustomPermission*",
+            "CustomNotification*",
+        ],
         explicit_types: &[
             "CustomSettingsType",
             "CustomChannelConnectedAppType",
@@ -1365,7 +1405,17 @@ pub const CATEGORIES: &[TypeCategory] = &[
         feature: "industries",
         module_path: "metadata/industries.rs",
         description: "Industry Cloud types (Health, Insurance, Manufacturing, Automotive)",
-        patterns: &["Care*", "Health*", "Clinical*", "Insurance*", "Ins*", "Mfg*", "Manufacturing*", "Vehicle*", "Automotive*"],
+        patterns: &[
+            "Care*",
+            "Health*",
+            "Clinical*",
+            "Insurance*",
+            "Ins*",
+            "Mfg*",
+            "Manufacturing*",
+            "Vehicle*",
+            "Automotive*",
+        ],
         explicit_types: &[
             "MfgProgramTransformationType",
             "VehicleAssetType",
@@ -1389,7 +1439,17 @@ pub const CATEGORIES: &[TypeCategory] = &[
         feature: "commerce",
         module_path: "metadata/commerce.rs",
         description: "Commerce Cloud, Web Stores, Products, Pricing",
-        patterns: &["Commerce*", "WebStore*", "Product*", "PriceBook*", "Cart*", "Checkout*", "Order*", "Payment*", "Promotion*"],
+        patterns: &[
+            "Commerce*",
+            "WebStore*",
+            "Product*",
+            "PriceBook*",
+            "Cart*",
+            "Checkout*",
+            "Order*",
+            "Payment*",
+            "Promotion*",
+        ],
         explicit_types: &[
             "ProductGrouping",
             "WebStoreType",
@@ -1749,11 +1809,7 @@ pub const CATEGORIES: &[TypeCategory] = &[
         module_path: "metadata/navigation.rs",
         description: "Navigation Menus, Navigation Links",
         patterns: &["Navigation*"],
-        explicit_types: &[
-            "NavigationLinkSet",
-            "NavigationSubMenu",
-            "NavigationMenu",
-        ],
+        explicit_types: &["NavigationLinkSet", "NavigationSubMenu", "NavigationMenu"],
     },
     // Transaction Security
     TypeCategory {
@@ -1987,10 +2043,7 @@ pub const CATEGORIES: &[TypeCategory] = &[
         module_path: "metadata/slack.rs",
         description: "Slack Integration, Slack Record Layouts",
         patterns: &["Slack*"],
-        explicit_types: &[
-            "SlackRecordLayoutViewMode",
-            "SlackRecordLayout",
-        ],
+        explicit_types: &["SlackRecordLayoutViewMode", "SlackRecordLayout"],
     },
     // Explainability
     TypeCategory {
@@ -2028,11 +2081,7 @@ pub const CATEGORIES: &[TypeCategory] = &[
         module_path: "metadata/picklists.rs",
         description: "Picklist Values, Picklist Translations",
         patterns: &["Picklist*"],
-        explicit_types: &[
-            "Picklist",
-            "PicklistValueTranslation",
-            "PicklistValue",
-        ],
+        explicit_types: &["Picklist", "PicklistValueTranslation", "PicklistValue"],
     },
     // Related Records
     TypeCategory {
@@ -2058,10 +2107,7 @@ pub const CATEGORIES: &[TypeCategory] = &[
         module_path: "metadata/homepage.rs",
         description: "Home Page Components, Home Page Layouts",
         patterns: &["HomePage*", "Home*"],
-        explicit_types: &[
-            "HomePageComponent",
-            "HomePageLayout",
-        ],
+        explicit_types: &["HomePageComponent", "HomePageLayout"],
     },
     // UI Configuration
     TypeCategory {
@@ -2146,11 +2192,7 @@ pub const CATEGORIES: &[TypeCategory] = &[
         module_path: "metadata/deploy.rs",
         description: "Deploy Options, Deploy Details, Deploy Problems",
         patterns: &["Deploy*"],
-        explicit_types: &[
-            "DeployProblemType",
-            "DeployDetails",
-            "DeployOptions",
-        ],
+        explicit_types: &["DeployProblemType", "DeployDetails", "DeployOptions"],
     },
     // Lightning General (not LWC)
     TypeCategory {
@@ -2173,10 +2215,7 @@ pub const CATEGORIES: &[TypeCategory] = &[
         module_path: "metadata/workspace.rs",
         description: "Workspace Mappings, Console Configuration",
         patterns: &["Workspace*", "Console*", "Tab*"],
-        explicit_types: &[
-            "WorkspaceMapping",
-            "TabLimitConfig",
-        ],
+        explicit_types: &["WorkspaceMapping", "TabLimitConfig"],
     },
     // Standard Types
     TypeCategory {
@@ -2185,10 +2224,7 @@ pub const CATEGORIES: &[TypeCategory] = &[
         module_path: "metadata/standard.rs",
         description: "Standard Permission Sets, Standard Fields",
         patterns: &["Standard*"],
-        explicit_types: &[
-            "StandardPermissionSet",
-            "StandardFieldTranslation",
-        ],
+        explicit_types: &["StandardPermissionSet", "StandardFieldTranslation"],
     },
 ];
 
@@ -2317,7 +2353,10 @@ mod tests {
 
         // Test decision tables
         assert!(find_category("DecisionTable").is_some());
-        assert_eq!(find_category("DecisionTable").unwrap().name, "decision_tables");
+        assert_eq!(
+            find_category("DecisionTable").unwrap().name,
+            "decision_tables"
+        );
 
         // Test data cloud
         assert!(find_category("DataSource").is_some());
@@ -2325,7 +2364,10 @@ mod tests {
 
         // Test service cloud
         assert!(find_category("EmbeddedServiceFlowConfig").is_some());
-        assert_eq!(find_category("EmbeddedServiceFlowConfig").unwrap().name, "service_cloud");
+        assert_eq!(
+            find_category("EmbeddedServiceFlowConfig").unwrap().name,
+            "service_cloud"
+        );
 
         // Test messaging
         assert!(find_category("MessagingChannel").is_some());
@@ -2333,7 +2375,10 @@ mod tests {
 
         // Test loyalty
         assert!(find_category("LoyaltyProgramProcess").is_some());
-        assert_eq!(find_category("LoyaltyProgramProcess").unwrap().name, "loyalty");
+        assert_eq!(
+            find_category("LoyaltyProgramProcess").unwrap().name,
+            "loyalty"
+        );
 
         // Test identity
         assert!(find_category("SamlSsoConfig").is_some());
@@ -2341,20 +2386,32 @@ mod tests {
 
         // Test batch
         assert!(find_category("BatchProcessJobDefinition").is_some());
-        assert_eq!(find_category("BatchProcessJobDefinition").unwrap().name, "batch");
+        assert_eq!(
+            find_category("BatchProcessJobDefinition").unwrap().name,
+            "batch"
+        );
     }
 
     #[test]
     fn test_phase2_categories() {
         // Test copilot
         assert!(find_category("AssistantDefinition").is_some());
-        assert_eq!(find_category("AssistantDefinition").unwrap().name, "copilot");
+        assert_eq!(
+            find_category("AssistantDefinition").unwrap().name,
+            "copilot"
+        );
 
         // Test forecasting
         assert!(find_category("ForecastingDateType").is_some());
-        assert_eq!(find_category("ForecastingDateType").unwrap().name, "forecasting");
+        assert_eq!(
+            find_category("ForecastingDateType").unwrap().name,
+            "forecasting"
+        );
         assert!(find_category("AdvAcctFcstFormulaType").is_some());
-        assert_eq!(find_category("AdvAcctFcstFormulaType").unwrap().name, "forecasting");
+        assert_eq!(
+            find_category("AdvAcctFcstFormulaType").unwrap().name,
+            "forecasting"
+        );
 
         // Test nba
         assert!(find_category("RecommendationStrategy").is_some());
@@ -2364,13 +2421,19 @@ mod tests {
 
         // Test omnichannel
         assert!(find_category("PresenceUserConfig").is_some());
-        assert_eq!(find_category("PresenceUserConfig").unwrap().name, "omnichannel");
+        assert_eq!(
+            find_category("PresenceUserConfig").unwrap().name,
+            "omnichannel"
+        );
         assert!(find_category("Skill").is_some());
         assert_eq!(find_category("Skill").unwrap().name, "omnichannel");
 
         // Test mobile_security
         assert!(find_category("MobileSecurityPolicy").is_some());
-        assert_eq!(find_category("MobileSecurityPolicy").unwrap().name, "mobile_security");
+        assert_eq!(
+            find_category("MobileSecurityPolicy").unwrap().name,
+            "mobile_security"
+        );
 
         // Test documents
         assert!(find_category("DocumentTemplate").is_some());
@@ -2378,7 +2441,10 @@ mod tests {
         assert!(find_category("ContentAsset").is_some());
         assert_eq!(find_category("ContentAsset").unwrap().name, "documents");
         assert!(find_category("OcrSampleDocument").is_some());
-        assert_eq!(find_category("OcrSampleDocument").unwrap().name, "documents");
+        assert_eq!(
+            find_category("OcrSampleDocument").unwrap().name,
+            "documents"
+        );
 
         // Test stages
         assert!(find_category("StageDefinition").is_some());
@@ -2402,21 +2468,36 @@ mod tests {
 
         // Test business_rules
         assert!(find_category("BusinessProcessDefinition").is_some());
-        assert_eq!(find_category("BusinessProcessDefinition").unwrap().name, "business_rules");
+        assert_eq!(
+            find_category("BusinessProcessDefinition").unwrap().name,
+            "business_rules"
+        );
         assert!(find_category("RuleDefinition").is_some());
-        assert_eq!(find_category("RuleDefinition").unwrap().name, "business_rules");
+        assert_eq!(
+            find_category("RuleDefinition").unwrap().name,
+            "business_rules"
+        );
 
         // Test assessments
         assert!(find_category("AssessmentQuestionSet").is_some());
-        assert_eq!(find_category("AssessmentQuestionSet").unwrap().name, "assessments");
+        assert_eq!(
+            find_category("AssessmentQuestionSet").unwrap().name,
+            "assessments"
+        );
 
         // Test visualization
         assert!(find_category("VisualizationPlugin").is_some());
-        assert_eq!(find_category("VisualizationPlugin").unwrap().name, "visualization");
+        assert_eq!(
+            find_category("VisualizationPlugin").unwrap().name,
+            "visualization"
+        );
 
         // Test telemetry
         assert!(find_category("TelemetryActionDefStep").is_some());
-        assert_eq!(find_category("TelemetryActionDefStep").unwrap().name, "telemetry");
+        assert_eq!(
+            find_category("TelemetryActionDefStep").unwrap().name,
+            "telemetry"
+        );
 
         // Test navigation
         assert!(find_category("NavigationMenu").is_some());
@@ -2424,11 +2505,17 @@ mod tests {
 
         // Test transaction_security
         assert!(find_category("TransactionSecurityPolicy").is_some());
-        assert_eq!(find_category("TransactionSecurityPolicy").unwrap().name, "transaction_security");
+        assert_eq!(
+            find_category("TransactionSecurityPolicy").unwrap().name,
+            "transaction_security"
+        );
 
         // Test invocable
         assert!(find_category("InvocableActionExtension").is_some());
-        assert_eq!(find_category("InvocableActionExtension").unwrap().name, "invocable");
+        assert_eq!(
+            find_category("InvocableActionExtension").unwrap().name,
+            "invocable"
+        );
 
         // Test channels
         assert!(find_category("ChannelLayout").is_some());
@@ -2446,15 +2533,24 @@ mod tests {
 
         // Test digital_experience
         assert!(find_category("DigitalExperienceConfig").is_some());
-        assert_eq!(find_category("DigitalExperienceConfig").unwrap().name, "digital_experience");
+        assert_eq!(
+            find_category("DigitalExperienceConfig").unwrap().name,
+            "digital_experience"
+        );
 
         // Test briefcase
         assert!(find_category("BriefcaseDefinition").is_some());
-        assert_eq!(find_category("BriefcaseDefinition").unwrap().name, "briefcase");
+        assert_eq!(
+            find_category("BriefcaseDefinition").unwrap().name,
+            "briefcase"
+        );
 
         // Test life_sciences
         assert!(find_category("LifeSciConfigRecord").is_some());
-        assert_eq!(find_category("LifeSciConfigRecord").unwrap().name, "life_sciences");
+        assert_eq!(
+            find_category("LifeSciConfigRecord").unwrap().name,
+            "life_sciences"
+        );
 
         // Test translations
         assert!(find_category("Translations").is_some());
@@ -2462,7 +2558,10 @@ mod tests {
 
         // Test managed_content
         assert!(find_category("ManagedTopics").is_some());
-        assert_eq!(find_category("ManagedTopics").unwrap().name, "managed_content");
+        assert_eq!(
+            find_category("ManagedTopics").unwrap().name,
+            "managed_content"
+        );
 
         // Test slack
         assert!(find_category("SlackRecordLayout").is_some());
@@ -2470,7 +2569,10 @@ mod tests {
 
         // Test explainability
         assert!(find_category("ExplainabilityMsgTemplate").is_some());
-        assert_eq!(find_category("ExplainabilityMsgTemplate").unwrap().name, "explainability");
+        assert_eq!(
+            find_category("ExplainabilityMsgTemplate").unwrap().name,
+            "explainability"
+        );
 
         // Test portals
         assert!(find_category("Portal").is_some());
@@ -2482,7 +2584,10 @@ mod tests {
 
         // Test related_records
         assert!(find_category("RelatedContent").is_some());
-        assert_eq!(find_category("RelatedContent").unwrap().name, "related_records");
+        assert_eq!(
+            find_category("RelatedContent").unwrap().name,
+            "related_records"
+        );
 
         // Test home_page
         assert!(find_category("HomePageLayout").is_some());
@@ -2490,7 +2595,10 @@ mod tests {
 
         // Test ui_config
         assert!(find_category("UiFormatSpecification").is_some());
-        assert_eq!(find_category("UiFormatSpecification").unwrap().name, "ui_config");
+        assert_eq!(
+            find_category("UiFormatSpecification").unwrap().name,
+            "ui_config"
+        );
 
         // Test conditions
         assert!(find_category("ConditionLogic").is_some());
@@ -2502,7 +2610,10 @@ mod tests {
 
         // Test features
         assert!(find_category("FeatureParameterBoolean").is_some());
-        assert_eq!(find_category("FeatureParameterBoolean").unwrap().name, "features");
+        assert_eq!(
+            find_category("FeatureParameterBoolean").unwrap().name,
+            "features"
+        );
 
         // Test deploy
         assert!(find_category("DeployOptions").is_some());
@@ -2510,7 +2621,10 @@ mod tests {
 
         // Test lightning
         assert!(find_category("LightningBoltCategory").is_some());
-        assert_eq!(find_category("LightningBoltCategory").unwrap().name, "lightning");
+        assert_eq!(
+            find_category("LightningBoltCategory").unwrap().name,
+            "lightning"
+        );
 
         // Test workspace
         assert!(find_category("WorkspaceMapping").is_some());

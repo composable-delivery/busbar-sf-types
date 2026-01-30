@@ -663,4 +663,3 @@ pub struct ValueSet {
     #[serde(rename = "valueSettings", default)]
     pub value_settings: Vec<serde_json::Value>,
 }
-

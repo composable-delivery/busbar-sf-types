@@ -129,4 +129,3 @@ pub struct AssessmentQuestionSet {
     #[serde(default)]
     pub name: String,
 }
-

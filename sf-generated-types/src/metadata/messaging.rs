@@ -1320,4 +1320,3 @@ pub struct ConversationDefinitionRichMessage {
     #[serde(rename = "messageDefinitionName", default)]
     pub message_definition_name: String,
 }
-

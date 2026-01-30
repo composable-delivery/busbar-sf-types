@@ -84,4 +84,3 @@ pub struct ExplainabilityMessageTemplateTokenMapping {
     #[serde(rename = "resourceReference", default)]
     pub resource_reference: String,
 }
-

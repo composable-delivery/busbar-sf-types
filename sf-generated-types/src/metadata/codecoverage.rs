@@ -117,4 +117,3 @@ pub struct CodeCoverageWarning {
     #[serde(default)]
     pub namespace: String,
 }
-

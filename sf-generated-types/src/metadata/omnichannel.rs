@@ -151,4 +151,3 @@ pub struct SkillAssignments {
     #[serde(default)]
     pub users: SkillUserAssignments,
 }
-

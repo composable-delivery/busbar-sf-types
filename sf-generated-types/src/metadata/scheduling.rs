@@ -464,4 +464,3 @@ pub struct FieldServiceMobileConfig {
     #[serde(rename = "updateScheduleTimeMins", default)]
     pub update_schedule_time_mins: f64,
 }
-

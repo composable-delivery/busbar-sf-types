@@ -677,4 +677,3 @@ pub struct ExperienceBundle {
     #[serde(rename = "urlPathPrefix", default)]
     pub url_path_prefix: String,
 }
-

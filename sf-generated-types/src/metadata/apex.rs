@@ -38,4 +38,3 @@ pub struct ApexTestSuite {
     #[serde(rename = "testClassName", default)]
     pub test_class_name: Vec<String>,
 }
-

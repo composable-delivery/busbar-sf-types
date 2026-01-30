@@ -47,4 +47,3 @@ pub enum MappingAlertType {
     Warning,
     Error,
 }
-

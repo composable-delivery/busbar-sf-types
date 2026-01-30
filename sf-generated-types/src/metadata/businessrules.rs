@@ -443,4 +443,3 @@ pub struct RuleEntry {
     #[serde(default)]
     pub template: String,
 }
-

@@ -299,4 +299,3 @@ pub struct UserLicenseDefinition {
     #[serde(rename = "standardPermissionSets", default)]
     pub standard_permission_sets: Vec<serde_json::Value>,
 }
-

@@ -267,4 +267,3 @@ pub struct MfgProgramTemplate {
     #[serde(default)]
     pub status: MfgProgramTemplateStatus,
 }
-

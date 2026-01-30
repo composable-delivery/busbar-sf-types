@@ -344,4 +344,3 @@ pub struct DiscoveryModelCard {
     #[serde(default)]
     pub sections: String,
 }
-

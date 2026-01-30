@@ -243,4 +243,3 @@ pub struct Approver {
     #[serde(default)]
     pub r#type: serde_json::Value,
 }
-

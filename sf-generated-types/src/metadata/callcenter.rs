@@ -100,4 +100,3 @@ pub struct CallCenterRoutingMap {
     #[serde(rename = "referenceRecord", default)]
     pub reference_record: String,
 }
-

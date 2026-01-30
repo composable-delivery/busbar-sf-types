@@ -15852,4 +15852,3 @@ pub struct RetrievalSummaryDefField {
     #[serde(rename = "sequenceNumber", default)]
     pub sequence_number: f64,
 }
-

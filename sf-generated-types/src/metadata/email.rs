@@ -228,4 +228,3 @@ pub struct Letterhead {
     #[serde(rename = "topLine", default)]
     pub top_line: LetterheadLine,
 }
-

@@ -64,4 +64,3 @@ pub struct NavigationMenuItem {
     #[serde(default)]
     pub r#type: String,
 }
-

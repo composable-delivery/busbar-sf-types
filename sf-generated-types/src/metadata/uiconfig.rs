@@ -86,4 +86,3 @@ pub struct UiPreviewMessageTabDef {
     #[serde(rename = "tabName", default)]
     pub tab_name: String,
 }
-

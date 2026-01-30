@@ -549,4 +549,3 @@ pub struct LoginFlow {
     #[serde(rename = "vfFlowPageTitle", default)]
     pub vf_flow_page_title: String,
 }
-

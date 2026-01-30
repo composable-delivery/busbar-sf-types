@@ -211,4 +211,3 @@ pub struct RecommendationLoadCondition {
     #[serde(default)]
     pub value: RecommendationConditionValue,
 }
-

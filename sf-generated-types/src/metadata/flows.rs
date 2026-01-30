@@ -952,4 +952,3 @@ pub struct FlowInputValidationRule {
     #[serde(rename = "formulaExpression", default)]
     pub formula_expression: String,
 }
-

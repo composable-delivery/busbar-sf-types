@@ -547,4 +547,3 @@ pub struct CampaignTemplateDefinition {
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
 }
-

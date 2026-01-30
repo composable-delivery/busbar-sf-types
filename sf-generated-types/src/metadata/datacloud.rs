@@ -987,4 +987,3 @@ pub struct DataPackageKitDefinition {
     #[serde(rename = "versionNumber", default)]
     pub version_number: f64,
 }
-

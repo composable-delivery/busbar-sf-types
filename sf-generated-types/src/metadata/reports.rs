@@ -1062,4 +1062,3 @@ pub struct DashboardComponentGroupingSortProperties {
     #[serde(rename = "groupingSorts", default)]
     pub grouping_sorts: Vec<DashboardComponentGroupingSort>,
 }
-

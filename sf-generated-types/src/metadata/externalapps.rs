@@ -780,4 +780,3 @@ pub struct ExternalDataTranObject {
     #[serde(rename = "objectCategory", default)]
     pub object_category: String,
 }
-

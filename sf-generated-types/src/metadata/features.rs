@@ -57,4 +57,3 @@ pub struct FeatureParameterInteger {
     #[serde(default)]
     pub value: f64,
 }
-

@@ -356,4 +356,3 @@ pub struct AutoResponseRule {
     #[serde(rename = "ruleEntry", default)]
     pub rule_entry: Vec<serde_json::Value>,
 }
-

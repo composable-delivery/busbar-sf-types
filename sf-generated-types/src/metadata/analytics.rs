@@ -846,4 +846,3 @@ pub struct WaveAnalyticAssetCollection {
     #[serde(default)]
     pub shares: Vec<serde_json::Value>,
 }
-

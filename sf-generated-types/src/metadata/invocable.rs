@@ -1219,4 +1219,3 @@ pub struct InvocableActionExtensionTarget {
     #[serde(rename = "targetType", default)]
     pub target_type: InvocableActionExtTargetType,
 }
-

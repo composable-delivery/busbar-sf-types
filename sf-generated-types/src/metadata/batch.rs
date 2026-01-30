@@ -658,4 +658,3 @@ pub struct BatchCalcJobDatasourceField {
     #[serde(default)]
     pub name: String,
 }
-

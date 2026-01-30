@@ -68,4 +68,3 @@ pub struct ComponentInstanceProperty {
     #[serde(rename = "valueList", default)]
     pub value_list: ComponentInstancePropertyList,
 }
-

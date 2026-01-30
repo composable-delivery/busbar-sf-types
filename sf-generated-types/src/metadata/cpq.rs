@@ -238,4 +238,3 @@ pub struct PriceRule {
     #[serde(default)]
     pub status: serde_json::Value,
 }
-

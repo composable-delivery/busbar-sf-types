@@ -386,4 +386,3 @@ pub struct NtfcnChannelDef {
     #[serde(rename = "ntfcnChannelRecs", default)]
     pub ntfcn_channel_recs: Vec<NtfcnChannelRec>,
 }
-

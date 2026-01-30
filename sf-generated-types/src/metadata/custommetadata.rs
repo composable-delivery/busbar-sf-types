@@ -341,4 +341,3 @@ pub struct CustomNotificationActionDefinition {
     #[serde(rename = "actionType", default)]
     pub action_type: serde_json::Value,
 }
-
