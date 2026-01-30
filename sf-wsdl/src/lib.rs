@@ -1,6 +1,7 @@
 pub mod categories;
 pub mod error;
 pub mod modular_generator;
+pub mod traits_gen;
 
 #[cfg(feature = "build-utils")]
 pub mod build_utils;

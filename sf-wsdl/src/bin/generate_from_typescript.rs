@@ -367,25 +367,22 @@ fn extract_fields_from_type_lit(type_lit: &TSTypeLiteral) -> Vec<FieldDef> {
 
 /// Extract a single property signature into a field definition
 fn extract_property_signature(prop: &TSPropertySignature, fields: &mut Vec<FieldDef>) {
-    match &prop.key {
-        PropertyKey::Identifier(ident) => {
-            let field_name = ident.name.to_string();
-            let optional = prop.optional;
+    if let PropertyKey::Identifier(ident) = &prop.key {
+        let field_name = ident.name.to_string();
+        let optional = prop.optional;
 
-            let (type_ref, is_array) = if let Some(type_ann) = &prop.type_annotation {
-                extract_type_info(&type_ann.type_annotation)
-            } else {
-                ("String".to_string(), false)
-            };
+        let (type_ref, is_array) = if let Some(type_ann) = &prop.type_annotation {
+            extract_type_info(&type_ann.type_annotation)
+        } else {
+            ("String".to_string(), false)
+        };
 
-            fields.push(FieldDef {
-                name: field_name,
-                type_ref,
-                optional,
-                is_array,
-            });
-        }
-        _ => {}
+        fields.push(FieldDef {
+            name: field_name,
+            type_ref,
+            optional,
+            is_array,
+        });
     }
 }
 
@@ -428,12 +425,12 @@ fn extract_structs_with_regex(source: &str) -> Result<HashMap<String, Vec<FieldD
 
     let type_pattern =
         Regex::new(r"(?s)export type (\w+)\s*=\s*(?:Metadata\s*&\s*)?\s*\{([^}]+)\}")?;
+    let field_pattern = Regex::new(r"(\w+)\??\s*:\s*([^;,}]+)")?;
 
     for cap in type_pattern.captures_iter(source) {
         let type_name = cap.get(1).unwrap().as_str().to_string();
         let type_body = cap.get(2).unwrap().as_str();
 
-        let field_pattern = Regex::new(r"(\w+)\??\s*:\s*([^;,}]+)")?;
         let mut fields = Vec::new();
 
         for field_cap in field_pattern.captures_iter(type_body) {
@@ -555,15 +552,11 @@ pub enum {} {{
         name
     );
 
-    for (i, variant) in variants.iter().enumerate() {
+    for variant in variants.iter() {
         let mut rust_variant = variant
-            .replace('-', "_")
-            .replace(' ', "_")
-            .replace('(', "")
-            .replace(')', "")
-            .replace('.', "_")
-            .replace('/', "_")
-            .replace(':', "_");
+            .replace(['-', ' '], "_")
+            .replace(['(', ')'], "")
+            .replace(['.', '/', ':'], "_");
 
         if rust_variant
             .chars()

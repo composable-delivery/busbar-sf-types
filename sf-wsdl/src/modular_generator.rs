@@ -259,6 +259,7 @@ impl ModularGenerator {
     }
 
     /// Generate a category module
+    #[allow(clippy::too_many_arguments)]
     fn generate_category_module(
         &self,
         output_dir: &Path,
@@ -759,13 +760,9 @@ pub enum {} {{
     for variant in variants {
         // Clean variant name
         let mut rust_variant = variant
-            .replace('-', "_")
-            .replace(' ', "_")
-            .replace('(', "")
-            .replace(')', "")
-            .replace('.', "_")
-            .replace('/', "_")
-            .replace(':', "_");
+            .replace(['-', ' '], "_")
+            .replace(['(', ')'], "")
+            .replace(['.', '/', ':'], "_");
 
         if rust_variant
             .chars()
