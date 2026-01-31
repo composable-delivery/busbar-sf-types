@@ -45,7 +45,7 @@ pub use crate::metadata::experience::*;
 pub use crate::metadata::reports::*;
 
 #[cfg(feature = "packaging")]
-pub use crate::metadata::packaging::*;
+pub use crate::packaging::*;
 
 #[cfg(feature = "email")]
 pub use crate::metadata::email::*;

@@ -32,6 +32,7 @@ pub enum SharingModel {
     ControlledByCampaign,
 }
 
+/// Represents a set of permissions that can be assigned to users.
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]

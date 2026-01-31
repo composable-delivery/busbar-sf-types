@@ -5125,6 +5125,7 @@ pub struct SecurityHubSettings {
     pub ai_gateway_usage_metric: bool,
 }
 
+/// Represents the security settings for an organization.
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]

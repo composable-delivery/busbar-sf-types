@@ -36,6 +36,8 @@ jobs:
       - name: Set up Rust
         uses: dtolnay/rust-toolchain@stable
 
+      - uses: Swatinem/rust-cache@v2
+
       - name: Install dependencies (fetches @salesforce/types)
         run: npm ci
 
@@ -45,7 +47,10 @@ jobs:
       - name: Check for changes
         id: git-check
         run: |
-          git diff --exit-code || echo "changes=true" >> $GITHUB_OUTPUT
+          # Use git status to also detect untracked new files (e.g., new category modules)
+          if [[ -n "$(git status --porcelain=v1)" ]]; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+          fi
 
       - name: Commit and Push changes
         if: steps.git-check.outputs.changes == 'true'
