@@ -1619,7 +1619,7 @@ dependencies = [
  "oxc_ast 0.111.0",
  "oxc_diagnostics 0.36.0",
  "oxc_parser",
- "oxc_span 0.36.0",
+ "oxc_span 0.111.0",
  "regex",
  "reqwest",
  "serde",
