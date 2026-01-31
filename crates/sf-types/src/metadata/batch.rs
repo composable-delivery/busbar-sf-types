@@ -703,3 +703,4 @@ pub struct QueueSobject {
     #[serde(rename = "sobjectType", default)]
     pub sobject_type: String,
 }
+

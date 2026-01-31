@@ -250,3 +250,4 @@ pub struct WebStoreTemplate {
     #[serde(default)]
     pub r#type: WebStoreType,
 }
+

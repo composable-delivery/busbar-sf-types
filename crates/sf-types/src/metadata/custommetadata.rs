@@ -363,3 +363,4 @@ pub struct CustomTabTranslation {
     #[serde(default)]
     pub name: String,
 }
+

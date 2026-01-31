@@ -816,3 +816,4 @@ pub struct EnablementProgramTaskMilestoneMeasure {
     #[serde(rename = "sequenceNumber", default)]
     pub sequence_number: f64,
 }
+

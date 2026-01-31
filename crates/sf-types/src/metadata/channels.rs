@@ -96,3 +96,4 @@ pub struct ChannelObjectLinkingRule {
     #[serde(rename = "ruleName", default)]
     pub rule_name: String,
 }
+

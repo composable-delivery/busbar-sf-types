@@ -89,3 +89,4 @@ pub struct ExplainabilityMsgTemplateFieldTranslation {
     #[serde(rename = "templateMessage", default)]
     pub template_message: String,
 }
+

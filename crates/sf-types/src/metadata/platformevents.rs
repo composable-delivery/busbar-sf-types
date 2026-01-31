@@ -418,3 +418,4 @@ pub struct PlatformLicenseDefinition {
     #[serde(rename = "settingUsageDefinitions", default)]
     pub setting_usage_definitions: Vec<serde_json::Value>,
 }
+

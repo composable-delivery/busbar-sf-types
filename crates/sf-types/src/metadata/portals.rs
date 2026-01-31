@@ -96,3 +96,4 @@ pub struct PortalDelegablePermissionSet {
     #[serde(default)]
     pub profile: String,
 }
+

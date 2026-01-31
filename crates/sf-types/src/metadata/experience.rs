@@ -716,3 +716,4 @@ pub struct SiteWebAddress {
     #[serde(default)]
     pub primary: bool,
 }
+

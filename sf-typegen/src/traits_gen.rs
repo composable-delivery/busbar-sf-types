@@ -181,7 +181,7 @@ fn generate_metadata_type_impl(
     let supports_wildcard = true;
 
     let api_name_impl = if has_full_name {
-        r#"        self.full_name.as_deref()"#
+        r#"        Some(&self.full_name)"#
     } else {
         r#"        None"#
     };

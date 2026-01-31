@@ -487,3 +487,4 @@ pub struct Territory2Type {
     #[serde(default)]
     pub priority: f64,
 }
+

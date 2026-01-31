@@ -190,3 +190,4 @@ pub struct LifeSciConfigRecord {
     #[serde(default)]
     pub r#type: String,
 }
+

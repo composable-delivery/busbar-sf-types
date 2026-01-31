@@ -27,3 +27,4 @@ pub struct WorkspaceMapping {
     #[serde(default)]
     pub tab: String,
 }
+

@@ -1480,3 +1480,4 @@ pub struct ServiceMgmtKnwlgArtclConfig {
     #[serde(rename = "workAroundField", default)]
     pub work_around_field: String,
 }
+

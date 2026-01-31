@@ -655,3 +655,4 @@ pub struct RemoteSiteSetting {
     #[serde(default)]
     pub url: String,
 }
+

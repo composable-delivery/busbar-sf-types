@@ -139,3 +139,4 @@ pub struct TelemetryDefinitionVersion {
     #[serde(rename = "versionNumber", default)]
     pub version_number: f64,
 }
+

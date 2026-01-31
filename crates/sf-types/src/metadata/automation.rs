@@ -383,3 +383,4 @@ pub struct WorkflowTimeTrigger {
     #[serde(rename = "workflowTimeTriggerUnit", default)]
     pub workflow_time_trigger_unit: WorkflowTimeUnits,
 }
+
