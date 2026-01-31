@@ -1,10 +1,67 @@
 version: 2
+
 updates:
+  # ------------------------------------------------------------
+  # Rust / Cargo dependencies
+  # ------------------------------------------------------------
   - package-ecosystem: "cargo"
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "rust"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    groups:
+      # Group minor/patch updates together to reduce PR noise.
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # ------------------------------------------------------------
+  # GitHub Actions
+  # ------------------------------------------------------------
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+
+  # ------------------------------------------------------------
+  # npm dependencies (used to track @salesforce/types releases)
+  # ------------------------------------------------------------
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "npm"
+      - "salesforce-types"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    groups:
+      # Prefer a single PR when @salesforce/types releases (and related npm patch/minor updates).
+      npm-minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
