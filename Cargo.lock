@@ -1615,7 +1615,7 @@ dependencies = [
  "async-trait",
  "convert_case",
  "http",
- "oxc_allocator 0.36.0",
+ "oxc_allocator 0.111.0",
  "oxc_ast 0.111.0",
  "oxc_diagnostics 0.36.0",
  "oxc_parser",
