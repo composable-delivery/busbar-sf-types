@@ -97,4 +97,3 @@ pub struct LightningMessageField {
     #[serde(rename = "fieldName", default)]
     pub field_name: String,
 }
-

@@ -383,4 +383,3 @@ pub struct LoyaltyProgramSetup {
     #[serde(rename = "programProcesses", default)]
     pub program_processes: Vec<LoyaltyProgramProcess>,
 }
-

@@ -471,4 +471,3 @@ pub struct QuickActionTranslation {
     #[serde(rename = "quickActionParametersTranslation", default)]
     pub quick_action_parameters_translation: Vec<QuickActionParametersTranslation>,
 }
-

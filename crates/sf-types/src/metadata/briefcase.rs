@@ -100,4 +100,3 @@ pub struct BriefcaseRuleFilter {
     #[serde(rename = "targetEntityField", default)]
     pub target_entity_field: String,
 }
-

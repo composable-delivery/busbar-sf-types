@@ -27,4 +27,3 @@ pub struct StandardPermissionSet {
     #[serde(rename = "settingValues", default)]
     pub setting_values: Vec<serde_json::Value>,
 }
-

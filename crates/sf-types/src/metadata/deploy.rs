@@ -150,4 +150,3 @@ pub struct DeployResult {
     #[serde(rename = "zipSize", default)]
     pub zip_size: f64,
 }
-

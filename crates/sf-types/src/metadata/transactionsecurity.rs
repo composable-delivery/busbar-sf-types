@@ -110,4 +110,3 @@ pub struct TransactionSecurityPolicy {
     #[serde(default)]
     pub r#type: serde_json::Value,
 }
-

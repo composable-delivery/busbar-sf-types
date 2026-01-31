@@ -184,4 +184,3 @@ pub struct ObjectUsage {
     #[serde(default)]
     pub object: Vec<String>,
 }
-

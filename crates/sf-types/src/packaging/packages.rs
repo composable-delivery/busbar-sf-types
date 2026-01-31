@@ -71,4 +71,3 @@ pub struct PackageVersion {
     #[serde(rename = "packageId", default)]
     pub package_id: String,
 }
-

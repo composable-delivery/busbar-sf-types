@@ -627,4 +627,3 @@ pub struct BotVersionTranslation {
     #[serde(rename = "fullName", default)]
     pub full_name: String,
 }
-

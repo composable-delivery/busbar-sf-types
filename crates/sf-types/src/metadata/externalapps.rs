@@ -826,4 +826,3 @@ pub struct ExtlClntAppSampleConfigurablePolicies {
     #[serde(rename = "policy2", default)]
     pub policy_2: String,
 }
-

@@ -83,4 +83,3 @@ pub struct PicklistValueTranslation {
     #[serde(default)]
     pub translation: String,
 }
-

@@ -359,4 +359,3 @@ pub struct OcrTemplateSampleDocument {
     #[serde(rename = "ocrSampleDocument", default)]
     pub ocr_sample_document: String,
 }
-

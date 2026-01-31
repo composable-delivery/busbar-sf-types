@@ -152,4 +152,3 @@ pub struct LightningOnboardingConfig {
     #[serde(rename = "sendFeedbackToSalesforce", default)]
     pub send_feedback_to_salesforce: bool,
 }
-

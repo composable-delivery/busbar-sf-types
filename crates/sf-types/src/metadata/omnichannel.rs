@@ -163,4 +163,3 @@ pub struct WorkSkillRoutingAttribute {
     #[serde(default)]
     pub value: String,
 }
-

@@ -52,4 +52,3 @@ pub enum MappingUsageType {
     TransformationMapping,
     CLMFieldMapping,
 }
-
