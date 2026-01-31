@@ -22,7 +22,7 @@ oxc_parser = "0.36"
 oxc_ast = "0.111"
 oxc_allocator = "0.36"
 oxc_span = "0.36"
-oxc_diagnostics = "0.36"
+oxc_diagnostics = "0.111"
 
 # Code generation utilities
 convert_case = "0.6"
