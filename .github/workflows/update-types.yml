@@ -117,11 +117,7 @@ jobs:
                if git push origin "$BRANCH_NAME"; then
                  echo "Push succeeded"
                  gh pr create --title "chore: auto-regenerate types from latest @salesforce/types" \
-                   --body "Automated update from @salesforce/types package.
-
-This PR was automatically created because type regeneration detected changes.
-
-Original commit: ${{ github.sha }}" || echo "PR may already exist"
+                   --body "Automated update from @salesforce/types package.  This PR was automatically created because type regeneration detected changes.Original commit: ${{ github.sha }}" || echo "PR may already exist"
                  break
                else
                  if [ $i -lt 3 ]; then
