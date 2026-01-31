@@ -10,22 +10,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConditionLogic {
-    #[default]
-    All,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConditionFilterInputValueType {
-    #[default]
-    Variable,
-    String,
-    Expression,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum ConditionAggregationFunction {
     #[default]
     Sum,
@@ -45,6 +29,13 @@ pub enum ConditionType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConditionLogic {
+    #[default]
+    All,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum ConditionFilterOperator {
     #[default]
     Equals,
@@ -55,4 +46,13 @@ pub enum ConditionFilterOperator {
     GreaterOrEqual,
     IsNull,
     NotNull,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConditionFilterInputValueType {
+    #[default]
+    Variable,
+    String,
+    Expression,
 }

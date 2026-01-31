@@ -10,6 +10,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum PolicyAction {
+    #[default]
+    Block,
+    RaiseSessionLevel,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum PolicyApplicableDuration {
     #[default]
     ParameterBased,
@@ -17,12 +25,42 @@ pub enum PolicyApplicableDuration {
     Weekly,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PolicyAction {
-    #[default]
-    Block,
-    RaiseSessionLevel,
+#[serde(rename_all = "camelCase")]
+pub struct PolicyRuleDefinitionClauseConjunction {
+    #[serde(default)]
+    pub conditions: Vec<PolicyRuleDefinitionCondition>,
+    #[serde(rename = "conjunctionExpression", default)]
+    pub conjunction_expression: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PolicyRuleDefinitionSet {
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PolicyRuleResourceDomain {
+    #[serde(rename = "resourceDomain", default)]
+    pub resource_domain: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PolicyRuleValueSet {
+    #[serde(rename = "valueReference", default)]
+    pub value_reference: String,
+    #[serde(rename = "valueString", default)]
+    pub value_string: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -64,16 +102,6 @@ pub struct PolicyRuleDefinitionCondition {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PolicyRuleDefinitionClauseConjunction {
-    #[serde(default)]
-    pub conditions: Vec<PolicyRuleDefinitionCondition>,
-    #[serde(rename = "conjunctionExpression", default)]
-    pub conjunction_expression: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct PolicyRuleDefinition {
     #[serde(default)]
     pub action: Vec<String>,
@@ -109,32 +137,4 @@ pub struct PolicyRuleDefinition {
     pub unless_policy_rule_definition_clause_conjunction: PolicyRuleDefinitionClauseConjunction,
     #[serde(rename = "whenPolicyRuleDefinitionClauseConjunction", default)]
     pub when_policy_rule_definition_clause_conjunction: PolicyRuleDefinitionClauseConjunction,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PolicyRuleDefinitionSet {
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PolicyRuleValueSet {
-    #[serde(rename = "valueReference", default)]
-    pub value_reference: String,
-    #[serde(rename = "valueString", default)]
-    pub value_string: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PolicyRuleResourceDomain {
-    #[serde(rename = "resourceDomain", default)]
-    pub resource_domain: String,
 }

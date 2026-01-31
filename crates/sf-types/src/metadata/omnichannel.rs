@@ -11,6 +11,22 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct PresenceDeclineReason {
+    #[serde(default)]
+    pub label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SkillUserAssignments {
+    #[serde(default)]
+    pub user: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct PresenceUserConfig {
     #[serde(rename = "acwExtensionDuration", default)]
     pub acw_extension_duration: f64,
@@ -53,46 +69,6 @@ pub struct PresenceUserConfig {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PresenceConfigUserAssignments {
-    #[serde(default)]
-    pub user: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct WorkSkillRouting {
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "relatedEntity", default)]
-    pub related_entity: String,
-    #[serde(rename = "workSkillRoutingAttributes", default)]
-    pub work_skill_routing_attributes: Vec<WorkSkillRoutingAttribute>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SkillProfileAssignments {
-    #[serde(default)]
-    pub profile: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SkillAssignments {
-    #[serde(default)]
-    pub profiles: SkillProfileAssignments,
-    #[serde(default)]
-    pub users: SkillUserAssignments,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct Skill {
     #[serde(default)]
     pub assignments: SkillAssignments,
@@ -107,9 +83,49 @@ pub struct Skill {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct PresenceConfigAssignments {
+    #[serde(default)]
+    pub profiles: PresenceConfigProfileAssignments,
+    #[serde(default)]
+    pub users: PresenceConfigUserAssignments,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SkillProfileAssignments {
+    #[serde(default)]
+    pub profile: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct SkillType {
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PresenceConfigProfileAssignments {
+    #[serde(default)]
+    pub profile: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WorkSkillRouting {
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "relatedEntity", default)]
+    pub related_entity: String,
+    #[serde(rename = "workSkillRoutingAttributes", default)]
+    pub work_skill_routing_attributes: Vec<WorkSkillRoutingAttribute>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -133,33 +149,17 @@ pub struct WorkSkillRoutingAttribute {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PresenceConfigProfileAssignments {
+pub struct SkillAssignments {
     #[serde(default)]
-    pub profile: Vec<String>,
+    pub profiles: SkillProfileAssignments,
+    #[serde(default)]
+    pub users: SkillUserAssignments,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct SkillUserAssignments {
+pub struct PresenceConfigUserAssignments {
     #[serde(default)]
     pub user: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PresenceConfigAssignments {
-    #[serde(default)]
-    pub profiles: PresenceConfigProfileAssignments,
-    #[serde(default)]
-    pub users: PresenceConfigUserAssignments,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PresenceDeclineReason {
-    #[serde(default)]
-    pub label: String,
 }

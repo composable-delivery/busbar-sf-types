@@ -10,6 +10,13 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ProductFamilyUsageType {
+    #[default]
+    AccountForecasting,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum OrderLifeCycleType {
     #[default]
     MANAGED,
@@ -27,18 +34,101 @@ pub enum ProductGrouping {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ProductFamilyUsageType {
-    #[default]
-    AccountForecasting,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum WebStoreType {
     #[default]
     B2B,
     B2C,
     B2CE,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WebStoreBundle {
+    #[serde(rename = "autoFacetingEnabled", default)]
+    pub auto_faceting_enabled: bool,
+    #[serde(rename = "cartToOrderAutoCustomFieldMapping", default)]
+    pub cart_to_order_auto_custom_field_mapping: bool,
+    #[serde(rename = "commerceEinsteinActivitiesTracked", default)]
+    pub commerce_einstein_activities_tracked: bool,
+    #[serde(rename = "commerceEinsteinDeployed", default)]
+    pub commerce_einstein_deployed: bool,
+    #[serde(default)]
+    pub country: serde_json::Value,
+    #[serde(rename = "defaultCurrency", default)]
+    pub default_currency: String,
+    #[serde(rename = "defaultLanguage", default)]
+    pub default_language: String,
+    #[serde(rename = "defaultTaxLocaleType", default)]
+    pub default_tax_locale_type: serde_json::Value,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "guestBrowsingEnabled", default)]
+    pub guest_browsing_enabled: bool,
+    #[serde(rename = "guestCartTimeToLive", default)]
+    pub guest_cart_time_to_live: f64,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "orderLifeCycleType", default)]
+    pub order_life_cycle_type: OrderLifeCycleType,
+    #[serde(rename = "pricingStrategy", default)]
+    pub pricing_strategy: serde_json::Value,
+    #[serde(rename = "productGrouping", default)]
+    pub product_grouping: ProductGrouping,
+    #[serde(rename = "skipAdditionalEntitlementCheckForSearch", default)]
+    pub skip_additional_entitlement_check_for_search: bool,
+    #[serde(rename = "skuDetectionEnabled", default)]
+    pub sku_detection_enabled: bool,
+    #[serde(rename = "storeName", default)]
+    pub store_name: String,
+    #[serde(rename = "supportedCurrencies", default)]
+    pub supported_currencies: String,
+    #[serde(rename = "supportedLanguages", default)]
+    pub supported_languages: String,
+    #[serde(rename = "supportedShipToCountries", default)]
+    pub supported_ship_to_countries: String,
+    #[serde(default)]
+    pub r#type: WebStoreType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProductAttributeSetItem {
+    #[serde(default)]
+    pub field: String,
+    #[serde(rename = "isGroupedBy", default)]
+    pub is_grouped_by: bool,
+    #[serde(default)]
+    pub sequence: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProductAttrDisplayConfig {
+    #[serde(rename = "dataType", default)]
+    pub data_type: String,
+    #[serde(rename = "displayType", default)]
+    pub display_type: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub status: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProductAttributeSet {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "productAttributeSetItems", default)]
+    pub product_attribute_set_items: Vec<ProductAttributeSetItem>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -116,63 +206,33 @@ pub struct WebStoreTemplate {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ProductAttributeSetItem {
-    #[serde(default)]
-    pub field: String,
-    #[serde(rename = "isGroupedBy", default)]
-    pub is_grouped_by: bool,
-    #[serde(default)]
-    pub sequence: f64,
+pub struct ProductFamilyUsage {
+    #[serde(rename = "productFamilyUsageType", default)]
+    pub product_family_usage_type: ProductFamilyUsageType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct WebStoreBundle {
-    #[serde(rename = "autoFacetingEnabled", default)]
-    pub auto_faceting_enabled: bool,
-    #[serde(rename = "cartToOrderAutoCustomFieldMapping", default)]
-    pub cart_to_order_auto_custom_field_mapping: bool,
-    #[serde(rename = "commerceEinsteinActivitiesTracked", default)]
-    pub commerce_einstein_activities_tracked: bool,
-    #[serde(rename = "commerceEinsteinDeployed", default)]
-    pub commerce_einstein_deployed: bool,
-    #[serde(default)]
-    pub country: serde_json::Value,
-    #[serde(rename = "defaultCurrency", default)]
-    pub default_currency: String,
-    #[serde(rename = "defaultLanguage", default)]
-    pub default_language: String,
-    #[serde(rename = "defaultTaxLocaleType", default)]
-    pub default_tax_locale_type: serde_json::Value,
+pub struct ProductSpecificationRecType {
+    #[serde(rename = "isCommercial", default)]
+    pub is_commercial: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "productSpecificationType", default)]
+    pub product_specification_type: String,
+    #[serde(rename = "recordType", default)]
+    pub record_type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProductSpecificationType {
     #[serde(default)]
     pub description: String,
-    #[serde(rename = "guestBrowsingEnabled", default)]
-    pub guest_browsing_enabled: bool,
-    #[serde(rename = "guestCartTimeToLive", default)]
-    pub guest_cart_time_to_live: f64,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "orderLifeCycleType", default)]
-    pub order_life_cycle_type: OrderLifeCycleType,
-    #[serde(rename = "pricingStrategy", default)]
-    pub pricing_strategy: serde_json::Value,
-    #[serde(rename = "productGrouping", default)]
-    pub product_grouping: ProductGrouping,
-    #[serde(rename = "skipAdditionalEntitlementCheckForSearch", default)]
-    pub skip_additional_entitlement_check_for_search: bool,
-    #[serde(rename = "skuDetectionEnabled", default)]
-    pub sku_detection_enabled: bool,
-    #[serde(rename = "storeName", default)]
-    pub store_name: String,
-    #[serde(rename = "supportedCurrencies", default)]
-    pub supported_currencies: String,
-    #[serde(rename = "supportedLanguages", default)]
-    pub supported_languages: String,
-    #[serde(rename = "supportedShipToCountries", default)]
-    pub supported_ship_to_countries: String,
-    #[serde(default)]
-    pub r#type: WebStoreType,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -189,64 +249,4 @@ pub struct PaymentGatewayProvider {
     pub idempotency_supported: serde_json::Value,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProductFamilyUsage {
-    #[serde(rename = "productFamilyUsageType", default)]
-    pub product_family_usage_type: ProductFamilyUsageType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProductAttributeSet {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "productAttributeSetItems", default)]
-    pub product_attribute_set_items: Vec<ProductAttributeSetItem>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProductAttrDisplayConfig {
-    #[serde(rename = "dataType", default)]
-    pub data_type: String,
-    #[serde(rename = "displayType", default)]
-    pub display_type: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub status: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProductSpecificationType {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProductSpecificationRecType {
-    #[serde(rename = "isCommercial", default)]
-    pub is_commercial: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "productSpecificationType", default)]
-    pub product_specification_type: String,
-    #[serde(rename = "recordType", default)]
-    pub record_type: String,
 }

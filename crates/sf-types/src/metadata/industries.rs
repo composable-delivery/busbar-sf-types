@@ -10,10 +10,22 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MfgProgramTransformationType {
+pub enum InsRatePlanCmsnConfigCalcType {
     #[default]
-    BusinessTransformation,
-    ForecastSetRelation,
+    Flat,
+    Graded,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum InsPolicyLifecycleProcess {
+    #[default]
+    Renew_Same_Carrier,
+    Renew_Different_Carrier,
+    Repurpose,
+    Endorse,
+    Cancel,
+    Bulk_Renew_Same_Carrier,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -35,10 +47,10 @@ pub enum CareProviderAfflType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum InsRatePlanCmsnConfigCalcType {
+pub enum MfgProgramTransformationType {
     #[default]
-    Flat,
-    Graded,
+    BusinessTransformation,
+    ForecastSetRelation,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -47,18 +59,6 @@ pub enum VehicleAssetType {
     #[default]
     FleetVehicle,
     PrivateJet,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum InsPolicyLifecycleProcess {
-    #[default]
-    Renew_Same_Carrier,
-    Renew_Different_Carrier,
-    Repurpose,
-    Endorse,
-    Cancel,
-    Bulk_Renew_Same_Carrier,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -73,15 +73,53 @@ pub enum MfgProgramTemplateStatus {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct CareProviderAfflRoleConfig {
-    #[serde(rename = "affiliationType", default)]
-    pub affiliation_type: CareProviderAfflType,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
+pub struct VehicleAssetEmssnSrcCnfg {
+    #[serde(rename = "recordType", default)]
+    pub record_type: String,
+    #[serde(rename = "vehicleAssetType", default)]
+    pub vehicle_asset_type: VehicleAssetType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct InsRatePlanTypeConfig {
+    #[serde(rename = "displayFields", default)]
+    pub display_fields: String,
+    #[serde(rename = "ratePlanCommissionTypes", default)]
+    pub rate_plan_commission_types: String,
+    #[serde(rename = "ratePlanType", default)]
+    pub rate_plan_type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct InsPlcyCoverageSpecConfig {
+    #[serde(rename = "coverageSpecification", default)]
+    pub coverage_specification: String,
+    #[serde(rename = "isNetworkTierApplicable", default)]
+    pub is_network_tier_applicable: bool,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "providerRole", default)]
-    pub provider_role: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CareProviderSearchConfig {
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "mappedObject", default)]
+    pub mapped_object: serde_json::Value,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "sourceField", default)]
+    pub source_field: String,
+    #[serde(rename = "targetField", default)]
+    pub target_field: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -99,6 +137,86 @@ pub struct InsRatePlanCmsnConfig {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct CareLimitType {
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "limitType", default)]
+    pub limit_type: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "metricType", default)]
+    pub metric_type: CareLimitTypeMetricType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MfgProgramTemplate {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "programTemplateItems", default)]
+    pub program_template_items: Vec<MfgProgramTemplateItem>,
+    #[serde(rename = "programTemplateName", default)]
+    pub program_template_name: String,
+    #[serde(default)]
+    pub status: MfgProgramTemplateStatus,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct InsPolicyLifecycleConfig {
+    #[serde(rename = "customContextDefinition", default)]
+    pub custom_context_definition: String,
+    #[serde(rename = "customContextMapping", default)]
+    pub custom_context_mapping: String,
+    #[serde(rename = "displayFields", default)]
+    pub display_fields: String,
+    #[serde(rename = "policyProcessType", default)]
+    pub policy_process_type: InsPolicyLifecycleProcess,
+    #[serde(rename = "standardContextDefinition", default)]
+    pub standard_context_definition: String,
+    #[serde(rename = "standardContextMapping", default)]
+    pub standard_context_mapping: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct InsPolicyManagementConfig {
+    #[serde(rename = "expectedRevExpsSetDef", default)]
+    pub expected_rev_exps_set_def: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "premiumCalcExpsSetDef", default)]
+    pub premium_calc_exps_set_def: String,
+    #[serde(rename = "stdExpectedRevExpsSetDef", default)]
+    pub std_expected_rev_exps_set_def: String,
+    #[serde(rename = "stdPremiumCalcExpsSetDef", default)]
+    pub std_premium_calc_exps_set_def: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CareRequestConfiguration {
+    #[serde(rename = "careRequestRecordType", default)]
+    pub care_request_record_type: String,
+    #[serde(rename = "careRequestRecords", default)]
+    pub care_request_records: Vec<CareRequestRecords>,
+    #[serde(rename = "careRequestType", default)]
+    pub care_request_type: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "isDefaultRecordType", default)]
+    pub is_default_record_type: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct InsPlcyLineOfBusConfig {
     #[serde(rename = "lineOfBusiness", default)]
     pub line_of_business: String,
@@ -106,14 +224,6 @@ pub struct InsPlcyLineOfBusConfig {
     pub master_label: String,
     #[serde(rename = "termName", default)]
     pub term_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CareRequestRecords {
-    #[serde(rename = "careRequestRecord", default)]
-    pub care_request_record: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -139,6 +249,28 @@ pub struct CareSystemFieldMapping {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct CareRequestRecords {
+    #[serde(rename = "careRequestRecord", default)]
+    pub care_request_record: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CareProviderAfflRoleConfig {
+    #[serde(rename = "affiliationType", default)]
+    pub affiliation_type: CareProviderAfflType,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "providerRole", default)]
+    pub provider_role: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct MfgProgramTemplateItem {
     #[serde(rename = "advAccountForecastSet", default)]
     pub adv_account_forecast_set: String,
@@ -156,136 +288,4 @@ pub struct MfgProgramTemplateItem {
     pub transformation_display_order: f64,
     #[serde(rename = "transformationType", default)]
     pub transformation_type: MfgProgramTransformationType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CareRequestConfiguration {
-    #[serde(rename = "careRequestRecordType", default)]
-    pub care_request_record_type: String,
-    #[serde(rename = "careRequestRecords", default)]
-    pub care_request_records: Vec<CareRequestRecords>,
-    #[serde(rename = "careRequestType", default)]
-    pub care_request_type: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isDefaultRecordType", default)]
-    pub is_default_record_type: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct InsPlcyCoverageSpecConfig {
-    #[serde(rename = "coverageSpecification", default)]
-    pub coverage_specification: String,
-    #[serde(rename = "isNetworkTierApplicable", default)]
-    pub is_network_tier_applicable: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct InsPolicyLifecycleConfig {
-    #[serde(rename = "customContextDefinition", default)]
-    pub custom_context_definition: String,
-    #[serde(rename = "customContextMapping", default)]
-    pub custom_context_mapping: String,
-    #[serde(rename = "displayFields", default)]
-    pub display_fields: String,
-    #[serde(rename = "policyProcessType", default)]
-    pub policy_process_type: InsPolicyLifecycleProcess,
-    #[serde(rename = "standardContextDefinition", default)]
-    pub standard_context_definition: String,
-    #[serde(rename = "standardContextMapping", default)]
-    pub standard_context_mapping: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MfgProgramTemplate {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "programTemplateItems", default)]
-    pub program_template_items: Vec<MfgProgramTemplateItem>,
-    #[serde(rename = "programTemplateName", default)]
-    pub program_template_name: String,
-    #[serde(default)]
-    pub status: MfgProgramTemplateStatus,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct InsPolicyManagementConfig {
-    #[serde(rename = "expectedRevExpsSetDef", default)]
-    pub expected_rev_exps_set_def: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "premiumCalcExpsSetDef", default)]
-    pub premium_calc_exps_set_def: String,
-    #[serde(rename = "stdExpectedRevExpsSetDef", default)]
-    pub std_expected_rev_exps_set_def: String,
-    #[serde(rename = "stdPremiumCalcExpsSetDef", default)]
-    pub std_premium_calc_exps_set_def: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct InsRatePlanTypeConfig {
-    #[serde(rename = "displayFields", default)]
-    pub display_fields: String,
-    #[serde(rename = "ratePlanCommissionTypes", default)]
-    pub rate_plan_commission_types: String,
-    #[serde(rename = "ratePlanType", default)]
-    pub rate_plan_type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CareLimitType {
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "limitType", default)]
-    pub limit_type: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "metricType", default)]
-    pub metric_type: CareLimitTypeMetricType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct VehicleAssetEmssnSrcCnfg {
-    #[serde(rename = "recordType", default)]
-    pub record_type: String,
-    #[serde(rename = "vehicleAssetType", default)]
-    pub vehicle_asset_type: VehicleAssetType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CareProviderSearchConfig {
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "mappedObject", default)]
-    pub mapped_object: serde_json::Value,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "sourceField", default)]
-    pub source_field: String,
-    #[serde(rename = "targetField", default)]
-    pub target_field: String,
 }

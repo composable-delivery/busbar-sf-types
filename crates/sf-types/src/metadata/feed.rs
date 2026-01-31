@@ -10,19 +10,20 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FeedLayoutComponentType {
+pub enum FeedLayoutFilterPosition {
     #[default]
-    HelpAndToolLinks,
-    CustomButtons,
-    Following,
-    Followers,
-    CustomLinks,
-    Milestones,
-    SimilarCases,
-    CaseExperts,
-    Topics,
-    CaseUnifiedFiles,
-    Visualforce,
+    CenterDropDown,
+    LeftFixed,
+    LeftFloat,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FeedLayoutFilterType {
+    #[default]
+    AllUpdates,
+    FeedItemType,
+    Custom,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -43,11 +44,19 @@ pub enum FeedItemVisibility {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FeedLayoutFilterPosition {
+pub enum FeedLayoutComponentType {
     #[default]
-    CenterDropDown,
-    LeftFixed,
-    LeftFloat,
+    HelpAndToolLinks,
+    CustomButtons,
+    Following,
+    Followers,
+    CustomLinks,
+    Milestones,
+    SimilarCases,
+    CaseExperts,
+    Topics,
+    CaseUnifiedFiles,
+    Visualforce,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -87,15 +96,6 @@ pub enum FeedItemType {
     CreateRecordEvent,
     CanvasPost,
     AnnouncementPost,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FeedLayoutFilterType {
-    #[default]
-    AllUpdates,
-    FeedItemType,
-    Custom,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]

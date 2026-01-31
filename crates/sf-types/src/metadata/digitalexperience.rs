@@ -11,6 +11,32 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct DigitalExperienceFolderShares {
+    #[serde(rename = "digitalExperienceFolderShare", default)]
+    pub digital_experience_folder_share: Vec<DigitalExperienceFolderShare>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DigitalExperienceFolderShare {
+    #[serde(rename = "folderPath", default)]
+    pub folder_path: String,
+    #[serde(rename = "sharedWith", default)]
+    pub shared_with: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DigitalExperienceModuleCollection {
+    #[serde(default)]
+    pub module: Vec<DigitalExperienceModule>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct DigitalExperienceBundle {
     #[serde(default)]
     pub description: String,
@@ -34,32 +60,6 @@ pub struct DigitalExperienceConfig {
     pub site: serde_json::Value,
     #[serde(default)]
     pub space: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DigitalExperienceModuleCollection {
-    #[serde(default)]
-    pub module: Vec<DigitalExperienceModule>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DigitalExperienceFolderShare {
-    #[serde(rename = "folderPath", default)]
-    pub folder_path: String,
-    #[serde(rename = "sharedWith", default)]
-    pub shared_with: Vec<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DigitalExperienceFolderShares {
-    #[serde(rename = "digitalExperienceFolderShare", default)]
-    pub digital_experience_folder_share: Vec<DigitalExperienceFolderShare>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]

@@ -10,26 +10,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum StrategyReactionType {
-    #[default]
-    Accepted,
-    Rejected,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RecommendationConditionValueType {
-    #[default]
-    TEXT,
-    NUMBER,
-    BOOLEAN,
-    DATE,
-    DATE_TIME,
-    TIME,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum RecommendationConditionOperator {
     #[default]
     EQUALS,
@@ -56,86 +36,42 @@ pub enum RecommendationChannel {
     CustomChannel5,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct StrategyNodeSortField {
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "nullsFirst", default)]
-    pub nulls_first: bool,
-    #[serde(default)]
-    pub order: serde_json::Value,
+pub enum StrategyReactionType {
+    #[default]
+    Accepted,
+    Rejected,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RecommendationConditionValueType {
+    #[default]
+    TEXT,
+    NUMBER,
+    BOOLEAN,
+    DATE,
+    DATE_TIME,
+    TIME,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct RecommendationAudience {
-    #[serde(rename = "recommendationAudienceDetails", default)]
-    pub recommendation_audience_details: Vec<RecommendationAudienceDetail>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct StrategyAction {
-    #[serde(default)]
-    pub action: String,
-    #[serde(default)]
-    pub argument: Vec<StrategyActionArg>,
+pub struct RecommendationDefinitionDetail {
+    #[serde(rename = "actionUrl", default)]
+    pub action_url: String,
     #[serde(default)]
     pub description: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub r#type: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct StrategyNodeBase {
-    #[serde(rename = "childNode", default)]
-    pub child_node: Vec<String>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct StrategyNodeInvocableActionArg {
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RecommendationDefinition {
-    #[serde(rename = "recommendationDefinitionDetails", default)]
-    pub recommendation_definition_details: Vec<RecommendationDefinitionDetail>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RecommendationAudienceDetail {
-    #[serde(rename = "audienceCriteriaType", default)]
-    pub audience_criteria_type: serde_json::Value,
-    #[serde(rename = "audienceCriteriaValue", default)]
-    pub audience_criteria_value: String,
+    #[serde(rename = "linkText", default)]
+    pub link_text: String,
+    #[serde(rename = "scheduledRecommendations", default)]
+    pub scheduled_recommendations: serde_json::Value,
     #[serde(rename = "setupName", default)]
     pub setup_name: String,
+    #[serde(default)]
+    pub title: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -181,11 +117,103 @@ pub struct RecommendationStrategy {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct StrategyNodeSortField {
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "nullsFirst", default)]
+    pub nulls_first: bool,
+    #[serde(default)]
+    pub order: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct StrategyNodeBase {
+    #[serde(rename = "childNode", default)]
+    pub child_node: Vec<String>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RecommendationDefinition {
+    #[serde(rename = "recommendationDefinitionDetails", default)]
+    pub recommendation_definition_details: Vec<RecommendationDefinitionDetail>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RecommendationAudience {
+    #[serde(rename = "recommendationAudienceDetails", default)]
+    pub recommendation_audience_details: Vec<RecommendationAudienceDetail>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct RecommendationConditionValue {
     #[serde(default)]
     pub r#type: RecommendationConditionValueType,
     #[serde(default)]
     pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RecommendationAudienceDetail {
+    #[serde(rename = "audienceCriteriaType", default)]
+    pub audience_criteria_type: serde_json::Value,
+    #[serde(rename = "audienceCriteriaValue", default)]
+    pub audience_criteria_value: String,
+    #[serde(rename = "setupName", default)]
+    pub setup_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct StrategyNodeInvocableActionArg {
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct StrategyActionArg {
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct StrategyAction {
+    #[serde(default)]
+    pub action: String,
+    #[serde(default)]
+    pub argument: Vec<StrategyActionArg>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub r#type: serde_json::Value,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -198,32 +226,4 @@ pub struct RecommendationLoadCondition {
     pub operator: RecommendationConditionOperator,
     #[serde(default)]
     pub value: RecommendationConditionValue,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RecommendationDefinitionDetail {
-    #[serde(rename = "actionUrl", default)]
-    pub action_url: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "linkText", default)]
-    pub link_text: String,
-    #[serde(rename = "scheduledRecommendations", default)]
-    pub scheduled_recommendations: serde_json::Value,
-    #[serde(rename = "setupName", default)]
-    pub setup_name: String,
-    #[serde(default)]
-    pub title: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct StrategyActionArg {
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub value: String,
 }

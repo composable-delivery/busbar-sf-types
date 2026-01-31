@@ -10,14 +10,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum WorkflowTimeUnits {
-    #[default]
-    Hours,
-    Days,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum WorkflowTriggerTypes {
     #[default]
     onCreateOnly,
@@ -38,6 +30,72 @@ pub enum WorkflowActionType {
     OutboundMessage,
     FlowAction,
     FlowAutomation,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum WorkflowTimeUnits {
+    #[default]
+    Hours,
+    Days,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DuplicateRule {
+    #[serde(rename = "actionOnInsert", default)]
+    pub action_on_insert: serde_json::Value,
+    #[serde(rename = "actionOnUpdate", default)]
+    pub action_on_update: serde_json::Value,
+    #[serde(rename = "alertText", default)]
+    pub alert_text: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "duplicateRuleFilter", default)]
+    pub duplicate_rule_filter: serde_json::Value,
+    #[serde(rename = "duplicateRuleMatchRules", default)]
+    pub duplicate_rule_match_rules: Vec<serde_json::Value>,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "operationsOnInsert", default)]
+    pub operations_on_insert: Vec<String>,
+    #[serde(rename = "operationsOnUpdate", default)]
+    pub operations_on_update: Vec<String>,
+    #[serde(rename = "securityOption", default)]
+    pub security_option: serde_json::Value,
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ApprovalAction {
+    #[serde(default)]
+    pub action: Vec<WorkflowActionReference>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MatchingRules {
+    #[serde(rename = "matchingRules", default)]
+    pub matching_rules: Vec<MatchingRule>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ApprovalEntryCriteria {
+    #[serde(rename = "booleanFilter", default)]
+    pub boolean_filter: String,
+    #[serde(rename = "criteriaItems", default)]
+    pub criteria_items: Vec<serde_json::Value>,
+    #[serde(default)]
+    pub formula: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -67,59 +125,19 @@ pub struct Workflow {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ApprovalEntryCriteria {
-    #[serde(rename = "booleanFilter", default)]
-    pub boolean_filter: String,
-    #[serde(rename = "criteriaItems", default)]
-    pub criteria_items: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub formula: String,
+pub struct AssignmentRules {
+    #[serde(rename = "assignmentRule", default)]
+    pub assignment_rule: Vec<AssignmentRule>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ApprovalAction {
+pub struct EscalationRule {
     #[serde(default)]
-    pub action: Vec<WorkflowActionReference>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ApprovalStep {
-    #[serde(rename = "allowDelegate", default)]
-    pub allow_delegate: bool,
-    #[serde(rename = "approvalActions", default)]
-    pub approval_actions: ApprovalAction,
-    #[serde(rename = "assignedApprover", default)]
-    pub assigned_approver: ApprovalStepApprover,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "entryCriteria", default)]
-    pub entry_criteria: ApprovalEntryCriteria,
-    #[serde(rename = "ifCriteriaNotMet", default)]
-    pub if_criteria_not_met: serde_json::Value,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "rejectBehavior", default)]
-    pub reject_behavior: ApprovalStepRejectBehavior,
-    #[serde(rename = "rejectionActions", default)]
-    pub rejection_actions: ApprovalAction,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct WorkflowTaskTranslation {
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub subject: String,
+    pub active: bool,
+    #[serde(rename = "ruleEntry", default)]
+    pub rule_entry: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -135,9 +153,53 @@ pub struct ApprovalSubmitter {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct WorkflowRule {
+    #[serde(default)]
+    pub actions: Vec<WorkflowActionReference>,
+    #[serde(default)]
+    pub active: bool,
+    #[serde(rename = "booleanFilter", default)]
+    pub boolean_filter: String,
+    #[serde(rename = "criteriaItems", default)]
+    pub criteria_items: Vec<serde_json::Value>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "failedMigrationToolVersion", default)]
+    pub failed_migration_tool_version: String,
+    #[serde(default)]
+    pub formula: String,
+    #[serde(rename = "triggerType", default)]
+    pub trigger_type: WorkflowTriggerTypes,
+    #[serde(rename = "workflowTimeTriggers", default)]
+    pub workflow_time_triggers: Vec<WorkflowTimeTrigger>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WorkflowActionReference {
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub r#type: WorkflowActionType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct ApprovalStepRejectBehavior {
     #[serde(default)]
     pub r#type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WorkflowFlowActionParameter {
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub value: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -153,17 +215,39 @@ pub struct AssignmentRule {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct MatchingRule {
-    #[serde(rename = "booleanFilter", default)]
-    pub boolean_filter: String,
+pub struct ApprovalPageField {
     #[serde(default)]
-    pub description: String,
+    pub field: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AutoResponseRule {
     #[serde(default)]
-    pub label: String,
-    #[serde(rename = "matchingRuleItems", default)]
-    pub matching_rule_items: Vec<serde_json::Value>,
-    #[serde(rename = "ruleStatus", default)]
-    pub rule_status: serde_json::Value,
+    pub active: bool,
+    #[serde(rename = "ruleEntry", default)]
+    pub rule_entry: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WorkflowEmailRecipient {
+    #[serde(default)]
+    pub field: String,
+    #[serde(default)]
+    pub recipient: String,
+    #[serde(default)]
+    pub r#type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EscalationRules {
+    #[serde(rename = "escalationRule", default)]
+    pub escalation_rule: Vec<EscalationRule>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -179,19 +263,35 @@ pub struct ApprovalStepApprover {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct AssignmentRules {
-    #[serde(rename = "assignmentRule", default)]
-    pub assignment_rule: Vec<AssignmentRule>,
+pub struct WorkflowTimeTrigger {
+    #[serde(default)]
+    pub actions: Vec<WorkflowActionReference>,
+    #[serde(rename = "offsetFromField", default)]
+    pub offset_from_field: String,
+    #[serde(rename = "timeLength", default)]
+    pub time_length: String,
+    #[serde(rename = "workflowTimeTriggerUnit", default)]
+    pub workflow_time_trigger_unit: WorkflowTimeUnits,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct WorkflowActionReference {
+pub struct AutoResponseRules {
+    #[serde(rename = "autoResponseRule", default)]
+    pub auto_response_rule: Vec<AutoResponseRule>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WorkflowTaskTranslation {
+    #[serde(default)]
+    pub description: String,
     #[serde(default)]
     pub name: String,
     #[serde(default)]
-    pub r#type: WorkflowActionType,
+    pub subject: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -245,141 +345,41 @@ pub struct ApprovalProcess {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct AutoResponseRule {
-    #[serde(default)]
-    pub active: bool,
-    #[serde(rename = "ruleEntry", default)]
-    pub rule_entry: Vec<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EscalationRule {
-    #[serde(default)]
-    pub active: bool,
-    #[serde(rename = "ruleEntry", default)]
-    pub rule_entry: Vec<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DuplicateRule {
-    #[serde(rename = "actionOnInsert", default)]
-    pub action_on_insert: serde_json::Value,
-    #[serde(rename = "actionOnUpdate", default)]
-    pub action_on_update: serde_json::Value,
-    #[serde(rename = "alertText", default)]
-    pub alert_text: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "duplicateRuleFilter", default)]
-    pub duplicate_rule_filter: serde_json::Value,
-    #[serde(rename = "duplicateRuleMatchRules", default)]
-    pub duplicate_rule_match_rules: Vec<serde_json::Value>,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "operationsOnInsert", default)]
-    pub operations_on_insert: Vec<String>,
-    #[serde(rename = "operationsOnUpdate", default)]
-    pub operations_on_update: Vec<String>,
-    #[serde(rename = "securityOption", default)]
-    pub security_option: serde_json::Value,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct WorkflowFlowActionParameter {
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct WorkflowEmailRecipient {
-    #[serde(default)]
-    pub field: String,
-    #[serde(default)]
-    pub recipient: String,
-    #[serde(default)]
-    pub r#type: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ApprovalPageField {
-    #[serde(default)]
-    pub field: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MatchingRules {
-    #[serde(rename = "matchingRules", default)]
-    pub matching_rules: Vec<MatchingRule>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AutoResponseRules {
-    #[serde(rename = "autoResponseRule", default)]
-    pub auto_response_rule: Vec<AutoResponseRule>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EscalationRules {
-    #[serde(rename = "escalationRule", default)]
-    pub escalation_rule: Vec<EscalationRule>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct WorkflowTimeTrigger {
-    #[serde(default)]
-    pub actions: Vec<WorkflowActionReference>,
-    #[serde(rename = "offsetFromField", default)]
-    pub offset_from_field: String,
-    #[serde(rename = "timeLength", default)]
-    pub time_length: String,
-    #[serde(rename = "workflowTimeTriggerUnit", default)]
-    pub workflow_time_trigger_unit: WorkflowTimeUnits,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct WorkflowRule {
-    #[serde(default)]
-    pub actions: Vec<WorkflowActionReference>,
-    #[serde(default)]
-    pub active: bool,
+pub struct MatchingRule {
     #[serde(rename = "booleanFilter", default)]
     pub boolean_filter: String,
-    #[serde(rename = "criteriaItems", default)]
-    pub criteria_items: Vec<serde_json::Value>,
     #[serde(default)]
     pub description: String,
-    #[serde(rename = "failedMigrationToolVersion", default)]
-    pub failed_migration_tool_version: String,
     #[serde(default)]
-    pub formula: String,
-    #[serde(rename = "triggerType", default)]
-    pub trigger_type: WorkflowTriggerTypes,
-    #[serde(rename = "workflowTimeTriggers", default)]
-    pub workflow_time_triggers: Vec<WorkflowTimeTrigger>,
+    pub label: String,
+    #[serde(rename = "matchingRuleItems", default)]
+    pub matching_rule_items: Vec<serde_json::Value>,
+    #[serde(rename = "ruleStatus", default)]
+    pub rule_status: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ApprovalStep {
+    #[serde(rename = "allowDelegate", default)]
+    pub allow_delegate: bool,
+    #[serde(rename = "approvalActions", default)]
+    pub approval_actions: ApprovalAction,
+    #[serde(rename = "assignedApprover", default)]
+    pub assigned_approver: ApprovalStepApprover,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "entryCriteria", default)]
+    pub entry_criteria: ApprovalEntryCriteria,
+    #[serde(rename = "ifCriteriaNotMet", default)]
+    pub if_criteria_not_met: serde_json::Value,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "rejectBehavior", default)]
+    pub reject_behavior: ApprovalStepRejectBehavior,
+    #[serde(rename = "rejectionActions", default)]
+    pub rejection_actions: ApprovalAction,
 }

@@ -20,15 +20,63 @@ pub enum DeployProblemType {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct DeployDetails {
-    #[serde(rename = "componentFailures", default)]
-    pub component_failures: Vec<DeployMessage>,
-    #[serde(rename = "componentSuccesses", default)]
-    pub component_successes: Vec<DeployMessage>,
-    #[serde(rename = "retrieveResult", default)]
-    pub retrieve_result: serde_json::Value,
-    #[serde(rename = "runTestResult", default)]
-    pub run_test_result: serde_json::Value,
+pub struct DeployResult {
+    #[serde(rename = "canceledBy", default)]
+    pub canceled_by: String,
+    #[serde(rename = "canceledByName", default)]
+    pub canceled_by_name: String,
+    #[serde(rename = "checkOnly", default)]
+    pub check_only: bool,
+    #[serde(rename = "completedDate", default)]
+    pub completed_date: String,
+    #[serde(rename = "createdBy", default)]
+    pub created_by: String,
+    #[serde(rename = "createdByName", default)]
+    pub created_by_name: String,
+    #[serde(rename = "createdDate", default)]
+    pub created_date: String,
+    #[serde(default)]
+    pub details: DeployDetails,
+    #[serde(default)]
+    pub done: bool,
+    #[serde(rename = "errorMessage", default)]
+    pub error_message: String,
+    #[serde(rename = "errorStatusCode", default)]
+    pub error_status_code: serde_json::Value,
+    #[serde(default)]
+    pub id: serde_json::Value,
+    #[serde(rename = "ignoreWarnings", default)]
+    pub ignore_warnings: bool,
+    #[serde(rename = "lastModifiedDate", default)]
+    pub last_modified_date: String,
+    #[serde(rename = "numberComponentErrors", default)]
+    pub number_component_errors: f64,
+    #[serde(rename = "numberComponentsDeployed", default)]
+    pub number_components_deployed: f64,
+    #[serde(rename = "numberComponentsTotal", default)]
+    pub number_components_total: f64,
+    #[serde(rename = "numberFiles", default)]
+    pub number_files: f64,
+    #[serde(rename = "numberTestErrors", default)]
+    pub number_test_errors: f64,
+    #[serde(rename = "numberTestsCompleted", default)]
+    pub number_tests_completed: f64,
+    #[serde(rename = "numberTestsTotal", default)]
+    pub number_tests_total: f64,
+    #[serde(rename = "rollbackOnError", default)]
+    pub rollback_on_error: bool,
+    #[serde(rename = "runTestsEnabled", default)]
+    pub run_tests_enabled: bool,
+    #[serde(rename = "startDate", default)]
+    pub start_date: String,
+    #[serde(rename = "stateDetail", default)]
+    pub state_detail: String,
+    #[serde(default)]
+    pub status: serde_json::Value,
+    #[serde(default)]
+    pub success: bool,
+    #[serde(rename = "zipSize", default)]
+    pub zip_size: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -92,61 +140,13 @@ pub struct DeployMessage {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct DeployResult {
-    #[serde(rename = "canceledBy", default)]
-    pub canceled_by: String,
-    #[serde(rename = "canceledByName", default)]
-    pub canceled_by_name: String,
-    #[serde(rename = "checkOnly", default)]
-    pub check_only: bool,
-    #[serde(rename = "completedDate", default)]
-    pub completed_date: String,
-    #[serde(rename = "createdBy", default)]
-    pub created_by: String,
-    #[serde(rename = "createdByName", default)]
-    pub created_by_name: String,
-    #[serde(rename = "createdDate", default)]
-    pub created_date: String,
-    #[serde(default)]
-    pub details: DeployDetails,
-    #[serde(default)]
-    pub done: bool,
-    #[serde(rename = "errorMessage", default)]
-    pub error_message: String,
-    #[serde(rename = "errorStatusCode", default)]
-    pub error_status_code: serde_json::Value,
-    #[serde(default)]
-    pub id: serde_json::Value,
-    #[serde(rename = "ignoreWarnings", default)]
-    pub ignore_warnings: bool,
-    #[serde(rename = "lastModifiedDate", default)]
-    pub last_modified_date: String,
-    #[serde(rename = "numberComponentErrors", default)]
-    pub number_component_errors: f64,
-    #[serde(rename = "numberComponentsDeployed", default)]
-    pub number_components_deployed: f64,
-    #[serde(rename = "numberComponentsTotal", default)]
-    pub number_components_total: f64,
-    #[serde(rename = "numberFiles", default)]
-    pub number_files: f64,
-    #[serde(rename = "numberTestErrors", default)]
-    pub number_test_errors: f64,
-    #[serde(rename = "numberTestsCompleted", default)]
-    pub number_tests_completed: f64,
-    #[serde(rename = "numberTestsTotal", default)]
-    pub number_tests_total: f64,
-    #[serde(rename = "rollbackOnError", default)]
-    pub rollback_on_error: bool,
-    #[serde(rename = "runTestsEnabled", default)]
-    pub run_tests_enabled: bool,
-    #[serde(rename = "startDate", default)]
-    pub start_date: String,
-    #[serde(rename = "stateDetail", default)]
-    pub state_detail: String,
-    #[serde(default)]
-    pub status: serde_json::Value,
-    #[serde(default)]
-    pub success: bool,
-    #[serde(rename = "zipSize", default)]
-    pub zip_size: f64,
+pub struct DeployDetails {
+    #[serde(rename = "componentFailures", default)]
+    pub component_failures: Vec<DeployMessage>,
+    #[serde(rename = "componentSuccesses", default)]
+    pub component_successes: Vec<DeployMessage>,
+    #[serde(rename = "retrieveResult", default)]
+    pub retrieve_result: serde_json::Value,
+    #[serde(rename = "runTestResult", default)]
+    pub run_test_result: serde_json::Value,
 }

@@ -10,10 +10,57 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DiscoveryPushbackType {
+pub enum DiscoveryOutcomeGoal {
     #[default]
-    AiRecordInsight,
-    Direct,
+    Minimize,
+    Maximize,
+    None,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DiscoveryFilterValueType {
+    #[default]
+    Constant,
+    PlaceHolder,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DiscoveryStoryOutcomeGoal {
+    #[default]
+    Minimize,
+    Maximize,
+    None,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DiscoveryFieldMapSourceType {
+    #[default]
+    SalesforceField,
+    AnalyticsDatasetField,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DiscoveryPredictionType {
+    #[default]
+    Unknown,
+    Regression,
+    Classification,
+    MulticlassClassification,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DiscoveryModelRuntimeType {
+    #[default]
+    Discovery,
+    H2O,
+    Py36Tensorflow244,
+    Py37Tensorflow270,
+    Py37Scikitlearn102,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -27,6 +74,14 @@ pub enum DiscoveryStorySourceType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DiscoveryModelSourceType {
+    #[default]
+    Discovery,
+    UserUpload,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum DiscoveryFilterFieldType {
     #[default]
     Text,
@@ -34,35 +89,6 @@ pub enum DiscoveryFilterFieldType {
     Date,
     DateTime,
     Boolean,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DiscoveryAlgorithmType {
-    #[default]
-    Glm,
-    Gbm,
-    Xgboost,
-    Drf,
-    Best,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DiscoveryStoryOutcomeType {
-    #[default]
-    Count,
-    Text,
-    Categorical,
-    Number,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DiscoveryFilterValueType {
-    #[default]
-    Constant,
-    PlaceHolder,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -96,44 +122,6 @@ pub enum DiscoveryStoryAutopilotStatus {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DiscoveryOutcomeGoal {
-    #[default]
-    Minimize,
-    Maximize,
-    None,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DiscoveryPredictionType {
-    #[default]
-    Unknown,
-    Regression,
-    Classification,
-    MulticlassClassification,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DiscoveryFieldMapSourceType {
-    #[default]
-    SalesforceField,
-    AnalyticsDatasetField,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DiscoveryModelRuntimeType {
-    #[default]
-    Discovery,
-    H2O,
-    Py36Tensorflow244,
-    Py37Tensorflow270,
-    Py37Scikitlearn102,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum DiscoveryModelFieldType {
     #[default]
     Text,
@@ -143,11 +131,31 @@ pub enum DiscoveryModelFieldType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DiscoveryStoryOutcomeGoal {
+pub enum DiscoveryAlgorithmType {
     #[default]
-    Minimize,
-    Maximize,
-    None,
+    Glm,
+    Gbm,
+    Xgboost,
+    Drf,
+    Best,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DiscoveryPushbackType {
+    #[default]
+    AiRecordInsight,
+    Direct,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DiscoveryStoryOutcomeType {
+    #[default]
+    Count,
+    Text,
+    Categorical,
+    Number,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -166,14 +174,6 @@ pub enum DiscoveryAIModelStatus {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DiscoveryModelSourceType {
-    #[default]
-    Discovery,
-    UserUpload,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum DiscoveryAIModelTransformationType {
     #[default]
     TypographicClustering,
@@ -184,6 +184,56 @@ pub enum DiscoveryAIModelTransformationType {
     TimeSeriesForecast,
     ExtractMonthOfYear,
     ExtractDayOfWeek,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DiscoveryGoal {
+    #[serde(default)]
+    pub active: bool,
+    #[serde(rename = "deployedModels", default)]
+    pub deployed_models: Vec<DiscoveryDeployedModel>,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "modelCards", default)]
+    pub model_cards: Vec<DiscoveryModelCard>,
+    #[serde(default)]
+    pub outcome: DiscoveryGoalOutcome,
+    #[serde(rename = "predictionType", default)]
+    pub prediction_type: DiscoveryPredictionType,
+    #[serde(rename = "pushbackField", default)]
+    pub pushback_field: String,
+    #[serde(rename = "pushbackType", default)]
+    pub pushback_type: DiscoveryPushbackType,
+    #[serde(rename = "subscribedEntity", default)]
+    pub subscribed_entity: String,
+    #[serde(rename = "terminalStateFilters", default)]
+    pub terminal_state_filters: Vec<DiscoveryFilter>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DiscoveryModelCard {
+    #[serde(rename = "contactEmail", default)]
+    pub contact_email: String,
+    #[serde(rename = "contactName", default)]
+    pub contact_name: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub sections: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DiscoveryFilterValue {
+    #[serde(default)]
+    pub r#type: DiscoveryFilterValueType,
+    #[serde(default)]
+    pub value: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -235,41 +285,41 @@ pub struct DiscoveryGoalOutcome {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct DiscoveryGoal {
-    #[serde(default)]
-    pub active: bool,
-    #[serde(rename = "deployedModels", default)]
-    pub deployed_models: Vec<DiscoveryDeployedModel>,
+pub struct DiscoveryModelField {
+    #[serde(rename = "isDisparateImpact", default)]
+    pub is_disparate_impact: bool,
+    #[serde(rename = "isSensitive", default)]
+    pub is_sensitive: bool,
     #[serde(default)]
     pub label: String,
-    #[serde(rename = "modelCards", default)]
-    pub model_cards: Vec<DiscoveryModelCard>,
     #[serde(default)]
-    pub outcome: DiscoveryGoalOutcome,
-    #[serde(rename = "predictionType", default)]
-    pub prediction_type: DiscoveryPredictionType,
-    #[serde(rename = "pushbackField", default)]
-    pub pushback_field: String,
-    #[serde(rename = "pushbackType", default)]
-    pub pushback_type: DiscoveryPushbackType,
-    #[serde(rename = "subscribedEntity", default)]
-    pub subscribed_entity: String,
-    #[serde(rename = "terminalStateFilters", default)]
-    pub terminal_state_filters: Vec<DiscoveryFilter>,
+    pub name: String,
+    #[serde(default)]
+    pub r#type: DiscoveryModelFieldType,
+    #[serde(default)]
+    pub values: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct DiscoveryModelCard {
-    #[serde(rename = "contactEmail", default)]
-    pub contact_email: String,
-    #[serde(rename = "contactName", default)]
-    pub contact_name: String,
+pub struct DiscoveryDeployedModel {
+    #[serde(default)]
+    pub active: bool,
+    #[serde(rename = "aiModel", default)]
+    pub ai_model: String,
+    #[serde(rename = "classificationThreshold", default)]
+    pub classification_threshold: f64,
+    #[serde(rename = "fieldMappings", default)]
+    pub field_mappings: Vec<DiscoveryFieldMap>,
+    #[serde(default)]
+    pub filters: Vec<DiscoveryFilter>,
     #[serde(default)]
     pub label: String,
     #[serde(default)]
-    pub sections: String,
+    pub name: String,
+    #[serde(rename = "prescribableFields", default)]
+    pub prescribable_fields: Vec<DiscoveryPrescribableField>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -280,16 +330,6 @@ pub struct DiscoveryCustomPrescribableFieldDefinition {
     pub filters: Vec<DiscoveryFilter>,
     #[serde(default)]
     pub template: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DiscoveryFilterValue {
-    #[serde(default)]
-    pub r#type: DiscoveryFilterValueType,
-    #[serde(default)]
-    pub value: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -332,44 +372,4 @@ pub struct DiscoveryPrescribableField {
     pub custom_definitions: Vec<DiscoveryCustomPrescribableFieldDefinition>,
     #[serde(default)]
     pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DiscoveryModelField {
-    #[serde(rename = "isDisparateImpact", default)]
-    pub is_disparate_impact: bool,
-    #[serde(rename = "isSensitive", default)]
-    pub is_sensitive: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub r#type: DiscoveryModelFieldType,
-    #[serde(default)]
-    pub values: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DiscoveryDeployedModel {
-    #[serde(default)]
-    pub active: bool,
-    #[serde(rename = "aiModel", default)]
-    pub ai_model: String,
-    #[serde(rename = "classificationThreshold", default)]
-    pub classification_threshold: f64,
-    #[serde(rename = "fieldMappings", default)]
-    pub field_mappings: Vec<DiscoveryFieldMap>,
-    #[serde(default)]
-    pub filters: Vec<DiscoveryFilter>,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "prescribableFields", default)]
-    pub prescribable_fields: Vec<DiscoveryPrescribableField>,
 }

@@ -23,6 +23,23 @@ pub enum CodeSubType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum CodeProvider {
+    #[default]
+    Bandwidth,
+    Inteliquent,
+    Sinch,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum CodeFeature {
+    #[default]
+    ServiceCloudVoice,
+    ServiceCloudNative,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum CodeProvisioningStatus {
     #[default]
     UNKNOWN,
@@ -53,23 +70,6 @@ pub enum CodeStatus {
     Verifying,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CodeFeature {
-    #[default]
-    ServiceCloudVoice,
-    ServiceCloudNative,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CodeProvider {
-    #[default]
-    Bandwidth,
-    Inteliquent,
-    Sinch,
-}
-
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
@@ -82,20 +82,6 @@ pub struct CodeCoverageWarning {
     pub name: String,
     #[serde(default)]
     pub namespace: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CodeLocation {
-    #[serde(default)]
-    pub column: f64,
-    #[serde(default)]
-    pub line: f64,
-    #[serde(rename = "numExecutions", default)]
-    pub num_executions: f64,
-    #[serde(default)]
-    pub time: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -124,4 +110,18 @@ pub struct CodeCoverageResult {
     pub sosl_info: Vec<CodeLocation>,
     #[serde(default)]
     pub r#type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CodeLocation {
+    #[serde(default)]
+    pub column: f64,
+    #[serde(default)]
+    pub line: f64,
+    #[serde(rename = "numExecutions", default)]
+    pub num_executions: f64,
+    #[serde(default)]
+    pub time: f64,
 }

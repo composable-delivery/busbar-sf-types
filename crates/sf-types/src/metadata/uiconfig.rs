@@ -10,18 +10,44 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum UiLoginFlowType {
+    #[default]
+    VisualWorkflow,
+    VisualForce,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum UiType {
     #[default]
     Aloha,
     Lightning,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum UiLoginFlowType {
-    #[default]
-    VisualWorkflow,
-    VisualForce,
+#[serde(rename_all = "camelCase")]
+pub struct UiFormatSpecification {
+    #[serde(rename = "formatProperties", default)]
+    pub format_properties: String,
+    #[serde(rename = "formatType", default)]
+    pub format_type: serde_json::Value,
+    #[serde(default)]
+    pub order: f64,
+    #[serde(rename = "visibilityRule", default)]
+    pub visibility_rule: UiFormulaRule,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct UiFormulaCriterion {
+    #[serde(rename = "leftValue", default)]
+    pub left_value: String,
+    #[serde(default)]
+    pub operator: String,
+    #[serde(rename = "rightValue", default)]
+    pub right_value: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -50,32 +76,6 @@ pub struct UiFormulaRule {
     pub boolean_filter: String,
     #[serde(default)]
     pub criteria: Vec<UiFormulaCriterion>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct UiFormulaCriterion {
-    #[serde(rename = "leftValue", default)]
-    pub left_value: String,
-    #[serde(default)]
-    pub operator: String,
-    #[serde(rename = "rightValue", default)]
-    pub right_value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct UiFormatSpecification {
-    #[serde(rename = "formatProperties", default)]
-    pub format_properties: String,
-    #[serde(rename = "formatType", default)]
-    pub format_type: serde_json::Value,
-    #[serde(default)]
-    pub order: f64,
-    #[serde(rename = "visibilityRule", default)]
-    pub visibility_rule: UiFormulaRule,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]

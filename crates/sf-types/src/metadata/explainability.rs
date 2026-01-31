@@ -11,48 +11,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ExplainabilityMsgTemplate {
-    #[serde(rename = "evaluationResult", default)]
-    pub evaluation_result: serde_json::Value,
-    #[serde(rename = "expressionSetStepType", default)]
-    pub expression_set_step_type: serde_json::Value,
-    #[serde(rename = "expsSetProcessType", default)]
-    pub exps_set_process_type: serde_json::Value,
-    #[serde(rename = "isDefault", default)]
-    pub is_default: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub message: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExplainabilityMessageTemplateTokenMapping {
-    #[serde(rename = "expressionSetMessageToken", default)]
-    pub expression_set_message_token: String,
-    #[serde(rename = "resourceReference", default)]
-    pub resource_reference: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExplainabilityMsgTemplateFieldTranslation {
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "templateMessage", default)]
-    pub template_message: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct ExplainabilityActionDefinition {
     #[serde(rename = "actionLogSchemaType", default)]
     pub action_log_schema_type: serde_json::Value,
@@ -73,6 +31,20 @@ pub struct ExplainabilityActionDefinition {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct ExplainabilityMsgTemplateFieldTranslation {
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "templateMessage", default)]
+    pub template_message: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct ExplainabilityActionVersion {
     #[serde(rename = "actionLogMessageTemplate", default)]
     pub action_log_message_template: String,
@@ -88,4 +60,32 @@ pub struct ExplainabilityActionVersion {
     pub explainability_action_def: String,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExplainabilityMessageTemplateTokenMapping {
+    #[serde(rename = "expressionSetMessageToken", default)]
+    pub expression_set_message_token: String,
+    #[serde(rename = "resourceReference", default)]
+    pub resource_reference: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExplainabilityMsgTemplate {
+    #[serde(rename = "evaluationResult", default)]
+    pub evaluation_result: serde_json::Value,
+    #[serde(rename = "expressionSetStepType", default)]
+    pub expression_set_step_type: serde_json::Value,
+    #[serde(rename = "expsSetProcessType", default)]
+    pub exps_set_process_type: serde_json::Value,
+    #[serde(rename = "isDefault", default)]
+    pub is_default: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub message: String,
 }

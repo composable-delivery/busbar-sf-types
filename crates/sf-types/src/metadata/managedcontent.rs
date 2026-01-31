@@ -23,26 +23,6 @@ pub enum ManagedContentSpaceModuleStatusEnum {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ManagedContentNodeType {
-    #[serde(rename = "helpText", default)]
-    pub help_text: String,
-    #[serde(rename = "isLocalizable", default)]
-    pub is_localizable: bool,
-    #[serde(rename = "isRequired", default)]
-    pub is_required: bool,
-    #[serde(rename = "nodeLabel", default)]
-    pub node_label: String,
-    #[serde(rename = "nodeName", default)]
-    pub node_name: String,
-    #[serde(rename = "nodeType", default)]
-    pub node_type: serde_json::Value,
-    #[serde(rename = "placeholderText", default)]
-    pub placeholder_text: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct ManagedContentType {
     #[serde(default)]
     pub description: String,
@@ -62,6 +42,44 @@ pub struct ManagedContentType {
 pub struct ManagedTopics {
     #[serde(rename = "managedTopic", default)]
     pub managed_topic: Vec<ManagedTopic>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ManagedEventSubscription {
+    #[serde(rename = "defaultReplay", default)]
+    pub default_replay: serde_json::Value,
+    #[serde(rename = "errorRecoveryReplay", default)]
+    pub error_recovery_replay: serde_json::Value,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub state: serde_json::Value,
+    #[serde(rename = "topicName", default)]
+    pub topic_name: String,
+    #[serde(default)]
+    pub version: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ManagedContentNodeType {
+    #[serde(rename = "helpText", default)]
+    pub help_text: String,
+    #[serde(rename = "isLocalizable", default)]
+    pub is_localizable: bool,
+    #[serde(rename = "isRequired", default)]
+    pub is_required: bool,
+    #[serde(rename = "nodeLabel", default)]
+    pub node_label: String,
+    #[serde(rename = "nodeName", default)]
+    pub node_name: String,
+    #[serde(rename = "nodeType", default)]
+    pub node_type: serde_json::Value,
+    #[serde(rename = "placeholderText", default)]
+    pub placeholder_text: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -92,22 +110,4 @@ pub struct ManagedContentTypeBundle {
     pub master_label: String,
     #[serde(rename = "schemaBody", default)]
     pub schema_body: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ManagedEventSubscription {
-    #[serde(rename = "defaultReplay", default)]
-    pub default_replay: serde_json::Value,
-    #[serde(rename = "errorRecoveryReplay", default)]
-    pub error_recovery_replay: serde_json::Value,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub state: serde_json::Value,
-    #[serde(rename = "topicName", default)]
-    pub topic_name: String,
-    #[serde(default)]
-    pub version: String,
 }

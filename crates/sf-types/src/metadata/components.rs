@@ -42,6 +42,14 @@ pub struct ComponentInstanceProperty {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct ComponentInstancePropertyList {
+    #[serde(rename = "valueListItems", default)]
+    pub value_list_items: Vec<ComponentInstancePropertyListItem>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct ComponentInstancePropertyListItem {
     #[serde(default)]
     pub value: String,
@@ -65,12 +73,4 @@ pub struct ComponentInstance {
     pub identifier: String,
     #[serde(rename = "visibilityRule", default)]
     pub visibility_rule: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ComponentInstancePropertyList {
-    #[serde(rename = "valueListItems", default)]
-    pub value_list_items: Vec<ComponentInstancePropertyListItem>,
 }

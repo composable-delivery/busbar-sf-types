@@ -10,15 +10,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CustomFieldDisplayType {
-    #[default]
-    Dropdown,
-    ColorSwatch,
-    Pill,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum ActionOverrideType {
     #[default]
     Default,
@@ -27,6 +18,89 @@ pub enum ActionOverrideType {
     Visualforce,
     Flexipage,
     LightningComponent,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum CustomFieldDisplayType {
+    #[default]
+    Dropdown,
+    ColorSwatch,
+    Pill,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct HistoryRetentionPolicy {
+    #[serde(rename = "archiveAfterMonths", default)]
+    pub archive_after_months: f64,
+    #[serde(rename = "archiveRetentionYears", default)]
+    pub archive_retention_years: f64,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "gracePeriodDays", default)]
+    pub grace_period_days: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct StandardValueSetTranslation {
+    #[serde(rename = "valueTranslation", default)]
+    pub value_translation: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RecordType {
+    #[serde(default)]
+    pub active: bool,
+    #[serde(rename = "businessProcess", default)]
+    pub business_process: String,
+    #[serde(rename = "compactLayoutAssignment", default)]
+    pub compact_layout_assignment: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "picklistValues", default)]
+    pub picklist_values: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CustomObjectTranslation {
+    #[serde(rename = "caseValues", default)]
+    pub case_values: Vec<serde_json::Value>,
+    #[serde(rename = "fieldSets", default)]
+    pub field_sets: Vec<serde_json::Value>,
+    #[serde(default)]
+    pub fields: Vec<CustomFieldTranslation>,
+    #[serde(default)]
+    pub gender: serde_json::Value,
+    #[serde(default)]
+    pub layouts: Vec<serde_json::Value>,
+    #[serde(rename = "nameFieldLabel", default)]
+    pub name_field_label: String,
+    #[serde(rename = "quickActions", default)]
+    pub quick_actions: Vec<serde_json::Value>,
+    #[serde(rename = "recordTypes", default)]
+    pub record_types: Vec<serde_json::Value>,
+    #[serde(rename = "sharingReasons", default)]
+    pub sharing_reasons: Vec<serde_json::Value>,
+    #[serde(rename = "standardFields", default)]
+    pub standard_fields: Vec<serde_json::Value>,
+    #[serde(rename = "startsWith", default)]
+    pub starts_with: serde_json::Value,
+    #[serde(rename = "validationRules", default)]
+    pub validation_rules: Vec<serde_json::Value>,
+    #[serde(rename = "webLinks", default)]
+    pub web_links: Vec<serde_json::Value>,
+    #[serde(rename = "workflowTasks", default)]
+    pub workflow_tasks: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -44,15 +118,11 @@ pub struct BusinessProcess {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct HistoryRetentionPolicy {
-    #[serde(rename = "archiveAfterMonths", default)]
-    pub archive_after_months: f64,
-    #[serde(rename = "archiveRetentionYears", default)]
-    pub archive_retention_years: f64,
+pub struct IndexField {
     #[serde(default)]
-    pub description: String,
-    #[serde(rename = "gracePeriodDays", default)]
-    pub grace_period_days: f64,
+    pub name: String,
+    #[serde(rename = "sortDirection", default)]
+    pub sort_direction: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -74,154 +144,6 @@ pub struct ValueSet {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct FieldSet {
-    #[serde(rename = "availableFields", default)]
-    pub available_fields: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "displayedFields", default)]
-    pub displayed_fields: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomValue {
-    #[serde(default)]
-    pub color: String,
-    #[serde(default)]
-    pub default: bool,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(default)]
-    pub label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomObject {
-    #[serde(rename = "actionOverrides", default)]
-    pub action_overrides: Vec<ActionOverride>,
-    #[serde(rename = "allowInChatterGroups", default)]
-    pub allow_in_chatter_groups: bool,
-    #[serde(rename = "articleTypeChannelDisplay", default)]
-    pub article_type_channel_display: serde_json::Value,
-    #[serde(rename = "businessProcesses", default)]
-    pub business_processes: Vec<BusinessProcess>,
-    #[serde(rename = "compactLayoutAssignment", default)]
-    pub compact_layout_assignment: String,
-    #[serde(rename = "compactLayouts", default)]
-    pub compact_layouts: Vec<CompactLayout>,
-    #[serde(rename = "customHelp", default)]
-    pub custom_help: String,
-    #[serde(rename = "customHelpPage", default)]
-    pub custom_help_page: String,
-    #[serde(rename = "customSettingsType", default)]
-    pub custom_settings_type: serde_json::Value,
-    #[serde(rename = "deploymentStatus", default)]
-    pub deployment_status: serde_json::Value,
-    #[serde(default)]
-    pub deprecated: bool,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "enableActivities", default)]
-    pub enable_activities: bool,
-    #[serde(rename = "enableBulkApi", default)]
-    pub enable_bulk_api: bool,
-    #[serde(rename = "enableDataTranslation", default)]
-    pub enable_data_translation: bool,
-    #[serde(rename = "enableDivisions", default)]
-    pub enable_divisions: bool,
-    #[serde(rename = "enableEnhancedLookup", default)]
-    pub enable_enhanced_lookup: bool,
-    #[serde(rename = "enableFeeds", default)]
-    pub enable_feeds: bool,
-    #[serde(rename = "enableHistory", default)]
-    pub enable_history: bool,
-    #[serde(rename = "enableLicensing", default)]
-    pub enable_licensing: bool,
-    #[serde(rename = "enablePublishStatusTracking", default)]
-    pub enable_publish_status_tracking: bool,
-    #[serde(rename = "enableReports", default)]
-    pub enable_reports: bool,
-    #[serde(rename = "enableSearch", default)]
-    pub enable_search: bool,
-    #[serde(rename = "enableSharing", default)]
-    pub enable_sharing: bool,
-    #[serde(rename = "enableStreamingApi", default)]
-    pub enable_streaming_api: bool,
-    #[serde(rename = "eventType", default)]
-    pub event_type: serde_json::Value,
-    #[serde(rename = "externalDataSource", default)]
-    pub external_data_source: String,
-    #[serde(rename = "externalIndexAvailable", default)]
-    pub external_index_available: bool,
-    #[serde(rename = "externalName", default)]
-    pub external_name: String,
-    #[serde(rename = "externalRepository", default)]
-    pub external_repository: String,
-    #[serde(rename = "externalSharingModel", default)]
-    pub external_sharing_model: serde_json::Value,
-    #[serde(rename = "fieldSets", default)]
-    pub field_sets: Vec<FieldSet>,
-    #[serde(default)]
-    pub fields: Vec<CustomField>,
-    #[serde(default)]
-    pub gender: serde_json::Value,
-    #[serde(rename = "historyRetentionPolicy", default)]
-    pub history_retention_policy: HistoryRetentionPolicy,
-    #[serde(default)]
-    pub household: bool,
-    #[serde(default)]
-    pub indexes: Vec<Index>,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "listViews", default)]
-    pub list_views: Vec<ListView>,
-    #[serde(rename = "mktDataLakeAttributes", default)]
-    pub mkt_data_lake_attributes: serde_json::Value,
-    #[serde(rename = "mktDataModelAttributes", default)]
-    pub mkt_data_model_attributes: serde_json::Value,
-    #[serde(rename = "nameField", default)]
-    pub name_field: CustomField,
-    #[serde(rename = "pluralLabel", default)]
-    pub plural_label: String,
-    #[serde(rename = "profileSearchLayouts", default)]
-    pub profile_search_layouts: Vec<serde_json::Value>,
-    #[serde(rename = "publishBehavior", default)]
-    pub publish_behavior: serde_json::Value,
-    #[serde(rename = "recordTypeTrackFeedHistory", default)]
-    pub record_type_track_feed_history: bool,
-    #[serde(rename = "recordTypeTrackHistory", default)]
-    pub record_type_track_history: bool,
-    #[serde(rename = "recordTypes", default)]
-    pub record_types: Vec<RecordType>,
-    #[serde(rename = "searchLayouts", default)]
-    pub search_layouts: SearchLayouts,
-    #[serde(rename = "sharingModel", default)]
-    pub sharing_model: serde_json::Value,
-    #[serde(rename = "sharingReasons", default)]
-    pub sharing_reasons: Vec<SharingReason>,
-    #[serde(rename = "sharingRecalculations", default)]
-    pub sharing_recalculations: Vec<serde_json::Value>,
-    #[serde(rename = "startsWith", default)]
-    pub starts_with: serde_json::Value,
-    #[serde(rename = "validationRules", default)]
-    pub validation_rules: Vec<ValidationRule>,
-    #[serde(default)]
-    pub visibility: serde_json::Value,
-    #[serde(rename = "webLinks", default)]
-    pub web_links: Vec<WebLink>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct CustomObjectBinding {
     #[serde(default)]
     pub fields: Vec<CustomFieldBinding>,
@@ -236,19 +158,83 @@ pub struct CustomObjectBinding {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct SharingReason {
+pub struct ListView {
+    #[serde(rename = "booleanFilter", default)]
+    pub boolean_filter: String,
+    #[serde(default)]
+    pub columns: Vec<String>,
+    #[serde(default)]
+    pub division: String,
+    #[serde(rename = "filterScope", default)]
+    pub filter_scope: serde_json::Value,
+    #[serde(default)]
+    pub filters: Vec<serde_json::Value>,
     #[serde(default)]
     pub label: String,
+    #[serde(default)]
+    pub language: serde_json::Value,
+    #[serde(default)]
+    pub queue: String,
+    #[serde(rename = "sharedTo", default)]
+    pub shared_to: serde_json::Value,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct IndexField {
+pub struct WebLink {
     #[serde(default)]
-    pub name: String,
-    #[serde(rename = "sortDirection", default)]
-    pub sort_direction: String,
+    pub availability: serde_json::Value,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "displayType", default)]
+    pub display_type: serde_json::Value,
+    #[serde(rename = "encodingKey", default)]
+    pub encoding_key: serde_json::Value,
+    #[serde(rename = "hasMenubar", default)]
+    pub has_menubar: bool,
+    #[serde(rename = "hasScrollbars", default)]
+    pub has_scrollbars: bool,
+    #[serde(rename = "hasToolbar", default)]
+    pub has_toolbar: bool,
+    #[serde(default)]
+    pub height: f64,
+    #[serde(rename = "isResizable", default)]
+    pub is_resizable: bool,
+    #[serde(rename = "linkType", default)]
+    pub link_type: serde_json::Value,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "openType", default)]
+    pub open_type: serde_json::Value,
+    #[serde(default)]
+    pub page: String,
+    #[serde(default)]
+    pub position: serde_json::Value,
+    #[serde(default)]
+    pub protected: bool,
+    #[serde(rename = "requireRowSelection", default)]
+    pub require_row_selection: bool,
+    #[serde(default)]
+    pub scontrol: String,
+    #[serde(rename = "showsLocation", default)]
+    pub shows_location: bool,
+    #[serde(rename = "showsStatus", default)]
+    pub shows_status: bool,
+    #[serde(default)]
+    pub url: String,
+    #[serde(default)]
+    pub width: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ValueSetValuesDefinition {
+    #[serde(default)]
+    pub sorted: bool,
+    #[serde(default)]
+    pub value: Vec<CustomValue>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -386,107 +372,35 @@ pub struct CustomField {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct StandardValueSet {
-    #[serde(rename = "groupingStringEnum", default)]
-    pub grouping_string_enum: String,
+pub struct ActionOverride {
+    #[serde(rename = "actionName", default)]
+    pub action_name: String,
     #[serde(default)]
-    pub sorted: bool,
-    #[serde(rename = "standardValue", default)]
-    pub standard_value: Vec<serde_json::Value>,
+    pub comment: String,
+    #[serde(default)]
+    pub content: String,
+    #[serde(rename = "formFactor", default)]
+    pub form_factor: serde_json::Value,
+    #[serde(rename = "skipRecordTypeSelect", default)]
+    pub skip_record_type_select: bool,
+    #[serde(default)]
+    pub r#type: ActionOverrideType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct GlobalValueSet {
-    #[serde(rename = "customValue", default)]
-    pub custom_value: Vec<CustomValue>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub sorted: bool,
+pub struct GlobalValueSetTranslation {
+    #[serde(rename = "valueTranslation", default)]
+    pub value_translation: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ValidationRule {
-    #[serde(default)]
-    pub active: bool,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "errorConditionFormula", default)]
-    pub error_condition_formula: String,
-    #[serde(rename = "errorDisplayField", default)]
-    pub error_display_field: String,
-    #[serde(rename = "errorMessage", default)]
-    pub error_message: String,
-    #[serde(rename = "shouldEvaluateOnClient", default)]
-    pub should_evaluate_on_client: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomObjectTranslation {
-    #[serde(rename = "caseValues", default)]
-    pub case_values: Vec<serde_json::Value>,
-    #[serde(rename = "fieldSets", default)]
-    pub field_sets: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub fields: Vec<CustomFieldTranslation>,
-    #[serde(default)]
-    pub gender: serde_json::Value,
-    #[serde(default)]
-    pub layouts: Vec<serde_json::Value>,
-    #[serde(rename = "nameFieldLabel", default)]
-    pub name_field_label: String,
-    #[serde(rename = "quickActions", default)]
-    pub quick_actions: Vec<serde_json::Value>,
-    #[serde(rename = "recordTypes", default)]
-    pub record_types: Vec<serde_json::Value>,
-    #[serde(rename = "sharingReasons", default)]
-    pub sharing_reasons: Vec<serde_json::Value>,
-    #[serde(rename = "standardFields", default)]
-    pub standard_fields: Vec<serde_json::Value>,
-    #[serde(rename = "startsWith", default)]
-    pub starts_with: serde_json::Value,
-    #[serde(rename = "validationRules", default)]
-    pub validation_rules: Vec<serde_json::Value>,
-    #[serde(rename = "webLinks", default)]
-    pub web_links: Vec<serde_json::Value>,
-    #[serde(rename = "workflowTasks", default)]
-    pub workflow_tasks: Vec<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomFieldDisplay {
-    #[serde(rename = "displayType", default)]
-    pub display_type: CustomFieldDisplayType,
-    #[serde(rename = "fieldApiName", default)]
-    pub field_api_name: String,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Index {
-    #[serde(default)]
-    pub fields: Vec<IndexField>,
+pub struct SharingReason {
     #[serde(default)]
     pub label: String,
-    #[serde(rename = "minNumRequiredIndexedFields", default)]
-    pub min_num_required_indexed_fields: f64,
-    #[serde(default)]
-    pub r#type: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -516,29 +430,241 @@ pub struct CustomFieldTranslation {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ValueSetValuesDefinition {
+pub struct CompactLayout {
     #[serde(default)]
-    pub sorted: bool,
+    pub fields: Vec<String>,
     #[serde(default)]
-    pub value: Vec<CustomValue>,
+    pub label: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ActionOverride {
-    #[serde(rename = "actionName", default)]
-    pub action_name: String,
+pub struct Index {
     #[serde(default)]
-    pub comment: String,
+    pub fields: Vec<IndexField>,
     #[serde(default)]
-    pub content: String,
-    #[serde(rename = "formFactor", default)]
-    pub form_factor: serde_json::Value,
-    #[serde(rename = "skipRecordTypeSelect", default)]
-    pub skip_record_type_select: bool,
+    pub label: String,
+    #[serde(rename = "minNumRequiredIndexedFields", default)]
+    pub min_num_required_indexed_fields: f64,
     #[serde(default)]
-    pub r#type: ActionOverrideType,
+    pub r#type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FieldSet {
+    #[serde(rename = "availableFields", default)]
+    pub available_fields: Vec<serde_json::Value>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "displayedFields", default)]
+    pub displayed_fields: Vec<serde_json::Value>,
+    #[serde(default)]
+    pub label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CustomFieldDisplay {
+    #[serde(rename = "displayType", default)]
+    pub display_type: CustomFieldDisplayType,
+    #[serde(rename = "fieldApiName", default)]
+    pub field_api_name: String,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CustomFieldBinding {
+    #[serde(rename = "implementationField", default)]
+    pub implementation_field: String,
+    #[serde(rename = "interfaceField", default)]
+    pub interface_field: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CustomObject {
+    #[serde(rename = "actionOverrides", default)]
+    pub action_overrides: Vec<ActionOverride>,
+    #[serde(rename = "allowInChatterGroups", default)]
+    pub allow_in_chatter_groups: bool,
+    #[serde(rename = "articleTypeChannelDisplay", default)]
+    pub article_type_channel_display: serde_json::Value,
+    #[serde(rename = "businessProcesses", default)]
+    pub business_processes: Vec<BusinessProcess>,
+    #[serde(rename = "compactLayoutAssignment", default)]
+    pub compact_layout_assignment: String,
+    #[serde(rename = "compactLayouts", default)]
+    pub compact_layouts: Vec<CompactLayout>,
+    #[serde(rename = "customHelp", default)]
+    pub custom_help: String,
+    #[serde(rename = "customHelpPage", default)]
+    pub custom_help_page: String,
+    #[serde(rename = "customSettingsType", default)]
+    pub custom_settings_type: serde_json::Value,
+    #[serde(rename = "deploymentStatus", default)]
+    pub deployment_status: serde_json::Value,
+    #[serde(default)]
+    pub deprecated: bool,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "enableActivities", default)]
+    pub enable_activities: bool,
+    #[serde(rename = "enableBulkApi", default)]
+    pub enable_bulk_api: bool,
+    #[serde(rename = "enableDataTranslation", default)]
+    pub enable_data_translation: bool,
+    #[serde(rename = "enableDivisions", default)]
+    pub enable_divisions: bool,
+    #[serde(rename = "enableEnhancedLookup", default)]
+    pub enable_enhanced_lookup: bool,
+    #[serde(rename = "enableFeeds", default)]
+    pub enable_feeds: bool,
+    #[serde(rename = "enableHistory", default)]
+    pub enable_history: bool,
+    #[serde(rename = "enableLicensing", default)]
+    pub enable_licensing: bool,
+    #[serde(rename = "enablePublishStatusTracking", default)]
+    pub enable_publish_status_tracking: bool,
+    #[serde(rename = "enableReports", default)]
+    pub enable_reports: bool,
+    #[serde(rename = "enableSearch", default)]
+    pub enable_search: bool,
+    #[serde(rename = "enableSharing", default)]
+    pub enable_sharing: bool,
+    #[serde(rename = "enableStreamingApi", default)]
+    pub enable_streaming_api: bool,
+    #[serde(rename = "eventType", default)]
+    pub event_type: serde_json::Value,
+    #[serde(rename = "externalDataSource", default)]
+    pub external_data_source: String,
+    #[serde(rename = "externalIndexAvailable", default)]
+    pub external_index_available: bool,
+    #[serde(rename = "externalName", default)]
+    pub external_name: String,
+    #[serde(rename = "externalRepository", default)]
+    pub external_repository: String,
+    #[serde(rename = "externalSharingModel", default)]
+    pub external_sharing_model: serde_json::Value,
+    #[serde(rename = "fieldSets", default)]
+    pub field_sets: Vec<FieldSet>,
+    #[serde(default)]
+    pub fields: Vec<CustomField>,
+    #[serde(default)]
+    pub gender: serde_json::Value,
+    #[serde(rename = "historyRetentionPolicy", default)]
+    pub history_retention_policy: HistoryRetentionPolicy,
+    #[serde(default)]
+    pub household: bool,
+    #[serde(default)]
+    pub indexes: Vec<Index>,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "listViews", default)]
+    pub list_views: Vec<ListView>,
+    #[serde(rename = "mktDataLakeAttributes", default)]
+    pub mkt_data_lake_attributes: serde_json::Value,
+    #[serde(rename = "mktDataModelAttributes", default)]
+    pub mkt_data_model_attributes: serde_json::Value,
+    #[serde(rename = "nameField", default)]
+    pub name_field: CustomField,
+    #[serde(rename = "pluralLabel", default)]
+    pub plural_label: String,
+    #[serde(rename = "profileSearchLayouts", default)]
+    pub profile_search_layouts: Vec<serde_json::Value>,
+    #[serde(rename = "publishBehavior", default)]
+    pub publish_behavior: serde_json::Value,
+    #[serde(rename = "recordTypeTrackFeedHistory", default)]
+    pub record_type_track_feed_history: bool,
+    #[serde(rename = "recordTypeTrackHistory", default)]
+    pub record_type_track_history: bool,
+    #[serde(rename = "recordTypes", default)]
+    pub record_types: Vec<RecordType>,
+    #[serde(rename = "searchLayouts", default)]
+    pub search_layouts: SearchLayouts,
+    #[serde(rename = "sharingModel", default)]
+    pub sharing_model: serde_json::Value,
+    #[serde(rename = "sharingReasons", default)]
+    pub sharing_reasons: Vec<SharingReason>,
+    #[serde(rename = "sharingRecalculations", default)]
+    pub sharing_recalculations: Vec<serde_json::Value>,
+    #[serde(rename = "startsWith", default)]
+    pub starts_with: serde_json::Value,
+    #[serde(rename = "validationRules", default)]
+    pub validation_rules: Vec<ValidationRule>,
+    #[serde(default)]
+    pub visibility: serde_json::Value,
+    #[serde(rename = "webLinks", default)]
+    pub web_links: Vec<WebLink>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct StandardValueSet {
+    #[serde(rename = "groupingStringEnum", default)]
+    pub grouping_string_enum: String,
+    #[serde(default)]
+    pub sorted: bool,
+    #[serde(rename = "standardValue", default)]
+    pub standard_value: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct GlobalValueSet {
+    #[serde(rename = "customValue", default)]
+    pub custom_value: Vec<CustomValue>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub sorted: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CustomValue {
+    #[serde(default)]
+    pub color: String,
+    #[serde(default)]
+    pub default: bool,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(default)]
+    pub label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ValidationRule {
+    #[serde(default)]
+    pub active: bool,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "errorConditionFormula", default)]
+    pub error_condition_formula: String,
+    #[serde(rename = "errorDisplayField", default)]
+    pub error_display_field: String,
+    #[serde(rename = "errorMessage", default)]
+    pub error_message: String,
+    #[serde(rename = "shouldEvaluateOnClient", default)]
+    pub should_evaluate_on_client: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -565,130 +691,4 @@ pub struct SearchLayouts {
     pub search_results_additional_fields: Vec<String>,
     #[serde(rename = "searchResultsCustomButtons", default)]
     pub search_results_custom_buttons: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomFieldBinding {
-    #[serde(rename = "implementationField", default)]
-    pub implementation_field: String,
-    #[serde(rename = "interfaceField", default)]
-    pub interface_field: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CompactLayout {
-    #[serde(default)]
-    pub fields: Vec<String>,
-    #[serde(default)]
-    pub label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct StandardValueSetTranslation {
-    #[serde(rename = "valueTranslation", default)]
-    pub value_translation: Vec<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ListView {
-    #[serde(rename = "booleanFilter", default)]
-    pub boolean_filter: String,
-    #[serde(default)]
-    pub columns: Vec<String>,
-    #[serde(default)]
-    pub division: String,
-    #[serde(rename = "filterScope", default)]
-    pub filter_scope: serde_json::Value,
-    #[serde(default)]
-    pub filters: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub language: serde_json::Value,
-    #[serde(default)]
-    pub queue: String,
-    #[serde(rename = "sharedTo", default)]
-    pub shared_to: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct WebLink {
-    #[serde(default)]
-    pub availability: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "displayType", default)]
-    pub display_type: serde_json::Value,
-    #[serde(rename = "encodingKey", default)]
-    pub encoding_key: serde_json::Value,
-    #[serde(rename = "hasMenubar", default)]
-    pub has_menubar: bool,
-    #[serde(rename = "hasScrollbars", default)]
-    pub has_scrollbars: bool,
-    #[serde(rename = "hasToolbar", default)]
-    pub has_toolbar: bool,
-    #[serde(default)]
-    pub height: f64,
-    #[serde(rename = "isResizable", default)]
-    pub is_resizable: bool,
-    #[serde(rename = "linkType", default)]
-    pub link_type: serde_json::Value,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "openType", default)]
-    pub open_type: serde_json::Value,
-    #[serde(default)]
-    pub page: String,
-    #[serde(default)]
-    pub position: serde_json::Value,
-    #[serde(default)]
-    pub protected: bool,
-    #[serde(rename = "requireRowSelection", default)]
-    pub require_row_selection: bool,
-    #[serde(default)]
-    pub scontrol: String,
-    #[serde(rename = "showsLocation", default)]
-    pub shows_location: bool,
-    #[serde(rename = "showsStatus", default)]
-    pub shows_status: bool,
-    #[serde(default)]
-    pub url: String,
-    #[serde(default)]
-    pub width: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GlobalValueSetTranslation {
-    #[serde(rename = "valueTranslation", default)]
-    pub value_translation: Vec<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RecordType {
-    #[serde(default)]
-    pub active: bool,
-    #[serde(rename = "businessProcess", default)]
-    pub business_process: String,
-    #[serde(rename = "compactLayoutAssignment", default)]
-    pub compact_layout_assignment: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "picklistValues", default)]
-    pub picklist_values: Vec<serde_json::Value>,
 }

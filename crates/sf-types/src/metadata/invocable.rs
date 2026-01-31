@@ -1197,18 +1197,6 @@ pub enum InvocableActionExtTargetType {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct InvocableActionExtensionTarget {
-    #[serde(default)]
-    pub attributes: Vec<InvocableActionExtensionTargetAttribute>,
-    #[serde(rename = "targetName", default)]
-    pub target_name: String,
-    #[serde(rename = "targetType", default)]
-    pub target_type: InvocableActionExtTargetType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct InvocableActionExtension {
     #[serde(default)]
     pub targets: Vec<InvocableActionExtensionTarget>,
@@ -1224,4 +1212,16 @@ pub struct InvocableActionExtensionTargetAttribute {
     pub key: String,
     #[serde(default)]
     pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct InvocableActionExtensionTarget {
+    #[serde(default)]
+    pub attributes: Vec<InvocableActionExtensionTargetAttribute>,
+    #[serde(rename = "targetName", default)]
+    pub target_name: String,
+    #[serde(rename = "targetType", default)]
+    pub target_type: InvocableActionExtTargetType,
 }

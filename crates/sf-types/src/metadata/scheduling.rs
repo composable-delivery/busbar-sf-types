@@ -19,41 +19,6 @@ pub enum ShiftSegmentTypeCategory {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SchedulingMode {
-    #[default]
-    Sliding,
-    Reshuffle,
-    Normal,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SchedulingObjectiveType {
-    #[default]
-    AgentPreference,
-    BalanceShifts,
-    BalanceNonStandardShifts,
-    ASAP,
-    MinimizeGaps,
-    MinimizeOvertime,
-    MinimizeTravel,
-    PreferredResource,
-    ResourcePriority,
-    SameSite,
-    SkillLevel,
-    SkillPreferences,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SchedulingCategory {
-    #[default]
-    B,
-    A,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum SchedulingRuleType {
     #[default]
     M,
@@ -77,6 +42,24 @@ pub enum SchedulingRuleType {
     TimeSlotDesignatedWork,
     CapacityLimit,
     WorkingLocations,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SchedulingObjectiveType {
+    #[default]
+    AgentPreference,
+    BalanceShifts,
+    BalanceNonStandardShifts,
+    ASAP,
+    MinimizeGaps,
+    MinimizeOvertime,
+    MinimizeTravel,
+    PreferredResource,
+    ResourcePriority,
+    SameSite,
+    SkillLevel,
+    SkillPreferences,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -126,130 +109,41 @@ pub enum SchedulingParameterKey {
     MaximumExtraResourcesForCrews,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Territory2AccessLevel {
-    #[serde(rename = "accessLevel", default)]
-    pub access_level: String,
-    #[serde(rename = "objectType", default)]
-    pub object_type: String,
+pub enum SchedulingCategory {
+    #[default]
+    B,
+    A,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SchedulingMode {
+    #[default]
+    Sliding,
+    Reshuffle,
+    Normal,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct Territory2Type {
+pub struct ShiftSegmentType {
+    #[serde(rename = "adherenceThreshold", default)]
+    pub adherence_threshold: f64,
     #[serde(default)]
-    pub description: String,
+    pub category: ShiftSegmentTypeCategory,
     #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub priority: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Territory2SupportedObject {
-    #[serde(rename = "defaultAccessLevel", default)]
-    pub default_access_level: String,
-    #[serde(rename = "objectType", default)]
-    pub object_type: String,
-    #[serde(default)]
-    pub state: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SchedulingRuleParameter {
-    #[serde(rename = "schedulingParameterKey", default)]
-    pub scheduling_parameter_key: SchedulingParameterKey,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Territory2Rule {
-    #[serde(default)]
-    pub active: bool,
-    #[serde(rename = "booleanFilter", default)]
-    pub boolean_filter: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "objectType", default)]
-    pub object_type: String,
-    #[serde(rename = "ruleItems", default)]
-    pub rule_items: Vec<Territory2RuleItem>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SchedulingObjective {
+    pub color: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
     #[serde(rename = "isProtected", default)]
     pub is_protected: bool,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "schedulingCategory", default)]
-    pub scheduling_category: SchedulingCategory,
-    #[serde(rename = "schedulingObjectiveParameters", default)]
-    pub scheduling_objective_parameters: Vec<SchedulingObjectiveParameter>,
-    #[serde(rename = "schedulingObjectiveType", default)]
-    pub scheduling_objective_type: SchedulingObjectiveType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AppointmentAssignmentPolicy {
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "policyApplicableDuration", default)]
-    pub policy_applicable_duration: serde_json::Value,
-    #[serde(rename = "policyType", default)]
-    pub policy_type: serde_json::Value,
-    #[serde(rename = "utilizationFactor", default)]
-    pub utilization_factor: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AppointmentSchedulingPolicy {
-    #[serde(rename = "appointmentAssignmentPolicy", default)]
-    pub appointment_assignment_policy: String,
-    #[serde(rename = "appointmentStartTimeInterval", default)]
-    pub appointment_start_time_interval: String,
-    #[serde(rename = "extCalEventHandler", default)]
-    pub ext_cal_event_handler: String,
-    #[serde(rename = "isSvcTerrOpHoursWithShiftsUsed", default)]
-    pub is_svc_terr_op_hours_with_shifts_used: bool,
-    #[serde(rename = "isSvcTerritoryMemberShiftUsed", default)]
-    pub is_svc_territory_member_shift_used: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "shouldCheckExternalCalendar", default)]
-    pub should_check_external_calendar: bool,
-    #[serde(rename = "shouldConsiderCalendarEvents", default)]
-    pub should_consider_calendar_events: bool,
-    #[serde(rename = "shouldEnforceExcludedResource", default)]
-    pub should_enforce_excluded_resource: bool,
-    #[serde(rename = "shouldEnforceRequiredResource", default)]
-    pub should_enforce_required_resource: bool,
-    #[serde(rename = "shouldMatchSkill", default)]
-    pub should_match_skill: bool,
-    #[serde(rename = "shouldMatchSkillLevel", default)]
-    pub should_match_skill_level: bool,
-    #[serde(rename = "shouldRespectVisitingHours", default)]
-    pub should_respect_visiting_hours: bool,
-    #[serde(rename = "shouldUsePrimaryMembers", default)]
-    pub should_use_primary_members: bool,
-    #[serde(rename = "shouldUseSecondaryMembers", default)]
-    pub should_use_secondary_members: bool,
+    #[serde(rename = "servicePresenceStatus", default)]
+    pub service_presence_status: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -283,6 +177,16 @@ pub struct Territory2 {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct SchedulingObjectiveParameter {
+    #[serde(rename = "parameterKey", default)]
+    pub parameter_key: serde_json::Value,
+    #[serde(default)]
+    pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct SchedulingRule {
     #[serde(rename = "isProtected", default)]
     pub is_protected: bool,
@@ -299,21 +203,51 @@ pub struct SchedulingRule {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ShiftSegmentType {
-    #[serde(rename = "adherenceThreshold", default)]
-    pub adherence_threshold: f64,
+pub struct AppointmentAssignmentPolicy {
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "policyApplicableDuration", default)]
+    pub policy_applicable_duration: serde_json::Value,
+    #[serde(rename = "policyType", default)]
+    pub policy_type: serde_json::Value,
+    #[serde(rename = "utilizationFactor", default)]
+    pub utilization_factor: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Territory2RuleAssociation {
     #[serde(default)]
-    pub category: ShiftSegmentTypeCategory,
+    pub inherited: bool,
+    #[serde(rename = "ruleName", default)]
+    pub rule_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SchedulingRuleParameter {
+    #[serde(rename = "schedulingParameterKey", default)]
+    pub scheduling_parameter_key: SchedulingParameterKey,
     #[serde(default)]
-    pub color: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
+    pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SchedulingObjective {
     #[serde(rename = "isProtected", default)]
     pub is_protected: bool,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "servicePresenceStatus", default)]
-    pub service_presence_status: String,
+    #[serde(rename = "schedulingCategory", default)]
+    pub scheduling_category: SchedulingCategory,
+    #[serde(rename = "schedulingObjectiveParameters", default)]
+    pub scheduling_objective_parameters: Vec<SchedulingObjectiveParameter>,
+    #[serde(rename = "schedulingObjectiveType", default)]
+    pub scheduling_objective_type: SchedulingObjectiveType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -431,25 +365,17 @@ pub struct FieldServiceMobileConfig {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct Territory2Model {
-    #[serde(rename = "customFields", default)]
-    pub custom_fields: Vec<serde_json::Value>,
+pub struct Territory2Rule {
     #[serde(default)]
-    pub description: String,
+    pub active: bool,
+    #[serde(rename = "booleanFilter", default)]
+    pub boolean_filter: String,
     #[serde(default)]
     pub name: String,
-    #[serde(rename = "recordVisibility", default)]
-    pub record_visibility: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SchedulingObjectiveParameter {
-    #[serde(rename = "parameterKey", default)]
-    pub parameter_key: serde_json::Value,
-    #[serde(default)]
-    pub value: String,
+    #[serde(rename = "objectType", default)]
+    pub object_type: String,
+    #[serde(rename = "ruleItems", default)]
+    pub rule_items: Vec<Territory2RuleItem>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -481,9 +407,83 @@ pub struct Territory2RuleItem {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct Territory2RuleAssociation {
+pub struct Territory2SupportedObject {
+    #[serde(rename = "defaultAccessLevel", default)]
+    pub default_access_level: String,
+    #[serde(rename = "objectType", default)]
+    pub object_type: String,
     #[serde(default)]
-    pub inherited: bool,
-    #[serde(rename = "ruleName", default)]
-    pub rule_name: String,
+    pub state: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Territory2Model {
+    #[serde(rename = "customFields", default)]
+    pub custom_fields: Vec<serde_json::Value>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "recordVisibility", default)]
+    pub record_visibility: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Territory2AccessLevel {
+    #[serde(rename = "accessLevel", default)]
+    pub access_level: String,
+    #[serde(rename = "objectType", default)]
+    pub object_type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AppointmentSchedulingPolicy {
+    #[serde(rename = "appointmentAssignmentPolicy", default)]
+    pub appointment_assignment_policy: String,
+    #[serde(rename = "appointmentStartTimeInterval", default)]
+    pub appointment_start_time_interval: String,
+    #[serde(rename = "extCalEventHandler", default)]
+    pub ext_cal_event_handler: String,
+    #[serde(rename = "isSvcTerrOpHoursWithShiftsUsed", default)]
+    pub is_svc_terr_op_hours_with_shifts_used: bool,
+    #[serde(rename = "isSvcTerritoryMemberShiftUsed", default)]
+    pub is_svc_territory_member_shift_used: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "shouldCheckExternalCalendar", default)]
+    pub should_check_external_calendar: bool,
+    #[serde(rename = "shouldConsiderCalendarEvents", default)]
+    pub should_consider_calendar_events: bool,
+    #[serde(rename = "shouldEnforceExcludedResource", default)]
+    pub should_enforce_excluded_resource: bool,
+    #[serde(rename = "shouldEnforceRequiredResource", default)]
+    pub should_enforce_required_resource: bool,
+    #[serde(rename = "shouldMatchSkill", default)]
+    pub should_match_skill: bool,
+    #[serde(rename = "shouldMatchSkillLevel", default)]
+    pub should_match_skill_level: bool,
+    #[serde(rename = "shouldRespectVisitingHours", default)]
+    pub should_respect_visiting_hours: bool,
+    #[serde(rename = "shouldUsePrimaryMembers", default)]
+    pub should_use_primary_members: bool,
+    #[serde(rename = "shouldUseSecondaryMembers", default)]
+    pub should_use_secondary_members: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Territory2Type {
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub priority: f64,
 }

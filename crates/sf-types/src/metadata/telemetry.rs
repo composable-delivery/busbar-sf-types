@@ -35,6 +35,42 @@ pub enum TelemetryDefinitionUsageType {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct TelemetryDefinitionVersion {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "telemetryComponentStructure", default)]
+    pub telemetry_component_structure: String,
+    #[serde(rename = "telemetryDefinition", default)]
+    pub telemetry_definition: String,
+    #[serde(rename = "versionNumber", default)]
+    pub version_number: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct TelemetryDefinition {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "isTemplate", default)]
+    pub is_template: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "usageType", default)]
+    pub usage_type: TelemetryDefinitionUsageType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct TelemetryActionDefinition {
     #[serde(rename = "actionName", default)]
     pub action_name: String,
@@ -81,26 +117,6 @@ pub struct TelemetryActnDefStepAttr {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct TelemetryDefinitionVersion {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "telemetryComponentStructure", default)]
-    pub telemetry_component_structure: String,
-    #[serde(rename = "telemetryDefinition", default)]
-    pub telemetry_definition: String,
-    #[serde(rename = "versionNumber", default)]
-    pub version_number: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct TelemetryActionDefStep {
     #[serde(rename = "delayInSeconds", default)]
     pub delay_in_seconds: f64,
@@ -122,20 +138,4 @@ pub struct TelemetryActionDefStep {
     pub telemetry_action_definition: String,
     #[serde(rename = "telemetryDefVersion", default)]
     pub telemetry_def_version: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct TelemetryDefinition {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "isTemplate", default)]
-    pub is_template: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "usageType", default)]
-    pub usage_type: TelemetryDefinitionUsageType,
 }

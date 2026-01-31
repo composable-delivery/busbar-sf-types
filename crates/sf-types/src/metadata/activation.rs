@@ -10,21 +10,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EnablementFilterOperator {
+pub enum EnablementAggregationType {
     #[default]
-    Equals,
-    DoesNotContain,
-    DoesNotEqual,
-    IsNull,
-    In,
-    NotIn,
-    GreaterThan,
-    GreaterThanOrEqual,
-    LessThan,
-    LessThanOrEqual,
-    Contains,
-    StartsWith,
-    EndsWith,
+    Sum,
+    Count,
+    Average,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -37,79 +27,11 @@ pub enum ActivationPlatformRefreshMode {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActivationPlatformFileOutputFormat {
+pub enum ActivationFlowType {
     #[default]
-    CSV,
-    JSON,
-    PARQUET,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActivationPlatformProcessingType {
-    #[default]
-    Batch,
-    Streaming,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ContextAttributeFieldType {
-    #[default]
-    input,
-    output,
-    inputoutput,
-    aggregate,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActivationPlatformFieldDataType {
-    #[default]
-    Text,
-    Number,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActivationPlatformConnectorType {
-    #[default]
-    S3,
-    OAUTH,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ContextUseCaseType {
-    #[default]
-    ContractCreationOrUpdation,
-    ContractExtraction,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActivationPlatformRefreshFrequency {
-    #[default]
-    FOUR,
-    TWELVE,
-    TWENTY_FOUR,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActivationPlatformFileOutputGrouping {
-    #[default]
-    PER_SEGMENT,
-    PER_ACCOUNT,
-    PER_USER,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActivationPlatformPeriodicFullRefresh {
-    #[default]
-    REFRESH_30,
-    REFRESH_60,
+    SEGMENT,
+    DMO,
+    API_TRIGGERED,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -131,21 +53,20 @@ pub enum ContextAttributeDataType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ContextMappingIntentType {
+pub enum ActivationPlatformFileOutputFormat {
     #[default]
-    hydration,
-    association,
-    persistence,
-    translation,
+    CSV,
+    JSON,
+    PARQUET,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EnablementAggregationType {
+pub enum ActivationPlatformRefreshFrequency {
     #[default]
-    Sum,
-    Count,
-    Average,
+    FOUR,
+    TWELVE,
+    TWENTY_FOUR,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -161,10 +82,12 @@ pub enum ActivationPlatformType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActivationPlatformCreationType {
+pub enum ActivationPlatformIdentifierType {
     #[default]
-    JSON,
-    MANUAL,
+    EMAIL,
+    PHONE,
+    OTT,
+    MAID,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -185,28 +108,10 @@ pub enum ContextRuleUsageType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ContextMappingConfigUsageType {
+pub enum ActivationPlatformCreationType {
     #[default]
-    Claim,
-    CaseIntakeForm,
-    DiseaseDefinition,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ContextMappingType {
-    #[default]
-    Hydration,
-    Persistence,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActivationFlowType {
-    #[default]
-    SEGMENT,
-    DMO,
-    API_TRIGGERED,
+    JSON,
+    MANUAL,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -217,6 +122,14 @@ pub enum ActivationPlatformIdentifierHashMethod {
     SHA256,
     MD5,
     NONE,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ActivationPlatformFieldDataType {
+    #[default]
+    Text,
+    Number,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -237,96 +150,99 @@ pub enum ContextRuleStatus {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActivationPlatformIdentifierType {
+pub enum ActivationPlatformFileOutputGrouping {
     #[default]
-    EMAIL,
-    PHONE,
-    OTT,
-    MAID,
+    PER_SEGMENT,
+    PER_ACCOUNT,
+    PER_USER,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EnablementMeasureDefinition {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "sourceMeasureObject", default)]
-    pub source_measure_object: EnablementMeasureSourceObjectDefinition,
-    #[serde(default)]
-    pub status: serde_json::Value,
+pub enum ContextMappingType {
+    #[default]
+    Hydration,
+    Persistence,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ContextDefinitionVersion {
-    #[serde(rename = "contextDefinitionFilters", default)]
-    pub context_definition_filters: Vec<ContextDefinitionFilter>,
-    #[serde(rename = "contextMappings", default)]
-    pub context_mappings: Vec<ContextMapping>,
-    #[serde(rename = "contextNodes", default)]
-    pub context_nodes: Vec<ContextNode>,
-    #[serde(rename = "endDate", default)]
-    pub end_date: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "startDate", default)]
-    pub start_date: String,
-    #[serde(rename = "versionNumber", default)]
-    pub version_number: f64,
+pub enum ContextUseCaseType {
+    #[default]
+    ContractCreationOrUpdation,
+    ContractExtraction,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ContextNode {
-    #[serde(rename = "canonicalNode", default)]
-    pub canonical_node: String,
-    #[serde(rename = "contextAttributes", default)]
-    pub context_attributes: Vec<ContextAttribute>,
-    #[serde(rename = "contextNodeAttrDictionaries", default)]
-    pub context_node_attr_dictionaries: Vec<ContextNodeAttrDictionary>,
-    #[serde(rename = "contextTags", default)]
-    pub context_tags: Vec<ContextTag>,
-    #[serde(rename = "customMappingAllowed", default)]
-    pub custom_mapping_allowed: bool,
-    #[serde(rename = "displayName", default)]
-    pub display_name: String,
-    #[serde(rename = "inheritedFrom", default)]
-    pub inherited_from: String,
-    #[serde(default)]
-    pub title: String,
-    #[serde(default)]
-    pub transposable: bool,
+pub enum ActivationPlatformProcessingType {
+    #[default]
+    Batch,
+    Streaming,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EnablementMeasureFilterDefinition {
-    #[serde(rename = "fieldApiName", default)]
-    pub field_api_name: String,
-    #[serde(rename = "fieldValue", default)]
-    pub field_value: String,
-    #[serde(default)]
-    pub operator: EnablementFilterOperator,
-    #[serde(rename = "sequenceNumber", default)]
-    pub sequence_number: f64,
+pub enum EnablementFilterOperator {
+    #[default]
+    Equals,
+    DoesNotContain,
+    DoesNotEqual,
+    IsNull,
+    In,
+    NotIn,
+    GreaterThan,
+    GreaterThanOrEqual,
+    LessThan,
+    LessThanOrEqual,
+    Contains,
+    StartsWith,
+    EndsWith,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EnablementProgramTaskCmsContent {
-    #[serde(rename = "apiName", default)]
-    pub api_name: String,
-    #[serde(rename = "contentKey", default)]
-    pub content_key: String,
+pub enum ContextAttributeFieldType {
+    #[default]
+    input,
+    output,
+    inputoutput,
+    aggregate,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ActivationPlatformConnectorType {
+    #[default]
+    S3,
+    OAUTH,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ContextMappingIntentType {
+    #[default]
+    hydration,
+    association,
+    persistence,
+    translation,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ActivationPlatformPeriodicFullRefresh {
+    #[default]
+    REFRESH_30,
+    REFRESH_60,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ContextMappingConfigUsageType {
+    #[default]
+    Claim,
+    CaseIntakeForm,
+    DiseaseDefinition,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -358,69 +274,27 @@ pub struct EnablementProgramTask {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ContextDefinition {
-    #[serde(rename = "canBeReferenceDefinition", default)]
-    pub can_be_reference_definition: bool,
-    #[serde(rename = "clonedFrom", default)]
-    pub cloned_from: String,
-    #[serde(rename = "contextDefinitionReferences", default)]
-    pub context_definition_references: Vec<ContextDefinitionReference>,
-    #[serde(rename = "contextDefinitionVersions", default)]
-    pub context_definition_versions: Vec<ContextDefinitionVersion>,
-    #[serde(rename = "contextTtl", default)]
-    pub context_ttl: f64,
+pub struct EnablementProgramTaskCustomContent {
     #[serde(default)]
-    pub description: String,
-    #[serde(rename = "displayName", default)]
-    pub display_name: String,
-    #[serde(rename = "hasSystemTags", default)]
-    pub has_system_tags: bool,
-    #[serde(rename = "inheritedFrom", default)]
-    pub inherited_from: String,
-    #[serde(rename = "inheritedFromVersion", default)]
-    pub inherited_from_version: String,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub title: String,
+    pub content: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ContextTag {
-    #[serde(rename = "inheritedFrom", default)]
-    pub inherited_from: String,
-    #[serde(default)]
-    pub title: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ContextUseCaseMapping {
-    #[serde(rename = "contextDefinitionName", default)]
-    pub context_definition_name: String,
-    #[serde(rename = "mappingName", default)]
-    pub mapping_name: String,
-    #[serde(rename = "mappingType", default)]
-    pub mapping_type: ContextMappingType,
+pub struct ActivationPlatformField {
+    #[serde(rename = "activationPlatform", default)]
+    pub activation_platform: String,
+    #[serde(rename = "helpText", default)]
+    pub help_text: String,
+    #[serde(rename = "isHidden", default)]
+    pub is_hidden: bool,
+    #[serde(rename = "isRequired", default)]
+    pub is_required: bool,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "referenceObjectName", default)]
-    pub reference_object_name: String,
-    #[serde(rename = "referenceObjectRecordType", default)]
-    pub reference_object_record_type: String,
-    #[serde(rename = "targetObjectCustomFieldName", default)]
-    pub target_object_custom_field_name: String,
-    #[serde(rename = "targetObjectName", default)]
-    pub target_object_name: String,
-    #[serde(rename = "targetObjectRecordType", default)]
-    pub target_object_record_type: String,
-    #[serde(rename = "useCaseType", default)]
-    pub use_case_type: ContextUseCaseType,
+    #[serde(default)]
+    pub r#type: ActivationPlatformFieldDataType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -450,6 +324,98 @@ pub struct EnablementMeasureSourceObjectDefinition {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct EnablementProgramSection {
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "sequenceNumber", default)]
+    pub sequence_number: f64,
+    #[serde(default)]
+    pub tasks: Vec<EnablementProgramTask>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EnablementMeasureFilterDefinition {
+    #[serde(rename = "fieldApiName", default)]
+    pub field_api_name: String,
+    #[serde(rename = "fieldValue", default)]
+    pub field_value: String,
+    #[serde(default)]
+    pub operator: EnablementFilterOperator,
+    #[serde(rename = "sequenceNumber", default)]
+    pub sequence_number: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ContextDefinitionFilter {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "filterApiName", default)]
+    pub filter_api_name: String,
+    #[serde(rename = "filterName", default)]
+    pub filter_name: String,
+    #[serde(rename = "filtersPerNode", default)]
+    pub filters_per_node: String,
+    #[serde(rename = "inheritedFrom", default)]
+    pub inherited_from: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EnablementProgramTaskCmsContent {
+    #[serde(rename = "apiName", default)]
+    pub api_name: String,
+    #[serde(rename = "contentKey", default)]
+    pub content_key: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EnablementProgramTaskExercise {
+    #[serde(rename = "cmsContent", default)]
+    pub cms_content: EnablementProgramTaskCmsContent,
+    #[serde(rename = "customContent", default)]
+    pub custom_content: EnablementProgramTaskCustomContent,
+    #[serde(rename = "externalContent", default)]
+    pub external_content: EnablementProgramTaskExternalContent,
+    #[serde(rename = "feedbackContent", default)]
+    pub feedback_content: EnablementProgramTaskFeedbackContent,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EnablementMeasureDefinition {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "sourceMeasureObject", default)]
+    pub source_measure_object: EnablementMeasureSourceObjectDefinition,
+    #[serde(default)]
+    pub status: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ContextMappingIntent {
+    #[serde(rename = "mappingIntent", default)]
+    pub mapping_intent: ContextMappingIntentType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct ContextMapping {
     #[serde(rename = "contextMappingIntents", default)]
     pub context_mapping_intents: Vec<ContextMappingIntent>,
@@ -463,16 +429,6 @@ pub struct ContextMapping {
     pub inherited_from: String,
     #[serde(default)]
     pub title: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ContextNodeAttrDictionary {
-    #[serde(rename = "contextAttrDictIdentifier", default)]
-    pub context_attr_dict_identifier: String,
-    #[serde(rename = "contextNodeTagPrefix", default)]
-    pub context_node_tag_prefix: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -502,63 +458,11 @@ pub struct EnablementProgramDefinition {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ActivationPlatformField {
-    #[serde(rename = "activationPlatform", default)]
-    pub activation_platform: String,
-    #[serde(rename = "helpText", default)]
-    pub help_text: String,
-    #[serde(rename = "isHidden", default)]
-    pub is_hidden: bool,
-    #[serde(rename = "isRequired", default)]
-    pub is_required: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub r#type: ActivationPlatformFieldDataType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ContextAttribute {
-    #[serde(rename = "contextTags", default)]
-    pub context_tags: Vec<ContextTag>,
-    #[serde(rename = "customMappingAllowed", default)]
-    pub custom_mapping_allowed: bool,
-    #[serde(rename = "dataType", default)]
-    pub data_type: ContextAttributeDataType,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "displayName", default)]
-    pub display_name: String,
-    #[serde(rename = "domainSet", default)]
-    pub domain_set: String,
-    #[serde(rename = "fieldType", default)]
-    pub field_type: ContextAttributeFieldType,
-    #[serde(rename = "inheritedFrom", default)]
-    pub inherited_from: String,
-    #[serde(default)]
-    pub key: bool,
-    #[serde(default)]
-    pub title: String,
-    #[serde(default)]
-    pub transient: bool,
-    #[serde(default)]
-    pub value: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EnablementMeasureRelatedObjectDefinition {
-    #[serde(rename = "filterLogic", default)]
-    pub filter_logic: String,
-    #[serde(default)]
-    pub filters: Vec<EnablementMeasureFilterDefinition>,
-    #[serde(rename = "idFieldApiName", default)]
-    pub id_field_api_name: String,
-    #[serde(rename = "objectApiName", default)]
-    pub object_api_name: String,
+pub struct ContextNodeAttrDictionary {
+    #[serde(rename = "contextAttrDictIdentifier", default)]
+    pub context_attr_dict_identifier: String,
+    #[serde(rename = "contextNodeTagPrefix", default)]
+    pub context_node_tag_prefix: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -569,6 +473,20 @@ pub struct EnablementProgramTaskExternalContent {
     pub external_id: String,
     #[serde(rename = "providerType", default)]
     pub provider_type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ContextAttrHydrationDetail {
+    #[serde(rename = "contextAttrHydrationDetails", default)]
+    pub context_attr_hydration_details: Vec<Box<ContextAttrHydrationDetail>>,
+    #[serde(rename = "inheritedFrom", default)]
+    pub inherited_from: String,
+    #[serde(rename = "objectName", default)]
+    pub object_name: String,
+    #[serde(rename = "queryAttribute", default)]
+    pub query_attribute: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -592,177 +510,35 @@ pub struct EnablementProgramTaskMilestone {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ContextMappingIntent {
-    #[serde(rename = "mappingIntent", default)]
-    pub mapping_intent: ContextMappingIntentType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ContextAttributeMapping {
-    #[serde(rename = "contextAttrHydrationDetails", default)]
-    pub context_attr_hydration_details: Vec<ContextAttrHydrationDetail>,
-    #[serde(rename = "contextAttribute", default)]
-    pub context_attribute: String,
-    #[serde(rename = "contextInputAttributeName", default)]
-    pub context_input_attribute_name: String,
-    #[serde(rename = "ctxAttrHydrationCtxs", default)]
-    pub ctx_attr_hydration_ctxs: Vec<serde_json::Value>,
+pub struct ContextTag {
     #[serde(rename = "inheritedFrom", default)]
     pub inherited_from: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ContextMappingConfig {
     #[serde(default)]
-    pub active: bool,
-    #[serde(rename = "contextDefinition", default)]
-    pub context_definition: String,
-    #[serde(rename = "contextMapping", default)]
-    pub context_mapping: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "usageType", default)]
-    pub usage_type: ContextMappingConfigUsageType,
+    pub title: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ContextAttrHydrationDetail {
-    #[serde(rename = "contextAttrHydrationDetails", default)]
-    pub context_attr_hydration_details: Vec<Box<ContextAttrHydrationDetail>>,
-    #[serde(rename = "inheritedFrom", default)]
-    pub inherited_from: String,
-    #[serde(rename = "objectName", default)]
-    pub object_name: String,
-    #[serde(rename = "queryAttribute", default)]
-    pub query_attribute: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ActivationPlatform {
-    #[serde(rename = "activationFlowType", default)]
-    pub activation_flow_type: ActivationFlowType,
-    #[serde(rename = "activationPlatformAdditionalMetadata", default)]
-    pub activation_platform_additional_metadata: String,
-    #[serde(rename = "activationPlatformConnectorType", default)]
-    pub activation_platform_connector_type: ActivationPlatformConnectorType,
-    #[serde(rename = "activationPlatformCreationType", default)]
-    pub activation_platform_creation_type: ActivationPlatformCreationType,
-    #[serde(rename = "dataConnector", default)]
-    pub data_connector: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub enabled: bool,
-    #[serde(rename = "includeSegmentNames", default)]
-    pub include_segment_names: bool,
-    #[serde(rename = "logoUrl", default)]
-    pub logo_url: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub notes: String,
-    #[serde(rename = "outputFormat", default)]
-    pub output_format: ActivationPlatformFileOutputFormat,
-    #[serde(rename = "outputGrouping", default)]
-    pub output_grouping: ActivationPlatformFileOutputGrouping,
-    #[serde(rename = "periodicRefreshFrequecy", default)]
-    pub periodic_refresh_frequecy: ActivationPlatformPeriodicFullRefresh,
-    #[serde(rename = "platformProcessingType", default)]
-    pub platform_processing_type: ActivationPlatformProcessingType,
-    #[serde(rename = "platformType", default)]
-    pub platform_type: ActivationPlatformType,
-    #[serde(rename = "refreshFrequency", default)]
-    pub refresh_frequency: ActivationPlatformRefreshFrequency,
-    #[serde(rename = "refreshMode", default)]
-    pub refresh_mode: ActivationPlatformRefreshMode,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EnablementProgramTaskExercise {
-    #[serde(rename = "cmsContent", default)]
-    pub cms_content: EnablementProgramTaskCmsContent,
-    #[serde(rename = "customContent", default)]
-    pub custom_content: EnablementProgramTaskCustomContent,
-    #[serde(rename = "externalContent", default)]
-    pub external_content: EnablementProgramTaskExternalContent,
-    #[serde(rename = "feedbackContent", default)]
-    pub feedback_content: EnablementProgramTaskFeedbackContent,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ContextNodeMapping {
-    #[serde(rename = "contextAttributeMappings", default)]
-    pub context_attribute_mappings: Vec<ContextAttributeMapping>,
-    #[serde(rename = "contextNode", default)]
-    pub context_node: String,
+pub struct ContextNode {
+    #[serde(rename = "canonicalNode", default)]
+    pub canonical_node: String,
+    #[serde(rename = "contextAttributes", default)]
+    pub context_attributes: Vec<ContextAttribute>,
     #[serde(rename = "contextNodeAttrDictionaries", default)]
     pub context_node_attr_dictionaries: Vec<ContextNodeAttrDictionary>,
+    #[serde(rename = "contextTags", default)]
+    pub context_tags: Vec<ContextTag>,
+    #[serde(rename = "customMappingAllowed", default)]
+    pub custom_mapping_allowed: bool,
+    #[serde(rename = "displayName", default)]
+    pub display_name: String,
     #[serde(rename = "inheritedFrom", default)]
     pub inherited_from: String,
-    #[serde(rename = "mappedContextDefinition", default)]
-    pub mapped_context_definition: String,
     #[serde(default)]
-    pub object: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EnablementProgramTaskCustomContent {
+    pub title: String,
     #[serde(default)]
-    pub content: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EnablementProgramTaskMilestoneMeasure {
-    #[serde(rename = "measureDefinitionDeveloperName", default)]
-    pub measure_definition_developer_name: String,
-    #[serde(rename = "sequenceNumber", default)]
-    pub sequence_number: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ContextDefinitionFilter {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "filterApiName", default)]
-    pub filter_api_name: String,
-    #[serde(rename = "filterName", default)]
-    pub filter_name: String,
-    #[serde(rename = "filtersPerNode", default)]
-    pub filters_per_node: String,
-    #[serde(rename = "inheritedFrom", default)]
-    pub inherited_from: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EnablementProgramSection {
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "sequenceNumber", default)]
-    pub sequence_number: f64,
-    #[serde(default)]
-    pub tasks: Vec<EnablementProgramTask>,
+    pub transposable: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -810,9 +586,233 @@ pub struct EnablementProgramTaskFeedbackContent {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct ContextAttributeMapping {
+    #[serde(rename = "contextAttrHydrationDetails", default)]
+    pub context_attr_hydration_details: Vec<ContextAttrHydrationDetail>,
+    #[serde(rename = "contextAttribute", default)]
+    pub context_attribute: String,
+    #[serde(rename = "contextInputAttributeName", default)]
+    pub context_input_attribute_name: String,
+    #[serde(rename = "ctxAttrHydrationCtxs", default)]
+    pub ctx_attr_hydration_ctxs: Vec<serde_json::Value>,
+    #[serde(rename = "inheritedFrom", default)]
+    pub inherited_from: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EnablementMeasureRelatedObjectDefinition {
+    #[serde(rename = "filterLogic", default)]
+    pub filter_logic: String,
+    #[serde(default)]
+    pub filters: Vec<EnablementMeasureFilterDefinition>,
+    #[serde(rename = "idFieldApiName", default)]
+    pub id_field_api_name: String,
+    #[serde(rename = "objectApiName", default)]
+    pub object_api_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ContextMappingConfig {
+    #[serde(default)]
+    pub active: bool,
+    #[serde(rename = "contextDefinition", default)]
+    pub context_definition: String,
+    #[serde(rename = "contextMapping", default)]
+    pub context_mapping: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "usageType", default)]
+    pub usage_type: ContextMappingConfigUsageType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ContextDefinitionVersion {
+    #[serde(rename = "contextDefinitionFilters", default)]
+    pub context_definition_filters: Vec<ContextDefinitionFilter>,
+    #[serde(rename = "contextMappings", default)]
+    pub context_mappings: Vec<ContextMapping>,
+    #[serde(rename = "contextNodes", default)]
+    pub context_nodes: Vec<ContextNode>,
+    #[serde(rename = "endDate", default)]
+    pub end_date: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "startDate", default)]
+    pub start_date: String,
+    #[serde(rename = "versionNumber", default)]
+    pub version_number: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ContextDefinition {
+    #[serde(rename = "canBeReferenceDefinition", default)]
+    pub can_be_reference_definition: bool,
+    #[serde(rename = "clonedFrom", default)]
+    pub cloned_from: String,
+    #[serde(rename = "contextDefinitionReferences", default)]
+    pub context_definition_references: Vec<ContextDefinitionReference>,
+    #[serde(rename = "contextDefinitionVersions", default)]
+    pub context_definition_versions: Vec<ContextDefinitionVersion>,
+    #[serde(rename = "contextTtl", default)]
+    pub context_ttl: f64,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "displayName", default)]
+    pub display_name: String,
+    #[serde(rename = "hasSystemTags", default)]
+    pub has_system_tags: bool,
+    #[serde(rename = "inheritedFrom", default)]
+    pub inherited_from: String,
+    #[serde(rename = "inheritedFromVersion", default)]
+    pub inherited_from_version: String,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub title: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EnablementProgramTaskMilestoneMeasure {
+    #[serde(rename = "measureDefinitionDeveloperName", default)]
+    pub measure_definition_developer_name: String,
+    #[serde(rename = "sequenceNumber", default)]
+    pub sequence_number: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ContextUseCaseMapping {
+    #[serde(rename = "contextDefinitionName", default)]
+    pub context_definition_name: String,
+    #[serde(rename = "mappingName", default)]
+    pub mapping_name: String,
+    #[serde(rename = "mappingType", default)]
+    pub mapping_type: ContextMappingType,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "referenceObjectName", default)]
+    pub reference_object_name: String,
+    #[serde(rename = "referenceObjectRecordType", default)]
+    pub reference_object_record_type: String,
+    #[serde(rename = "targetObjectCustomFieldName", default)]
+    pub target_object_custom_field_name: String,
+    #[serde(rename = "targetObjectName", default)]
+    pub target_object_name: String,
+    #[serde(rename = "targetObjectRecordType", default)]
+    pub target_object_record_type: String,
+    #[serde(rename = "useCaseType", default)]
+    pub use_case_type: ContextUseCaseType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct ContextDefinitionReference {
     #[serde(rename = "inheritedFrom", default)]
     pub inherited_from: String,
     #[serde(rename = "referenceContextDefinition", default)]
     pub reference_context_definition: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ContextAttribute {
+    #[serde(rename = "contextTags", default)]
+    pub context_tags: Vec<ContextTag>,
+    #[serde(rename = "customMappingAllowed", default)]
+    pub custom_mapping_allowed: bool,
+    #[serde(rename = "dataType", default)]
+    pub data_type: ContextAttributeDataType,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "displayName", default)]
+    pub display_name: String,
+    #[serde(rename = "domainSet", default)]
+    pub domain_set: String,
+    #[serde(rename = "fieldType", default)]
+    pub field_type: ContextAttributeFieldType,
+    #[serde(rename = "inheritedFrom", default)]
+    pub inherited_from: String,
+    #[serde(default)]
+    pub key: bool,
+    #[serde(default)]
+    pub title: String,
+    #[serde(default)]
+    pub transient: bool,
+    #[serde(default)]
+    pub value: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ContextNodeMapping {
+    #[serde(rename = "contextAttributeMappings", default)]
+    pub context_attribute_mappings: Vec<ContextAttributeMapping>,
+    #[serde(rename = "contextNode", default)]
+    pub context_node: String,
+    #[serde(rename = "contextNodeAttrDictionaries", default)]
+    pub context_node_attr_dictionaries: Vec<ContextNodeAttrDictionary>,
+    #[serde(rename = "inheritedFrom", default)]
+    pub inherited_from: String,
+    #[serde(rename = "mappedContextDefinition", default)]
+    pub mapped_context_definition: String,
+    #[serde(default)]
+    pub object: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ActivationPlatform {
+    #[serde(rename = "activationFlowType", default)]
+    pub activation_flow_type: ActivationFlowType,
+    #[serde(rename = "activationPlatformAdditionalMetadata", default)]
+    pub activation_platform_additional_metadata: String,
+    #[serde(rename = "activationPlatformConnectorType", default)]
+    pub activation_platform_connector_type: ActivationPlatformConnectorType,
+    #[serde(rename = "activationPlatformCreationType", default)]
+    pub activation_platform_creation_type: ActivationPlatformCreationType,
+    #[serde(rename = "dataConnector", default)]
+    pub data_connector: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub enabled: bool,
+    #[serde(rename = "includeSegmentNames", default)]
+    pub include_segment_names: bool,
+    #[serde(rename = "logoUrl", default)]
+    pub logo_url: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub notes: String,
+    #[serde(rename = "outputFormat", default)]
+    pub output_format: ActivationPlatformFileOutputFormat,
+    #[serde(rename = "outputGrouping", default)]
+    pub output_grouping: ActivationPlatformFileOutputGrouping,
+    #[serde(rename = "periodicRefreshFrequecy", default)]
+    pub periodic_refresh_frequecy: ActivationPlatformPeriodicFullRefresh,
+    #[serde(rename = "platformProcessingType", default)]
+    pub platform_processing_type: ActivationPlatformProcessingType,
+    #[serde(rename = "platformType", default)]
+    pub platform_type: ActivationPlatformType,
+    #[serde(rename = "refreshFrequency", default)]
+    pub refresh_frequency: ActivationPlatformRefreshFrequency,
+    #[serde(rename = "refreshMode", default)]
+    pub refresh_mode: ActivationPlatformRefreshMode,
 }

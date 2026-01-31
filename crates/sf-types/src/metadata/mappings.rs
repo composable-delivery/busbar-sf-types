@@ -10,6 +10,23 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MappingBehaviorType {
+    #[default]
+    PointInTime,
+    CurrentValue,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MappingAlertType {
+    #[default]
+    None,
+    Warning,
+    Error,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum MappingUsageType {
     #[default]
     ConvertToSalesAgreement,
@@ -34,21 +51,4 @@ pub enum MappingType {
     WorkPlans_WorkPlanTemplate_WorkPlan,
     WorkPlans_WorkStepTemplate_WorkStep,
     WorkPlans_WorkPlanTemplateEntry_WorkStep,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MappingBehaviorType {
-    #[default]
-    PointInTime,
-    CurrentValue,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MappingAlertType {
-    #[default]
-    None,
-    Warning,
-    Error,
 }

@@ -10,20 +10,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlexiPageRegionType {
+pub enum FlexipageDataSourceModeEnum {
     #[default]
-    Region,
-    Facet,
-    Background,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlexiPageRegionMode {
-    #[default]
-    Append,
-    Prepend,
-    Replace,
+    Create,
+    Edit,
+    View,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -35,57 +26,11 @@ pub enum FlexipageEventSourceTypeEnum {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum OmniSupervisorActionName {
+pub enum FlexiPageRegionMode {
     #[default]
-    ChangeQueues,
-    ChangeSkills,
-    AssignLearning,
-    AWSDashboard,
-    ManageQueues,
-    CustomAction,
-    ChangeGroups,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum OmniSupervisorActionTab {
-    #[default]
-    AllAgents,
-    AgentDetails,
-    QueuesBacklog,
-    QueueDetails,
-    AssignedWork,
-    AssignedWorkDetails,
-    SkillsBacklog,
-    SkillDetails,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlexipageEventTargetTypeEnum {
-    #[default]
-    FlexipageServices,
-    LwcServices,
-    InvocableApexServices,
-    InvocableExternalServices,
-    ActionServices,
-    ViewServices,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlexipageDataSourceModeEnum {
-    #[default]
-    Create,
-    Edit,
-    View,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum OmniProcessType {
-    #[default]
-    OmniScript,
+    Append,
+    Prepend,
+    Replace,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -106,18 +51,14 @@ pub enum OmniSupervisorTabType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum OmniAnalyticsComponentType {
+pub enum FlexipageEventTargetTypeEnum {
     #[default]
-    Omniscript,
-    Flexcard,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum OmniUiCardType {
-    #[default]
-    Parent,
-    Child,
+    FlexipageServices,
+    LwcServices,
+    InvocableApexServices,
+    InvocableExternalServices,
+    ActionServices,
+    ViewServices,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -132,11 +73,50 @@ pub enum FlexipageDataSourceTypeEnum {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum OmniDataTransformInputType {
+    #[default]
+    JSON,
+    XML,
+    SObject,
+    Custom,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum OmniSupervisorActionName {
+    #[default]
+    ChangeQueues,
+    ChangeSkills,
+    AssignLearning,
+    AWSDashboard,
+    ManageQueues,
+    CustomAction,
+    ChangeGroups,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum OmniAnalyticsComponentType {
+    #[default]
+    Omniscript,
+    Flexcard,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum FlexipageSchemaPropType {
     #[default]
     boolean,
     integer,
     string,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum OmniTrackingGroupType {
+    #[default]
+    Internal,
+    External,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -198,60 +178,40 @@ pub enum OmniSuperSkillVisibilityType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum OmniDataTransformInputType {
+pub enum OmniSupervisorActionTab {
     #[default]
-    JSON,
-    XML,
-    SObject,
-    Custom,
+    AllAgents,
+    AgentDetails,
+    QueuesBacklog,
+    QueueDetails,
+    AssignedWork,
+    AssignedWorkDetails,
+    SkillsBacklog,
+    SkillDetails,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum OmniTrackingGroupType {
+pub enum OmniUiCardType {
     #[default]
-    Internal,
-    External,
+    Parent,
+    Child,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct OmniSupervisorConfigAction {
-    #[serde(rename = "actionName", default)]
-    pub action_name: OmniSupervisorActionName,
-    #[serde(rename = "actionTab", default)]
-    pub action_tab: OmniSupervisorActionTab,
-    #[serde(rename = "customActionFlow", default)]
-    pub custom_action_flow: String,
-    #[serde(rename = "displayOrder", default)]
-    pub display_order: f64,
+pub enum OmniProcessType {
+    #[default]
+    OmniScript,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct OmniSpvsrConfigAIAgent {
-    #[serde(rename = "botDefinition", default)]
-    pub bot_definition: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlexiPageTemplateInstance {
-    #[serde(rename = "componentType", default)]
-    pub component_type: serde_json::Value,
-    #[serde(rename = "flexipageDataSources", default)]
-    pub flexipage_data_sources: Vec<FlexipageDataSource>,
-    #[serde(default)]
-    pub identifier: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub properties: Vec<serde_json::Value>,
-    #[serde(rename = "schemaProperties", default)]
-    pub schema_properties: Vec<FlexiPageCompSchemaPropertyDef>,
+pub enum FlexiPageRegionType {
+    #[default]
+    Region,
+    Facet,
+    Background,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -289,125 +249,23 @@ pub struct OmniUiCard {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct FlexiPageEventTarget {
+pub struct OmniSupervisorConfigUser {
     #[serde(default)]
-    pub mappings: Vec<FlexiPageEventPropertyMapping>,
-    #[serde(default)]
-    pub method: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub properties: Vec<FlexiPageEventTargetProperty>,
-    #[serde(default)]
-    pub r#type: FlexipageEventTargetTypeEnum,
+    pub user: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct OmniTrackingGroup {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "endDate", default)]
-    pub end_date: String,
-    #[serde(rename = "groupType", default)]
-    pub group_type: OmniTrackingGroupType,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "maxAgeInDays", default)]
-    pub max_age_in_days: f64,
-    #[serde(rename = "omniExtTrackingDef", default)]
-    pub omni_ext_tracking_def: String,
-    #[serde(rename = "omniTrackingComponentDefs", default)]
-    pub omni_tracking_component_defs: Vec<OmniTrackingComponentDef>,
-    #[serde(rename = "omniTrackingGroupKey", default)]
-    pub omni_tracking_group_key: String,
-    #[serde(rename = "startDate", default)]
-    pub start_date: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct OmniScript {
-    #[serde(rename = "assessmentDefinitionMetadata", default)]
-    pub assessment_definition_metadata: Vec<serde_json::Value>,
-    #[serde(rename = "customHtmlTemplates", default)]
-    pub custom_html_templates: String,
-    #[serde(rename = "customJavaScript", default)]
-    pub custom_java_script: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "designerCustomizationType", default)]
-    pub designer_customization_type: String,
-    #[serde(rename = "discoveryFrameworkUsageType", default)]
-    pub discovery_framework_usage_type: String,
-    #[serde(rename = "elementTypeComponentMapping", default)]
-    pub element_type_component_mapping: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isIntegrationProcedure", default)]
-    pub is_integration_procedure: bool,
-    #[serde(rename = "isManagedUsingStdDesigner", default)]
-    pub is_managed_using_std_designer: bool,
-    #[serde(rename = "isMetadataCacheDisabled", default)]
-    pub is_metadata_cache_disabled: bool,
-    #[serde(rename = "isOmniScriptEmbeddable", default)]
-    pub is_omni_script_embeddable: bool,
-    #[serde(rename = "isTestProcedure", default)]
-    pub is_test_procedure: bool,
-    #[serde(rename = "isWebCompEnabled", default)]
-    pub is_web_comp_enabled: bool,
-    #[serde(default)]
-    pub language: String,
-    #[serde(rename = "lastPreviewPage", default)]
-    pub last_preview_page: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "nameSpace", default)]
-    pub name_space: String,
-    #[serde(rename = "omniAssessmentTasks", default)]
-    pub omni_assessment_tasks: Vec<OmniAssessmentTaskMetadata>,
-    #[serde(rename = "omniProcessElements", default)]
-    pub omni_process_elements: Vec<OmniProcessElement>,
-    #[serde(rename = "omniProcessKey", default)]
-    pub omni_process_key: String,
-    #[serde(rename = "omniProcessType", default)]
-    pub omni_process_type: OmniProcessType,
-    #[serde(rename = "overrideKey", default)]
-    pub override_key: String,
-    #[serde(rename = "propertySetConfig", default)]
-    pub property_set_config: String,
-    #[serde(rename = "requiredPermission", default)]
-    pub required_permission: String,
-    #[serde(rename = "responseCacheType", default)]
-    pub response_cache_type: String,
-    #[serde(rename = "subType", default)]
-    pub sub_type: String,
-    #[serde(default)]
-    pub r#type: String,
-    #[serde(rename = "uniqueName", default)]
-    pub unique_name: String,
-    #[serde(rename = "versionNumber", default)]
-    pub version_number: f64,
-    #[serde(rename = "webComponentKey", default)]
-    pub web_component_key: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct OmniAssessmentTaskMetadata {
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub status: String,
-    #[serde(rename = "uniqueName", default)]
-    pub unique_name: String,
+pub struct OmniSupervisorConfigAction {
+    #[serde(rename = "actionName", default)]
+    pub action_name: OmniSupervisorActionName,
+    #[serde(rename = "actionTab", default)]
+    pub action_tab: OmniSupervisorActionTab,
+    #[serde(rename = "customActionFlow", default)]
+    pub custom_action_flow: String,
+    #[serde(rename = "displayOrder", default)]
+    pub display_order: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -427,25 +285,61 @@ pub struct FlexiPageEvent {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct OmniTrackingComponentDef {
-    #[serde(rename = "componentType", default)]
-    pub component_type: OmniAnalyticsComponentType,
-    #[serde(rename = "componentVersion", default)]
-    pub component_version: f64,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "omniTrackingComponentDefKey", default)]
-    pub omni_tracking_component_def_key: String,
-    #[serde(rename = "omniTrackingGroup", default)]
-    pub omni_tracking_group: String,
+pub struct OmniAssessmentTaskMetadata {
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub status: String,
+    #[serde(rename = "uniqueName", default)]
+    pub unique_name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct FlexiPageEventTargetProperty {
+pub struct FlexiPageCompSchemaPropertyDef {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "isRequired", default)]
+    pub is_required: bool,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub r#type: FlexipageSchemaPropType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlexiPage {
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub events: Vec<FlexiPageEvent>,
+    #[serde(rename = "flexiPageRegions", default)]
+    pub flexi_page_regions: Vec<FlexiPageRegion>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "parentFlexiPage", default)]
+    pub parent_flexi_page: String,
+    #[serde(rename = "platformActionlist", default)]
+    pub platform_actionlist: serde_json::Value,
+    #[serde(rename = "quickActionList", default)]
+    pub quick_action_list: serde_json::Value,
+    #[serde(rename = "sobjectType", default)]
+    pub sobject_type: String,
+    #[serde(default)]
+    pub template: FlexiPageTemplateInstance,
+    #[serde(default)]
+    pub r#type: FlexiPageType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlexiPageEventSourceProperty {
     #[serde(default)]
     pub name: String,
     #[serde(default)]
@@ -466,6 +360,66 @@ pub struct FlexipageDataSource {
     pub properties: String,
     #[serde(default)]
     pub r#type: FlexipageDataSourceTypeEnum,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlexiPageRegion {
+    #[serde(default)]
+    pub appendable: serde_json::Value,
+    #[serde(rename = "itemInstances", default)]
+    pub item_instances: Vec<serde_json::Value>,
+    #[serde(default)]
+    pub mode: FlexiPageRegionMode,
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub prependable: serde_json::Value,
+    #[serde(default)]
+    pub replaceable: serde_json::Value,
+    #[serde(default)]
+    pub r#type: FlexiPageRegionType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct OmniSupervisorConfigGroup {
+    #[serde(default)]
+    pub group: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct OmniExtTrackingDef {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "omniExtTrackingDefKey", default)]
+    pub omni_ext_tracking_def_key: String,
+    #[serde(rename = "omniExtTrackingEventDefs", default)]
+    pub omni_ext_tracking_event_defs: Vec<OmniExtTrackingEventDef>,
+    #[serde(rename = "trackingFrameworkInformation", default)]
+    pub tracking_framework_information: String,
+    #[serde(rename = "trackingServiceProvider", default)]
+    pub tracking_service_provider: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct OmniInteractionConfig {
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub value: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -551,119 +505,175 @@ pub struct OmniDataTransformItem {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct OmniSupervisorConfigSkill {
-    #[serde(default)]
-    pub skill: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct OmniSupervisorConfigQueue {
-    #[serde(default)]
-    pub queue: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlexiPage {
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub events: Vec<FlexiPageEvent>,
-    #[serde(rename = "flexiPageRegions", default)]
-    pub flexi_page_regions: Vec<FlexiPageRegion>,
+pub struct OmniTrackingComponentDef {
+    #[serde(rename = "componentType", default)]
+    pub component_type: OmniAnalyticsComponentType,
+    #[serde(rename = "componentVersion", default)]
+    pub component_version: f64,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "parentFlexiPage", default)]
-    pub parent_flexi_page: String,
-    #[serde(rename = "platformActionlist", default)]
-    pub platform_actionlist: serde_json::Value,
-    #[serde(rename = "quickActionList", default)]
-    pub quick_action_list: serde_json::Value,
-    #[serde(rename = "sobjectType", default)]
-    pub sobject_type: String,
-    #[serde(default)]
-    pub template: FlexiPageTemplateInstance,
-    #[serde(default)]
-    pub r#type: FlexiPageType,
+    #[serde(rename = "omniTrackingComponentDefKey", default)]
+    pub omni_tracking_component_def_key: String,
+    #[serde(rename = "omniTrackingGroup", default)]
+    pub omni_tracking_group: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct OmniSupervisorConfigGroup {
+pub struct OmniTrackingGroup {
     #[serde(default)]
-    pub group: String,
+    pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "endDate", default)]
+    pub end_date: String,
+    #[serde(rename = "groupType", default)]
+    pub group_type: OmniTrackingGroupType,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "maxAgeInDays", default)]
+    pub max_age_in_days: f64,
+    #[serde(rename = "omniExtTrackingDef", default)]
+    pub omni_ext_tracking_def: String,
+    #[serde(rename = "omniTrackingComponentDefs", default)]
+    pub omni_tracking_component_defs: Vec<OmniTrackingComponentDef>,
+    #[serde(rename = "omniTrackingGroupKey", default)]
+    pub omni_tracking_group_key: String,
+    #[serde(rename = "startDate", default)]
+    pub start_date: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct OmniProcessElement {
-    #[serde(rename = "childElements", default)]
-    pub child_elements: Vec<Box<OmniProcessElement>>,
+pub struct OmniIntegrationProcedure {
+    #[serde(rename = "customHtmlTemplates", default)]
+    pub custom_html_templates: String,
+    #[serde(rename = "customJavaScript", default)]
+    pub custom_java_script: String,
     #[serde(default)]
     pub description: String,
     #[serde(rename = "designerCustomizationType", default)]
     pub designer_customization_type: String,
-    #[serde(rename = "discoveryFrameworkUsageType", default)]
-    pub discovery_framework_usage_type: String,
-    #[serde(rename = "embeddedOmniScriptKey", default)]
-    pub embedded_omni_script_key: String,
+    #[serde(rename = "elementTypeComponentMapping", default)]
+    pub element_type_component_mapping: String,
+    #[serde(rename = "integrationProcedureInput", default)]
+    pub integration_procedure_input: String,
+    #[serde(rename = "integrationProcedureOutput", default)]
+    pub integration_procedure_output: String,
     #[serde(rename = "isActive", default)]
     pub is_active: bool,
+    #[serde(rename = "isIntegProcdSignatureAvl", default)]
+    pub is_integ_procd_signature_avl: bool,
+    #[serde(rename = "isIntegrationProcedure", default)]
+    pub is_integration_procedure: bool,
+    #[serde(rename = "isManagedUsingStdDesigner", default)]
+    pub is_managed_using_std_designer: bool,
+    #[serde(rename = "isMetadataCacheDisabled", default)]
+    pub is_metadata_cache_disabled: bool,
     #[serde(rename = "isOmniScriptEmbeddable", default)]
     pub is_omni_script_embeddable: bool,
+    #[serde(rename = "isTestProcedure", default)]
+    pub is_test_procedure: bool,
+    #[serde(rename = "isWebCompEnabled", default)]
+    pub is_web_comp_enabled: bool,
     #[serde(default)]
-    pub level: f64,
+    pub language: String,
+    #[serde(rename = "lastPreviewPage", default)]
+    pub last_preview_page: String,
     #[serde(default)]
     pub name: String,
-    #[serde(rename = "omniProcessVersionNumber", default)]
-    pub omni_process_version_number: f64,
-    #[serde(rename = "parentElementName", default)]
-    pub parent_element_name: String,
-    #[serde(rename = "parentElementType", default)]
-    pub parent_element_type: String,
+    #[serde(rename = "nameSpace", default)]
+    pub name_space: String,
+    #[serde(rename = "omniProcessElements", default)]
+    pub omni_process_elements: Vec<OmniProcessElement>,
+    #[serde(rename = "omniProcessKey", default)]
+    pub omni_process_key: String,
+    #[serde(rename = "omniProcessType", default)]
+    pub omni_process_type: OmniProcessType,
+    #[serde(rename = "overrideKey", default)]
+    pub override_key: String,
     #[serde(rename = "propertySetConfig", default)]
     pub property_set_config: String,
-    #[serde(rename = "sequenceNumber", default)]
-    pub sequence_number: f64,
+    #[serde(rename = "requiredPermission", default)]
+    pub required_permission: String,
+    #[serde(rename = "responseCacheType", default)]
+    pub response_cache_type: String,
+    #[serde(rename = "subType", default)]
+    pub sub_type: String,
     #[serde(default)]
     pub r#type: String,
-    #[serde(rename = "uniqueIndex", default)]
-    pub unique_index: String,
+    #[serde(rename = "uniqueName", default)]
+    pub unique_name: String,
+    #[serde(rename = "versionNumber", default)]
+    pub version_number: f64,
+    #[serde(rename = "webComponentKey", default)]
+    pub web_component_key: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct FlexiPageRegion {
+pub struct OmniExtTrackingEventDef {
+    #[serde(rename = "componentType", default)]
+    pub component_type: OmniAnalyticsComponentType,
     #[serde(default)]
-    pub appendable: serde_json::Value,
-    #[serde(rename = "itemInstances", default)]
-    pub item_instances: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub mode: FlexiPageRegionMode,
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub prependable: serde_json::Value,
-    #[serde(default)]
-    pub replaceable: serde_json::Value,
-    #[serde(default)]
-    pub r#type: FlexiPageRegionType,
+    pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "inclusionRule", default)]
+    pub inclusion_rule: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "omniExtTrackingDef", default)]
+    pub omni_ext_tracking_def: String,
+    #[serde(rename = "omniExtTrackingEventDefKey", default)]
+    pub omni_ext_tracking_event_def_key: String,
+    #[serde(rename = "payloadTemplate", default)]
+    pub payload_template: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct FlexiPageEventSourceProperty {
+pub struct OmniSupervisorConfigTab {
+    #[serde(rename = "displayOrder", default)]
+    pub display_order: f64,
+    #[serde(rename = "flexiPage", default)]
+    pub flexi_page: String,
+    #[serde(rename = "tabType", default)]
+    pub tab_type: OmniSupervisorTabType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlexiPageTemplateInstance {
+    #[serde(rename = "componentType", default)]
+    pub component_type: serde_json::Value,
+    #[serde(rename = "flexipageDataSources", default)]
+    pub flexipage_data_sources: Vec<FlexipageDataSource>,
+    #[serde(default)]
+    pub identifier: String,
     #[serde(default)]
     pub name: String,
     #[serde(default)]
-    pub value: String,
+    pub properties: Vec<serde_json::Value>,
+    #[serde(rename = "schemaProperties", default)]
+    pub schema_properties: Vec<FlexiPageCompSchemaPropertyDef>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct OmniSpvsrConfigAIAgent {
+    #[serde(rename = "botDefinition", default)]
+    pub bot_definition: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -697,67 +707,11 @@ pub struct OmniSupervisorConfig {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct OmniSupervisorConfigUser {
-    #[serde(default)]
-    pub user: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlexiPageEventPropertyMapping {
+pub struct FlexiPageEventTargetProperty {
     #[serde(default)]
     pub name: String,
     #[serde(default)]
     pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct OmniInteractionConfig {
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlexiPageCompSchemaPropertyDef {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isRequired", default)]
-    pub is_required: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub r#type: FlexipageSchemaPropType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct OmniExtTrackingDef {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "omniExtTrackingDefKey", default)]
-    pub omni_ext_tracking_def_key: String,
-    #[serde(rename = "omniExtTrackingEventDefs", default)]
-    pub omni_ext_tracking_event_defs: Vec<OmniExtTrackingEventDef>,
-    #[serde(rename = "trackingFrameworkInformation", default)]
-    pub tracking_framework_information: String,
-    #[serde(rename = "trackingServiceProvider", default)]
-    pub tracking_service_provider: serde_json::Value,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -771,33 +725,9 @@ pub struct OmniSupervisorConfigProfile {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct OmniInteractionAccessConfig {
-    #[serde(rename = "configName", default)]
-    pub config_name: String,
-    #[serde(rename = "isAsyncCardCachingEnabled", default)]
-    pub is_async_card_caching_enabled: bool,
-    #[serde(rename = "isCardApexRemoteDisabled", default)]
-    pub is_card_apex_remote_disabled: bool,
-    #[serde(rename = "isCardCacheDisabled", default)]
-    pub is_card_cache_disabled: bool,
-    #[serde(rename = "isCardDataTfrmDisabled", default)]
-    pub is_card_data_tfrm_disabled: bool,
-    #[serde(rename = "isCardIntegrationProcDisabled", default)]
-    pub is_card_integration_proc_disabled: bool,
-    #[serde(rename = "isCardRestApiDisabled", default)]
-    pub is_card_rest_api_disabled: bool,
-    #[serde(rename = "isCardSoqlDisabled", default)]
-    pub is_card_soql_disabled: bool,
-    #[serde(rename = "isCardSoslDisabled", default)]
-    pub is_card_sosl_disabled: bool,
-    #[serde(rename = "isCardStreamingApiDisabled", default)]
-    pub is_card_streaming_api_disabled: bool,
-    #[serde(rename = "isDataTfrmEncrpFieldsDisabled", default)]
-    pub is_data_tfrm_encrp_fields_disabled: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "setupOwner", default)]
-    pub setup_owner: String,
+pub struct OmniSupervisorConfigQueue {
+    #[serde(default)]
+    pub queue: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -893,7 +823,113 @@ pub struct OmniDataTransform {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct OmniIntegrationProcedure {
+pub struct FlexiPageEventPropertyMapping {
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlexiPageEventTarget {
+    #[serde(default)]
+    pub mappings: Vec<FlexiPageEventPropertyMapping>,
+    #[serde(default)]
+    pub method: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub properties: Vec<FlexiPageEventTargetProperty>,
+    #[serde(default)]
+    pub r#type: FlexipageEventTargetTypeEnum,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct OmniProcessElement {
+    #[serde(rename = "childElements", default)]
+    pub child_elements: Vec<Box<OmniProcessElement>>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "designerCustomizationType", default)]
+    pub designer_customization_type: String,
+    #[serde(rename = "discoveryFrameworkUsageType", default)]
+    pub discovery_framework_usage_type: String,
+    #[serde(rename = "embeddedOmniScriptKey", default)]
+    pub embedded_omni_script_key: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "isOmniScriptEmbeddable", default)]
+    pub is_omni_script_embeddable: bool,
+    #[serde(default)]
+    pub level: f64,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "omniProcessVersionNumber", default)]
+    pub omni_process_version_number: f64,
+    #[serde(rename = "parentElementName", default)]
+    pub parent_element_name: String,
+    #[serde(rename = "parentElementType", default)]
+    pub parent_element_type: String,
+    #[serde(rename = "propertySetConfig", default)]
+    pub property_set_config: String,
+    #[serde(rename = "sequenceNumber", default)]
+    pub sequence_number: f64,
+    #[serde(default)]
+    pub r#type: String,
+    #[serde(rename = "uniqueIndex", default)]
+    pub unique_index: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct OmniInteractionAccessConfig {
+    #[serde(rename = "configName", default)]
+    pub config_name: String,
+    #[serde(rename = "isAsyncCardCachingEnabled", default)]
+    pub is_async_card_caching_enabled: bool,
+    #[serde(rename = "isCardApexRemoteDisabled", default)]
+    pub is_card_apex_remote_disabled: bool,
+    #[serde(rename = "isCardCacheDisabled", default)]
+    pub is_card_cache_disabled: bool,
+    #[serde(rename = "isCardDataTfrmDisabled", default)]
+    pub is_card_data_tfrm_disabled: bool,
+    #[serde(rename = "isCardIntegrationProcDisabled", default)]
+    pub is_card_integration_proc_disabled: bool,
+    #[serde(rename = "isCardRestApiDisabled", default)]
+    pub is_card_rest_api_disabled: bool,
+    #[serde(rename = "isCardSoqlDisabled", default)]
+    pub is_card_soql_disabled: bool,
+    #[serde(rename = "isCardSoslDisabled", default)]
+    pub is_card_sosl_disabled: bool,
+    #[serde(rename = "isCardStreamingApiDisabled", default)]
+    pub is_card_streaming_api_disabled: bool,
+    #[serde(rename = "isDataTfrmEncrpFieldsDisabled", default)]
+    pub is_data_tfrm_encrp_fields_disabled: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "setupOwner", default)]
+    pub setup_owner: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct OmniSupervisorConfigSkill {
+    #[serde(default)]
+    pub skill: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct OmniScript {
+    #[serde(rename = "assessmentDefinitionMetadata", default)]
+    pub assessment_definition_metadata: Vec<serde_json::Value>,
     #[serde(rename = "customHtmlTemplates", default)]
     pub custom_html_templates: String,
     #[serde(rename = "customJavaScript", default)]
@@ -902,16 +938,12 @@ pub struct OmniIntegrationProcedure {
     pub description: String,
     #[serde(rename = "designerCustomizationType", default)]
     pub designer_customization_type: String,
+    #[serde(rename = "discoveryFrameworkUsageType", default)]
+    pub discovery_framework_usage_type: String,
     #[serde(rename = "elementTypeComponentMapping", default)]
     pub element_type_component_mapping: String,
-    #[serde(rename = "integrationProcedureInput", default)]
-    pub integration_procedure_input: String,
-    #[serde(rename = "integrationProcedureOutput", default)]
-    pub integration_procedure_output: String,
     #[serde(rename = "isActive", default)]
     pub is_active: bool,
-    #[serde(rename = "isIntegProcdSignatureAvl", default)]
-    pub is_integ_procd_signature_avl: bool,
     #[serde(rename = "isIntegrationProcedure", default)]
     pub is_integration_procedure: bool,
     #[serde(rename = "isManagedUsingStdDesigner", default)]
@@ -932,6 +964,8 @@ pub struct OmniIntegrationProcedure {
     pub name: String,
     #[serde(rename = "nameSpace", default)]
     pub name_space: String,
+    #[serde(rename = "omniAssessmentTasks", default)]
+    pub omni_assessment_tasks: Vec<OmniAssessmentTaskMetadata>,
     #[serde(rename = "omniProcessElements", default)]
     pub omni_process_elements: Vec<OmniProcessElement>,
     #[serde(rename = "omniProcessKey", default)]
@@ -956,38 +990,4 @@ pub struct OmniIntegrationProcedure {
     pub version_number: f64,
     #[serde(rename = "webComponentKey", default)]
     pub web_component_key: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct OmniSupervisorConfigTab {
-    #[serde(rename = "displayOrder", default)]
-    pub display_order: f64,
-    #[serde(rename = "flexiPage", default)]
-    pub flexi_page: String,
-    #[serde(rename = "tabType", default)]
-    pub tab_type: OmniSupervisorTabType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct OmniExtTrackingEventDef {
-    #[serde(rename = "componentType", default)]
-    pub component_type: OmniAnalyticsComponentType,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "inclusionRule", default)]
-    pub inclusion_rule: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "omniExtTrackingDef", default)]
-    pub omni_ext_tracking_def: String,
-    #[serde(rename = "omniExtTrackingEventDefKey", default)]
-    pub omni_ext_tracking_event_def_key: String,
-    #[serde(rename = "payloadTemplate", default)]
-    pub payload_template: String,
 }

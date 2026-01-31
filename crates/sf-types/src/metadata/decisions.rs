@@ -10,44 +10,15 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExpsSetVariableType {
+pub enum ExpsSetAggregationFunction {
     #[default]
-    Variable,
-    Constant,
-    Formula,
-    ExecutableContextDefinitionTag,
-    ContextDynamicAttributeTag,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExpsSetStepType {
-    #[default]
-    Condition,
-    AdvancedCondition,
-    Branch,
-    DefaultPath,
-    SubExpression,
-    BusinessKnowledgeModel,
-    ListGroup,
-    ListFilter,
-    AdvancedListFilter,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DecisionMatrixType {
-    #[default]
-    Standard,
-    Grouped,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CalculatedInsightCreationType {
-    #[default]
-    Custom,
-    System,
+    Sum,
+    Avg,
+    Min,
+    Max,
+    ListSum,
+    ListAvg,
+    ListSize,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -64,10 +35,131 @@ pub enum CalculatedInsightDefinitionType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExpressionType {
+pub enum DecisionTableRefreshStatus {
     #[default]
-    sel,
-    handlebars,
+    Initiated,
+    Failed,
+    Completed,
+    InProgress,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DecisionTableStatus {
+    #[default]
+    Draft,
+    Inactive,
+    Active,
+    ActivationInProgress,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DecisionTableDataSourceType {
+    #[default]
+    SingleSobject,
+    MultipleSobjects,
+    CsvUpload,
+    ContextDefinition,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExpsSetValueType {
+    #[default]
+    Literal,
+    Parameter,
+    PickList,
+    Formula,
+    Lookup,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExpsSetStatus {
+    #[default]
+    Draft,
+    Active,
+    Inactive,
+    InvalidDraft,
+    Obsolete,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DecisionMatrixType {
+    #[default]
+    Standard,
+    Grouped,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExpressionSetStepType {
+    #[default]
+    Calculation,
+    Aggregation,
+    MatrixLookup,
+    ReferenceProcedure,
+    Condition,
+    DecisionTableLookup,
+    Branch,
+    BusinessElement,
+    ListEnabledGroup,
+    ListFilter,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DecisionTableParameterType {
+    #[default]
+    INPUT,
+    ROWCRITERIA,
+    OUTPUT,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DecisionTableType {
+    #[default]
+    LowVolume,
+    HighVolume,
+    Advanced,
+    MediumVolume,
+    HighScaleExecution,
+    RealTime,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DecisionMatrixDefStatus {
+    #[default]
+    Draft,
+    Active,
+    Inactive,
+    InvalidDraft,
+    Obsolete,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DecisionTableHitPolicy {
+    #[default]
+    UniqueValues,
+    AnyValue,
+    Priority,
+    FirstMatch,
+    CollectOperator,
+    OutputOrder,
+    RuleOrder,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DecisionMatrixColumnType {
+    #[default]
+    Input,
+    Output,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -83,12 +175,10 @@ pub enum DecisionTableExecutionType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DecisionTableRefreshStatus {
+pub enum ExpsSetObjectDataType {
     #[default]
-    Initiated,
-    Failed,
-    Completed,
-    InProgress,
+    sObject,
+    JSON,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -106,34 +196,6 @@ pub enum ExpsSetInterfaceSourceType {
     GpaCalculationProcedure,
     Bre,
     ItServiceManagement,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DecisionTableDataSourceType {
-    #[default]
-    SingleSobject,
-    MultipleSobjects,
-    CsvUpload,
-    ContextDefinition,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExpsSetExecutionScale {
-    #[default]
-    Low,
-    High,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DecisionTableUploadStatus {
-    #[default]
-    UploadInProgress,
-    Completed,
-    CompletedWithErrors,
-    Failed,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -184,15 +246,134 @@ pub enum ExpsSetProcessType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExpsSetAggregationFunction {
+pub enum DecisionTableSortType {
     #[default]
+    None,
+    AscNullFirst,
+    AscNullLast,
+    DescNullFirst,
+    DescNullLast,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExpsSetConditionOperator {
+    #[default]
+    Equals,
+    NotEquals,
+    GreaterThan,
+    GreaterThanOrEquals,
+    LessThan,
+    LessThanOrEquals,
+    Contains,
+    DoesNotContain,
+    IsNull,
+    IsNotNull,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExpsSetUsageSubtype {
+    #[default]
+    SampleSubtype1,
+    SampleSubtype2,
+    SampleSubtype3,
+    AcadTermRgstrTmln,
+    LearningRules,
+    DefaultStudentInformationSystem,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExpsSetVariableType {
+    #[default]
+    Variable,
+    Constant,
+    Formula,
+    ExecutableContextDefinitionTag,
+    ContextDynamicAttributeTag,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DecisionMatrixDataType {
+    #[default]
+    Text,
+    Number,
+    NumberRange,
+    TextRange,
+    Currency,
+    Percent,
+    Boolean,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DecisionTableCollectOperator {
+    #[default]
+    None,
     Sum,
-    Avg,
-    Min,
-    Max,
-    ListSum,
-    ListAvg,
-    ListSize,
+    Minimum,
+    Maximum,
+    Count,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DecisionTableDownloadStatus {
+    #[default]
+    DownloadInProgress,
+    Completed,
+    Failed,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExpsSetExecutionScale {
+    #[default]
+    Low,
+    High,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DecisionTableConditionType {
+    #[default]
+    All,
+    Any,
+    Custom,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExpsSetStepType {
+    #[default]
+    Condition,
+    AdvancedCondition,
+    Branch,
+    DefaultPath,
+    SubExpression,
+    BusinessKnowledgeModel,
+    ListGroup,
+    ListFilter,
+    AdvancedListFilter,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum CalculationFrequency {
+    #[default]
+    Monthly,
+    Quarterly,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExpsSetVariableLookupType {
+    #[default]
+    SubExpression,
+    DecisionMatrix,
+    DecisionTable,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -216,213 +397,6 @@ pub enum DecisionTableOperator {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExpsSetValueType {
-    #[default]
-    Literal,
-    Parameter,
-    PickList,
-    Formula,
-    Lookup,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DecisionTableSortType {
-    #[default]
-    None,
-    AscNullFirst,
-    AscNullLast,
-    DescNullFirst,
-    DescNullLast,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DecisionTableStatus {
-    #[default]
-    Draft,
-    Inactive,
-    Active,
-    ActivationInProgress,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DecisionTableConditionType {
-    #[default]
-    All,
-    Any,
-    Custom,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExpsSetVariableLookupType {
-    #[default]
-    SubExpression,
-    DecisionMatrix,
-    DecisionTable,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CalculationFrequency {
-    #[default]
-    Monthly,
-    Quarterly,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DecisionMatrixDataType {
-    #[default]
-    Text,
-    Number,
-    NumberRange,
-    TextRange,
-    Currency,
-    Percent,
-    Boolean,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DecisionMatrixDefStatus {
-    #[default]
-    Draft,
-    Active,
-    Inactive,
-    InvalidDraft,
-    Obsolete,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DecisionTableParameterType {
-    #[default]
-    INPUT,
-    ROWCRITERIA,
-    OUTPUT,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExpressionSetStepType {
-    #[default]
-    Calculation,
-    Aggregation,
-    MatrixLookup,
-    ReferenceProcedure,
-    Condition,
-    DecisionTableLookup,
-    Branch,
-    BusinessElement,
-    ListEnabledGroup,
-    ListFilter,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExpsSetConditionOperator {
-    #[default]
-    Equals,
-    NotEquals,
-    GreaterThan,
-    GreaterThanOrEquals,
-    LessThan,
-    LessThanOrEquals,
-    Contains,
-    DoesNotContain,
-    IsNull,
-    IsNotNull,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DecisionTableHitPolicy {
-    #[default]
-    UniqueValues,
-    AnyValue,
-    Priority,
-    FirstMatch,
-    CollectOperator,
-    OutputOrder,
-    RuleOrder,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExpsSetUsageSubtype {
-    #[default]
-    SampleSubtype1,
-    SampleSubtype2,
-    SampleSubtype3,
-    AcadTermRgstrTmln,
-    LearningRules,
-    DefaultStudentInformationSystem,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExpsSetStatus {
-    #[default]
-    Draft,
-    Active,
-    Inactive,
-    InvalidDraft,
-    Obsolete,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DecisionTableDownloadStatus {
-    #[default]
-    DownloadInProgress,
-    Completed,
-    Failed,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DecisionTableCollectOperator {
-    #[default]
-    None,
-    Sum,
-    Minimum,
-    Maximum,
-    Count,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DecisionMatrixColumnType {
-    #[default]
-    Input,
-    Output,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DecisionTableType {
-    #[default]
-    LowVolume,
-    HighVolume,
-    Advanced,
-    MediumVolume,
-    HighScaleExecution,
-    RealTime,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExpsSetObjectDataType {
-    #[default]
-    sObject,
-    JSON,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum ExpsSetDataType {
     #[default]
     Text,
@@ -442,20 +416,138 @@ pub enum ExpsSetDataType {
     Picklist,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DecisionTableUploadStatus {
+    #[default]
+    UploadInProgress,
+    Completed,
+    CompletedWithErrors,
+    Failed,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExpressionType {
+    #[default]
+    sel,
+    handlebars,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum CalculatedInsightCreationType {
+    #[default]
+    Custom,
+    System,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ExpressionSetElementParameter {
+pub struct DecisionMatrixDefinition {
     #[serde(default)]
-    pub input: bool,
+    pub description: String,
+    #[serde(rename = "groupKey", default)]
+    pub group_key: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "processType", default)]
+    pub process_type: ExpsSetProcessType,
+    #[serde(rename = "subGroupKey", default)]
+    pub sub_group_key: String,
+    #[serde(default)]
+    pub r#type: DecisionMatrixType,
+    #[serde(default)]
+    pub versions: Vec<DecisionMatrixDefinitionVersion>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DecisionTable {
+    #[serde(rename = "collectOperator", default)]
+    pub collect_operator: DecisionTableCollectOperator,
+    #[serde(rename = "conditionCriteria", default)]
+    pub condition_criteria: String,
+    #[serde(rename = "conditionType", default)]
+    pub condition_type: DecisionTableConditionType,
+    #[serde(rename = "dataSourceType", default)]
+    pub data_source_type: DecisionTableDataSourceType,
+    #[serde(rename = "decisionTableParameters", default)]
+    pub decision_table_parameters: Vec<DecisionTableParameter>,
+    #[serde(rename = "decisionTableSourceCriterias", default)]
+    pub decision_table_source_criterias: Vec<DecisionTableSourceCriteria>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "doesConsiderNullValue", default)]
+    pub does_consider_null_value: bool,
+    #[serde(rename = "downloadStatus", default)]
+    pub download_status: DecisionTableDownloadStatus,
+    #[serde(rename = "executionType", default)]
+    pub execution_type: DecisionTableExecutionType,
+    #[serde(rename = "filterResultBy", default)]
+    pub filter_result_by: DecisionTableHitPolicy,
+    #[serde(rename = "hasIncrementalSyncFailed", default)]
+    pub has_incremental_sync_failed: bool,
+    #[serde(rename = "isIncrementalSyncEnabled", default)]
+    pub is_incremental_sync_enabled: bool,
+    #[serde(rename = "lastIncrementalSyncDate", default)]
+    pub last_incremental_sync_date: String,
+    #[serde(rename = "lastSyncDate", default)]
+    pub last_sync_date: String,
+    #[serde(rename = "refreshFailureReason", default)]
+    pub refresh_failure_reason: String,
+    #[serde(rename = "refreshStatus", default)]
+    pub refresh_status: DecisionTableRefreshStatus,
+    #[serde(rename = "setupName", default)]
+    pub setup_name: String,
+    #[serde(rename = "sourceConditionLogic", default)]
+    pub source_condition_logic: String,
+    #[serde(rename = "sourceObject", default)]
+    pub source_object: String,
+    #[serde(default)]
+    pub status: DecisionTableStatus,
+    #[serde(default)]
+    pub r#type: DecisionTableType,
+    #[serde(rename = "uploadStatus", default)]
+    pub upload_status: DecisionTableUploadStatus,
+    #[serde(rename = "usageType", default)]
+    pub usage_type: ExpsSetProcessType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExpressionSetObjectAliasField {
+    #[serde(rename = "dataType", default)]
+    pub data_type: ExpsSetDataType,
+    #[serde(rename = "decimalScale", default)]
+    pub decimal_scale: f64,
+    #[serde(rename = "fieldAlias", default)]
+    pub field_alias: String,
+    #[serde(rename = "sourceFieldName", default)]
+    pub source_field_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExpressionSetVariableField {
+    #[serde(rename = "dataType", default)]
+    pub data_type: ExpsSetDataType,
+    #[serde(rename = "decimalPlaces", default)]
+    pub decimal_places: f64,
+    #[serde(default)]
+    pub fields: Vec<Box<ExpressionSetVariableField>>,
+    #[serde(rename = "lookupName", default)]
+    pub lookup_name: String,
+    #[serde(rename = "lookupType", default)]
+    pub lookup_type: ExpsSetVariableLookupType,
     #[serde(default)]
     pub name: String,
-    #[serde(default)]
-    pub output: bool,
-    #[serde(default)]
-    pub r#type: ExpsSetValueType,
-    #[serde(default)]
-    pub value: String,
+    #[serde(rename = "objectName", default)]
+    pub object_name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -493,6 +585,98 @@ pub struct DecisionTableParameter {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct ExpressionSetConditionExpression {
+    #[serde(rename = "errorMessage", default)]
+    pub error_message: String,
+    #[serde(default)]
+    pub expression: String,
+    #[serde(rename = "resultParameter", default)]
+    pub result_parameter: String,
+    #[serde(rename = "successMessage", default)]
+    pub success_message: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DecisionTblDatasetParameter {
+    #[serde(rename = "datasetFieldName", default)]
+    pub dataset_field_name: String,
+    #[serde(rename = "datasetSourceObject", default)]
+    pub dataset_source_object: String,
+    #[serde(rename = "fieldName", default)]
+    pub field_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExpressionSetDefinitionVersion {
+    #[serde(rename = "decimalScale", default)]
+    pub decimal_scale: f64,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "endDate", default)]
+    pub end_date: String,
+    #[serde(rename = "expressionSetDefinition", default)]
+    pub expression_set_definition: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub rank: f64,
+    #[serde(rename = "shouldShowExplExternally", default)]
+    pub should_show_expl_externally: bool,
+    #[serde(rename = "startDate", default)]
+    pub start_date: String,
+    #[serde(default)]
+    pub status: ExpsSetStatus,
+    #[serde(default)]
+    pub steps: Vec<ExpressionSetStep>,
+    #[serde(rename = "uiTier", default)]
+    pub ui_tier: bool,
+    #[serde(default)]
+    pub variables: Vec<ExpressionSetVariable>,
+    #[serde(rename = "versionNumber", default)]
+    pub version_number: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DecisionMatrixDefinitionVersionColumn {
+    #[serde(rename = "columnType", default)]
+    pub column_type: DecisionMatrixColumnType,
+    #[serde(rename = "dataType", default)]
+    pub data_type: DecisionMatrixDataType,
+    #[serde(rename = "displaySequence", default)]
+    pub display_sequence: f64,
+    #[serde(rename = "isWildcardColumn", default)]
+    pub is_wildcard_column: bool,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "rangeValue", default)]
+    pub range_value: String,
+    #[serde(rename = "wildcardValue", default)]
+    pub wildcard_value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExpressionSetObjectAlias {
+    #[serde(rename = "dataType", default)]
+    pub data_type: ExpsSetObjectDataType,
+    #[serde(default)]
+    pub mappings: Vec<ExpressionSetObjectAliasField>,
+    #[serde(rename = "objectApiName", default)]
+    pub object_api_name: String,
+    #[serde(rename = "usageType", default)]
+    pub usage_type: ExpsSetProcessType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct DecisionTableSourceCriteria {
     #[serde(default)]
     pub operator: serde_json::Value,
@@ -504,6 +688,52 @@ pub struct DecisionTableSourceCriteria {
     pub value: String,
     #[serde(rename = "valueType", default)]
     pub value_type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExpressionSetDecisionTable {
+    #[serde(rename = "decisionTableName", default)]
+    pub decision_table_name: String,
+    #[serde(default)]
+    pub mappings: Vec<ExpressionSetElementParameter>,
+    #[serde(default)]
+    pub r#type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExpressionSetSubExpression {
+    #[serde(rename = "expressionSet", default)]
+    pub expression_set: String,
+    #[serde(default)]
+    pub mappings: Vec<ExpressionSetElementParameter>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExpressionSetCustomElement {
+    #[serde(default)]
+    pub parameters: Vec<ExpressionSetElementParameter>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExpressionSetConditionCriteria {
+    #[serde(default)]
+    pub operator: ExpsSetConditionOperator,
+    #[serde(rename = "sequenceNumber", default)]
+    pub sequence_number: f64,
+    #[serde(rename = "sourceFieldName", default)]
+    pub source_field_name: String,
+    #[serde(default)]
+    pub value: String,
+    #[serde(rename = "valueType", default)]
+    pub value_type: ExpsSetValueType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -589,31 +819,39 @@ pub struct ExpressionSetStep {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ExpressionSetObjectAliasField {
-    #[serde(rename = "dataType", default)]
-    pub data_type: ExpsSetDataType,
-    #[serde(rename = "decimalScale", default)]
-    pub decimal_scale: f64,
-    #[serde(rename = "fieldAlias", default)]
-    pub field_alias: String,
-    #[serde(rename = "sourceFieldName", default)]
-    pub source_field_name: String,
+pub struct ExpressionSetMessageToken {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ExpressionSetConditionCriteria {
+pub struct DecisionMatrixDefinitionVersion {
     #[serde(default)]
-    pub operator: ExpsSetConditionOperator,
-    #[serde(rename = "sequenceNumber", default)]
-    pub sequence_number: f64,
-    #[serde(rename = "sourceFieldName", default)]
-    pub source_field_name: String,
+    pub columns: Vec<DecisionMatrixDefinitionVersionColumn>,
+    #[serde(rename = "decisionMatrixDefinition", default)]
+    pub decision_matrix_definition: String,
+    #[serde(rename = "endDate", default)]
+    pub end_date: String,
+    #[serde(rename = "groupKeyValue", default)]
+    pub group_key_value: String,
     #[serde(default)]
-    pub value: String,
-    #[serde(rename = "valueType", default)]
-    pub value_type: ExpsSetValueType,
+    pub label: String,
+    #[serde(default)]
+    pub rank: f64,
+    #[serde(rename = "startDate", default)]
+    pub start_date: String,
+    #[serde(default)]
+    pub status: DecisionMatrixDefStatus,
+    #[serde(rename = "subGroupKeyValue", default)]
+    pub sub_group_key_value: String,
+    #[serde(rename = "versionNumber", default)]
+    pub version_number: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -653,163 +891,19 @@ pub struct ExpressionSetVariable {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct DecisionMatrixDefinitionVersionColumn {
-    #[serde(rename = "columnType", default)]
-    pub column_type: DecisionMatrixColumnType,
-    #[serde(rename = "dataType", default)]
-    pub data_type: DecisionMatrixDataType,
-    #[serde(rename = "displaySequence", default)]
-    pub display_sequence: f64,
-    #[serde(rename = "isWildcardColumn", default)]
-    pub is_wildcard_column: bool,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "rangeValue", default)]
-    pub range_value: String,
-    #[serde(rename = "wildcardValue", default)]
-    pub wildcard_value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExpressionSetDecisionTable {
+pub struct DecisionTableDatasetLink {
     #[serde(rename = "decisionTableName", default)]
     pub decision_table_name: String,
-    #[serde(default)]
-    pub mappings: Vec<ExpressionSetElementParameter>,
-    #[serde(default)]
-    pub r#type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExpressionSetObjectAlias {
-    #[serde(rename = "dataType", default)]
-    pub data_type: ExpsSetObjectDataType,
-    #[serde(default)]
-    pub mappings: Vec<ExpressionSetObjectAliasField>,
-    #[serde(rename = "objectApiName", default)]
-    pub object_api_name: String,
-    #[serde(rename = "usageType", default)]
-    pub usage_type: ExpsSetProcessType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExpressionSetVariableField {
-    #[serde(rename = "dataType", default)]
-    pub data_type: ExpsSetDataType,
-    #[serde(rename = "decimalPlaces", default)]
-    pub decimal_places: f64,
-    #[serde(default)]
-    pub fields: Vec<Box<ExpressionSetVariableField>>,
-    #[serde(rename = "lookupName", default)]
-    pub lookup_name: String,
-    #[serde(rename = "lookupType", default)]
-    pub lookup_type: ExpsSetVariableLookupType,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "objectName", default)]
-    pub object_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DecisionTable {
-    #[serde(rename = "collectOperator", default)]
-    pub collect_operator: DecisionTableCollectOperator,
-    #[serde(rename = "conditionCriteria", default)]
-    pub condition_criteria: String,
-    #[serde(rename = "conditionType", default)]
-    pub condition_type: DecisionTableConditionType,
-    #[serde(rename = "dataSourceType", default)]
-    pub data_source_type: DecisionTableDataSourceType,
-    #[serde(rename = "decisionTableParameters", default)]
-    pub decision_table_parameters: Vec<DecisionTableParameter>,
-    #[serde(rename = "decisionTableSourceCriterias", default)]
-    pub decision_table_source_criterias: Vec<DecisionTableSourceCriteria>,
+    #[serde(rename = "decisionTblDatasetParameters", default)]
+    pub decision_tbl_dataset_parameters: Vec<DecisionTblDatasetParameter>,
     #[serde(default)]
     pub description: String,
-    #[serde(rename = "doesConsiderNullValue", default)]
-    pub does_consider_null_value: bool,
-    #[serde(rename = "downloadStatus", default)]
-    pub download_status: DecisionTableDownloadStatus,
-    #[serde(rename = "executionType", default)]
-    pub execution_type: DecisionTableExecutionType,
-    #[serde(rename = "filterResultBy", default)]
-    pub filter_result_by: DecisionTableHitPolicy,
-    #[serde(rename = "hasIncrementalSyncFailed", default)]
-    pub has_incremental_sync_failed: bool,
-    #[serde(rename = "isIncrementalSyncEnabled", default)]
-    pub is_incremental_sync_enabled: bool,
-    #[serde(rename = "lastIncrementalSyncDate", default)]
-    pub last_incremental_sync_date: String,
-    #[serde(rename = "lastSyncDate", default)]
-    pub last_sync_date: String,
-    #[serde(rename = "refreshFailureReason", default)]
-    pub refresh_failure_reason: String,
-    #[serde(rename = "refreshStatus", default)]
-    pub refresh_status: DecisionTableRefreshStatus,
+    #[serde(rename = "isDefault", default)]
+    pub is_default: bool,
     #[serde(rename = "setupName", default)]
     pub setup_name: String,
-    #[serde(rename = "sourceConditionLogic", default)]
-    pub source_condition_logic: String,
     #[serde(rename = "sourceObject", default)]
     pub source_object: String,
-    #[serde(default)]
-    pub status: DecisionTableStatus,
-    #[serde(default)]
-    pub r#type: DecisionTableType,
-    #[serde(rename = "uploadStatus", default)]
-    pub upload_status: DecisionTableUploadStatus,
-    #[serde(rename = "usageType", default)]
-    pub usage_type: ExpsSetProcessType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DecisionMatrixDefinition {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "groupKey", default)]
-    pub group_key: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "processType", default)]
-    pub process_type: ExpsSetProcessType,
-    #[serde(rename = "subGroupKey", default)]
-    pub sub_group_key: String,
-    #[serde(default)]
-    pub r#type: DecisionMatrixType,
-    #[serde(default)]
-    pub versions: Vec<DecisionMatrixDefinitionVersion>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExpressionSetAssignment {
-    #[serde(rename = "assignedParameter", default)]
-    pub assigned_parameter: String,
-    #[serde(default)]
-    pub expression: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DecisionTblDatasetParameter {
-    #[serde(rename = "datasetFieldName", default)]
-    pub dataset_field_name: String,
-    #[serde(rename = "datasetSourceObject", default)]
-    pub dataset_source_object: String,
-    #[serde(rename = "fieldName", default)]
-    pub field_name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -831,69 +925,11 @@ pub struct ExpressionSetAdvancedCondition {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct DecisionMatrixDefinitionVersion {
-    #[serde(default)]
-    pub columns: Vec<DecisionMatrixDefinitionVersionColumn>,
-    #[serde(rename = "decisionMatrixDefinition", default)]
-    pub decision_matrix_definition: String,
-    #[serde(rename = "endDate", default)]
-    pub end_date: String,
-    #[serde(rename = "groupKeyValue", default)]
-    pub group_key_value: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub rank: f64,
-    #[serde(rename = "startDate", default)]
-    pub start_date: String,
-    #[serde(default)]
-    pub status: DecisionMatrixDefStatus,
-    #[serde(rename = "subGroupKeyValue", default)]
-    pub sub_group_key_value: String,
-    #[serde(rename = "versionNumber", default)]
-    pub version_number: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExpressionSetSubExpression {
-    #[serde(rename = "expressionSet", default)]
-    pub expression_set: String,
-    #[serde(default)]
-    pub mappings: Vec<ExpressionSetElementParameter>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DecisionTableDatasetLink {
-    #[serde(rename = "decisionTableName", default)]
-    pub decision_table_name: String,
-    #[serde(rename = "decisionTblDatasetParameters", default)]
-    pub decision_tbl_dataset_parameters: Vec<DecisionTblDatasetParameter>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isDefault", default)]
-    pub is_default: bool,
-    #[serde(rename = "setupName", default)]
-    pub setup_name: String,
-    #[serde(rename = "sourceObject", default)]
-    pub source_object: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExpressionSetConditionExpression {
-    #[serde(rename = "errorMessage", default)]
-    pub error_message: String,
+pub struct ExpressionSetAssignment {
+    #[serde(rename = "assignedParameter", default)]
+    pub assigned_parameter: String,
     #[serde(default)]
     pub expression: String,
-    #[serde(rename = "resultParameter", default)]
-    pub result_parameter: String,
-    #[serde(rename = "successMessage", default)]
-    pub success_message: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -911,51 +947,15 @@ pub struct ExpressionSetAggregation {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ExpressionSetMessageToken {
+pub struct ExpressionSetElementParameter {
     #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExpressionSetCustomElement {
+    pub input: bool,
     #[serde(default)]
-    pub parameters: Vec<ExpressionSetElementParameter>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExpressionSetDefinitionVersion {
-    #[serde(rename = "decimalScale", default)]
-    pub decimal_scale: f64,
+    pub name: String,
     #[serde(default)]
-    pub description: String,
-    #[serde(rename = "endDate", default)]
-    pub end_date: String,
-    #[serde(rename = "expressionSetDefinition", default)]
-    pub expression_set_definition: String,
+    pub output: bool,
     #[serde(default)]
-    pub label: String,
+    pub r#type: ExpsSetValueType,
     #[serde(default)]
-    pub rank: f64,
-    #[serde(rename = "shouldShowExplExternally", default)]
-    pub should_show_expl_externally: bool,
-    #[serde(rename = "startDate", default)]
-    pub start_date: String,
-    #[serde(default)]
-    pub status: ExpsSetStatus,
-    #[serde(default)]
-    pub steps: Vec<ExpressionSetStep>,
-    #[serde(rename = "uiTier", default)]
-    pub ui_tier: bool,
-    #[serde(default)]
-    pub variables: Vec<ExpressionSetVariable>,
-    #[serde(rename = "versionNumber", default)]
-    pub version_number: f64,
+    pub value: String,
 }

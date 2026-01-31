@@ -10,18 +10,145 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExternalDataSrcDescSubtype {
+pub enum ExtlClntAppDistState {
     #[default]
-    SchemaTableQualifiers,
-    SchemaTableMetadata,
+    Local,
+    Packaged,
+    Managed,
+    AutoInstalled,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExternalTrackingVendor {
+pub enum ExtlClntAppStartPage {
     #[default]
-    Google,
-    Mixpanel,
+    None,
+    Custom,
+    OAuth,
+    SAML,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExternalPrincipalType {
+    #[default]
+    Anonymous,
+    PerUser,
+    NamedUser,
+    UserWithImpersonation,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExternalConnectionStatus {
+    #[default]
+    Unprovisioned,
+    Allocating,
+    PendingAcceptance,
+    PendingActivation,
+    RejectedRemotely,
+    DeletedRemotely,
+    TeardownInProgress,
+    Ready,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExtlClntAppSamlSignAlgoType {
+    #[default]
+    SHA1,
+    SHA256,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExternalModelStatus {
+    #[default]
+    ENABLED,
+    DISABLED,
+    PAUSED,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExtlClntAppSamlEncryptType {
+    #[default]
+    AES_128,
+    AES_256,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExtlClntAppSamlBindingType {
+    #[default]
+    RedirectBinding,
+    PostBinding,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExtlClntAppNameIdFormatType {
+    #[default]
+    Unspecified,
+    EmailAddress,
+    Persistent,
+    Transient,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExternalConnectionType {
+    #[default]
+    AwsPrivateLink,
+    DataCloudPrivateConnection,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExtlClntAppSamlSubjectType {
+    #[default]
+    Username,
+    FederationId,
+    UserId,
+    SpokeId,
+    CustomAttribute,
+    PersistentId,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExternalDataSrcDescType {
+    #[default]
+    Schema,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExtlIdentityProviderParmType {
+    #[default]
+    AuthorizeUrl,
+    TokenUrl,
+    UrlQueryParameter,
+    HttpHeader,
+    ClientCertificate,
+    SigningCertificate,
+    RequestBodyParameter,
+    JwtBodyClaim,
+    JwtHeaderClaim,
+    CreatedByNamespace,
+    UserInfoUrl,
+    ClientAuthentication,
+    IdentityProviderOptions,
+    AuthorizeRequestQueryParameter,
+    TokenRequestQueryParameter,
+    TokenRequestBodyParameter,
+    TokenRequestHttpHeader,
+    RefreshRequestQueryParameter,
+    RefreshRequestBodyParameter,
+    RefreshRequestHttpHeader,
+    StandardExternalIdentityProvider,
+    ManagedByFeature,
+    ManagedByComponent,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -57,71 +184,10 @@ pub enum ExternalCredentialParamType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExtlIdentityProviderParmType {
+pub enum ExternalTrackingVendor {
     #[default]
-    AuthorizeUrl,
-    TokenUrl,
-    UrlQueryParameter,
-    HttpHeader,
-    ClientCertificate,
-    SigningCertificate,
-    RequestBodyParameter,
-    JwtBodyClaim,
-    JwtHeaderClaim,
-    CreatedByNamespace,
-    UserInfoUrl,
-    ClientAuthentication,
-    IdentityProviderOptions,
-    AuthorizeRequestQueryParameter,
-    TokenRequestQueryParameter,
-    TokenRequestBodyParameter,
-    TokenRequestHttpHeader,
-    RefreshRequestQueryParameter,
-    RefreshRequestBodyParameter,
-    RefreshRequestHttpHeader,
-    StandardExternalIdentityProvider,
-    ManagedByFeature,
-    ManagedByComponent,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExternalConnectionType {
-    #[default]
-    AwsPrivateLink,
-    DataCloudPrivateConnection,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExternalDataSrcDescType {
-    #[default]
-    Schema,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExtlClntAppSamlSignAlgoType {
-    #[default]
-    SHA1,
-    SHA256,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExternalBotType {
-    #[default]
-    Chatbot,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExtlClntAppDistState {
-    #[default]
-    Local,
-    Packaged,
-    Managed,
-    AutoInstalled,
+    Google,
+    Mixpanel,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -134,65 +200,10 @@ pub enum ExtlClntAppManagedType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExternalConnectionStatus {
+pub enum ExternalDataSrcDescSubtype {
     #[default]
-    Unprovisioned,
-    Allocating,
-    PendingAcceptance,
-    PendingActivation,
-    RejectedRemotely,
-    DeletedRemotely,
-    TeardownInProgress,
-    Ready,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExtlClntAppSamlSubjectType {
-    #[default]
-    Username,
-    FederationId,
-    UserId,
-    SpokeId,
-    CustomAttribute,
-    PersistentId,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExternalModelStatus {
-    #[default]
-    ENABLED,
-    DISABLED,
-    PAUSED,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExtlClntAppStartPage {
-    #[default]
-    None,
-    Custom,
-    OAuth,
-    SAML,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExtlClntAppSamlEncryptType {
-    #[default]
-    AES_128,
-    AES_256,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExternalPrincipalType {
-    #[default]
-    Anonymous,
-    PerUser,
-    NamedUser,
-    UserWithImpersonation,
+    SchemaTableQualifiers,
+    SchemaTableMetadata,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -281,70 +292,43 @@ pub enum ExternalDataSourceType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExtlClntAppSamlBindingType {
+pub enum ExternalBotType {
     #[default]
-    RedirectBinding,
-    PostBinding,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExtlClntAppNameIdFormatType {
-    #[default]
-    Unspecified,
-    EmailAddress,
-    Persistent,
-    Transient,
+    Chatbot,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ExternalStoragePrvdConfig {
-    #[serde(rename = "customConfiguration", default)]
-    pub custom_configuration: String,
+pub struct ExternalDataSrcDescriptor {
+    #[serde(rename = "customObject", default)]
+    pub custom_object: String,
+    #[serde(default)]
+    pub descriptor: String,
+    #[serde(rename = "descriptorVersion", default)]
+    pub descriptor_version: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
     #[serde(rename = "externalDataSource", default)]
     pub external_data_source: String,
-    #[serde(rename = "flowDefinition", default)]
-    pub flow_definition: String,
+    #[serde(default)]
+    pub subtype: ExternalDataSrcDescSubtype,
+    #[serde(rename = "systemVersion", default)]
+    pub system_version: f64,
+    #[serde(default)]
+    pub r#type: ExternalDataSrcDescType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ExtlClntAppApplePushConfig {
-    #[serde(rename = "applicationBundle", default)]
-    pub application_bundle: String,
+pub struct ExtlClntAppOauthIpRange {
     #[serde(default)]
-    pub certificate: String,
-    #[serde(default)]
-    pub environment: serde_json::Value,
-    #[serde(rename = "keyIdentifier", default)]
-    pub key_identifier: String,
-    #[serde(default)]
-    pub password: String,
-    #[serde(rename = "signingKey", default)]
-    pub signing_key: String,
-    #[serde(rename = "teamIdentifier", default)]
-    pub team_identifier: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExternalAIModel {
-    #[serde(rename = "applicationSourceType", default)]
-    pub application_source_type: serde_json::Value,
-    #[serde(rename = "externalModelKey", default)]
-    pub external_model_key: String,
-    #[serde(rename = "externalModelStatus", default)]
-    pub external_model_status: ExternalModelStatus,
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub threshold: f64,
-    #[serde(rename = "trainingJobName", default)]
-    pub training_job_name: String,
+    pub description: String,
+    #[serde(rename = "endIpAddress", default)]
+    pub end_ip_address: String,
+    #[serde(rename = "startIpAddress", default)]
+    pub start_ip_address: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -384,11 +368,81 @@ pub struct ExternalDataTranField {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct ExtlClntAppApplePushConfig {
+    #[serde(rename = "applicationBundle", default)]
+    pub application_bundle: String,
+    #[serde(default)]
+    pub certificate: String,
+    #[serde(default)]
+    pub environment: serde_json::Value,
+    #[serde(rename = "keyIdentifier", default)]
+    pub key_identifier: String,
+    #[serde(default)]
+    pub password: String,
+    #[serde(rename = "signingKey", default)]
+    pub signing_key: String,
+    #[serde(rename = "teamIdentifier", default)]
+    pub team_identifier: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExternalClientApplication {
+    #[serde(rename = "contactEmail", default)]
+    pub contact_email: String,
+    #[serde(rename = "contactPhone", default)]
+    pub contact_phone: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "distributionState", default)]
+    pub distribution_state: ExtlClntAppDistState,
+    #[serde(rename = "iconUrl", default)]
+    pub icon_url: String,
+    #[serde(rename = "infoUrl", default)]
+    pub info_url: String,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "logoUrl", default)]
+    pub logo_url: String,
+    #[serde(rename = "managedType", default)]
+    pub managed_type: ExtlClntAppManagedType,
+    #[serde(rename = "orgScopedExternalApp", default)]
+    pub org_scoped_external_app: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExtlClntAppAndroidPushConfig {
+    #[serde(rename = "fcmProject", default)]
+    pub fcm_project: String,
+    #[serde(rename = "serviceAccount", default)]
+    pub service_account: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct ExtlClntAppOauthPoliciesAttribute {
     #[serde(default)]
     pub formula: String,
     #[serde(default)]
     pub key: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExternalStoragePrvdConfig {
+    #[serde(rename = "customConfiguration", default)]
+    pub custom_configuration: String,
+    #[serde(rename = "externalDataSource", default)]
+    pub external_data_source: String,
+    #[serde(rename = "flowDefinition", default)]
+    pub flow_definition: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -410,23 +464,75 @@ pub struct ExternalAuthIdentityProvider {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ExternalDataSrcDescriptor {
-    #[serde(rename = "customObject", default)]
-    pub custom_object: String,
+pub struct ExternalDataTranObject {
+    #[serde(rename = "availabilityStatus", default)]
+    pub availability_status: serde_json::Value,
+    #[serde(rename = "creationType", default)]
+    pub creation_type: serde_json::Value,
+    #[serde(rename = "extDataTranObjectTemplate", default)]
+    pub ext_data_tran_object_template: String,
+    #[serde(rename = "externalDataTranFields", default)]
+    pub external_data_tran_fields: Vec<ExternalDataTranField>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "mktDataTranObject", default)]
+    pub mkt_data_tran_object: String,
+    #[serde(rename = "objectCategory", default)]
+    pub object_category: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExtlClntAppConfigurablePolicies {
+    #[serde(rename = "externalClientApplication", default)]
+    pub external_client_application: String,
+    #[serde(rename = "isCanvasPluginEnabled", default)]
+    pub is_canvas_plugin_enabled: bool,
+    #[serde(rename = "isEnabled", default)]
+    pub is_enabled: bool,
+    #[serde(rename = "isMobilePluginEnabled", default)]
+    pub is_mobile_plugin_enabled: bool,
+    #[serde(rename = "isNotificationPluginEnabled", default)]
+    pub is_notification_plugin_enabled: bool,
+    #[serde(rename = "isOauthPluginEnabled", default)]
+    pub is_oauth_plugin_enabled: bool,
+    #[serde(rename = "isPushPluginEnabled", default)]
+    pub is_push_plugin_enabled: bool,
+    #[serde(rename = "isSamlPluginEnabled", default)]
+    pub is_saml_plugin_enabled: bool,
     #[serde(default)]
-    pub descriptor: String,
-    #[serde(rename = "descriptorVersion", default)]
-    pub descriptor_version: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "externalDataSource", default)]
-    pub external_data_source: String,
-    #[serde(default)]
-    pub subtype: ExternalDataSrcDescSubtype,
-    #[serde(rename = "systemVersion", default)]
-    pub system_version: f64,
-    #[serde(default)]
-    pub r#type: ExternalDataSrcDescType,
+    pub label: String,
+    #[serde(rename = "startPage", default)]
+    pub start_page: ExtlClntAppStartPage,
+    #[serde(rename = "startUrl", default)]
+    pub start_url: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExternalAppIdTokenConfig {
+    #[serde(rename = "idTokenAudience", default)]
+    pub id_token_audience: String,
+    #[serde(rename = "idTokenIncludeAttributes", default)]
+    pub id_token_include_attributes: bool,
+    #[serde(rename = "idTokenIncludeCustomPermissions", default)]
+    pub id_token_include_custom_permissions: bool,
+    #[serde(rename = "idTokenIncludeStandardClaims", default)]
+    pub id_token_include_standard_claims: bool,
+    #[serde(rename = "idTokenValidityInMinutes", default)]
+    pub id_token_validity_in_minutes: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExtlClntAppNotificationType {
+    #[serde(rename = "notificationType", default)]
+    pub notification_type: String,
+    #[serde(rename = "pushByDefault", default)]
+    pub push_by_default: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -490,16 +596,6 @@ pub struct ExtlClntAppOauthConfigurablePolicies {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ExtlClntAppNotificationType {
-    #[serde(rename = "notificationType", default)]
-    pub notification_type: String,
-    #[serde(rename = "pushByDefault", default)]
-    pub push_by_default: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct ExtlClntAppSampleConfigurablePolicies {
     #[serde(rename = "adminOnlyPolicy", default)]
     pub admin_only_policy: String,
@@ -516,29 +612,13 @@ pub struct ExtlClntAppSampleConfigurablePolicies {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ExtlClntAppMobileConfigurablePolicies {
+pub struct ExtlClntAppPushConfigurablePolicies {
     #[serde(rename = "externalClientApplication", default)]
     pub external_client_application: String,
+    #[serde(rename = "isFullContent", default)]
+    pub is_full_content: bool,
     #[serde(default)]
     pub label: String,
-    #[serde(rename = "screenLockTimeout", default)]
-    pub screen_lock_timeout: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExternalAuthIdentityProviderParameter {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "parameterName", default)]
-    pub parameter_name: String,
-    #[serde(rename = "parameterType", default)]
-    pub parameter_type: ExtlIdentityProviderParmType,
-    #[serde(rename = "parameterValue", default)]
-    pub parameter_value: String,
-    #[serde(rename = "sequenceNumber", default)]
-    pub sequence_number: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -564,83 +644,11 @@ pub struct ExternalDocStorageConfig {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ExternalAppIdTokenConfig {
-    #[serde(rename = "idTokenAudience", default)]
-    pub id_token_audience: String,
-    #[serde(rename = "idTokenIncludeAttributes", default)]
-    pub id_token_include_attributes: bool,
-    #[serde(rename = "idTokenIncludeCustomPermissions", default)]
-    pub id_token_include_custom_permissions: bool,
-    #[serde(rename = "idTokenIncludeStandardClaims", default)]
-    pub id_token_include_standard_claims: bool,
-    #[serde(rename = "idTokenValidityInMinutes", default)]
-    pub id_token_validity_in_minutes: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExternalDataConnector {
-    #[serde(rename = "dataConnectionStatus", default)]
-    pub data_connection_status: serde_json::Value,
-    #[serde(rename = "dataConnectorConfiguration", default)]
-    pub data_connector_configuration: String,
-    #[serde(rename = "dataConnectorType", default)]
-    pub data_connector_type: serde_json::Value,
-    #[serde(rename = "dataPlatform", default)]
-    pub data_platform: String,
-    #[serde(rename = "externalDataTranObjects", default)]
-    pub external_data_tran_objects: Vec<ExternalDataTranObject>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExternalDataTranObject {
-    #[serde(rename = "availabilityStatus", default)]
-    pub availability_status: serde_json::Value,
-    #[serde(rename = "creationType", default)]
-    pub creation_type: serde_json::Value,
-    #[serde(rename = "extDataTranObjectTemplate", default)]
-    pub ext_data_tran_object_template: String,
-    #[serde(rename = "externalDataTranFields", default)]
-    pub external_data_tran_fields: Vec<ExternalDataTranField>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "mktDataTranObject", default)]
-    pub mkt_data_tran_object: String,
-    #[serde(rename = "objectCategory", default)]
-    pub object_category: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExternalClientApplication {
-    #[serde(rename = "contactEmail", default)]
-    pub contact_email: String,
-    #[serde(rename = "contactPhone", default)]
-    pub contact_phone: String,
+pub struct ExtlClntAppSamlConfigurablePoliciesAttribute {
     #[serde(default)]
-    pub description: String,
-    #[serde(rename = "distributionState", default)]
-    pub distribution_state: ExtlClntAppDistState,
-    #[serde(rename = "iconUrl", default)]
-    pub icon_url: String,
-    #[serde(rename = "infoUrl", default)]
-    pub info_url: String,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
+    pub formula: String,
     #[serde(default)]
-    pub label: String,
-    #[serde(rename = "logoUrl", default)]
-    pub logo_url: String,
-    #[serde(rename = "managedType", default)]
-    pub managed_type: ExtlClntAppManagedType,
-    #[serde(rename = "orgScopedExternalApp", default)]
-    pub org_scoped_external_app: String,
+    pub key: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -686,23 +694,35 @@ pub struct ExtlClntAppSamlConfigurablePolicies {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ExtlClntAppCanvasStngs {
-    #[serde(rename = "accessMethod", default)]
-    pub access_method: serde_json::Value,
-    #[serde(rename = "canvasLocationOptions", default)]
-    pub canvas_location_options: Vec<serde_json::Value>,
-    #[serde(rename = "canvasOptions", default)]
-    pub canvas_options: Vec<serde_json::Value>,
-    #[serde(rename = "canvasUrl", default)]
-    pub canvas_url: String,
-    #[serde(rename = "externalClientApplication", default)]
-    pub external_client_application: String,
+pub struct ExternalAuthIdentityProviderParameter {
     #[serde(default)]
-    pub label: String,
-    #[serde(rename = "lifeCycleHandler", default)]
-    pub life_cycle_handler: String,
-    #[serde(rename = "samlInitiationMethod", default)]
-    pub saml_initiation_method: serde_json::Value,
+    pub description: String,
+    #[serde(rename = "parameterName", default)]
+    pub parameter_name: String,
+    #[serde(rename = "parameterType", default)]
+    pub parameter_type: ExtlIdentityProviderParmType,
+    #[serde(rename = "parameterValue", default)]
+    pub parameter_value: String,
+    #[serde(rename = "sequenceNumber", default)]
+    pub sequence_number: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExternalDataConnector {
+    #[serde(rename = "dataConnectionStatus", default)]
+    pub data_connection_status: serde_json::Value,
+    #[serde(rename = "dataConnectorConfiguration", default)]
+    pub data_connector_configuration: String,
+    #[serde(rename = "dataConnectorType", default)]
+    pub data_connector_type: serde_json::Value,
+    #[serde(rename = "dataPlatform", default)]
+    pub data_platform: String,
+    #[serde(rename = "externalDataTranObjects", default)]
+    pub external_data_tran_objects: Vec<ExternalDataTranObject>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -732,21 +752,19 @@ pub struct ExternalCredentialParameter {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ExtlClntAppAndroidPushConfig {
-    #[serde(rename = "fcmProject", default)]
-    pub fcm_project: String,
-    #[serde(rename = "serviceAccount", default)]
-    pub service_account: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExtlClntAppSamlConfigurablePoliciesAttribute {
+pub struct ExternalAIModel {
+    #[serde(rename = "applicationSourceType", default)]
+    pub application_source_type: serde_json::Value,
+    #[serde(rename = "externalModelKey", default)]
+    pub external_model_key: String,
+    #[serde(rename = "externalModelStatus", default)]
+    pub external_model_status: ExternalModelStatus,
     #[serde(default)]
-    pub formula: String,
+    pub name: String,
     #[serde(default)]
-    pub key: String,
+    pub threshold: f64,
+    #[serde(rename = "trainingJobName", default)]
+    pub training_job_name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -768,13 +786,35 @@ pub struct ExternalConversationBotDef {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ExtlClntAppOauthIpRange {
+pub struct ExtlClntAppCanvasStngs {
+    #[serde(rename = "accessMethod", default)]
+    pub access_method: serde_json::Value,
+    #[serde(rename = "canvasLocationOptions", default)]
+    pub canvas_location_options: Vec<serde_json::Value>,
+    #[serde(rename = "canvasOptions", default)]
+    pub canvas_options: Vec<serde_json::Value>,
+    #[serde(rename = "canvasUrl", default)]
+    pub canvas_url: String,
+    #[serde(rename = "externalClientApplication", default)]
+    pub external_client_application: String,
     #[serde(default)]
-    pub description: String,
-    #[serde(rename = "endIpAddress", default)]
-    pub end_ip_address: String,
-    #[serde(rename = "startIpAddress", default)]
-    pub start_ip_address: String,
+    pub label: String,
+    #[serde(rename = "lifeCycleHandler", default)]
+    pub life_cycle_handler: String,
+    #[serde(rename = "samlInitiationMethod", default)]
+    pub saml_initiation_method: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExtlClntAppMobileConfigurablePolicies {
+    #[serde(rename = "externalClientApplication", default)]
+    pub external_client_application: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "screenLockTimeout", default)]
+    pub screen_lock_timeout: serde_json::Value,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -785,44 +825,4 @@ pub struct ExtlClntAppOauthSettingsAttribute {
     pub formula: String,
     #[serde(default)]
     pub key: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExtlClntAppConfigurablePolicies {
-    #[serde(rename = "externalClientApplication", default)]
-    pub external_client_application: String,
-    #[serde(rename = "isCanvasPluginEnabled", default)]
-    pub is_canvas_plugin_enabled: bool,
-    #[serde(rename = "isEnabled", default)]
-    pub is_enabled: bool,
-    #[serde(rename = "isMobilePluginEnabled", default)]
-    pub is_mobile_plugin_enabled: bool,
-    #[serde(rename = "isNotificationPluginEnabled", default)]
-    pub is_notification_plugin_enabled: bool,
-    #[serde(rename = "isOauthPluginEnabled", default)]
-    pub is_oauth_plugin_enabled: bool,
-    #[serde(rename = "isPushPluginEnabled", default)]
-    pub is_push_plugin_enabled: bool,
-    #[serde(rename = "isSamlPluginEnabled", default)]
-    pub is_saml_plugin_enabled: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "startPage", default)]
-    pub start_page: ExtlClntAppStartPage,
-    #[serde(rename = "startUrl", default)]
-    pub start_url: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExtlClntAppPushConfigurablePolicies {
-    #[serde(rename = "externalClientApplication", default)]
-    pub external_client_application: String,
-    #[serde(rename = "isFullContent", default)]
-    pub is_full_content: bool,
-    #[serde(default)]
-    pub label: String,
 }

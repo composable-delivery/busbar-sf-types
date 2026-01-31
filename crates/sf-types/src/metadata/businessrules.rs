@@ -10,70 +10,39 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BusinessVertical {
+pub enum RuleDefinitionOperator {
     #[default]
-    RevenueCloud,
+    EQUALS,
+    NOT_EQUALS,
+    GREATER_THAN,
+    LESS_THAN,
+    GREATER_THAN_OR_EQUAL,
+    LESS_THAN_OR_EQUALS,
+    IN,
+    LIKE,
+    CONTAINS_ANY,
+    CONTAINS_NONE,
+    CONTAINS_ALL,
+    IS,
+    EXISTS,
+    HIERARCHICALLY_ABOVE,
+    HIERARCHICALLY_BELOW,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RuleConsumer {
+pub enum RuleEngine {
     #[default]
-    ALL,
-    DATACLOUD,
-    MULESOFT,
-    TABLEAU,
-    CORE,
+    StandardConfigurator,
+    AdvancedConfigurator,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RuleResourceScopeType {
+pub enum RuleContextPath {
     #[default]
-    ANY,
-    FIELD,
-    RECORD,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BusinessHoursSourceType {
-    #[default]
-    None,
-    Case,
-    Static,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RuleDefinitionClause {
-    #[default]
-    UNLESS,
-    WHEN,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RulePrincipalPath {
-    #[default]
-    IS_AUTHENTICATED,
-    ASSIGNED_PERMISSIONS_PATH,
-    USER_ID,
-    ORGANIZATION_ID,
-    USER_ROLE_ID,
-    RBAC_TAGS,
-    SCALAR_ATTRIBUTE,
-    PLURAL_ATTRIBUTE,
-    PLACEHOLDER,
-    IS_INTERNAL,
-    CONTACT_ID,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RulePrincipalScopeType {
-    #[default]
-    ANY,
+    SESSION_DATASPACE,
+    SESSION_CONTACT_ID,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -86,37 +55,6 @@ pub enum RuleStatus {
     Verified,
     ActivationInProgress,
     DeactivationInProgress,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RuleResourcePath {
-    #[default]
-    NAMESPACE,
-    ENTITY,
-    FIELD,
-    ENTITYTYPE,
-    ENTITYKIND,
-    FIELDKIND,
-    DATASPACE,
-    TAG,
-    OBJECT_TAG,
-    CLASSIFICATION,
-    IMPLICITTAG,
-    RECORDFIELD,
-    OBJECT_CLASSIFICATION,
-    EXPRESSION,
-    OBJECT_DATASPACE,
-    RECORDFIELDTYPE,
-    METADATAKIND,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RuleEngine {
-    #[default]
-    StandardConfigurator,
-    AdvancedConfigurator,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -237,31 +175,93 @@ pub enum BusinessKnowledgeModel {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RuleDefinitionOperator {
+pub enum RuleConsumer {
     #[default]
-    EQUALS,
-    NOT_EQUALS,
-    GREATER_THAN,
-    LESS_THAN,
-    GREATER_THAN_OR_EQUAL,
-    LESS_THAN_OR_EQUALS,
-    IN,
-    LIKE,
-    CONTAINS_ANY,
-    CONTAINS_NONE,
-    CONTAINS_ALL,
-    IS,
-    EXISTS,
-    HIERARCHICALLY_ABOVE,
-    HIERARCHICALLY_BELOW,
+    ALL,
+    DATACLOUD,
+    MULESOFT,
+    TABLEAU,
+    CORE,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RuleContextPath {
+pub enum RulePrincipalPath {
     #[default]
-    SESSION_DATASPACE,
-    SESSION_CONTACT_ID,
+    IS_AUTHENTICATED,
+    ASSIGNED_PERMISSIONS_PATH,
+    USER_ID,
+    ORGANIZATION_ID,
+    USER_ROLE_ID,
+    RBAC_TAGS,
+    SCALAR_ATTRIBUTE,
+    PLURAL_ATTRIBUTE,
+    PLACEHOLDER,
+    IS_INTERNAL,
+    CONTACT_ID,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum BusinessVertical {
+    #[default]
+    RevenueCloud,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum BusinessHoursSourceType {
+    #[default]
+    None,
+    Case,
+    Static,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RulePrincipalScopeType {
+    #[default]
+    ANY,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RuleDefinitionClause {
+    #[default]
+    UNLESS,
+    WHEN,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RuleResourcePath {
+    #[default]
+    NAMESPACE,
+    ENTITY,
+    FIELD,
+    ENTITYTYPE,
+    ENTITYKIND,
+    FIELDKIND,
+    DATASPACE,
+    TAG,
+    OBJECT_TAG,
+    CLASSIFICATION,
+    IMPLICITTAG,
+    RECORDFIELD,
+    OBJECT_CLASSIFICATION,
+    EXPRESSION,
+    OBJECT_DATASPACE,
+    RECORDFIELDTYPE,
+    METADATAKIND,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RuleResourceScopeType {
+    #[default]
+    ANY,
+    FIELD,
+    RECORD,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -304,6 +304,72 @@ pub struct BusinessHoursEntry {
     pub wednesday_end_time: String,
     #[serde(rename = "wednesdayStartTime", default)]
     pub wednesday_start_time: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RulesetDefinition {
+    #[serde(rename = "apiName", default)]
+    pub api_name: String,
+    #[serde(rename = "endDate", default)]
+    pub end_date: String,
+    #[serde(rename = "executionType", default)]
+    pub execution_type: serde_json::Value,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "ruleDefinitions", default)]
+    pub rule_definitions: Vec<RuleDefinition>,
+    #[serde(rename = "startDate", default)]
+    pub start_date: String,
+    #[serde(default)]
+    pub status: serde_json::Value,
+    #[serde(rename = "usageType", default)]
+    pub usage_type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BusinessProcessFeedback {
+    #[serde(rename = "actionName", default)]
+    pub action_name: String,
+    #[serde(rename = "actionParam", default)]
+    pub action_param: String,
+    #[serde(rename = "actionType", default)]
+    pub action_type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BusinessProcessGroup {
+    #[serde(rename = "businessProcessDefinitions", default)]
+    pub business_process_definitions: Vec<BusinessProcessDefinition>,
+    #[serde(rename = "customerSatisfactionMetric", default)]
+    pub customer_satisfaction_metric: serde_json::Value,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RuleLibraryDefinition {
+    #[serde(rename = "contextDefinition", default)]
+    pub context_definition: String,
+    #[serde(rename = "contextRuleStatus", default)]
+    pub context_rule_status: serde_json::Value,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "rulesetDefinitions", default)]
+    pub ruleset_definitions: Vec<RulesetDefinition>,
+    #[serde(rename = "usageType", default)]
+    pub usage_type: serde_json::Value,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -375,19 +441,13 @@ pub struct RuleDefinition {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct RuleLibraryDefinition {
-    #[serde(rename = "contextDefinition", default)]
-    pub context_definition: String,
-    #[serde(rename = "contextRuleStatus", default)]
-    pub context_rule_status: serde_json::Value,
+pub struct BusinessProcessTypeDefinition {
+    #[serde(rename = "applicationUsageType", default)]
+    pub application_usage_type: serde_json::Value,
     #[serde(default)]
     pub description: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "rulesetDefinitions", default)]
-    pub ruleset_definitions: Vec<RulesetDefinition>,
-    #[serde(rename = "usageType", default)]
-    pub usage_type: serde_json::Value,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -404,64 +464,4 @@ pub struct BusinessProcessDefinition {
     pub master_label: String,
     #[serde(rename = "sequenceNumber", default)]
     pub sequence_number: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RulesetDefinition {
-    #[serde(rename = "apiName", default)]
-    pub api_name: String,
-    #[serde(rename = "endDate", default)]
-    pub end_date: String,
-    #[serde(rename = "executionType", default)]
-    pub execution_type: serde_json::Value,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "ruleDefinitions", default)]
-    pub rule_definitions: Vec<RuleDefinition>,
-    #[serde(rename = "startDate", default)]
-    pub start_date: String,
-    #[serde(default)]
-    pub status: serde_json::Value,
-    #[serde(rename = "usageType", default)]
-    pub usage_type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BusinessProcessGroup {
-    #[serde(rename = "businessProcessDefinitions", default)]
-    pub business_process_definitions: Vec<BusinessProcessDefinition>,
-    #[serde(rename = "customerSatisfactionMetric", default)]
-    pub customer_satisfaction_metric: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BusinessProcessTypeDefinition {
-    #[serde(rename = "applicationUsageType", default)]
-    pub application_usage_type: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BusinessProcessFeedback {
-    #[serde(rename = "actionName", default)]
-    pub action_name: String,
-    #[serde(rename = "actionParam", default)]
-    pub action_param: String,
-    #[serde(rename = "actionType", default)]
-    pub action_type: serde_json::Value,
 }

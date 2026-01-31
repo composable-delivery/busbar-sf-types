@@ -21,6 +21,15 @@ pub enum StageUserPermission {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum StageCriteriaType {
+    #[default]
+    AND,
+    OR,
+    CUSTOMLOGIC,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum StageConditionOperator {
     #[default]
     Equals,
@@ -36,15 +45,6 @@ pub enum StageConditionOperator {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum StageCriteriaType {
-    #[default]
-    AND,
-    OR,
-    CUSTOMLOGIC,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum StageCriteriaExecType {
     #[default]
     CONDITION,
@@ -54,11 +54,39 @@ pub enum StageCriteriaExecType {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct StgFulfillmentStepDefGrp {
+pub struct StgFulfillmentStepDef {
+    #[serde(rename = "apiName", default)]
+    pub api_name: String,
+    #[serde(rename = "assignedToQueue", default)]
+    pub assigned_to_queue: String,
+    #[serde(rename = "assignedToUser", default)]
+    pub assigned_to_user: String,
+    #[serde(default)]
+    pub dependency: Vec<StgFulfillmentStepDpndDef>,
+    #[serde(rename = "executeOnRule", default)]
+    pub execute_on_rule: String,
+    #[serde(rename = "flowDefinitionName", default)]
+    pub flow_definition_name: String,
+    #[serde(rename = "integrationDefinitionName", default)]
+    pub integration_definition_name: String,
+    #[serde(rename = "isVisibleByExternalUsers", default)]
+    pub is_visible_by_external_users: bool,
     #[serde(default)]
     pub name: String,
+    #[serde(rename = "omniscriptName", default)]
+    pub omniscript_name: String,
+    #[serde(rename = "runAsUser", default)]
+    pub run_as_user: String,
+    #[serde(rename = "stepType", default)]
+    pub step_type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct StgFulfillmentStepDpndDef {
     #[serde(default)]
-    pub step: Vec<StgFulfillmentStepDef>,
+    pub step: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -82,13 +110,11 @@ pub struct PathAssistant {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct StageValue {
+pub struct StgFulfillmentStepDefGrp {
     #[serde(default)]
-    pub criteria: Vec<StageCriteria>,
-    #[serde(rename = "stepGroup", default)]
-    pub step_group: Vec<StgFulfillmentStepDefGrp>,
+    pub name: String,
     #[serde(default)]
-    pub value: String,
+    pub step: Vec<StgFulfillmentStepDef>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -134,48 +160,6 @@ pub struct StgAssignmentRuleCriteria {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PathAssistantStep {
-    #[serde(rename = "fieldNames", default)]
-    pub field_names: Vec<String>,
-    #[serde(default)]
-    pub info: String,
-    #[serde(rename = "picklistValueName", default)]
-    pub picklist_value_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct StgFulfillmentStepDef {
-    #[serde(rename = "apiName", default)]
-    pub api_name: String,
-    #[serde(rename = "assignedToQueue", default)]
-    pub assigned_to_queue: String,
-    #[serde(rename = "assignedToUser", default)]
-    pub assigned_to_user: String,
-    #[serde(default)]
-    pub dependency: Vec<StgFulfillmentStepDpndDef>,
-    #[serde(rename = "executeOnRule", default)]
-    pub execute_on_rule: String,
-    #[serde(rename = "flowDefinitionName", default)]
-    pub flow_definition_name: String,
-    #[serde(rename = "integrationDefinitionName", default)]
-    pub integration_definition_name: String,
-    #[serde(rename = "isVisibleByExternalUsers", default)]
-    pub is_visible_by_external_users: bool,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "omniscriptName", default)]
-    pub omniscript_name: String,
-    #[serde(rename = "runAsUser", default)]
-    pub run_as_user: String,
-    #[serde(rename = "stepType", default)]
-    pub step_type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct StageAssignment {
     #[serde(default)]
     pub active: bool,
@@ -191,24 +175,6 @@ pub struct StageAssignment {
     pub rule_criteria: Vec<StgAssignmentRuleCriteria>,
     #[serde(rename = "stageDefinition", default)]
     pub stage_definition: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct StageTransition {
-    #[serde(default)]
-    pub criteria: Vec<StageCriteria>,
-    #[serde(rename = "customPermission", default)]
-    pub custom_permission: String,
-    #[serde(rename = "fromStageValue", default)]
-    pub from_stage_value: String,
-    #[serde(rename = "stepGroup", default)]
-    pub step_group: Vec<StgFulfillmentStepDefGrp>,
-    #[serde(rename = "toStageValue", default)]
-    pub to_stage_value: String,
-    #[serde(rename = "userPermission", default)]
-    pub user_permission: StageUserPermission,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -238,13 +204,11 @@ pub struct StageCriteria {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct StgAssignmentRuleCond {
-    #[serde(rename = "fieldName", default)]
-    pub field_name: String,
+pub struct StageValue {
     #[serde(default)]
-    pub operator: StageConditionOperator,
-    #[serde(rename = "sequenceNumber", default)]
-    pub sequence_number: f64,
+    pub criteria: Vec<StageCriteria>,
+    #[serde(rename = "stepGroup", default)]
+    pub step_group: Vec<StgFulfillmentStepDefGrp>,
     #[serde(default)]
     pub value: String,
 }
@@ -266,7 +230,43 @@ pub struct StageCondition {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct StgFulfillmentStepDpndDef {
+pub struct StageTransition {
     #[serde(default)]
-    pub step: String,
+    pub criteria: Vec<StageCriteria>,
+    #[serde(rename = "customPermission", default)]
+    pub custom_permission: String,
+    #[serde(rename = "fromStageValue", default)]
+    pub from_stage_value: String,
+    #[serde(rename = "stepGroup", default)]
+    pub step_group: Vec<StgFulfillmentStepDefGrp>,
+    #[serde(rename = "toStageValue", default)]
+    pub to_stage_value: String,
+    #[serde(rename = "userPermission", default)]
+    pub user_permission: StageUserPermission,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PathAssistantStep {
+    #[serde(rename = "fieldNames", default)]
+    pub field_names: Vec<String>,
+    #[serde(default)]
+    pub info: String,
+    #[serde(rename = "picklistValueName", default)]
+    pub picklist_value_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct StgAssignmentRuleCond {
+    #[serde(rename = "fieldName", default)]
+    pub field_name: String,
+    #[serde(default)]
+    pub operator: StageConditionOperator,
+    #[serde(rename = "sequenceNumber", default)]
+    pub sequence_number: f64,
+    #[serde(default)]
+    pub value: String,
 }

@@ -43,20 +43,6 @@ pub struct CallCenter {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct CallCtrAgentFavTrfrDest {
-    #[serde(default)]
-    pub agent: String,
-    #[serde(rename = "callCenter", default)]
-    pub call_center: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "transferDestination", default)]
-    pub transfer_destination: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct CallCoachingMediaProvider {
     #[serde(rename = "isActive", default)]
     pub is_active: bool,
@@ -69,19 +55,15 @@ pub struct CallCoachingMediaProvider {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct CallCenterRoutingMap {
+pub struct CallCtrAgentFavTrfrDest {
+    #[serde(default)]
+    pub agent: String,
     #[serde(rename = "callCenter", default)]
     pub call_center: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "externalId", default)]
-    pub external_id: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "quickConnect", default)]
-    pub quick_connect: String,
-    #[serde(rename = "referenceRecord", default)]
-    pub reference_record: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "transferDestination", default)]
+    pub transfer_destination: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -106,4 +88,22 @@ pub struct CallCenterSection {
     pub label: String,
     #[serde(default)]
     pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CallCenterRoutingMap {
+    #[serde(rename = "callCenter", default)]
+    pub call_center: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "externalId", default)]
+    pub external_id: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "quickConnect", default)]
+    pub quick_connect: String,
+    #[serde(rename = "referenceRecord", default)]
+    pub reference_record: String,
 }

@@ -10,52 +10,57 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EmbeddedServiceFormDisplayContext {
+pub enum EmbeddedServiceCustomComponentType {
     #[default]
-    None,
-    Conversation,
-    Session,
+    LA_Prechat,
+    LA_Minimized,
+    LA_PlainTextChatMessage,
+    LA_ChatHeader,
+    MIAW_Prechat,
+    MIAW_Header,
+    MIAW_TextMessage,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EmbeddedServiceAuthMethod {
+pub enum EmbeddedServiceFontSize {
     #[default]
-    CommunitiesLogin,
-    CustomLogin,
+    Small,
+    Medium,
+    Large,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EmbeddedServiceScenario {
+pub enum LiveChatButtonInviteEndPosition {
     #[default]
-    Sales,
-    Service,
-    Basic,
+    TopLeft,
+    Top,
+    TopRight,
+    Left,
+    Center,
+    Right,
+    BottomLeft,
+    Bottom,
+    BottomRight,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LiveChatButtonType {
+pub enum KnowledgeLanguageLookupValueType {
     #[default]
-    Standard,
-    Invite,
+    User,
+    Queue,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EmbeddedServiceLayoutType {
+pub enum LiveChatButtonPresentation {
     #[default]
-    FS_AppointmentHome,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CaseSubjectOption {
-    #[default]
-    SocialPostSource,
-    SocialPostContent,
-    BuildCustom,
+    Slide,
+    Fade,
+    Appear,
+    Custom,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -96,6 +101,31 @@ pub enum CaseType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum CaseSubjectParticleType {
+    #[default]
+    ProvidedString,
+    Source,
+    MessageType,
+    SocialHandle,
+    SocialNetwork,
+    Sentiment,
+    RealName,
+    Content,
+    PipeSeparator,
+    ColonSeparator,
+    HyphenSeparator,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum EmbeddedServiceQuickActionType {
+    #[default]
+    Prechat,
+    OfflineCase,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum EmbeddedServiceFormFieldType {
     #[default]
     Text,
@@ -104,6 +134,24 @@ pub enum EmbeddedServiceFormFieldType {
     Number,
     Checkbox,
     ChoiceList,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum EmbeddedServiceScenario {
+    #[default]
+    Sales,
+    Service,
+    Basic,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum CaseSubjectOption {
+    #[default]
+    SocialPostSource,
+    SocialPostContent,
+    BuildCustom,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -482,131 +530,6 @@ pub enum EmbeddedServiceLabelKey {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LiveChatButtonPresentation {
-    #[default]
-    Slide,
-    Fade,
-    Appear,
-    Custom,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EmbeddedServiceCustomComponentType {
-    #[default]
-    LA_Prechat,
-    LA_Minimized,
-    LA_PlainTextChatMessage,
-    LA_ChatHeader,
-    MIAW_Prechat,
-    MIAW_Header,
-    MIAW_TextMessage,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum KnowledgeWorkflowAction {
-    #[default]
-    PublishAsNew,
-    Publish,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CaseSubjectParticleType {
-    #[default]
-    ProvidedString,
-    Source,
-    MessageType,
-    SocialHandle,
-    SocialNetwork,
-    Sentiment,
-    RealName,
-    Content,
-    PipeSeparator,
-    ColonSeparator,
-    HyphenSeparator,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EmbeddedServiceQuickActionType {
-    #[default]
-    Prechat,
-    OfflineCase,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EmbeddedServiceAuthModeType {
-    #[default]
-    Auth,
-    UnAuth,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EmbeddedServiceResourceType {
-    #[default]
-    SettingsFile,
-    ChatInvitation,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EmbeddedServiceFlowType {
-    #[default]
-    FL_Flow,
-    FS_NewAppointment,
-    FS_ModifyAppointment,
-    FS_CancelAppointment,
-    LA_Survey,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EmbeddedServiceComponentBundleType {
-    #[default]
-    AuraDefinitionBundle,
-    LightningComponentBundle,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EmbeddedServiceChannelType {
-    #[default]
-    EmbeddedServiceConfig,
-    MessagingChannel,
-    Phone,
-    CustomURL,
-    EmbeddedMessaging,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum KnowledgeLanguageLookupValueType {
-    #[default]
-    User,
-    Queue,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LiveChatButtonInviteEndPosition {
-    #[default]
-    TopLeft,
-    Top,
-    TopRight,
-    Left,
-    Center,
-    Right,
-    BottomLeft,
-    Bottom,
-    BottomRight,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum LiveChatButtonInviteStartPosition {
     #[default]
     TopLeft,
@@ -629,6 +552,27 @@ pub enum LiveChatButtonInviteStartPosition {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum EmbeddedServiceFeature {
+    #[default]
+    NotInUse,
+    Base,
+    LiveAgent,
+    FieldService,
+    Flows,
+    ChannelMenu,
+    EmbeddedMessaging,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum EmbeddedServiceResourceType {
+    #[default]
+    SettingsFile,
+    ChatInvitation,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum EmbeddedServiceClientVersion {
     #[default]
     WebV1,
@@ -637,10 +581,18 @@ pub enum EmbeddedServiceClientVersion {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EmbeddedMsgQueueLimitType {
+pub enum EmbeddedServiceAuthMethod {
     #[default]
-    QueueLength,
-    QueueLengthPerAgent,
+    CommunitiesLogin,
+    CustomLogin,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum EmbeddedServiceComponentBundleType {
+    #[default]
+    AuraDefinitionBundle,
+    LightningComponentBundle,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -656,28 +608,21 @@ pub enum EmbeddedServiceDeploymentFeature {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LiveChatButtonRoutingType {
+pub enum EmbeddedServiceChannelType {
     #[default]
-    Choice,
-    LeastActive,
-    MostAvailable,
+    EmbeddedServiceConfig,
+    MessagingChannel,
+    Phone,
+    CustomURL,
+    EmbeddedMessaging,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EmbeddedServiceFontSize {
+pub enum EmbeddedServiceAuthModeType {
     #[default]
-    Small,
-    Medium,
-    Large,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum KnowledgeCaseEditor {
-    #[default]
-    simple,
-    standard,
+    Auth,
+    UnAuth,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -692,15 +637,142 @@ pub enum EmbeddedServiceDeploymentType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EmbeddedServiceFeature {
+pub enum LiveChatButtonRoutingType {
     #[default]
-    NotInUse,
-    Base,
-    LiveAgent,
-    FieldService,
-    Flows,
-    ChannelMenu,
-    EmbeddedMessaging,
+    Choice,
+    LeastActive,
+    MostAvailable,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum KnowledgeWorkflowAction {
+    #[default]
+    PublishAsNew,
+    Publish,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum EmbeddedServiceFormDisplayContext {
+    #[default]
+    None,
+    Conversation,
+    Session,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum EmbeddedMsgQueueLimitType {
+    #[default]
+    QueueLength,
+    QueueLengthPerAgent,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum KnowledgeCaseEditor {
+    #[default]
+    simple,
+    standard,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum EmbeddedServiceLayoutType {
+    #[default]
+    FS_AppointmentHome,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum LiveChatButtonType {
+    #[default]
+    Standard,
+    Invite,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum EmbeddedServiceFlowType {
+    #[default]
+    FL_Flow,
+    FS_NewAppointment,
+    FS_ModifyAppointment,
+    FS_CancelAppointment,
+    LA_Survey,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LiveAgentConfig {
+    #[serde(rename = "enableLiveChat", default)]
+    pub enable_live_chat: bool,
+    #[serde(rename = "openNewAccountSubtab", default)]
+    pub open_new_account_subtab: bool,
+    #[serde(rename = "openNewCaseSubtab", default)]
+    pub open_new_case_subtab: bool,
+    #[serde(rename = "openNewContactSubtab", default)]
+    pub open_new_contact_subtab: bool,
+    #[serde(rename = "openNewLeadSubtab", default)]
+    pub open_new_lead_subtab: bool,
+    #[serde(rename = "openNewVFPageSubtab", default)]
+    pub open_new_vf_page_subtab: bool,
+    #[serde(rename = "pageNamesToOpen", default)]
+    pub page_names_to_open: Vec<String>,
+    #[serde(rename = "showKnowledgeArticles", default)]
+    pub show_knowledge_articles: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EmbeddedServiceBranding {
+    #[serde(rename = "contrastInvertedColor", default)]
+    pub contrast_inverted_color: String,
+    #[serde(rename = "contrastPrimaryColor", default)]
+    pub contrast_primary_color: String,
+    #[serde(rename = "embeddedServiceConfig", default)]
+    pub embedded_service_config: String,
+    #[serde(default)]
+    pub font: String,
+    #[serde(default)]
+    pub height: f64,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "navBarColor", default)]
+    pub nav_bar_color: String,
+    #[serde(rename = "navBarTextColor", default)]
+    pub nav_bar_text_color: String,
+    #[serde(rename = "primaryColor", default)]
+    pub primary_color: String,
+    #[serde(rename = "secondaryColor", default)]
+    pub secondary_color: String,
+    #[serde(rename = "secondaryNavBarColor", default)]
+    pub secondary_nav_bar_color: String,
+    #[serde(default)]
+    pub width: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EntitlementProcessMilestoneTimeTrigger {
+    #[serde(default)]
+    pub actions: Vec<serde_json::Value>,
+    #[serde(rename = "timeLength", default)]
+    pub time_length: f64,
+    #[serde(rename = "workflowTimeTriggerUnit", default)]
+    pub workflow_time_trigger_unit: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LiveChatButtonDeployments {
+    #[serde(default)]
+    pub deployment: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -716,41 +788,91 @@ pub struct EmbeddedServiceResource {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct EmbeddedMessagingChannel {
-    #[serde(rename = "allowedFileTypes", default)]
-    pub allowed_file_types: String,
-    #[serde(rename = "anonymousUserJwtExpirationTime", default)]
-    pub anonymous_user_jwt_expiration_time: f64,
-    #[serde(rename = "authMode", default)]
-    pub auth_mode: EmbeddedServiceAuthModeType,
-    #[serde(rename = "connectedApp", default)]
-    pub connected_app: String,
-    #[serde(rename = "isAgentAvlCheckEnabled", default)]
-    pub is_agent_avl_check_enabled: bool,
-    #[serde(rename = "isAttachmentUploadEnabled", default)]
-    pub is_attachment_upload_enabled: bool,
-    #[serde(rename = "isEstimatedWaitTimeEnabled", default)]
-    pub is_estimated_wait_time_enabled: bool,
-    #[serde(rename = "isFallbackMessageEnabled", default)]
-    pub is_fallback_message_enabled: bool,
-    #[serde(rename = "isSaveTranscriptEnabled", default)]
-    pub is_save_transcript_enabled: bool,
-    #[serde(rename = "maxFileSize", default)]
-    pub max_file_size: f64,
-    #[serde(rename = "messagingAuthorizations", default)]
-    pub messaging_authorizations: Vec<serde_json::Value>,
-    #[serde(rename = "queueLimitType", default)]
-    pub queue_limit_type: EmbeddedMsgQueueLimitType,
-    #[serde(rename = "queueThreshold", default)]
-    pub queue_threshold: f64,
-    #[serde(rename = "verifiedUserJwtExpirationTime", default)]
-    pub verified_user_jwt_expiration_time: f64,
+pub struct EntitlementProcessMilestoneItem {
+    #[serde(rename = "agreementType", default)]
+    pub agreement_type: String,
+    #[serde(rename = "businessHours", default)]
+    pub business_hours: String,
+    #[serde(rename = "criteriaBooleanFilter", default)]
+    pub criteria_boolean_filter: String,
+    #[serde(rename = "milestoneCompletionCriteria", default)]
+    pub milestone_completion_criteria: serde_json::Value,
+    #[serde(rename = "milestoneCriteriaFilterItems", default)]
+    pub milestone_criteria_filter_items: Vec<serde_json::Value>,
+    #[serde(rename = "milestoneCriteriaFormula", default)]
+    pub milestone_criteria_formula: String,
+    #[serde(rename = "milestoneName", default)]
+    pub milestone_name: String,
+    #[serde(rename = "minutesCustomClass", default)]
+    pub minutes_custom_class: String,
+    #[serde(rename = "minutesToComplete", default)]
+    pub minutes_to_complete: f64,
+    #[serde(rename = "successActions", default)]
+    pub success_actions: Vec<serde_json::Value>,
+    #[serde(rename = "timeTriggers", default)]
+    pub time_triggers: Vec<EntitlementProcessMilestoneTimeTrigger>,
+    #[serde(rename = "useCriteriaStartTime", default)]
+    pub use_criteria_start_time: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct KnowledgeWorkOrderLineItemField {
+pub struct LiveChatButtonSkills {
+    #[serde(default)]
+    pub skill: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct KnowledgeLanguage {
+    #[serde(default)]
+    pub active: bool,
+    #[serde(rename = "defaultAssignee", default)]
+    pub default_assignee: String,
+    #[serde(rename = "defaultAssigneeType", default)]
+    pub default_assignee_type: KnowledgeLanguageLookupValueType,
+    #[serde(rename = "defaultReviewer", default)]
+    pub default_reviewer: String,
+    #[serde(rename = "defaultReviewerType", default)]
+    pub default_reviewer_type: KnowledgeLanguageLookupValueType,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EmbeddedServiceFlow {
+    #[serde(default)]
+    pub flow: String,
+    #[serde(rename = "flowType", default)]
+    pub flow_type: EmbeddedServiceFlowType,
+    #[serde(rename = "isAuthenticationRequired", default)]
+    pub is_authentication_required: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct KnowledgeCaseField {
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EmbeddedServiceLayoutRule {
+    #[serde(rename = "appointmentStatus", default)]
+    pub appointment_status: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct KnowledgeWorkOrderField {
     #[serde(default)]
     pub name: String,
 }
@@ -772,41 +894,161 @@ pub struct EmbeddedServiceQuickAction {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct LiveChatSensitiveDataRule {
-    #[serde(rename = "actionType", default)]
-    pub action_type: serde_json::Value,
+pub struct EmbeddedServiceCustomization {
+    #[serde(rename = "customizationName", default)]
+    pub customization_name: String,
     #[serde(default)]
     pub description: String,
-    #[serde(rename = "enforceOn", default)]
-    pub enforce_on: f64,
-    #[serde(rename = "isEnabled", default)]
-    pub is_enabled: bool,
-    #[serde(default)]
-    pub pattern: String,
-    #[serde(default)]
-    pub priority: f64,
-    #[serde(rename = "processingType", default)]
-    pub processing_type: serde_json::Value,
-    #[serde(default)]
-    pub replacement: String,
-    #[serde(default)]
-    pub version: serde_json::Value,
+    #[serde(rename = "embeddedServiceResources", default)]
+    pub embedded_service_resources: Vec<EmbeddedServiceResource>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct KnowledgeCaseField {
+pub struct EmbeddedServiceFormField {
+    #[serde(rename = "choiceList", default)]
+    pub choice_list: String,
+    #[serde(rename = "displayOrder", default)]
+    pub display_order: f64,
+    #[serde(rename = "embeddedServiceCustomLabels", default)]
+    pub embedded_service_custom_labels: Vec<EmbeddedServiceCustomLabel>,
+    #[serde(rename = "formField", default)]
+    pub form_field: String,
+    #[serde(rename = "formFieldType", default)]
+    pub form_field_type: EmbeddedServiceFormFieldType,
+    #[serde(rename = "isHidden", default)]
+    pub is_hidden: bool,
+    #[serde(rename = "isRequired", default)]
+    pub is_required: bool,
+    #[serde(rename = "messagingChannelParameterType", default)]
+    pub messaging_channel_parameter_type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EmbeddedServiceForm {
+    #[serde(rename = "displayContext", default)]
+    pub display_context: EmbeddedServiceFormDisplayContext,
+    #[serde(rename = "embeddedServiceFormFields", default)]
+    pub embedded_service_form_fields: Vec<EmbeddedServiceFormField>,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EmbeddedServiceLayout {
+    #[serde(rename = "embeddedServiceLayoutRules", default)]
+    pub embedded_service_layout_rules: Vec<EmbeddedServiceLayoutRule>,
+    #[serde(default)]
+    pub layout: String,
+    #[serde(rename = "layoutType", default)]
+    pub layout_type: EmbeddedServiceLayoutType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EntitlementProcess {
+    #[serde(rename = "SObjectType", default)]
+    pub s_object_type: String,
+    #[serde(default)]
+    pub active: bool,
+    #[serde(rename = "businessHours", default)]
+    pub business_hours: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "entryStartDateField", default)]
+    pub entry_start_date_field: String,
+    #[serde(rename = "exitCriteriaBooleanFilter", default)]
+    pub exit_criteria_boolean_filter: String,
+    #[serde(rename = "exitCriteriaFilterItems", default)]
+    pub exit_criteria_filter_items: Vec<serde_json::Value>,
+    #[serde(rename = "exitCriteriaFormula", default)]
+    pub exit_criteria_formula: String,
+    #[serde(rename = "isRecordTypeApplied", default)]
+    pub is_record_type_applied: bool,
+    #[serde(rename = "isVersionDefault", default)]
+    pub is_version_default: bool,
+    #[serde(default)]
+    pub milestones: Vec<EntitlementProcessMilestoneItem>,
     #[serde(default)]
     pub name: String,
+    #[serde(rename = "recordType", default)]
+    pub record_type: String,
+    #[serde(rename = "versionMaster", default)]
+    pub version_master: String,
+    #[serde(rename = "versionNotes", default)]
+    pub version_notes: String,
+    #[serde(rename = "versionNumber", default)]
+    pub version_number: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct LiveChatDeploymentDomainWhitelist {
+pub struct LiveChatDeployment {
+    #[serde(rename = "brandingImage", default)]
+    pub branding_image: String,
+    #[serde(rename = "connectionTimeoutDuration", default)]
+    pub connection_timeout_duration: f64,
+    #[serde(rename = "connectionWarningDuration", default)]
+    pub connection_warning_duration: f64,
+    #[serde(rename = "displayQueuePosition", default)]
+    pub display_queue_position: bool,
+    #[serde(rename = "domainWhiteList", default)]
+    pub domain_white_list: LiveChatDeploymentDomainWhitelist,
+    #[serde(rename = "enablePrechatApi", default)]
+    pub enable_prechat_api: bool,
+    #[serde(rename = "enableTranscriptSave", default)]
+    pub enable_transcript_save: bool,
     #[serde(default)]
-    pub domain: Vec<String>,
+    pub label: String,
+    #[serde(rename = "mobileBrandingImage", default)]
+    pub mobile_branding_image: String,
+    #[serde(default)]
+    pub site: String,
+    #[serde(rename = "windowTitle", default)]
+    pub window_title: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EmbeddedServiceMenuItem {
+    #[serde(default)]
+    pub channel: String,
+    #[serde(rename = "channelType", default)]
+    pub channel_type: EmbeddedServiceChannelType,
+    #[serde(rename = "customUrl", default)]
+    pub custom_url: String,
+    #[serde(rename = "displayOrder", default)]
+    pub display_order: f64,
+    #[serde(rename = "embeddedServiceCustomLabels", default)]
+    pub embedded_service_custom_labels: Vec<EmbeddedServiceCustomLabel>,
+    #[serde(rename = "iconUrl", default)]
+    pub icon_url: String,
+    #[serde(rename = "isDisplayedOnPageLoad", default)]
+    pub is_displayed_on_page_load: bool,
+    #[serde(rename = "itemName", default)]
+    pub item_name: String,
+    #[serde(rename = "osOptionsHideInIOS", default)]
+    pub os_options_hide_in_ios: bool,
+    #[serde(rename = "osOptionsHideInLinuxOS", default)]
+    pub os_options_hide_in_linux_os: bool,
+    #[serde(rename = "osOptionsHideInMacOS", default)]
+    pub os_options_hide_in_mac_os: bool,
+    #[serde(rename = "osOptionsHideInOtherOS", default)]
+    pub os_options_hide_in_other_os: bool,
+    #[serde(rename = "osOptionsHideInWindowsOS", default)]
+    pub os_options_hide_in_windows_os: bool,
+    #[serde(rename = "phoneNumber", default)]
+    pub phone_number: String,
+    #[serde(rename = "shouldOpenUrlInSameTab", default)]
+    pub should_open_url_in_same_tab: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -851,86 +1093,6 @@ pub struct EmbeddedServiceLiveAgent {
     pub small_company_logo_img: String,
     #[serde(rename = "waitingStateBackgroundImg", default)]
     pub waiting_state_background_img: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct KnowledgeWorkOrderField {
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EmbeddedServiceLayout {
-    #[serde(rename = "embeddedServiceLayoutRules", default)]
-    pub embedded_service_layout_rules: Vec<EmbeddedServiceLayoutRule>,
-    #[serde(default)]
-    pub layout: String,
-    #[serde(rename = "layoutType", default)]
-    pub layout_type: EmbeddedServiceLayoutType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EntitlementTemplate {
-    #[serde(rename = "businessHours", default)]
-    pub business_hours: String,
-    #[serde(rename = "casesPerEntitlement", default)]
-    pub cases_per_entitlement: f64,
-    #[serde(rename = "entitlementProcess", default)]
-    pub entitlement_process: String,
-    #[serde(rename = "isPerIncident", default)]
-    pub is_per_incident: bool,
-    #[serde(default)]
-    pub term: f64,
-    #[serde(default)]
-    pub r#type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EmbeddedServiceCustomization {
-    #[serde(rename = "customizationName", default)]
-    pub customization_name: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "embeddedServiceResources", default)]
-    pub embedded_service_resources: Vec<EmbeddedServiceResource>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EmbeddedServiceBranding {
-    #[serde(rename = "contrastInvertedColor", default)]
-    pub contrast_inverted_color: String,
-    #[serde(rename = "contrastPrimaryColor", default)]
-    pub contrast_primary_color: String,
-    #[serde(rename = "embeddedServiceConfig", default)]
-    pub embedded_service_config: String,
-    #[serde(default)]
-    pub font: String,
-    #[serde(default)]
-    pub height: f64,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "navBarColor", default)]
-    pub nav_bar_color: String,
-    #[serde(rename = "navBarTextColor", default)]
-    pub nav_bar_text_color: String,
-    #[serde(rename = "primaryColor", default)]
-    pub primary_color: String,
-    #[serde(rename = "secondaryColor", default)]
-    pub secondary_color: String,
-    #[serde(rename = "secondaryNavBarColor", default)]
-    pub secondary_nav_bar_color: String,
-    #[serde(default)]
-    pub width: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -984,215 +1146,45 @@ pub struct EmbeddedServiceConfig {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct EmbeddedServiceMessagingChannel {
-    #[serde(rename = "businessHours", default)]
-    pub business_hours: String,
-    #[serde(rename = "embdMsgChannelInvitationConditions", default)]
-    pub embd_msg_channel_invitation_conditions: Vec<serde_json::Value>,
+pub struct EmbeddedServiceCustomLabel {
+    #[serde(rename = "customLabel", default)]
+    pub custom_label: String,
     #[serde(default)]
-    pub formula: String,
-    #[serde(rename = "isChatInvitationCustomizable", default)]
-    pub is_chat_invitation_customizable: bool,
-    #[serde(rename = "isEnabled", default)]
-    pub is_enabled: bool,
-    #[serde(rename = "isInvitationEnabled", default)]
-    pub is_invitation_enabled: bool,
-    #[serde(rename = "isSendInvtAllowedAfterAccept", default)]
-    pub is_send_invt_allowed_after_accept: bool,
-    #[serde(rename = "isSendInvtAllowedAfterReject", default)]
-    pub is_send_invt_allowed_after_reject: bool,
-    #[serde(rename = "messagingChannel", default)]
-    pub messaging_channel: String,
-    #[serde(rename = "shouldShowDeliveryReceipts", default)]
-    pub should_show_delivery_receipts: bool,
-    #[serde(rename = "shouldShowEmojiSelection", default)]
-    pub should_show_emoji_selection: bool,
-    #[serde(rename = "shouldShowReadReceipts", default)]
-    pub should_show_read_receipts: bool,
-    #[serde(rename = "shouldShowTypingIndicators", default)]
-    pub should_show_typing_indicators: bool,
-    #[serde(rename = "shouldStartNewLineOnEnter", default)]
-    pub should_start_new_line_on_enter: bool,
+    pub feature: EmbeddedServiceFeature,
+    #[serde(rename = "labelKey", default)]
+    pub label_key: EmbeddedServiceLabelKey,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct LiveChatAgentConfig {
-    #[serde(default)]
-    pub assignments: serde_json::Value,
-    #[serde(rename = "autoGreeting", default)]
-    pub auto_greeting: String,
-    #[serde(default)]
-    pub capacity: f64,
-    #[serde(rename = "criticalWaitTime", default)]
-    pub critical_wait_time: f64,
-    #[serde(rename = "customAgentName", default)]
-    pub custom_agent_name: String,
-    #[serde(rename = "disableTransferConferenceGreeting", default)]
-    pub disable_transfer_conference_greeting: bool,
-    #[serde(rename = "enableAgentFileTransfer", default)]
-    pub enable_agent_file_transfer: bool,
-    #[serde(rename = "enableAgentSneakPeek", default)]
-    pub enable_agent_sneak_peek: bool,
-    #[serde(rename = "enableAssistanceFlag", default)]
-    pub enable_assistance_flag: bool,
-    #[serde(rename = "enableAutoAwayOnDecline", default)]
-    pub enable_auto_away_on_decline: bool,
-    #[serde(rename = "enableAutoAwayOnPushTimeout", default)]
-    pub enable_auto_away_on_push_timeout: bool,
-    #[serde(rename = "enableChatConferencing", default)]
-    pub enable_chat_conferencing: bool,
-    #[serde(rename = "enableChatMonitoring", default)]
-    pub enable_chat_monitoring: bool,
-    #[serde(rename = "enableChatTransferToAgent", default)]
-    pub enable_chat_transfer_to_agent: bool,
-    #[serde(rename = "enableChatTransferToButton", default)]
-    pub enable_chat_transfer_to_button: bool,
-    #[serde(rename = "enableChatTransferToSkill", default)]
-    pub enable_chat_transfer_to_skill: bool,
-    #[serde(rename = "enableLogoutSound", default)]
-    pub enable_logout_sound: bool,
-    #[serde(rename = "enableNotifications", default)]
-    pub enable_notifications: bool,
-    #[serde(rename = "enableRequestSound", default)]
-    pub enable_request_sound: bool,
-    #[serde(rename = "enableSneakPeek", default)]
-    pub enable_sneak_peek: bool,
-    #[serde(rename = "enableVisitorBlocking", default)]
-    pub enable_visitor_blocking: bool,
-    #[serde(rename = "enableWhisperMessage", default)]
-    pub enable_whisper_message: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "supervisorDefaultAgentStatusFilter", default)]
-    pub supervisor_default_agent_status_filter: serde_json::Value,
-    #[serde(rename = "supervisorDefaultButtonFilter", default)]
-    pub supervisor_default_button_filter: String,
-    #[serde(rename = "supervisorDefaultSkillFilter", default)]
-    pub supervisor_default_skill_filter: String,
-    #[serde(rename = "supervisorSkills", default)]
-    pub supervisor_skills: serde_json::Value,
-    #[serde(rename = "transferableButtons", default)]
-    pub transferable_buttons: serde_json::Value,
-    #[serde(rename = "transferableSkills", default)]
-    pub transferable_skills: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EmbeddedServiceForm {
-    #[serde(rename = "displayContext", default)]
-    pub display_context: EmbeddedServiceFormDisplayContext,
-    #[serde(rename = "embeddedServiceFormFields", default)]
-    pub embedded_service_form_fields: Vec<EmbeddedServiceFormField>,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EmbeddedServiceFormField {
-    #[serde(rename = "choiceList", default)]
-    pub choice_list: String,
-    #[serde(rename = "displayOrder", default)]
-    pub display_order: f64,
-    #[serde(rename = "embeddedServiceCustomLabels", default)]
-    pub embedded_service_custom_labels: Vec<EmbeddedServiceCustomLabel>,
-    #[serde(rename = "formField", default)]
-    pub form_field: String,
-    #[serde(rename = "formFieldType", default)]
-    pub form_field_type: EmbeddedServiceFormFieldType,
-    #[serde(rename = "isHidden", default)]
-    pub is_hidden: bool,
-    #[serde(rename = "isRequired", default)]
-    pub is_required: bool,
-    #[serde(rename = "messagingChannelParameterType", default)]
-    pub messaging_channel_parameter_type: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LiveChatDeployment {
-    #[serde(rename = "brandingImage", default)]
-    pub branding_image: String,
-    #[serde(rename = "connectionTimeoutDuration", default)]
-    pub connection_timeout_duration: f64,
-    #[serde(rename = "connectionWarningDuration", default)]
-    pub connection_warning_duration: f64,
-    #[serde(rename = "displayQueuePosition", default)]
-    pub display_queue_position: bool,
-    #[serde(rename = "domainWhiteList", default)]
-    pub domain_white_list: LiveChatDeploymentDomainWhitelist,
-    #[serde(rename = "enablePrechatApi", default)]
-    pub enable_prechat_api: bool,
-    #[serde(rename = "enableTranscriptSave", default)]
-    pub enable_transcript_save: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "mobileBrandingImage", default)]
-    pub mobile_branding_image: String,
-    #[serde(default)]
-    pub site: String,
-    #[serde(rename = "windowTitle", default)]
-    pub window_title: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EntitlementProcess {
-    #[serde(rename = "SObjectType", default)]
-    pub s_object_type: String,
-    #[serde(default)]
-    pub active: bool,
-    #[serde(rename = "businessHours", default)]
-    pub business_hours: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "entryStartDateField", default)]
-    pub entry_start_date_field: String,
-    #[serde(rename = "exitCriteriaBooleanFilter", default)]
-    pub exit_criteria_boolean_filter: String,
-    #[serde(rename = "exitCriteriaFilterItems", default)]
-    pub exit_criteria_filter_items: Vec<serde_json::Value>,
-    #[serde(rename = "exitCriteriaFormula", default)]
-    pub exit_criteria_formula: String,
-    #[serde(rename = "isRecordTypeApplied", default)]
-    pub is_record_type_applied: bool,
-    #[serde(rename = "isVersionDefault", default)]
-    pub is_version_default: bool,
-    #[serde(default)]
-    pub milestones: Vec<EntitlementProcessMilestoneItem>,
+pub struct KnowledgeWorkOrderLineItemField {
     #[serde(default)]
     pub name: String,
-    #[serde(rename = "recordType", default)]
-    pub record_type: String,
-    #[serde(rename = "versionMaster", default)]
-    pub version_master: String,
-    #[serde(rename = "versionNotes", default)]
-    pub version_notes: String,
-    #[serde(rename = "versionNumber", default)]
-    pub version_number: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct EmbeddedServiceLayoutRule {
-    #[serde(rename = "appointmentStatus", default)]
-    pub appointment_status: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EmbeddedServiceFlowConfig {
+pub struct LiveChatSensitiveDataRule {
+    #[serde(rename = "actionType", default)]
+    pub action_type: serde_json::Value,
     #[serde(default)]
-    pub enabled: bool,
+    pub description: String,
+    #[serde(rename = "enforceOn", default)]
+    pub enforce_on: f64,
+    #[serde(rename = "isEnabled", default)]
+    pub is_enabled: bool,
+    #[serde(default)]
+    pub pattern: String,
+    #[serde(default)]
+    pub priority: f64,
+    #[serde(rename = "processingType", default)]
+    pub processing_type: serde_json::Value,
+    #[serde(default)]
+    pub replacement: String,
+    #[serde(default)]
+    pub version: serde_json::Value,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -1276,40 +1268,6 @@ pub struct LiveChatButton {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ServiceMgmtKnwlgArtclConfig {
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "knowledgeArticleRecordType", default)]
-    pub knowledge_article_record_type: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "rootCauseField", default)]
-    pub root_cause_field: String,
-    #[serde(rename = "workAroundField", default)]
-    pub work_around_field: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct KnowledgeLanguage {
-    #[serde(default)]
-    pub active: bool,
-    #[serde(rename = "defaultAssignee", default)]
-    pub default_assignee: String,
-    #[serde(rename = "defaultAssigneeType", default)]
-    pub default_assignee_type: KnowledgeLanguageLookupValueType,
-    #[serde(rename = "defaultReviewer", default)]
-    pub default_reviewer: String,
-    #[serde(rename = "defaultReviewerType", default)]
-    pub default_reviewer_type: KnowledgeLanguageLookupValueType,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct EmbeddedServiceCustomComponent {
     #[serde(rename = "componentBundleType", default)]
     pub component_bundle_type: EmbeddedServiceComponentBundleType,
@@ -1317,104 +1275,6 @@ pub struct EmbeddedServiceCustomComponent {
     pub custom_component: String,
     #[serde(rename = "customComponentType", default)]
     pub custom_component_type: EmbeddedServiceCustomComponentType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EntitlementProcessMilestoneItem {
-    #[serde(rename = "agreementType", default)]
-    pub agreement_type: String,
-    #[serde(rename = "businessHours", default)]
-    pub business_hours: String,
-    #[serde(rename = "criteriaBooleanFilter", default)]
-    pub criteria_boolean_filter: String,
-    #[serde(rename = "milestoneCompletionCriteria", default)]
-    pub milestone_completion_criteria: serde_json::Value,
-    #[serde(rename = "milestoneCriteriaFilterItems", default)]
-    pub milestone_criteria_filter_items: Vec<serde_json::Value>,
-    #[serde(rename = "milestoneCriteriaFormula", default)]
-    pub milestone_criteria_formula: String,
-    #[serde(rename = "milestoneName", default)]
-    pub milestone_name: String,
-    #[serde(rename = "minutesCustomClass", default)]
-    pub minutes_custom_class: String,
-    #[serde(rename = "minutesToComplete", default)]
-    pub minutes_to_complete: f64,
-    #[serde(rename = "successActions", default)]
-    pub success_actions: Vec<serde_json::Value>,
-    #[serde(rename = "timeTriggers", default)]
-    pub time_triggers: Vec<EntitlementProcessMilestoneTimeTrigger>,
-    #[serde(rename = "useCriteriaStartTime", default)]
-    pub use_criteria_start_time: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EmbeddedServiceFlow {
-    #[serde(default)]
-    pub flow: String,
-    #[serde(rename = "flowType", default)]
-    pub flow_type: EmbeddedServiceFlowType,
-    #[serde(rename = "isAuthenticationRequired", default)]
-    pub is_authentication_required: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EntitlementProcessMilestoneTimeTrigger {
-    #[serde(default)]
-    pub actions: Vec<serde_json::Value>,
-    #[serde(rename = "timeLength", default)]
-    pub time_length: f64,
-    #[serde(rename = "workflowTimeTriggerUnit", default)]
-    pub workflow_time_trigger_unit: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EmbeddedServiceMenuItem {
-    #[serde(default)]
-    pub channel: String,
-    #[serde(rename = "channelType", default)]
-    pub channel_type: EmbeddedServiceChannelType,
-    #[serde(rename = "customUrl", default)]
-    pub custom_url: String,
-    #[serde(rename = "displayOrder", default)]
-    pub display_order: f64,
-    #[serde(rename = "embeddedServiceCustomLabels", default)]
-    pub embedded_service_custom_labels: Vec<EmbeddedServiceCustomLabel>,
-    #[serde(rename = "iconUrl", default)]
-    pub icon_url: String,
-    #[serde(rename = "isDisplayedOnPageLoad", default)]
-    pub is_displayed_on_page_load: bool,
-    #[serde(rename = "itemName", default)]
-    pub item_name: String,
-    #[serde(rename = "osOptionsHideInIOS", default)]
-    pub os_options_hide_in_ios: bool,
-    #[serde(rename = "osOptionsHideInLinuxOS", default)]
-    pub os_options_hide_in_linux_os: bool,
-    #[serde(rename = "osOptionsHideInMacOS", default)]
-    pub os_options_hide_in_mac_os: bool,
-    #[serde(rename = "osOptionsHideInOtherOS", default)]
-    pub os_options_hide_in_other_os: bool,
-    #[serde(rename = "osOptionsHideInWindowsOS", default)]
-    pub os_options_hide_in_windows_os: bool,
-    #[serde(rename = "phoneNumber", default)]
-    pub phone_number: String,
-    #[serde(rename = "shouldOpenUrlInSameTab", default)]
-    pub should_open_url_in_same_tab: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LiveChatButtonSkills {
-    #[serde(default)]
-    pub skill: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -1442,41 +1302,181 @@ pub struct EmbeddedServiceFieldService {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct LiveAgentConfig {
-    #[serde(rename = "enableLiveChat", default)]
-    pub enable_live_chat: bool,
-    #[serde(rename = "openNewAccountSubtab", default)]
-    pub open_new_account_subtab: bool,
-    #[serde(rename = "openNewCaseSubtab", default)]
-    pub open_new_case_subtab: bool,
-    #[serde(rename = "openNewContactSubtab", default)]
-    pub open_new_contact_subtab: bool,
-    #[serde(rename = "openNewLeadSubtab", default)]
-    pub open_new_lead_subtab: bool,
-    #[serde(rename = "openNewVFPageSubtab", default)]
-    pub open_new_vf_page_subtab: bool,
-    #[serde(rename = "pageNamesToOpen", default)]
-    pub page_names_to_open: Vec<String>,
-    #[serde(rename = "showKnowledgeArticles", default)]
-    pub show_knowledge_articles: bool,
+pub struct ServiceMgmtKnwlgArtclConfig {
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "knowledgeArticleRecordType", default)]
+    pub knowledge_article_record_type: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "rootCauseField", default)]
+    pub root_cause_field: String,
+    #[serde(rename = "workAroundField", default)]
+    pub work_around_field: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct LiveChatButtonDeployments {
+pub struct LiveChatAgentConfig {
     #[serde(default)]
-    pub deployment: Vec<String>,
+    pub assignments: serde_json::Value,
+    #[serde(rename = "autoGreeting", default)]
+    pub auto_greeting: String,
+    #[serde(default)]
+    pub capacity: f64,
+    #[serde(rename = "criticalWaitTime", default)]
+    pub critical_wait_time: f64,
+    #[serde(rename = "customAgentName", default)]
+    pub custom_agent_name: String,
+    #[serde(rename = "disableTransferConferenceGreeting", default)]
+    pub disable_transfer_conference_greeting: bool,
+    #[serde(rename = "enableAgentFileTransfer", default)]
+    pub enable_agent_file_transfer: bool,
+    #[serde(rename = "enableAgentSneakPeek", default)]
+    pub enable_agent_sneak_peek: bool,
+    #[serde(rename = "enableAssistanceFlag", default)]
+    pub enable_assistance_flag: bool,
+    #[serde(rename = "enableAutoAwayOnDecline", default)]
+    pub enable_auto_away_on_decline: bool,
+    #[serde(rename = "enableAutoAwayOnPushTimeout", default)]
+    pub enable_auto_away_on_push_timeout: bool,
+    #[serde(rename = "enableChatConferencing", default)]
+    pub enable_chat_conferencing: bool,
+    #[serde(rename = "enableChatMonitoring", default)]
+    pub enable_chat_monitoring: bool,
+    #[serde(rename = "enableChatTransferToAgent", default)]
+    pub enable_chat_transfer_to_agent: bool,
+    #[serde(rename = "enableChatTransferToButton", default)]
+    pub enable_chat_transfer_to_button: bool,
+    #[serde(rename = "enableChatTransferToSkill", default)]
+    pub enable_chat_transfer_to_skill: bool,
+    #[serde(rename = "enableLogoutSound", default)]
+    pub enable_logout_sound: bool,
+    #[serde(rename = "enableNotifications", default)]
+    pub enable_notifications: bool,
+    #[serde(rename = "enableRequestSound", default)]
+    pub enable_request_sound: bool,
+    #[serde(rename = "enableSneakPeek", default)]
+    pub enable_sneak_peek: bool,
+    #[serde(rename = "enableVisitorBlocking", default)]
+    pub enable_visitor_blocking: bool,
+    #[serde(rename = "enableWhisperMessage", default)]
+    pub enable_whisper_message: bool,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "supervisorDefaultAgentStatusFilter", default)]
+    pub supervisor_default_agent_status_filter: serde_json::Value,
+    #[serde(rename = "supervisorDefaultButtonFilter", default)]
+    pub supervisor_default_button_filter: String,
+    #[serde(rename = "supervisorDefaultSkillFilter", default)]
+    pub supervisor_default_skill_filter: String,
+    #[serde(rename = "supervisorSkills", default)]
+    pub supervisor_skills: serde_json::Value,
+    #[serde(rename = "transferableButtons", default)]
+    pub transferable_buttons: serde_json::Value,
+    #[serde(rename = "transferableSkills", default)]
+    pub transferable_skills: serde_json::Value,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct EmbeddedServiceCustomLabel {
-    #[serde(rename = "customLabel", default)]
-    pub custom_label: String,
+pub struct EmbeddedMessagingChannel {
+    #[serde(rename = "allowedFileTypes", default)]
+    pub allowed_file_types: String,
+    #[serde(rename = "anonymousUserJwtExpirationTime", default)]
+    pub anonymous_user_jwt_expiration_time: f64,
+    #[serde(rename = "authMode", default)]
+    pub auth_mode: EmbeddedServiceAuthModeType,
+    #[serde(rename = "connectedApp", default)]
+    pub connected_app: String,
+    #[serde(rename = "isAgentAvlCheckEnabled", default)]
+    pub is_agent_avl_check_enabled: bool,
+    #[serde(rename = "isAttachmentUploadEnabled", default)]
+    pub is_attachment_upload_enabled: bool,
+    #[serde(rename = "isEstimatedWaitTimeEnabled", default)]
+    pub is_estimated_wait_time_enabled: bool,
+    #[serde(rename = "isFallbackMessageEnabled", default)]
+    pub is_fallback_message_enabled: bool,
+    #[serde(rename = "isSaveTranscriptEnabled", default)]
+    pub is_save_transcript_enabled: bool,
+    #[serde(rename = "maxFileSize", default)]
+    pub max_file_size: f64,
+    #[serde(rename = "messagingAuthorizations", default)]
+    pub messaging_authorizations: Vec<serde_json::Value>,
+    #[serde(rename = "queueLimitType", default)]
+    pub queue_limit_type: EmbeddedMsgQueueLimitType,
+    #[serde(rename = "queueThreshold", default)]
+    pub queue_threshold: f64,
+    #[serde(rename = "verifiedUserJwtExpirationTime", default)]
+    pub verified_user_jwt_expiration_time: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EmbeddedServiceMessagingChannel {
+    #[serde(rename = "businessHours", default)]
+    pub business_hours: String,
+    #[serde(rename = "embdMsgChannelInvitationConditions", default)]
+    pub embd_msg_channel_invitation_conditions: Vec<serde_json::Value>,
     #[serde(default)]
-    pub feature: EmbeddedServiceFeature,
-    #[serde(rename = "labelKey", default)]
-    pub label_key: EmbeddedServiceLabelKey,
+    pub formula: String,
+    #[serde(rename = "isChatInvitationCustomizable", default)]
+    pub is_chat_invitation_customizable: bool,
+    #[serde(rename = "isEnabled", default)]
+    pub is_enabled: bool,
+    #[serde(rename = "isInvitationEnabled", default)]
+    pub is_invitation_enabled: bool,
+    #[serde(rename = "isSendInvtAllowedAfterAccept", default)]
+    pub is_send_invt_allowed_after_accept: bool,
+    #[serde(rename = "isSendInvtAllowedAfterReject", default)]
+    pub is_send_invt_allowed_after_reject: bool,
+    #[serde(rename = "messagingChannel", default)]
+    pub messaging_channel: String,
+    #[serde(rename = "shouldShowDeliveryReceipts", default)]
+    pub should_show_delivery_receipts: bool,
+    #[serde(rename = "shouldShowEmojiSelection", default)]
+    pub should_show_emoji_selection: bool,
+    #[serde(rename = "shouldShowReadReceipts", default)]
+    pub should_show_read_receipts: bool,
+    #[serde(rename = "shouldShowTypingIndicators", default)]
+    pub should_show_typing_indicators: bool,
+    #[serde(rename = "shouldStartNewLineOnEnter", default)]
+    pub should_start_new_line_on_enter: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LiveChatDeploymentDomainWhitelist {
+    #[serde(default)]
+    pub domain: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EntitlementTemplate {
+    #[serde(rename = "businessHours", default)]
+    pub business_hours: String,
+    #[serde(rename = "casesPerEntitlement", default)]
+    pub cases_per_entitlement: f64,
+    #[serde(rename = "entitlementProcess", default)]
+    pub entitlement_process: String,
+    #[serde(rename = "isPerIncident", default)]
+    pub is_per_incident: bool,
+    #[serde(default)]
+    pub term: f64,
+    #[serde(default)]
+    pub r#type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EmbeddedServiceFlowConfig {
+    #[serde(default)]
+    pub enabled: bool,
 }

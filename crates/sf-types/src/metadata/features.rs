@@ -10,15 +10,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FeatureParameterDataflowDirection {
-    #[default]
-    LmoToSubscriber,
-    SubscriberToLmo,
-    Provisioned,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum FeatureInputType {
     #[default]
     Realtime_Input,
@@ -27,16 +18,13 @@ pub enum FeatureInputType {
     Batch_And_Realtime_Input,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FeatureParameterBoolean {
-    #[serde(rename = "dataflowDirection", default)]
-    pub dataflow_direction: FeatureParameterDataflowDirection,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub value: bool,
+pub enum FeatureParameterDataflowDirection {
+    #[default]
+    LmoToSubscriber,
+    SubscriberToLmo,
+    Provisioned,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -49,6 +37,18 @@ pub struct FeatureParameterDate {
     pub master_label: String,
     #[serde(default)]
     pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FeatureParameterBoolean {
+    #[serde(rename = "dataflowDirection", default)]
+    pub dataflow_direction: FeatureParameterDataflowDirection,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub value: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]

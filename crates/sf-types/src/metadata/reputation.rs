@@ -31,6 +31,14 @@ pub struct ReputationLevel {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct ReputationPointsRules {
+    #[serde(rename = "pointsRule", default)]
+    pub points_rule: Vec<ReputationPointsRule>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct ReputationLevelDefinitions {
     #[serde(default)]
     pub level: Vec<ReputationLevel>,
@@ -54,12 +62,4 @@ pub struct ReputationLevels {
     pub chatter_answers_reputation_levels: Vec<serde_json::Value>,
     #[serde(rename = "ideaReputationLevels", default)]
     pub idea_reputation_levels: Vec<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ReputationPointsRules {
-    #[serde(rename = "pointsRule", default)]
-    pub points_rule: Vec<ReputationPointsRule>,
 }

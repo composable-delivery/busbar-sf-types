@@ -10,15 +10,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PortalType {
-    #[default]
-    CustomerSuccess,
-    Partner,
-    Network,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum PortalRoles {
     #[default]
     Executive,
@@ -27,18 +18,13 @@ pub enum PortalRoles {
     PersonAccount,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PortalDelegablePermissionSet {
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "permissionSet", default)]
-    pub permission_set: String,
-    #[serde(default)]
-    pub profile: String,
+pub enum PortalType {
+    #[default]
+    CustomerSuccess,
+    Partner,
+    Network,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -95,4 +81,18 @@ pub struct Portal {
     pub stylesheet_document: String,
     #[serde(default)]
     pub r#type: PortalType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PortalDelegablePermissionSet {
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "permissionSet", default)]
+    pub permission_set: String,
+    #[serde(default)]
+    pub profile: String,
 }

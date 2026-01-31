@@ -10,11 +10,127 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowInputConfiguratorMode {
+pub enum FlowCollectionProcessorType {
     #[default]
-    Custom,
+    SortCollectionProcessor,
+    RecommendationMapCollectionProcessor,
+    FilterCollectionProcessor,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FlowExperimentFallbackMode {
+    #[default]
+    BestPerformer,
+    Randomize,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FlowTransformValueActionType {
+    #[default]
+    Map,
+    Count,
+    Sum,
+    GetItemByIndex,
+    InnerJoin,
+    InvocableAction,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FlowExperimentType {
+    #[default]
+    Random,
+    Manual,
+    Automatic,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FlowTestActivationStatus {
+    #[default]
+    Active,
+    Inactive,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FlowAssignmentOperator {
+    #[default]
+    None,
+    Assign,
+    Add,
+    Subtract,
+    AddItem,
+    RemoveFirst,
+    RemoveBeforeFirst,
+    RemoveAfterFirst,
+    RemoveAll,
+    AddAtStart,
+    RemoveUncommon,
+    AssignCount,
+    RemovePosition,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FlowRunAsUser {
+    #[default]
+    TriggeringUser,
+    DefaultWorkflowUser,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FlowEntryType {
+    #[default]
+    Always,
+    AfterCompletion,
+    Never,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FlowScheduledPathType {
+    #[default]
+    AsyncAfterCommit,
+    ApprovalRecall,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FlowScheduledPathTimeSource {
+    #[default]
+    RecordTriggerEvent,
+    RecordField,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FlowStageStepAssigneeType {
+    #[default]
+    User,
+    Group,
+    Queue,
+    Invalid,
     Resource,
-    Transform,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FlowWaitInteractionType {
+    #[default]
+    SmsResponse,
+    WhatsappResponse,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FlowNodeGroupType {
+    #[default]
+    generic,
+    rpa,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -42,27 +158,12 @@ pub enum FlowScreenFieldType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowRunAsUser {
+pub enum FlowStartFrequency {
     #[default]
-    TriggeringUser,
-    DefaultWorkflowUser,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowEnvironment {
-    #[default]
-    Default,
-    Slack,
-    Offline,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowNodeGroupType {
-    #[default]
-    generic,
-    rpa,
+    OnActivate,
+    Once,
+    Daily,
+    Weekly,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -78,93 +179,70 @@ pub enum FlowScheduledPathOffsetUnit {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowRunInMode {
-    #[default]
-    DefaultMode,
-    SystemModeWithSharing,
-    SystemModeWithoutSharing,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowComparisonOperator {
+pub enum FlowTriggerType {
     #[default]
     None,
-    EqualTo,
-    NotEqualTo,
-    GreaterThan,
-    LessThan,
-    GreaterThanOrEqualTo,
-    LessThanOrEqualTo,
-    StartsWith,
-    EndsWith,
-    Contains,
-    IsNull,
-    IsChanged,
-    WasSet,
-    WasSelected,
-    WasVisited,
-    In,
-    NotIn,
-    IsBlank,
-    IsEmpty,
-    HasError,
+    Scheduled,
+    RecordBeforeSave,
+    RecordBeforeDelete,
+    RecordAfterSave,
+    PlatformEvent,
+    EventDrivenJourney,
+    Segment,
+    DataCloudDataChange,
+    FormSubmissionEvent,
+    Capability,
+    AutomationEvent,
+    ExternalSystemChange,
+    DataGraphDataChange,
+    Activation,
+    AdminAutomationEvent,
+    BroadcastNoTrigger,
+    OnDemandNoTrigger,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowTransactionModel {
+pub enum FlowEnvironment {
     #[default]
-    Automatic,
-    NewTransaction,
-    CurrentTransaction,
+    Default,
+    Slack,
+    Offline,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowDataType {
+pub enum FlowScreenFieldInputsRevisited {
     #[default]
-    Currency,
-    Date,
-    Number,
-    String,
-    Boolean,
-    SObject,
-    DateTime,
-    Time,
-    Picklist,
-    Multipicklist,
-    Apex,
+    UseStoredValues,
+    ResetValues,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowAssignmentOperator {
+pub enum FlowAttributeType {
     #[default]
-    None,
-    Assign,
-    Add,
-    Subtract,
-    AddItem,
-    RemoveFirst,
-    RemoveBeforeFirst,
-    RemoveAfterFirst,
-    RemoveAll,
-    AddAtStart,
-    RemoveUncommon,
-    AssignCount,
-    RemovePosition,
+    LlmPrompt,
+    LlmDescription,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowStageStepAssigneeType {
+pub enum FlowTestParameterType {
     #[default]
-    User,
-    Group,
-    Queue,
-    Invalid,
+    InputTriggeringRecordInitial,
+    InputTriggeringRecordUpdated,
+    ScheduledPath,
+    InputVariable,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FlowInputConfiguratorMode {
+    #[default]
+    Custom,
     Resource,
+    Transform,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -194,63 +272,13 @@ pub enum FlowElementSubtype {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowTransformValueActionType {
+pub enum FlowVersionStatus {
     #[default]
-    Map,
-    Count,
-    Sum,
-    GetItemByIndex,
-    InnerJoin,
-    InvocableAction,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowAttributeType {
-    #[default]
-    LlmPrompt,
-    LlmDescription,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowScheduledPathType {
-    #[default]
-    AsyncAfterCommit,
-    ApprovalRecall,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowExperimentType {
-    #[default]
-    Random,
-    Manual,
-    Automatic,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowTriggerType {
-    #[default]
-    None,
-    Scheduled,
-    RecordBeforeSave,
-    RecordBeforeDelete,
-    RecordAfterSave,
-    PlatformEvent,
-    EventDrivenJourney,
-    Segment,
-    DataCloudDataChange,
-    FormSubmissionEvent,
-    Capability,
-    AutomationEvent,
-    ExternalSystemChange,
-    DataGraphDataChange,
-    Activation,
-    AdminAutomationEvent,
-    BroadcastNoTrigger,
-    OnDemandNoTrigger,
+    Active,
+    Draft,
+    Obsolete,
+    InvalidDraft,
+    UnderReview,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -262,20 +290,40 @@ pub enum FlowValueMappingType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowWaitInteractionType {
+pub enum FlowComplexValueType {
     #[default]
-    SmsResponse,
-    WhatsappResponse,
+    JoinDefinition,
+    FieldReference,
+    ResourceDescriptor,
+    ResourceAnnotationMap,
+    ComplexObjectFieldDetails,
+    FlowDataCloudId,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowStartFrequency {
+pub enum FlowDataType {
     #[default]
-    OnActivate,
-    Once,
-    Daily,
-    Weekly,
+    Currency,
+    Date,
+    Number,
+    String,
+    Boolean,
+    SObject,
+    DateTime,
+    Time,
+    Picklist,
+    Multipicklist,
+    Apex,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FlowRunInMode {
+    #[default]
+    DefaultMode,
+    SystemModeWithSharing,
+    SystemModeWithoutSharing,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -333,84 +381,28 @@ pub enum FlowProcessType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowVersionStatus {
+pub enum FlowComparisonOperator {
     #[default]
-    Active,
-    Draft,
-    Obsolete,
-    InvalidDraft,
-    UnderReview,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowExperimentFallbackMode {
-    #[default]
-    BestPerformer,
-    Randomize,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowTestActivationStatus {
-    #[default]
-    Active,
-    Inactive,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowTestParameterType {
-    #[default]
-    InputTriggeringRecordInitial,
-    InputTriggeringRecordUpdated,
-    ScheduledPath,
-    InputVariable,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowEntryType {
-    #[default]
-    Always,
-    AfterCompletion,
-    Never,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowScreenFieldInputsRevisited {
-    #[default]
-    UseStoredValues,
-    ResetValues,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowScheduledPathTimeSource {
-    #[default]
-    RecordTriggerEvent,
-    RecordField,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowRegionContainerType {
-    #[default]
-    SectionWithHeader,
-    SectionWithoutHeader,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowComplexValueType {
-    #[default]
-    JoinDefinition,
-    FieldReference,
-    ResourceDescriptor,
-    ResourceAnnotationMap,
-    ComplexObjectFieldDetails,
-    FlowDataCloudId,
+    None,
+    EqualTo,
+    NotEqualTo,
+    GreaterThan,
+    LessThan,
+    GreaterThanOrEqualTo,
+    LessThanOrEqualTo,
+    StartsWith,
+    EndsWith,
+    Contains,
+    IsNull,
+    IsChanged,
+    WasSet,
+    WasSelected,
+    WasVisited,
+    In,
+    NotIn,
+    IsBlank,
+    IsEmpty,
+    HasError,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -434,11 +426,347 @@ pub enum FlowRecordFilterOperator {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FlowCollectionProcessorType {
+pub enum FlowTransactionModel {
     #[default]
-    SortCollectionProcessor,
-    RecommendationMapCollectionProcessor,
-    FilterCollectionProcessor,
+    Automatic,
+    NewTransaction,
+    CurrentTransaction,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FlowRegionContainerType {
+    #[default]
+    SectionWithHeader,
+    SectionWithoutHeader,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowTestPoint {
+    #[serde(default)]
+    pub assertions: Vec<FlowTestAssertion>,
+    #[serde(rename = "elementApiName", default)]
+    pub element_api_name: String,
+    #[serde(default)]
+    pub parameters: Vec<FlowTestParameter>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowCategoryItems {
+    #[serde(default)]
+    pub flow: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowTestParameter {
+    #[serde(rename = "leftValueReference", default)]
+    pub left_value_reference: String,
+    #[serde(default)]
+    pub r#type: FlowTestParameterType,
+    #[serde(default)]
+    pub value: FlowTestReferenceOrValue,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProcessFlowMigration {
+    #[serde(rename = "destinationFlowDefinition", default)]
+    pub destination_flow_definition: String,
+    #[serde(rename = "destinationFlowVersion", default)]
+    pub destination_flow_version: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "migratedCriteriaLabel", default)]
+    pub migrated_criteria_label: String,
+    #[serde(rename = "migratedCriteriaName", default)]
+    pub migrated_criteria_name: String,
+    #[serde(rename = "processVersion", default)]
+    pub process_version: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowOrchestrationStageTranslation {
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "stageLabel", default)]
+    pub stage_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowTestAssertion {
+    #[serde(default)]
+    pub conditions: Vec<FlowTestCondition>,
+    #[serde(rename = "errorMessage", default)]
+    pub error_message: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowScreenTranslation {
+    #[serde(rename = "backButtonLabel", default)]
+    pub back_button_label: String,
+    #[serde(default)]
+    pub fields: Vec<FlowScreenFieldTranslation>,
+    #[serde(rename = "helpText", default)]
+    pub help_text: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "nextOrFinishButtonLabel", default)]
+    pub next_or_finish_button_label: String,
+    #[serde(rename = "pauseButtonLabel", default)]
+    pub pause_button_label: String,
+    #[serde(rename = "pausedText", default)]
+    pub paused_text: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowStageTranslation {
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowOrchestrationStepTranslation {
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "stepLabel", default)]
+    pub step_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowComplexLiteralTranslation {
+    #[serde(rename = "customAspectKey", default)]
+    pub custom_aspect_key: String,
+    #[serde(default)]
+    pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowIcon {
+    #[serde(rename = "iconName", default)]
+    pub icon_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowInputValidationRule {
+    #[serde(rename = "errorMessage", default)]
+    pub error_message: String,
+    #[serde(rename = "formulaExpression", default)]
+    pub formula_expression: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowCustomProperty {
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub value: FlowElementReferenceOrValue,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowMetadataValue {
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub value: FlowElementReferenceOrValue,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowCoverageWarning {
+    #[serde(rename = "flowId", default)]
+    pub flow_id: String,
+    #[serde(rename = "flowName", default)]
+    pub flow_name: String,
+    #[serde(rename = "flowNamespace", default)]
+    pub flow_namespace: String,
+    #[serde(default)]
+    pub message: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowChoiceUserInputTranslation {
+    #[serde(rename = "promptText", default)]
+    pub prompt_text: String,
+    #[serde(rename = "validationRule", default)]
+    pub validation_rule: FlowInputValidationRuleTranslation,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowTranslation {
+    #[serde(default)]
+    pub choices: Vec<FlowChoiceTranslation>,
+    #[serde(rename = "customErrorMessages", default)]
+    pub custom_error_messages: Vec<FlowCustomErrorMessageTranslation>,
+    #[serde(rename = "fullName", default)]
+    pub full_name: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "orchestrationStages", default)]
+    pub orchestration_stages: Vec<FlowOrchestrationStageTranslation>,
+    #[serde(rename = "orchestrationSteps", default)]
+    pub orchestration_steps: Vec<FlowOrchestrationStepTranslation>,
+    #[serde(default)]
+    pub screens: Vec<FlowScreenTranslation>,
+    #[serde(default)]
+    pub stages: Vec<FlowStageTranslation>,
+    #[serde(rename = "textTemplates", default)]
+    pub text_templates: Vec<FlowTextTemplateTranslation>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowTextTemplateTranslation {
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub text: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowScreenFieldStyleProperties {
+    #[serde(rename = "styleSettings", default)]
+    pub style_settings: Vec<serde_json::Value>,
+    #[serde(rename = "verticalAlignment", default)]
+    pub vertical_alignment: FlowElementReferenceOrValue,
+    #[serde(default)]
+    pub width: FlowElementReferenceOrValue,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowCustomErrorMessageTranslation {
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "errorMessage", default)]
+    pub error_message: String,
+    #[serde(default)]
+    pub field: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowCategory {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "flowCategoryItems", default)]
+    pub flow_category_items: Vec<FlowCategoryItems>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowChoiceTranslation {
+    #[serde(rename = "choiceText", default)]
+    pub choice_text: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "userInput", default)]
+    pub user_input: FlowChoiceUserInputTranslation,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowFerovTranslation {
+    #[serde(rename = "complexValues", default)]
+    pub complex_values: Vec<FlowComplexLiteralTranslation>,
+    #[serde(rename = "stringValue", default)]
+    pub string_value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowTest {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "flowApiName", default)]
+    pub flow_api_name: String,
+    #[serde(rename = "flowTestFlowVersions", default)]
+    pub flow_test_flow_versions: Vec<FlowTestFlowVersion>,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "testPoints", default)]
+    pub test_points: Vec<FlowTestPoint>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowTestReferenceOrValue {
+    #[serde(rename = "booleanValue", default)]
+    pub boolean_value: bool,
+    #[serde(rename = "dateTimeValue", default)]
+    pub date_time_value: String,
+    #[serde(rename = "dateValue", default)]
+    pub date_value: String,
+    #[serde(rename = "numberValue", default)]
+    pub number_value: f64,
+    #[serde(rename = "sobjectValue", default)]
+    pub sobject_value: String,
+    #[serde(rename = "stringValue", default)]
+    pub string_value: String,
+    #[serde(rename = "timeValue", default)]
+    pub time_value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowScreenFieldTranslation {
+    #[serde(rename = "fieldText", default)]
+    pub field_text: String,
+    #[serde(rename = "helpText", default)]
+    pub help_text: String,
+    #[serde(rename = "inputParameters", default)]
+    pub input_parameters: Vec<FlowInputParameterTranslation>,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "validationRule", default)]
+    pub validation_rule: FlowInputValidationRuleTranslation,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -550,13 +878,21 @@ pub struct Flow {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct FlowSchedule {
+pub struct FlowInputValidationRuleTranslation {
+    #[serde(rename = "errorMessage", default)]
+    pub error_message: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FlowDefinitionTranslation {
     #[serde(default)]
-    pub frequency: FlowStartFrequency,
-    #[serde(rename = "startDate", default)]
-    pub start_date: String,
-    #[serde(rename = "startTime", default)]
-    pub start_time: String,
+    pub flows: Vec<FlowTranslation>,
+    #[serde(rename = "fullName", default)]
+    pub full_name: String,
+    #[serde(default)]
+    pub label: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -569,186 +905,6 @@ pub struct FlowDefinition {
     pub description: String,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowTextTemplateTranslation {
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub text: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowInputParameterTranslation {
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub value: FlowFerovTranslation,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowFerovTranslation {
-    #[serde(rename = "complexValues", default)]
-    pub complex_values: Vec<FlowComplexLiteralTranslation>,
-    #[serde(rename = "stringValue", default)]
-    pub string_value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowTestReferenceOrValue {
-    #[serde(rename = "booleanValue", default)]
-    pub boolean_value: bool,
-    #[serde(rename = "dateTimeValue", default)]
-    pub date_time_value: String,
-    #[serde(rename = "dateValue", default)]
-    pub date_value: String,
-    #[serde(rename = "numberValue", default)]
-    pub number_value: f64,
-    #[serde(rename = "sobjectValue", default)]
-    pub sobject_value: String,
-    #[serde(rename = "stringValue", default)]
-    pub string_value: String,
-    #[serde(rename = "timeValue", default)]
-    pub time_value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowScreenFieldStyleProperties {
-    #[serde(rename = "styleSettings", default)]
-    pub style_settings: Vec<serde_json::Value>,
-    #[serde(rename = "verticalAlignment", default)]
-    pub vertical_alignment: FlowElementReferenceOrValue,
-    #[serde(default)]
-    pub width: FlowElementReferenceOrValue,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowScreenFieldTranslation {
-    #[serde(rename = "fieldText", default)]
-    pub field_text: String,
-    #[serde(rename = "helpText", default)]
-    pub help_text: String,
-    #[serde(rename = "inputParameters", default)]
-    pub input_parameters: Vec<FlowInputParameterTranslation>,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "validationRule", default)]
-    pub validation_rule: FlowInputValidationRuleTranslation,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowCoverageWarning {
-    #[serde(rename = "flowId", default)]
-    pub flow_id: String,
-    #[serde(rename = "flowName", default)]
-    pub flow_name: String,
-    #[serde(rename = "flowNamespace", default)]
-    pub flow_namespace: String,
-    #[serde(default)]
-    pub message: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowScreenTranslation {
-    #[serde(rename = "backButtonLabel", default)]
-    pub back_button_label: String,
-    #[serde(default)]
-    pub fields: Vec<FlowScreenFieldTranslation>,
-    #[serde(rename = "helpText", default)]
-    pub help_text: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "nextOrFinishButtonLabel", default)]
-    pub next_or_finish_button_label: String,
-    #[serde(rename = "pauseButtonLabel", default)]
-    pub pause_button_label: String,
-    #[serde(rename = "pausedText", default)]
-    pub paused_text: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowTestParameter {
-    #[serde(rename = "leftValueReference", default)]
-    pub left_value_reference: String,
-    #[serde(default)]
-    pub r#type: FlowTestParameterType,
-    #[serde(default)]
-    pub value: FlowTestReferenceOrValue,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowInputValidationRule {
-    #[serde(rename = "errorMessage", default)]
-    pub error_message: String,
-    #[serde(rename = "formulaExpression", default)]
-    pub formula_expression: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowTest {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "flowApiName", default)]
-    pub flow_api_name: String,
-    #[serde(rename = "flowTestFlowVersions", default)]
-    pub flow_test_flow_versions: Vec<FlowTestFlowVersion>,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "testPoints", default)]
-    pub test_points: Vec<FlowTestPoint>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowCustomProperty {
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub value: FlowElementReferenceOrValue,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowStageTranslation {
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowOrchestrationStageTranslation {
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "stageLabel", default)]
-    pub stage_label: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -774,111 +930,41 @@ pub struct FlowCoverageResult {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct FlowCategory {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "flowCategoryItems", default)]
-    pub flow_category_items: Vec<FlowCategoryItems>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
+pub struct FlowBaseElement {
+    #[serde(rename = "processMetadataValues", default)]
+    pub process_metadata_values: Vec<FlowMetadataValue>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct FlowChoiceTranslation {
-    #[serde(rename = "choiceText", default)]
-    pub choice_text: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "userInput", default)]
-    pub user_input: FlowChoiceUserInputTranslation,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowCustomErrorMessageTranslation {
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "errorMessage", default)]
-    pub error_message: String,
-    #[serde(default)]
-    pub field: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowDefinitionTranslation {
-    #[serde(default)]
-    pub flows: Vec<FlowTranslation>,
-    #[serde(rename = "fullName", default)]
-    pub full_name: String,
-    #[serde(default)]
-    pub label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProcessFlowMigration {
-    #[serde(rename = "destinationFlowDefinition", default)]
-    pub destination_flow_definition: String,
-    #[serde(rename = "destinationFlowVersion", default)]
-    pub destination_flow_version: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "migratedCriteriaLabel", default)]
-    pub migrated_criteria_label: String,
-    #[serde(rename = "migratedCriteriaName", default)]
-    pub migrated_criteria_name: String,
-    #[serde(rename = "processVersion", default)]
-    pub process_version: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowTestAssertion {
-    #[serde(default)]
-    pub conditions: Vec<FlowTestCondition>,
-    #[serde(rename = "errorMessage", default)]
-    pub error_message: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowMetadataValue {
+pub struct FlowInputParameterTranslation {
     #[serde(default)]
     pub name: String,
     #[serde(default)]
-    pub value: FlowElementReferenceOrValue,
+    pub value: FlowFerovTranslation,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct FlowChoiceUserInputTranslation {
-    #[serde(rename = "promptText", default)]
-    pub prompt_text: String,
-    #[serde(rename = "validationRule", default)]
-    pub validation_rule: FlowInputValidationRuleTranslation,
+pub struct FlowSchedule {
+    #[serde(default)]
+    pub frequency: FlowStartFrequency,
+    #[serde(rename = "startDate", default)]
+    pub start_date: String,
+    #[serde(rename = "startTime", default)]
+    pub start_time: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct FlowTestPoint {
-    #[serde(default)]
-    pub assertions: Vec<FlowTestAssertion>,
-    #[serde(rename = "elementApiName", default)]
-    pub element_api_name: String,
-    #[serde(default)]
-    pub parameters: Vec<FlowTestParameter>,
+pub struct FlowTestFlowVersion {
+    #[serde(rename = "flowTestActivationStatus", default)]
+    pub flow_test_activation_status: FlowTestActivationStatus,
+    #[serde(rename = "versionNumber", default)]
+    pub version_number: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -928,16 +1014,6 @@ pub struct FlowElementReferenceOrValue {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct FlowTestFlowVersion {
-    #[serde(rename = "flowTestActivationStatus", default)]
-    pub flow_test_activation_status: FlowTestActivationStatus,
-    #[serde(rename = "versionNumber", default)]
-    pub version_number: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct FlowTestCondition {
     #[serde(rename = "leftValueReference", default)]
     pub left_value_reference: String,
@@ -945,80 +1021,4 @@ pub struct FlowTestCondition {
     pub operator: FlowComparisonOperator,
     #[serde(rename = "rightValue", default)]
     pub right_value: FlowTestReferenceOrValue,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowIcon {
-    #[serde(rename = "iconName", default)]
-    pub icon_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowTranslation {
-    #[serde(default)]
-    pub choices: Vec<FlowChoiceTranslation>,
-    #[serde(rename = "customErrorMessages", default)]
-    pub custom_error_messages: Vec<FlowCustomErrorMessageTranslation>,
-    #[serde(rename = "fullName", default)]
-    pub full_name: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "orchestrationStages", default)]
-    pub orchestration_stages: Vec<FlowOrchestrationStageTranslation>,
-    #[serde(rename = "orchestrationSteps", default)]
-    pub orchestration_steps: Vec<FlowOrchestrationStepTranslation>,
-    #[serde(default)]
-    pub screens: Vec<FlowScreenTranslation>,
-    #[serde(default)]
-    pub stages: Vec<FlowStageTranslation>,
-    #[serde(rename = "textTemplates", default)]
-    pub text_templates: Vec<FlowTextTemplateTranslation>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowBaseElement {
-    #[serde(rename = "processMetadataValues", default)]
-    pub process_metadata_values: Vec<FlowMetadataValue>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowComplexLiteralTranslation {
-    #[serde(rename = "customAspectKey", default)]
-    pub custom_aspect_key: String,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowInputValidationRuleTranslation {
-    #[serde(rename = "errorMessage", default)]
-    pub error_message: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowOrchestrationStepTranslation {
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "stepLabel", default)]
-    pub step_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FlowCategoryItems {
-    #[serde(default)]
-    pub flow: String,
 }

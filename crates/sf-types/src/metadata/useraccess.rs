@@ -10,51 +10,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum UserDateGranularity {
-    #[default]
-    None,
-    Day,
-    Week,
-    Month,
-    Quarter,
-    Year,
-    FiscalQuarter,
-    FiscalYear,
-    MonthInYear,
-    DayInMonth,
-    FiscalPeriod,
-    FiscalWeek,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum UserAccessPolicyActionTargetType {
-    #[default]
-    PermissionSet,
-    PermissionSetGroup,
-    PermissionSetLicense,
-    PackageLicense,
-    Group,
-    Queue,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum UserAccessPolicyFilterTargetType {
-    #[default]
-    Group,
-    Queue,
-    PermissionSet,
-    PermissionSetGroup,
-    PermissionSetLicense,
-    Profile,
-    UserRole,
-    PackageLicense,
-    User,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum UserDateInterval {
     #[default]
     INTERVAL_CURRENT,
@@ -125,15 +80,10 @@ pub enum UserDateInterval {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum UserAccessPolicyStatus {
+pub enum UserAccessPolicyActionType {
     #[default]
-    Design,
-    Testing,
-    Migrate,
-    Updating,
-    Failed,
-    Active,
-    Completed,
+    Grant,
+    Revoke,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -159,10 +109,60 @@ pub enum UserAccessPolicyFilterOperation {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum UserAccessPolicyActionType {
+pub enum UserDateGranularity {
     #[default]
-    Grant,
-    Revoke,
+    None,
+    Day,
+    Week,
+    Month,
+    Quarter,
+    Year,
+    FiscalQuarter,
+    FiscalYear,
+    MonthInYear,
+    DayInMonth,
+    FiscalPeriod,
+    FiscalWeek,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum UserAccessPolicyStatus {
+    #[default]
+    Design,
+    Testing,
+    Migrate,
+    Updating,
+    Failed,
+    Active,
+    Completed,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum UserAccessPolicyActionTargetType {
+    #[default]
+    PermissionSet,
+    PermissionSetGroup,
+    PermissionSetLicense,
+    PackageLicense,
+    Group,
+    Queue,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum UserAccessPolicyFilterTargetType {
+    #[default]
+    Group,
+    Queue,
+    PermissionSet,
+    PermissionSetGroup,
+    PermissionSetLicense,
+    Profile,
+    UserRole,
+    PackageLicense,
+    User,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -187,6 +187,14 @@ pub struct UserAccessPolicy {
     pub user_access_policy_actions: Vec<UserAccessPolicyAction>,
     #[serde(rename = "userAccessPolicyFilters", default)]
     pub user_access_policy_filters: Vec<UserAccessPolicyFilter>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Users {
+    #[serde(default)]
+    pub user: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -234,44 +242,6 @@ pub struct UserLicenseDefinition {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct Users {
-    #[serde(default)]
-    pub user: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct UserAccessPolicyAction {
-    #[serde(default)]
-    pub action: UserAccessPolicyActionType,
-    #[serde(default)]
-    pub target: String,
-    #[serde(default)]
-    pub r#type: UserAccessPolicyActionTargetType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct UserAccessPolicyFilter {
-    #[serde(rename = "columnName", default)]
-    pub column_name: String,
-    #[serde(default)]
-    pub operation: UserAccessPolicyFilterOperation,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: f64,
-    #[serde(default)]
-    pub target: String,
-    #[serde(default)]
-    pub r#type: UserAccessPolicyFilterTargetType,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct UserCriteria {
     #[serde(rename = "creationAgeInSeconds", default)]
     pub creation_age_in_seconds: f64,
@@ -313,4 +283,34 @@ pub struct UserProvisioningConfig {
     pub recon_filter: String,
     #[serde(rename = "userAccountMapping", default)]
     pub user_account_mapping: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct UserAccessPolicyFilter {
+    #[serde(rename = "columnName", default)]
+    pub column_name: String,
+    #[serde(default)]
+    pub operation: UserAccessPolicyFilterOperation,
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: f64,
+    #[serde(default)]
+    pub target: String,
+    #[serde(default)]
+    pub r#type: UserAccessPolicyFilterTargetType,
+    #[serde(default)]
+    pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct UserAccessPolicyAction {
+    #[serde(default)]
+    pub action: UserAccessPolicyActionType,
+    #[serde(default)]
+    pub target: String,
+    #[serde(default)]
+    pub r#type: UserAccessPolicyActionTargetType,
 }

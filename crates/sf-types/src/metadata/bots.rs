@@ -18,11 +18,60 @@ pub enum BotProvider {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum BotStepConditionOperatorType {
+    #[default]
+    Equals,
+    NotEquals,
+    IsSet,
+    IsNotSet,
+    GreaterThan,
+    LessThan,
+    GreaterThanOrEqualTo,
+    LessThanOrEqualTo,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum BotNavigationType {
+    #[default]
+    Call,
+    Redirect,
+    TransferToAgent,
+    EndChat,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum BotType {
     #[default]
     Bot,
     InternalCopilot,
     ExternalCopilot,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum BotWidgetType {
+    #[default]
+    Menu,
+    Buttons,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum BotSourceType {
+    #[default]
+    None,
+    B2ASandboxBot,
+    B2AProdBot,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum BotQuickReplyType {
+    #[default]
+    Static,
+    Dynamic,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -38,34 +87,11 @@ pub enum BotVariableOperationType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BotNavigationType {
+pub enum BotInvocationMappingType {
     #[default]
-    Call,
-    Redirect,
-    TransferToAgent,
-    EndChat,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BotQuickReplyType {
-    #[default]
-    Static,
-    Dynamic,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BotStepConditionOperatorType {
-    #[default]
-    Equals,
-    NotEquals,
-    IsSet,
-    IsNotSet,
-    GreaterThan,
-    LessThan,
-    GreaterThanOrEqualTo,
-    LessThanOrEqualTo,
+    Input,
+    Output,
+    Error,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -84,50 +110,12 @@ pub enum BotStepType {
     GoalStep,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BotInvocationMappingType {
-    #[default]
-    Input,
-    Output,
-    Error,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BotSourceType {
-    #[default]
-    None,
-    B2ASandboxBot,
-    B2AProdBot,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BotWidgetType {
-    #[default]
-    Menu,
-    Buttons,
-}
-
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct BotDialogTranslation {
-    #[serde(rename = "botSteps", default)]
-    pub bot_steps: Vec<BotStepTranslation>,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(default)]
-    pub label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BotBlockTranslation {
-    #[serde(rename = "botBlockVersions", default)]
-    pub bot_block_versions: Vec<BotBlockVersionTranslation>,
+pub struct BotTemplateTranslation {
+    #[serde(rename = "botDialogs", default)]
+    pub bot_dialogs: Vec<BotDialogTranslation>,
     #[serde(rename = "fullName", default)]
     pub full_name: String,
 }
@@ -135,11 +123,57 @@ pub struct BotBlockTranslation {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct BotQuickReplyOption {
-    #[serde(rename = "literalValue", default)]
-    pub literal_value: String,
-    #[serde(rename = "quickReplyOptionIdentifier", default)]
-    pub quick_reply_option_identifier: String,
+pub struct BotTemplate {
+    #[serde(rename = "agentType", default)]
+    pub agent_type: serde_json::Value,
+    #[serde(rename = "botDialogGroups", default)]
+    pub bot_dialog_groups: Vec<BotDialogGroup>,
+    #[serde(rename = "botDialogs", default)]
+    pub bot_dialogs: Vec<BotDialog>,
+    #[serde(rename = "contextVariables", default)]
+    pub context_variables: Vec<serde_json::Value>,
+    #[serde(rename = "conversationGoals", default)]
+    pub conversation_goals: Vec<serde_json::Value>,
+    #[serde(rename = "conversationLanguages", default)]
+    pub conversation_languages: String,
+    #[serde(rename = "conversationSystemDialogs", default)]
+    pub conversation_system_dialogs: Vec<serde_json::Value>,
+    #[serde(rename = "conversationVariables", default)]
+    pub conversation_variables: Vec<serde_json::Value>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "entryDialog", default)]
+    pub entry_dialog: String,
+    #[serde(default)]
+    pub icon: String,
+    #[serde(rename = "mainMenuDialog", default)]
+    pub main_menu_dialog: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "mlDomain", default)]
+    pub ml_domain: serde_json::Value,
+    #[serde(rename = "permissionSet", default)]
+    pub permission_set: String,
+    #[serde(rename = "richContentEnabled", default)]
+    pub rich_content_enabled: bool,
+    #[serde(default)]
+    pub r#type: BotType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BotBlock {
+    #[serde(rename = "botBlockVersions", default)]
+    pub bot_block_versions: Vec<BotBlockVersion>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub icon: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "richContentEnabled", default)]
+    pub rich_content_enabled: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -159,37 +193,79 @@ pub struct BotStepCondition {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct BotTemplateTranslation {
-    #[serde(rename = "botDialogs", default)]
-    pub bot_dialogs: Vec<BotDialogTranslation>,
-    #[serde(rename = "fullName", default)]
-    pub full_name: String,
+pub struct BotDialogTranslation {
+    #[serde(rename = "botSteps", default)]
+    pub bot_steps: Vec<BotStepTranslation>,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(default)]
+    pub label: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct BotBlockVersionTranslation {
-    #[serde(rename = "botDialogs", default)]
-    pub bot_dialogs: Vec<BotDialogTranslation>,
-    #[serde(rename = "fullName", default)]
-    pub full_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BotBlock {
-    #[serde(rename = "botBlockVersions", default)]
-    pub bot_block_versions: Vec<BotBlockVersion>,
+pub struct BotDialogGroup {
     #[serde(default)]
     pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
     #[serde(default)]
-    pub icon: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "richContentEnabled", default)]
-    pub rich_content_enabled: bool,
+    pub label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BotBlockTranslation {
+    #[serde(rename = "botBlockVersions", default)]
+    pub bot_block_versions: Vec<BotBlockVersionTranslation>,
+    #[serde(rename = "fullName", default)]
+    pub full_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BotStep {
+    #[serde(rename = "booleanFilter", default)]
+    pub boolean_filter: String,
+    #[serde(rename = "botInvocation", default)]
+    pub bot_invocation: BotInvocation,
+    #[serde(rename = "botMessages", default)]
+    pub bot_messages: Vec<BotMessage>,
+    #[serde(rename = "botNavigation", default)]
+    pub bot_navigation: BotNavigation,
+    #[serde(rename = "botStepConditions", default)]
+    pub bot_step_conditions: Vec<BotStepCondition>,
+    #[serde(rename = "botSteps", default)]
+    pub bot_steps: Vec<Box<BotStep>>,
+    #[serde(rename = "botVariableOperation", default)]
+    pub bot_variable_operation: BotVariableOperation,
+    #[serde(rename = "conditionLogicType", default)]
+    pub condition_logic_type: serde_json::Value,
+    #[serde(rename = "conversationRecordLookup", default)]
+    pub conversation_record_lookup: serde_json::Value,
+    #[serde(rename = "conversationStepGoalMappings", default)]
+    pub conversation_step_goal_mappings: Vec<serde_json::Value>,
+    #[serde(rename = "conversationSystemMessage", default)]
+    pub conversation_system_message: serde_json::Value,
+    #[serde(rename = "messageDefinition", default)]
+    pub message_definition: serde_json::Value,
+    #[serde(rename = "stepIdentifier", default)]
+    pub step_identifier: String,
+    #[serde(default)]
+    pub r#type: BotStepType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BotVersionTranslation {
+    #[serde(rename = "botDialogs", default)]
+    pub bot_dialogs: Vec<BotDialogTranslation>,
+    #[serde(rename = "fullName", default)]
+    pub full_name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -239,41 +315,55 @@ pub struct BotVariableOperation {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct BotTemplate {
-    #[serde(rename = "agentType", default)]
-    pub agent_type: serde_json::Value,
-    #[serde(rename = "botDialogGroups", default)]
-    pub bot_dialog_groups: Vec<BotDialogGroup>,
+pub struct BotBlockVersionTranslation {
     #[serde(rename = "botDialogs", default)]
-    pub bot_dialogs: Vec<BotDialog>,
-    #[serde(rename = "contextVariables", default)]
-    pub context_variables: Vec<serde_json::Value>,
-    #[serde(rename = "conversationGoals", default)]
-    pub conversation_goals: Vec<serde_json::Value>,
-    #[serde(rename = "conversationLanguages", default)]
-    pub conversation_languages: String,
-    #[serde(rename = "conversationSystemDialogs", default)]
-    pub conversation_system_dialogs: Vec<serde_json::Value>,
-    #[serde(rename = "conversationVariables", default)]
-    pub conversation_variables: Vec<serde_json::Value>,
+    pub bot_dialogs: Vec<BotDialogTranslation>,
+    #[serde(rename = "fullName", default)]
+    pub full_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BotQuickReplyOption {
+    #[serde(rename = "literalValue", default)]
+    pub literal_value: String,
+    #[serde(rename = "quickReplyOptionIdentifier", default)]
+    pub quick_reply_option_identifier: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BotDialog {
+    #[serde(rename = "botDialogGroup", default)]
+    pub bot_dialog_group: String,
+    #[serde(rename = "botSteps", default)]
+    pub bot_steps: Vec<BotStep>,
     #[serde(default)]
     pub description: String,
-    #[serde(rename = "entryDialog", default)]
-    pub entry_dialog: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "isPlaceholderDialog", default)]
+    pub is_placeholder_dialog: bool,
     #[serde(default)]
-    pub icon: String,
-    #[serde(rename = "mainMenuDialog", default)]
-    pub main_menu_dialog: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "mlDomain", default)]
-    pub ml_domain: serde_json::Value,
-    #[serde(rename = "permissionSet", default)]
-    pub permission_set: String,
-    #[serde(rename = "richContentEnabled", default)]
-    pub rich_content_enabled: bool,
-    #[serde(default)]
-    pub r#type: BotType,
+    pub label: String,
+    #[serde(rename = "mlIntent", default)]
+    pub ml_intent: String,
+    #[serde(rename = "mlIntentTrainingEnabled", default)]
+    pub ml_intent_training_enabled: bool,
+    #[serde(rename = "showInFooterMenu", default)]
+    pub show_in_footer_menu: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BotTranslation {
+    #[serde(rename = "botVersions", default)]
+    pub bot_versions: Vec<BotVersionTranslation>,
+    #[serde(rename = "fullName", default)]
+    pub full_name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -289,67 +379,65 @@ pub struct BotNavigation {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct BotVersionTranslation {
-    #[serde(rename = "botDialogs", default)]
-    pub bot_dialogs: Vec<BotDialogTranslation>,
-    #[serde(rename = "fullName", default)]
-    pub full_name: String,
+pub struct BotQuickReplyOptionTranslation {
+    #[serde(rename = "literalValue", default)]
+    pub literal_value: String,
+    #[serde(rename = "quickReplyOptionIdentifier", default)]
+    pub quick_reply_option_identifier: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct BotBlockVersion {
-    #[serde(rename = "botDialogs", default)]
-    pub bot_dialogs: Vec<BotDialog>,
-    #[serde(rename = "conversationGoals", default)]
-    pub conversation_goals: Vec<serde_json::Value>,
-    #[serde(rename = "conversationLanguages", default)]
-    pub conversation_languages: String,
-    #[serde(rename = "conversationVariables", default)]
-    pub conversation_variables: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "mlDomain", default)]
-    pub ml_domain: serde_json::Value,
-    #[serde(rename = "permissionSet", default)]
-    pub permission_set: String,
-    #[serde(default)]
-    pub status: serde_json::Value,
+pub struct BotInvocation {
+    #[serde(rename = "invocationActionName", default)]
+    pub invocation_action_name: String,
+    #[serde(rename = "invocationActionType", default)]
+    pub invocation_action_type: serde_json::Value,
+    #[serde(rename = "invocationMappings", default)]
+    pub invocation_mappings: Vec<BotInvocationMapping>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct BotStep {
-    #[serde(rename = "booleanFilter", default)]
-    pub boolean_filter: String,
-    #[serde(rename = "botInvocation", default)]
-    pub bot_invocation: BotInvocation,
-    #[serde(rename = "botMessages", default)]
-    pub bot_messages: Vec<BotMessage>,
-    #[serde(rename = "botNavigation", default)]
-    pub bot_navigation: BotNavigation,
-    #[serde(rename = "botStepConditions", default)]
-    pub bot_step_conditions: Vec<BotStepCondition>,
-    #[serde(rename = "botSteps", default)]
-    pub bot_steps: Vec<Box<BotStep>>,
-    #[serde(rename = "botVariableOperation", default)]
-    pub bot_variable_operation: BotVariableOperation,
-    #[serde(rename = "conditionLogicType", default)]
-    pub condition_logic_type: serde_json::Value,
-    #[serde(rename = "conversationRecordLookup", default)]
-    pub conversation_record_lookup: serde_json::Value,
-    #[serde(rename = "conversationStepGoalMappings", default)]
-    pub conversation_step_goal_mappings: Vec<serde_json::Value>,
-    #[serde(rename = "conversationSystemMessage", default)]
-    pub conversation_system_message: serde_json::Value,
-    #[serde(rename = "messageDefinition", default)]
-    pub message_definition: serde_json::Value,
-    #[serde(rename = "stepIdentifier", default)]
-    pub step_identifier: String,
+pub struct BotMessage {
     #[serde(default)]
-    pub r#type: BotStepType,
+    pub message: String,
+    #[serde(rename = "messageIdentifier", default)]
+    pub message_identifier: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BotNavigationLink {
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "targetBotDialog", default)]
+    pub target_bot_dialog: String,
+    #[serde(rename = "targetVariable", default)]
+    pub target_variable: String,
+    #[serde(rename = "targetVariableType", default)]
+    pub target_variable_type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BotInvocationMapping {
+    #[serde(rename = "parameterName", default)]
+    pub parameter_name: String,
+    #[serde(rename = "recordName", default)]
+    pub record_name: String,
+    #[serde(default)]
+    pub r#type: BotInvocationMappingType,
+    #[serde(default)]
+    pub value: String,
+    #[serde(rename = "variableName", default)]
+    pub variable_name: String,
+    #[serde(rename = "variableType", default)]
+    pub variable_type: serde_json::Value,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -415,26 +503,6 @@ pub struct BotVersion {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct BotTranslation {
-    #[serde(rename = "botVersions", default)]
-    pub bot_versions: Vec<BotVersionTranslation>,
-    #[serde(rename = "fullName", default)]
-    pub full_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BotMessageTranslation {
-    #[serde(default)]
-    pub message: String,
-    #[serde(rename = "messageIdentifier", default)]
-    pub message_identifier: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct BotVariableOperand {
     #[serde(rename = "disableAutoFill", default)]
     pub disable_auto_fill: bool,
@@ -453,15 +521,17 @@ pub struct BotVariableOperand {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct BotNavigationLink {
+pub struct BotStepTranslation {
+    #[serde(rename = "botMessages", default)]
+    pub bot_messages: Vec<BotMessageTranslation>,
+    #[serde(rename = "botSteps", default)]
+    pub bot_steps: Vec<Box<BotStepTranslation>>,
+    #[serde(rename = "botVariableOperation", default)]
+    pub bot_variable_operation: BotVariableOperationTranslation,
+    #[serde(rename = "stepIdentifier", default)]
+    pub step_identifier: String,
     #[serde(default)]
-    pub label: String,
-    #[serde(rename = "targetBotDialog", default)]
-    pub target_bot_dialog: String,
-    #[serde(rename = "targetVariable", default)]
-    pub target_variable: String,
-    #[serde(rename = "targetVariableType", default)]
-    pub target_variable_type: serde_json::Value,
+    pub r#type: BotStepType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -509,22 +579,6 @@ pub struct Bot {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct BotStepTranslation {
-    #[serde(rename = "botMessages", default)]
-    pub bot_messages: Vec<BotMessageTranslation>,
-    #[serde(rename = "botSteps", default)]
-    pub bot_steps: Vec<Box<BotStepTranslation>>,
-    #[serde(rename = "botVariableOperation", default)]
-    pub bot_variable_operation: BotVariableOperationTranslation,
-    #[serde(rename = "stepIdentifier", default)]
-    pub step_identifier: String,
-    #[serde(default)]
-    pub r#type: BotStepType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct BotVariableOperationTranslation {
     #[serde(rename = "botMessages", default)]
     pub bot_messages: Vec<BotMessageTranslation>,
@@ -545,71 +599,7 @@ pub struct BotVariableOperationTranslation {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct BotInvocationMapping {
-    #[serde(rename = "parameterName", default)]
-    pub parameter_name: String,
-    #[serde(rename = "recordName", default)]
-    pub record_name: String,
-    #[serde(default)]
-    pub r#type: BotInvocationMappingType,
-    #[serde(default)]
-    pub value: String,
-    #[serde(rename = "variableName", default)]
-    pub variable_name: String,
-    #[serde(rename = "variableType", default)]
-    pub variable_type: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BotQuickReplyOptionTranslation {
-    #[serde(rename = "literalValue", default)]
-    pub literal_value: String,
-    #[serde(rename = "quickReplyOptionIdentifier", default)]
-    pub quick_reply_option_identifier: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BotInvocation {
-    #[serde(rename = "invocationActionName", default)]
-    pub invocation_action_name: String,
-    #[serde(rename = "invocationActionType", default)]
-    pub invocation_action_type: serde_json::Value,
-    #[serde(rename = "invocationMappings", default)]
-    pub invocation_mappings: Vec<BotInvocationMapping>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BotDialog {
-    #[serde(rename = "botDialogGroup", default)]
-    pub bot_dialog_group: String,
-    #[serde(rename = "botSteps", default)]
-    pub bot_steps: Vec<BotStep>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "isPlaceholderDialog", default)]
-    pub is_placeholder_dialog: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "mlIntent", default)]
-    pub ml_intent: String,
-    #[serde(rename = "mlIntentTrainingEnabled", default)]
-    pub ml_intent_training_enabled: bool,
-    #[serde(rename = "showInFooterMenu", default)]
-    pub show_in_footer_menu: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BotMessage {
+pub struct BotMessageTranslation {
     #[serde(default)]
     pub message: String,
     #[serde(rename = "messageIdentifier", default)]
@@ -619,11 +609,21 @@ pub struct BotMessage {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct BotDialogGroup {
+pub struct BotBlockVersion {
+    #[serde(rename = "botDialogs", default)]
+    pub bot_dialogs: Vec<BotDialog>,
+    #[serde(rename = "conversationGoals", default)]
+    pub conversation_goals: Vec<serde_json::Value>,
+    #[serde(rename = "conversationLanguages", default)]
+    pub conversation_languages: String,
+    #[serde(rename = "conversationVariables", default)]
+    pub conversation_variables: Vec<serde_json::Value>,
     #[serde(default)]
     pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
+    #[serde(rename = "mlDomain", default)]
+    pub ml_domain: serde_json::Value,
+    #[serde(rename = "permissionSet", default)]
+    pub permission_set: String,
     #[serde(default)]
-    pub label: String,
+    pub status: serde_json::Value,
 }

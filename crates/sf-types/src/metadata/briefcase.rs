@@ -74,20 +74,6 @@ pub struct BriefcaseRule {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct BriefcaseRuleFilter {
-    #[serde(rename = "filterOperator", default)]
-    pub filter_operator: BriefcaseFilterOperator,
-    #[serde(rename = "filterSeqNumber", default)]
-    pub filter_seq_number: f64,
-    #[serde(rename = "filterValue", default)]
-    pub filter_value: String,
-    #[serde(rename = "targetEntityField", default)]
-    pub target_entity_field: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct BriefcaseDefinition {
     #[serde(rename = "briefcaseRules", default)]
     pub briefcase_rules: Vec<BriefcaseRule>,
@@ -99,4 +85,18 @@ pub struct BriefcaseDefinition {
     pub master_label: String,
     #[serde(default)]
     pub r#type: BriefcaseType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BriefcaseRuleFilter {
+    #[serde(rename = "filterOperator", default)]
+    pub filter_operator: BriefcaseFilterOperator,
+    #[serde(rename = "filterSeqNumber", default)]
+    pub filter_seq_number: f64,
+    #[serde(rename = "filterValue", default)]
+    pub filter_value: String,
+    #[serde(rename = "targetEntityField", default)]
+    pub target_entity_field: String,
 }

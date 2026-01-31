@@ -10,20 +10,20 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum QuickActionParameterType {
-    #[default]
-    Input,
-    Output,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum ActionLinkType {
     #[default]
     API,
     APIAsync,
     Download,
     UI,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum QuickActionParameterType {
+    #[default]
+    Input,
+    Output,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -81,11 +81,14 @@ pub enum QuickActionLabel {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActionLinkExecutionsAllowed {
+pub enum ActionPlanTemplateType {
     #[default]
-    Once,
-    OncePerUser,
-    Unlimited,
+    Industries,
+    Retail,
+    Sales,
+    ITSM,
+    PrvdEngmtCompliance,
+    KAM,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -98,6 +101,15 @@ pub enum ActionLinkHttpMethod {
     HttpPatch,
     HttpPost,
     HttpPut,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ActionLinkExecutionsAllowed {
+    #[default]
+    Once,
+    OncePerUser,
+    Unlimited,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -140,108 +152,6 @@ pub enum QuickActionType {
     Copilot,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActionPlanTemplateType {
-    #[default]
-    Industries,
-    Retail,
-    Sales,
-    ITSM,
-    PrvdEngmtCompliance,
-    KAM,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GlobalQuickActionTranslation {
-    #[serde(default)]
-    pub aspect: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ActionPlanTemplateItemValue {
-    #[serde(rename = "itemEntityType", default)]
-    pub item_entity_type: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "valueFormula", default)]
-    pub value_formula: String,
-    #[serde(rename = "valueLiteral", default)]
-    pub value_literal: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ActionLauncherItemDef {
-    #[serde(default)]
-    pub identifier: String,
-    #[serde(rename = "itemActionType", default)]
-    pub item_action_type: serde_json::Value,
-    #[serde(rename = "itemCategory", default)]
-    pub item_category: serde_json::Value,
-    #[serde(rename = "itemLanguage", default)]
-    pub item_language: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "subType", default)]
-    pub sub_type: String,
-    #[serde(default)]
-    pub r#type: String,
-    #[serde(rename = "versionNumber", default)]
-    pub version_number: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ActionPlanTemplateItem {
-    #[serde(rename = "actionPlanTemplateItemValue", default)]
-    pub action_plan_template_item_value: Vec<ActionPlanTemplateItemValue>,
-    #[serde(rename = "displayOrder", default)]
-    pub display_order: f64,
-    #[serde(rename = "isRequired", default)]
-    pub is_required: bool,
-    #[serde(rename = "itemEntityType", default)]
-    pub item_entity_type: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "uniqueName", default)]
-    pub unique_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct QuickActionSendEmailOptions {
-    #[serde(rename = "defaultEmailTemplateName", default)]
-    pub default_email_template_name: String,
-    #[serde(rename = "ignoreDefaultEmailTemplateSubject", default)]
-    pub ignore_default_email_template_subject: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ActionPlanTemplateItemDependency {
-    #[serde(rename = "creationType", default)]
-    pub creation_type: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "previousTemplateItem", default)]
-    pub previous_template_item: ActionPlanTemplateItem,
-    #[serde(rename = "templateItem", default)]
-    pub template_item: ActionPlanTemplateItem,
-}
-
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
@@ -255,87 +165,13 @@ pub struct QuickActionLayout {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ActionLinkGroupTemplate {
-    #[serde(rename = "actionLinkTemplates", default)]
-    pub action_link_templates: Vec<ActionLinkTemplate>,
-    #[serde(default)]
-    pub category: serde_json::Value,
-    #[serde(rename = "executionsAllowed", default)]
-    pub executions_allowed: ActionLinkExecutionsAllowed,
-    #[serde(rename = "hoursUntilExpiration", default)]
-    pub hours_until_expiration: f64,
-    #[serde(rename = "isPublished", default)]
-    pub is_published: bool,
+pub struct QuickActionParameters {
     #[serde(default)]
     pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct QuickActionParametersTranslation {
     #[serde(default)]
-    pub aspect: String,
-    #[serde(default)]
-    pub name: String,
+    pub r#type: QuickActionParameterType,
     #[serde(default)]
     pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ActionLinkTemplate {
-    #[serde(rename = "actionUrl", default)]
-    pub action_url: String,
-    #[serde(default)]
-    pub headers: String,
-    #[serde(rename = "isConfirmationRequired", default)]
-    pub is_confirmation_required: bool,
-    #[serde(rename = "isGroupDefault", default)]
-    pub is_group_default: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "labelKey", default)]
-    pub label_key: String,
-    #[serde(rename = "linkType", default)]
-    pub link_type: ActionLinkType,
-    #[serde(default)]
-    pub method: ActionLinkHttpMethod,
-    #[serde(default)]
-    pub position: f64,
-    #[serde(rename = "requestBody", default)]
-    pub request_body: String,
-    #[serde(rename = "userAlias", default)]
-    pub user_alias: String,
-    #[serde(rename = "userVisibility", default)]
-    pub user_visibility: ActionLinkUserVisibility,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GlobalPicklist {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "globalPicklistValues", default)]
-    pub global_picklist_values: Vec<GlobalPicklistValue>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub sorted: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct QuickActionLayoutItem {
-    #[serde(rename = "emptySpace", default)]
-    pub empty_space: bool,
-    #[serde(default)]
-    pub field: String,
-    #[serde(rename = "uiBehavior", default)]
-    pub ui_behavior: serde_json::Value,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -393,13 +229,53 @@ pub struct QuickAction {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct QuickActionParameters {
+pub struct GlobalPicklistValue {
+    #[serde(default)]
+    pub color: String,
+    #[serde(default)]
+    pub default: bool,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct QuickActionParametersTranslation {
+    #[serde(default)]
+    pub aspect: String,
     #[serde(default)]
     pub name: String,
     #[serde(default)]
-    pub r#type: QuickActionParameterType,
-    #[serde(default)]
     pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct GlobalQuickActionTranslation {
+    #[serde(default)]
+    pub aspect: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ActionPlanTemplateItemDependency {
+    #[serde(rename = "creationType", default)]
+    pub creation_type: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "previousTemplateItem", default)]
+    pub previous_template_item: ActionPlanTemplateItem,
+    #[serde(rename = "templateItem", default)]
+    pub template_item: ActionPlanTemplateItem,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -414,6 +290,48 @@ pub struct QuickActionTranslation {
     pub name: String,
     #[serde(rename = "quickActionParametersTranslation", default)]
     pub quick_action_parameters_translation: Vec<QuickActionParametersTranslation>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct QuickActionSendEmailOptions {
+    #[serde(rename = "defaultEmailTemplateName", default)]
+    pub default_email_template_name: String,
+    #[serde(rename = "ignoreDefaultEmailTemplateSubject", default)]
+    pub ignore_default_email_template_subject: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ActionPlanTemplateItemValue {
+    #[serde(rename = "itemEntityType", default)]
+    pub item_entity_type: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "valueFormula", default)]
+    pub value_formula: String,
+    #[serde(rename = "valueLiteral", default)]
+    pub value_literal: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ActionLinkGroupTemplate {
+    #[serde(rename = "actionLinkTemplates", default)]
+    pub action_link_templates: Vec<ActionLinkTemplate>,
+    #[serde(default)]
+    pub category: serde_json::Value,
+    #[serde(rename = "executionsAllowed", default)]
+    pub executions_allowed: ActionLinkExecutionsAllowed,
+    #[serde(rename = "hoursUntilExpiration", default)]
+    pub hours_until_expiration: f64,
+    #[serde(rename = "isPublished", default)]
+    pub is_published: bool,
+    #[serde(default)]
+    pub name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -453,15 +371,83 @@ pub struct ActionPlanTemplate {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct GlobalPicklistValue {
+pub struct ActionLinkTemplate {
+    #[serde(rename = "actionUrl", default)]
+    pub action_url: String,
     #[serde(default)]
-    pub color: String,
+    pub headers: String,
+    #[serde(rename = "isConfirmationRequired", default)]
+    pub is_confirmation_required: bool,
+    #[serde(rename = "isGroupDefault", default)]
+    pub is_group_default: bool,
     #[serde(default)]
-    pub default: bool,
+    pub label: String,
+    #[serde(rename = "labelKey", default)]
+    pub label_key: String,
+    #[serde(rename = "linkType", default)]
+    pub link_type: ActionLinkType,
     #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
+    pub method: ActionLinkHttpMethod,
+    #[serde(default)]
+    pub position: f64,
+    #[serde(rename = "requestBody", default)]
+    pub request_body: String,
+    #[serde(rename = "userAlias", default)]
+    pub user_alias: String,
+    #[serde(rename = "userVisibility", default)]
+    pub user_visibility: ActionLinkUserVisibility,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ActionPlanTemplateItem {
+    #[serde(rename = "actionPlanTemplateItemValue", default)]
+    pub action_plan_template_item_value: Vec<ActionPlanTemplateItemValue>,
+    #[serde(rename = "displayOrder", default)]
+    pub display_order: f64,
+    #[serde(rename = "isRequired", default)]
+    pub is_required: bool,
+    #[serde(rename = "itemEntityType", default)]
+    pub item_entity_type: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "uniqueName", default)]
+    pub unique_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct QuickActionLayoutItem {
+    #[serde(rename = "emptySpace", default)]
+    pub empty_space: bool,
+    #[serde(default)]
+    pub field: String,
+    #[serde(rename = "uiBehavior", default)]
+    pub ui_behavior: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ActionLauncherItemDef {
+    #[serde(default)]
+    pub identifier: String,
+    #[serde(rename = "itemActionType", default)]
+    pub item_action_type: serde_json::Value,
+    #[serde(rename = "itemCategory", default)]
+    pub item_category: serde_json::Value,
+    #[serde(rename = "itemLanguage", default)]
+    pub item_language: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "subType", default)]
+    pub sub_type: String,
+    #[serde(default)]
+    pub r#type: String,
+    #[serde(rename = "versionNumber", default)]
+    pub version_number: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -470,4 +456,18 @@ pub struct GlobalPicklistValue {
 pub struct QuickActionLayoutColumn {
     #[serde(rename = "quickActionLayoutItems", default)]
     pub quick_action_layout_items: Vec<QuickActionLayoutItem>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct GlobalPicklist {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "globalPicklistValues", default)]
+    pub global_picklist_values: Vec<GlobalPicklistValue>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub sorted: bool,
 }

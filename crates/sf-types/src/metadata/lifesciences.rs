@@ -18,14 +18,6 @@ pub enum LifeSciAssignmentLevel {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LifeSciCategoryType {
-    #[default]
-    Hierarchical,
-    List,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum LifeSciConfigCategoryType {
     #[default]
     DbSchema,
@@ -89,6 +81,14 @@ pub enum LifeSciConfigCategoryType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum LifeSciCategoryType {
+    #[default]
+    Hierarchical,
+    List,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum LifeSciConfigFieldDataType {
     #[default]
     TEXT,
@@ -105,6 +105,40 @@ pub enum LifeSciConfigFieldDataType {
     FIELD,
     RECORDREFERENCE,
     MULTIPICKLIST,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LifeSciConfigRecord {
+    #[serde(default)]
+    pub assignments: Vec<LifeSciConfigAssignment>,
+    #[serde(rename = "fieldValues", default)]
+    pub field_values: Vec<LifeSciConfigFieldValue>,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "isOrgLevel", default)]
+    pub is_org_level: bool,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "lifeSciConfigCategory", default)]
+    pub life_sci_config_category: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "parentConfigRecord", default)]
+    pub parent_config_record: String,
+    #[serde(default)]
+    pub r#type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LifeSciConfigAssignment {
+    #[serde(rename = "assignedTo", default)]
+    pub assigned_to: String,
+    #[serde(rename = "assignmentLevel", default)]
+    pub assignment_level: LifeSciAssignmentLevel,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -155,38 +189,4 @@ pub struct LifeSciConfigCategory {
     pub master_label: String,
     #[serde(default)]
     pub r#type: LifeSciCategoryType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LifeSciConfigAssignment {
-    #[serde(rename = "assignedTo", default)]
-    pub assigned_to: String,
-    #[serde(rename = "assignmentLevel", default)]
-    pub assignment_level: LifeSciAssignmentLevel,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LifeSciConfigRecord {
-    #[serde(default)]
-    pub assignments: Vec<LifeSciConfigAssignment>,
-    #[serde(rename = "fieldValues", default)]
-    pub field_values: Vec<LifeSciConfigFieldValue>,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isOrgLevel", default)]
-    pub is_org_level: bool,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "lifeSciConfigCategory", default)]
-    pub life_sci_config_category: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "parentConfigRecord", default)]
-    pub parent_config_record: String,
-    #[serde(default)]
-    pub r#type: String,
 }

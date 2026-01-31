@@ -25,6 +25,16 @@ pub struct Picklist {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct PicklistValueTranslation {
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub translation: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct PicklistEntry {
     #[serde(default)]
     pub active: bool,
@@ -36,16 +46,6 @@ pub struct PicklistEntry {
     pub valid_for: String,
     #[serde(default)]
     pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PicklistValueTranslation {
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub translation: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]

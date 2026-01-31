@@ -10,23 +10,132 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConvMsgExternalRejectionReason {
+pub enum ConvMsgExternalTemplateVersionStatus {
     #[default]
-    AbusiveContent,
-    IncorrectCategory,
-    InvalidFormat,
-    Scam,
-    Other,
+    Pending,
+    Rejected,
+    Approved,
+    Paused,
+    Disabled,
+    InAppeal,
+    PendingDeletion,
+    Deleted,
+    LimitExceeded,
+    Blocked,
+    OutOfSync,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MessagingChannelUsageDeploymentType {
+pub enum ConvMsgExternalTemplateVersionType {
     #[default]
-    DigitalEngagementConversation,
-    UnifiedConversation,
-    MessagingEngagement,
-    MarketingJourneyBuilder,
+    Legacy,
+    Template,
+    Flow,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConvIntelligenceType {
+    #[default]
+    Category,
+    Keyword,
+    AgentSentiment,
+    CustomerSentiment,
+    Intent,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MessagingAuthorizationType {
+    #[default]
+    PublicKeyCertificateSet,
+    AuthProvider,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConversationMessageHandlerType {
+    #[default]
+    QuickAction,
+    AuthProvider,
+    PaymentProvider,
+    Attachment,
+    Survey,
+    ApexFormProvider,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConversationVariableOperandSourceType {
+    #[default]
+    StandardConversationVariable,
+    ConversationVariable,
+    ContextVariable,
+    MlSlotClass,
+    StandardMlSlotClass,
+    Value,
+    BotDefinition,
+    Queue,
+    FlowDefinition,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConversationDefinitionLogicalOperatorType {
+    #[default]
+    And,
+    Or,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConversationInvocableTargetType {
+    #[default]
+    apex,
+    flow,
+    standardInvocableAction,
+    logFeedback,
+    externalService,
+    logGoalAchieved,
+    logDisambiguation,
+    quickAction,
+    api,
+    botAction,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConversationMessageOptionsParameterType {
+    #[default]
+    RecordIdOptions,
+    TimeSlotOptions,
+    CustomPrimitiveOptions,
+    CustomCompositeOptions,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConversationVariableVisibilityType {
+    #[default]
+    Internal,
+    External,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConversationMessageCollectionType {
+    #[default]
+    None,
+    StaticList,
+    DynamicList,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConversationSystemMessageParamType {
+    #[default]
+    Transfer,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -39,10 +148,148 @@ pub enum ConversationMessageExecutionType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MessagingChannelParameterType {
+pub enum ConversationSystemMessageType {
     #[default]
-    Standard,
+    Transfer,
+    EndChat,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConvMsgExternalErrorCode {
+    #[default]
+    InvalidParameter,
+    IntegrityError,
+    InternalError,
+    PublishError,
+    DeprecationError,
+    MetricsThresholdNotReached,
+    InvalidAccessToken,
+    ValidationError,
+    Other,
+    OutOfSync,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConvMsgExternalRejectionReason {
+    #[default]
+    AbusiveContent,
+    IncorrectCategory,
+    InvalidFormat,
+    Scam,
+    Other,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConversationMessageType {
+    #[default]
+    StaticContent,
+    Choices,
+    Form,
+    AuthenticationRequest,
+    PaymentRequest,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConversationDefinitionNlpProviderType {
+    #[default]
+    EinsteinAi,
+    Apex,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConversationSystemDialogType {
+    #[default]
+    TransferFailed,
+    ErrorHandling,
+    KnowledgeFallback,
+    Disambiguation,
+    DisambiguationFailed,
+    KnowledgeAction,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MessagingChannelStandardParameterType {
+    #[default]
+    FirstName,
+    LastName,
+    Email,
+    Subject,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConvIntelligenceActionType {
+    #[default]
+    LaunchNBA,
+    LaunchFlow,
+    AlertSupervisor,
+    AlertSupervisorAndAgent,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConvIntelligenceOperator {
+    #[default]
+    Equals,
+    NotEquals,
+    LessThan,
+    GreaterThan,
+    In,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConversationMessageMergeFieldType {
+    #[default]
+    ListTemplate,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConversationDataType {
+    #[default]
+    Text,
+    Number,
+    Boolean,
+    Object,
+    Date,
+    DateTime,
+    Currency,
+    Id,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConversationMessageConstantValueType {
+    #[default]
+    Text,
+    Url,
+    ImageAsset,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MessagingKeywordType {
+    #[default]
+    OptIn,
+    DoubleOptIn,
+    OptOut,
+    Help,
     Custom,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MessagingChannelTargetLookupValueType {
+    #[default]
+    Queue,
+    Intent,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -69,58 +316,56 @@ pub enum ConversationMessageFormatType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConvDefBlockVersionStatus {
+pub enum ChatterExtensionType {
     #[default]
-    Published,
+    Lightning,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationMessageConstantValueType {
+pub enum MessagingAutoResponseType {
     #[default]
-    Text,
+    InitialResponse,
+    AgentEngagedResponse,
+    AgentEndEngagementResponse,
+    OptInPrompt,
+    DoubleOptInPrompt,
+    EndUserInactiveResponse,
+    EndUserIdleResponse,
+    OptOutConfirmation,
+    CustomResponse,
+    HelpResponse,
+    OptInConfirmation,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConversationMessageParameterType {
+    #[default]
+    RecordIds,
+    CustomPrimitive,
+    CustomComposite,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConvParticipantRole {
+    #[default]
+    Agent,
+    Customer,
+    AgentOrCustomer,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConversationMessageConstantType {
+    #[default]
+    Title,
     Url,
-    ImageAsset,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationMessageType {
-    #[default]
-    StaticContent,
-    Choices,
-    Form,
-    AuthenticationRequest,
-    PaymentRequest,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationSystemDialogType {
-    #[default]
-    TransferFailed,
-    ErrorHandling,
-    KnowledgeFallback,
-    Disambiguation,
-    DisambiguationFailed,
-    KnowledgeAction,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConvMsgExternalTemplateVersionType {
-    #[default]
-    Legacy,
-    Template,
-    Flow,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationSystemMessageType {
-    #[default]
-    Transfer,
-    EndChat,
+    Image,
+    Options,
+    SubTitle,
+    Custom,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -145,94 +390,25 @@ pub enum ConversationMessageDefinitionType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationDataType {
+pub enum ConvDefBlockVersionStatus {
     #[default]
-    Text,
-    Number,
-    Boolean,
-    Object,
-    Date,
-    DateTime,
-    Currency,
-    Id,
+    Published,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationMessageParameterType {
+pub enum ConversationVariableType {
     #[default]
-    RecordIds,
-    CustomPrimitive,
-    CustomComposite,
+    ConversationVariable,
+    ContextVariable,
+    PageContextVariable,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ChatterExtensionType {
+pub enum ConversationVariableCollectionType {
     #[default]
-    Lightning,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationMessageContentCategory {
-    #[default]
-    Response,
-    Reminder,
-    Feedback,
-    OrderUpdate,
-    AccountUpdate,
-    PromotionalOutreach,
-    Authentication,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MessagingChannelConsentType {
-    #[default]
-    ImplicitOptIn,
-    ExplicitOptIn,
-    DoubleOptIn,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MessagingChannelTargetLookupValueType {
-    #[default]
-    Queue,
-    Intent,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationMessageValueType {
-    #[default]
-    Text,
-    Boolean,
-    Integer,
-    Double,
-    Date,
-    DateTime,
-    Url,
-    RecordId,
-    ImageId,
-    Composite,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationInvocableTargetType {
-    #[default]
-    apex,
-    flow,
-    standardInvocableAction,
-    logFeedback,
-    externalService,
-    logGoalAchieved,
-    logDisambiguation,
-    quickAction,
-    api,
-    botAction,
+    List,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -256,12 +432,45 @@ pub enum MessagingChannelType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConvIntelligenceActionType {
+pub enum ConversationMappingType {
     #[default]
-    LaunchNBA,
-    LaunchFlow,
-    AlertSupervisor,
-    AlertSupervisorAndAgent,
+    Input,
+    Output,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConversationMessageValueType {
+    #[default]
+    Text,
+    Boolean,
+    Integer,
+    Double,
+    Date,
+    DateTime,
+    Url,
+    RecordId,
+    ImageId,
+    Composite,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MessagingChannelParameterType {
+    #[default]
+    Standard,
+    Custom,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ConvIntelligenceService {
+    #[default]
+    AmazonConnectContactLens,
+    KeywordMatch,
+    CXoneAgentAssistService,
+    VonageConversationalInsights,
+    EinsteinConversationIntelligenceSignals,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -281,15 +490,6 @@ pub enum ConversationMessageLayoutValueType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationMessageCollectionType {
-    #[default]
-    None,
-    StaticList,
-    DynamicList,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum ConversationVendorType {
     #[default]
     ServiceCloudVoicePartner,
@@ -300,204 +500,21 @@ pub enum ConversationVendorType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MessagingAutoResponseType {
+pub enum MessagingChannelConsentType {
     #[default]
-    InitialResponse,
-    AgentEngagedResponse,
-    AgentEndEngagementResponse,
-    OptInPrompt,
-    DoubleOptInPrompt,
-    EndUserInactiveResponse,
-    EndUserIdleResponse,
-    OptOutConfirmation,
-    CustomResponse,
-    HelpResponse,
-    OptInConfirmation,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConvMsgExternalErrorCode {
-    #[default]
-    InvalidParameter,
-    IntegrityError,
-    InternalError,
-    PublishError,
-    DeprecationError,
-    MetricsThresholdNotReached,
-    InvalidAccessToken,
-    ValidationError,
-    Other,
-    OutOfSync,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationMessageConstantType {
-    #[default]
-    Title,
-    Url,
-    Image,
-    Options,
-    SubTitle,
-    Custom,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationMessageOptionsParameterType {
-    #[default]
-    RecordIdOptions,
-    TimeSlotOptions,
-    CustomPrimitiveOptions,
-    CustomCompositeOptions,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConvParticipantRole {
-    #[default]
-    Agent,
-    Customer,
-    AgentOrCustomer,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MessagingKeywordType {
-    #[default]
-    OptIn,
+    ImplicitOptIn,
+    ExplicitOptIn,
     DoubleOptIn,
-    OptOut,
-    Help,
-    Custom,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationVariableOperandSourceType {
+pub enum MessagingChannelUsageDeploymentType {
     #[default]
-    StandardConversationVariable,
-    ConversationVariable,
-    ContextVariable,
-    MlSlotClass,
-    StandardMlSlotClass,
-    Value,
-    BotDefinition,
-    Queue,
-    FlowDefinition,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConvIntelligenceType {
-    #[default]
-    Category,
-    Keyword,
-    AgentSentiment,
-    CustomerSentiment,
-    Intent,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConvIntelligenceOperator {
-    #[default]
-    Equals,
-    NotEquals,
-    LessThan,
-    GreaterThan,
-    In,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationMessageHandlerType {
-    #[default]
-    QuickAction,
-    AuthProvider,
-    PaymentProvider,
-    Attachment,
-    Survey,
-    ApexFormProvider,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationMappingType {
-    #[default]
-    Input,
-    Output,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationVariableCollectionType {
-    #[default]
-    List,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationSystemMessageParamType {
-    #[default]
-    Transfer,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationMessageMergeFieldType {
-    #[default]
-    ListTemplate,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConvMsgExternalTemplateVersionStatus {
-    #[default]
-    Pending,
-    Rejected,
-    Approved,
-    Paused,
-    Disabled,
-    InAppeal,
-    PendingDeletion,
-    Deleted,
-    LimitExceeded,
-    Blocked,
-    OutOfSync,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationDefinitionLogicalOperatorType {
-    #[default]
-    And,
-    Or,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationDefinitionNlpProviderType {
-    #[default]
-    EinsteinAi,
-    Apex,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationVariableVisibilityType {
-    #[default]
-    Internal,
-    External,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MessagingAuthorizationType {
-    #[default]
-    PublicKeyCertificateSet,
-    AuthProvider,
+    DigitalEngagementConversation,
+    UnifiedConversation,
+    MessagingEngagement,
+    MarketingJourneyBuilder,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -512,258 +529,15 @@ pub enum MessagingSessionHandlerType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MessagingChannelStandardParameterType {
+pub enum ConversationMessageContentCategory {
     #[default]
-    FirstName,
-    LastName,
-    Email,
-    Subject,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConversationVariableType {
-    #[default]
-    ConversationVariable,
-    ContextVariable,
-    PageContextVariable,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConvIntelligenceService {
-    #[default]
-    AmazonConnectContactLens,
-    KeywordMatch,
-    CXoneAgentAssistService,
-    VonageConversationalInsights,
-    EinsteinConversationIntelligenceSignals,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConversationMessageDefinition {
-    #[serde(default)]
-    pub constants: Vec<ConversationMessageConstant>,
-    #[serde(rename = "contentCategory", default)]
-    pub content_category: ConversationMessageContentCategory,
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub language: String,
-    #[serde(rename = "messageHandlers", default)]
-    pub message_handlers: Vec<ConversationMessageHandler>,
-    #[serde(rename = "messageLayouts", default)]
-    pub message_layouts: Vec<ConversationMessageLayout>,
-    #[serde(rename = "optionsParameter", default)]
-    pub options_parameter: ConversationMessageOptionsParameter,
-    #[serde(default)]
-    pub parameters: Vec<ConversationMessageParameter>,
-    #[serde(default)]
-    pub r#type: ConversationMessageDefinitionType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConvReasonReportDefinition {
-    #[serde(rename = "endDate", default)]
-    pub end_date: String,
-    #[serde(rename = "externalModelIdentifier", default)]
-    pub external_model_identifier: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "pipelineRunIdentifier", default)]
-    pub pipeline_run_identifier: String,
-    #[serde(rename = "refreshFrequency", default)]
-    pub refresh_frequency: serde_json::Value,
-    #[serde(rename = "reportLanguage", default)]
-    pub report_language: String,
-    #[serde(rename = "startDate", default)]
-    pub start_date: String,
-    #[serde(default)]
-    pub status: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConversationMessageParameterCompositeDetails {
-    #[serde(rename = "compositeChildItems", default)]
-    pub composite_child_items: Vec<Box<ConversationMessageParameterCompositeDetails>>,
-    #[serde(rename = "isList", default)]
-    pub is_list: bool,
-    #[serde(rename = "isRequired", default)]
-    pub is_required: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "maxListItems", default)]
-    pub max_list_items: f64,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "primitiveChildItems", default)]
-    pub primitive_child_items: Vec<ConversationMessageParameterPrimitiveDetails>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConversationDefinitionChannelProvider {
-    #[serde(rename = "agentRequired", default)]
-    pub agent_required: bool,
-    #[serde(rename = "chatButtonName", default)]
-    pub chat_button_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConversationMessageConstant {
-    #[serde(rename = "compositeValues", default)]
-    pub composite_values: Vec<ConversationMessageConstantCompositeValue>,
-    #[serde(rename = "constantType", default)]
-    pub constant_type: ConversationMessageConstantType,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "primitiveValues", default)]
-    pub primitive_values: Vec<ConversationMessageConstantPrimitiveValue>,
-    #[serde(rename = "valueType", default)]
-    pub value_type: ConversationMessageValueType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MessagingChannelUsage {
-    #[serde(rename = "channelConsentType", default)]
-    pub channel_consent_type: MessagingChannelConsentType,
-    #[serde(rename = "deploymentType", default)]
-    pub deployment_type: MessagingChannelUsageDeploymentType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ChatterAnswersReputationLevel {
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub value: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MessagingKeyword {
-    #[serde(default)]
-    pub keyword: Vec<String>,
-    #[serde(rename = "keywordType", default)]
-    pub keyword_type: MessagingKeywordType,
-    #[serde(default)]
-    pub language: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConversationDefinitionGoal {
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(default)]
-    pub label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConversationMessageConstantPrimitiveValue {
-    #[serde(rename = "contentAssetName", default)]
-    pub content_asset_name: String,
-    #[serde(rename = "textValue", default)]
-    pub text_value: String,
-    #[serde(default)]
-    pub r#type: ConversationMessageConstantValueType,
-    #[serde(rename = "urlValue", default)]
-    pub url_value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ChatterExtension {
-    #[serde(rename = "compositionComponent", default)]
-    pub composition_component: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "extensionName", default)]
-    pub extension_name: String,
-    #[serde(rename = "headerText", default)]
-    pub header_text: String,
-    #[serde(rename = "hoverText", default)]
-    pub hover_text: String,
-    #[serde(default)]
-    pub icon: String,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "renderComponent", default)]
-    pub render_component: String,
-    #[serde(default)]
-    pub r#type: ChatterExtensionType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConversationMessageConstantValueTranslation {
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConversationMessageConstantCompositeValue {
-    #[serde(rename = "constantItems", default)]
-    pub constant_items: Vec<ConversationMessageConstant>,
-    #[serde(default)]
-    pub identifier: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConvIntelligenceSignalRule {
-    #[serde(rename = "actionType", default)]
-    pub action_type: ConvIntelligenceActionType,
-    #[serde(rename = "actionValue", default)]
-    pub action_value: String,
-    #[serde(default)]
-    pub active: bool,
-    #[serde(rename = "channelAddressIdentifier", default)]
-    pub channel_address_identifier: String,
-    #[serde(rename = "channelType", default)]
-    pub channel_type: String,
-    #[serde(default)]
-    pub criteria: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "participantRole", default)]
-    pub participant_role: ConvParticipantRole,
-    #[serde(rename = "ruleName", default)]
-    pub rule_name: String,
-    #[serde(default)]
-    pub service: ConvIntelligenceService,
-    #[serde(default)]
-    pub subrule: Vec<ConvIntelligenceSignalSubRule>,
+    Response,
+    Reminder,
+    Feedback,
+    OrderUpdate,
+    AccountUpdate,
+    PromotionalOutreach,
+    Authentication,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -837,143 +611,105 @@ pub struct ConversationVendorInfo {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ConversationMessageParameter {
-    #[serde(rename = "compositeTypeDetails", default)]
-    pub composite_type_details: ConversationMessageParameterCompositeDetails,
-    #[serde(rename = "parameterType", default)]
-    pub parameter_type: ConversationMessageParameterType,
-    #[serde(rename = "primitiveTypeDetails", default)]
-    pub primitive_type_details: ConversationMessageParameterPrimitiveDetails,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConversationRecordLookup {
-    #[serde(rename = "SObjectType", default)]
-    pub s_object_type: String,
+pub struct MessagingAuthorization {
+    #[serde(rename = "authIdentifier", default)]
+    pub auth_identifier: String,
+    #[serde(rename = "authProviderName", default)]
+    pub auth_provider_name: String,
+    #[serde(rename = "authorizationType", default)]
+    pub authorization_type: MessagingAuthorizationType,
     #[serde(default)]
-    pub conditions: Vec<ConversationRecordLookupCondition>,
-    #[serde(rename = "filterLogic", default)]
-    pub filter_logic: String,
-    #[serde(rename = "lookupFields", default)]
-    pub lookup_fields: Vec<ConversationRecordLookupField>,
-    #[serde(rename = "maxLookupResults", default)]
-    pub max_lookup_results: f64,
-    #[serde(rename = "sortFieldName", default)]
-    pub sort_field_name: String,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: serde_json::Value,
-    #[serde(rename = "sourceVariableName", default)]
-    pub source_variable_name: String,
-    #[serde(rename = "sourceVariableType", default)]
-    pub source_variable_type: ConversationVariableType,
-    #[serde(rename = "targetVariableName", default)]
-    pub target_variable_name: String,
+    pub enabled: bool,
+    #[serde(rename = "publicKeyCertificateSetName", default)]
+    pub public_key_certificate_set_name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ConversationSystemMessageMapping {
-    #[serde(rename = "mappingType", default)]
-    pub mapping_type: ConversationMappingType,
-    #[serde(rename = "parameterType", default)]
-    pub parameter_type: ConversationSystemMessageParamType,
-    #[serde(rename = "variableName", default)]
-    pub variable_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConversationDefinitionNlpProvider {
+pub struct ConversationSystemDialog {
     #[serde(default)]
-    pub language: serde_json::Value,
-    #[serde(rename = "nlpProviderName", default)]
-    pub nlp_provider_name: String,
-    #[serde(rename = "nlpProviderType", default)]
-    pub nlp_provider_type: ConversationDefinitionNlpProviderType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MessagingChannel {
-    #[serde(rename = "automatedResponses", default)]
-    pub automated_responses: Vec<MessagingAutoResponse>,
-    #[serde(rename = "channelUsages", default)]
-    pub channel_usages: Vec<MessagingChannelUsage>,
-    #[serde(rename = "countryCode", default)]
-    pub country_code: String,
-    #[serde(rename = "customParameters", default)]
-    pub custom_parameters: Vec<MessagingChannelCustomParameter>,
+    pub dialog: String,
     #[serde(default)]
-    pub description: String,
-    #[serde(rename = "embeddedConfig", default)]
-    pub embedded_config: serde_json::Value,
-    #[serde(rename = "externalAccountId", default)]
-    pub external_account_id: String,
-    #[serde(rename = "isEstimatedWaitTimeEnabled", default)]
-    pub is_estimated_wait_time_enabled: bool,
-    #[serde(rename = "isQueuePositionEnabled", default)]
-    pub is_queue_position_enabled: bool,
-    #[serde(rename = "isSynchronousChatEnabled", default)]
-    pub is_synchronous_chat_enabled: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "messagingChannelType", default)]
-    pub messaging_channel_type: MessagingChannelType,
-    #[serde(rename = "messagingKeywords", default)]
-    pub messaging_keywords: Vec<MessagingKeyword>,
-    #[serde(rename = "platformKey", default)]
-    pub platform_key: String,
-    #[serde(rename = "queueRoutingConfig", default)]
-    pub queue_routing_config: String,
-    #[serde(rename = "sessionHandlerAsa", default)]
-    pub session_handler_asa: String,
-    #[serde(rename = "sessionHandlerFlow", default)]
-    pub session_handler_flow: String,
-    #[serde(rename = "sessionHandlerQueue", default)]
-    pub session_handler_queue: String,
-    #[serde(rename = "sessionHandlerType", default)]
-    pub session_handler_type: MessagingSessionHandlerType,
-    #[serde(rename = "sessionHandlerUser", default)]
-    pub session_handler_user: String,
-    #[serde(rename = "standardParameters", default)]
-    pub standard_parameters: Vec<MessagingChannelStandardParameter>,
+    pub r#type: ConversationSystemDialogType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ConversationMessageHandler {
-    #[serde(rename = "activeRequestDurationMinutes", default)]
-    pub active_request_duration_minutes: f64,
-    #[serde(rename = "handlerName", default)]
-    pub handler_name: String,
-    #[serde(rename = "handlerType", default)]
-    pub handler_type: ConversationMessageHandlerType,
+pub struct ConversationDefinitionPlanner {
+    #[serde(rename = "genAiPlannerName", default)]
+    pub gen_ai_planner_name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct MessagingChannelCustomParameter {
-    #[serde(rename = "actionParameterMappings", default)]
-    pub action_parameter_mappings: Vec<MessagingChannelActionParameterMapping>,
-    #[serde(rename = "externalParameterName", default)]
-    pub external_parameter_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "maxLength", default)]
-    pub max_length: f64,
+pub struct MessagingAutoResponse {
+    #[serde(rename = "autoResponseContentType", default)]
+    pub auto_response_content_type: serde_json::Value,
+    #[serde(default)]
+    pub language: String,
+    #[serde(rename = "messageDefinitionName", default)]
+    pub message_definition_name: String,
+    #[serde(default)]
+    pub response: String,
+    #[serde(rename = "responseTimeoutInMins", default)]
+    pub response_timeout_in_mins: f64,
+    #[serde(default)]
+    pub r#type: MessagingAutoResponseType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConversationMessageConstantCompositeValue {
+    #[serde(rename = "constantItems", default)]
+    pub constant_items: Vec<ConversationMessageConstant>,
+    #[serde(default)]
+    pub identifier: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConvReasonReportSegmentDef {
+    #[serde(rename = "convReasonReportDefinition", default)]
+    pub conv_reason_report_definition: String,
+    #[serde(rename = "conversationChannel", default)]
+    pub conversation_channel: String,
+    #[serde(rename = "filterCriteria", default)]
+    pub filter_criteria: String,
+    #[serde(rename = "filterCriteriaAsJson", default)]
+    pub filter_criteria_as_json: String,
     #[serde(default)]
     pub name: String,
-    #[serde(rename = "parameterDataType", default)]
-    pub parameter_data_type: serde_json::Value,
-    #[serde(rename = "parameterValueMappings", default)]
-    pub parameter_value_mappings: Vec<MessagingChannelParameterValueMapping>,
+    #[serde(rename = "segmentObject", default)]
+    pub segment_object: String,
+    #[serde(rename = "segmentType", default)]
+    pub segment_type: serde_json::Value,
+    #[serde(rename = "targetField", default)]
+    pub target_field: String,
+    #[serde(rename = "targetObject", default)]
+    pub target_object: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConversationRecordLookupField {
+    #[serde(rename = "fieldName", default)]
+    pub field_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConversationDefinitionGoal {
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(default)]
+    pub label: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -1039,26 +775,6 @@ pub struct ConversationChannelDefinition {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ConversationDefinitionPlanner {
-    #[serde(rename = "genAiPlannerName", default)]
-    pub gen_ai_planner_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MessagingChannelParameterValueMapping {
-    #[serde(rename = "lookupValue", default)]
-    pub lookup_value: String,
-    #[serde(rename = "lookupValueType", default)]
-    pub lookup_value_type: MessagingChannelTargetLookupValueType,
-    #[serde(rename = "parameterValue", default)]
-    pub parameter_value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct ConversationDefinitionStepGoalMapping {
     #[serde(rename = "goalName", default)]
     pub goal_name: String,
@@ -1067,27 +783,43 @@ pub struct ConversationDefinitionStepGoalMapping {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ConversationRecordLookupField {
-    #[serde(rename = "fieldName", default)]
-    pub field_name: String,
+pub struct ConversationMessageConstant {
+    #[serde(rename = "compositeValues", default)]
+    pub composite_values: Vec<ConversationMessageConstantCompositeValue>,
+    #[serde(rename = "constantType", default)]
+    pub constant_type: ConversationMessageConstantType,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "primitiveValues", default)]
+    pub primitive_values: Vec<ConversationMessageConstantPrimitiveValue>,
+    #[serde(rename = "valueType", default)]
+    pub value_type: ConversationMessageValueType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ConversationRecordLookupCondition {
-    #[serde(rename = "leftOperand", default)]
-    pub left_operand: String,
-    #[serde(rename = "operatorType", default)]
-    pub operator_type: String,
-    #[serde(rename = "rightOperandName", default)]
-    pub right_operand_name: String,
-    #[serde(rename = "rightOperandType", default)]
-    pub right_operand_type: ConversationVariableType,
-    #[serde(rename = "rightOperandValue", default)]
-    pub right_operand_value: String,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: f64,
+pub struct ConversationMessageConstantValueTranslation {
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConvIntelligenceSignalSubRule {
+    #[serde(rename = "operandValue", default)]
+    pub operand_value: String,
+    #[serde(default)]
+    pub operator: ConvIntelligenceOperator,
+    #[serde(default)]
+    pub order: f64,
+    #[serde(default)]
+    pub r#type: ConvIntelligenceType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -1115,191 +847,101 @@ pub struct ConversationMessageLayoutPrimitiveValue {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct MessagingAuthorization {
-    #[serde(rename = "authIdentifier", default)]
-    pub auth_identifier: String,
-    #[serde(rename = "authProviderName", default)]
-    pub auth_provider_name: String,
-    #[serde(rename = "authorizationType", default)]
-    pub authorization_type: MessagingAuthorizationType,
-    #[serde(default)]
-    pub enabled: bool,
-    #[serde(rename = "publicKeyCertificateSetName", default)]
-    pub public_key_certificate_set_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConversationVariable {
-    #[serde(rename = "SObjectType", default)]
-    pub s_object_type: String,
-    #[serde(rename = "collectionType", default)]
-    pub collection_type: ConversationVariableCollectionType,
-    #[serde(rename = "dataType", default)]
-    pub data_type: ConversationDataType,
+pub struct MessagingChannel {
+    #[serde(rename = "automatedResponses", default)]
+    pub automated_responses: Vec<MessagingAutoResponse>,
+    #[serde(rename = "channelUsages", default)]
+    pub channel_usages: Vec<MessagingChannelUsage>,
+    #[serde(rename = "countryCode", default)]
+    pub country_code: String,
+    #[serde(rename = "customParameters", default)]
+    pub custom_parameters: Vec<MessagingChannelCustomParameter>,
     #[serde(default)]
     pub description: String,
+    #[serde(rename = "embeddedConfig", default)]
+    pub embedded_config: serde_json::Value,
+    #[serde(rename = "externalAccountId", default)]
+    pub external_account_id: String,
+    #[serde(rename = "isEstimatedWaitTimeEnabled", default)]
+    pub is_estimated_wait_time_enabled: bool,
+    #[serde(rename = "isQueuePositionEnabled", default)]
+    pub is_queue_position_enabled: bool,
+    #[serde(rename = "isSynchronousChatEnabled", default)]
+    pub is_synchronous_chat_enabled: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "messagingChannelType", default)]
+    pub messaging_channel_type: MessagingChannelType,
+    #[serde(rename = "messagingKeywords", default)]
+    pub messaging_keywords: Vec<MessagingKeyword>,
+    #[serde(rename = "platformKey", default)]
+    pub platform_key: String,
+    #[serde(rename = "queueRoutingConfig", default)]
+    pub queue_routing_config: String,
+    #[serde(rename = "sessionHandlerAsa", default)]
+    pub session_handler_asa: String,
+    #[serde(rename = "sessionHandlerFlow", default)]
+    pub session_handler_flow: String,
+    #[serde(rename = "sessionHandlerQueue", default)]
+    pub session_handler_queue: String,
+    #[serde(rename = "sessionHandlerType", default)]
+    pub session_handler_type: MessagingSessionHandlerType,
+    #[serde(rename = "sessionHandlerUser", default)]
+    pub session_handler_user: String,
+    #[serde(rename = "standardParameters", default)]
+    pub standard_parameters: Vec<MessagingChannelStandardParameter>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConversationMessageHandler {
+    #[serde(rename = "activeRequestDurationMinutes", default)]
+    pub active_request_duration_minutes: f64,
+    #[serde(rename = "handlerName", default)]
+    pub handler_name: String,
+    #[serde(rename = "handlerType", default)]
+    pub handler_type: ConversationMessageHandlerType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConversationDefinitionNlpProvider {
+    #[serde(default)]
+    pub language: serde_json::Value,
+    #[serde(rename = "nlpProviderName", default)]
+    pub nlp_provider_name: String,
+    #[serde(rename = "nlpProviderType", default)]
+    pub nlp_provider_type: ConversationDefinitionNlpProviderType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConvIntelligenceSignalRule {
+    #[serde(rename = "actionType", default)]
+    pub action_type: ConvIntelligenceActionType,
+    #[serde(rename = "actionValue", default)]
+    pub action_value: String,
+    #[serde(default)]
+    pub active: bool,
+    #[serde(rename = "channelAddressIdentifier", default)]
+    pub channel_address_identifier: String,
+    #[serde(rename = "channelType", default)]
+    pub channel_type: String,
+    #[serde(default)]
+    pub criteria: String,
     #[serde(rename = "developerName", default)]
     pub developer_name: String,
-    #[serde(rename = "includeInPrompt", default)]
-    pub include_in_prompt: bool,
+    #[serde(rename = "participantRole", default)]
+    pub participant_role: ConvParticipantRole,
+    #[serde(rename = "ruleName", default)]
+    pub rule_name: String,
     #[serde(default)]
-    pub label: String,
+    pub service: ConvIntelligenceService,
     #[serde(default)]
-    pub visibility: ConversationVariableVisibilityType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConversationMessageMergeField {
-    #[serde(rename = "formulaTemplate", default)]
-    pub formula_template: String,
-    #[serde(rename = "mergeFieldType", default)]
-    pub merge_field_type: ConversationMessageMergeFieldType,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "valueSourceReference", default)]
-    pub value_source_reference: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MessagingChannelActionParameterMapping {
-    #[serde(rename = "actionParameterName", default)]
-    pub action_parameter_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConvIntelligenceSignalSubRule {
-    #[serde(rename = "operandValue", default)]
-    pub operand_value: String,
-    #[serde(default)]
-    pub operator: ConvIntelligenceOperator,
-    #[serde(default)]
-    pub order: f64,
-    #[serde(default)]
-    pub r#type: ConvIntelligenceType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConversationContextVariableMapping {
-    #[serde(rename = "SObjectType", default)]
-    pub s_object_type: String,
-    #[serde(rename = "fieldName", default)]
-    pub field_name: String,
-    #[serde(rename = "messageType", default)]
-    pub message_type: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConvReasonReportSegmentDef {
-    #[serde(rename = "convReasonReportDefinition", default)]
-    pub conv_reason_report_definition: String,
-    #[serde(rename = "conversationChannel", default)]
-    pub conversation_channel: String,
-    #[serde(rename = "filterCriteria", default)]
-    pub filter_criteria: String,
-    #[serde(rename = "filterCriteriaAsJson", default)]
-    pub filter_criteria_as_json: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "segmentObject", default)]
-    pub segment_object: String,
-    #[serde(rename = "segmentType", default)]
-    pub segment_type: serde_json::Value,
-    #[serde(rename = "targetField", default)]
-    pub target_field: String,
-    #[serde(rename = "targetObject", default)]
-    pub target_object: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConversationSystemMessage {
-    #[serde(rename = "systemMessageMappings", default)]
-    pub system_message_mappings: Vec<ConversationSystemMessageMapping>,
-    #[serde(default)]
-    pub r#type: ConversationSystemMessageType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConversationDefinitionRichMessage {
-    #[serde(rename = "executionType", default)]
-    pub execution_type: ConversationMessageExecutionType,
-    #[serde(rename = "messageDefinitionMappings", default)]
-    pub message_definition_mappings: Vec<serde_json::Value>,
-    #[serde(rename = "messageDefinitionName", default)]
-    pub message_definition_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConversationMessageLayoutItem {
-    #[serde(rename = "collectionType", default)]
-    pub collection_type: ConversationMessageCollectionType,
-    #[serde(rename = "compositeValues", default)]
-    pub composite_values: Vec<ConversationMessageLayoutCompositeValue>,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "primitiveValues", default)]
-    pub primitive_values: Vec<ConversationMessageLayoutPrimitiveValue>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MessagingChannelStandardParameter {
-    #[serde(rename = "actionParameterMappings", default)]
-    pub action_parameter_mappings: Vec<MessagingChannelActionParameterMapping>,
-    #[serde(rename = "parameterType", default)]
-    pub parameter_type: MessagingChannelStandardParameterType,
-    #[serde(rename = "parameterValueMappings", default)]
-    pub parameter_value_mappings: Vec<MessagingChannelParameterValueMapping>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConversationContextVariable {
-    #[serde(rename = "SObjectType", default)]
-    pub s_object_type: String,
-    #[serde(rename = "contextVariableMappings", default)]
-    pub context_variable_mappings: Vec<ConversationContextVariableMapping>,
-    #[serde(rename = "dataType", default)]
-    pub data_type: ConversationDataType,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "includeInPrompt", default)]
-    pub include_in_prompt: bool,
-    #[serde(default)]
-    pub label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConversationMessageDefinitionTranslation {
-    #[serde(rename = "constantValueTranslations", default)]
-    pub constant_value_translations: Vec<ConversationMessageConstantValueTranslation>,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
+    pub subrule: Vec<ConvIntelligenceSignalSubRule>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -1319,49 +961,13 @@ pub struct ConversationMessageLayout {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ConversationSystemDialog {
-    #[serde(default)]
-    pub dialog: String,
-    #[serde(default)]
-    pub r#type: ConversationSystemDialogType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MessagingAutoResponse {
-    #[serde(rename = "autoResponseContentType", default)]
-    pub auto_response_content_type: serde_json::Value,
-    #[serde(default)]
-    pub language: String,
-    #[serde(rename = "messageDefinitionName", default)]
-    pub message_definition_name: String,
-    #[serde(default)]
-    pub response: String,
-    #[serde(rename = "responseTimeoutInMins", default)]
-    pub response_timeout_in_mins: f64,
-    #[serde(default)]
-    pub r#type: MessagingAutoResponseType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConversationMessageParameterPrimitiveDetails {
-    #[serde(rename = "isList", default)]
-    pub is_list: bool,
-    #[serde(rename = "isRequired", default)]
-    pub is_required: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "maxListItems", default)]
-    pub max_list_items: f64,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "sobjectType", default)]
-    pub sobject_type: String,
-    #[serde(rename = "valueType", default)]
-    pub value_type: ConversationMessageValueType,
+pub struct ConversationSystemMessageMapping {
+    #[serde(rename = "mappingType", default)]
+    pub mapping_type: ConversationMappingType,
+    #[serde(rename = "parameterType", default)]
+    pub parameter_type: ConversationSystemMessageParamType,
+    #[serde(rename = "variableName", default)]
+    pub variable_name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -1379,13 +985,13 @@ pub struct ConversationMessageOptionsParameter {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ConversationMessageLayoutCompositeValue {
-    #[serde(rename = "compositeTypeName", default)]
-    pub composite_type_name: String,
-    #[serde(rename = "layoutItems", default)]
-    pub layout_items: Vec<ConversationMessageLayoutItem>,
-    #[serde(rename = "valueSourceReference", default)]
-    pub value_source_reference: String,
+pub struct ConversationContextVariableMapping {
+    #[serde(rename = "SObjectType", default)]
+    pub s_object_type: String,
+    #[serde(rename = "fieldName", default)]
+    pub field_name: String,
+    #[serde(rename = "messageType", default)]
+    pub message_type: serde_json::Value,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -1416,4 +1022,398 @@ pub struct ConvMsgExternalTemplateVersion {
     pub template_version_identifier: String,
     #[serde(default)]
     pub r#type: ConvMsgExternalTemplateVersionType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConversationMessageParameter {
+    #[serde(rename = "compositeTypeDetails", default)]
+    pub composite_type_details: ConversationMessageParameterCompositeDetails,
+    #[serde(rename = "parameterType", default)]
+    pub parameter_type: ConversationMessageParameterType,
+    #[serde(rename = "primitiveTypeDetails", default)]
+    pub primitive_type_details: ConversationMessageParameterPrimitiveDetails,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConversationMessageParameterCompositeDetails {
+    #[serde(rename = "compositeChildItems", default)]
+    pub composite_child_items: Vec<Box<ConversationMessageParameterCompositeDetails>>,
+    #[serde(rename = "isList", default)]
+    pub is_list: bool,
+    #[serde(rename = "isRequired", default)]
+    pub is_required: bool,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "maxListItems", default)]
+    pub max_list_items: f64,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "primitiveChildItems", default)]
+    pub primitive_child_items: Vec<ConversationMessageParameterPrimitiveDetails>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConversationMessageConstantPrimitiveValue {
+    #[serde(rename = "contentAssetName", default)]
+    pub content_asset_name: String,
+    #[serde(rename = "textValue", default)]
+    pub text_value: String,
+    #[serde(default)]
+    pub r#type: ConversationMessageConstantValueType,
+    #[serde(rename = "urlValue", default)]
+    pub url_value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConvReasonReportDefinition {
+    #[serde(rename = "endDate", default)]
+    pub end_date: String,
+    #[serde(rename = "externalModelIdentifier", default)]
+    pub external_model_identifier: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "pipelineRunIdentifier", default)]
+    pub pipeline_run_identifier: String,
+    #[serde(rename = "refreshFrequency", default)]
+    pub refresh_frequency: serde_json::Value,
+    #[serde(rename = "reportLanguage", default)]
+    pub report_language: String,
+    #[serde(rename = "startDate", default)]
+    pub start_date: String,
+    #[serde(default)]
+    pub status: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConversationMessageLayoutCompositeValue {
+    #[serde(rename = "compositeTypeName", default)]
+    pub composite_type_name: String,
+    #[serde(rename = "layoutItems", default)]
+    pub layout_items: Vec<ConversationMessageLayoutItem>,
+    #[serde(rename = "valueSourceReference", default)]
+    pub value_source_reference: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConversationMessageLayoutItem {
+    #[serde(rename = "collectionType", default)]
+    pub collection_type: ConversationMessageCollectionType,
+    #[serde(rename = "compositeValues", default)]
+    pub composite_values: Vec<ConversationMessageLayoutCompositeValue>,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "primitiveValues", default)]
+    pub primitive_values: Vec<ConversationMessageLayoutPrimitiveValue>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConversationMessageDefinitionTranslation {
+    #[serde(rename = "constantValueTranslations", default)]
+    pub constant_value_translations: Vec<ConversationMessageConstantValueTranslation>,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConversationSystemMessage {
+    #[serde(rename = "systemMessageMappings", default)]
+    pub system_message_mappings: Vec<ConversationSystemMessageMapping>,
+    #[serde(default)]
+    pub r#type: ConversationSystemMessageType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConversationMessageParameterPrimitiveDetails {
+    #[serde(rename = "isList", default)]
+    pub is_list: bool,
+    #[serde(rename = "isRequired", default)]
+    pub is_required: bool,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "maxListItems", default)]
+    pub max_list_items: f64,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "sobjectType", default)]
+    pub sobject_type: String,
+    #[serde(rename = "valueType", default)]
+    pub value_type: ConversationMessageValueType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConversationMessageDefinition {
+    #[serde(default)]
+    pub constants: Vec<ConversationMessageConstant>,
+    #[serde(rename = "contentCategory", default)]
+    pub content_category: ConversationMessageContentCategory,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub language: String,
+    #[serde(rename = "messageHandlers", default)]
+    pub message_handlers: Vec<ConversationMessageHandler>,
+    #[serde(rename = "messageLayouts", default)]
+    pub message_layouts: Vec<ConversationMessageLayout>,
+    #[serde(rename = "optionsParameter", default)]
+    pub options_parameter: ConversationMessageOptionsParameter,
+    #[serde(default)]
+    pub parameters: Vec<ConversationMessageParameter>,
+    #[serde(default)]
+    pub r#type: ConversationMessageDefinitionType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConversationDefinitionChannelProvider {
+    #[serde(rename = "agentRequired", default)]
+    pub agent_required: bool,
+    #[serde(rename = "chatButtonName", default)]
+    pub chat_button_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ChatterAnswersReputationLevel {
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub value: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConversationRecordLookupCondition {
+    #[serde(rename = "leftOperand", default)]
+    pub left_operand: String,
+    #[serde(rename = "operatorType", default)]
+    pub operator_type: String,
+    #[serde(rename = "rightOperandName", default)]
+    pub right_operand_name: String,
+    #[serde(rename = "rightOperandType", default)]
+    pub right_operand_type: ConversationVariableType,
+    #[serde(rename = "rightOperandValue", default)]
+    pub right_operand_value: String,
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConversationRecordLookup {
+    #[serde(rename = "SObjectType", default)]
+    pub s_object_type: String,
+    #[serde(default)]
+    pub conditions: Vec<ConversationRecordLookupCondition>,
+    #[serde(rename = "filterLogic", default)]
+    pub filter_logic: String,
+    #[serde(rename = "lookupFields", default)]
+    pub lookup_fields: Vec<ConversationRecordLookupField>,
+    #[serde(rename = "maxLookupResults", default)]
+    pub max_lookup_results: f64,
+    #[serde(rename = "sortFieldName", default)]
+    pub sort_field_name: String,
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: serde_json::Value,
+    #[serde(rename = "sourceVariableName", default)]
+    pub source_variable_name: String,
+    #[serde(rename = "sourceVariableType", default)]
+    pub source_variable_type: ConversationVariableType,
+    #[serde(rename = "targetVariableName", default)]
+    pub target_variable_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConversationMessageMergeField {
+    #[serde(rename = "formulaTemplate", default)]
+    pub formula_template: String,
+    #[serde(rename = "mergeFieldType", default)]
+    pub merge_field_type: ConversationMessageMergeFieldType,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "valueSourceReference", default)]
+    pub value_source_reference: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MessagingChannelStandardParameter {
+    #[serde(rename = "actionParameterMappings", default)]
+    pub action_parameter_mappings: Vec<MessagingChannelActionParameterMapping>,
+    #[serde(rename = "parameterType", default)]
+    pub parameter_type: MessagingChannelStandardParameterType,
+    #[serde(rename = "parameterValueMappings", default)]
+    pub parameter_value_mappings: Vec<MessagingChannelParameterValueMapping>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConversationVariable {
+    #[serde(rename = "SObjectType", default)]
+    pub s_object_type: String,
+    #[serde(rename = "collectionType", default)]
+    pub collection_type: ConversationVariableCollectionType,
+    #[serde(rename = "dataType", default)]
+    pub data_type: ConversationDataType,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "includeInPrompt", default)]
+    pub include_in_prompt: bool,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub visibility: ConversationVariableVisibilityType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConversationContextVariable {
+    #[serde(rename = "SObjectType", default)]
+    pub s_object_type: String,
+    #[serde(rename = "contextVariableMappings", default)]
+    pub context_variable_mappings: Vec<ConversationContextVariableMapping>,
+    #[serde(rename = "dataType", default)]
+    pub data_type: ConversationDataType,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "includeInPrompt", default)]
+    pub include_in_prompt: bool,
+    #[serde(default)]
+    pub label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConversationDefinitionRichMessage {
+    #[serde(rename = "executionType", default)]
+    pub execution_type: ConversationMessageExecutionType,
+    #[serde(rename = "messageDefinitionMappings", default)]
+    pub message_definition_mappings: Vec<serde_json::Value>,
+    #[serde(rename = "messageDefinitionName", default)]
+    pub message_definition_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MessagingChannelParameterValueMapping {
+    #[serde(rename = "lookupValue", default)]
+    pub lookup_value: String,
+    #[serde(rename = "lookupValueType", default)]
+    pub lookup_value_type: MessagingChannelTargetLookupValueType,
+    #[serde(rename = "parameterValue", default)]
+    pub parameter_value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MessagingChannelCustomParameter {
+    #[serde(rename = "actionParameterMappings", default)]
+    pub action_parameter_mappings: Vec<MessagingChannelActionParameterMapping>,
+    #[serde(rename = "externalParameterName", default)]
+    pub external_parameter_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "maxLength", default)]
+    pub max_length: f64,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "parameterDataType", default)]
+    pub parameter_data_type: serde_json::Value,
+    #[serde(rename = "parameterValueMappings", default)]
+    pub parameter_value_mappings: Vec<MessagingChannelParameterValueMapping>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ChatterExtension {
+    #[serde(rename = "compositionComponent", default)]
+    pub composition_component: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "extensionName", default)]
+    pub extension_name: String,
+    #[serde(rename = "headerText", default)]
+    pub header_text: String,
+    #[serde(rename = "hoverText", default)]
+    pub hover_text: String,
+    #[serde(default)]
+    pub icon: String,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "renderComponent", default)]
+    pub render_component: String,
+    #[serde(default)]
+    pub r#type: ChatterExtensionType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MessagingKeyword {
+    #[serde(default)]
+    pub keyword: Vec<String>,
+    #[serde(rename = "keywordType", default)]
+    pub keyword_type: MessagingKeywordType,
+    #[serde(default)]
+    pub language: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MessagingChannelActionParameterMapping {
+    #[serde(rename = "actionParameterName", default)]
+    pub action_parameter_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MessagingChannelUsage {
+    #[serde(rename = "channelConsentType", default)]
+    pub channel_consent_type: MessagingChannelConsentType,
+    #[serde(rename = "deploymentType", default)]
+    pub deployment_type: MessagingChannelUsageDeploymentType,
 }

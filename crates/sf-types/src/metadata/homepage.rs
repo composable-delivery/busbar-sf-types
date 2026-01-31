@@ -11,6 +11,16 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct HomePageLayout {
+    #[serde(rename = "narrowComponents", default)]
+    pub narrow_components: Vec<String>,
+    #[serde(rename = "wideComponents", default)]
+    pub wide_components: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct HomePageComponent {
     #[serde(default)]
     pub body: String,
@@ -28,14 +38,4 @@ pub struct HomePageComponent {
     pub show_scrollbars: bool,
     #[serde(default)]
     pub width: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct HomePageLayout {
-    #[serde(rename = "narrowComponents", default)]
-    pub narrow_components: Vec<String>,
-    #[serde(rename = "wideComponents", default)]
-    pub wide_components: Vec<String>,
 }

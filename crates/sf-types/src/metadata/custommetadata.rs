@@ -27,6 +27,46 @@ pub enum CustomSettingsType {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct CustomMetadataValue {
+    #[serde(default)]
+    pub field: String,
+    #[serde(default)]
+    pub value: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CustomTabTranslation {
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CustomNotificationType {
+    #[serde(rename = "actionGroups", default)]
+    pub action_groups: Vec<CustomNotificationActionGroup>,
+    #[serde(rename = "customNotifTypeName", default)]
+    pub custom_notif_type_name: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub desktop: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub mobile: bool,
+    #[serde(default)]
+    pub slack: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct CustomDataType {
     #[serde(rename = "customDataTypeComponents", default)]
     pub custom_data_type_components: Vec<CustomDataTypeComponent>,
@@ -47,39 +87,11 @@ pub struct CustomDataType {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct CustomMetadata {
+pub struct CustomPermissionDependencyRequired {
+    #[serde(rename = "customPermission", default)]
+    pub custom_permission: String,
     #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub protected: bool,
-    #[serde(default)]
-    pub values: Vec<CustomMetadataValue>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomDataTypeComponent {
-    #[serde(rename = "developerSuffix", default)]
-    pub developer_suffix: String,
-    #[serde(rename = "enforceFieldRequiredness", default)]
-    pub enforce_field_requiredness: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub length: f64,
-    #[serde(default)]
-    pub precision: f64,
-    #[serde(default)]
-    pub scale: f64,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: serde_json::Value,
-    #[serde(rename = "sortPriority", default)]
-    pub sort_priority: f64,
-    #[serde(default)]
-    pub r#type: serde_json::Value,
+    pub dependency: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -95,75 +107,23 @@ pub struct CustomLabelTranslation {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct CustomMetadataValue {
+pub struct CustomLabels {
     #[serde(default)]
-    pub field: String,
-    #[serde(default)]
-    pub value: serde_json::Value,
+    pub labels: Vec<CustomLabel>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct CustomPermissionDependencyRequired {
-    #[serde(rename = "customPermission", default)]
-    pub custom_permission: String,
-    #[serde(default)]
-    pub dependency: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomApplicationComponent {
-    #[serde(rename = "buttonIconUrl", default)]
-    pub button_icon_url: String,
-    #[serde(rename = "buttonStyle", default)]
-    pub button_style: String,
-    #[serde(rename = "buttonText", default)]
-    pub button_text: String,
-    #[serde(rename = "buttonWidth", default)]
-    pub button_width: f64,
-    #[serde(default)]
-    pub height: f64,
-    #[serde(rename = "isHeightFixed", default)]
-    pub is_height_fixed: bool,
-    #[serde(rename = "isHidden", default)]
-    pub is_hidden: bool,
-    #[serde(rename = "isWidthFixed", default)]
-    pub is_width_fixed: bool,
-    #[serde(rename = "visualforcePage", default)]
-    pub visualforce_page: String,
-    #[serde(default)]
-    pub width: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomPermission {
-    #[serde(rename = "connectedApp", default)]
-    pub connected_app: String,
+pub struct CustomHttpHeader {
     #[serde(default)]
     pub description: String,
-    #[serde(rename = "externalClientApplication", default)]
-    pub external_client_application: String,
-    #[serde(rename = "isLicensed", default)]
-    pub is_licensed: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "requiredPermission", default)]
-    pub required_permission: Vec<CustomPermissionDependencyRequired>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomNotificationActionGroup {
-    #[serde(default)]
-    pub actions: Vec<CustomNotificationActionDefinition>,
-    #[serde(rename = "groupName", default)]
-    pub group_name: String,
+    #[serde(rename = "headerFieldName", default)]
+    pub header_field_name: String,
+    #[serde(rename = "headerFieldValue", default)]
+    pub header_field_value: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -202,6 +162,132 @@ pub struct CustomTab {
     pub url: String,
     #[serde(rename = "urlEncodingKey", default)]
     pub url_encoding_key: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CustomApplicationComponent {
+    #[serde(rename = "buttonIconUrl", default)]
+    pub button_icon_url: String,
+    #[serde(rename = "buttonStyle", default)]
+    pub button_style: String,
+    #[serde(rename = "buttonText", default)]
+    pub button_text: String,
+    #[serde(rename = "buttonWidth", default)]
+    pub button_width: f64,
+    #[serde(default)]
+    pub height: f64,
+    #[serde(rename = "isHeightFixed", default)]
+    pub is_height_fixed: bool,
+    #[serde(rename = "isHidden", default)]
+    pub is_hidden: bool,
+    #[serde(rename = "isWidthFixed", default)]
+    pub is_width_fixed: bool,
+    #[serde(rename = "visualforcePage", default)]
+    pub visualforce_page: String,
+    #[serde(default)]
+    pub width: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CustomDataTypeComponent {
+    #[serde(rename = "developerSuffix", default)]
+    pub developer_suffix: String,
+    #[serde(rename = "enforceFieldRequiredness", default)]
+    pub enforce_field_requiredness: bool,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub length: f64,
+    #[serde(default)]
+    pub precision: f64,
+    #[serde(default)]
+    pub scale: f64,
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: serde_json::Value,
+    #[serde(rename = "sortPriority", default)]
+    pub sort_priority: f64,
+    #[serde(default)]
+    pub r#type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CustomMetadata {
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub protected: bool,
+    #[serde(default)]
+    pub values: Vec<CustomMetadataValue>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CustomPermission {
+    #[serde(rename = "connectedApp", default)]
+    pub connected_app: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "externalClientApplication", default)]
+    pub external_client_application: String,
+    #[serde(rename = "isLicensed", default)]
+    pub is_licensed: bool,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "requiredPermission", default)]
+    pub required_permission: Vec<CustomPermissionDependencyRequired>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CustomPageWebLinkTranslation {
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CustomNotificationActionGroup {
+    #[serde(default)]
+    pub actions: Vec<CustomNotificationActionDefinition>,
+    #[serde(rename = "groupName", default)]
+    pub group_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CustomNotificationActionDefinition {
+    #[serde(rename = "actionLabel", default)]
+    pub action_label: String,
+    #[serde(rename = "actionName", default)]
+    pub action_name: String,
+    #[serde(rename = "actionTarget", default)]
+    pub action_target: String,
+    #[serde(rename = "actionType", default)]
+    pub action_type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CustomHelpMenuSection {
+    #[serde(rename = "customHelpMenuItems", default)]
+    pub custom_help_menu_items: Vec<serde_json::Value>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -255,74 +341,6 @@ pub struct CustomPageWebLink {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct CustomTabTranslation {
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomHelpMenuSection {
-    #[serde(rename = "customHelpMenuItems", default)]
-    pub custom_help_menu_items: Vec<serde_json::Value>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomConsoleComponents {
-    #[serde(rename = "primaryTabComponents", default)]
-    pub primary_tab_components: serde_json::Value,
-    #[serde(rename = "subtabComponents", default)]
-    pub subtab_components: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomPageWebLinkTranslation {
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomNotificationActionDefinition {
-    #[serde(rename = "actionLabel", default)]
-    pub action_label: String,
-    #[serde(rename = "actionName", default)]
-    pub action_name: String,
-    #[serde(rename = "actionTarget", default)]
-    pub action_target: String,
-    #[serde(rename = "actionType", default)]
-    pub action_type: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomHttpHeader {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "headerFieldName", default)]
-    pub header_field_name: String,
-    #[serde(rename = "headerFieldValue", default)]
-    pub header_field_value: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct CustomLabel {
     #[serde(default)]
     pub categories: String,
@@ -339,27 +357,9 @@ pub struct CustomLabel {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct CustomNotificationType {
-    #[serde(rename = "actionGroups", default)]
-    pub action_groups: Vec<CustomNotificationActionGroup>,
-    #[serde(rename = "customNotifTypeName", default)]
-    pub custom_notif_type_name: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub desktop: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub mobile: bool,
-    #[serde(default)]
-    pub slack: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomLabels {
-    #[serde(default)]
-    pub labels: Vec<CustomLabel>,
+pub struct CustomConsoleComponents {
+    #[serde(rename = "primaryTabComponents", default)]
+    pub primary_tab_components: serde_json::Value,
+    #[serde(rename = "subtabComponents", default)]
+    pub subtab_components: serde_json::Value,
 }

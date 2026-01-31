@@ -10,6 +10,15 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum PlatformEventType {
+    #[default]
+    HighVolume,
+    StandardVolume,
+    ExternalEvent,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum PlatformActionGroupCategory {
     #[default]
     Primary,
@@ -18,18 +27,25 @@ pub enum PlatformActionGroupCategory {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum NotificationActionType {
+pub enum PlatformEventChannelType {
     #[default]
-    NotificationApiAction,
-    Share,
+    event,
+    data,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EventSubscriptionReplayPreset {
+pub enum PlatformSchemaContentType {
     #[default]
-    EARLIEST,
-    LATEST,
+    Json,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum EventDeliveryType {
+    #[default]
+    StartFlow,
+    ResumeFlow,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -61,12 +77,18 @@ pub enum PlatformActionListContext {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PlatformEventChannelEventType {
+pub enum NotificationActionType {
     #[default]
-    custom,
-    standard,
-    monitoring,
-    data,
+    NotificationApiAction,
+    Share,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum EventSubscriptionReplayPreset {
+    #[default]
+    EARLIEST,
+    LATEST,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -80,34 +102,12 @@ pub enum EventSubscriptionAdminState {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PlatformSchemaContentType {
+pub enum EventRelayAdminState {
     #[default]
-    Json,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PlatformEventType {
-    #[default]
-    HighVolume,
-    StandardVolume,
-    ExternalEvent,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EventDeliveryType {
-    #[default]
-    StartFlow,
-    ResumeFlow,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PlatformEventChannelType {
-    #[default]
-    event,
-    data,
+    RUN,
+    STOP,
+    PAUSE,
+    DELETE,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -121,12 +121,12 @@ pub enum EventRelayUsageType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EventRelayAdminState {
+pub enum PlatformEventChannelEventType {
     #[default]
-    RUN,
-    STOP,
-    PAUSE,
-    DELETE,
+    custom,
+    standard,
+    monitoring,
+    data,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -152,105 +152,9 @@ pub enum PlatformEventPublishBehavior {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PlatformCachePartition {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isDefaultPartition", default)]
-    pub is_default_partition: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "platformCachePartitionTypes", default)]
-    pub platform_cache_partition_types: Vec<PlatformCachePartitionType>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct NtfcnCriteria {
-    #[serde(default)]
-    pub condition: Vec<NtfcnCondition>,
-    #[serde(rename = "criteriaName", default)]
-    pub criteria_name: String,
-    #[serde(rename = "customExpression", default)]
-    pub custom_expression: String,
-    #[serde(rename = "expressionType", default)]
-    pub expression_type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct NtfcnChannelActionDef {
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "notificationActionName", default)]
-    pub notification_action_name: String,
-    #[serde(rename = "targetType", default)]
-    pub target_type: String,
-    #[serde(rename = "targetUrl", default)]
-    pub target_url: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PlatformEventSubscriberConfig {
-    #[serde(rename = "batchSize", default)]
-    pub batch_size: f64,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "numPartitions", default)]
-    pub num_partitions: f64,
-    #[serde(rename = "partitionKey", default)]
-    pub partition_key: String,
-    #[serde(rename = "platformEventConsumer", default)]
-    pub platform_event_consumer: String,
-    #[serde(default)]
-    pub user: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct NtfcnCondition {
-    #[serde(rename = "fieldName", default)]
-    pub field_name: String,
-    #[serde(default)]
-    pub operator: String,
-    #[serde(rename = "sequenceNumber", default)]
-    pub sequence_number: f64,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PlatformCachePartitionType {
-    #[serde(rename = "allocatedCapacity", default)]
-    pub allocated_capacity: f64,
-    #[serde(rename = "allocatedPartnerCapacity", default)]
-    pub allocated_partner_capacity: f64,
-    #[serde(rename = "allocatedPurchasedCapacity", default)]
-    pub allocated_purchased_capacity: f64,
-    #[serde(rename = "allocatedTrialCapacity", default)]
-    pub allocated_trial_capacity: f64,
-    #[serde(rename = "cacheType", default)]
-    pub cache_type: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct NtfcnChannelCont {
-    #[serde(rename = "emailTemplate", default)]
-    pub email_template: String,
-    #[serde(rename = "messageBody", default)]
-    pub message_body: String,
-    #[serde(rename = "messageTitle", default)]
-    pub message_title: String,
+pub struct NotificationTypeConfig {
+    #[serde(rename = "notificationTypeSettings", default)]
+    pub notification_type_settings: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -261,28 +165,6 @@ pub struct EventSubtype {
     pub api_name: String,
     #[serde(default)]
     pub label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct NotificationTypeConfig {
-    #[serde(rename = "notificationTypeSettings", default)]
-    pub notification_type_settings: Vec<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EventSubscription {
-    #[serde(default)]
-    pub active: bool,
-    #[serde(rename = "eventParameters", default)]
-    pub event_parameters: Vec<EventParameterMap>,
-    #[serde(rename = "eventType", default)]
-    pub event_type: String,
-    #[serde(rename = "referenceData", default)]
-    pub reference_data: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -326,6 +208,20 @@ pub struct NotificationChannels {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct NtfcnCondition {
+    #[serde(rename = "fieldName", default)]
+    pub field_name: String,
+    #[serde(default)]
+    pub operator: String,
+    #[serde(rename = "sequenceNumber", default)]
+    pub sequence_number: f64,
+    #[serde(default)]
+    pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct EventDelivery {
     #[serde(rename = "eventParameters", default)]
     pub event_parameters: Vec<EventParameterMap>,
@@ -340,11 +236,141 @@ pub struct EventDelivery {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct NtfcnChannelActionDef {
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "notificationActionName", default)]
+    pub notification_action_name: String,
+    #[serde(rename = "targetType", default)]
+    pub target_type: String,
+    #[serde(rename = "targetUrl", default)]
+    pub target_url: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PlatformCachePartition {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "isDefaultPartition", default)]
+    pub is_default_partition: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "platformCachePartitionTypes", default)]
+    pub platform_cache_partition_types: Vec<PlatformCachePartitionType>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PlatformCachePartitionType {
+    #[serde(rename = "allocatedCapacity", default)]
+    pub allocated_capacity: f64,
+    #[serde(rename = "allocatedPartnerCapacity", default)]
+    pub allocated_partner_capacity: f64,
+    #[serde(rename = "allocatedPurchasedCapacity", default)]
+    pub allocated_purchased_capacity: f64,
+    #[serde(rename = "allocatedTrialCapacity", default)]
+    pub allocated_trial_capacity: f64,
+    #[serde(rename = "cacheType", default)]
+    pub cache_type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct EventLogObject {
     #[serde(rename = "eventLogName", default)]
     pub event_log_name: String,
     #[serde(rename = "isEnabled", default)]
     pub is_enabled: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct NtfcnDefinition {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "notificationCriteria", default)]
+    pub notification_criteria: Vec<NtfcnCriteria>,
+    #[serde(rename = "ntfcnChannelDefs", default)]
+    pub ntfcn_channel_defs: Vec<NtfcnChannelDef>,
+    #[serde(rename = "referenceObject", default)]
+    pub reference_object: String,
+    #[serde(default)]
+    pub status: String,
+    #[serde(rename = "triggerEventType", default)]
+    pub trigger_event_type: String,
+    #[serde(rename = "usageType", default)]
+    pub usage_type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PlatformEventSubscriberConfig {
+    #[serde(rename = "batchSize", default)]
+    pub batch_size: f64,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "numPartitions", default)]
+    pub num_partitions: f64,
+    #[serde(rename = "partitionKey", default)]
+    pub partition_key: String,
+    #[serde(rename = "platformEventConsumer", default)]
+    pub platform_event_consumer: String,
+    #[serde(default)]
+    pub user: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EventSubscription {
+    #[serde(default)]
+    pub active: bool,
+    #[serde(rename = "eventParameters", default)]
+    pub event_parameters: Vec<EventParameterMap>,
+    #[serde(rename = "eventType", default)]
+    pub event_type: String,
+    #[serde(rename = "referenceData", default)]
+    pub reference_data: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct NtfcnChannelRec {
+    #[serde(default)]
+    pub active: bool,
+    #[serde(default)]
+    pub recipient: String,
+    #[serde(rename = "recipientType", default)]
+    pub recipient_type: String,
+    #[serde(rename = "targetIdentifier", default)]
+    pub target_identifier: String,
+    #[serde(rename = "teamIdentifier", default)]
+    pub team_identifier: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct NtfcnCriteria {
+    #[serde(default)]
+    pub condition: Vec<NtfcnCondition>,
+    #[serde(rename = "criteriaName", default)]
+    pub criteria_name: String,
+    #[serde(rename = "customExpression", default)]
+    pub custom_expression: String,
+    #[serde(rename = "expressionType", default)]
+    pub expression_type: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -384,37 +410,11 @@ pub struct PlatformLicenseDefinition {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct NtfcnDefinition {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "notificationCriteria", default)]
-    pub notification_criteria: Vec<NtfcnCriteria>,
-    #[serde(rename = "ntfcnChannelDefs", default)]
-    pub ntfcn_channel_defs: Vec<NtfcnChannelDef>,
-    #[serde(rename = "referenceObject", default)]
-    pub reference_object: String,
-    #[serde(default)]
-    pub status: String,
-    #[serde(rename = "triggerEventType", default)]
-    pub trigger_event_type: String,
-    #[serde(rename = "usageType", default)]
-    pub usage_type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct NtfcnChannelRec {
-    #[serde(default)]
-    pub active: bool,
-    #[serde(default)]
-    pub recipient: String,
-    #[serde(rename = "recipientType", default)]
-    pub recipient_type: String,
-    #[serde(rename = "targetIdentifier", default)]
-    pub target_identifier: String,
-    #[serde(rename = "teamIdentifier", default)]
-    pub team_identifier: String,
+pub struct NtfcnChannelCont {
+    #[serde(rename = "emailTemplate", default)]
+    pub email_template: String,
+    #[serde(rename = "messageBody", default)]
+    pub message_body: String,
+    #[serde(rename = "messageTitle", default)]
+    pub message_title: String,
 }

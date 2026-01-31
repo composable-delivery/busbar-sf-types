@@ -10,20 +10,58 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AdvAcctFcstMeasureType {
-    #[default]
-    QUANTITY,
-    REVENUE,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum AdvAcctFcstCalcFrequency {
     #[default]
     Monthly,
     Quarterly,
     Yearly,
     Weekly,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum AdvAcctFrcstDisplayGroupType {
+    #[default]
+    MEASURE,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum AdvAccForecastSetStatus {
+    #[default]
+    Active,
+    Inactive,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ForecastingDateType {
+    #[default]
+    OpportunityCloseDate,
+    ProductDate,
+    ScheduleDate,
+    OLIMeasureCloseDateOnly,
+    ProductDateOnly,
+    ScheduleDateOnly,
+    OpportunityCustomDate,
+    OLIMeasureOppCustomDateOnly,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum AdvAcctFcstComputationMethod {
+    #[default]
+    DATA_PROCESSING_ENGINE_DEFINITION,
+    CUSTOM,
+    FORMULA,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum AdvAcctFcstMeasureType {
+    #[default]
+    QUANTITY,
+    REVENUE,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -44,42 +82,40 @@ pub enum AdvAcctFcstAggregationType {
     AVERAGE,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AdvAcctFrcstDisplayGroupType {
-    #[default]
-    MEASURE,
+#[serde(rename_all = "camelCase")]
+pub struct ForecastingGroup {
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "forecastingGroupItems", default)]
+    pub forecasting_group_items: Vec<ForecastingGroupItem>,
+    #[serde(rename = "groupField", default)]
+    pub group_field: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "sourceObject", default)]
+    pub source_object: String,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AdvAccForecastSetStatus {
-    #[default]
-    Active,
-    Inactive,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AdvAcctFcstComputationMethod {
-    #[default]
-    DATA_PROCESSING_ENGINE_DEFINITION,
-    CUSTOM,
-    FORMULA,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ForecastingDateType {
-    #[default]
-    OpportunityCloseDate,
-    ProductDate,
-    ScheduleDate,
-    OLIMeasureCloseDateOnly,
-    ProductDateOnly,
-    ScheduleDateOnly,
-    OpportunityCustomDate,
-    OLIMeasureOppCustomDateOnly,
+#[serde(rename_all = "camelCase")]
+pub struct ForecastingTypeSource {
+    #[serde(rename = "forecastingSourceDefinition", default)]
+    pub forecasting_source_definition: String,
+    #[serde(rename = "forecastingType", default)]
+    pub forecasting_type: String,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "parentSourceDefinition", default)]
+    pub parent_source_definition: String,
+    #[serde(rename = "relationField", default)]
+    pub relation_field: String,
+    #[serde(rename = "sourceGroup", default)]
+    pub source_group: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -135,64 +171,6 @@ pub struct AdvAccountForecastSet {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ForecastingTypeSource {
-    #[serde(rename = "forecastingSourceDefinition", default)]
-    pub forecasting_source_definition: String,
-    #[serde(rename = "forecastingType", default)]
-    pub forecasting_type: String,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "parentSourceDefinition", default)]
-    pub parent_source_definition: String,
-    #[serde(rename = "relationField", default)]
-    pub relation_field: String,
-    #[serde(rename = "sourceGroup", default)]
-    pub source_group: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ForecastingObjectListLabelMapping {
-    #[serde(default)]
-    pub field: String,
-    #[serde(default)]
-    pub label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AdvAcctForecastPeriodGroup {
-    #[serde(rename = "forecastPeriodGroupName", default)]
-    pub forecast_period_group_name: String,
-    #[serde(rename = "forecastPeriods", default)]
-    pub forecast_periods: Vec<AdvAccountForecastPeriod>,
-    #[serde(rename = "startPeriod", default)]
-    pub start_period: f64,
-    #[serde(default)]
-    pub status: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AdvancedFieldMapping {
-    #[serde(rename = "sourceField", default)]
-    pub source_field: String,
-    #[serde(rename = "sourceObject", default)]
-    pub source_object: String,
-    #[serde(rename = "targetField", default)]
-    pub target_field: String,
-    #[serde(rename = "targetObject", default)]
-    pub target_object: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct AdvAcctForecastDimension {
     #[serde(rename = "advAcctForecastDimName", default)]
     pub adv_acct_forecast_dim_name: String,
@@ -202,50 +180,6 @@ pub struct AdvAcctForecastDimension {
     pub dimension_source_name: String,
     #[serde(rename = "hierarchySequenceNumber", default)]
     pub hierarchy_sequence_number: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ForecastingFilterCondition {
-    #[serde(rename = "colName", default)]
-    pub col_name: String,
-    #[serde(rename = "fieldName", default)]
-    pub field_name: String,
-    #[serde(rename = "forecastingFilter", default)]
-    pub forecasting_filter: String,
-    #[serde(rename = "forecastingSourceDefinition", default)]
-    pub forecasting_source_definition: String,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub operation: serde_json::Value,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: f64,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ForecastingCategoryMapping {
-    #[serde(rename = "forecastingItemCategoryApiName", default)]
-    pub forecasting_item_category_api_name: String,
-    #[serde(rename = "weightedSourceCategories", default)]
-    pub weighted_source_categories: Vec<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AdvAcctForecastDimSource {
-    #[serde(rename = "advAcctForecastDimSrcName", default)]
-    pub adv_acct_forecast_dim_src_name: String,
-    #[serde(rename = "sourceObjectName", default)]
-    pub source_object_name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -279,35 +213,45 @@ pub struct ForecastingSourceDefinition {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct AdvAccountForecastPeriod {
-    #[serde(rename = "displayDuration", default)]
-    pub display_duration: f64,
-    #[serde(rename = "sequenceNumber", default)]
-    pub sequence_number: f64,
-    #[serde(default)]
-    pub r#type: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AdvAcctFrcstDplyGroupItem {
-    #[serde(rename = "advAcctFrcstDplyGroupItemName", default)]
-    pub adv_acct_frcst_dply_group_item_name: String,
-    #[serde(rename = "displayOrder", default)]
-    pub display_order: f64,
-    #[serde(rename = "measureReferenceName", default)]
-    pub measure_reference_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct ForecastingGroupItem {
     #[serde(rename = "displayPosition", default)]
     pub display_position: f64,
     #[serde(rename = "sourceApiValue", default)]
     pub source_api_value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AdvAcctForecastDimSource {
+    #[serde(rename = "advAcctForecastDimSrcName", default)]
+    pub adv_acct_forecast_dim_src_name: String,
+    #[serde(rename = "sourceObjectName", default)]
+    pub source_object_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ForecastingCategoryMapping {
+    #[serde(rename = "forecastingItemCategoryApiName", default)]
+    pub forecasting_item_category_api_name: String,
+    #[serde(rename = "weightedSourceCategories", default)]
+    pub weighted_source_categories: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AdvAcctForecastPeriodGroup {
+    #[serde(rename = "forecastPeriodGroupName", default)]
+    pub forecast_period_group_name: String,
+    #[serde(rename = "forecastPeriods", default)]
+    pub forecast_periods: Vec<AdvAccountForecastPeriod>,
+    #[serde(rename = "startPeriod", default)]
+    pub start_period: f64,
+    #[serde(default)]
+    pub status: serde_json::Value,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -327,21 +271,103 @@ pub struct AdvAccountForecastFormula {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ForecastingFilter {
-    #[serde(rename = "filterLogic", default)]
-    pub filter_logic: String,
-    #[serde(rename = "forecastingCustomCategory", default)]
-    pub forecasting_custom_category: String,
-    #[serde(rename = "forecastingType", default)]
-    pub forecasting_type: String,
-    #[serde(rename = "forecastingTypeSource", default)]
-    pub forecasting_type_source: String,
-    #[serde(rename = "forecastingTypeSourceCategory", default)]
-    pub forecasting_type_source_category: String,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
+pub struct AdvancedObjectMapping {
+    #[serde(default)]
+    pub client: serde_json::Value,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub rows: Vec<AdvancedFieldMapping>,
+    #[serde(rename = "sourceObject", default)]
+    pub source_object: String,
+    #[serde(rename = "targetObject", default)]
+    pub target_object: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AdvAccountForecastPeriod {
+    #[serde(rename = "displayDuration", default)]
+    pub display_duration: f64,
+    #[serde(rename = "sequenceNumber", default)]
+    pub sequence_number: f64,
+    #[serde(default)]
+    pub r#type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AdvAcctFrcstDisplayGroup {
+    #[serde(rename = "advAcctFrcstDisplayGroupName", default)]
+    pub adv_acct_frcst_display_group_name: String,
+    #[serde(rename = "displayGroupItems", default)]
+    pub display_group_items: Vec<AdvAcctFrcstDplyGroupItem>,
+    #[serde(rename = "displayGroupType", default)]
+    pub display_group_type: AdvAcctFrcstDisplayGroupType,
+    #[serde(rename = "isDefault", default)]
+    pub is_default: bool,
+    #[serde(rename = "userProfileName", default)]
+    pub user_profile_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AdvAcctForecastAdjPeriod {
+    #[serde(rename = "adjustmentDayCount", default)]
+    pub adjustment_day_count: f64,
+    #[serde(default)]
+    pub frequency: serde_json::Value,
+    #[serde(rename = "profileName", default)]
+    pub profile_name: String,
+    #[serde(rename = "startDay", default)]
+    pub start_day: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ForecastingObjectListLabelMapping {
+    #[serde(default)]
+    pub field: String,
+    #[serde(default)]
+    pub label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AdvAcctFrcstDplyGroupItem {
+    #[serde(rename = "advAcctFrcstDplyGroupItemName", default)]
+    pub adv_acct_frcst_dply_group_item_name: String,
+    #[serde(rename = "displayOrder", default)]
+    pub display_order: f64,
+    #[serde(rename = "measureReferenceName", default)]
+    pub measure_reference_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AdvAcctForecastMeasureDef {
+    #[serde(rename = "advAcctForecastMeasureDefName", default)]
+    pub adv_acct_forecast_measure_def_name: String,
+    #[serde(rename = "aggregationType", default)]
+    pub aggregation_type: AdvAcctFcstAggregationType,
+    #[serde(rename = "computationMethod", default)]
+    pub computation_method: AdvAcctFcstComputationMethod,
+    #[serde(rename = "forecastDataMeasureName", default)]
+    pub forecast_data_measure_name: String,
+    #[serde(rename = "forecastMeasureName", default)]
+    pub forecast_measure_name: String,
+    #[serde(rename = "forecastMeasureType", default)]
+    pub forecast_measure_type: AdvAcctFcstMeasureType,
+    #[serde(rename = "isAdjustmentTracked", default)]
+    pub is_adjustment_tracked: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -379,37 +405,37 @@ pub struct ForecastingType {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct AdvAcctForecastMeasureDef {
-    #[serde(rename = "advAcctForecastMeasureDefName", default)]
-    pub adv_acct_forecast_measure_def_name: String,
-    #[serde(rename = "aggregationType", default)]
-    pub aggregation_type: AdvAcctFcstAggregationType,
-    #[serde(rename = "computationMethod", default)]
-    pub computation_method: AdvAcctFcstComputationMethod,
-    #[serde(rename = "forecastDataMeasureName", default)]
-    pub forecast_data_measure_name: String,
-    #[serde(rename = "forecastMeasureName", default)]
-    pub forecast_measure_name: String,
-    #[serde(rename = "forecastMeasureType", default)]
-    pub forecast_measure_type: AdvAcctFcstMeasureType,
-    #[serde(rename = "isAdjustmentTracked", default)]
-    pub is_adjustment_tracked: bool,
+pub struct ForecastingFilterCondition {
+    #[serde(rename = "colName", default)]
+    pub col_name: String,
+    #[serde(rename = "fieldName", default)]
+    pub field_name: String,
+    #[serde(rename = "forecastingFilter", default)]
+    pub forecasting_filter: String,
+    #[serde(rename = "forecastingSourceDefinition", default)]
+    pub forecasting_source_definition: String,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub operation: serde_json::Value,
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: f64,
+    #[serde(default)]
+    pub value: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct AdvancedObjectMapping {
-    #[serde(default)]
-    pub client: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub rows: Vec<AdvancedFieldMapping>,
+pub struct AdvancedFieldMapping {
+    #[serde(rename = "sourceField", default)]
+    pub source_field: String,
     #[serde(rename = "sourceObject", default)]
     pub source_object: String,
+    #[serde(rename = "targetField", default)]
+    pub target_field: String,
     #[serde(rename = "targetObject", default)]
     pub target_object: String,
 }
@@ -417,45 +443,19 @@ pub struct AdvancedObjectMapping {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ForecastingGroup {
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "forecastingGroupItems", default)]
-    pub forecasting_group_items: Vec<ForecastingGroupItem>,
-    #[serde(rename = "groupField", default)]
-    pub group_field: String,
+pub struct ForecastingFilter {
+    #[serde(rename = "filterLogic", default)]
+    pub filter_logic: String,
+    #[serde(rename = "forecastingCustomCategory", default)]
+    pub forecasting_custom_category: String,
+    #[serde(rename = "forecastingType", default)]
+    pub forecasting_type: String,
+    #[serde(rename = "forecastingTypeSource", default)]
+    pub forecasting_type_source: String,
+    #[serde(rename = "forecastingTypeSourceCategory", default)]
+    pub forecasting_type_source_category: String,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "sourceObject", default)]
-    pub source_object: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AdvAcctForecastAdjPeriod {
-    #[serde(rename = "adjustmentDayCount", default)]
-    pub adjustment_day_count: f64,
-    #[serde(default)]
-    pub frequency: serde_json::Value,
-    #[serde(rename = "profileName", default)]
-    pub profile_name: String,
-    #[serde(rename = "startDay", default)]
-    pub start_day: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AdvAcctFrcstDisplayGroup {
-    #[serde(rename = "advAcctFrcstDisplayGroupName", default)]
-    pub adv_acct_frcst_display_group_name: String,
-    #[serde(rename = "displayGroupItems", default)]
-    pub display_group_items: Vec<AdvAcctFrcstDplyGroupItem>,
-    #[serde(rename = "displayGroupType", default)]
-    pub display_group_type: AdvAcctFrcstDisplayGroupType,
-    #[serde(rename = "isDefault", default)]
-    pub is_default: bool,
-    #[serde(rename = "userProfileName", default)]
-    pub user_profile_name: String,
 }

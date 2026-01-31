@@ -10,19 +10,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DocumentTemplateStatus {
+pub enum ContentAssetAccess {
     #[default]
-    Draft,
-    Active,
-    Archived,
+    VIEWER,
+    COLLABORATOR,
+    INFERRED,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ContentAssetFormat {
+pub enum OcrMappingType {
     #[default]
-    Original,
-    ZippedVersions,
+    FormField,
+    TableColumn,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -37,19 +37,10 @@ pub enum DocumentTemplateUsageType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum OcrMappingType {
+pub enum ContentAssetFormat {
     #[default]
-    FormField,
-    TableColumn,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ContentAssetAccess {
-    #[default]
-    VIEWER,
-    COLLABORATOR,
-    INFERRED,
+    Original,
+    ZippedVersions,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -66,102 +57,53 @@ pub enum DocumentTemplateType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum OcrApplicationType {
-    #[default]
-    Industries,
-    EinsteinDocumentReader,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum DocumentGenerationMechanism {
     #[default]
     ClientSide,
     ServerSide,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DocumentTemplateStatus {
+    #[default]
+    Draft,
+    Active,
+    Archived,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum OcrApplicationType {
+    #[default]
+    Industries,
+    EinsteinDocumentReader,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct DocumentType {
+pub struct OcrSampleDocumentPageItem {
+    #[serde(rename = "hasHeader", default)]
+    pub has_header: bool,
+    #[serde(rename = "sequenceNumber", default)]
+    pub sequence_number: f64,
+    #[serde(default)]
+    pub title: String,
+    #[serde(default)]
+    pub r#type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ContentTypeBundle {
     #[serde(default)]
     pub description: String,
-    #[serde(rename = "externalIdentifier", default)]
-    pub external_identifier: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "maximumFileSize", default)]
-    pub maximum_file_size: f64,
-    #[serde(rename = "maximumFileUploadCount", default)]
-    pub maximum_file_upload_count: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DocumentCategory {
     #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct OcrTemplateSampleDocument {
-    #[serde(rename = "ocrSampleDocument", default)]
-    pub ocr_sample_document: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DocumentCategoryDocumentType {
-    #[serde(rename = "documentCategory", default)]
-    pub document_category: String,
-    #[serde(rename = "documentType", default)]
-    pub document_type: String,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ContentAssetVersions {
-    #[serde(default)]
-    pub version: Vec<ContentAssetVersion>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ContentAssetLink {
-    #[serde(default)]
-    pub access: ContentAssetAccess,
-    #[serde(rename = "isManagingWorkspace", default)]
-    pub is_managing_workspace: bool,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ContentAssetVersion {
-    #[serde(default)]
-    pub number: String,
-    #[serde(rename = "pathOnClient", default)]
-    pub path_on_client: String,
-    #[serde(rename = "zipEntry", default)]
-    pub zip_entry: String,
+    pub resources: Vec<ContentTypeBundleResource>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -193,45 +135,25 @@ pub struct DocumentGenerationSetting {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ContentAssetRelationships {
-    #[serde(rename = "emailTemplate", default)]
-    pub email_template: Vec<ContentAssetLink>,
-    #[serde(rename = "insightsApplication", default)]
-    pub insights_application: Vec<ContentAssetLink>,
+pub struct DocumentCategory {
     #[serde(default)]
-    pub network: Vec<ContentAssetLink>,
-    #[serde(default)]
-    pub organization: ContentAssetLink,
-    #[serde(default)]
-    pub workspace: Vec<ContentAssetLink>,
+    pub description: String,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct OcrSampleDocumentPage {
-    #[serde(rename = "ocrSampleDocument", default)]
-    pub ocr_sample_document: String,
-    #[serde(rename = "ocrSampleDocumentPageItems", default)]
-    pub ocr_sample_document_page_items: Vec<OcrSampleDocumentPageItem>,
-    #[serde(rename = "pageHeight", default)]
-    pub page_height: f64,
-    #[serde(rename = "pageNumber", default)]
-    pub page_number: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct OcrSampleDocumentPageItem {
-    #[serde(rename = "hasHeader", default)]
-    pub has_header: bool,
-    #[serde(rename = "sequenceNumber", default)]
-    pub sequence_number: f64,
+pub struct ContentAssetVersion {
     #[serde(default)]
-    pub title: String,
-    #[serde(default)]
-    pub r#type: serde_json::Value,
+    pub number: String,
+    #[serde(rename = "pathOnClient", default)]
+    pub path_on_client: String,
+    #[serde(rename = "zipEntry", default)]
+    pub zip_entry: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -283,6 +205,62 @@ pub struct OcrTargetObject {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct OcrTargetObjFieldMapping {
+    #[serde(rename = "ocrSampleDocField", default)]
+    pub ocr_sample_doc_field: OcrSampleDocumentField,
+    #[serde(rename = "targetField", default)]
+    pub target_field: String,
+    #[serde(default)]
+    pub r#type: OcrMappingType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ContentAssetRelationships {
+    #[serde(rename = "emailTemplate", default)]
+    pub email_template: Vec<ContentAssetLink>,
+    #[serde(rename = "insightsApplication", default)]
+    pub insights_application: Vec<ContentAssetLink>,
+    #[serde(default)]
+    pub network: Vec<ContentAssetLink>,
+    #[serde(default)]
+    pub organization: ContentAssetLink,
+    #[serde(default)]
+    pub workspace: Vec<ContentAssetLink>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DocumentCategoryDocumentType {
+    #[serde(rename = "documentCategory", default)]
+    pub document_category: String,
+    #[serde(rename = "documentType", default)]
+    pub document_type: String,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct OcrSampleDocumentPage {
+    #[serde(rename = "ocrSampleDocument", default)]
+    pub ocr_sample_document: String,
+    #[serde(rename = "ocrSampleDocumentPageItems", default)]
+    pub ocr_sample_document_page_items: Vec<OcrSampleDocumentPageItem>,
+    #[serde(rename = "pageHeight", default)]
+    pub page_height: f64,
+    #[serde(rename = "pageNumber", default)]
+    pub page_number: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct OcrSampleDocument {
     #[serde(rename = "applicationType", default)]
     pub application_type: OcrApplicationType,
@@ -298,32 +276,6 @@ pub struct OcrSampleDocument {
     pub ocr_sample_document_fields: Vec<OcrSampleDocumentField>,
     #[serde(rename = "ocrSampleDocumentPages", default)]
     pub ocr_sample_document_pages: Vec<OcrSampleDocumentPage>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct OcrTargetObjFieldMapping {
-    #[serde(rename = "ocrSampleDocField", default)]
-    pub ocr_sample_doc_field: OcrSampleDocumentField,
-    #[serde(rename = "targetField", default)]
-    pub target_field: String,
-    #[serde(default)]
-    pub r#type: OcrMappingType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ContentTypeBundleResource {
-    #[serde(rename = "fileName", default)]
-    pub file_name: String,
-    #[serde(rename = "filePath", default)]
-    pub file_path: String,
-    #[serde(rename = "fileType", default)]
-    pub file_type: String,
-    #[serde(default)]
-    pub source: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -351,11 +303,59 @@ pub struct OcrTemplate {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ContentTypeBundle {
+pub struct ContentTypeBundleResource {
+    #[serde(rename = "fileName", default)]
+    pub file_name: String,
+    #[serde(rename = "filePath", default)]
+    pub file_path: String,
+    #[serde(rename = "fileType", default)]
+    pub file_type: String,
+    #[serde(default)]
+    pub source: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DocumentType {
     #[serde(default)]
     pub description: String,
+    #[serde(rename = "externalIdentifier", default)]
+    pub external_identifier: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
+    #[serde(rename = "maximumFileSize", default)]
+    pub maximum_file_size: f64,
+    #[serde(rename = "maximumFileUploadCount", default)]
+    pub maximum_file_upload_count: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ContentAssetLink {
     #[serde(default)]
-    pub resources: Vec<ContentTypeBundleResource>,
+    pub access: ContentAssetAccess,
+    #[serde(rename = "isManagingWorkspace", default)]
+    pub is_managing_workspace: bool,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ContentAssetVersions {
+    #[serde(default)]
+    pub version: Vec<ContentAssetVersion>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct OcrTemplateSampleDocument {
+    #[serde(rename = "ocrSampleDocument", default)]
+    pub ocr_sample_document: String,
 }

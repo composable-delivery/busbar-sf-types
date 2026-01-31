@@ -10,6 +10,15 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RelatedRecordAccessDefStatus {
+    #[default]
+    Draft,
+    Active,
+    Inactive,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum RelatedRecordAccessDefShareTo {
     #[default]
     Internal,
@@ -17,13 +26,20 @@ pub enum RelatedRecordAccessDefShareTo {
     All,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RelatedRecordAccessDefStatus {
-    #[default]
-    Draft,
-    Active,
-    Inactive,
+#[serde(rename_all = "camelCase")]
+pub struct RelatedRecordAccessFltr {
+    #[serde(default)]
+    pub field: String,
+    #[serde(rename = "objectType", default)]
+    pub object_type: serde_json::Value,
+    #[serde(default)]
+    pub operator: serde_json::Value,
+    #[serde(rename = "sequenceNumber", default)]
+    pub sequence_number: f64,
+    #[serde(default)]
+    pub value: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -67,6 +83,14 @@ pub struct RelatedRecordAccessDef {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct RelatedContent {
+    #[serde(rename = "relatedContentItems", default)]
+    pub related_content_items: Vec<RelatedContentItem>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct RelatedRecordAssocCriteria {
     #[serde(rename = "associationHandlerApexClass", default)]
     pub association_handler_apex_class: String,
@@ -93,38 +117,6 @@ pub struct RelatedRecordAssocCriteria {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct RelatedContent {
-    #[serde(rename = "relatedContentItems", default)]
-    pub related_content_items: Vec<RelatedContentItem>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RelatedContentItem {
-    #[serde(rename = "layoutItem", default)]
-    pub layout_item: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RelatedRecordAccessFltr {
-    #[serde(default)]
-    pub field: String,
-    #[serde(rename = "objectType", default)]
-    pub object_type: serde_json::Value,
-    #[serde(default)]
-    pub operator: serde_json::Value,
-    #[serde(rename = "sequenceNumber", default)]
-    pub sequence_number: f64,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct RelatedRecordAccessMap {
     #[serde(rename = "sourceObjAccessLevel", default)]
     pub source_obj_access_level: serde_json::Value,
@@ -134,4 +126,12 @@ pub struct RelatedRecordAccessMap {
     pub target_obj_access_level: serde_json::Value,
     #[serde(rename = "targetObjParticipantRole", default)]
     pub target_obj_participant_role: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RelatedContentItem {
+    #[serde(rename = "layoutItem", default)]
+    pub layout_item: serde_json::Value,
 }

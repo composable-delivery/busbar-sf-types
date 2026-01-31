@@ -17,14 +17,6 @@ pub enum ObjectToLink {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ObjectFilterOperator {
-    #[default]
-    with,
-    without,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum ObjectRelationshipType {
     #[default]
     Direct,
@@ -36,11 +28,10 @@ pub enum ObjectRelationshipType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ObjectAccessLevel {
+pub enum ObjectFilterOperator {
     #[default]
-    Edit,
-    Read,
-    None,
+    with,
+    without,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -55,12 +46,49 @@ pub enum ObjectiveParameterKey {
     SkillType,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ObjectAccessLevel {
+    #[default]
+    Edit,
+    Read,
+    None,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ObjectUsage {
+pub struct ObjectNameCaseValue {
     #[serde(default)]
-    pub object: Vec<String>,
+    pub article: serde_json::Value,
+    #[serde(rename = "caseType", default)]
+    pub case_type: serde_json::Value,
+    #[serde(default)]
+    pub plural: bool,
+    #[serde(default)]
+    pub possessive: serde_json::Value,
+    #[serde(default)]
+    pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ObjectMappingItem {
+    #[serde(rename = "mappingType", default)]
+    pub mapping_type: serde_json::Value,
+    #[serde(rename = "objectMapping", default)]
+    pub object_mapping: ObjectMapping,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ObjectMappingField {
+    #[serde(rename = "inputField", default)]
+    pub input_field: String,
+    #[serde(rename = "outputField", default)]
+    pub output_field: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -84,47 +112,13 @@ pub struct ObjectSourceTargetMap {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ObjectSearchSetting {
-    #[serde(rename = "enhancedLookupEnabled", default)]
-    pub enhanced_lookup_enabled: bool,
-    #[serde(rename = "lookupAutoCompleteEnabled", default)]
-    pub lookup_auto_complete_enabled: bool,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "resultsPerPageCount", default)]
-    pub results_per_page_count: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ObjectMappingField {
-    #[serde(rename = "inputField", default)]
-    pub input_field: String,
-    #[serde(rename = "outputField", default)]
-    pub output_field: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ObjectMappingItem {
-    #[serde(rename = "mappingType", default)]
-    pub mapping_type: serde_json::Value,
-    #[serde(rename = "objectMapping", default)]
-    pub object_mapping: ObjectMapping,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ObjectRelationship {
-    #[serde(default)]
-    pub join: Box<ObjectRelationship>,
-    #[serde(rename = "outerJoin", default)]
-    pub outer_join: bool,
-    #[serde(default)]
-    pub relationship: String,
+pub struct ObjectMapping {
+    #[serde(rename = "inputObject", default)]
+    pub input_object: String,
+    #[serde(rename = "mappingFields", default)]
+    pub mapping_fields: Vec<ObjectMappingField>,
+    #[serde(rename = "outputObject", default)]
+    pub output_object: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -160,27 +154,33 @@ pub struct ObjectHierarchyRelationship {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ObjectNameCaseValue {
+pub struct ObjectRelationship {
     #[serde(default)]
-    pub article: serde_json::Value,
-    #[serde(rename = "caseType", default)]
-    pub case_type: serde_json::Value,
+    pub join: Box<ObjectRelationship>,
+    #[serde(rename = "outerJoin", default)]
+    pub outer_join: bool,
     #[serde(default)]
-    pub plural: bool,
-    #[serde(default)]
-    pub possessive: serde_json::Value,
-    #[serde(default)]
-    pub value: String,
+    pub relationship: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ObjectMapping {
-    #[serde(rename = "inputObject", default)]
-    pub input_object: String,
-    #[serde(rename = "mappingFields", default)]
-    pub mapping_fields: Vec<ObjectMappingField>,
-    #[serde(rename = "outputObject", default)]
-    pub output_object: String,
+pub struct ObjectUsage {
+    #[serde(default)]
+    pub object: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ObjectSearchSetting {
+    #[serde(rename = "enhancedLookupEnabled", default)]
+    pub enhanced_lookup_enabled: bool,
+    #[serde(rename = "lookupAutoCompleteEnabled", default)]
+    pub lookup_auto_complete_enabled: bool,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "resultsPerPageCount", default)]
+    pub results_per_page_count: f64,
 }

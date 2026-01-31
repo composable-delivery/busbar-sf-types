@@ -10,13 +10,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum Channel {
+pub enum ChannelSource {
     #[default]
-    AllChannels,
-    App,
-    Pkb,
-    Csp,
-    Prm,
+    Other,
+    Phone,
+    Chat,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -40,19 +38,13 @@ pub enum ChannelMode {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ChannelSource {
+pub enum Channel {
     #[default]
-    Other,
-    Phone,
-    Chat,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ChannelLayoutItem {
-    #[serde(default)]
-    pub field: String,
+    AllChannels,
+    App,
+    Pkb,
+    Csp,
+    Prm,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -77,6 +69,14 @@ pub struct ChannelObjectLinkingRule {
     pub object_to_link: serde_json::Value,
     #[serde(rename = "ruleName", default)]
     pub rule_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ChannelLayoutItem {
+    #[serde(default)]
+    pub field: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]

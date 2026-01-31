@@ -10,16 +10,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AssessmentType {
+pub enum AssessmentConfigurationOption {
     #[default]
-    DiscoveryFramework,
+    Send,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AssessmentConfigurationOption {
+pub enum AssessmentType {
     #[default]
-    Send,
+    DiscoveryFramework,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -36,6 +36,72 @@ pub struct AssessmentConfiguration {
     pub resolution: String,
     #[serde(default)]
     pub r#type: AssessmentType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AssessmentQuestionSet {
+    #[serde(rename = "assessmentQuestionDeveloperNames", default)]
+    pub assessment_question_developer_names: Vec<String>,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AssessmentQuestion {
+    #[serde(rename = "assessmentQuestionVersion", default)]
+    pub assessment_question_version: AssessmentQuestionVersion,
+    #[serde(rename = "dataType", default)]
+    pub data_type: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "disclosureDefinitionVer", default)]
+    pub disclosure_definition_ver: String,
+    #[serde(rename = "displayTextCategory", default)]
+    pub display_text_category: String,
+    #[serde(rename = "formulaResponseDataType", default)]
+    pub formula_response_data_type: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "questionCategory", default)]
+    pub question_category: String,
+    #[serde(rename = "relatedQuestion", default)]
+    pub related_question: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AssessmentQuestionVersion {
+    #[serde(rename = "additionalInformation", default)]
+    pub additional_information: String,
+    #[serde(rename = "assessmentQuestionVersionChoices", default)]
+    pub assessment_question_version_choices: Vec<AssessmentQuestionVersionChoice>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "guidanceInformation", default)]
+    pub guidance_information: String,
+    #[serde(rename = "helpText", default)]
+    pub help_text: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "optionSourceResponseValue", default)]
+    pub option_source_response_value: bool,
+    #[serde(rename = "questionText", default)]
+    pub question_text: String,
+    #[serde(rename = "responseValues", default)]
+    pub response_values: String,
+    #[serde(default)]
+    pub status: String,
+    #[serde(rename = "versionNumber", default)]
+    pub version_number: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -70,70 +136,4 @@ pub struct AssessmentDefinitionMetadata {
     pub performer_type: String,
     #[serde(default)]
     pub purpose: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AssessmentQuestion {
-    #[serde(rename = "assessmentQuestionVersion", default)]
-    pub assessment_question_version: AssessmentQuestionVersion,
-    #[serde(rename = "dataType", default)]
-    pub data_type: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "disclosureDefinitionVer", default)]
-    pub disclosure_definition_ver: String,
-    #[serde(rename = "displayTextCategory", default)]
-    pub display_text_category: String,
-    #[serde(rename = "formulaResponseDataType", default)]
-    pub formula_response_data_type: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "questionCategory", default)]
-    pub question_category: String,
-    #[serde(rename = "relatedQuestion", default)]
-    pub related_question: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AssessmentQuestionSet {
-    #[serde(rename = "assessmentQuestionDeveloperNames", default)]
-    pub assessment_question_developer_names: Vec<String>,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AssessmentQuestionVersion {
-    #[serde(rename = "additionalInformation", default)]
-    pub additional_information: String,
-    #[serde(rename = "assessmentQuestionVersionChoices", default)]
-    pub assessment_question_version_choices: Vec<AssessmentQuestionVersionChoice>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "guidanceInformation", default)]
-    pub guidance_information: String,
-    #[serde(rename = "helpText", default)]
-    pub help_text: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "optionSourceResponseValue", default)]
-    pub option_source_response_value: bool,
-    #[serde(rename = "questionText", default)]
-    pub question_text: String,
-    #[serde(rename = "responseValues", default)]
-    pub response_values: String,
-    #[serde(default)]
-    pub status: String,
-    #[serde(rename = "versionNumber", default)]
-    pub version_number: f64,
 }

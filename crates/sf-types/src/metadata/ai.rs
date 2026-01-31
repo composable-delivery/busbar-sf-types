@@ -10,70 +10,43 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PromptUserProfileAccess {
+pub enum GenAiAgentVariableType {
     #[default]
-    Everyone,
-    SpecificProfiles,
+    Variable,
+    ContextVariable,
+    Attribute,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PromptThemeSaturation {
+pub enum GenAiRuleExpressionOperator {
     #[default]
-    Dark,
-    Light,
+    equal,
+    greaterThan,
+    greaterThanOrEqual,
+    lessThan,
+    lessThanOrEqual,
+    notEqual,
+    isEmpty,
+    isNotEmpty,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PredictionPlatform {
+pub enum GenAiPromptTemplateResponseFormat {
     #[default]
-    Einstein_Discovery,
-    Default,
-    Data_Cloud,
-    Einstein_on_Data_Cloud,
+    MarkDown,
+    JSON,
+    HTML,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PromptUserAccess {
+pub enum MlModelType {
     #[default]
-    Everyone,
-    SpecificPermissions,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MlModelConnectorType {
-    #[default]
-    SAGEMAKER_DEPLOYED,
-    OPEN_AI,
-    AZURE_OPEN_AI,
-    GENERIC,
-    DATABRICKS,
-    VERTEX_AI,
-    ANTHROPIC,
-    BEDROCK,
-    OPEN_CONNECTOR,
-    SALESFORCE,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MlModelEndpointType {
-    #[default]
-    REAL_TIME_INFERENCE,
-    BATCH_INFERENCE,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PromptThemeColor {
-    #[default]
-    Theme1,
-    Theme2,
-    Theme3,
-    Theme4,
+    Predictive,
+    Generative,
+    Unknown,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -82,15 +55,6 @@ pub enum MlAIModelType {
     #[default]
     ModelArtifact,
     ConfiguredModel,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MlParameterSubtype {
-    #[default]
-    Integer,
-    Double,
-    Picklist,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -113,6 +77,142 @@ pub enum PromptElementRelativePosition {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MlModelDeployStatus {
+    #[default]
+    DRAFT,
+    REGISTERED,
+    ACTIVATED,
+    DEACTIVATED,
+    FAILED,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MlAIModelAlgorithmType {
+    #[default]
+    Unknown,
+    Glm,
+    Gbm,
+    Xgboost,
+    RandomForest,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum PromptImageLocation {
+    #[default]
+    Top,
+    Bottom,
+    Left,
+    Right,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MlInferenceFormat {
+    #[default]
+    JSON_DENSE,
+    CSV,
+    JSON_INSTANCES,
+    DATAFRAME_RECORDS,
+    DATAFRAME_SPLIT,
+    JSON,
+    COLUMNAR,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MlRuntimeType {
+    #[default]
+    External,
+    Internal,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum GenAiPromptTemplateActvAccessLevel {
+    #[default]
+    Allowed,
+    Blocked,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MlSlotClassDataType {
+    #[default]
+    Text,
+    Number,
+    Boolean,
+    Date,
+    DateTime,
+    Currency,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MlModelCapability {
+    #[default]
+    Completion,
+    ChatCompletion,
+    Embedding,
+    Regression,
+    BinaryClassification,
+    MulticlassClassification,
+    Generic,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum PromptUserAccess {
+    #[default]
+    Everyone,
+    SpecificPermissions,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum PromptDisplayPosition {
+    #[default]
+    TopLeft,
+    TopCenter,
+    TopRight,
+    BottomLeft,
+    BottomCenter,
+    BottomRight,
+    MiddleLeft,
+    MiddleCenter,
+    MiddleRight,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MlGenerativeModelType {
+    #[default]
+    Text,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum GenAiPromptTemplateVisibilityType {
+    #[default]
+    Locked,
+    Internal,
+    API,
+    Global,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MlModelSourceType {
+    #[default]
+    ModelConnector,
+    EdcNoCode,
+    OutOfTheBox,
+    FineTuned,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum GenAiPromptTemplateStatus {
     #[default]
     Published,
@@ -121,10 +221,28 @@ pub enum GenAiPromptTemplateStatus {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PromptExperience {
+pub enum MlModelEndpointType {
     #[default]
-    Lightning,
-    Site,
+    REAL_TIME_INFERENCE,
+    BATCH_INFERENCE,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MlSlotClassExtractionType {
+    #[default]
+    Pattern,
+    Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MlModelPredictionType {
+    #[default]
+    Regression,
+    BinaryClassification,
+    MulticlassClassification,
+    Generic,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -155,10 +273,19 @@ pub enum GenAiAgentType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum GenAiPromptTemplateActvAccessLevel {
+pub enum GenAiBotToneType {
     #[default]
-    Allowed,
-    Blocked,
+    Casual,
+    Neutral,
+    Formal,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum PromptUserProfileAccess {
+    #[default]
+    Everyone,
+    SpecificProfiles,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -168,6 +295,32 @@ pub enum MlGenerativeModelCapability {
     Completion,
     ChatCompletion,
     Embedding,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MlModelConnectorType {
+    #[default]
+    SAGEMAKER_DEPLOYED,
+    OPEN_AI,
+    AZURE_OPEN_AI,
+    GENERIC,
+    DATABRICKS,
+    VERTEX_AI,
+    ANTHROPIC,
+    BEDROCK,
+    OPEN_CONNECTOR,
+    SALESFORCE,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum PredictionPlatform {
+    #[default]
+    Einstein_Discovery,
+    Default,
+    Data_Cloud,
+    Einstein_on_Data_Cloud,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -182,21 +335,29 @@ pub enum PromptDisplayType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MlSlotClassExtractionType {
+pub enum PromptExperience {
     #[default]
-    Pattern,
-    Value,
+    Lightning,
+    Site,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MlModelDeployStatus {
+pub enum MlParameterSubtype {
     #[default]
-    DRAFT,
-    REGISTERED,
-    ACTIVATED,
-    DEACTIVATED,
-    FAILED,
+    Integer,
+    Double,
+    Picklist,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum PromptThemeColor {
+    #[default]
+    Theme1,
+    Theme2,
+    Theme3,
+    Theme4,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -209,233 +370,32 @@ pub enum MlParameterType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MlInferenceFormat {
+pub enum PromptThemeSaturation {
     #[default]
-    JSON_DENSE,
-    CSV,
-    JSON_INSTANCES,
-    DATAFRAME_RECORDS,
-    DATAFRAME_SPLIT,
-    JSON,
-    COLUMNAR,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PromptDisplayPosition {
-    #[default]
-    TopLeft,
-    TopCenter,
-    TopRight,
-    BottomLeft,
-    BottomCenter,
-    BottomRight,
-    MiddleLeft,
-    MiddleCenter,
-    MiddleRight,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum GenAiRuleExpressionOperator {
-    #[default]
-    equal,
-    greaterThan,
-    greaterThanOrEqual,
-    lessThan,
-    lessThanOrEqual,
-    notEqual,
-    isEmpty,
-    isNotEmpty,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MlModelCapability {
-    #[default]
-    Completion,
-    ChatCompletion,
-    Embedding,
-    Regression,
-    BinaryClassification,
-    MulticlassClassification,
-    Generic,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PromptImageLocation {
-    #[default]
-    Top,
-    Bottom,
-    Left,
-    Right,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum GenAiAgentVariableType {
-    #[default]
-    Variable,
-    ContextVariable,
-    Attribute,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MlAIModelAlgorithmType {
-    #[default]
-    Unknown,
-    Glm,
-    Gbm,
-    Xgboost,
-    RandomForest,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum GenAiPromptTemplateResponseFormat {
-    #[default]
-    MarkDown,
-    JSON,
-    HTML,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MlModelType {
-    #[default]
-    Predictive,
-    Generative,
-    Unknown,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MlModelPredictionType {
-    #[default]
-    Regression,
-    BinaryClassification,
-    MulticlassClassification,
-    Generic,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MlSlotClassDataType {
-    #[default]
-    Text,
-    Number,
-    Boolean,
-    Date,
-    DateTime,
-    Currency,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum GenAiBotToneType {
-    #[default]
-    Casual,
-    Neutral,
-    Formal,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MlRuntimeType {
-    #[default]
-    External,
-    Internal,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MlModelSourceType {
-    #[default]
-    ModelConnector,
-    EdcNoCode,
-    OutOfTheBox,
-    FineTuned,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MlGenerativeModelType {
-    #[default]
-    Text,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum GenAiPromptTemplateVisibilityType {
-    #[default]
-    Locked,
-    Internal,
-    API,
-    Global,
+    Dark,
+    Light,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct GenAiPromptTemplateInput {
-    #[serde(rename = "apiName", default)]
-    pub api_name: String,
-    #[serde(default)]
-    pub definition: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "referenceName", default)]
-    pub reference_name: String,
-    #[serde(default)]
-    pub required: bool,
+pub struct GenAiPromptTemplateGenerationConfig {
+    #[serde(rename = "generationConfigDeveloperName", default)]
+    pub generation_config_developer_name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct AiPlannerVoiceDef {
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "inboundFillerWordsBool", default)]
-    pub inbound_filler_words_bool: bool,
-    #[serde(rename = "inboundKeywords", default)]
-    pub inbound_keywords: String,
-    #[serde(rename = "inboundModel", default)]
-    pub inbound_model: String,
+pub struct AiEvaluationExpectation {
+    #[serde(rename = "expectedValue", default)]
+    pub expected_value: String,
     #[serde(default)]
     pub label: String,
-    #[serde(rename = "outboundFillerSentences", default)]
-    pub outbound_filler_sentences: String,
-    #[serde(rename = "pronunciationDict", default)]
-    pub pronunciation_dict: String,
-    #[serde(rename = "outboundModel", default)]
-    pub outbound_model: String,
-    #[serde(rename = "outboundSimilarity", default)]
-    pub outbound_similarity: f64,
-    #[serde(rename = "outboundSpeedNum", default)]
-    pub outbound_speed_num: f64,
-    #[serde(rename = "outboundStability", default)]
-    pub outbound_stability: f64,
-    #[serde(rename = "outboundStyleExaggeration", default)]
-    pub outbound_style_exaggeration: f64,
-    #[serde(rename = "outboundVoice", default)]
-    pub outbound_voice: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AiEvaluationTestCase {
     #[serde(default)]
-    pub expectation: Vec<AiEvaluationExpectation>,
+    pub name: String,
     #[serde(default)]
-    pub inputs: Vec<AiEvaluationAgentTestCaseInput>,
-    #[serde(default)]
-    pub number: f64,
+    pub parameter: Vec<AiEvaluationTestCaseCritParam>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -455,423 +415,43 @@ pub struct GenAiPromptTemplateActv {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct GenAiPlannerBundle {
-    #[serde(rename = "attributeMappings", default)]
-    pub attribute_mappings: Vec<GenAiPlannerAttrMapping>,
-    #[serde(rename = "botTemplate", default)]
-    pub bot_template: String,
-    #[serde(default)]
-    pub capabilities: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "genAiFunctions", default)]
-    pub gen_ai_functions: Vec<GenAiPlannerFunctionDef>,
-    #[serde(rename = "genAiPlugins", default)]
-    pub gen_ai_plugins: Vec<GenAiPlannerFunctionDef>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "plannerSurfaces", default)]
-    pub planner_surfaces: Vec<AiPlannerSurfaceDef>,
-    #[serde(rename = "plannerType", default)]
-    pub planner_type: serde_json::Value,
-    #[serde(rename = "ruleExpressionAssignments", default)]
-    pub rule_expression_assignments: Vec<GenAiPlannerRuleExprAsgn>,
-    #[serde(rename = "ruleExpressions", default)]
-    pub rule_expressions: Vec<GenAiPlannerRuleExprDef>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GenAiPlannerRuleExprDef {
-    #[serde(default)]
-    pub conditions: Vec<GenAiPlannerRuleExprCondition>,
-    #[serde(default)]
-    pub expression: String,
-    #[serde(rename = "expressionLabel", default)]
-    pub expression_label: String,
-    #[serde(rename = "expressionName", default)]
-    pub expression_name: String,
-    #[serde(rename = "expressionType", default)]
-    pub expression_type: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AiEvalCopilotTestCaseCntxtVar {
-    #[serde(rename = "variableName", default)]
-    pub variable_name: String,
-    #[serde(rename = "variableValue", default)]
-    pub variable_value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MlModelArtifact {
-    #[serde(rename = "algorithmType", default)]
-    pub algorithm_type: MlAIModelAlgorithmType,
-    #[serde(rename = "connectorType", default)]
-    pub connector_type: MlModelConnectorType,
-    #[serde(rename = "deployStatus", default)]
-    pub deploy_status: MlModelDeployStatus,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "generativeModelType", default)]
-    pub generative_model_type: MlGenerativeModelType,
-    #[serde(rename = "inputFeatures", default)]
-    pub input_features: Vec<MlModelInput>,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "modelCapabilities", default)]
-    pub model_capabilities: Vec<MlGenerativeModelCapability>,
-    #[serde(rename = "modelCapability", default)]
-    pub model_capability: MlModelCapability,
-    #[serde(rename = "modelType", default)]
-    pub model_type: MlModelType,
-    #[serde(rename = "outputFeatures", default)]
-    pub output_features: Vec<MlModelOutput>,
-    #[serde(rename = "parameterOverrides", default)]
-    pub parameter_overrides: Vec<MlParameterOverride>,
-    #[serde(default)]
-    pub parameters: Vec<MlParameterDefinition>,
-    #[serde(rename = "parentModel", default)]
-    pub parent_model: String,
-    #[serde(rename = "predictionType", default)]
-    pub prediction_type: MlModelPredictionType,
-    #[serde(rename = "runtimeType", default)]
-    pub runtime_type: MlRuntimeType,
-    #[serde(default)]
-    pub source: String,
-    #[serde(rename = "sourceContainer", default)]
-    pub source_container: String,
-    #[serde(rename = "sourceType", default)]
-    pub source_type: MlModelSourceType,
-    #[serde(rename = "trainingMetrics", default)]
-    pub training_metrics: String,
-    #[serde(default)]
-    pub r#type: MlAIModelType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GenAiPlannerAttr {
+pub struct AiCoachAgentScnrDefTranslation {
     #[serde(default)]
     pub description: String,
     #[serde(default)]
     pub label: String,
     #[serde(default)]
     pub name: String,
-    #[serde(rename = "parameterName", default)]
-    pub parameter_name: String,
-    #[serde(rename = "parameterType", default)]
-    pub parameter_type: serde_json::Value,
+    #[serde(rename = "userGuidance", default)]
+    pub user_guidance: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct MlModelOutputEndpoint {
-    #[serde(rename = "jsonPath", default)]
-    pub json_path: String,
-    #[serde(default)]
-    pub label: String,
+pub struct GenAiPlannerAttrMapping {
+    #[serde(rename = "attributeName", default)]
+    pub attribute_name: String,
+    #[serde(rename = "attributeType", default)]
+    pub attribute_type: serde_json::Value,
+    #[serde(rename = "constantValue", default)]
+    pub constant_value: String,
+    #[serde(rename = "mappingTargetName", default)]
+    pub mapping_target_name: String,
+    #[serde(rename = "mappingType", default)]
+    pub mapping_type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AiEvaluationTestCaseCritParam {
+    #[serde(rename = "isReference", default)]
+    pub is_reference: bool,
     #[serde(default)]
     pub name: String,
-    #[serde(rename = "outputFeature", default)]
-    pub output_feature: String,
-    #[serde(default)]
-    pub position: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MlModelSchema {
-    #[serde(default)]
-    pub format: MlInferenceFormat,
-    #[serde(rename = "isMultiRowPrediction", default)]
-    pub is_multi_row_prediction: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "multiRowPredictionKey", default)]
-    pub multi_row_prediction_key: String,
-    #[serde(rename = "multiRowResultKey", default)]
-    pub multi_row_result_key: String,
-    #[serde(default)]
-    pub schema: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MlSlotClassValue {
-    #[serde(rename = "synonymGroup", default)]
-    pub synonym_group: serde_json::Value,
-    #[serde(rename = "synonymGroups", default)]
-    pub synonym_groups: Vec<serde_json::Value>,
     #[serde(default)]
     pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GenAiPluginInstructionDef {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(default)]
-    pub language: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MlRelatedIntent {
-    #[serde(rename = "relatedMlIntent", default)]
-    pub related_ml_intent: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GenAiPluginFunctionDef {
-    #[serde(rename = "functionName", default)]
-    pub function_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GenAiPromptTemplate {
-    #[serde(rename = "activeVersionIdentifier", default)]
-    pub active_version_identifier: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "overrideSource", default)]
-    pub override_source: String,
-    #[serde(rename = "relatedEntity", default)]
-    pub related_entity: String,
-    #[serde(rename = "relatedField", default)]
-    pub related_field: String,
-    #[serde(rename = "templateVersions", default)]
-    pub template_versions: Vec<GenAiPromptTemplateVersion>,
-    #[serde(default)]
-    pub r#type: String,
-    #[serde(default)]
-    pub visibility: GenAiPromptTemplateVisibilityType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GenAiPromptTemplateDataProviderParam {
-    #[serde(default)]
-    pub definition: String,
-    #[serde(rename = "isRequired", default)]
-    pub is_required: bool,
-    #[serde(rename = "parameterName", default)]
-    pub parameter_name: String,
-    #[serde(rename = "valueExpression", default)]
-    pub value_expression: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MlSlotClass {
-    #[serde(rename = "dataType", default)]
-    pub data_type: MlSlotClassDataType,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "extractionRegex", default)]
-    pub extraction_regex: String,
-    #[serde(rename = "extractionType", default)]
-    pub extraction_type: MlSlotClassExtractionType,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "mlSlotClassValues", default)]
-    pub ml_slot_class_values: Vec<MlSlotClassValue>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MlDomain {
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "mlIntents", default)]
-    pub ml_intents: Vec<MlIntent>,
-    #[serde(rename = "mlSlotClasses", default)]
-    pub ml_slot_classes: Vec<MlSlotClass>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MlModelOutput {
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub r#type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GenAiPlanner {
-    #[serde(rename = "attributeMappings", default)]
-    pub attribute_mappings: Vec<GenAiPlannerAttrMapping>,
-    #[serde(rename = "botTemplate", default)]
-    pub bot_template: String,
-    #[serde(default)]
-    pub capabilities: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "genAiFunctions", default)]
-    pub gen_ai_functions: Vec<GenAiPlannerFunctionDef>,
-    #[serde(rename = "genAiPlugins", default)]
-    pub gen_ai_plugins: Vec<GenAiPlannerFunctionDef>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "plannerType", default)]
-    pub planner_type: serde_json::Value,
-    #[serde(rename = "ruleExpressionAssignments", default)]
-    pub rule_expression_assignments: Vec<GenAiPlannerRuleExprAsgn>,
-    #[serde(rename = "ruleExpressions", default)]
-    pub rule_expressions: Vec<GenAiPlannerRuleExprDef>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AiEvaluationAgentTestCaseInput {
-    #[serde(rename = "contextVariable", default)]
-    pub context_variable: Vec<AiEvalCopilotTestCaseCntxtVar>,
-    #[serde(rename = "conversationHistory", default)]
-    pub conversation_history: Vec<AiEvalCopilotTestCaseConv>,
-    #[serde(default)]
-    pub utterance: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GenAiPromptTemplateDataProvider {
-    #[serde(default)]
-    pub definition: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub parameters: Vec<GenAiPromptTemplateDataProviderParam>,
-    #[serde(rename = "referenceName", default)]
-    pub reference_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AiPluginUtteranceDef {
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(default)]
-    pub language: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub utterance: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GenAiPlannerRuleExprAsgn {
-    #[serde(rename = "ruleExpressionName", default)]
-    pub rule_expression_name: String,
-    #[serde(rename = "targetName", default)]
-    pub target_name: String,
-    #[serde(rename = "targetType", default)]
-    pub target_type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GenAiPlugin {
-    #[serde(rename = "aiPluginUtterances", default)]
-    pub ai_plugin_utterances: Vec<AiPluginUtteranceDef>,
-    #[serde(rename = "canEscalate", default)]
-    pub can_escalate: bool,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "genAiFunctions", default)]
-    pub gen_ai_functions: Vec<GenAiPluginFunctionDef>,
-    #[serde(rename = "genAiPluginInstructions", default)]
-    pub gen_ai_plugin_instructions: Vec<GenAiPluginInstructionDef>,
-    #[serde(default)]
-    pub language: String,
-    #[serde(rename = "localActionLinks", default)]
-    pub local_action_links: Vec<GenAiPluginFunctionDef>,
-    #[serde(rename = "localActions", default)]
-    pub local_actions: Vec<GenAiFunction>,
-    #[serde(rename = "localDeveloperName", default)]
-    pub local_developer_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "pluginType", default)]
-    pub plugin_type: serde_json::Value,
-    #[serde(default)]
-    pub scope: String,
-    #[serde(default)]
-    pub source: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MlParameterDefinition {
-    #[serde(rename = "continuousDefault", default)]
-    pub continuous_default: f64,
-    #[serde(rename = "continuousMaximum", default)]
-    pub continuous_maximum: f64,
-    #[serde(rename = "continuousMinimum", default)]
-    pub continuous_minimum: f64,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "discreteDefault", default)]
-    pub discrete_default: String,
-    #[serde(rename = "discreteValues", default)]
-    pub discrete_values: Vec<String>,
-    #[serde(rename = "modelCapabilities", default)]
-    pub model_capabilities: Vec<MlGenerativeModelCapability>,
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub subtype: MlParameterSubtype,
-    #[serde(default)]
-    pub r#type: MlParameterType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -899,56 +479,6 @@ pub struct MlModelInput {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct MlModelConnection {
-    #[serde(rename = "deployStatus", default)]
-    pub deploy_status: MlModelDeployStatus,
-    #[serde(default)]
-    pub endpoints: Vec<MlModelEndpoint>,
-    #[serde(rename = "externalSystemRegistry", default)]
-    pub external_system_registry: String,
-    #[serde(rename = "foundationalModelName", default)]
-    pub foundational_model_name: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "outputFeatures", default)]
-    pub output_features: Vec<MlModelOutput>,
-    #[serde(rename = "registeredModelApiName", default)]
-    pub registered_model_api_name: String,
-    #[serde(default)]
-    pub r#type: MlModelConnectorType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AiCoachAgentScnrDefTranslation {
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "userGuidance", default)]
-    pub user_guidance: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AiPlannerSurfaceDef {
-    #[serde(rename = "adaptiveResponseAllowed", default)]
-    pub adaptive_response_allowed: bool,
-    #[serde(rename = "callRecordingAllowed", default)]
-    pub call_recording_allowed: bool,
-    #[serde(default)]
-    pub surface: String,
-    #[serde(rename = "surfaceType", default)]
-    pub surface_type: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct AiEvaluationDefinition {
     #[serde(default)]
     pub description: String,
@@ -967,55 +497,13 @@ pub struct AiEvaluationDefinition {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct MlIntentUtterance {
-    #[serde(default)]
-    pub language: serde_json::Value,
-    #[serde(default)]
-    pub utterance: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GenAiPlannerFunctionDef {
-    #[serde(rename = "genAiCustomizedPlugin", default)]
-    pub gen_ai_customized_plugin: GenAiLocalPlugin,
-    #[serde(rename = "genAiFunctionName", default)]
-    pub gen_ai_function_name: String,
-    #[serde(rename = "genAiPluginName", default)]
-    pub gen_ai_plugin_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PromptVersionTranslation {
-    #[serde(rename = "actionButtonLabel", default)]
-    pub action_button_label: String,
-    #[serde(rename = "actionButtonLink", default)]
-    pub action_button_link: String,
-    #[serde(default)]
-    pub body: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "dismissButtonLabel", default)]
-    pub dismiss_button_label: String,
-    #[serde(default)]
-    pub header: String,
-    #[serde(rename = "imageAltText", default)]
-    pub image_alt_text: String,
-    #[serde(rename = "imageLink", default)]
-    pub image_link: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "stepNumber", default)]
-    pub step_number: f64,
-    #[serde(default)]
-    pub title: String,
-    #[serde(rename = "videoLink", default)]
-    pub video_link: String,
+pub struct GenAiPlannerRuleExprAsgn {
+    #[serde(rename = "ruleExpressionName", default)]
+    pub rule_expression_name: String,
+    #[serde(rename = "targetName", default)]
+    pub target_name: String,
+    #[serde(rename = "targetType", default)]
+    pub target_type: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -1049,131 +537,43 @@ pub struct GenAiLocalPlugin {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct Prompt {
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "promptVersions", default)]
-    pub prompt_versions: Vec<PromptVersion>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GenAiPromptTemplateVersion {
+pub struct GenAiPlannerBundle {
+    #[serde(rename = "attributeMappings", default)]
+    pub attribute_mappings: Vec<GenAiPlannerAttrMapping>,
+    #[serde(rename = "botTemplate", default)]
+    pub bot_template: String,
     #[serde(default)]
-    pub classification: String,
-    #[serde(default)]
-    pub content: String,
-    #[serde(rename = "defaultLanguageScope", default)]
-    pub default_language_scope: String,
+    pub capabilities: String,
     #[serde(default)]
     pub description: String,
-    #[serde(rename = "generationTemplateConfigs", default)]
-    pub generation_template_configs: Vec<GenAiPromptTemplateGenerationConfig>,
-    #[serde(default)]
-    pub inputs: Vec<GenAiPromptTemplateInput>,
-    #[serde(default)]
-    pub keywords: String,
-    #[serde(rename = "outputSchema", default)]
-    pub output_schema: String,
-    #[serde(rename = "primaryModel", default)]
-    pub primary_model: String,
-    #[serde(rename = "responseFormat", default)]
-    pub response_format: GenAiPromptTemplateResponseFormat,
-    #[serde(default)]
-    pub status: GenAiPromptTemplateStatus,
-    #[serde(rename = "templateDataProviders", default)]
-    pub template_data_providers: Vec<GenAiPromptTemplateDataProvider>,
-    #[serde(rename = "versionIdentifier", default)]
-    pub version_identifier: String,
+    #[serde(rename = "genAiFunctions", default)]
+    pub gen_ai_functions: Vec<GenAiPlannerFunctionDef>,
+    #[serde(rename = "genAiPlugins", default)]
+    pub gen_ai_plugins: Vec<GenAiPlannerFunctionDef>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "plannerSurfaces", default)]
+    pub planner_surfaces: Vec<AiPlannerSurfaceDef>,
+    #[serde(rename = "plannerType", default)]
+    pub planner_type: serde_json::Value,
+    #[serde(rename = "ruleExpressionAssignments", default)]
+    pub rule_expression_assignments: Vec<GenAiPlannerRuleExprAsgn>,
+    #[serde(rename = "ruleExpressions", default)]
+    pub rule_expressions: Vec<GenAiPlannerRuleExprDef>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct AiEvalCopilotTestCaseConv {
+pub struct PromptTranslation {
     #[serde(default)]
-    pub index: f64,
-    #[serde(default)]
-    pub message: String,
-    #[serde(default)]
-    pub role: String,
-    #[serde(default)]
-    pub topic: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AiEvaluationTestCaseCritParam {
-    #[serde(rename = "isReference", default)]
-    pub is_reference: bool,
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MlModelEndpoint {
-    #[serde(rename = "inputSchema", default)]
-    pub input_schema: String,
+    pub description: String,
     #[serde(default)]
     pub label: String,
     #[serde(default)]
     pub name: String,
-    #[serde(rename = "outputSchema", default)]
-    pub output_schema: String,
-    #[serde(default)]
-    pub outputs: Vec<MlModelOutputEndpoint>,
-    #[serde(default)]
-    pub r#type: MlModelEndpointType,
-    #[serde(default)]
-    pub url: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MlParameterOverride {
-    #[serde(rename = "continuousValue", default)]
-    pub continuous_value: f64,
-    #[serde(rename = "discreteValue", default)]
-    pub discrete_value: String,
-    #[serde(default)]
-    pub parameter: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GenAiFunction {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "invocationTarget", default)]
-    pub invocation_target: String,
-    #[serde(rename = "invocationTargetType", default)]
-    pub invocation_target_type: serde_json::Value,
-    #[serde(rename = "isConfirmationRequired", default)]
-    pub is_confirmation_required: bool,
-    #[serde(rename = "isIncludeInProgressIndicator", default)]
-    pub is_include_in_progress_indicator: bool,
-    #[serde(default)]
-    pub language: String,
-    #[serde(rename = "localDeveloperName", default)]
-    pub local_developer_name: String,
-    #[serde(rename = "mappingAttributes", default)]
-    pub mapping_attributes: Vec<GenAiPlannerAttr>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "progressIndicatorMessage", default)]
-    pub progress_indicator_message: String,
-    #[serde(default)]
-    pub source: String,
+    #[serde(rename = "promptVersions", default)]
+    pub prompt_versions: Vec<PromptVersionTranslation>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -1279,39 +679,315 @@ pub struct PromptVersion {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct GenAiPlannerAttrMapping {
-    #[serde(rename = "attributeName", default)]
-    pub attribute_name: String,
-    #[serde(rename = "attributeType", default)]
-    pub attribute_type: serde_json::Value,
-    #[serde(rename = "constantValue", default)]
-    pub constant_value: String,
-    #[serde(rename = "mappingTargetName", default)]
-    pub mapping_target_name: String,
-    #[serde(rename = "mappingType", default)]
-    pub mapping_type: serde_json::Value,
+pub struct MlSlotClassValue {
+    #[serde(rename = "synonymGroup", default)]
+    pub synonym_group: serde_json::Value,
+    #[serde(rename = "synonymGroups", default)]
+    pub synonym_groups: Vec<serde_json::Value>,
+    #[serde(default)]
+    pub value: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct AiEvaluationExpectation {
-    #[serde(rename = "expectedValue", default)]
-    pub expected_value: String,
+pub struct GenAiPlannerAttr {
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "parameterName", default)]
+    pub parameter_name: String,
+    #[serde(rename = "parameterType", default)]
+    pub parameter_type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MlIntent {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "mlIntentUtterances", default)]
+    pub ml_intent_utterances: Vec<MlIntentUtterance>,
+    #[serde(rename = "relatedMlIntents", default)]
+    pub related_ml_intents: Vec<MlRelatedIntent>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct GenAiPromptTemplate {
+    #[serde(rename = "activeVersionIdentifier", default)]
+    pub active_version_identifier: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "overrideSource", default)]
+    pub override_source: String,
+    #[serde(rename = "relatedEntity", default)]
+    pub related_entity: String,
+    #[serde(rename = "relatedField", default)]
+    pub related_field: String,
+    #[serde(rename = "templateVersions", default)]
+    pub template_versions: Vec<GenAiPromptTemplateVersion>,
+    #[serde(default)]
+    pub r#type: String,
+    #[serde(default)]
+    pub visibility: GenAiPromptTemplateVisibilityType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct GenAiPluginFunctionDef {
+    #[serde(rename = "functionName", default)]
+    pub function_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct GenAiPromptTemplateDataProvider {
+    #[serde(default)]
+    pub definition: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub parameters: Vec<GenAiPromptTemplateDataProviderParam>,
+    #[serde(rename = "referenceName", default)]
+    pub reference_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PromptVersionTranslation {
+    #[serde(rename = "actionButtonLabel", default)]
+    pub action_button_label: String,
+    #[serde(rename = "actionButtonLink", default)]
+    pub action_button_link: String,
+    #[serde(default)]
+    pub body: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "dismissButtonLabel", default)]
+    pub dismiss_button_label: String,
+    #[serde(default)]
+    pub header: String,
+    #[serde(rename = "imageAltText", default)]
+    pub image_alt_text: String,
+    #[serde(rename = "imageLink", default)]
+    pub image_link: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "stepNumber", default)]
+    pub step_number: f64,
+    #[serde(default)]
+    pub title: String,
+    #[serde(rename = "videoLink", default)]
+    pub video_link: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AiPlannerSurfaceDef {
+    #[serde(rename = "adaptiveResponseAllowed", default)]
+    pub adaptive_response_allowed: bool,
+    #[serde(rename = "callRecordingAllowed", default)]
+    pub call_recording_allowed: bool,
+    #[serde(default)]
+    pub surface: String,
+    #[serde(rename = "surfaceType", default)]
+    pub surface_type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct GenAiPlanner {
+    #[serde(rename = "attributeMappings", default)]
+    pub attribute_mappings: Vec<GenAiPlannerAttrMapping>,
+    #[serde(rename = "botTemplate", default)]
+    pub bot_template: String,
+    #[serde(default)]
+    pub capabilities: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "genAiFunctions", default)]
+    pub gen_ai_functions: Vec<GenAiPlannerFunctionDef>,
+    #[serde(rename = "genAiPlugins", default)]
+    pub gen_ai_plugins: Vec<GenAiPlannerFunctionDef>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "plannerType", default)]
+    pub planner_type: serde_json::Value,
+    #[serde(rename = "ruleExpressionAssignments", default)]
+    pub rule_expression_assignments: Vec<GenAiPlannerRuleExprAsgn>,
+    #[serde(rename = "ruleExpressions", default)]
+    pub rule_expressions: Vec<GenAiPlannerRuleExprDef>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MlModelOutput {
     #[serde(default)]
     pub label: String,
     #[serde(default)]
     pub name: String,
     #[serde(default)]
-    pub parameter: Vec<AiEvaluationTestCaseCritParam>,
+    pub r#type: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct GenAiPromptTemplateGenerationConfig {
-    #[serde(rename = "generationConfigDeveloperName", default)]
-    pub generation_config_developer_name: String,
+pub struct MlModelSchema {
+    #[serde(default)]
+    pub format: MlInferenceFormat,
+    #[serde(rename = "isMultiRowPrediction", default)]
+    pub is_multi_row_prediction: bool,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "multiRowPredictionKey", default)]
+    pub multi_row_prediction_key: String,
+    #[serde(rename = "multiRowResultKey", default)]
+    pub multi_row_result_key: String,
+    #[serde(default)]
+    pub schema: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MlModelOutputEndpoint {
+    #[serde(rename = "jsonPath", default)]
+    pub json_path: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "outputFeature", default)]
+    pub output_feature: String,
+    #[serde(default)]
+    pub position: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct GenAiFunction {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "invocationTarget", default)]
+    pub invocation_target: String,
+    #[serde(rename = "invocationTargetType", default)]
+    pub invocation_target_type: serde_json::Value,
+    #[serde(rename = "isConfirmationRequired", default)]
+    pub is_confirmation_required: bool,
+    #[serde(rename = "isIncludeInProgressIndicator", default)]
+    pub is_include_in_progress_indicator: bool,
+    #[serde(default)]
+    pub language: String,
+    #[serde(rename = "localDeveloperName", default)]
+    pub local_developer_name: String,
+    #[serde(rename = "mappingAttributes", default)]
+    pub mapping_attributes: Vec<GenAiPlannerAttr>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "progressIndicatorMessage", default)]
+    pub progress_indicator_message: String,
+    #[serde(default)]
+    pub source: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct GenAiPluginInstructionDef {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(default)]
+    pub language: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct GenAiPromptTemplateInput {
+    #[serde(rename = "apiName", default)]
+    pub api_name: String,
+    #[serde(default)]
+    pub definition: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "referenceName", default)]
+    pub reference_name: String,
+    #[serde(default)]
+    pub required: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MlParameterOverride {
+    #[serde(rename = "continuousValue", default)]
+    pub continuous_value: f64,
+    #[serde(rename = "discreteValue", default)]
+    pub discrete_value: String,
+    #[serde(default)]
+    pub parameter: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MlDomain {
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "mlIntents", default)]
+    pub ml_intents: Vec<MlIntent>,
+    #[serde(rename = "mlSlotClasses", default)]
+    pub ml_slot_classes: Vec<MlSlotClass>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AiEvaluationTestCase {
+    #[serde(default)]
+    pub expectation: Vec<AiEvaluationExpectation>,
+    #[serde(default)]
+    pub inputs: Vec<AiEvaluationAgentTestCaseInput>,
+    #[serde(default)]
+    pub number: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -1331,29 +1007,353 @@ pub struct GenAiPlannerRuleExprCondition {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PromptTranslation {
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "promptVersions", default)]
-    pub prompt_versions: Vec<PromptVersionTranslation>,
+pub struct MlRelatedIntent {
+    #[serde(rename = "relatedMlIntent", default)]
+    pub related_ml_intent: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct MlIntent {
+pub struct GenAiPlugin {
+    #[serde(rename = "aiPluginUtterances", default)]
+    pub ai_plugin_utterances: Vec<AiPluginUtteranceDef>,
+    #[serde(rename = "canEscalate", default)]
+    pub can_escalate: bool,
     #[serde(default)]
     pub description: String,
     #[serde(rename = "developerName", default)]
     pub developer_name: String,
+    #[serde(rename = "genAiFunctions", default)]
+    pub gen_ai_functions: Vec<GenAiPluginFunctionDef>,
+    #[serde(rename = "genAiPluginInstructions", default)]
+    pub gen_ai_plugin_instructions: Vec<GenAiPluginInstructionDef>,
+    #[serde(default)]
+    pub language: String,
+    #[serde(rename = "localActionLinks", default)]
+    pub local_action_links: Vec<GenAiPluginFunctionDef>,
+    #[serde(rename = "localActions", default)]
+    pub local_actions: Vec<GenAiFunction>,
+    #[serde(rename = "localDeveloperName", default)]
+    pub local_developer_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "pluginType", default)]
+    pub plugin_type: serde_json::Value,
+    #[serde(default)]
+    pub scope: String,
+    #[serde(default)]
+    pub source: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct GenAiPlannerRuleExprDef {
+    #[serde(default)]
+    pub conditions: Vec<GenAiPlannerRuleExprCondition>,
+    #[serde(default)]
+    pub expression: String,
+    #[serde(rename = "expressionLabel", default)]
+    pub expression_label: String,
+    #[serde(rename = "expressionName", default)]
+    pub expression_name: String,
+    #[serde(rename = "expressionType", default)]
+    pub expression_type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MlModelConnection {
+    #[serde(rename = "deployStatus", default)]
+    pub deploy_status: MlModelDeployStatus,
+    #[serde(default)]
+    pub endpoints: Vec<MlModelEndpoint>,
+    #[serde(rename = "externalSystemRegistry", default)]
+    pub external_system_registry: String,
+    #[serde(rename = "foundationalModelName", default)]
+    pub foundational_model_name: String,
     #[serde(default)]
     pub label: String,
-    #[serde(rename = "mlIntentUtterances", default)]
-    pub ml_intent_utterances: Vec<MlIntentUtterance>,
-    #[serde(rename = "relatedMlIntents", default)]
-    pub related_ml_intents: Vec<MlRelatedIntent>,
+    #[serde(rename = "outputFeatures", default)]
+    pub output_features: Vec<MlModelOutput>,
+    #[serde(rename = "registeredModelApiName", default)]
+    pub registered_model_api_name: String,
+    #[serde(default)]
+    pub r#type: MlModelConnectorType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MlIntentUtterance {
+    #[serde(default)]
+    pub language: serde_json::Value,
+    #[serde(default)]
+    pub utterance: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct GenAiPromptTemplateDataProviderParam {
+    #[serde(default)]
+    pub definition: String,
+    #[serde(rename = "isRequired", default)]
+    pub is_required: bool,
+    #[serde(rename = "parameterName", default)]
+    pub parameter_name: String,
+    #[serde(rename = "valueExpression", default)]
+    pub value_expression: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MlParameterDefinition {
+    #[serde(rename = "continuousDefault", default)]
+    pub continuous_default: f64,
+    #[serde(rename = "continuousMaximum", default)]
+    pub continuous_maximum: f64,
+    #[serde(rename = "continuousMinimum", default)]
+    pub continuous_minimum: f64,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "discreteDefault", default)]
+    pub discrete_default: String,
+    #[serde(rename = "discreteValues", default)]
+    pub discrete_values: Vec<String>,
+    #[serde(rename = "modelCapabilities", default)]
+    pub model_capabilities: Vec<MlGenerativeModelCapability>,
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub subtype: MlParameterSubtype,
+    #[serde(default)]
+    pub r#type: MlParameterType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct GenAiPlannerFunctionDef {
+    #[serde(rename = "genAiCustomizedPlugin", default)]
+    pub gen_ai_customized_plugin: GenAiLocalPlugin,
+    #[serde(rename = "genAiFunctionName", default)]
+    pub gen_ai_function_name: String,
+    #[serde(rename = "genAiPluginName", default)]
+    pub gen_ai_plugin_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct GenAiPromptTemplateVersion {
+    #[serde(default)]
+    pub classification: String,
+    #[serde(default)]
+    pub content: String,
+    #[serde(rename = "defaultLanguageScope", default)]
+    pub default_language_scope: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "generationTemplateConfigs", default)]
+    pub generation_template_configs: Vec<GenAiPromptTemplateGenerationConfig>,
+    #[serde(default)]
+    pub inputs: Vec<GenAiPromptTemplateInput>,
+    #[serde(default)]
+    pub keywords: String,
+    #[serde(rename = "outputSchema", default)]
+    pub output_schema: String,
+    #[serde(rename = "primaryModel", default)]
+    pub primary_model: String,
+    #[serde(rename = "responseFormat", default)]
+    pub response_format: GenAiPromptTemplateResponseFormat,
+    #[serde(default)]
+    pub status: GenAiPromptTemplateStatus,
+    #[serde(rename = "templateDataProviders", default)]
+    pub template_data_providers: Vec<GenAiPromptTemplateDataProvider>,
+    #[serde(rename = "versionIdentifier", default)]
+    pub version_identifier: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AiPluginUtteranceDef {
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(default)]
+    pub language: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub utterance: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AiEvaluationAgentTestCaseInput {
+    #[serde(rename = "contextVariable", default)]
+    pub context_variable: Vec<AiEvalCopilotTestCaseCntxtVar>,
+    #[serde(rename = "conversationHistory", default)]
+    pub conversation_history: Vec<AiEvalCopilotTestCaseConv>,
+    #[serde(default)]
+    pub utterance: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Prompt {
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "promptVersions", default)]
+    pub prompt_versions: Vec<PromptVersion>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AiPlannerVoiceDef {
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "inboundFillerWordsBool", default)]
+    pub inbound_filler_words_bool: bool,
+    #[serde(rename = "inboundKeywords", default)]
+    pub inbound_keywords: String,
+    #[serde(rename = "inboundModel", default)]
+    pub inbound_model: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "outboundFillerSentences", default)]
+    pub outbound_filler_sentences: String,
+    #[serde(rename = "pronunciationDict", default)]
+    pub pronunciation_dict: String,
+    #[serde(rename = "outboundModel", default)]
+    pub outbound_model: String,
+    #[serde(rename = "outboundSimilarity", default)]
+    pub outbound_similarity: f64,
+    #[serde(rename = "outboundSpeedNum", default)]
+    pub outbound_speed_num: f64,
+    #[serde(rename = "outboundStability", default)]
+    pub outbound_stability: f64,
+    #[serde(rename = "outboundStyleExaggeration", default)]
+    pub outbound_style_exaggeration: f64,
+    #[serde(rename = "outboundVoice", default)]
+    pub outbound_voice: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MlModelArtifact {
+    #[serde(rename = "algorithmType", default)]
+    pub algorithm_type: MlAIModelAlgorithmType,
+    #[serde(rename = "connectorType", default)]
+    pub connector_type: MlModelConnectorType,
+    #[serde(rename = "deployStatus", default)]
+    pub deploy_status: MlModelDeployStatus,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "generativeModelType", default)]
+    pub generative_model_type: MlGenerativeModelType,
+    #[serde(rename = "inputFeatures", default)]
+    pub input_features: Vec<MlModelInput>,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "modelCapabilities", default)]
+    pub model_capabilities: Vec<MlGenerativeModelCapability>,
+    #[serde(rename = "modelCapability", default)]
+    pub model_capability: MlModelCapability,
+    #[serde(rename = "modelType", default)]
+    pub model_type: MlModelType,
+    #[serde(rename = "outputFeatures", default)]
+    pub output_features: Vec<MlModelOutput>,
+    #[serde(rename = "parameterOverrides", default)]
+    pub parameter_overrides: Vec<MlParameterOverride>,
+    #[serde(default)]
+    pub parameters: Vec<MlParameterDefinition>,
+    #[serde(rename = "parentModel", default)]
+    pub parent_model: String,
+    #[serde(rename = "predictionType", default)]
+    pub prediction_type: MlModelPredictionType,
+    #[serde(rename = "runtimeType", default)]
+    pub runtime_type: MlRuntimeType,
+    #[serde(default)]
+    pub source: String,
+    #[serde(rename = "sourceContainer", default)]
+    pub source_container: String,
+    #[serde(rename = "sourceType", default)]
+    pub source_type: MlModelSourceType,
+    #[serde(rename = "trainingMetrics", default)]
+    pub training_metrics: String,
+    #[serde(default)]
+    pub r#type: MlAIModelType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AiEvalCopilotTestCaseConv {
+    #[serde(default)]
+    pub index: f64,
+    #[serde(default)]
+    pub message: String,
+    #[serde(default)]
+    pub role: String,
+    #[serde(default)]
+    pub topic: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AiEvalCopilotTestCaseCntxtVar {
+    #[serde(rename = "variableName", default)]
+    pub variable_name: String,
+    #[serde(rename = "variableValue", default)]
+    pub variable_value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MlModelEndpoint {
+    #[serde(rename = "inputSchema", default)]
+    pub input_schema: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "outputSchema", default)]
+    pub output_schema: String,
+    #[serde(default)]
+    pub outputs: Vec<MlModelOutputEndpoint>,
+    #[serde(default)]
+    pub r#type: MlModelEndpointType,
+    #[serde(default)]
+    pub url: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MlSlotClass {
+    #[serde(rename = "dataType", default)]
+    pub data_type: MlSlotClassDataType,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "extractionRegex", default)]
+    pub extraction_regex: String,
+    #[serde(rename = "extractionType", default)]
+    pub extraction_type: MlSlotClassExtractionType,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "mlSlotClassValues", default)]
+    pub ml_slot_class_values: Vec<MlSlotClassValue>,
 }

@@ -10,6 +10,32 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum VisualizationFieldType {
+    #[default]
+    Field,
+    MeasureNames,
+    MeasureValues,
+    AdHocCalculation,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum VisualizationResourceType {
+    #[default]
+    js,
+    css,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum VisualizationFieldDisplayCategoryType {
+    #[default]
+    Discrete,
+    Continuous,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum VisualizationFieldFunctionType {
     #[default]
     Sum,
@@ -49,36 +75,26 @@ pub enum VisualizationFieldFunctionType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum VisualizationFieldType {
-    #[default]
-    Field,
-    MeasureNames,
-    MeasureValues,
-    AdHocCalculation,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum VisualizationFieldRoleType {
     #[default]
     Dimension,
     Measure,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum VisualizationFieldDisplayCategoryType {
-    #[default]
-    Discrete,
-    Continuous,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum VisualizationResourceType {
-    #[default]
-    js,
-    css,
+#[serde(rename_all = "camelCase")]
+pub struct VisualizationType {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(default)]
+    pub icon: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "scriptBootstrapMethod", default)]
+    pub script_bootstrap_method: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -111,20 +127,4 @@ pub struct VisualizationPlugin {
     pub visualization_resources: Vec<VisualizationResource>,
     #[serde(rename = "visualizationTypes", default)]
     pub visualization_types: Vec<VisualizationType>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct VisualizationType {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(default)]
-    pub icon: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "scriptBootstrapMethod", default)]
-    pub script_bootstrap_method: String,
 }

@@ -22,54 +22,6 @@ pub enum AuraBundleType {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct LightningOnboardingConfig {
-    #[serde(rename = "collaborationGroup", default)]
-    pub collaboration_group: String,
-    #[serde(rename = "customQuestion", default)]
-    pub custom_question: String,
-    #[serde(rename = "feedbackFormDaysFrequency", default)]
-    pub feedback_form_days_frequency: f64,
-    #[serde(rename = "isCustom", default)]
-    pub is_custom: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "promptDelayTime", default)]
-    pub prompt_delay_time: f64,
-    #[serde(rename = "sendFeedbackToSalesforce", default)]
-    pub send_feedback_to_salesforce: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AuraDefinition {
-    #[serde(rename = "defType", default)]
-    pub def_type: String,
-    #[serde(default)]
-    pub source: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LightningExperienceTheme {
-    #[serde(rename = "defaultBrandingSet", default)]
-    pub default_branding_set: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "designSystemVersion", default)]
-    pub design_system_version: serde_json::Value,
-    #[serde(rename = "isDarkModeEnabled", default)]
-    pub is_dark_mode_enabled: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "shouldOverrideLoadingImage", default)]
-    pub should_override_loading_image: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct LightningComponentBundle {
     #[serde(default)]
     pub ai: String,
@@ -98,9 +50,21 @@ pub struct LightningComponentBundle {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct AuraDefinitions {
-    #[serde(rename = "auraDefinition", default)]
-    pub aura_definition: Vec<AuraDefinition>,
+pub struct LightningOnboardingConfig {
+    #[serde(rename = "collaborationGroup", default)]
+    pub collaboration_group: String,
+    #[serde(rename = "customQuestion", default)]
+    pub custom_question: String,
+    #[serde(rename = "feedbackFormDaysFrequency", default)]
+    pub feedback_form_days_frequency: f64,
+    #[serde(rename = "isCustom", default)]
+    pub is_custom: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "promptDelayTime", default)]
+    pub prompt_delay_time: f64,
+    #[serde(rename = "sendFeedbackToSalesforce", default)]
+    pub send_feedback_to_salesforce: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -115,6 +79,32 @@ pub struct LightningMessageChannel {
     pub lightning_message_fields: Vec<serde_json::Value>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LightningExperienceTheme {
+    #[serde(rename = "defaultBrandingSet", default)]
+    pub default_branding_set: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "designSystemVersion", default)]
+    pub design_system_version: serde_json::Value,
+    #[serde(rename = "isDarkModeEnabled", default)]
+    pub is_dark_mode_enabled: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "shouldOverrideLoadingImage", default)]
+    pub should_override_loading_image: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AuraDefinitions {
+    #[serde(rename = "auraDefinition", default)]
+    pub aura_definition: Vec<AuraDefinition>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -151,4 +141,14 @@ pub struct AuraDefinitionBundle {
     pub testsuite_content: String,
     #[serde(default)]
     pub r#type: AuraBundleType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AuraDefinition {
+    #[serde(rename = "defType", default)]
+    pub def_type: String,
+    #[serde(default)]
+    pub source: String,
 }

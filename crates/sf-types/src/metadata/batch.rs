@@ -10,40 +10,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BatchCalcJobFrcstPeriodType {
+pub enum BatchCalcJobDataType {
     #[default]
-    Year,
-    YearQuarter,
-    YearMonth,
-    YearWeek,
-    YearMonthDay,
-    FiscalYear,
-    FiscalYearQuarter,
-    FiscalYearMonth,
-    FiscalYearWeek,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BatchCalcJobDefRunMode {
-    #[default]
-    Batch,
-    OnDemand,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BatchCalcJobFileSource {
-    #[default]
-    ContentManagement,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BatchCalcJobWritebackKeyType {
-    #[default]
-    PrimaryKey,
-    QualifierKey,
+    Text,
+    Numeric,
+    Date,
+    DateTime,
+    MultiValue,
+    Boolean,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -61,10 +35,92 @@ pub enum BatchCalcJobParameterDataType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum BatchCalcJobTransformType {
+    #[default]
+    Expression,
+    Slice,
+    ComputeRelative,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum BatchCalcJobAggregateFunction {
+    #[default]
+    Unique,
+    Sum,
+    Max,
+    Min,
+    Avg,
+    Std,
+    StdP,
+    Var,
+    VarP,
+    Count,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum BatchJobDefinitionStatus {
+    #[default]
+    Active,
+    Inactive,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum BatchInputSourceType {
     #[default]
     CRMA,
     Data_Cloud,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum BatchCalcJobCSVDelimiter {
+    #[default]
+    COMMA,
+    BACKQUOTE,
+    CARET,
+    PIPE,
+    SEMICOLON,
+    TAB,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum BatchCalcJobFrcstPeriodType {
+    #[default]
+    Year,
+    YearQuarter,
+    YearMonth,
+    YearWeek,
+    YearMonthDay,
+    FiscalYear,
+    FiscalYearQuarter,
+    FiscalYearMonth,
+    FiscalYearWeek,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum BatchCalcJobFrcstAccuracy {
+    #[default]
+    None,
+    Eighty,
+    NinetyFive,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum BatchCalcJobDatasourceType {
+    #[default]
+    StandardObject,
+    Analytics,
+    DataModelObject,
+    CalculatedInsightsObject,
+    CRMObject,
+    CSV,
+    DataLakeObject,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -80,31 +136,50 @@ pub enum BatchCalcJobWritebackOpn {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BatchCalcJobFilterOperator {
+pub enum BatchCalcJobFrcstSeasonality {
     #[default]
-    Equals,
-    NotEquals,
-    GreaterThan,
-    GreaterThanOrEquals,
-    LessThan,
-    LessThanOrEquals,
-    StartsWith,
-    EndsWith,
-    Contains,
-    DoesNotContain,
-    IsNull,
-    IsNotNull,
-    In,
-    NotIn,
+    Auto,
+    None,
+    Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    Ten,
+    Eleven,
+    Twelve,
+    Thirteen,
+    Fourteen,
+    Fifteen,
+    Sixteen,
+    Seventeen,
+    Eighteen,
+    Nineteen,
+    Twenty,
+    TwentyOne,
+    TwentyTwo,
+    TwentyThree,
+    TwentyFour,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BatchCalcJobFrcstAccuracy {
+pub enum AsyncRequestState {
     #[default]
-    None,
-    Eighty,
-    NinetyFive,
+    Queued,
+    InProgress,
+    Completed,
+    Error,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum BatchCalcJobFileSource {
+    #[default]
+    ContentManagement,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -165,14 +240,22 @@ pub enum BatchCalcProcessType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BatchCalcJobDataType {
+pub enum BatchCalcJobFilterOperator {
     #[default]
-    Text,
-    Numeric,
-    Date,
-    DateTime,
-    MultiValue,
-    Boolean,
+    Equals,
+    NotEquals,
+    GreaterThan,
+    GreaterThanOrEquals,
+    LessThan,
+    LessThanOrEquals,
+    StartsWith,
+    EndsWith,
+    Contains,
+    DoesNotContain,
+    IsNull,
+    IsNotNull,
+    In,
+    NotIn,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -182,6 +265,25 @@ pub enum BatchCalcJobFrcstModel {
     Additive,
     Multiplicative,
     Auto,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum BatchCalcJobWritebackType {
+    #[default]
+    sObject,
+    Analytics,
+    DataLakeObject,
+    DataModelObject,
+    CalculatedInsights,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum BatchCalcJobOrderType {
+    #[default]
+    Ascending,
+    Descending,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -196,140 +298,96 @@ pub enum BatchCalcJobSourceJoinType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AsyncRequestState {
+pub enum BatchCalcJobWritebackKeyType {
     #[default]
-    Queued,
-    InProgress,
-    Completed,
-    Error,
+    PrimaryKey,
+    QualifierKey,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BatchJobDefinitionStatus {
+pub enum BatchCalcJobDefRunMode {
     #[default]
-    Active,
-    Inactive,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BatchCalcJobAggregateFunction {
-    #[default]
-    Unique,
-    Sum,
-    Max,
-    Min,
-    Avg,
-    Std,
-    StdP,
-    Var,
-    VarP,
-    Count,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BatchCalcJobFrcstSeasonality {
-    #[default]
-    Auto,
-    None,
-    Two,
-    Three,
-    Four,
-    Five,
-    Six,
-    Seven,
-    Eight,
-    Nine,
-    Ten,
-    Eleven,
-    Twelve,
-    Thirteen,
-    Fourteen,
-    Fifteen,
-    Sixteen,
-    Seventeen,
-    Eighteen,
-    Nineteen,
-    Twenty,
-    TwentyOne,
-    TwentyTwo,
-    TwentyThree,
-    TwentyFour,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BatchCalcJobTransformType {
-    #[default]
-    Expression,
-    Slice,
-    ComputeRelative,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BatchCalcJobOrderType {
-    #[default]
-    Ascending,
-    Descending,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BatchCalcJobCSVDelimiter {
-    #[default]
-    COMMA,
-    BACKQUOTE,
-    CARET,
-    PIPE,
-    SEMICOLON,
-    TAB,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BatchCalcJobDatasourceType {
-    #[default]
-    StandardObject,
-    Analytics,
-    DataModelObject,
-    CalculatedInsightsObject,
-    CRMObject,
-    CSV,
-    DataLakeObject,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BatchCalcJobWritebackType {
-    #[default]
-    sObject,
-    Analytics,
-    DataLakeObject,
-    DataModelObject,
-    CalculatedInsights,
+    Batch,
+    OnDemand,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct BatchDataSource {
+pub struct BatchCalcJobJoinResultField {
     #[serde(default)]
-    pub condition: String,
+    pub alias: String,
+    #[serde(rename = "sourceFieldName", default)]
+    pub source_field_name: String,
+    #[serde(rename = "sourceName", default)]
+    pub source_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BatchCalcJobAggregateField {
+    #[serde(rename = "aggregateFunction", default)]
+    pub aggregate_function: BatchCalcJobAggregateFunction,
     #[serde(default)]
-    pub criteria: String,
-    #[serde(rename = "dataSourceType", default)]
-    pub data_source_type: serde_json::Value,
+    pub alias: String,
+    #[serde(rename = "sourceFieldName", default)]
+    pub source_field_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct QueueMembers {
+    #[serde(rename = "publicGroups", default)]
+    pub public_groups: serde_json::Value,
+    #[serde(rename = "roleAndSubordinates", default)]
+    pub role_and_subordinates: serde_json::Value,
+    #[serde(rename = "roleAndSubordinatesInternal", default)]
+    pub role_and_subordinates_internal: serde_json::Value,
     #[serde(default)]
-    pub filters: Vec<BatchDataSrcFilterCriteria>,
-    #[serde(rename = "orderFields", default)]
-    pub order_fields: Vec<BatchDataSourceOrderField>,
-    #[serde(rename = "sourceObject", default)]
-    pub source_object: String,
-    #[serde(rename = "sourceObjectField", default)]
-    pub source_object_field: String,
+    pub roles: serde_json::Value,
+    #[serde(default)]
+    pub users: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BatchProcessJobDefinition {
+    #[serde(rename = "batchSize", default)]
+    pub batch_size: f64,
+    #[serde(rename = "dataSource", default)]
+    pub data_source: BatchDataSource,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "executionProcessApiName", default)]
+    pub execution_process_api_name: String,
+    #[serde(rename = "flowApiName", default)]
+    pub flow_api_name: String,
+    #[serde(rename = "flowInputVariable", default)]
+    pub flow_input_variable: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "processGroup", default)]
+    pub process_group: String,
+    #[serde(rename = "retryCount", default)]
+    pub retry_count: f64,
+    #[serde(rename = "retryInterval", default)]
+    pub retry_interval: f64,
+    #[serde(default)]
+    pub status: String,
+    #[serde(default)]
+    pub r#type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct QueueSobject {
+    #[serde(rename = "sobjectType", default)]
+    pub sobject_type: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -351,45 +409,13 @@ pub struct BatchCalcJobTransformAddedField {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct BatchCalcJobJoinKey {
-    #[serde(rename = "primarySourceFieldName", default)]
-    pub primary_source_field_name: String,
-    #[serde(rename = "secondarySourceFieldName", default)]
-    pub secondary_source_field_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BatchCalcJobFilterCriteria {
-    #[serde(rename = "inputVariable", default)]
-    pub input_variable: String,
-    #[serde(default)]
-    pub operator: BatchCalcJobFilterOperator,
-    #[serde(default)]
-    pub sequence: f64,
-    #[serde(rename = "sourceFieldName", default)]
-    pub source_field_name: String,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BatchCalcJobAtomicWritebackRelationship {
-    #[serde(rename = "childWritebackObjectField", default)]
-    pub child_writeback_object_field: String,
-    #[serde(rename = "childWritebackObjectName", default)]
-    pub child_writeback_object_name: String,
-    #[serde(rename = "parentWritebackObjectField", default)]
-    pub parent_writeback_object_field: String,
-    #[serde(rename = "parentWritebackObjectName", default)]
-    pub parent_writeback_object_name: String,
-    #[serde(rename = "relationshipName", default)]
-    pub relationship_name: String,
-    #[serde(rename = "sequenceNumber", default)]
-    pub sequence_number: f64,
+pub struct BatchDataSourceOrderField {
+    #[serde(rename = "domainObjectName", default)]
+    pub domain_object_name: String,
+    #[serde(rename = "fieldName", default)]
+    pub field_name: String,
+    #[serde(rename = "fieldPath", default)]
+    pub field_path: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -465,137 +491,15 @@ pub struct BatchCalcJobOrderByField {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct QueueMembers {
-    #[serde(rename = "publicGroups", default)]
-    pub public_groups: serde_json::Value,
-    #[serde(rename = "roleAndSubordinates", default)]
-    pub role_and_subordinates: serde_json::Value,
-    #[serde(rename = "roleAndSubordinatesInternal", default)]
-    pub role_and_subordinates_internal: serde_json::Value,
+pub struct BatchCalcJobFilterCriteria {
+    #[serde(rename = "inputVariable", default)]
+    pub input_variable: String,
     #[serde(default)]
-    pub roles: serde_json::Value,
+    pub operator: BatchCalcJobFilterOperator,
     #[serde(default)]
-    pub users: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BatchDataSourceOrderField {
-    #[serde(rename = "domainObjectName", default)]
-    pub domain_object_name: String,
-    #[serde(rename = "fieldName", default)]
-    pub field_name: String,
-    #[serde(rename = "fieldPath", default)]
-    pub field_path: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BatchCalcJobAggregateField {
-    #[serde(rename = "aggregateFunction", default)]
-    pub aggregate_function: BatchCalcJobAggregateFunction,
-    #[serde(default)]
-    pub alias: String,
+    pub sequence: f64,
     #[serde(rename = "sourceFieldName", default)]
     pub source_field_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BatchCalcJobDatasourceField {
-    #[serde(default)]
-    pub alias: String,
-    #[serde(rename = "dataType", default)]
-    pub data_type: BatchCalcJobDataType,
-    #[serde(rename = "isPrimaryKey", default)]
-    pub is_primary_key: bool,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BatchCalcJobTransformDroppedField {
-    #[serde(rename = "sourceFieldName", default)]
-    pub source_field_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct QueueSobject {
-    #[serde(rename = "sobjectType", default)]
-    pub sobject_type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Queue {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "doesSendEmailToMembers", default)]
-    pub does_send_email_to_members: bool,
-    #[serde(default)]
-    pub email: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "queueMembers", default)]
-    pub queue_members: QueueMembers,
-    #[serde(rename = "queueRoutingConfig", default)]
-    pub queue_routing_config: String,
-    #[serde(rename = "queueSobject", default)]
-    pub queue_sobject: Vec<QueueSobject>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BatchProcessJobDefinition {
-    #[serde(rename = "batchSize", default)]
-    pub batch_size: f64,
-    #[serde(rename = "dataSource", default)]
-    pub data_source: BatchDataSource,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "executionProcessApiName", default)]
-    pub execution_process_api_name: String,
-    #[serde(rename = "flowApiName", default)]
-    pub flow_api_name: String,
-    #[serde(rename = "flowInputVariable", default)]
-    pub flow_input_variable: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "processGroup", default)]
-    pub process_group: String,
-    #[serde(rename = "retryCount", default)]
-    pub retry_count: f64,
-    #[serde(rename = "retryInterval", default)]
-    pub retry_interval: f64,
-    #[serde(default)]
-    pub status: String,
-    #[serde(default)]
-    pub r#type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct QueueRoutingConfigSkill {
-    #[serde(default)]
-    pub skill: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BatchCalcJobCustomNodeParameter {
-    #[serde(default)]
-    pub name: String,
     #[serde(default)]
     pub value: String,
 }
@@ -623,23 +527,11 @@ pub struct BatchCalcJobWritebackMapping {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct BatchDataSrcFilterCriteria {
-    #[serde(rename = "domainObjectName", default)]
-    pub domain_object_name: String,
-    #[serde(rename = "dynamicValue", default)]
-    pub dynamic_value: bool,
-    #[serde(rename = "dynamicValueType", default)]
-    pub dynamic_value_type: String,
-    #[serde(rename = "fieldName", default)]
-    pub field_name: String,
-    #[serde(rename = "fieldPath", default)]
-    pub field_path: String,
-    #[serde(rename = "fieldValue", default)]
-    pub field_value: String,
-    #[serde(default)]
-    pub operator: String,
-    #[serde(rename = "sequenceNo", default)]
-    pub sequence_no: f64,
+pub struct BatchCalcJobJoinKey {
+    #[serde(rename = "primarySourceFieldName", default)]
+    pub primary_source_field_name: String,
+    #[serde(rename = "secondarySourceFieldName", default)]
+    pub secondary_source_field_name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -661,13 +553,35 @@ pub struct AsyncResult {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct BatchCalcJobJoinResultField {
+pub struct BatchCalcJobDatasourceField {
     #[serde(default)]
     pub alias: String,
-    #[serde(rename = "sourceFieldName", default)]
-    pub source_field_name: String,
-    #[serde(rename = "sourceName", default)]
-    pub source_name: String,
+    #[serde(rename = "dataType", default)]
+    pub data_type: BatchCalcJobDataType,
+    #[serde(rename = "isPrimaryKey", default)]
+    pub is_primary_key: bool,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BatchDataSource {
+    #[serde(default)]
+    pub condition: String,
+    #[serde(default)]
+    pub criteria: String,
+    #[serde(rename = "dataSourceType", default)]
+    pub data_source_type: serde_json::Value,
+    #[serde(default)]
+    pub filters: Vec<BatchDataSrcFilterCriteria>,
+    #[serde(rename = "orderFields", default)]
+    pub order_fields: Vec<BatchDataSourceOrderField>,
+    #[serde(rename = "sourceObject", default)]
+    pub source_object: String,
+    #[serde(rename = "sourceObjectField", default)]
+    pub source_object_field: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -702,4 +616,90 @@ pub struct QueueRoutingConfig {
     pub skills: Vec<QueueRoutingConfigSkill>,
     #[serde(rename = "userOverflowAssignee", default)]
     pub user_overflow_assignee: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BatchCalcJobAtomicWritebackRelationship {
+    #[serde(rename = "childWritebackObjectField", default)]
+    pub child_writeback_object_field: String,
+    #[serde(rename = "childWritebackObjectName", default)]
+    pub child_writeback_object_name: String,
+    #[serde(rename = "parentWritebackObjectField", default)]
+    pub parent_writeback_object_field: String,
+    #[serde(rename = "parentWritebackObjectName", default)]
+    pub parent_writeback_object_name: String,
+    #[serde(rename = "relationshipName", default)]
+    pub relationship_name: String,
+    #[serde(rename = "sequenceNumber", default)]
+    pub sequence_number: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BatchCalcJobCustomNodeParameter {
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct QueueRoutingConfigSkill {
+    #[serde(default)]
+    pub skill: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Queue {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "doesSendEmailToMembers", default)]
+    pub does_send_email_to_members: bool,
+    #[serde(default)]
+    pub email: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "queueMembers", default)]
+    pub queue_members: QueueMembers,
+    #[serde(rename = "queueRoutingConfig", default)]
+    pub queue_routing_config: String,
+    #[serde(rename = "queueSobject", default)]
+    pub queue_sobject: Vec<QueueSobject>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BatchCalcJobTransformDroppedField {
+    #[serde(rename = "sourceFieldName", default)]
+    pub source_field_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BatchDataSrcFilterCriteria {
+    #[serde(rename = "domainObjectName", default)]
+    pub domain_object_name: String,
+    #[serde(rename = "dynamicValue", default)]
+    pub dynamic_value: bool,
+    #[serde(rename = "dynamicValueType", default)]
+    pub dynamic_value_type: String,
+    #[serde(rename = "fieldName", default)]
+    pub field_name: String,
+    #[serde(rename = "fieldPath", default)]
+    pub field_path: String,
+    #[serde(rename = "fieldValue", default)]
+    pub field_value: String,
+    #[serde(default)]
+    pub operator: String,
+    #[serde(rename = "sequenceNo", default)]
+    pub sequence_no: f64,
 }

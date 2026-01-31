@@ -10,19 +10,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SearchResultActionType {
+pub enum SearchCriteriaConfigurationFilterType {
     #[default]
-    FlowDefinition,
-    OmniScript,
-    LightningWebComponent,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SearchCriteriaConfigurationResultDisplayFormat {
-    #[default]
-    LIST,
-    CARD,
+    GROUPING_AND_AGGREGATION,
+    MULTIPLE_FIELDS,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -35,10 +26,10 @@ pub enum SearchCriteriaConfigurationConfigurationType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SearchCriteriaConfigurationFilterType {
+pub enum SearchCriteriaConfigurationResultDisplayFormat {
     #[default]
-    GROUPING_AND_AGGREGATION,
-    MULTIPLE_FIELDS,
+    LIST,
+    CARD,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -47,6 +38,101 @@ pub enum SearchResultActionScope {
     #[default]
     Global,
     Inline,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SearchResultActionType {
+    #[default]
+    FlowDefinition,
+    OmniScript,
+    LightningWebComponent,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SearchCustomizationRuleValue {
+    #[serde(rename = "targetObjectApiName", default)]
+    pub target_object_api_name: String,
+    #[serde(default)]
+    pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SearchCustomizationRule {
+    #[serde(rename = "fieldApiName", default)]
+    pub field_api_name: String,
+    #[serde(default)]
+    pub operator: String,
+    #[serde(rename = "ruleValue", default)]
+    pub rule_value: Vec<SearchCustomizationRuleValue>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SearchSettingsByObject {
+    #[serde(rename = "searchSettingsByObject", default)]
+    pub search_settings_by_object: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SearchCustomizationExplicitFilter {
+    #[serde(rename = "fieldPath", default)]
+    pub field_path: String,
+    #[serde(default)]
+    pub r#type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SearchCustomizationObjectOverride {
+    #[serde(rename = "explicitFilter", default)]
+    pub explicit_filter: Vec<SearchCustomizationExplicitFilter>,
+    #[serde(rename = "fieldOverride", default)]
+    pub field_override: Vec<SearchCustomizationFieldOverride>,
+    #[serde(rename = "objectApiName", default)]
+    pub object_api_name: String,
+    #[serde(default)]
+    pub rule: Vec<SearchCustomizationRule>,
+    #[serde(default)]
+    pub searchable: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SearchableObjDataSyncInfo {
+    #[serde(rename = "dataSyncActive", default)]
+    pub data_sync_active: bool,
+    #[serde(rename = "dataSyncJob", default)]
+    pub data_sync_job: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "displayFieldSet", default)]
+    pub display_field_set: serde_json::Value,
+    #[serde(rename = "lastDataSyncRunDate", default)]
+    pub last_data_sync_run_date: String,
+    #[serde(rename = "lookupMappings", default)]
+    pub lookup_mappings: serde_json::Value,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "parsingFieldSet", default)]
+    pub parsing_field_set: serde_json::Value,
+    #[serde(rename = "picklistMappings", default)]
+    pub picklist_mappings: Vec<serde_json::Value>,
+    #[serde(rename = "scheduleFrequencyInHours", default)]
+    pub schedule_frequency_in_hours: String,
+    #[serde(rename = "searchableObject", default)]
+    pub searchable_object: String,
+    #[serde(rename = "typeAheadMappings", default)]
+    pub type_ahead_mappings: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -65,56 +151,6 @@ pub struct SearchCustomization {
     pub selected_object: Vec<String>,
     #[serde(rename = "selectedProfile", default)]
     pub selected_profile: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SearchCustomizationFieldOverride {
-    #[serde(rename = "fieldApiName", default)]
-    pub field_api_name: String,
-    #[serde(default)]
-    pub searchable: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SearchCustomizationExplicitFilter {
-    #[serde(rename = "fieldPath", default)]
-    pub field_path: String,
-    #[serde(default)]
-    pub r#type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SearchCustomizationRuleValue {
-    #[serde(rename = "targetObjectApiName", default)]
-    pub target_object_api_name: String,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SearchResultActionConfig {
-    #[serde(rename = "actionReference", default)]
-    pub action_reference: String,
-    #[serde(rename = "actionScope", default)]
-    pub action_scope: SearchResultActionScope,
-    #[serde(rename = "actionType", default)]
-    pub action_type: SearchResultActionType,
-    #[serde(rename = "agentConfirmationMessage", default)]
-    pub agent_confirmation_message: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isAiAction", default)]
-    pub is_ai_action: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -160,29 +196,11 @@ pub struct SearchCriteriaConfiguration {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct SearchCustomizationObjectOverride {
-    #[serde(rename = "explicitFilter", default)]
-    pub explicit_filter: Vec<SearchCustomizationExplicitFilter>,
-    #[serde(rename = "fieldOverride", default)]
-    pub field_override: Vec<SearchCustomizationFieldOverride>,
-    #[serde(rename = "objectApiName", default)]
-    pub object_api_name: String,
-    #[serde(default)]
-    pub rule: Vec<SearchCustomizationRule>,
+pub struct SearchCustomizationFieldOverride {
+    #[serde(rename = "fieldApiName", default)]
+    pub field_api_name: String,
     #[serde(default)]
     pub searchable: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SearchOrgWideObjectConfig {
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "objectReference", default)]
-    pub object_reference: String,
-    #[serde(rename = "searchOrgWideFieldConfig", default)]
-    pub search_org_wide_field_config: Vec<SearchOrgWideFieldConfig>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -200,49 +218,31 @@ pub struct SearchOrgWideFieldConfig {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct SearchSettingsByObject {
-    #[serde(rename = "searchSettingsByObject", default)]
-    pub search_settings_by_object: Vec<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SearchableObjDataSyncInfo {
-    #[serde(rename = "dataSyncActive", default)]
-    pub data_sync_active: bool,
-    #[serde(rename = "dataSyncJob", default)]
-    pub data_sync_job: String,
+pub struct SearchResultActionConfig {
+    #[serde(rename = "actionReference", default)]
+    pub action_reference: String,
+    #[serde(rename = "actionScope", default)]
+    pub action_scope: SearchResultActionScope,
+    #[serde(rename = "actionType", default)]
+    pub action_type: SearchResultActionType,
+    #[serde(rename = "agentConfirmationMessage", default)]
+    pub agent_confirmation_message: String,
     #[serde(default)]
     pub description: String,
-    #[serde(rename = "displayFieldSet", default)]
-    pub display_field_set: serde_json::Value,
-    #[serde(rename = "lastDataSyncRunDate", default)]
-    pub last_data_sync_run_date: String,
-    #[serde(rename = "lookupMappings", default)]
-    pub lookup_mappings: serde_json::Value,
+    #[serde(rename = "isAiAction", default)]
+    pub is_ai_action: bool,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "parsingFieldSet", default)]
-    pub parsing_field_set: serde_json::Value,
-    #[serde(rename = "picklistMappings", default)]
-    pub picklist_mappings: Vec<serde_json::Value>,
-    #[serde(rename = "scheduleFrequencyInHours", default)]
-    pub schedule_frequency_in_hours: String,
-    #[serde(rename = "searchableObject", default)]
-    pub searchable_object: String,
-    #[serde(rename = "typeAheadMappings", default)]
-    pub type_ahead_mappings: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct SearchCustomizationRule {
-    #[serde(rename = "fieldApiName", default)]
-    pub field_api_name: String,
-    #[serde(default)]
-    pub operator: String,
-    #[serde(rename = "ruleValue", default)]
-    pub rule_value: Vec<SearchCustomizationRuleValue>,
+pub struct SearchOrgWideObjectConfig {
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "objectReference", default)]
+    pub object_reference: String,
+    #[serde(rename = "searchOrgWideFieldConfig", default)]
+    pub search_org_wide_field_config: Vec<SearchOrgWideFieldConfig>,
 }

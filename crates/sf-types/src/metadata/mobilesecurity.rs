@@ -10,41 +10,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MobileSecurityMobilePlatform {
-    #[default]
-    Android,
-    iOS,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MobileSecurityPolicyRuleValueType {
-    #[default]
-    Boolean,
-    Text,
-    TextList,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MobileSecurityCertPinType {
-    #[default]
-    AuthServer,
-    Resource,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MobileSecurityPolicySeverityLevel {
-    #[default]
-    Warn,
-    Error,
-    Critical,
-    Info,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum MobileSecurityPolicyType {
     #[default]
     JailbrokenDevice,
@@ -82,6 +47,41 @@ pub enum MobileSecurityPolicyType {
     AllowedDeviceList,
     LogCertPin,
     BlockEditingMenu,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MobileSecurityPolicyRuleValueType {
+    #[default]
+    Boolean,
+    Text,
+    TextList,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MobileSecurityPolicySeverityLevel {
+    #[default]
+    Warn,
+    Error,
+    Critical,
+    Info,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MobileSecurityCertPinType {
+    #[default]
+    AuthServer,
+    Resource,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MobileSecurityMobilePlatform {
+    #[default]
+    Android,
+    iOS,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
