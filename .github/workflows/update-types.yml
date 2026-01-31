@@ -40,21 +40,7 @@ jobs:
         run: npm ci
 
       - name: Regenerate Rust types
-        run: |
-          cd sf-wsdl
-          # Use the type definition file from node_modules
-          # The path might vary slightly depending on how @salesforce/types exposes it
-          # Usually it's in dist/ or src/
-          TYPES_PATH="../node_modules/@salesforce/types/src/metadata.ts"
-          
-          if [ ! -f "$TYPES_PATH" ]; then
-            echo "Error: Could not find metadata.ts at $TYPES_PATH"
-            # Try finding it
-            find ../node_modules/@salesforce/types -name "metadata.ts"
-            exit 1
-          fi
-
-          cargo run --bin generate_from_typescript -- --output-dir ../sf-generated-types/src --input-file "$TYPES_PATH"
+        run: bash ./scripts/generate.sh
 
       - name: Check for changes
         id: git-check
@@ -66,7 +52,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add sf-generated-types/src/
+          git add crates/sf-types/src/ .typegen-reports/
           
           # If this is a PR (e.g. from Dependabot), commit to the branch
           if [ "${{ github.event_name }}" == "pull_request" ]; then
