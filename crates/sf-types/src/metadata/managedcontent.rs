@@ -111,4 +111,3 @@ pub struct ManagedTopics {
     #[serde(rename = "managedTopic", default)]
     pub managed_topic: Vec<ManagedTopic>,
 }
-

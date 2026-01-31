@@ -153,4 +153,3 @@ pub struct MobileSecurityPolicy {
     #[serde(default)]
     pub r#type: MobileSecurityPolicyType,
 }
-

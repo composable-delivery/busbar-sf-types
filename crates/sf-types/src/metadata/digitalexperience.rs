@@ -71,4 +71,3 @@ pub struct DigitalExperienceModuleCollection {
     #[serde(default)]
     pub module: Vec<DigitalExperienceModule>,
 }
-

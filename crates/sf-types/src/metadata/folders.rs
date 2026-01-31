@@ -141,4 +141,3 @@ pub struct PublicKeyCertificateSetKey {
     #[serde(rename = "publicKeyCertificate", default)]
     pub public_key_certificate: String,
 }
-

@@ -243,4 +243,3 @@ pub struct LetterheadLine {
     #[serde(default)]
     pub height: f64,
 }
-

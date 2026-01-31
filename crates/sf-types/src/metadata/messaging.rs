@@ -1417,4 +1417,3 @@ pub struct MessagingKeyword {
     #[serde(default)]
     pub language: String,
 }
-

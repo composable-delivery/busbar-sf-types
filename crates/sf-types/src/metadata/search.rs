@@ -246,4 +246,3 @@ pub struct SearchableObjDataSyncInfo {
     #[serde(rename = "typeAheadMappings", default)]
     pub type_ahead_mappings: Vec<serde_json::Value>,
 }
-

@@ -234,4 +234,3 @@ pub struct AssistantVersionAction {
     #[serde(default)]
     pub action: String,
 }
-

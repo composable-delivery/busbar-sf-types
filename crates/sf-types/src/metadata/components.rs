@@ -74,4 +74,3 @@ pub struct ComponentInstancePropertyListItem {
     #[serde(rename = "visibilityRule", default)]
     pub visibility_rule: serde_json::Value,
 }
-

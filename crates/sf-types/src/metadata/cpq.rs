@@ -252,4 +252,3 @@ pub struct PricingRecipeTableMapping {
     #[serde(rename = "pricingRecipe", default)]
     pub pricing_recipe: String,
 }
-

@@ -991,4 +991,3 @@ pub struct OmniUiCard {
     #[serde(rename = "versionNumber", default)]
     pub version_number: String,
 }
-

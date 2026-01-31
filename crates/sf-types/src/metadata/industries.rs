@@ -289,4 +289,3 @@ pub struct VehicleAssetEmssnSrcCnfg {
     #[serde(rename = "vehicleAssetType", default)]
     pub vehicle_asset_type: VehicleAssetType,
 }
-

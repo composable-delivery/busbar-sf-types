@@ -595,4 +595,3 @@ pub struct SvcCatalogItemDefFiltrCrit {
     #[serde(rename = "svcCatalogFilterCriteria", default)]
     pub svc_catalog_filter_criteria: String,
 }
-

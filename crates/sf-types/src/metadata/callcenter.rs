@@ -107,4 +107,3 @@ pub struct CallCtrAgentFavTrfrDest {
     #[serde(rename = "transferDestination", default)]
     pub transfer_destination: String,
 }
-

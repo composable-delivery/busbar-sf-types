@@ -314,4 +314,3 @@ pub struct Users {
     #[serde(default)]
     pub user: Vec<String>,
 }
-

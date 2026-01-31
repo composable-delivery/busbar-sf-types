@@ -465,4 +465,3 @@ pub struct RulesetDefinition {
     #[serde(rename = "usageType", default)]
     pub usage_type: String,
 }
-
