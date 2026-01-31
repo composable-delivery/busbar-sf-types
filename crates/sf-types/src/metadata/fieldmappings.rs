@@ -10,6 +10,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FieldMappingClient {
+    #[default]
+    PriceSheetPricing,
+    CustomFieldMappingPricing,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum FieldMappingConfigProcessType {
     #[default]
     GiftEntry,
@@ -50,12 +58,28 @@ pub enum ResourceTransform {
     REPLACE_ALL_CHARS_RESOURCE_TRANSFORM,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FieldMappingClient {
-    #[default]
-    PriceSheetPricing,
-    CustomFieldMappingPricing,
+#[serde(rename_all = "camelCase")]
+pub struct FieldInstance {
+    #[serde(rename = "fieldInstanceProperties", default)]
+    pub field_instance_properties: Vec<FieldInstanceProperty>,
+    #[serde(rename = "fieldItem", default)]
+    pub field_item: String,
+    #[serde(default)]
+    pub identifier: String,
+    #[serde(rename = "visibilityRule", default)]
+    pub visibility_rule: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FieldInstanceProperty {
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub value: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -75,6 +99,36 @@ pub struct FieldMapping {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct FieldMappingConfig {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "fieldMappingConfigItems", default)]
+    pub field_mapping_config_items: Vec<FieldMappingConfigItem>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "processType", default)]
+    pub process_type: FieldMappingConfigProcessType,
+    #[serde(rename = "sourceObjectId", default)]
+    pub source_object_id: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FieldMappingConfigItem {
+    #[serde(rename = "destinationFieldId", default)]
+    pub destination_field_id: String,
+    #[serde(rename = "destinationObjectId", default)]
+    pub destination_object_id: String,
+    #[serde(default)]
+    pub sequence: f64,
+    #[serde(rename = "sourceFieldId", default)]
+    pub source_field_id: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct FieldMappingField {
     #[serde(rename = "dataServiceField", default)]
     pub data_service_field: String,
@@ -87,45 +141,27 @@ pub struct FieldMappingField {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct FieldSrcTrgtRelationship {
-    #[serde(rename = "definitionCreationType", default)]
-    pub definition_creation_type: serde_json::Value,
-    #[serde(rename = "lookupFieldName", default)]
-    pub lookup_field_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub owner: FieldSrcTrgtRelationshipOwner,
-    #[serde(rename = "relationshipCardinality", default)]
-    pub relationship_cardinality: serde_json::Value,
-    #[serde(rename = "sourceFieldName", default)]
-    pub source_field_name: String,
-    #[serde(rename = "targetEntity", default)]
-    pub target_entity: String,
-    #[serde(rename = "targetFieldName", default)]
-    pub target_field_name: String,
+pub struct FieldMappingRow {
+    #[serde(rename = "SObjectType", default)]
+    pub s_object_type: String,
+    #[serde(rename = "fieldMappingFields", default)]
+    pub field_mapping_fields: Vec<FieldMappingField>,
+    #[serde(rename = "fieldName", default)]
+    pub field_name: String,
+    #[serde(rename = "mappingOperation", default)]
+    pub mapping_operation: serde_json::Value,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct FieldSourceTargetMap {
-    #[serde(rename = "creationType", default)]
-    pub creation_type: serde_json::Value,
-    #[serde(rename = "filterApplied", default)]
-    pub filter_applied: bool,
-    #[serde(rename = "filterOperationType", default)]
-    pub filter_operation_type: String,
-    #[serde(rename = "filterValue", default)]
-    pub filter_value: String,
-    #[serde(rename = "isSourceFormula", default)]
-    pub is_source_formula: bool,
-    #[serde(rename = "sourceField", default)]
-    pub source_field: String,
-    #[serde(rename = "sourceFormula", default)]
-    pub source_formula: String,
-    #[serde(rename = "targetField", default)]
-    pub target_field: String,
+pub struct FieldOverride {
+    #[serde(default)]
+    pub field: String,
+    #[serde(default)]
+    pub formula: String,
+    #[serde(rename = "literalValue", default)]
+    pub literal_value: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -157,25 +193,15 @@ pub struct FieldRestrictionRule {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct FieldMappingRow {
-    #[serde(rename = "SObjectType", default)]
-    pub s_object_type: String,
-    #[serde(rename = "fieldMappingFields", default)]
-    pub field_mapping_fields: Vec<FieldMappingField>,
-    #[serde(rename = "fieldName", default)]
-    pub field_name: String,
-    #[serde(rename = "mappingOperation", default)]
-    pub mapping_operation: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FieldInstanceProperty {
+pub struct FieldSetItem {
+    #[serde(rename = "alternativeDisplayFormat", default)]
+    pub alternative_display_format: String,
     #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub value: String,
+    pub field: String,
+    #[serde(rename = "isFieldManaged", default)]
+    pub is_field_managed: bool,
+    #[serde(rename = "isRequired", default)]
+    pub is_required: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -191,43 +217,45 @@ pub struct FieldSetTranslation {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct FieldSetItem {
-    #[serde(rename = "alternativeDisplayFormat", default)]
-    pub alternative_display_format: String,
-    #[serde(default)]
-    pub field: String,
-    #[serde(rename = "isFieldManaged", default)]
-    pub is_field_managed: bool,
-    #[serde(rename = "isRequired", default)]
-    pub is_required: bool,
+pub struct FieldSourceTargetMap {
+    #[serde(rename = "creationType", default)]
+    pub creation_type: serde_json::Value,
+    #[serde(rename = "filterApplied", default)]
+    pub filter_applied: bool,
+    #[serde(rename = "filterOperationType", default)]
+    pub filter_operation_type: String,
+    #[serde(rename = "filterValue", default)]
+    pub filter_value: String,
+    #[serde(rename = "isSourceFormula", default)]
+    pub is_source_formula: bool,
+    #[serde(rename = "sourceField", default)]
+    pub source_field: String,
+    #[serde(rename = "sourceFormula", default)]
+    pub source_formula: String,
+    #[serde(rename = "targetField", default)]
+    pub target_field: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct FieldInstance {
-    #[serde(rename = "fieldInstanceProperties", default)]
-    pub field_instance_properties: Vec<FieldInstanceProperty>,
-    #[serde(rename = "fieldItem", default)]
-    pub field_item: String,
+pub struct FieldSrcTrgtRelationship {
+    #[serde(rename = "definitionCreationType", default)]
+    pub definition_creation_type: serde_json::Value,
+    #[serde(rename = "lookupFieldName", default)]
+    pub lookup_field_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
     #[serde(default)]
-    pub identifier: String,
-    #[serde(rename = "visibilityRule", default)]
-    pub visibility_rule: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FieldMappingConfigItem {
-    #[serde(rename = "destinationFieldId", default)]
-    pub destination_field_id: String,
-    #[serde(rename = "destinationObjectId", default)]
-    pub destination_object_id: String,
-    #[serde(default)]
-    pub sequence: f64,
-    #[serde(rename = "sourceFieldId", default)]
-    pub source_field_id: String,
+    pub owner: FieldSrcTrgtRelationshipOwner,
+    #[serde(rename = "relationshipCardinality", default)]
+    pub relationship_cardinality: serde_json::Value,
+    #[serde(rename = "sourceFieldName", default)]
+    pub source_field_name: String,
+    #[serde(rename = "targetEntity", default)]
+    pub target_entity: String,
+    #[serde(rename = "targetFieldName", default)]
+    pub target_field_name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -238,32 +266,4 @@ pub struct FieldValue {
     pub name: String,
     #[serde(default)]
     pub value: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FieldOverride {
-    #[serde(default)]
-    pub field: String,
-    #[serde(default)]
-    pub formula: String,
-    #[serde(rename = "literalValue", default)]
-    pub literal_value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FieldMappingConfig {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "fieldMappingConfigItems", default)]
-    pub field_mapping_config_items: Vec<FieldMappingConfigItem>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "processType", default)]
-    pub process_type: FieldMappingConfigProcessType,
-    #[serde(rename = "sourceObjectId", default)]
-    pub source_object_id: String,
 }

@@ -10,26 +10,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EmailTemplateType {
-    #[default]
-    text,
-    html,
-    custom,
-    visualforce,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EmailServicesErrorAction {
-    #[default]
-    UseSystemDefault,
-    Bounce,
-    Discard,
-    Requeue,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum EmailServicesAttOptions {
     #[default]
     None,
@@ -41,27 +21,9 @@ pub enum EmailServicesAttOptions {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EmailTemplateUiType {
+pub enum EmailServicesErrorAction {
     #[default]
-    Aloha,
-    SFX,
-    SFX_Sample,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LetterheadVerticalAlignment {
-    #[default]
-    None,
-    Top,
-    Middle,
-    Bottom,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EmailToCaseOnFailureActionType {
-    #[default]
+    UseSystemDefault,
     Bounce,
     Discard,
     Requeue,
@@ -82,12 +44,30 @@ pub enum EmailTemplateStyle {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LetterheadHorizontalAlignment {
+pub enum EmailTemplateType {
     #[default]
-    None,
-    Left,
-    Center,
-    Right,
+    text,
+    html,
+    custom,
+    visualforce,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum EmailTemplateUiType {
+    #[default]
+    Aloha,
+    SFX,
+    SFX_Sample,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum EmailToCaseOnFailureActionType {
+    #[default]
+    Bounce,
+    Discard,
+    Requeue,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -100,14 +80,24 @@ pub enum EmailToCaseRoutingAddressType {
     E2cEasy,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LetterheadLine {
-    #[serde(default)]
-    pub color: String,
-    #[serde(default)]
-    pub height: f64,
+pub enum LetterheadHorizontalAlignment {
+    #[default]
+    None,
+    Left,
+    Center,
+    Right,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum LetterheadVerticalAlignment {
+    #[default]
+    None,
+    Top,
+    Middle,
+    Bottom,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -129,17 +119,37 @@ pub struct EmailServicesAddress {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct LetterheadHeaderFooter {
-    #[serde(rename = "backgroundColor", default)]
-    pub background_color: String,
-    #[serde(default)]
-    pub height: f64,
-    #[serde(rename = "horizontalAlignment", default)]
-    pub horizontal_alignment: LetterheadHorizontalAlignment,
-    #[serde(default)]
-    pub logo: String,
-    #[serde(rename = "verticalAlignment", default)]
-    pub vertical_alignment: LetterheadVerticalAlignment,
+pub struct EmailServicesFunction {
+    #[serde(rename = "apexClass", default)]
+    pub apex_class: String,
+    #[serde(rename = "attachmentOption", default)]
+    pub attachment_option: EmailServicesAttOptions,
+    #[serde(rename = "authenticationFailureAction", default)]
+    pub authentication_failure_action: EmailServicesErrorAction,
+    #[serde(rename = "authorizationFailureAction", default)]
+    pub authorization_failure_action: EmailServicesErrorAction,
+    #[serde(rename = "authorizedSenders", default)]
+    pub authorized_senders: String,
+    #[serde(rename = "emailServicesAddresses", default)]
+    pub email_services_addresses: Vec<EmailServicesAddress>,
+    #[serde(rename = "errorRoutingAddress", default)]
+    pub error_routing_address: String,
+    #[serde(rename = "functionInactiveAction", default)]
+    pub function_inactive_action: EmailServicesErrorAction,
+    #[serde(rename = "functionName", default)]
+    pub function_name: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "isAuthenticationRequired", default)]
+    pub is_authentication_required: bool,
+    #[serde(rename = "isErrorRoutingEnabled", default)]
+    pub is_error_routing_enabled: bool,
+    #[serde(rename = "isTextAttachmentsAsBinary", default)]
+    pub is_text_attachments_as_binary: bool,
+    #[serde(rename = "isTlsRequired", default)]
+    pub is_tls_required: bool,
+    #[serde(rename = "overLimitAction", default)]
+    pub over_limit_action: EmailServicesErrorAction,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -185,42 +195,6 @@ pub struct EmailToCaseRoutingAddress {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct EmailServicesFunction {
-    #[serde(rename = "apexClass", default)]
-    pub apex_class: String,
-    #[serde(rename = "attachmentOption", default)]
-    pub attachment_option: EmailServicesAttOptions,
-    #[serde(rename = "authenticationFailureAction", default)]
-    pub authentication_failure_action: EmailServicesErrorAction,
-    #[serde(rename = "authorizationFailureAction", default)]
-    pub authorization_failure_action: EmailServicesErrorAction,
-    #[serde(rename = "authorizedSenders", default)]
-    pub authorized_senders: String,
-    #[serde(rename = "emailServicesAddresses", default)]
-    pub email_services_addresses: Vec<EmailServicesAddress>,
-    #[serde(rename = "errorRoutingAddress", default)]
-    pub error_routing_address: String,
-    #[serde(rename = "functionInactiveAction", default)]
-    pub function_inactive_action: EmailServicesErrorAction,
-    #[serde(rename = "functionName", default)]
-    pub function_name: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isAuthenticationRequired", default)]
-    pub is_authentication_required: bool,
-    #[serde(rename = "isErrorRoutingEnabled", default)]
-    pub is_error_routing_enabled: bool,
-    #[serde(rename = "isTextAttachmentsAsBinary", default)]
-    pub is_text_attachments_as_binary: bool,
-    #[serde(rename = "isTlsRequired", default)]
-    pub is_tls_required: bool,
-    #[serde(rename = "overLimitAction", default)]
-    pub over_limit_action: EmailServicesErrorAction,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct Letterhead {
     #[serde(default)]
     pub available: bool,
@@ -242,4 +216,30 @@ pub struct Letterhead {
     pub name: String,
     #[serde(rename = "topLine", default)]
     pub top_line: LetterheadLine,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LetterheadHeaderFooter {
+    #[serde(rename = "backgroundColor", default)]
+    pub background_color: String,
+    #[serde(default)]
+    pub height: f64,
+    #[serde(rename = "horizontalAlignment", default)]
+    pub horizontal_alignment: LetterheadHorizontalAlignment,
+    #[serde(default)]
+    pub logo: String,
+    #[serde(rename = "verticalAlignment", default)]
+    pub vertical_alignment: LetterheadVerticalAlignment,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LetterheadLine {
+    #[serde(default)]
+    pub color: String,
+    #[serde(default)]
+    pub height: f64,
 }

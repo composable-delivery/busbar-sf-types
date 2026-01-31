@@ -10,28 +10,21 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PublicFolderAccess {
-    #[default]
-    ReadOnly,
-    ReadWrite,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PublicKeyCertificateSetType {
-    #[default]
-    JWKS,
-    JWKS_URL,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum FolderAccessTypes {
     #[default]
     Shared,
     Public,
     Hidden,
     PublicInternal,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FolderShareAccessLevel {
+    #[default]
+    View,
+    EditAllContents,
+    Manage,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -59,11 +52,34 @@ pub enum FolderSharedToType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FolderShareAccessLevel {
+pub enum PublicFolderAccess {
     #[default]
-    View,
-    EditAllContents,
-    Manage,
+    ReadOnly,
+    ReadWrite,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum PublicKeyCertificateSetType {
+    #[default]
+    JWKS,
+    JWKS_URL,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Folder {
+    #[serde(rename = "accessType", default)]
+    pub access_type: FolderAccessTypes,
+    #[serde(rename = "folderShares", default)]
+    pub folder_shares: Vec<FolderShare>,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "publicFolderAccess", default)]
+    pub public_folder_access: PublicFolderAccess,
+    #[serde(rename = "sharedTo", default)]
+    pub shared_to: serde_json::Value,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -81,9 +97,23 @@ pub struct FolderShare {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PublicKeyCertificateSetKey {
-    #[serde(rename = "publicKeyCertificate", default)]
-    pub public_key_certificate: String,
+pub struct PublicGroups {
+    #[serde(rename = "publicGroup", default)]
+    pub public_group: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PublicKeyCertificate {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "jsonWebKey", default)]
+    pub json_web_key: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -107,37 +137,7 @@ pub struct PublicKeyCertificateSet {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct Folder {
-    #[serde(rename = "accessType", default)]
-    pub access_type: FolderAccessTypes,
-    #[serde(rename = "folderShares", default)]
-    pub folder_shares: Vec<FolderShare>,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "publicFolderAccess", default)]
-    pub public_folder_access: PublicFolderAccess,
-    #[serde(rename = "sharedTo", default)]
-    pub shared_to: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PublicGroups {
-    #[serde(rename = "publicGroup", default)]
-    pub public_group: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PublicKeyCertificate {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "jsonWebKey", default)]
-    pub json_web_key: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
+pub struct PublicKeyCertificateSetKey {
+    #[serde(rename = "publicKeyCertificate", default)]
+    pub public_key_certificate: String,
 }

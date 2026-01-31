@@ -10,13 +10,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MappingUsageType {
+pub enum MappingAlertType {
     #[default]
-    ConvertToSalesAgreement,
-    EligibleProgramRebateType,
-    MapJournalToMemberAggregate,
-    TransformationMapping,
-    CLMFieldMapping,
+    None,
+    Warning,
+    Error,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MappingBehaviorType {
+    #[default]
+    PointInTime,
+    CurrentValue,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -38,17 +44,11 @@ pub enum MappingType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MappingBehaviorType {
+pub enum MappingUsageType {
     #[default]
-    PointInTime,
-    CurrentValue,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MappingAlertType {
-    #[default]
-    None,
-    Warning,
-    Error,
+    ConvertToSalesAgreement,
+    EligibleProgramRebateType,
+    MapJournalToMemberAggregate,
+    TransformationMapping,
+    CLMFieldMapping,
 }

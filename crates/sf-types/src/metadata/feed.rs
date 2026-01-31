@@ -10,44 +10,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FeedLayoutComponentType {
-    #[default]
-    HelpAndToolLinks,
-    CustomButtons,
-    Following,
-    Followers,
-    CustomLinks,
-    Milestones,
-    SimilarCases,
-    CaseExperts,
-    Topics,
-    CaseUnifiedFiles,
-    Visualforce,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum FeedItemDisplayFormat {
     #[default]
     Default,
     HideBlankLines,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FeedItemVisibility {
-    #[default]
-    AllUsers,
-    InternalUsers,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FeedLayoutFilterPosition {
-    #[default]
-    CenterDropDown,
-    LeftFixed,
-    LeftFloat,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -87,6 +53,40 @@ pub enum FeedItemType {
     CreateRecordEvent,
     CanvasPost,
     AnnouncementPost,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FeedItemVisibility {
+    #[default]
+    AllUsers,
+    InternalUsers,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FeedLayoutComponentType {
+    #[default]
+    HelpAndToolLinks,
+    CustomButtons,
+    Following,
+    Followers,
+    CustomLinks,
+    Milestones,
+    SimilarCases,
+    CaseExperts,
+    Topics,
+    CaseUnifiedFiles,
+    Visualforce,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FeedLayoutFilterPosition {
+    #[default]
+    CenterDropDown,
+    LeftFixed,
+    LeftFloat,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]

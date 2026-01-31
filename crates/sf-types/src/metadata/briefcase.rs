@@ -24,6 +24,14 @@ pub enum BriefcaseFilterOperator {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum BriefcaseRuleRelationshipType {
+    #[default]
+    ParentToChild,
+    ChildToParent,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum BriefcaseType {
     #[default]
     Standard,
@@ -31,12 +39,20 @@ pub enum BriefcaseType {
     MobileAppSync,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BriefcaseRuleRelationshipType {
-    #[default]
-    ParentToChild,
-    ChildToParent,
+#[serde(rename_all = "camelCase")]
+pub struct BriefcaseDefinition {
+    #[serde(rename = "briefcaseRules", default)]
+    pub briefcase_rules: Vec<BriefcaseRule>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub r#type: BriefcaseType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -83,20 +99,4 @@ pub struct BriefcaseRuleFilter {
     pub filter_value: String,
     #[serde(rename = "targetEntityField", default)]
     pub target_entity_field: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BriefcaseDefinition {
-    #[serde(rename = "briefcaseRules", default)]
-    pub briefcase_rules: Vec<BriefcaseRule>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub r#type: BriefcaseType,
 }

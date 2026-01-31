@@ -59,30 +59,6 @@ pub struct ManagedContentType {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ManagedTopics {
-    #[serde(rename = "managedTopic", default)]
-    pub managed_topic: Vec<ManagedTopic>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ManagedTopic {
-    #[serde(rename = "managedTopicType", default)]
-    pub managed_topic_type: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "parentName", default)]
-    pub parent_name: String,
-    #[serde(default)]
-    pub position: f64,
-    #[serde(rename = "topicDescription", default)]
-    pub topic_description: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct ManagedContentTypeBundle {
     #[serde(default)]
     pub description: String,
@@ -110,4 +86,28 @@ pub struct ManagedEventSubscription {
     pub topic_name: String,
     #[serde(default)]
     pub version: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ManagedTopic {
+    #[serde(rename = "managedTopicType", default)]
+    pub managed_topic_type: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "parentName", default)]
+    pub parent_name: String,
+    #[serde(default)]
+    pub position: f64,
+    #[serde(rename = "topicDescription", default)]
+    pub topic_description: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ManagedTopics {
+    #[serde(rename = "managedTopic", default)]
+    pub managed_topic: Vec<ManagedTopic>,
 }

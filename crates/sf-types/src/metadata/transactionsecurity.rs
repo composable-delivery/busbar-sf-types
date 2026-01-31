@@ -68,6 +68,18 @@ pub struct TransactionSecurityAction {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct TransactionSecurityNotification {
+    #[serde(rename = "inApp", default)]
+    pub in_app: bool,
+    #[serde(rename = "sendEmail", default)]
+    pub send_email: bool,
+    #[serde(default)]
+    pub user: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct TransactionSecurityPolicy {
     #[serde(default)]
     pub action: TransactionSecurityAction,
@@ -97,16 +109,4 @@ pub struct TransactionSecurityPolicy {
     pub resource_name: String,
     #[serde(default)]
     pub r#type: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct TransactionSecurityNotification {
-    #[serde(rename = "inApp", default)]
-    pub in_app: bool,
-    #[serde(rename = "sendEmail", default)]
-    pub send_email: bool,
-    #[serde(default)]
-    pub user: String,
 }

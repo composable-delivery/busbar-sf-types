@@ -11,7 +11,21 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct NavigationSubMenu {
+pub struct NavigationLinkSet {
+    #[serde(rename = "navigationMenuItem", default)]
+    pub navigation_menu_item: Vec<NavigationMenuItem>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct NavigationMenu {
+    #[serde(default)]
+    pub container: String,
+    #[serde(rename = "containerType", default)]
+    pub container_type: String,
+    #[serde(default)]
+    pub label: String,
     #[serde(rename = "navigationMenuItem", default)]
     pub navigation_menu_item: Vec<NavigationMenuItem>,
 }
@@ -51,21 +65,7 @@ pub struct NavigationMenuItemBranding {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct NavigationLinkSet {
-    #[serde(rename = "navigationMenuItem", default)]
-    pub navigation_menu_item: Vec<NavigationMenuItem>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct NavigationMenu {
-    #[serde(default)]
-    pub container: String,
-    #[serde(rename = "containerType", default)]
-    pub container_type: String,
-    #[serde(default)]
-    pub label: String,
+pub struct NavigationSubMenu {
     #[serde(rename = "navigationMenuItem", default)]
     pub navigation_menu_item: Vec<NavigationMenuItem>,
 }

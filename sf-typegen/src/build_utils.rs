@@ -1,9 +1,13 @@
 //! Build script utilities for WSDL processing
+//!
+//! NOTE: This module is currently a placeholder for future WSDL processing functionality.
+//! The generator and processor modules are not yet implemented.
 
 pub use crate::error::{Result, WsdlError};
-pub use crate::generator::WsdlGenerator;
-pub use crate::processor::{ProcessorConfig, WsdlProcessor};
+// pub use crate::generator::WsdlGenerator;
+// pub use crate::processor::{ProcessorConfig, WsdlProcessor};
 
+/*
 /// Convenience function for simple WSDL generation in build scripts
 ///
 /// # Example
@@ -44,7 +48,7 @@ pub fn generate_wsdl_types(wsdl_files: &[(&str, &str)]) -> Result<()> {
 ///         remove_duplicates: true,
 ///         flatten_wrappers: false,
 ///     };
-///     
+///
 ///     generate_wsdl_types_with_config(
 ///         &[("partner", "wsdl/partner.wsdl")],
 ///         config
@@ -63,3 +67,4 @@ pub fn generate_wsdl_types_with_config(
 
     generator.generate()
 }
+*/

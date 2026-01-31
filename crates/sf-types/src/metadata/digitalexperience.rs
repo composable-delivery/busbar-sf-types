@@ -39,14 +39,6 @@ pub struct DigitalExperienceConfig {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct DigitalExperienceModuleCollection {
-    #[serde(default)]
-    pub module: Vec<DigitalExperienceModule>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct DigitalExperienceFolderShare {
     #[serde(rename = "folderPath", default)]
     pub folder_path: String,
@@ -70,4 +62,12 @@ pub struct DigitalExperienceModule {
     pub fully_qualified_name: String,
     #[serde(default)]
     pub status: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DigitalExperienceModuleCollection {
+    #[serde(default)]
+    pub module: Vec<DigitalExperienceModule>,
 }

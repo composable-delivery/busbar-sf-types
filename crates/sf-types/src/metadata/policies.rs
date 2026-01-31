@@ -10,65 +10,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PolicyApplicableDuration {
-    #[default]
-    ParameterBased,
-    Monthly,
-    Weekly,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum PolicyAction {
     #[default]
     Block,
     RaiseSessionLevel,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PolicyRuleDefinitionCondition {
-    #[serde(default)]
-    pub clause: serde_json::Value,
-    #[serde(rename = "contextPath", default)]
-    pub context_path: serde_json::Value,
-    #[serde(default)]
-    pub operator: serde_json::Value,
-    #[serde(rename = "policyRuleDefinitionCondition", default)]
-    pub policy_rule_definition_condition: Vec<Box<PolicyRuleDefinitionCondition>>,
-    #[serde(rename = "policyRuleValueSet", default)]
-    pub policy_rule_value_set: Vec<PolicyRuleValueSet>,
-    #[serde(rename = "principalPath", default)]
-    pub principal_path: serde_json::Value,
-    #[serde(rename = "resourceAlias", default)]
-    pub resource_alias: String,
-    #[serde(rename = "resourceExpression", default)]
-    pub resource_expression: String,
-    #[serde(rename = "resourcePath", default)]
-    pub resource_path: serde_json::Value,
-    #[serde(rename = "valueBit", default)]
-    pub value_bit: Vec<String>,
-    #[serde(rename = "valueContextPath", default)]
-    pub value_context_path: serde_json::Value,
-    #[serde(rename = "valueDomain", default)]
-    pub value_domain: String,
-    #[serde(rename = "valuePrincipalPath", default)]
-    pub value_principal_path: serde_json::Value,
-    #[serde(rename = "valueResourcePath", default)]
-    pub value_resource_path: serde_json::Value,
-    #[serde(rename = "whereClauseConjunction", default)]
-    pub where_clause_conjunction: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PolicyRuleDefinitionClauseConjunction {
-    #[serde(default)]
-    pub conditions: Vec<PolicyRuleDefinitionCondition>,
-    #[serde(rename = "conjunctionExpression", default)]
-    pub conjunction_expression: String,
+pub enum PolicyApplicableDuration {
+    #[default]
+    ParameterBased,
+    Monthly,
+    Weekly,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -114,6 +68,52 @@ pub struct PolicyRuleDefinition {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct PolicyRuleDefinitionClauseConjunction {
+    #[serde(default)]
+    pub conditions: Vec<PolicyRuleDefinitionCondition>,
+    #[serde(rename = "conjunctionExpression", default)]
+    pub conjunction_expression: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PolicyRuleDefinitionCondition {
+    #[serde(default)]
+    pub clause: serde_json::Value,
+    #[serde(rename = "contextPath", default)]
+    pub context_path: serde_json::Value,
+    #[serde(default)]
+    pub operator: serde_json::Value,
+    #[serde(rename = "policyRuleDefinitionCondition", default)]
+    pub policy_rule_definition_condition: Vec<Box<PolicyRuleDefinitionCondition>>,
+    #[serde(rename = "policyRuleValueSet", default)]
+    pub policy_rule_value_set: Vec<PolicyRuleValueSet>,
+    #[serde(rename = "principalPath", default)]
+    pub principal_path: serde_json::Value,
+    #[serde(rename = "resourceAlias", default)]
+    pub resource_alias: String,
+    #[serde(rename = "resourceExpression", default)]
+    pub resource_expression: String,
+    #[serde(rename = "resourcePath", default)]
+    pub resource_path: serde_json::Value,
+    #[serde(rename = "valueBit", default)]
+    pub value_bit: Vec<String>,
+    #[serde(rename = "valueContextPath", default)]
+    pub value_context_path: serde_json::Value,
+    #[serde(rename = "valueDomain", default)]
+    pub value_domain: String,
+    #[serde(rename = "valuePrincipalPath", default)]
+    pub value_principal_path: serde_json::Value,
+    #[serde(rename = "valueResourcePath", default)]
+    pub value_resource_path: serde_json::Value,
+    #[serde(rename = "whereClauseConjunction", default)]
+    pub where_clause_conjunction: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct PolicyRuleDefinitionSet {
     #[serde(default)]
     pub description: String,
@@ -124,17 +124,17 @@ pub struct PolicyRuleDefinitionSet {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PolicyRuleValueSet {
-    #[serde(rename = "valueReference", default)]
-    pub value_reference: String,
-    #[serde(rename = "valueString", default)]
-    pub value_string: String,
+pub struct PolicyRuleResourceDomain {
+    #[serde(rename = "resourceDomain", default)]
+    pub resource_domain: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PolicyRuleResourceDomain {
-    #[serde(rename = "resourceDomain", default)]
-    pub resource_domain: String,
+pub struct PolicyRuleValueSet {
+    #[serde(rename = "valueReference", default)]
+    pub value_reference: String,
+    #[serde(rename = "valueString", default)]
+    pub value_string: String,
 }

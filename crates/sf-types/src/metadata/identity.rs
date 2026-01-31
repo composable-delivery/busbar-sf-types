@@ -10,126 +10,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LoginFlowType {
-    #[default]
-    UI,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum IdentityVerificationProcFldFieldDataType {
-    #[default]
-    address,
-    checkbox,
-    currency,
-    dateonly,
-    datetime,
-    email,
-    number,
-    percent,
-    phone,
-    picklist,
-    reference,
-    text,
-    timeonly,
-    url,
-    other,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SamlType {
-    #[default]
-    SAML1_1,
-    SAML2_0,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum IdentityVerificationProcFldDataSourceType {
-    #[default]
-    Salesforce,
-    External,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SamlIdentityType {
-    #[default]
-    Username,
-    FederationId,
-    UserId,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SamlNameIdFormatType {
-    #[default]
-    Unspecified,
-    EmailAddress,
-    Persistent,
-    Transient,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum IdentityVerificationSearchType {
-    #[default]
-    #[serde(rename = "Text-Based")]
-    Text_Based,
-    #[serde(rename = "Object-Based")]
-    Object_Based,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SamlSpSLOBinding {
-    #[default]
-    RedirectBinding,
-    PostBinding,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum IdentityVerificationProcFldFieldType {
-    #[default]
-    requiredVerifier,
-    optionalVerifier,
-    searchField,
-    resultField,
-    additionalResultField,
-    searchFilter,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum IdentityProviderAuthProtocol {
-    #[default]
-    OAuth,
-    SalesforceDefined,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SamlIdpSLOBinding {
-    #[default]
-    RedirectBinding,
-    PostBinding,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AuthoringMode {
-    #[default]
-    OmniScriptForm,
-    Microsoft365Word,
-    OmniScriptAndMcrsft365Wrd,
-    GoogleDocs,
-    OmniscriptAndGoogleDocs,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum AuthProviderType {
     #[default]
     Facebook,
@@ -152,24 +32,6 @@ pub enum AuthProviderType {
     SlackSeamless,
     SlackFirst,
     SlackFirstDev,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum IdentityProviderAuthFlow {
-    #[default]
-    AuthorizationCode,
-    ClientCredentials,
-    JwtBearer,
-    SalesforceDefined,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SamlSigningAlgoType {
-    #[default]
-    SHA1,
-    SHA256,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -207,6 +69,35 @@ pub enum AuthenticationProtocol {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum AuthoringMode {
+    #[default]
+    OmniScriptForm,
+    Microsoft365Word,
+    OmniScriptAndMcrsft365Wrd,
+    GoogleDocs,
+    OmniscriptAndGoogleDocs,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum IdentityProviderAuthFlow {
+    #[default]
+    AuthorizationCode,
+    ClientCredentials,
+    JwtBearer,
+    SalesforceDefined,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum IdentityProviderAuthProtocol {
+    #[default]
+    OAuth,
+    SalesforceDefined,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum IdentityVerificationDataSourceType {
     #[default]
     Salesforce,
@@ -215,14 +106,43 @@ pub enum IdentityVerificationDataSourceType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SamlSubjectType {
+pub enum IdentityVerificationProcFldDataSourceType {
     #[default]
-    Username,
-    FederationId,
-    UserId,
-    SpokeId,
-    CustomAttribute,
-    PersistentId,
+    Salesforce,
+    External,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum IdentityVerificationProcFldFieldDataType {
+    #[default]
+    address,
+    checkbox,
+    currency,
+    dateonly,
+    datetime,
+    email,
+    number,
+    percent,
+    phone,
+    picklist,
+    reference,
+    text,
+    timeonly,
+    url,
+    other,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum IdentityVerificationProcFldFieldType {
+    #[default]
+    requiredVerifier,
+    optionalVerifier,
+    searchField,
+    resultField,
+    additionalResultField,
+    searchFilter,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -235,11 +155,19 @@ pub enum IdentityVerificationSearchLayoutType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SamlInitiationMethod {
+pub enum IdentityVerificationSearchType {
     #[default]
-    None,
-    IdpInitiated,
-    SpInitiated,
+    #[serde(rename = "Text-Based")]
+    Text_Based,
+    #[serde(rename = "Object-Based")]
+    Object_Based,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum LoginFlowType {
+    #[default]
+    UI,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -259,126 +187,86 @@ pub enum SamlIdentityLocationType {
     Attribute,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct IdentityVerificationProcDef {
-    #[serde(rename = "identityVerificationProcDtls", default)]
-    pub identity_verification_proc_dtls: Vec<IdentityVerificationProcDtl>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "searchLayoutType", default)]
-    pub search_layout_type: IdentityVerificationSearchLayoutType,
+pub enum SamlIdentityType {
+    #[default]
+    Username,
+    FederationId,
+    UserId,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SamlIdpSLOBinding {
+    #[default]
+    RedirectBinding,
+    PostBinding,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SamlInitiationMethod {
+    #[default]
+    None,
+    IdpInitiated,
+    SpInitiated,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SamlNameIdFormatType {
+    #[default]
+    Unspecified,
+    EmailAddress,
+    Persistent,
+    Transient,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SamlSigningAlgoType {
+    #[default]
+    SHA1,
+    SHA256,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SamlSpSLOBinding {
+    #[default]
+    RedirectBinding,
+    PostBinding,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SamlSubjectType {
+    #[default]
+    Username,
+    FederationId,
+    UserId,
+    SpokeId,
+    CustomAttribute,
+    PersistentId,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SamlType {
+    #[default]
+    SAML1_1,
+    SAML2_0,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct OauthCustomScopeApp {
-    #[serde(rename = "connectedApp", default)]
-    pub connected_app: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SamlSsoConfig {
-    #[serde(rename = "attributeName", default)]
-    pub attribute_name: String,
-    #[serde(rename = "attributeNameIdFormat", default)]
-    pub attribute_name_id_format: String,
-    #[serde(rename = "decryptionCertificate", default)]
-    pub decryption_certificate: String,
-    #[serde(rename = "errorUrl", default)]
-    pub error_url: String,
-    #[serde(rename = "executionUserId", default)]
-    pub execution_user_id: String,
-    #[serde(rename = "identityLocation", default)]
-    pub identity_location: SamlIdentityLocationType,
-    #[serde(rename = "identityMapping", default)]
-    pub identity_mapping: SamlIdentityType,
-    #[serde(default)]
-    pub issuer: String,
-    #[serde(rename = "loginUrl", default)]
-    pub login_url: String,
-    #[serde(rename = "logoutUrl", default)]
-    pub logout_url: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "oauthTokenEndpoint", default)]
-    pub oauth_token_endpoint: String,
-    #[serde(rename = "redirectBinding", default)]
-    pub redirect_binding: bool,
-    #[serde(rename = "requestSignatureMethod", default)]
-    pub request_signature_method: String,
-    #[serde(rename = "requestSigningCertId", default)]
-    pub request_signing_cert_id: String,
-    #[serde(rename = "salesforceLoginUrl", default)]
-    pub salesforce_login_url: String,
-    #[serde(rename = "samlEntityId", default)]
-    pub saml_entity_id: String,
-    #[serde(rename = "samlJitHandlerId", default)]
-    pub saml_jit_handler_id: String,
-    #[serde(rename = "samlVersion", default)]
-    pub saml_version: SamlType,
-    #[serde(rename = "singleLogoutBinding", default)]
-    pub single_logout_binding: SamlSpSLOBinding,
-    #[serde(rename = "singleLogoutUrl", default)]
-    pub single_logout_url: String,
-    #[serde(rename = "useConfigRequestMethod", default)]
-    pub use_config_request_method: bool,
-    #[serde(rename = "useSameDigestAlgoForSigning", default)]
-    pub use_same_digest_algo_for_signing: bool,
-    #[serde(rename = "userProvisioning", default)]
-    pub user_provisioning: bool,
-    #[serde(rename = "validationCert", default)]
-    pub validation_cert: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct OauthCustomScope {
-    #[serde(rename = "assignedTo", default)]
-    pub assigned_to: Vec<OauthCustomScopeApp>,
+pub struct AuthProvParamFwdAllowlist {
     #[serde(default)]
     pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "isPublic", default)]
-    pub is_public: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct IdentityVerificationProcFld {
-    #[serde(rename = "customFieldLabel", default)]
-    pub custom_field_label: String,
-    #[serde(rename = "dataSourceType", default)]
-    pub data_source_type: IdentityVerificationProcFldDataSourceType,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "fieldDataType", default)]
-    pub field_data_type: IdentityVerificationProcFldFieldDataType,
-    #[serde(rename = "fieldName", default)]
-    pub field_name: String,
-    #[serde(rename = "fieldType", default)]
-    pub field_type: IdentityVerificationProcFldFieldType,
-    #[serde(rename = "fieldValueFormula", default)]
-    pub field_value_formula: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isManualInput", default)]
-    pub is_manual_input: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "sequenceNumber", default)]
-    pub sequence_number: f64,
+    #[serde(default)]
+    pub param: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -456,6 +344,32 @@ pub struct AuthProvider {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct IdentityVerificationFieldTranslation {
+    #[serde(rename = "customFieldLabel", default)]
+    pub custom_field_label: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct IdentityVerificationProcDef {
+    #[serde(rename = "identityVerificationProcDtls", default)]
+    pub identity_verification_proc_dtls: Vec<IdentityVerificationProcDtl>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "searchLayoutType", default)]
+    pub search_layout_type: IdentityVerificationSearchLayoutType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct IdentityVerificationProcDtl {
     #[serde(rename = "apexClass", default)]
     pub apex_class: String,
@@ -496,15 +410,75 @@ pub struct IdentityVerificationProcDtl {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct IdentityVerificationFieldTranslation {
+pub struct IdentityVerificationProcFld {
     #[serde(rename = "customFieldLabel", default)]
     pub custom_field_label: String,
+    #[serde(rename = "dataSourceType", default)]
+    pub data_source_type: IdentityVerificationProcFldDataSourceType,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "fieldDataType", default)]
+    pub field_data_type: IdentityVerificationProcFldFieldDataType,
+    #[serde(rename = "fieldName", default)]
+    pub field_name: String,
+    #[serde(rename = "fieldType", default)]
+    pub field_type: IdentityVerificationProcFldFieldType,
+    #[serde(rename = "fieldValueFormula", default)]
+    pub field_value_formula: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "isManualInput", default)]
+    pub is_manual_input: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "sequenceNumber", default)]
+    pub sequence_number: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LoginFlow {
+    #[serde(default)]
+    pub flow: String,
+    #[serde(rename = "flowType", default)]
+    pub flow_type: LoginFlowType,
+    #[serde(rename = "friendlyName", default)]
+    pub friendly_name: String,
+    #[serde(rename = "uiLoginFlowType", default)]
+    pub ui_login_flow_type: serde_json::Value,
+    #[serde(rename = "useLightningRuntime", default)]
+    pub use_lightning_runtime: bool,
+    #[serde(rename = "vfFlowPage", default)]
+    pub vf_flow_page: String,
+    #[serde(rename = "vfFlowPageTitle", default)]
+    pub vf_flow_page_title: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct OauthCustomScope {
+    #[serde(rename = "assignedTo", default)]
+    pub assigned_to: Vec<OauthCustomScopeApp>,
     #[serde(default)]
     pub description: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "isPublic", default)]
+    pub is_public: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct OauthCustomScopeApp {
+    #[serde(rename = "connectedApp", default)]
+    pub connected_app: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -558,29 +532,55 @@ pub struct OauthTokenExchangeHandler {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct AuthProvParamFwdAllowlist {
+pub struct SamlSsoConfig {
+    #[serde(rename = "attributeName", default)]
+    pub attribute_name: String,
+    #[serde(rename = "attributeNameIdFormat", default)]
+    pub attribute_name_id_format: String,
+    #[serde(rename = "decryptionCertificate", default)]
+    pub decryption_certificate: String,
+    #[serde(rename = "errorUrl", default)]
+    pub error_url: String,
+    #[serde(rename = "executionUserId", default)]
+    pub execution_user_id: String,
+    #[serde(rename = "identityLocation", default)]
+    pub identity_location: SamlIdentityLocationType,
+    #[serde(rename = "identityMapping", default)]
+    pub identity_mapping: SamlIdentityType,
     #[serde(default)]
-    pub description: String,
+    pub issuer: String,
+    #[serde(rename = "loginUrl", default)]
+    pub login_url: String,
+    #[serde(rename = "logoutUrl", default)]
+    pub logout_url: String,
     #[serde(default)]
-    pub param: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LoginFlow {
-    #[serde(default)]
-    pub flow: String,
-    #[serde(rename = "flowType", default)]
-    pub flow_type: LoginFlowType,
-    #[serde(rename = "friendlyName", default)]
-    pub friendly_name: String,
-    #[serde(rename = "uiLoginFlowType", default)]
-    pub ui_login_flow_type: serde_json::Value,
-    #[serde(rename = "useLightningRuntime", default)]
-    pub use_lightning_runtime: bool,
-    #[serde(rename = "vfFlowPage", default)]
-    pub vf_flow_page: String,
-    #[serde(rename = "vfFlowPageTitle", default)]
-    pub vf_flow_page_title: String,
+    pub name: String,
+    #[serde(rename = "oauthTokenEndpoint", default)]
+    pub oauth_token_endpoint: String,
+    #[serde(rename = "redirectBinding", default)]
+    pub redirect_binding: bool,
+    #[serde(rename = "requestSignatureMethod", default)]
+    pub request_signature_method: String,
+    #[serde(rename = "requestSigningCertId", default)]
+    pub request_signing_cert_id: String,
+    #[serde(rename = "salesforceLoginUrl", default)]
+    pub salesforce_login_url: String,
+    #[serde(rename = "samlEntityId", default)]
+    pub saml_entity_id: String,
+    #[serde(rename = "samlJitHandlerId", default)]
+    pub saml_jit_handler_id: String,
+    #[serde(rename = "samlVersion", default)]
+    pub saml_version: SamlType,
+    #[serde(rename = "singleLogoutBinding", default)]
+    pub single_logout_binding: SamlSpSLOBinding,
+    #[serde(rename = "singleLogoutUrl", default)]
+    pub single_logout_url: String,
+    #[serde(rename = "useConfigRequestMethod", default)]
+    pub use_config_request_method: bool,
+    #[serde(rename = "useSameDigestAlgoForSigning", default)]
+    pub use_same_digest_algo_for_signing: bool,
+    #[serde(rename = "userProvisioning", default)]
+    pub user_provisioning: bool,
+    #[serde(rename = "validationCert", default)]
+    pub validation_cert: String,
 }

@@ -34,32 +34,6 @@ pub struct DeployDetails {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct DeployOptions {
-    #[serde(rename = "allowMissingFiles", default)]
-    pub allow_missing_files: bool,
-    #[serde(rename = "autoUpdatePackage", default)]
-    pub auto_update_package: bool,
-    #[serde(rename = "checkOnly", default)]
-    pub check_only: bool,
-    #[serde(rename = "ignoreWarnings", default)]
-    pub ignore_warnings: bool,
-    #[serde(rename = "performRetrieve", default)]
-    pub perform_retrieve: bool,
-    #[serde(rename = "purgeOnDelete", default)]
-    pub purge_on_delete: bool,
-    #[serde(rename = "rollbackOnError", default)]
-    pub rollback_on_error: bool,
-    #[serde(rename = "runTests", default)]
-    pub run_tests: Vec<String>,
-    #[serde(rename = "singlePackage", default)]
-    pub single_package: bool,
-    #[serde(rename = "testLevel", default)]
-    pub test_level: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct DeployMessage {
     #[serde(default)]
     pub changed: bool,
@@ -87,6 +61,32 @@ pub struct DeployMessage {
     pub problem_type: DeployProblemType,
     #[serde(default)]
     pub success: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DeployOptions {
+    #[serde(rename = "allowMissingFiles", default)]
+    pub allow_missing_files: bool,
+    #[serde(rename = "autoUpdatePackage", default)]
+    pub auto_update_package: bool,
+    #[serde(rename = "checkOnly", default)]
+    pub check_only: bool,
+    #[serde(rename = "ignoreWarnings", default)]
+    pub ignore_warnings: bool,
+    #[serde(rename = "performRetrieve", default)]
+    pub perform_retrieve: bool,
+    #[serde(rename = "purgeOnDelete", default)]
+    pub purge_on_delete: bool,
+    #[serde(rename = "rollbackOnError", default)]
+    pub rollback_on_error: bool,
+    #[serde(rename = "runTests", default)]
+    pub run_tests: Vec<String>,
+    #[serde(rename = "singlePackage", default)]
+    pub single_package: bool,
+    #[serde(rename = "testLevel", default)]
+    pub test_level: serde_json::Value,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]

@@ -29,6 +29,22 @@ pub enum RelatedRecordAccessDefStatus {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct RelatedContent {
+    #[serde(rename = "relatedContentItems", default)]
+    pub related_content_items: Vec<RelatedContentItem>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RelatedContentItem {
+    #[serde(rename = "layoutItem", default)]
+    pub layout_item: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct RelatedRecordAccessDef {
     #[serde(default)]
     pub description: String,
@@ -67,48 +83,6 @@ pub struct RelatedRecordAccessDef {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct RelatedRecordAssocCriteria {
-    #[serde(rename = "associationHandlerApexClass", default)]
-    pub association_handler_apex_class: String,
-    #[serde(rename = "associationType", default)]
-    pub association_type: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "eventType", default)]
-    pub event_type: serde_json::Value,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "preCondition", default)]
-    pub pre_condition: String,
-    #[serde(rename = "referenceObject", default)]
-    pub reference_object: String,
-    #[serde(rename = "selectedOwnerField", default)]
-    pub selected_owner_field: String,
-    #[serde(default)]
-    pub status: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RelatedContent {
-    #[serde(rename = "relatedContentItems", default)]
-    pub related_content_items: Vec<RelatedContentItem>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RelatedContentItem {
-    #[serde(rename = "layoutItem", default)]
-    pub layout_item: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct RelatedRecordAccessFltr {
     #[serde(default)]
     pub field: String,
@@ -134,4 +108,30 @@ pub struct RelatedRecordAccessMap {
     pub target_obj_access_level: serde_json::Value,
     #[serde(rename = "targetObjParticipantRole", default)]
     pub target_obj_participant_role: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RelatedRecordAssocCriteria {
+    #[serde(rename = "associationHandlerApexClass", default)]
+    pub association_handler_apex_class: String,
+    #[serde(rename = "associationType", default)]
+    pub association_type: serde_json::Value,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "eventType", default)]
+    pub event_type: serde_json::Value,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "preCondition", default)]
+    pub pre_condition: String,
+    #[serde(rename = "referenceObject", default)]
+    pub reference_object: String,
+    #[serde(rename = "selectedOwnerField", default)]
+    pub selected_owner_field: String,
+    #[serde(default)]
+    pub status: serde_json::Value,
 }

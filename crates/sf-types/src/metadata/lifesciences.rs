@@ -110,6 +110,32 @@ pub enum LifeSciConfigFieldDataType {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct LifeSciConfigAssignment {
+    #[serde(rename = "assignedTo", default)]
+    pub assigned_to: String,
+    #[serde(rename = "assignmentLevel", default)]
+    pub assignment_level: LifeSciAssignmentLevel,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LifeSciConfigCategory {
+    #[serde(default)]
+    pub category: LifeSciConfigCategoryType,
+    #[serde(rename = "categoryLabel", default)]
+    pub category_label: String,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub r#type: LifeSciCategoryType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct LifeSciConfigFieldValue {
     #[serde(rename = "dataType", default)]
     pub data_type: LifeSciConfigFieldDataType,
@@ -139,32 +165,6 @@ pub struct LifeSciConfigFieldValue {
     pub text_value: String,
     #[serde(rename = "urlValue", default)]
     pub url_value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LifeSciConfigCategory {
-    #[serde(default)]
-    pub category: LifeSciConfigCategoryType,
-    #[serde(rename = "categoryLabel", default)]
-    pub category_label: String,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub r#type: LifeSciCategoryType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LifeSciConfigAssignment {
-    #[serde(rename = "assignedTo", default)]
-    pub assigned_to: String,
-    #[serde(rename = "assignmentLevel", default)]
-    pub assignment_level: LifeSciAssignmentLevel,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]

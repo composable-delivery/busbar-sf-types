@@ -342,15 +342,16 @@ impl ModularGenerator {
         content.push_str("//! Common enums used across Salesforce metadata types.\n\n");
         content.push_str("use serde::{Deserialize, Serialize};\n\n");
 
-        // Find the common_enums category
+        // Find the common_enums category and sort them for deterministic output
         if let Some(common_types) = groups.get("common_enums") {
-            for ct in common_types {
-                if ct.is_enum {
-                    if let Some(variants) = defs.union_types.get(&ct.name) {
-                        content.push_str(&generate_enum(&ct.name, variants));
-                        content.push('\n');
-                        result.types_generated += 1;
-                    }
+            let mut enum_list: Vec<_> = common_types.iter().filter(|ct| ct.is_enum).collect();
+            enum_list.sort_by(|a, b| a.name.cmp(&b.name));
+
+            for ct in enum_list {
+                if let Some(variants) = defs.union_types.get(&ct.name) {
+                    content.push_str(&generate_enum(&ct.name, variants));
+                    content.push('\n');
+                    result.types_generated += 1;
                 }
             }
         }
@@ -437,8 +438,10 @@ impl ModularGenerator {
             .cloned()
             .unwrap_or_default();
 
-        // Generate enums
-        for ct in types.iter().filter(|t| t.is_enum) {
+        // Generate enums (sorted by name for deterministic output)
+        let mut enum_types: Vec<_> = types.iter().filter(|t| t.is_enum).collect();
+        enum_types.sort_by(|a, b| a.name.cmp(&b.name));
+        for ct in enum_types {
             if let Some(variants) = defs.union_types.get(&ct.name) {
                 content.push_str(&generate_enum(&ct.name, variants));
                 content.push('\n');
@@ -446,8 +449,10 @@ impl ModularGenerator {
             }
         }
 
-        // Generate structs
-        for ct in types.iter().filter(|t| !t.is_enum) {
+        // Generate structs (sorted by name for deterministic output)
+        let mut struct_types: Vec<_> = types.iter().filter(|t| !t.is_enum).collect();
+        struct_types.sort_by(|a, b| a.name.cmp(&b.name));
+        for ct in struct_types {
             if let Some(fields) = defs.interface_types.get(&ct.name) {
                 content.push_str(&generate_struct_for_module(
                     &ct.name,
@@ -839,13 +844,18 @@ impl ModularGenerator {
             }
         }
 
-        // Generate remaining enums
-        for (name, variants) in &defs.union_types {
-            if !generated.contains(name) {
-                content.push_str(&generate_enum(name, variants));
-                content.push('\n');
-                generated.insert(name.clone());
-            }
+        // Generate remaining enums (sorted for deterministic output)
+        let mut remaining_enums: Vec<_> = defs
+            .union_types
+            .iter()
+            .filter(|(name, _)| !generated.contains(*name))
+            .collect();
+        remaining_enums.sort_by(|a, b| a.0.cmp(b.0));
+
+        for (name, variants) in remaining_enums {
+            content.push_str(&generate_enum(name, variants));
+            content.push('\n');
+            generated.insert(name.clone());
         }
 
         // Generate priority structs
@@ -857,12 +867,17 @@ impl ModularGenerator {
             }
         }
 
-        // Generate remaining structs
-        for (name, fields) in &defs.interface_types {
-            if !generated.contains(name) {
-                content.push_str(&generate_struct(name, fields, defs));
-                content.push('\n');
-            }
+        // Generate remaining structs (sorted for deterministic output)
+        let mut remaining_structs: Vec<_> = defs
+            .interface_types
+            .iter()
+            .filter(|(name, _)| !generated.contains(*name))
+            .collect();
+        remaining_structs.sort_by(|a, b| a.0.cmp(b.0));
+
+        for (name, fields) in remaining_structs {
+            content.push_str(&generate_struct(name, fields, defs));
+            content.push('\n');
         }
 
         let path = output_dir.join("generated_salesforce_types.rs");

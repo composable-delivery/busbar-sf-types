@@ -10,22 +10,17 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ApplicationUsageType {
+pub enum AppDomainUsageType {
     #[default]
-    LPI,
-    ERM,
-    HC,
-    EDU,
-    BA,
-    CCM,
-    Grantmaking,
+    ExplainabilityService,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AppDomainUsageType {
+pub enum ApplePushEnvironmentType {
     #[default]
-    ExplainabilityService,
+    Sandbox,
+    Production,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -57,6 +52,19 @@ pub enum ApplicationSourceType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ApplicationUsageType {
+    #[default]
+    LPI,
+    ERM,
+    HC,
+    EDU,
+    BA,
+    CCM,
+    Grantmaking,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum ApptAssistantRadiusUnit {
     #[default]
     Kilometer,
@@ -65,12 +73,134 @@ pub enum ApptAssistantRadiusUnit {
     Yard,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ApplePushEnvironmentType {
-    #[default]
-    Sandbox,
-    Production,
+#[serde(rename_all = "camelCase")]
+pub struct AppBrand {
+    #[serde(rename = "footerColor", default)]
+    pub footer_color: String,
+    #[serde(rename = "headerColor", default)]
+    pub header_color: String,
+    #[serde(default)]
+    pub logo: String,
+    #[serde(rename = "logoVersion", default)]
+    pub logo_version: f64,
+    #[serde(rename = "shouldOverrideOrgTheme", default)]
+    pub should_override_org_theme: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AppComponentList {
+    #[serde(default)]
+    pub alignment: String,
+    #[serde(default)]
+    pub components: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AppFrameworkTemplateBundle {
+    #[serde(rename = "assetVersion", default)]
+    pub asset_version: f64,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "maxAppCount", default)]
+    pub max_app_count: f64,
+    #[serde(rename = "templateBadgeIcon", default)]
+    pub template_badge_icon: String,
+    #[serde(rename = "templateStatus", default)]
+    pub template_status: String,
+    #[serde(rename = "templateSubtype", default)]
+    pub template_subtype: String,
+    #[serde(rename = "templateType", default)]
+    pub template_type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AppMenu {
+    #[serde(rename = "appMenuItems", default)]
+    pub app_menu_items: Vec<AppMenuItem>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AppMenuItem {
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub r#type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AppNotificationType {
+    #[serde(rename = "notificationType", default)]
+    pub notification_type: String,
+    #[serde(rename = "pushByDefault", default)]
+    pub push_by_default: bool,
+    #[serde(default)]
+    pub subscribed: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AppPreferences {
+    #[serde(rename = "enableCustomizeMyTabs", default)]
+    pub enable_customize_my_tabs: bool,
+    #[serde(rename = "enableKeyboardShortcuts", default)]
+    pub enable_keyboard_shortcuts: bool,
+    #[serde(rename = "enableListViewHover", default)]
+    pub enable_list_view_hover: bool,
+    #[serde(rename = "enableListViewReskin", default)]
+    pub enable_list_view_reskin: bool,
+    #[serde(rename = "enableMultiMonitorComponents", default)]
+    pub enable_multi_monitor_components: bool,
+    #[serde(rename = "enablePinTabs", default)]
+    pub enable_pin_tabs: bool,
+    #[serde(rename = "enableTabHover", default)]
+    pub enable_tab_hover: bool,
+    #[serde(rename = "enableTabLimits", default)]
+    pub enable_tab_limits: bool,
+    #[serde(rename = "saveUserSessions", default)]
+    pub save_user_sessions: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AppWorkspaceConfig {
+    #[serde(default)]
+    pub mappings: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ApplePushApplicationSetup {
+    #[serde(rename = "applicationBundle", default)]
+    pub application_bundle: String,
+    #[serde(default)]
+    pub certificate: String,
+    #[serde(default)]
+    pub environment: String,
+    #[serde(rename = "keyIdentifier", default)]
+    pub key_identifier: String,
+    #[serde(default)]
+    pub password: String,
+    #[serde(rename = "signingKey", default)]
+    pub signing_key: String,
+    #[serde(rename = "teamIdentifier", default)]
+    pub team_identifier: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -102,36 +232,6 @@ pub struct Application {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct AppWorkspaceConfig {
-    #[serde(default)]
-    pub mappings: Vec<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AppFrameworkTemplateBundle {
-    #[serde(rename = "assetVersion", default)]
-    pub asset_version: f64,
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "maxAppCount", default)]
-    pub max_app_count: f64,
-    #[serde(rename = "templateBadgeIcon", default)]
-    pub template_badge_icon: String,
-    #[serde(rename = "templateStatus", default)]
-    pub template_status: String,
-    #[serde(rename = "templateSubtype", default)]
-    pub template_subtype: String,
-    #[serde(rename = "templateType", default)]
-    pub template_type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct ApplicationRecordTypeConfig {
     #[serde(rename = "applicationObjectName", default)]
     pub application_object_name: ApplicationObjectName,
@@ -144,80 +244,6 @@ pub struct ApplicationRecordTypeConfig {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct AppMenuItem {
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub r#type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ApplePushApplicationSetup {
-    #[serde(rename = "applicationBundle", default)]
-    pub application_bundle: String,
-    #[serde(default)]
-    pub certificate: String,
-    #[serde(default)]
-    pub environment: String,
-    #[serde(rename = "keyIdentifier", default)]
-    pub key_identifier: String,
-    #[serde(default)]
-    pub password: String,
-    #[serde(rename = "signingKey", default)]
-    pub signing_key: String,
-    #[serde(rename = "teamIdentifier", default)]
-    pub team_identifier: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AppNotificationType {
-    #[serde(rename = "notificationType", default)]
-    pub notification_type: String,
-    #[serde(rename = "pushByDefault", default)]
-    pub push_by_default: bool,
-    #[serde(default)]
-    pub subscribed: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AppMenu {
-    #[serde(rename = "appMenuItems", default)]
-    pub app_menu_items: Vec<AppMenuItem>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AppPreferences {
-    #[serde(rename = "enableCustomizeMyTabs", default)]
-    pub enable_customize_my_tabs: bool,
-    #[serde(rename = "enableKeyboardShortcuts", default)]
-    pub enable_keyboard_shortcuts: bool,
-    #[serde(rename = "enableListViewHover", default)]
-    pub enable_list_view_hover: bool,
-    #[serde(rename = "enableListViewReskin", default)]
-    pub enable_list_view_reskin: bool,
-    #[serde(rename = "enableMultiMonitorComponents", default)]
-    pub enable_multi_monitor_components: bool,
-    #[serde(rename = "enablePinTabs", default)]
-    pub enable_pin_tabs: bool,
-    #[serde(rename = "enableTabHover", default)]
-    pub enable_tab_hover: bool,
-    #[serde(rename = "enableTabLimits", default)]
-    pub enable_tab_limits: bool,
-    #[serde(rename = "saveUserSessions", default)]
-    pub save_user_sessions: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct ApplicationSubtypeDefinition {
     #[serde(rename = "applicationUsageType", default)]
     pub application_usage_type: AppDomainUsageType,
@@ -225,32 +251,6 @@ pub struct ApplicationSubtypeDefinition {
     pub description: String,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AppBrand {
-    #[serde(rename = "footerColor", default)]
-    pub footer_color: String,
-    #[serde(rename = "headerColor", default)]
-    pub header_color: String,
-    #[serde(default)]
-    pub logo: String,
-    #[serde(rename = "logoVersion", default)]
-    pub logo_version: f64,
-    #[serde(rename = "shouldOverrideOrgTheme", default)]
-    pub should_override_org_theme: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AppComponentList {
-    #[serde(default)]
-    pub alignment: String,
-    #[serde(default)]
-    pub components: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]

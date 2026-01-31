@@ -11,30 +11,6 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PackageTypeMembers {
-    #[serde(default)]
-    pub members: Vec<String>,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PackageVersion {
-    #[serde(rename = "majorNumber", default)]
-    pub major_number: f64,
-    #[serde(rename = "minorNumber", default)]
-    pub minor_number: f64,
-    #[serde(default)]
-    pub namespace: String,
-    #[serde(rename = "packageId", default)]
-    pub package_id: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct InstalledPackage {
     #[serde(rename = "activateRSS", default)]
     pub activate_rss: bool,
@@ -70,4 +46,28 @@ pub struct Package {
     pub uninstall_class: String,
     #[serde(default)]
     pub version: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageTypeMembers {
+    #[serde(default)]
+    pub members: Vec<String>,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageVersion {
+    #[serde(rename = "majorNumber", default)]
+    pub major_number: f64,
+    #[serde(rename = "minorNumber", default)]
+    pub minor_number: f64,
+    #[serde(default)]
+    pub namespace: String,
+    #[serde(rename = "packageId", default)]
+    pub package_id: String,
 }

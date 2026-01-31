@@ -46,146 +46,6 @@ pub enum PricingStrategy {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PricingProcedureOutputMap {
-    #[serde(rename = "fieldName", default)]
-    pub field_name: String,
-    #[serde(rename = "isPricingRecipeActive", default)]
-    pub is_pricing_recipe_active: bool,
-    #[serde(rename = "outputFieldName", default)]
-    pub output_field_name: String,
-    #[serde(rename = "outputFieldNameString", default)]
-    pub output_field_name_string: String,
-    #[serde(rename = "outputType", default)]
-    pub output_type: String,
-    #[serde(rename = "pricingElementType", default)]
-    pub pricing_element_type: PricingElementType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PriceSheetDefinition {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "prcShtAttrDefinitions", default)]
-    pub prc_sht_attr_definitions: Vec<serde_json::Value>,
-    #[serde(rename = "priceSheetEntity", default)]
-    pub price_sheet_entity: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PricingRecipeTableMapping {
-    #[serde(rename = "fileBasedDecisionTableName", default)]
-    pub file_based_decision_table_name: String,
-    #[serde(rename = "isInternal", default)]
-    pub is_internal: bool,
-    #[serde(rename = "lookupTable", default)]
-    pub lookup_table: serde_json::Value,
-    #[serde(rename = "lookupTableDeveloperName", default)]
-    pub lookup_table_developer_name: String,
-    #[serde(rename = "pricingComponentType", default)]
-    pub pricing_component_type: String,
-    #[serde(rename = "pricingProcedureOutputMapList", default)]
-    pub pricing_procedure_output_map_list: Vec<PricingProcedureOutputMap>,
-    #[serde(rename = "pricingRecipe", default)]
-    pub pricing_recipe: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PriceRuleConditionFilter {
-    #[serde(default)]
-    pub field: String,
-    #[serde(rename = "fieldValue", default)]
-    pub field_value: String,
-    #[serde(rename = "fieldValueType", default)]
-    pub field_value_type: serde_json::Value,
-    #[serde(default)]
-    pub operator: serde_json::Value,
-    #[serde(default)]
-    pub sequence: f64,
-    #[serde(default)]
-    pub variable: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PriceRuleActionItem {
-    #[serde(default)]
-    pub field: String,
-    #[serde(rename = "fieldValue", default)]
-    pub field_value: String,
-    #[serde(rename = "fieldValueType", default)]
-    pub field_value_type: serde_json::Value,
-    #[serde(default)]
-    pub sequence: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PriceRuleExecutionStage {
-    #[serde(default)]
-    pub stage: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PricingActionParameters {
-    #[serde(rename = "contextDefinition", default)]
-    pub context_definition: String,
-    #[serde(rename = "contextMapping", default)]
-    pub context_mapping: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "effectiveFrom", default)]
-    pub effective_from: String,
-    #[serde(rename = "effectiveTo", default)]
-    pub effective_to: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "objectName", default)]
-    pub object_name: String,
-    #[serde(rename = "pricingProcedure", default)]
-    pub pricing_procedure: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PricingRecipe {
-    #[serde(rename = "businessVertical", default)]
-    pub business_vertical: serde_json::Value,
-    #[serde(rename = "defaultPricingProcedure", default)]
-    pub default_pricing_procedure: serde_json::Value,
-    #[serde(rename = "defaultPricingProcedureDeveloperName", default)]
-    pub default_pricing_procedure_developer_name: String,
-    #[serde(rename = "defaultPricingProcedureId", default)]
-    pub default_pricing_procedure_id: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isInternal", default)]
-    pub is_internal: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "pricingRecipeTableMapping", default)]
-    pub pricing_recipe_table_mapping: Vec<PricingRecipeTableMapping>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct PriceRule {
     #[serde(rename = "conditionLogic", default)]
     pub condition_logic: serde_json::Value,
@@ -207,6 +67,36 @@ pub struct PriceRule {
     pub sequence: f64,
     #[serde(default)]
     pub status: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PriceRuleAction {
+    #[serde(rename = "conditionVariable", default)]
+    pub condition_variable: String,
+    #[serde(rename = "priceRuleActionItems", default)]
+    pub price_rule_action_items: Vec<PriceRuleActionItem>,
+    #[serde(default)]
+    pub sequence: f64,
+    #[serde(rename = "targetObject", default)]
+    pub target_object: String,
+    #[serde(default)]
+    pub r#type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PriceRuleActionItem {
+    #[serde(default)]
+    pub field: String,
+    #[serde(rename = "fieldValue", default)]
+    pub field_value: String,
+    #[serde(rename = "fieldValueType", default)]
+    pub field_value_type: serde_json::Value,
+    #[serde(default)]
+    pub sequence: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -240,15 +130,125 @@ pub struct PriceRuleCondition {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PriceRuleAction {
-    #[serde(rename = "conditionVariable", default)]
-    pub condition_variable: String,
-    #[serde(rename = "priceRuleActionItems", default)]
-    pub price_rule_action_items: Vec<PriceRuleActionItem>,
+pub struct PriceRuleConditionFilter {
+    #[serde(default)]
+    pub field: String,
+    #[serde(rename = "fieldValue", default)]
+    pub field_value: String,
+    #[serde(rename = "fieldValueType", default)]
+    pub field_value_type: serde_json::Value,
+    #[serde(default)]
+    pub operator: serde_json::Value,
     #[serde(default)]
     pub sequence: f64,
-    #[serde(rename = "targetObject", default)]
-    pub target_object: String,
     #[serde(default)]
-    pub r#type: serde_json::Value,
+    pub variable: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PriceRuleExecutionStage {
+    #[serde(default)]
+    pub stage: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PriceSheetDefinition {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "prcShtAttrDefinitions", default)]
+    pub prc_sht_attr_definitions: Vec<serde_json::Value>,
+    #[serde(rename = "priceSheetEntity", default)]
+    pub price_sheet_entity: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PricingActionParameters {
+    #[serde(rename = "contextDefinition", default)]
+    pub context_definition: String,
+    #[serde(rename = "contextMapping", default)]
+    pub context_mapping: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "effectiveFrom", default)]
+    pub effective_from: String,
+    #[serde(rename = "effectiveTo", default)]
+    pub effective_to: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "objectName", default)]
+    pub object_name: String,
+    #[serde(rename = "pricingProcedure", default)]
+    pub pricing_procedure: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PricingProcedureOutputMap {
+    #[serde(rename = "fieldName", default)]
+    pub field_name: String,
+    #[serde(rename = "isPricingRecipeActive", default)]
+    pub is_pricing_recipe_active: bool,
+    #[serde(rename = "outputFieldName", default)]
+    pub output_field_name: String,
+    #[serde(rename = "outputFieldNameString", default)]
+    pub output_field_name_string: String,
+    #[serde(rename = "outputType", default)]
+    pub output_type: String,
+    #[serde(rename = "pricingElementType", default)]
+    pub pricing_element_type: PricingElementType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PricingRecipe {
+    #[serde(rename = "businessVertical", default)]
+    pub business_vertical: serde_json::Value,
+    #[serde(rename = "defaultPricingProcedure", default)]
+    pub default_pricing_procedure: serde_json::Value,
+    #[serde(rename = "defaultPricingProcedureDeveloperName", default)]
+    pub default_pricing_procedure_developer_name: String,
+    #[serde(rename = "defaultPricingProcedureId", default)]
+    pub default_pricing_procedure_id: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "isInternal", default)]
+    pub is_internal: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "pricingRecipeTableMapping", default)]
+    pub pricing_recipe_table_mapping: Vec<PricingRecipeTableMapping>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PricingRecipeTableMapping {
+    #[serde(rename = "fileBasedDecisionTableName", default)]
+    pub file_based_decision_table_name: String,
+    #[serde(rename = "isInternal", default)]
+    pub is_internal: bool,
+    #[serde(rename = "lookupTable", default)]
+    pub lookup_table: serde_json::Value,
+    #[serde(rename = "lookupTableDeveloperName", default)]
+    pub lookup_table_developer_name: String,
+    #[serde(rename = "pricingComponentType", default)]
+    pub pricing_component_type: String,
+    #[serde(rename = "pricingProcedureOutputMapList", default)]
+    pub pricing_procedure_output_map_list: Vec<PricingProcedureOutputMap>,
+    #[serde(rename = "pricingRecipe", default)]
+    pub pricing_recipe: String,
 }

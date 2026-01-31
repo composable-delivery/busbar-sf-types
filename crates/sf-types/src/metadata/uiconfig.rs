@@ -10,58 +10,18 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum UiType {
-    #[default]
-    Aloha,
-    Lightning,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum UiLoginFlowType {
     #[default]
     VisualWorkflow,
     VisualForce,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct UiPreviewMessageTabDef {
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "lightningComponentDef", default)]
-    pub lightning_component_def: String,
-    #[serde(rename = "supportedChannel", default)]
-    pub supported_channel: serde_json::Value,
-    #[serde(rename = "tabName", default)]
-    pub tab_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct UiFormulaRule {
-    #[serde(rename = "booleanFilter", default)]
-    pub boolean_filter: String,
-    #[serde(default)]
-    pub criteria: Vec<UiFormulaCriterion>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct UiFormulaCriterion {
-    #[serde(rename = "leftValue", default)]
-    pub left_value: String,
-    #[serde(default)]
-    pub operator: String,
-    #[serde(rename = "rightValue", default)]
-    pub right_value: String,
+pub enum UiType {
+    #[default]
+    Aloha,
+    Lightning,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -92,4 +52,44 @@ pub struct UiFormatSpecificationSet {
     pub sobject_type: String,
     #[serde(rename = "uiFormatSpecifications", default)]
     pub ui_format_specifications: Vec<UiFormatSpecification>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct UiFormulaCriterion {
+    #[serde(rename = "leftValue", default)]
+    pub left_value: String,
+    #[serde(default)]
+    pub operator: String,
+    #[serde(rename = "rightValue", default)]
+    pub right_value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct UiFormulaRule {
+    #[serde(rename = "booleanFilter", default)]
+    pub boolean_filter: String,
+    #[serde(default)]
+    pub criteria: Vec<UiFormulaCriterion>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct UiPreviewMessageTabDef {
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "lightningComponentDef", default)]
+    pub lightning_component_def: String,
+    #[serde(rename = "supportedChannel", default)]
+    pub supported_channel: serde_json::Value,
+    #[serde(rename = "tabName", default)]
+    pub tab_name: String,
 }

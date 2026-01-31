@@ -10,11 +10,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RecordAggregationJoinConditionType {
+pub enum RecordActionType {
     #[default]
-    AggregateTo,
-    Intermediate,
-    AggregateFrom,
+    Flow,
+    QuickAction,
+    Omniscript,
+    LWC,
+    WebLink,
+    SvcCatalogItemDef,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -35,14 +38,26 @@ pub enum RecordAggregationDefinitionStatus {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RecordActionType {
+pub enum RecordAggregationJoinConditionType {
     #[default]
-    Flow,
-    QuickAction,
-    Omniscript,
-    LWC,
-    WebLink,
-    SvcCatalogItemDef,
+    AggregateTo,
+    Intermediate,
+    AggregateFrom,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RecordAggregationObjectFilterOperator {
+    #[default]
+    Equals,
+    NotEquals,
+    LessThan,
+    LessThanOrEquals,
+    GreaterThan,
+    GreaterThanOrEquals,
+    Contains,
+    In,
+    NotIn,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -63,21 +78,6 @@ pub enum RecordEditabilityType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RecordAggregationObjectFilterOperator {
-    #[default]
-    Equals,
-    NotEquals,
-    LessThan,
-    LessThanOrEquals,
-    GreaterThan,
-    GreaterThanOrEquals,
-    Contains,
-    In,
-    NotIn,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum RecordTriggerType {
     #[default]
     Update,
@@ -85,6 +85,50 @@ pub enum RecordTriggerType {
     CreateAndUpdate,
     Delete,
     None,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RecordActionDefaultItem {
+    #[serde(default)]
+    pub action: String,
+    #[serde(rename = "isMandatory", default)]
+    pub is_mandatory: bool,
+    #[serde(rename = "isUiRemoveHidden", default)]
+    pub is_ui_remove_hidden: bool,
+    #[serde(default)]
+    pub pinned: serde_json::Value,
+    #[serde(default)]
+    pub position: f64,
+    #[serde(default)]
+    pub r#type: RecordActionType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RecordActionDeployment {
+    #[serde(rename = "channelConfigurations", default)]
+    pub channel_configurations: Vec<RecordActionDeploymentChannel>,
+    #[serde(rename = "componentName", default)]
+    pub component_name: serde_json::Value,
+    #[serde(rename = "deploymentContexts", default)]
+    pub deployment_contexts: Vec<RecordActionDeploymentContext>,
+    #[serde(rename = "hasComponents", default)]
+    pub has_components: bool,
+    #[serde(rename = "hasGuidedActions", default)]
+    pub has_guided_actions: bool,
+    #[serde(rename = "hasOmniscripts", default)]
+    pub has_omniscripts: bool,
+    #[serde(rename = "hasRecommendations", default)]
+    pub has_recommendations: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub recommendation: RecordActionRecommendation,
+    #[serde(rename = "selectableItems", default)]
+    pub selectable_items: Vec<RecordActionSelectableItem>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -102,17 +146,87 @@ pub struct RecordActionDeploymentChannel {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct RecordAlertDataSource {
-    #[serde(rename = "apexClass", default)]
-    pub apex_class: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
+pub struct RecordActionDeploymentContext {
+    #[serde(rename = "entityName", default)]
+    pub entity_name: String,
+    #[serde(rename = "recommendationStrategy", default)]
+    pub recommendation_strategy: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RecordActionRecommendation {
+    #[serde(rename = "defaultStrategy", default)]
+    pub default_strategy: String,
+    #[serde(rename = "hasDescription", default)]
+    pub has_description: bool,
+    #[serde(rename = "hasImage", default)]
+    pub has_image: bool,
+    #[serde(rename = "hasRealtimeRecommendations", default)]
+    pub has_realtime_recommendations: bool,
+    #[serde(rename = "hasRejectAction", default)]
+    pub has_reject_action: bool,
+    #[serde(rename = "hasTitle", default)]
+    pub has_title: bool,
+    #[serde(rename = "maxDisplayRecommendations", default)]
+    pub max_display_recommendations: f64,
+    #[serde(rename = "shouldLaunchActionOnReject", default)]
+    pub should_launch_action_on_reject: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RecordActionSelectableItem {
     #[serde(default)]
-    pub r#type: RecordAlertDataSourceType,
+    pub action: String,
+    #[serde(rename = "frequentActionSequenceNbr", default)]
+    pub frequent_action_sequence_nbr: f64,
+    #[serde(rename = "isFrequentAction", default)]
+    pub is_frequent_action: bool,
+    #[serde(default)]
+    pub r#type: RecordActionType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RecordAggregationDefinition {
+    #[serde(rename = "aggregateFromObject", default)]
+    pub aggregate_from_object: String,
+    #[serde(rename = "aggregateToObject", default)]
+    pub aggregate_to_object: String,
+    #[serde(rename = "aggregationType", default)]
+    pub aggregation_type: RecordAggregationDefinitionAggregationType,
+    #[serde(rename = "batchProcessingDefinition", default)]
+    pub batch_processing_definition: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "displayName", default)]
+    pub display_name: String,
+    #[serde(rename = "onDemandProcDefinition", default)]
+    pub on_demand_proc_definition: String,
+    #[serde(rename = "recordAggregationObject", default)]
+    pub record_aggregation_object: Vec<RecordAggregationObject>,
+    #[serde(default)]
+    pub status: RecordAggregationDefinitionStatus,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RecordAggregationJoinCondition {
+    #[serde(rename = "joinField", default)]
+    pub join_field: String,
+    #[serde(rename = "navigationSequenceNumber", default)]
+    pub navigation_sequence_number: f64,
+    #[serde(rename = "relatedJoinField", default)]
+    pub related_join_field: String,
+    #[serde(rename = "relatedRecordAggregationObject", default)]
+    pub related_record_aggregation_object: String,
+    #[serde(default)]
+    pub r#type: RecordAggregationJoinConditionType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -150,39 +264,29 @@ pub struct RecordAggregationObjectFilter {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct RecordActionRecommendation {
-    #[serde(rename = "defaultStrategy", default)]
-    pub default_strategy: String,
-    #[serde(rename = "hasDescription", default)]
-    pub has_description: bool,
-    #[serde(rename = "hasImage", default)]
-    pub has_image: bool,
-    #[serde(rename = "hasRealtimeRecommendations", default)]
-    pub has_realtime_recommendations: bool,
-    #[serde(rename = "hasRejectAction", default)]
-    pub has_reject_action: bool,
-    #[serde(rename = "hasTitle", default)]
-    pub has_title: bool,
-    #[serde(rename = "maxDisplayRecommendations", default)]
-    pub max_display_recommendations: f64,
-    #[serde(rename = "shouldLaunchActionOnReject", default)]
-    pub should_launch_action_on_reject: bool,
+pub struct RecordAlertCategory {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub severity: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct RecordAggregationJoinCondition {
-    #[serde(rename = "joinField", default)]
-    pub join_field: String,
-    #[serde(rename = "navigationSequenceNumber", default)]
-    pub navigation_sequence_number: f64,
-    #[serde(rename = "relatedJoinField", default)]
-    pub related_join_field: String,
-    #[serde(rename = "relatedRecordAggregationObject", default)]
-    pub related_record_aggregation_object: String,
+pub struct RecordAlertDataSource {
+    #[serde(rename = "apexClass", default)]
+    pub apex_class: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
     #[serde(default)]
-    pub r#type: RecordAggregationJoinConditionType,
+    pub r#type: RecordAlertDataSourceType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -204,37 +308,11 @@ pub struct RecordAlertTemplate {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct RecordAggregationDefinition {
-    #[serde(rename = "aggregateFromObject", default)]
-    pub aggregate_from_object: String,
-    #[serde(rename = "aggregateToObject", default)]
-    pub aggregate_to_object: String,
-    #[serde(rename = "aggregationType", default)]
-    pub aggregation_type: RecordAggregationDefinitionAggregationType,
-    #[serde(rename = "batchProcessingDefinition", default)]
-    pub batch_processing_definition: String,
+pub struct RecordTypePicklistValue {
     #[serde(default)]
-    pub description: String,
-    #[serde(rename = "displayName", default)]
-    pub display_name: String,
-    #[serde(rename = "onDemandProcDefinition", default)]
-    pub on_demand_proc_definition: String,
-    #[serde(rename = "recordAggregationObject", default)]
-    pub record_aggregation_object: Vec<RecordAggregationObject>,
+    pub picklist: String,
     #[serde(default)]
-    pub status: RecordAggregationDefinitionStatus,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RecordAlertCategory {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub severity: String,
+    pub values: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -247,82 +325,4 @@ pub struct RecordTypeTranslation {
     pub label: String,
     #[serde(default)]
     pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RecordActionDeploymentContext {
-    #[serde(rename = "entityName", default)]
-    pub entity_name: String,
-    #[serde(rename = "recommendationStrategy", default)]
-    pub recommendation_strategy: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RecordTypePicklistValue {
-    #[serde(default)]
-    pub picklist: String,
-    #[serde(default)]
-    pub values: Vec<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RecordActionDefaultItem {
-    #[serde(default)]
-    pub action: String,
-    #[serde(rename = "isMandatory", default)]
-    pub is_mandatory: bool,
-    #[serde(rename = "isUiRemoveHidden", default)]
-    pub is_ui_remove_hidden: bool,
-    #[serde(default)]
-    pub pinned: serde_json::Value,
-    #[serde(default)]
-    pub position: f64,
-    #[serde(default)]
-    pub r#type: RecordActionType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RecordActionSelectableItem {
-    #[serde(default)]
-    pub action: String,
-    #[serde(rename = "frequentActionSequenceNbr", default)]
-    pub frequent_action_sequence_nbr: f64,
-    #[serde(rename = "isFrequentAction", default)]
-    pub is_frequent_action: bool,
-    #[serde(default)]
-    pub r#type: RecordActionType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RecordActionDeployment {
-    #[serde(rename = "channelConfigurations", default)]
-    pub channel_configurations: Vec<RecordActionDeploymentChannel>,
-    #[serde(rename = "componentName", default)]
-    pub component_name: serde_json::Value,
-    #[serde(rename = "deploymentContexts", default)]
-    pub deployment_contexts: Vec<RecordActionDeploymentContext>,
-    #[serde(rename = "hasComponents", default)]
-    pub has_components: bool,
-    #[serde(rename = "hasGuidedActions", default)]
-    pub has_guided_actions: bool,
-    #[serde(rename = "hasOmniscripts", default)]
-    pub has_omniscripts: bool,
-    #[serde(rename = "hasRecommendations", default)]
-    pub has_recommendations: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub recommendation: RecordActionRecommendation,
-    #[serde(rename = "selectableItems", default)]
-    pub selectable_items: Vec<RecordActionSelectableItem>,
 }

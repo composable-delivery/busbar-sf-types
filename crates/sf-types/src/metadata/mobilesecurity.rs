@@ -10,6 +10,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MobileSecurityCertPinType {
+    #[default]
+    AuthServer,
+    Resource,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum MobileSecurityMobilePlatform {
     #[default]
     Android,
@@ -23,14 +31,6 @@ pub enum MobileSecurityPolicyRuleValueType {
     Boolean,
     Text,
     TextList,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MobileSecurityCertPinType {
-    #[default]
-    AuthServer,
-    Resource,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
