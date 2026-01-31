@@ -102,12 +102,7 @@ jobs:
           git add -A
           
           # Commit changes
-          git commit -m "chore: auto-regenerate types from latest @salesforce/types
-
-This is an automated commit created by CI when type regeneration
-produced changes that were not committed.
-
-Original commit: ${{ github.sha }}"
+          git commit -m "chore: auto-regenerate types from latest @salesforce/types This is an automated commit created by CI when type regeneration produced changes that were not committed. Original commit: ${{ github.sha }}"
           
           # Push to remote
           git push origin "$BRANCH_NAME"
