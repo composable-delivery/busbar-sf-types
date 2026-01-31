@@ -10,6 +10,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum VisualizationFieldDisplayCategoryType {
+    #[default]
+    Discrete,
+    Continuous,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum VisualizationFieldFunctionType {
     #[default]
     Sum,
@@ -49,6 +57,14 @@ pub enum VisualizationFieldFunctionType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum VisualizationFieldRoleType {
+    #[default]
+    Dimension,
+    Measure,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum VisualizationFieldType {
     #[default]
     Field,
@@ -59,40 +75,10 @@ pub enum VisualizationFieldType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum VisualizationFieldRoleType {
-    #[default]
-    Dimension,
-    Measure,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum VisualizationFieldDisplayCategoryType {
-    #[default]
-    Discrete,
-    Continuous,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum VisualizationResourceType {
     #[default]
     js,
     css,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct VisualizationResource {
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub file: String,
-    #[serde(default)]
-    pub rank: f64,
-    #[serde(default)]
-    pub r#type: VisualizationResourceType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -111,6 +97,20 @@ pub struct VisualizationPlugin {
     pub visualization_resources: Vec<VisualizationResource>,
     #[serde(rename = "visualizationTypes", default)]
     pub visualization_types: Vec<VisualizationType>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct VisualizationResource {
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub file: String,
+    #[serde(default)]
+    pub rank: f64,
+    #[serde(default)]
+    pub r#type: VisualizationResourceType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]

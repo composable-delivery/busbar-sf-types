@@ -28,30 +28,6 @@ pub enum ComponentName {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ComponentInstanceProperty {
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub r#type: serde_json::Value,
-    #[serde(default)]
-    pub value: String,
-    #[serde(rename = "valueList", default)]
-    pub value_list: ComponentInstancePropertyList,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ComponentInstancePropertyListItem {
-    #[serde(default)]
-    pub value: String,
-    #[serde(rename = "visibilityRule", default)]
-    pub visibility_rule: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct ComponentInstance {
     #[serde(rename = "componentInstanceProperties", default)]
     pub component_instance_properties: Vec<ComponentInstanceProperty>,
@@ -70,7 +46,31 @@ pub struct ComponentInstance {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct ComponentInstanceProperty {
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub r#type: serde_json::Value,
+    #[serde(default)]
+    pub value: String,
+    #[serde(rename = "valueList", default)]
+    pub value_list: ComponentInstancePropertyList,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct ComponentInstancePropertyList {
     #[serde(rename = "valueListItems", default)]
     pub value_list_items: Vec<ComponentInstancePropertyListItem>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ComponentInstancePropertyListItem {
+    #[serde(default)]
+    pub value: String,
+    #[serde(rename = "visibilityRule", default)]
+    pub visibility_rule: serde_json::Value,
 }

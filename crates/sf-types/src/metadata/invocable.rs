@@ -10,6 +10,28 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum InvocableActionExtAttributeDataType {
+    #[default]
+    String,
+    Boolean,
+    Integer,
+    Date,
+    Double,
+    Long,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum InvocableActionExtTargetType {
+    #[default]
+    ActionDefinition,
+    ActionParameter,
+    TypeDefinition,
+    TypeProperty,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum InvocableActionType {
     #[default]
     adjustedSchedules,
@@ -1172,26 +1194,12 @@ pub enum InvocableActionType {
     getOrgUserLicenseUsage,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum InvocableActionExtAttributeDataType {
-    #[default]
-    String,
-    Boolean,
-    Integer,
-    Date,
-    Double,
-    Long,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum InvocableActionExtTargetType {
-    #[default]
-    ActionDefinition,
-    ActionParameter,
-    TypeDefinition,
-    TypeProperty,
+#[serde(rename_all = "camelCase")]
+pub struct InvocableActionExtension {
+    #[serde(default)]
+    pub targets: Vec<InvocableActionExtensionTarget>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -1204,14 +1212,6 @@ pub struct InvocableActionExtensionTarget {
     pub target_name: String,
     #[serde(rename = "targetType", default)]
     pub target_type: InvocableActionExtTargetType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct InvocableActionExtension {
-    #[serde(default)]
-    pub targets: Vec<InvocableActionExtensionTarget>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]

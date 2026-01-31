@@ -43,27 +43,13 @@ pub struct CallCenter {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct CallCtrAgentFavTrfrDest {
+pub struct CallCenterItem {
     #[serde(default)]
-    pub agent: String,
-    #[serde(rename = "callCenter", default)]
-    pub call_center: String,
+    pub label: String,
     #[serde(default)]
     pub name: String,
-    #[serde(rename = "transferDestination", default)]
-    pub transfer_destination: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CallCoachingMediaProvider {
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "providerDescription", default)]
-    pub provider_description: String,
-    #[serde(rename = "providerName", default)]
-    pub provider_name: String,
+    #[serde(default)]
+    pub value: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -87,18 +73,6 @@ pub struct CallCenterRoutingMap {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct CallCenterItem {
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct CallCenterSection {
     #[serde(default)]
     pub items: Vec<CallCenterItem>,
@@ -106,4 +80,30 @@ pub struct CallCenterSection {
     pub label: String,
     #[serde(default)]
     pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CallCoachingMediaProvider {
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "providerDescription", default)]
+    pub provider_description: String,
+    #[serde(rename = "providerName", default)]
+    pub provider_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CallCtrAgentFavTrfrDest {
+    #[serde(default)]
+    pub agent: String,
+    #[serde(rename = "callCenter", default)]
+    pub call_center: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "transferDestination", default)]
+    pub transfer_destination: String,
 }

@@ -29,87 +29,27 @@ pub enum LayoutSectionStyle {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct RelatedListItem {
-    #[serde(rename = "customButtons", default)]
-    pub custom_buttons: Vec<String>,
-    #[serde(rename = "excludeButtons", default)]
-    pub exclude_buttons: Vec<String>,
-    #[serde(default)]
-    pub fields: Vec<String>,
-    #[serde(rename = "quickActions", default)]
-    pub quick_actions: Vec<String>,
-    #[serde(rename = "relatedList", default)]
-    pub related_list: String,
-    #[serde(rename = "sortField", default)]
-    pub sort_field: String,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RelatedList {
-    #[serde(rename = "hideOnDetail", default)]
-    pub hide_on_detail: bool,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct QuickActionListItem {
-    #[serde(rename = "quickActionName", default)]
-    pub quick_action_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SummaryLayout {
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "sizeX", default)]
-    pub size_x: f64,
-    #[serde(rename = "sizeY", default)]
-    pub size_y: f64,
-    #[serde(rename = "sizeZ", default)]
-    pub size_z: f64,
-    #[serde(rename = "summaryLayoutItems", default)]
-    pub summary_layout_items: Vec<SummaryLayoutItem>,
-    #[serde(rename = "summaryLayoutStyle", default)]
-    pub summary_layout_style: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MiniLayout {
-    #[serde(default)]
-    pub fields: Vec<String>,
-    #[serde(rename = "relatedLists", default)]
-    pub related_lists: Vec<RelatedListItem>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct QuickActionList {
-    #[serde(rename = "quickActionListItems", default)]
-    pub quick_action_list_items: Vec<QuickActionListItem>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PlatformActionList {
-    #[serde(rename = "actionListContext", default)]
-    pub action_list_context: serde_json::Value,
-    #[serde(rename = "platformActionListItems", default)]
-    pub platform_action_list_items: Vec<PlatformActionListItem>,
-    #[serde(rename = "relatedSourceEntity", default)]
-    pub related_source_entity: String,
+pub struct FeedLayout {
+    #[serde(rename = "autocollapsePublisher", default)]
+    pub autocollapse_publisher: bool,
+    #[serde(rename = "compactFeed", default)]
+    pub compact_feed: bool,
+    #[serde(rename = "feedFilterPosition", default)]
+    pub feed_filter_position: serde_json::Value,
+    #[serde(rename = "feedFilters", default)]
+    pub feed_filters: Vec<FeedLayoutFilter>,
+    #[serde(rename = "fullWidthFeed", default)]
+    pub full_width_feed: bool,
+    #[serde(rename = "hideSidebar", default)]
+    pub hide_sidebar: bool,
+    #[serde(rename = "highlightExternalFeedItems", default)]
+    pub highlight_external_feed_items: bool,
+    #[serde(rename = "leftComponents", default)]
+    pub left_components: Vec<FeedLayoutComponent>,
+    #[serde(rename = "rightComponents", default)]
+    pub right_components: Vec<FeedLayoutComponent>,
+    #[serde(rename = "useInlineFiltersInConsole", default)]
+    pub use_inline_filters_in_console: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -127,32 +67,6 @@ pub struct FeedLayoutComponent {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct SummaryLayoutItem {
-    #[serde(rename = "customLink", default)]
-    pub custom_link: String,
-    #[serde(default)]
-    pub field: String,
-    #[serde(rename = "posX", default)]
-    pub pos_x: f64,
-    #[serde(rename = "posY", default)]
-    pub pos_y: f64,
-    #[serde(rename = "posZ", default)]
-    pub pos_z: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LayoutColumn {
-    #[serde(rename = "layoutItems", default)]
-    pub layout_items: Vec<LayoutItem>,
-    #[serde(default)]
-    pub reserved: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct FeedLayoutFilter {
     #[serde(rename = "feedFilterName", default)]
     pub feed_filter_name: String,
@@ -160,48 +74,6 @@ pub struct FeedLayoutFilter {
     pub feed_filter_type: serde_json::Value,
     #[serde(rename = "feedItemType", default)]
     pub feed_item_type: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PlatformActionListItem {
-    #[serde(rename = "actionName", default)]
-    pub action_name: String,
-    #[serde(rename = "actionType", default)]
-    pub action_type: serde_json::Value,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: f64,
-    #[serde(default)]
-    pub subtype: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LayoutSectionTranslation {
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub section: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LayoutSection {
-    #[serde(rename = "customLabel", default)]
-    pub custom_label: bool,
-    #[serde(rename = "detailHeading", default)]
-    pub detail_heading: bool,
-    #[serde(rename = "editHeading", default)]
-    pub edit_heading: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "layoutColumns", default)]
-    pub layout_columns: Vec<Box<LayoutColumn>>,
-    #[serde(default)]
-    pub style: LayoutSectionStyle,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -259,27 +131,11 @@ pub struct Layout {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct FeedLayout {
-    #[serde(rename = "autocollapsePublisher", default)]
-    pub autocollapse_publisher: bool,
-    #[serde(rename = "compactFeed", default)]
-    pub compact_feed: bool,
-    #[serde(rename = "feedFilterPosition", default)]
-    pub feed_filter_position: serde_json::Value,
-    #[serde(rename = "feedFilters", default)]
-    pub feed_filters: Vec<FeedLayoutFilter>,
-    #[serde(rename = "fullWidthFeed", default)]
-    pub full_width_feed: bool,
-    #[serde(rename = "hideSidebar", default)]
-    pub hide_sidebar: bool,
-    #[serde(rename = "highlightExternalFeedItems", default)]
-    pub highlight_external_feed_items: bool,
-    #[serde(rename = "leftComponents", default)]
-    pub left_components: Vec<FeedLayoutComponent>,
-    #[serde(rename = "rightComponents", default)]
-    pub right_components: Vec<FeedLayoutComponent>,
-    #[serde(rename = "useInlineFiltersInConsole", default)]
-    pub use_inline_filters_in_console: bool,
+pub struct LayoutColumn {
+    #[serde(rename = "layoutItems", default)]
+    pub layout_items: Vec<LayoutItem>,
+    #[serde(default)]
+    pub reserved: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -319,6 +175,34 @@ pub struct LayoutItem {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct LayoutSection {
+    #[serde(rename = "customLabel", default)]
+    pub custom_label: bool,
+    #[serde(rename = "detailHeading", default)]
+    pub detail_heading: bool,
+    #[serde(rename = "editHeading", default)]
+    pub edit_heading: bool,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "layoutColumns", default)]
+    pub layout_columns: Vec<Box<LayoutColumn>>,
+    #[serde(default)]
+    pub style: LayoutSectionStyle,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LayoutSectionTranslation {
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub section: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct LayoutTranslation {
     #[serde(default)]
     pub layout: String,
@@ -326,4 +210,120 @@ pub struct LayoutTranslation {
     pub layout_type: String,
     #[serde(default)]
     pub sections: Vec<LayoutSectionTranslation>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MiniLayout {
+    #[serde(default)]
+    pub fields: Vec<String>,
+    #[serde(rename = "relatedLists", default)]
+    pub related_lists: Vec<RelatedListItem>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PlatformActionList {
+    #[serde(rename = "actionListContext", default)]
+    pub action_list_context: serde_json::Value,
+    #[serde(rename = "platformActionListItems", default)]
+    pub platform_action_list_items: Vec<PlatformActionListItem>,
+    #[serde(rename = "relatedSourceEntity", default)]
+    pub related_source_entity: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PlatformActionListItem {
+    #[serde(rename = "actionName", default)]
+    pub action_name: String,
+    #[serde(rename = "actionType", default)]
+    pub action_type: serde_json::Value,
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: f64,
+    #[serde(default)]
+    pub subtype: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct QuickActionList {
+    #[serde(rename = "quickActionListItems", default)]
+    pub quick_action_list_items: Vec<QuickActionListItem>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct QuickActionListItem {
+    #[serde(rename = "quickActionName", default)]
+    pub quick_action_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RelatedList {
+    #[serde(rename = "hideOnDetail", default)]
+    pub hide_on_detail: bool,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RelatedListItem {
+    #[serde(rename = "customButtons", default)]
+    pub custom_buttons: Vec<String>,
+    #[serde(rename = "excludeButtons", default)]
+    pub exclude_buttons: Vec<String>,
+    #[serde(default)]
+    pub fields: Vec<String>,
+    #[serde(rename = "quickActions", default)]
+    pub quick_actions: Vec<String>,
+    #[serde(rename = "relatedList", default)]
+    pub related_list: String,
+    #[serde(rename = "sortField", default)]
+    pub sort_field: String,
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SummaryLayout {
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "sizeX", default)]
+    pub size_x: f64,
+    #[serde(rename = "sizeY", default)]
+    pub size_y: f64,
+    #[serde(rename = "sizeZ", default)]
+    pub size_z: f64,
+    #[serde(rename = "summaryLayoutItems", default)]
+    pub summary_layout_items: Vec<SummaryLayoutItem>,
+    #[serde(rename = "summaryLayoutStyle", default)]
+    pub summary_layout_style: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SummaryLayoutItem {
+    #[serde(rename = "customLink", default)]
+    pub custom_link: String,
+    #[serde(default)]
+    pub field: String,
+    #[serde(rename = "posX", default)]
+    pub pos_x: f64,
+    #[serde(rename = "posY", default)]
+    pub pos_y: f64,
+    #[serde(rename = "posZ", default)]
+    pub pos_z: f64,
 }

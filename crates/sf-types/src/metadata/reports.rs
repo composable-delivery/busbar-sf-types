@@ -10,138 +10,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DashboardFilterOperation {
-    #[default]
-    equals,
-    notEqual,
-    lessThan,
-    greaterThan,
-    lessOrEqual,
-    greaterOrEqual,
-    contains,
-    notContain,
-    startsWith,
-    includes,
-    excludes,
-    between,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ReportStatus {
-    #[default]
-    NEW,
-    TRAINING,
-    COMPLETED,
-    ERROR,
-    NOT_ENOUGH_DATA_AFTER_PARSING,
-    NOT_ENOUGH_DATA_WITH_CONTACT_REASON,
-    LOW_CLUSTER_QUALITY,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ReportTypeCategory {
-    #[default]
-    accounts,
-    opportunities,
-    forecasts,
-    cases,
-    leads,
-    campaigns,
-    activities,
-    busop,
-    products,
-    admin,
-    territory,
-    other,
-    content,
-    usage_entitlement,
-    wdc,
-    calibration,
-    territory2,
-    quotes,
-    individual,
-    employee,
-    data_cloud,
-    commerce,
-    flow,
-    semantic_model,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ReportAggrType {
-    #[default]
-    Sum,
-    Average,
-    Maximum,
-    Minimum,
-    Unique,
-    RowCount,
-    Median,
-    Noop,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ReportAggregateDatatype {
-    #[default]
-    currency,
-    percent,
-    number,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ReportChartComponentSize {
-    #[default]
-    SMALL,
-    MEDIUM,
-    LARGE,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ReportFormat {
-    #[default]
-    MultiBlock,
-    Matrix,
-    Summary,
-    Tabular,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ReportSortType {
-    #[default]
-    Column,
-    Aggregate,
-    CustomSummaryFormula,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ReportChartSize {
-    #[default]
-    Tiny,
-    Small,
-    Medium,
-    Large,
-    Huge,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ReportBucketFieldType {
-    #[default]
-    text,
-    number,
-    picklist,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum DashboardComponentColumnType {
     #[default]
     aggregate,
@@ -151,16 +19,21 @@ pub enum DashboardComponentColumnType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ReportSummaryType {
+pub enum DashboardComponentFilter {
     #[default]
-    Sum,
-    Average,
-    Maximum,
-    Minimum,
-    Unique,
-    Median,
-    Noop,
-    None,
+    RowLabelAscending,
+    RowLabelDescending,
+    RowValueAscending,
+    RowValueDescending,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DashboardComponentSize {
+    #[default]
+    Narrow,
+    Medium,
+    Wide,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -201,21 +74,91 @@ pub enum DashboardComponentType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DashboardComponentSize {
+pub enum DashboardFilterOperation {
     #[default]
-    Narrow,
-    Medium,
-    Wide,
+    equals,
+    notEqual,
+    lessThan,
+    greaterThan,
+    lessOrEqual,
+    greaterOrEqual,
+    contains,
+    notContain,
+    startsWith,
+    includes,
+    excludes,
+    between,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DashboardComponentFilter {
+pub enum DashboardType {
     #[default]
-    RowLabelAscending,
-    RowLabelDescending,
-    RowValueAscending,
-    RowValueDescending,
+    SpecifiedUser,
+    LoggedInUser,
+    MyTeamUser,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ReportAggrType {
+    #[default]
+    Sum,
+    Average,
+    Maximum,
+    Minimum,
+    Unique,
+    RowCount,
+    Median,
+    Noop,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ReportAggregateDatatype {
+    #[default]
+    currency,
+    percent,
+    number,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ReportBucketFieldType {
+    #[default]
+    text,
+    number,
+    picklist,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ReportChartComponentSize {
+    #[default]
+    SMALL,
+    MEDIUM,
+    LARGE,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ReportChartSize {
+    #[default]
+    Tiny,
+    Small,
+    Medium,
+    Large,
+    Huge,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ReportFormat {
+    #[default]
+    MultiBlock,
+    Matrix,
+    Summary,
+    Tabular,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -237,33 +180,68 @@ pub enum ReportJobSourceTypes {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DashboardType {
+pub enum ReportSortType {
     #[default]
-    SpecifiedUser,
-    LoggedInUser,
-    MyTeamUser,
+    Column,
+    Aggregate,
+    CustomSummaryFormula,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ReportBucketField {
-    #[serde(rename = "bucketType", default)]
-    pub bucket_type: ReportBucketFieldType,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "nullTreatment", default)]
-    pub null_treatment: ReportFormulaNullTreatment,
-    #[serde(rename = "otherBucketLabel", default)]
-    pub other_bucket_label: String,
-    #[serde(rename = "sourceColumnName", default)]
-    pub source_column_name: String,
-    #[serde(rename = "useOther", default)]
-    pub use_other: bool,
-    #[serde(default)]
-    pub values: Vec<ReportBucketFieldValue>,
+pub enum ReportStatus {
+    #[default]
+    NEW,
+    TRAINING,
+    COMPLETED,
+    ERROR,
+    NOT_ENOUGH_DATA_AFTER_PARSING,
+    NOT_ENOUGH_DATA_WITH_CONTACT_REASON,
+    LOW_CLUSTER_QUALITY,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ReportSummaryType {
+    #[default]
+    Sum,
+    Average,
+    Maximum,
+    Minimum,
+    Unique,
+    Median,
+    Noop,
+    None,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ReportTypeCategory {
+    #[default]
+    accounts,
+    opportunities,
+    forecasts,
+    cases,
+    leads,
+    campaigns,
+    activities,
+    busop,
+    products,
+    admin,
+    territory,
+    other,
+    content,
+    usage_entitlement,
+    wdc,
+    calibration,
+    territory2,
+    quotes,
+    individual,
+    employee,
+    data_cloud,
+    commerce,
+    flow,
+    semantic_model,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -325,27 +303,277 @@ pub struct Dashboard {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ReportColumn {
-    #[serde(rename = "aggregateTypes", default)]
-    pub aggregate_types: Vec<ReportSummaryType>,
+pub struct DashboardComponent {
+    #[serde(rename = "autoselectColumnsFromReport", default)]
+    pub autoselect_columns_from_report: bool,
+    #[serde(rename = "chartAxisRange", default)]
+    pub chart_axis_range: serde_json::Value,
+    #[serde(rename = "chartAxisRangeMax", default)]
+    pub chart_axis_range_max: f64,
+    #[serde(rename = "chartAxisRangeMin", default)]
+    pub chart_axis_range_min: f64,
+    #[serde(rename = "chartSummary", default)]
+    pub chart_summary: Vec<serde_json::Value>,
+    #[serde(rename = "componentChartTheme", default)]
+    pub component_chart_theme: serde_json::Value,
+    #[serde(rename = "componentType", default)]
+    pub component_type: DashboardComponentType,
+    #[serde(rename = "dashboardComponentContents", default)]
+    pub dashboard_component_contents: Vec<DashboardComponentContent>,
+    #[serde(rename = "dashboardDynamicValues", default)]
+    pub dashboard_dynamic_values: Vec<DashboardDynamicValue>,
+    #[serde(rename = "dashboardFilterColumns", default)]
+    pub dashboard_filter_columns: Vec<DashboardFilterColumn>,
+    #[serde(rename = "dashboardTableColumn", default)]
+    pub dashboard_table_column: Vec<DashboardTableColumn>,
+    #[serde(rename = "decimalPrecision", default)]
+    pub decimal_precision: f64,
+    #[serde(rename = "displayUnits", default)]
+    pub display_units: serde_json::Value,
+    #[serde(rename = "drillDownUrl", default)]
+    pub drill_down_url: String,
+    #[serde(rename = "drillEnabled", default)]
+    pub drill_enabled: bool,
+    #[serde(rename = "drillToDetailEnabled", default)]
+    pub drill_to_detail_enabled: bool,
+    #[serde(rename = "enableHover", default)]
+    pub enable_hover: bool,
+    #[serde(rename = "expandOthers", default)]
+    pub expand_others: bool,
+    #[serde(rename = "flexComponentProperties", default)]
+    pub flex_component_properties: DashboardFlexTableComponentProperties,
     #[serde(default)]
-    pub field: String,
-    #[serde(rename = "isExtendedColumn", default)]
-    pub is_extended_column: bool,
-    #[serde(rename = "reverseColors", default)]
-    pub reverse_colors: bool,
-    #[serde(rename = "showChanges", default)]
-    pub show_changes: bool,
+    pub footer: String,
+    #[serde(rename = "gaugeMax", default)]
+    pub gauge_max: f64,
+    #[serde(rename = "gaugeMin", default)]
+    pub gauge_min: f64,
+    #[serde(rename = "groupingColumn", default)]
+    pub grouping_column: Vec<String>,
+    #[serde(rename = "groupingSortProperties", default)]
+    pub grouping_sort_properties: DashboardComponentGroupingSortProperties,
+    #[serde(default)]
+    pub header: String,
+    #[serde(rename = "indicatorBreakpoint1", default)]
+    pub indicator_breakpoint_1: f64,
+    #[serde(rename = "indicatorBreakpoint2", default)]
+    pub indicator_breakpoint_2: f64,
+    #[serde(rename = "indicatorHighColor", default)]
+    pub indicator_high_color: String,
+    #[serde(rename = "indicatorLowColor", default)]
+    pub indicator_low_color: String,
+    #[serde(rename = "indicatorMiddleColor", default)]
+    pub indicator_middle_color: String,
+    #[serde(rename = "legendPosition", default)]
+    pub legend_position: serde_json::Value,
+    #[serde(rename = "maxValuesDisplayed", default)]
+    pub max_values_displayed: f64,
+    #[serde(rename = "metricLabel", default)]
+    pub metric_label: String,
+    #[serde(default)]
+    pub page: String,
+    #[serde(rename = "pageHeightInPixels", default)]
+    pub page_height_in_pixels: f64,
+    #[serde(default)]
+    pub report: String,
+    #[serde(default)]
+    pub scontrol: String,
+    #[serde(rename = "scontrolHeightInPixels", default)]
+    pub scontrol_height_in_pixels: f64,
+    #[serde(rename = "showPercentage", default)]
+    pub show_percentage: bool,
+    #[serde(rename = "showPicturesOnCharts", default)]
+    pub show_pictures_on_charts: bool,
+    #[serde(rename = "showPicturesOnTables", default)]
+    pub show_pictures_on_tables: bool,
+    #[serde(rename = "showRange", default)]
+    pub show_range: bool,
+    #[serde(rename = "showTotal", default)]
+    pub show_total: bool,
+    #[serde(rename = "showValues", default)]
+    pub show_values: bool,
+    #[serde(rename = "sortBy", default)]
+    pub sort_by: DashboardComponentFilter,
+    #[serde(rename = "sortLegendValues", default)]
+    pub sort_legend_values: bool,
+    #[serde(default)]
+    pub title: String,
+    #[serde(rename = "useReportChart", default)]
+    pub use_report_chart: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ReportLayoutSection {
+pub struct DashboardComponentColumn {
+    #[serde(rename = "breakPoint1", default)]
+    pub break_point_1: f64,
+    #[serde(rename = "breakPoint2", default)]
+    pub break_point_2: f64,
+    #[serde(rename = "breakPointOrder", default)]
+    pub break_point_order: f64,
+    #[serde(rename = "highRangeColor", default)]
+    pub high_range_color: f64,
+    #[serde(rename = "lowRangeColor", default)]
+    pub low_range_color: f64,
+    #[serde(rename = "midRangeColor", default)]
+    pub mid_range_color: f64,
+    #[serde(rename = "reportColumn", default)]
+    pub report_column: String,
+    #[serde(rename = "showSubTotal", default)]
+    pub show_sub_total: bool,
+    #[serde(rename = "showTotal", default)]
+    pub show_total: bool,
     #[serde(default)]
-    pub columns: Vec<ReportTypeColumn>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
+    pub r#type: DashboardComponentColumnType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DashboardComponentContent {
+    #[serde(rename = "additionalInfo", default)]
+    pub additional_info: String,
+    #[serde(rename = "altText", default)]
+    pub alt_text: String,
+    #[serde(rename = "fileName", default)]
+    pub file_name: String,
+    #[serde(default)]
+    pub fit: serde_json::Value,
+    #[serde(rename = "horizontalAlignment", default)]
+    pub horizontal_alignment: serde_json::Value,
+    #[serde(rename = "richTextContent", default)]
+    pub rich_text_content: String,
+    #[serde(default)]
+    pub tooltip: String,
+    #[serde(rename = "verticalAlignment", default)]
+    pub vertical_alignment: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DashboardComponentGroupingSort {
+    #[serde(rename = "groupingLevel", default)]
+    pub grouping_level: String,
+    #[serde(rename = "inheritedReportGroupingSort", default)]
+    pub inherited_report_grouping_sort: String,
+    #[serde(rename = "sortColumn", default)]
+    pub sort_column: String,
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DashboardComponentGroupingSortProperties {
+    #[serde(rename = "groupingSorts", default)]
+    pub grouping_sorts: Vec<DashboardComponentGroupingSort>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DashboardComponentSection {
+    #[serde(rename = "columnSize", default)]
+    pub column_size: DashboardComponentSize,
+    #[serde(default)]
+    pub components: Vec<DashboardComponent>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DashboardComponentSortInfo {
+    #[serde(rename = "sortColumn", default)]
+    pub sort_column: String,
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DashboardDynamicValue {
+    #[serde(rename = "additionalInfo", default)]
+    pub additional_info: String,
+    #[serde(rename = "fieldName", default)]
+    pub field_name: String,
+    #[serde(rename = "isDynamicUser", default)]
+    pub is_dynamic_user: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DashboardFilter {
+    #[serde(rename = "dashboardFilterOptions", default)]
+    pub dashboard_filter_options: Vec<DashboardFilterOption>,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DashboardFilterColumn {
+    #[serde(default)]
+    pub column: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DashboardFilterOption {
+    #[serde(default)]
+    pub operator: DashboardFilterOperation,
+    #[serde(default)]
+    pub values: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DashboardFlexTableComponentProperties {
+    #[serde(rename = "decimalPrecision", default)]
+    pub decimal_precision: f64,
+    #[serde(rename = "flexTableColumn", default)]
+    pub flex_table_column: Vec<DashboardComponentColumn>,
+    #[serde(rename = "flexTableSortInfo", default)]
+    pub flex_table_sort_info: DashboardComponentSortInfo,
+    #[serde(rename = "hideChatterPhotos", default)]
+    pub hide_chatter_photos: bool,
+    #[serde(rename = "useReportTableSetting", default)]
+    pub use_report_table_setting: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DashboardGridComponent {
+    #[serde(rename = "colSpan", default)]
+    pub col_span: f64,
+    #[serde(rename = "columnIndex", default)]
+    pub column_index: f64,
+    #[serde(rename = "dashboardComponent", default)]
+    pub dashboard_component: DashboardComponent,
+    #[serde(rename = "rowIndex", default)]
+    pub row_index: f64,
+    #[serde(rename = "rowSpan", default)]
+    pub row_span: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DashboardGridLayout {
+    #[serde(rename = "dashboardGridComponents", default)]
+    pub dashboard_grid_components: Vec<DashboardGridComponent>,
+    #[serde(rename = "numberOfColumns", default)]
+    pub number_of_columns: f64,
+    #[serde(rename = "rowHeight", default)]
+    pub row_height: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -455,53 +683,39 @@ pub struct Report {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct DashboardComponentGroupingSortProperties {
-    #[serde(rename = "groupingSorts", default)]
-    pub grouping_sorts: Vec<DashboardComponentGroupingSort>,
+pub struct ReportAggregate {
+    #[serde(rename = "acrossGroupingContext", default)]
+    pub across_grouping_context: String,
+    #[serde(rename = "calculatedFormula", default)]
+    pub calculated_formula: String,
+    #[serde(default)]
+    pub datatype: ReportAggregateDatatype,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "downGroupingContext", default)]
+    pub down_grouping_context: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "isCrossBlock", default)]
+    pub is_cross_block: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "reportType", default)]
+    pub report_type: String,
+    #[serde(default)]
+    pub scale: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct DashboardGridComponent {
-    #[serde(rename = "colSpan", default)]
-    pub col_span: f64,
-    #[serde(rename = "columnIndex", default)]
-    pub column_index: f64,
-    #[serde(rename = "dashboardComponent", default)]
-    pub dashboard_component: DashboardComponent,
-    #[serde(rename = "rowIndex", default)]
-    pub row_index: f64,
-    #[serde(rename = "rowSpan", default)]
-    pub row_span: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DashboardGridLayout {
-    #[serde(rename = "dashboardGridComponents", default)]
-    pub dashboard_grid_components: Vec<DashboardGridComponent>,
-    #[serde(rename = "numberOfColumns", default)]
-    pub number_of_columns: f64,
-    #[serde(rename = "rowHeight", default)]
-    pub row_height: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ReportFilterItem {
+pub struct ReportAggregateFilter {
     #[serde(default)]
-    pub column: String,
-    #[serde(rename = "columnToColumn", default)]
-    pub column_to_column: bool,
-    #[serde(rename = "isUnlocked", default)]
-    pub is_unlocked: bool,
+    pub aggregate: String,
     #[serde(default)]
-    pub operator: serde_json::Value,
-    #[serde(default)]
-    pub snapshot: String,
+    pub operator: String,
     #[serde(default)]
     pub value: String,
 }
@@ -509,61 +723,43 @@ pub struct ReportFilterItem {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ReportFormattingRule {
+pub struct ReportAggregateReference {
     #[serde(default)]
-    pub aggregate: ReportSummaryType,
-    #[serde(rename = "columnName", default)]
-    pub column_name: String,
-    #[serde(default)]
-    pub values: Vec<ReportFormattingRuleValue>,
+    pub aggregate: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ReportGrouping {
-    #[serde(rename = "aggregateType", default)]
-    pub aggregate_type: ReportAggrType,
-    #[serde(rename = "dateGranularity", default)]
-    pub date_granularity: serde_json::Value,
-    #[serde(default)]
-    pub field: String,
-    #[serde(rename = "sortByName", default)]
-    pub sort_by_name: String,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: serde_json::Value,
-    #[serde(rename = "sortType", default)]
-    pub sort_type: ReportSortType,
+pub struct ReportBlockInfo {
+    #[serde(rename = "aggregateReferences", default)]
+    pub aggregate_references: Vec<ReportAggregateReference>,
+    #[serde(rename = "blockId", default)]
+    pub block_id: String,
+    #[serde(rename = "joinTable", default)]
+    pub join_table: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ReportType {
+pub struct ReportBucketField {
+    #[serde(rename = "bucketType", default)]
+    pub bucket_type: ReportBucketFieldType,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "nullTreatment", default)]
+    pub null_treatment: ReportFormulaNullTreatment,
+    #[serde(rename = "otherBucketLabel", default)]
+    pub other_bucket_label: String,
+    #[serde(rename = "sourceColumnName", default)]
+    pub source_column_name: String,
+    #[serde(rename = "useOther", default)]
+    pub use_other: bool,
     #[serde(default)]
-    pub autogenerated: bool,
-    #[serde(rename = "baseObject", default)]
-    pub base_object: String,
-    #[serde(default)]
-    pub category: ReportTypeCategory,
-    #[serde(default)]
-    pub deployed: bool,
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub join: serde_json::Value,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub sections: Vec<ReportLayoutSection>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ReportHistoricalSelector {
-    #[serde(default)]
-    pub snapshot: Vec<String>,
+    pub values: Vec<ReportBucketFieldValue>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -581,313 +777,11 @@ pub struct ReportBucketFieldSourceValue {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ReportDataCategoryFilter {
-    #[serde(rename = "dataCategory", default)]
-    pub data_category: String,
-    #[serde(rename = "dataCategoryGroup", default)]
-    pub data_category_group: String,
+pub struct ReportBucketFieldValue {
+    #[serde(rename = "sourceValues", default)]
+    pub source_values: Vec<ReportBucketFieldSourceValue>,
     #[serde(default)]
-    pub operator: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DashboardComponentContent {
-    #[serde(rename = "additionalInfo", default)]
-    pub additional_info: String,
-    #[serde(rename = "altText", default)]
-    pub alt_text: String,
-    #[serde(rename = "fileName", default)]
-    pub file_name: String,
-    #[serde(default)]
-    pub fit: serde_json::Value,
-    #[serde(rename = "horizontalAlignment", default)]
-    pub horizontal_alignment: serde_json::Value,
-    #[serde(rename = "richTextContent", default)]
-    pub rich_text_content: String,
-    #[serde(default)]
-    pub tooltip: String,
-    #[serde(rename = "verticalAlignment", default)]
-    pub vertical_alignment: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ReportFormattingRuleValue {
-    #[serde(rename = "backgroundColor", default)]
-    pub background_color: String,
-    #[serde(rename = "rangeUpperBound", default)]
-    pub range_upper_bound: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DashboardComponentSection {
-    #[serde(rename = "columnSize", default)]
-    pub column_size: DashboardComponentSize,
-    #[serde(default)]
-    pub components: Vec<DashboardComponent>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ReportTypeTranslation {
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub sections: Vec<ReportTypeSectionTranslation>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DashboardComponent {
-    #[serde(rename = "autoselectColumnsFromReport", default)]
-    pub autoselect_columns_from_report: bool,
-    #[serde(rename = "chartAxisRange", default)]
-    pub chart_axis_range: serde_json::Value,
-    #[serde(rename = "chartAxisRangeMax", default)]
-    pub chart_axis_range_max: f64,
-    #[serde(rename = "chartAxisRangeMin", default)]
-    pub chart_axis_range_min: f64,
-    #[serde(rename = "chartSummary", default)]
-    pub chart_summary: Vec<serde_json::Value>,
-    #[serde(rename = "componentChartTheme", default)]
-    pub component_chart_theme: serde_json::Value,
-    #[serde(rename = "componentType", default)]
-    pub component_type: DashboardComponentType,
-    #[serde(rename = "dashboardComponentContents", default)]
-    pub dashboard_component_contents: Vec<DashboardComponentContent>,
-    #[serde(rename = "dashboardDynamicValues", default)]
-    pub dashboard_dynamic_values: Vec<DashboardDynamicValue>,
-    #[serde(rename = "dashboardFilterColumns", default)]
-    pub dashboard_filter_columns: Vec<DashboardFilterColumn>,
-    #[serde(rename = "dashboardTableColumn", default)]
-    pub dashboard_table_column: Vec<DashboardTableColumn>,
-    #[serde(rename = "decimalPrecision", default)]
-    pub decimal_precision: f64,
-    #[serde(rename = "displayUnits", default)]
-    pub display_units: serde_json::Value,
-    #[serde(rename = "drillDownUrl", default)]
-    pub drill_down_url: String,
-    #[serde(rename = "drillEnabled", default)]
-    pub drill_enabled: bool,
-    #[serde(rename = "drillToDetailEnabled", default)]
-    pub drill_to_detail_enabled: bool,
-    #[serde(rename = "enableHover", default)]
-    pub enable_hover: bool,
-    #[serde(rename = "expandOthers", default)]
-    pub expand_others: bool,
-    #[serde(rename = "flexComponentProperties", default)]
-    pub flex_component_properties: DashboardFlexTableComponentProperties,
-    #[serde(default)]
-    pub footer: String,
-    #[serde(rename = "gaugeMax", default)]
-    pub gauge_max: f64,
-    #[serde(rename = "gaugeMin", default)]
-    pub gauge_min: f64,
-    #[serde(rename = "groupingColumn", default)]
-    pub grouping_column: Vec<String>,
-    #[serde(rename = "groupingSortProperties", default)]
-    pub grouping_sort_properties: DashboardComponentGroupingSortProperties,
-    #[serde(default)]
-    pub header: String,
-    #[serde(rename = "indicatorBreakpoint1", default)]
-    pub indicator_breakpoint_1: f64,
-    #[serde(rename = "indicatorBreakpoint2", default)]
-    pub indicator_breakpoint_2: f64,
-    #[serde(rename = "indicatorHighColor", default)]
-    pub indicator_high_color: String,
-    #[serde(rename = "indicatorLowColor", default)]
-    pub indicator_low_color: String,
-    #[serde(rename = "indicatorMiddleColor", default)]
-    pub indicator_middle_color: String,
-    #[serde(rename = "legendPosition", default)]
-    pub legend_position: serde_json::Value,
-    #[serde(rename = "maxValuesDisplayed", default)]
-    pub max_values_displayed: f64,
-    #[serde(rename = "metricLabel", default)]
-    pub metric_label: String,
-    #[serde(default)]
-    pub page: String,
-    #[serde(rename = "pageHeightInPixels", default)]
-    pub page_height_in_pixels: f64,
-    #[serde(default)]
-    pub report: String,
-    #[serde(default)]
-    pub scontrol: String,
-    #[serde(rename = "scontrolHeightInPixels", default)]
-    pub scontrol_height_in_pixels: f64,
-    #[serde(rename = "showPercentage", default)]
-    pub show_percentage: bool,
-    #[serde(rename = "showPicturesOnCharts", default)]
-    pub show_pictures_on_charts: bool,
-    #[serde(rename = "showPicturesOnTables", default)]
-    pub show_pictures_on_tables: bool,
-    #[serde(rename = "showRange", default)]
-    pub show_range: bool,
-    #[serde(rename = "showTotal", default)]
-    pub show_total: bool,
-    #[serde(rename = "showValues", default)]
-    pub show_values: bool,
-    #[serde(rename = "sortBy", default)]
-    pub sort_by: DashboardComponentFilter,
-    #[serde(rename = "sortLegendValues", default)]
-    pub sort_legend_values: bool,
-    #[serde(default)]
-    pub title: String,
-    #[serde(rename = "useReportChart", default)]
-    pub use_report_chart: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DashboardComponentSortInfo {
-    #[serde(rename = "sortColumn", default)]
-    pub sort_column: String,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ReportTimeFrameFilter {
-    #[serde(rename = "dateColumn", default)]
-    pub date_column: String,
-    #[serde(rename = "endDate", default)]
-    pub end_date: String,
-    #[serde(default)]
-    pub interval: serde_json::Value,
-    #[serde(rename = "startDate", default)]
-    pub start_date: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ReportChartComponentLayoutItem {
-    #[serde(rename = "cacheData", default)]
-    pub cache_data: bool,
-    #[serde(rename = "contextFilterableField", default)]
-    pub context_filterable_field: String,
-    #[serde(default)]
-    pub error: String,
-    #[serde(rename = "hideOnError", default)]
-    pub hide_on_error: bool,
-    #[serde(rename = "includeContext", default)]
-    pub include_context: bool,
-    #[serde(rename = "reportName", default)]
-    pub report_name: String,
-    #[serde(rename = "showTitle", default)]
-    pub show_title: bool,
-    #[serde(default)]
-    pub size: ReportChartComponentSize,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DashboardDynamicValue {
-    #[serde(rename = "additionalInfo", default)]
-    pub additional_info: String,
-    #[serde(rename = "fieldName", default)]
-    pub field_name: String,
-    #[serde(rename = "isDynamicUser", default)]
-    pub is_dynamic_user: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DashboardComponentGroupingSort {
-    #[serde(rename = "groupingLevel", default)]
-    pub grouping_level: String,
-    #[serde(rename = "inheritedReportGroupingSort", default)]
-    pub inherited_report_grouping_sort: String,
-    #[serde(rename = "sortColumn", default)]
-    pub sort_column: String,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ReportTypeSectionTranslation {
-    #[serde(default)]
-    pub columns: Vec<ReportTypeColumnTranslation>,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DashboardFilter {
-    #[serde(rename = "dashboardFilterOptions", default)]
-    pub dashboard_filter_options: Vec<DashboardFilterOption>,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ReportCrossFilter {
-    #[serde(rename = "criteriaItems", default)]
-    pub criteria_items: Vec<ReportFilterItem>,
-    #[serde(default)]
-    pub operation: serde_json::Value,
-    #[serde(rename = "primaryTableColumn", default)]
-    pub primary_table_column: String,
-    #[serde(rename = "relatedTable", default)]
-    pub related_table: String,
-    #[serde(rename = "relatedTableJoinColumn", default)]
-    pub related_table_join_column: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ReportTypeColumn {
-    #[serde(rename = "checkedByDefault", default)]
-    pub checked_by_default: bool,
-    #[serde(rename = "displayNameOverride", default)]
-    pub display_name_override: String,
-    #[serde(default)]
-    pub field: String,
-    #[serde(default)]
-    pub table: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ReportCustomDetailFormula {
-    #[serde(rename = "calculatedFormula", default)]
-    pub calculated_formula: String,
-    #[serde(rename = "dataType", default)]
-    pub data_type: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub scale: f64,
+    pub value: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -947,25 +841,23 @@ pub struct ReportChart {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct DashboardFlexTableComponentProperties {
-    #[serde(rename = "decimalPrecision", default)]
-    pub decimal_precision: f64,
-    #[serde(rename = "flexTableColumn", default)]
-    pub flex_table_column: Vec<DashboardComponentColumn>,
-    #[serde(rename = "flexTableSortInfo", default)]
-    pub flex_table_sort_info: DashboardComponentSortInfo,
-    #[serde(rename = "hideChatterPhotos", default)]
-    pub hide_chatter_photos: bool,
-    #[serde(rename = "useReportTableSetting", default)]
-    pub use_report_table_setting: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ReportAggregateReference {
+pub struct ReportChartComponentLayoutItem {
+    #[serde(rename = "cacheData", default)]
+    pub cache_data: bool,
+    #[serde(rename = "contextFilterableField", default)]
+    pub context_filterable_field: String,
     #[serde(default)]
-    pub aggregate: String,
+    pub error: String,
+    #[serde(rename = "hideOnError", default)]
+    pub hide_on_error: bool,
+    #[serde(rename = "includeContext", default)]
+    pub include_context: bool,
+    #[serde(rename = "reportName", default)]
+    pub report_name: String,
+    #[serde(rename = "showTitle", default)]
+    pub show_title: bool,
+    #[serde(default)]
+    pub size: ReportChartComponentSize,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -991,6 +883,68 @@ pub struct ReportColorRange {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct ReportColumn {
+    #[serde(rename = "aggregateTypes", default)]
+    pub aggregate_types: Vec<ReportSummaryType>,
+    #[serde(default)]
+    pub field: String,
+    #[serde(rename = "isExtendedColumn", default)]
+    pub is_extended_column: bool,
+    #[serde(rename = "reverseColors", default)]
+    pub reverse_colors: bool,
+    #[serde(rename = "showChanges", default)]
+    pub show_changes: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ReportCrossFilter {
+    #[serde(rename = "criteriaItems", default)]
+    pub criteria_items: Vec<ReportFilterItem>,
+    #[serde(default)]
+    pub operation: serde_json::Value,
+    #[serde(rename = "primaryTableColumn", default)]
+    pub primary_table_column: String,
+    #[serde(rename = "relatedTable", default)]
+    pub related_table: String,
+    #[serde(rename = "relatedTableJoinColumn", default)]
+    pub related_table_join_column: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ReportCustomDetailFormula {
+    #[serde(rename = "calculatedFormula", default)]
+    pub calculated_formula: String,
+    #[serde(rename = "dataType", default)]
+    pub data_type: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub scale: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ReportDataCategoryFilter {
+    #[serde(rename = "dataCategory", default)]
+    pub data_category: String,
+    #[serde(rename = "dataCategoryGroup", default)]
+    pub data_category_group: String,
+    #[serde(default)]
+    pub operator: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct ReportFilter {
     #[serde(rename = "booleanFilter", default)]
     pub boolean_filter: String,
@@ -998,6 +952,82 @@ pub struct ReportFilter {
     pub criteria_items: Vec<ReportFilterItem>,
     #[serde(default)]
     pub language: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ReportFilterItem {
+    #[serde(default)]
+    pub column: String,
+    #[serde(rename = "columnToColumn", default)]
+    pub column_to_column: bool,
+    #[serde(rename = "isUnlocked", default)]
+    pub is_unlocked: bool,
+    #[serde(default)]
+    pub operator: serde_json::Value,
+    #[serde(default)]
+    pub snapshot: String,
+    #[serde(default)]
+    pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ReportFormattingRule {
+    #[serde(default)]
+    pub aggregate: ReportSummaryType,
+    #[serde(rename = "columnName", default)]
+    pub column_name: String,
+    #[serde(default)]
+    pub values: Vec<ReportFormattingRuleValue>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ReportFormattingRuleValue {
+    #[serde(rename = "backgroundColor", default)]
+    pub background_color: String,
+    #[serde(rename = "rangeUpperBound", default)]
+    pub range_upper_bound: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ReportGrouping {
+    #[serde(rename = "aggregateType", default)]
+    pub aggregate_type: ReportAggrType,
+    #[serde(rename = "dateGranularity", default)]
+    pub date_granularity: serde_json::Value,
+    #[serde(default)]
+    pub field: String,
+    #[serde(rename = "sortByName", default)]
+    pub sort_by_name: String,
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: serde_json::Value,
+    #[serde(rename = "sortType", default)]
+    pub sort_type: ReportSortType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ReportHistoricalSelector {
+    #[serde(default)]
+    pub snapshot: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ReportLayoutSection {
+    #[serde(default)]
+    pub columns: Vec<ReportTypeColumn>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -1013,6 +1043,56 @@ pub struct ReportParam {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct ReportTimeFrameFilter {
+    #[serde(rename = "dateColumn", default)]
+    pub date_column: String,
+    #[serde(rename = "endDate", default)]
+    pub end_date: String,
+    #[serde(default)]
+    pub interval: serde_json::Value,
+    #[serde(rename = "startDate", default)]
+    pub start_date: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ReportType {
+    #[serde(default)]
+    pub autogenerated: bool,
+    #[serde(rename = "baseObject", default)]
+    pub base_object: String,
+    #[serde(default)]
+    pub category: ReportTypeCategory,
+    #[serde(default)]
+    pub deployed: bool,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub join: serde_json::Value,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub sections: Vec<ReportLayoutSection>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ReportTypeColumn {
+    #[serde(rename = "checkedByDefault", default)]
+    pub checked_by_default: bool,
+    #[serde(rename = "displayNameOverride", default)]
+    pub display_name_override: String,
+    #[serde(default)]
+    pub field: String,
+    #[serde(default)]
+    pub table: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct ReportTypeColumnTranslation {
     #[serde(default)]
     pub label: String,
@@ -1023,105 +1103,25 @@ pub struct ReportTypeColumnTranslation {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ReportAggregateFilter {
+pub struct ReportTypeSectionTranslation {
     #[serde(default)]
-    pub aggregate: String,
+    pub columns: Vec<ReportTypeColumnTranslation>,
     #[serde(default)]
-    pub operator: String,
+    pub label: String,
     #[serde(default)]
-    pub value: String,
+    pub name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ReportAggregate {
-    #[serde(rename = "acrossGroupingContext", default)]
-    pub across_grouping_context: String,
-    #[serde(rename = "calculatedFormula", default)]
-    pub calculated_formula: String,
-    #[serde(default)]
-    pub datatype: ReportAggregateDatatype,
+pub struct ReportTypeTranslation {
     #[serde(default)]
     pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "downGroupingContext", default)]
-    pub down_grouping_context: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isCrossBlock", default)]
-    pub is_cross_block: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "reportType", default)]
-    pub report_type: String,
     #[serde(default)]
-    pub scale: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ReportBlockInfo {
-    #[serde(rename = "aggregateReferences", default)]
-    pub aggregate_references: Vec<ReportAggregateReference>,
-    #[serde(rename = "blockId", default)]
-    pub block_id: String,
-    #[serde(rename = "joinTable", default)]
-    pub join_table: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DashboardFilterOption {
+    pub label: String,
     #[serde(default)]
-    pub operator: DashboardFilterOperation,
+    pub name: String,
     #[serde(default)]
-    pub values: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DashboardFilterColumn {
-    #[serde(default)]
-    pub column: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DashboardComponentColumn {
-    #[serde(rename = "breakPoint1", default)]
-    pub break_point_1: f64,
-    #[serde(rename = "breakPoint2", default)]
-    pub break_point_2: f64,
-    #[serde(rename = "breakPointOrder", default)]
-    pub break_point_order: f64,
-    #[serde(rename = "highRangeColor", default)]
-    pub high_range_color: f64,
-    #[serde(rename = "lowRangeColor", default)]
-    pub low_range_color: f64,
-    #[serde(rename = "midRangeColor", default)]
-    pub mid_range_color: f64,
-    #[serde(rename = "reportColumn", default)]
-    pub report_column: String,
-    #[serde(rename = "showSubTotal", default)]
-    pub show_sub_total: bool,
-    #[serde(rename = "showTotal", default)]
-    pub show_total: bool,
-    #[serde(default)]
-    pub r#type: DashboardComponentColumnType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ReportBucketFieldValue {
-    #[serde(rename = "sourceValues", default)]
-    pub source_values: Vec<ReportBucketFieldSourceValue>,
-    #[serde(default)]
-    pub value: String,
+    pub sections: Vec<ReportTypeSectionTranslation>,
 }

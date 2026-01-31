@@ -10,6 +10,21 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum CommunityBaseTemplate {
+    #[default]
+    c,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum CommunityTemplateBundleInfoType {
+    #[default]
+    Highlight,
+    PreviewImage,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum CommunityTemplateCategory {
     #[default]
     IT,
@@ -31,12 +46,14 @@ pub enum CommunityThemeLayoutType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SiteClickjackProtectionLevel {
+pub enum ExperienceContainerType {
     #[default]
-    AllowAllFraming,
-    External,
-    SameOriginOnly,
-    NoFraming,
+    SFS,
+    SAPP,
+    TEST,
+    LEX,
+    SCMA,
+    SAPPMOBILEHOME,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -51,26 +68,38 @@ pub enum NetworkPageOverrideSetting {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CommunityTemplateBundleInfoType {
+pub enum NetworkStatus {
     #[default]
-    Highlight,
-    PreviewImage,
+    UnderConstruction,
+    Live,
+    DownForMaintenance,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SitesArchiveStatus {
+pub enum NetworkUserType {
     #[default]
-    TemporarilyArchived,
-    Archived,
-    NotArchived,
+    Internal,
+    Customer,
+    Partner,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CommunityBaseTemplate {
+pub enum SiteClickjackProtectionLevel {
     #[default]
-    c,
+    AllowAllFraming,
+    External,
+    SameOriginOnly,
+    NoFraming,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SiteRedirect {
+    #[default]
+    Permanent,
+    Temporary,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -85,84 +114,191 @@ pub enum SiteType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum NetworkStatus {
+pub enum SitesArchiveStatus {
     #[default]
-    UnderConstruction,
-    Live,
-    DownForMaintenance,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExperienceContainerType {
-    #[default]
-    SFS,
-    SAPP,
-    TEST,
-    LEX,
-    SCMA,
-    SAPPMOBILEHOME,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum NetworkUserType {
-    #[default]
-    Internal,
-    Customer,
-    Partner,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SiteRedirect {
-    #[default]
-    Permanent,
-    Temporary,
+    TemporarilyArchived,
+    Archived,
+    NotArchived,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct SiteRedirectMapping {
+pub struct Community {
     #[serde(default)]
-    pub action: SiteRedirect,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isDynamic", default)]
-    pub is_dynamic: bool,
+    pub active: bool,
+    #[serde(rename = "chatterAnswersFacebookSsoUrl", default)]
+    pub chatter_answers_facebook_sso_url: String,
+    #[serde(rename = "communityFeedPage", default)]
+    pub community_feed_page: String,
+    #[serde(rename = "dataCategoryName", default)]
+    pub data_category_name: String,
     #[serde(default)]
-    pub source: String,
+    pub description: String,
+    #[serde(rename = "emailFooterDocument", default)]
+    pub email_footer_document: String,
+    #[serde(rename = "emailHeaderDocument", default)]
+    pub email_header_document: String,
+    #[serde(rename = "emailNotificationUrl", default)]
+    pub email_notification_url: String,
+    #[serde(rename = "enableChatterAnswers", default)]
+    pub enable_chatter_answers: bool,
+    #[serde(rename = "enablePrivateQuestions", default)]
+    pub enable_private_questions: bool,
+    #[serde(rename = "expertsGroup", default)]
+    pub experts_group: String,
     #[serde(default)]
-    pub target: String,
+    pub portal: String,
+    #[serde(rename = "reputationLevels", default)]
+    pub reputation_levels: serde_json::Value,
+    #[serde(rename = "showInPortal", default)]
+    pub show_in_portal: bool,
+    #[serde(default)]
+    pub site: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct SiteWebAddress {
+pub struct CommunityAIModelMapping {
+    #[serde(rename = "modelContent", default)]
+    pub model_content: String,
+    #[serde(rename = "modelEntityType", default)]
+    pub model_entity_type: serde_json::Value,
+    #[serde(rename = "modelStatus", default)]
+    pub model_status: serde_json::Value,
     #[serde(default)]
-    pub certificate: String,
-    #[serde(rename = "domainName", default)]
-    pub domain_name: String,
-    #[serde(default)]
-    pub primary: bool,
+    pub name: String,
+    #[serde(rename = "networkId", default)]
+    pub network_id: String,
+    #[serde(rename = "setupDefinition", default)]
+    pub setup_definition: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct NetworkAccess {
-    #[serde(rename = "ipRanges", default)]
-    pub ip_ranges: Vec<serde_json::Value>,
+pub struct CommunityCustomThemeLayoutType {
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub label: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct NetworkEmailTmplAllowlist {
-    #[serde(rename = "emailTemplate", default)]
-    pub email_template: String,
+pub struct CommunityRoles {
+    #[serde(rename = "customerUserRole", default)]
+    pub customer_user_role: String,
+    #[serde(rename = "employeeUserRole", default)]
+    pub employee_user_role: String,
+    #[serde(rename = "partnerUserRole", default)]
+    pub partner_user_role: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CommunityTemplateBundleInfo {
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub image: String,
+    #[serde(default)]
+    pub order: f64,
+    #[serde(default)]
+    pub title: String,
+    #[serde(default)]
+    pub r#type: CommunityTemplateBundleInfoType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CommunityTemplateDefinition {
+    #[serde(rename = "baseTemplate", default)]
+    pub base_template: CommunityBaseTemplate,
+    #[serde(rename = "bundlesInfo", default)]
+    pub bundles_info: Vec<CommunityTemplateBundleInfo>,
+    #[serde(default)]
+    pub category: CommunityTemplateCategory,
+    #[serde(rename = "defaultBrandingSet", default)]
+    pub default_branding_set: String,
+    #[serde(rename = "defaultThemeDefinition", default)]
+    pub default_theme_definition: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "enableExtendedCleanUpOnDelete", default)]
+    pub enable_extended_clean_up_on_delete: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "navigationLinkSet", default)]
+    pub navigation_link_set: Vec<serde_json::Value>,
+    #[serde(rename = "pageSetting", default)]
+    pub page_setting: Vec<CommunityTemplatePageSetting>,
+    #[serde(default)]
+    pub publisher: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CommunityTemplatePageSetting {
+    #[serde(default)]
+    pub page: String,
+    #[serde(rename = "themeLayout", default)]
+    pub theme_layout: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CommunityThemeDefinition {
+    #[serde(rename = "bundlesInfo", default)]
+    pub bundles_info: Vec<serde_json::Value>,
+    #[serde(rename = "customThemeLayoutType", default)]
+    pub custom_theme_layout_type: Vec<CommunityCustomThemeLayoutType>,
+    #[serde(rename = "defaultBrandingSet", default)]
+    pub default_branding_set: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "enableExtendedCleanUpOnDelete", default)]
+    pub enable_extended_clean_up_on_delete: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub publisher: String,
+    #[serde(rename = "themeRouteOverride", default)]
+    pub theme_route_override: Vec<CommunityThemeRouteOverride>,
+    #[serde(rename = "themeSetting", default)]
+    pub theme_setting: Vec<CommunityThemeSetting>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CommunityThemeRouteOverride {
+    #[serde(rename = "customThemeLayoutType", default)]
+    pub custom_theme_layout_type: String,
+    #[serde(rename = "pageAttributes", default)]
+    pub page_attributes: String,
+    #[serde(rename = "pageType", default)]
+    pub page_type: String,
+    #[serde(rename = "themeLayoutType", default)]
+    pub theme_layout_type: CommunityThemeLayoutType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CommunityThemeSetting {
+    #[serde(rename = "customThemeLayoutType", default)]
+    pub custom_theme_layout_type: String,
+    #[serde(rename = "themeLayout", default)]
+    pub theme_layout: String,
+    #[serde(rename = "themeLayoutType", default)]
+    pub theme_layout_type: CommunityThemeLayoutType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -270,69 +406,13 @@ pub struct CustomSite {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ExperiencePropertyTypeBundleResource {
-    #[serde(rename = "fileName", default)]
-    pub file_name: String,
-    #[serde(rename = "filePath", default)]
-    pub file_path: String,
+pub struct ExperienceBundle {
+    #[serde(rename = "experienceResources", default)]
+    pub experience_resources: ExperienceResources,
     #[serde(default)]
-    pub source: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Community {
+    pub label: String,
     #[serde(default)]
-    pub active: bool,
-    #[serde(rename = "chatterAnswersFacebookSsoUrl", default)]
-    pub chatter_answers_facebook_sso_url: String,
-    #[serde(rename = "communityFeedPage", default)]
-    pub community_feed_page: String,
-    #[serde(rename = "dataCategoryName", default)]
-    pub data_category_name: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "emailFooterDocument", default)]
-    pub email_footer_document: String,
-    #[serde(rename = "emailHeaderDocument", default)]
-    pub email_header_document: String,
-    #[serde(rename = "emailNotificationUrl", default)]
-    pub email_notification_url: String,
-    #[serde(rename = "enableChatterAnswers", default)]
-    pub enable_chatter_answers: bool,
-    #[serde(rename = "enablePrivateQuestions", default)]
-    pub enable_private_questions: bool,
-    #[serde(rename = "expertsGroup", default)]
-    pub experts_group: String,
-    #[serde(default)]
-    pub portal: String,
-    #[serde(rename = "reputationLevels", default)]
-    pub reputation_levels: serde_json::Value,
-    #[serde(rename = "showInPortal", default)]
-    pub show_in_portal: bool,
-    #[serde(default)]
-    pub site: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExperienceResource {
-    #[serde(rename = "fileName", default)]
-    pub file_name: String,
-    #[serde(default)]
-    pub format: String,
-    #[serde(default)]
-    pub source: String,
-    #[serde(default)]
-    pub r#type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Site {
+    pub r#type: SiteType,
     #[serde(rename = "urlPathPrefix", default)]
     pub url_path_prefix: String,
 }
@@ -364,87 +444,35 @@ pub struct ExperiencePropertyTypeBundle {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct CommunityTemplateBundleInfo {
+pub struct ExperiencePropertyTypeBundleResource {
+    #[serde(rename = "fileName", default)]
+    pub file_name: String,
+    #[serde(rename = "filePath", default)]
+    pub file_path: String,
     #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub image: String,
-    #[serde(default)]
-    pub order: f64,
-    #[serde(default)]
-    pub title: String,
-    #[serde(default)]
-    pub r#type: CommunityTemplateBundleInfoType,
+    pub source: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct CommunityThemeRouteOverride {
-    #[serde(rename = "customThemeLayoutType", default)]
-    pub custom_theme_layout_type: String,
-    #[serde(rename = "pageAttributes", default)]
-    pub page_attributes: String,
-    #[serde(rename = "pageType", default)]
-    pub page_type: String,
-    #[serde(rename = "themeLayoutType", default)]
-    pub theme_layout_type: CommunityThemeLayoutType,
+pub struct ExperienceResource {
+    #[serde(rename = "fileName", default)]
+    pub file_name: String,
+    #[serde(default)]
+    pub format: String,
+    #[serde(default)]
+    pub source: String,
+    #[serde(default)]
+    pub r#type: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct CommunityRoles {
-    #[serde(rename = "customerUserRole", default)]
-    pub customer_user_role: String,
-    #[serde(rename = "employeeUserRole", default)]
-    pub employee_user_role: String,
-    #[serde(rename = "partnerUserRole", default)]
-    pub partner_user_role: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct NetworkPageOverride {
-    #[serde(rename = "changePasswordPageOverrideSetting", default)]
-    pub change_password_page_override_setting: NetworkPageOverrideSetting,
-    #[serde(rename = "forgotPasswordPageOverrideSetting", default)]
-    pub forgot_password_page_override_setting: NetworkPageOverrideSetting,
-    #[serde(rename = "homePageOverrideSetting", default)]
-    pub home_page_override_setting: NetworkPageOverrideSetting,
-    #[serde(rename = "loginPageOverrideSetting", default)]
-    pub login_page_override_setting: NetworkPageOverrideSetting,
-    #[serde(rename = "selfRegProfilePageOverrideSetting", default)]
-    pub self_reg_profile_page_override_setting: NetworkPageOverrideSetting,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CommunityTemplateDefinition {
-    #[serde(rename = "baseTemplate", default)]
-    pub base_template: CommunityBaseTemplate,
-    #[serde(rename = "bundlesInfo", default)]
-    pub bundles_info: Vec<CommunityTemplateBundleInfo>,
-    #[serde(default)]
-    pub category: CommunityTemplateCategory,
-    #[serde(rename = "defaultBrandingSet", default)]
-    pub default_branding_set: String,
-    #[serde(rename = "defaultThemeDefinition", default)]
-    pub default_theme_definition: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "enableExtendedCleanUpOnDelete", default)]
-    pub enable_extended_clean_up_on_delete: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "navigationLinkSet", default)]
-    pub navigation_link_set: Vec<serde_json::Value>,
-    #[serde(rename = "pageSetting", default)]
-    pub page_setting: Vec<CommunityTemplatePageSetting>,
-    #[serde(default)]
-    pub publisher: String,
+pub struct ExperienceResources {
+    #[serde(rename = "experienceResource", default)]
+    pub experience_resource: Vec<ExperienceResource>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -594,73 +622,17 @@ pub struct Network {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct CommunityCustomThemeLayoutType {
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub label: String,
+pub struct NetworkAccess {
+    #[serde(rename = "ipRanges", default)]
+    pub ip_ranges: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct CommunityThemeSetting {
-    #[serde(rename = "customThemeLayoutType", default)]
-    pub custom_theme_layout_type: String,
-    #[serde(rename = "themeLayout", default)]
-    pub theme_layout: String,
-    #[serde(rename = "themeLayoutType", default)]
-    pub theme_layout_type: CommunityThemeLayoutType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CommunityThemeDefinition {
-    #[serde(rename = "bundlesInfo", default)]
-    pub bundles_info: Vec<serde_json::Value>,
-    #[serde(rename = "customThemeLayoutType", default)]
-    pub custom_theme_layout_type: Vec<CommunityCustomThemeLayoutType>,
-    #[serde(rename = "defaultBrandingSet", default)]
-    pub default_branding_set: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "enableExtendedCleanUpOnDelete", default)]
-    pub enable_extended_clean_up_on_delete: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub publisher: String,
-    #[serde(rename = "themeRouteOverride", default)]
-    pub theme_route_override: Vec<CommunityThemeRouteOverride>,
-    #[serde(rename = "themeSetting", default)]
-    pub theme_setting: Vec<CommunityThemeSetting>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CommunityTemplatePageSetting {
-    #[serde(default)]
-    pub page: String,
-    #[serde(rename = "themeLayout", default)]
-    pub theme_layout: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExperienceResources {
-    #[serde(rename = "experienceResource", default)]
-    pub experience_resource: Vec<ExperienceResource>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SiteIframeWhiteListUrl {
-    #[serde(default)]
-    pub url: String,
+pub struct NetworkEmailTmplAllowlist {
+    #[serde(rename = "emailTemplate", default)]
+    pub email_template: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -676,33 +648,17 @@ pub struct NetworkMemberGroup {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct CommunityAIModelMapping {
-    #[serde(rename = "modelContent", default)]
-    pub model_content: String,
-    #[serde(rename = "modelEntityType", default)]
-    pub model_entity_type: serde_json::Value,
-    #[serde(rename = "modelStatus", default)]
-    pub model_status: serde_json::Value,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "networkId", default)]
-    pub network_id: String,
-    #[serde(rename = "setupDefinition", default)]
-    pub setup_definition: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExperienceBundle {
-    #[serde(rename = "experienceResources", default)]
-    pub experience_resources: ExperienceResources,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub r#type: SiteType,
-    #[serde(rename = "urlPathPrefix", default)]
-    pub url_path_prefix: String,
+pub struct NetworkPageOverride {
+    #[serde(rename = "changePasswordPageOverrideSetting", default)]
+    pub change_password_page_override_setting: NetworkPageOverrideSetting,
+    #[serde(rename = "forgotPasswordPageOverrideSetting", default)]
+    pub forgot_password_page_override_setting: NetworkPageOverrideSetting,
+    #[serde(rename = "homePageOverrideSetting", default)]
+    pub home_page_override_setting: NetworkPageOverrideSetting,
+    #[serde(rename = "loginPageOverrideSetting", default)]
+    pub login_page_override_setting: NetworkPageOverrideSetting,
+    #[serde(rename = "selfRegProfilePageOverrideSetting", default)]
+    pub self_reg_profile_page_override_setting: NetworkPageOverrideSetting,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -715,4 +671,48 @@ pub struct NetworkTabSet {
     pub default_tab: String,
     #[serde(rename = "standardTab", default)]
     pub standard_tab: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Site {
+    #[serde(rename = "urlPathPrefix", default)]
+    pub url_path_prefix: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SiteIframeWhiteListUrl {
+    #[serde(default)]
+    pub url: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SiteRedirectMapping {
+    #[serde(default)]
+    pub action: SiteRedirect,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "isDynamic", default)]
+    pub is_dynamic: bool,
+    #[serde(default)]
+    pub source: String,
+    #[serde(default)]
+    pub target: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SiteWebAddress {
+    #[serde(default)]
+    pub certificate: String,
+    #[serde(rename = "domainName", default)]
+    pub domain_name: String,
+    #[serde(default)]
+    pub primary: bool,
 }

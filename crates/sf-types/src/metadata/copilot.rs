@@ -10,10 +10,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AssistantSkillType {
+pub enum AssistantDefinitionStatus {
     #[default]
-    AGENDA,
-    SOBJECT,
+    DISABLED,
+    ENABLED,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -27,78 +27,10 @@ pub enum AssistantSkillSobjectActionType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AssistantDefinitionStatus {
+pub enum AssistantSkillType {
     #[default]
-    DISABLED,
-    ENABLED,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AssistantSkillQuickActionParam {
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub field: String,
-    #[serde(default)]
-    pub index: f64,
-    #[serde(default)]
-    pub prompt: String,
-    #[serde(rename = "referenceTarget", default)]
-    pub reference_target: String,
-    #[serde(rename = "slotClass", default)]
-    pub slot_class: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AssistantSkillIntent {
-    #[serde(default)]
-    pub action: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub field: String,
-    #[serde(default)]
-    pub index: f64,
-    #[serde(rename = "intentName", default)]
-    pub intent_name: String,
-    #[serde(rename = "isPromptRequired", default)]
-    pub is_prompt_required: bool,
-    #[serde(rename = "isRequired", default)]
-    pub is_required: bool,
-    #[serde(rename = "mlIntent", default)]
-    pub ml_intent: String,
-    #[serde(rename = "sobjectType", default)]
-    pub sobject_type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AssistantDefinitionProfile {
-    #[serde(default)]
-    pub profile: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AssistantDefinition {
-    #[serde(rename = "appVersionNumber", default)]
-    pub app_version_number: f64,
-    #[serde(rename = "assistantDefinitionProfiles", default)]
-    pub assistant_definition_profiles: Vec<AssistantDefinitionProfile>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub status: AssistantDefinitionStatus,
+    AGENDA,
+    SOBJECT,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -132,6 +64,110 @@ pub struct AssistantContextItem {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct AssistantDefinition {
+    #[serde(rename = "appVersionNumber", default)]
+    pub app_version_number: f64,
+    #[serde(rename = "assistantDefinitionProfiles", default)]
+    pub assistant_definition_profiles: Vec<AssistantDefinitionProfile>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub status: AssistantDefinitionStatus,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AssistantDefinitionProfile {
+    #[serde(default)]
+    pub profile: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AssistantSkill {
+    #[serde(rename = "assistantSkillIntents", default)]
+    pub assistant_skill_intents: Vec<AssistantSkillIntent>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "externalModel", default)]
+    pub external_model: String,
+    #[serde(default)]
+    pub index: f64,
+    #[serde(rename = "mlDomain", default)]
+    pub ml_domain: String,
+    #[serde(rename = "skillType", default)]
+    pub skill_type: AssistantSkillType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AssistantSkillIntent {
+    #[serde(default)]
+    pub action: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub field: String,
+    #[serde(default)]
+    pub index: f64,
+    #[serde(rename = "intentName", default)]
+    pub intent_name: String,
+    #[serde(rename = "isPromptRequired", default)]
+    pub is_prompt_required: bool,
+    #[serde(rename = "isRequired", default)]
+    pub is_required: bool,
+    #[serde(rename = "mlIntent", default)]
+    pub ml_intent: String,
+    #[serde(rename = "sobjectType", default)]
+    pub sobject_type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AssistantSkillQuickAction {
+    #[serde(rename = "assistantSkillQuickActionParams", default)]
+    pub assistant_skill_quick_action_params: Vec<AssistantSkillQuickActionParam>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub prompt: String,
+    #[serde(rename = "quickAction", default)]
+    pub quick_action: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AssistantSkillQuickActionParam {
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub field: String,
+    #[serde(default)]
+    pub index: f64,
+    #[serde(default)]
+    pub prompt: String,
+    #[serde(rename = "referenceTarget", default)]
+    pub reference_target: String,
+    #[serde(rename = "slotClass", default)]
+    pub slot_class: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct AssistantSkillSobjectAction {
     #[serde(rename = "assistantSkillSobjectParams", default)]
     pub assistant_skill_sobject_params: Vec<AssistantSkillSobjectParam>,
@@ -156,45 +192,19 @@ pub struct AssistantSkillSobjectAction {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct AssistantSkill {
-    #[serde(rename = "assistantSkillIntents", default)]
-    pub assistant_skill_intents: Vec<AssistantSkillIntent>,
+pub struct AssistantSkillSobjectParam {
     #[serde(default)]
     pub description: String,
-    #[serde(rename = "externalModel", default)]
-    pub external_model: String,
+    #[serde(default)]
+    pub field: String,
     #[serde(default)]
     pub index: f64,
-    #[serde(rename = "mlDomain", default)]
-    pub ml_domain: String,
-    #[serde(rename = "skillType", default)]
-    pub skill_type: AssistantSkillType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AssistantVersionAction {
-    #[serde(default)]
-    pub action: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AssistantSkillQuickAction {
-    #[serde(rename = "assistantSkillQuickActionParams", default)]
-    pub assistant_skill_quick_action_params: Vec<AssistantSkillQuickActionParam>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
     #[serde(default)]
     pub prompt: String,
-    #[serde(rename = "quickAction", default)]
-    pub quick_action: String,
+    #[serde(rename = "referenceTarget", default)]
+    pub reference_target: String,
+    #[serde(rename = "slotClass", default)]
+    pub slot_class: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -220,17 +230,7 @@ pub struct AssistantVersion {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct AssistantSkillSobjectParam {
+pub struct AssistantVersionAction {
     #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub field: String,
-    #[serde(default)]
-    pub index: f64,
-    #[serde(default)]
-    pub prompt: String,
-    #[serde(rename = "referenceTarget", default)]
-    pub reference_target: String,
-    #[serde(rename = "slotClass", default)]
-    pub slot_class: String,
+    pub action: String,
 }

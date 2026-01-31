@@ -10,15 +10,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CodeSubType {
+pub enum CodeFeature {
     #[default]
-    Arbitrary,
-    Vanity,
-    TENDLC,
-    International,
-    TollFree,
-    Preregistered,
-    Dynamic,
+    ServiceCloudVoice,
+    ServiceCloudNative,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum CodeProvider {
+    #[default]
+    Bandwidth,
+    Inteliquent,
+    Sinch,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -55,47 +59,15 @@ pub enum CodeStatus {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CodeFeature {
+pub enum CodeSubType {
     #[default]
-    ServiceCloudVoice,
-    ServiceCloudNative,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CodeProvider {
-    #[default]
-    Bandwidth,
-    Inteliquent,
-    Sinch,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CodeCoverageWarning {
-    #[serde(default)]
-    pub id: serde_json::Value,
-    #[serde(default)]
-    pub message: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub namespace: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CodeLocation {
-    #[serde(default)]
-    pub column: f64,
-    #[serde(default)]
-    pub line: f64,
-    #[serde(rename = "numExecutions", default)]
-    pub num_executions: f64,
-    #[serde(default)]
-    pub time: f64,
+    Arbitrary,
+    Vanity,
+    TENDLC,
+    International,
+    TollFree,
+    Preregistered,
+    Dynamic,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -124,4 +96,32 @@ pub struct CodeCoverageResult {
     pub sosl_info: Vec<CodeLocation>,
     #[serde(default)]
     pub r#type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CodeCoverageWarning {
+    #[serde(default)]
+    pub id: serde_json::Value,
+    #[serde(default)]
+    pub message: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub namespace: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CodeLocation {
+    #[serde(default)]
+    pub column: f64,
+    #[serde(default)]
+    pub line: f64,
+    #[serde(rename = "numExecutions", default)]
+    pub num_executions: f64,
+    #[serde(default)]
+    pub time: f64,
 }

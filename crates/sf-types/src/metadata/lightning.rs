@@ -39,11 +39,21 @@ pub enum LightningDesignSystemVersion {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct LightningBoltItems {
+pub struct LightningBolt {
     #[serde(default)]
-    pub name: String,
+    pub category: LightningBoltCategory,
+    #[serde(rename = "lightningBoltFeatures", default)]
+    pub lightning_bolt_features: Vec<LightningBoltFeatures>,
+    #[serde(rename = "lightningBoltImages", default)]
+    pub lightning_bolt_images: Vec<LightningBoltImages>,
+    #[serde(rename = "lightningBoltItems", default)]
+    pub lightning_bolt_items: Vec<LightningBoltItems>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
     #[serde(default)]
-    pub r#type: String,
+    pub publisher: String,
+    #[serde(default)]
+    pub summary: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -71,29 +81,19 @@ pub struct LightningBoltImages {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct LightningMessageField {
+pub struct LightningBoltItems {
     #[serde(default)]
-    pub description: String,
-    #[serde(rename = "fieldName", default)]
-    pub field_name: String,
+    pub name: String,
+    #[serde(default)]
+    pub r#type: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct LightningBolt {
+pub struct LightningMessageField {
     #[serde(default)]
-    pub category: LightningBoltCategory,
-    #[serde(rename = "lightningBoltFeatures", default)]
-    pub lightning_bolt_features: Vec<LightningBoltFeatures>,
-    #[serde(rename = "lightningBoltImages", default)]
-    pub lightning_bolt_images: Vec<LightningBoltImages>,
-    #[serde(rename = "lightningBoltItems", default)]
-    pub lightning_bolt_items: Vec<LightningBoltItems>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub publisher: String,
-    #[serde(default)]
-    pub summary: String,
+    pub description: String,
+    #[serde(rename = "fieldName", default)]
+    pub field_name: String,
 }

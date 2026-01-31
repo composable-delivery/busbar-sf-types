@@ -21,17 +21,6 @@ pub enum Channel {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ChannelType {
-    #[default]
-    FacebookMessenger,
-    Text,
-    WeChat,
-    WhatsApp,
-    Phone,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum ChannelMode {
     #[default]
     Messaging,
@@ -45,6 +34,35 @@ pub enum ChannelSource {
     Other,
     Phone,
     Chat,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ChannelType {
+    #[default]
+    FacebookMessenger,
+    Text,
+    WeChat,
+    WhatsApp,
+    Phone,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ChannelLayout {
+    #[serde(rename = "doesExcludeFieldLabels", default)]
+    pub does_exclude_field_labels: bool,
+    #[serde(rename = "doesExcludeFiles", default)]
+    pub does_exclude_files: bool,
+    #[serde(rename = "enabledChannels", default)]
+    pub enabled_channels: Vec<String>,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "layoutItems", default)]
+    pub layout_items: Vec<ChannelLayoutItem>,
+    #[serde(rename = "recordType", default)]
+    pub record_type: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -77,22 +95,4 @@ pub struct ChannelObjectLinkingRule {
     pub object_to_link: serde_json::Value,
     #[serde(rename = "ruleName", default)]
     pub rule_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ChannelLayout {
-    #[serde(rename = "doesExcludeFieldLabels", default)]
-    pub does_exclude_field_labels: bool,
-    #[serde(rename = "doesExcludeFiles", default)]
-    pub does_exclude_files: bool,
-    #[serde(rename = "enabledChannels", default)]
-    pub enabled_channels: Vec<String>,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "layoutItems", default)]
-    pub layout_items: Vec<ChannelLayoutItem>,
-    #[serde(rename = "recordType", default)]
-    pub record_type: String,
 }

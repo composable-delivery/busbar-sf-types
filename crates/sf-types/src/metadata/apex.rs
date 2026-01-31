@@ -20,9 +20,11 @@ pub enum ApexCodeUnitStatus {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ApexTestSuite {
-    #[serde(rename = "testClassName", default)]
-    pub test_class_name: Vec<String>,
+pub struct ApexEmailNotification {
+    #[serde(default)]
+    pub email: String,
+    #[serde(default)]
+    pub user: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -36,9 +38,7 @@ pub struct ApexEmailNotifications {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ApexEmailNotification {
-    #[serde(default)]
-    pub email: String,
-    #[serde(default)]
-    pub user: String,
+pub struct ApexTestSuite {
+    #[serde(rename = "testClassName", default)]
+    pub test_class_name: Vec<String>,
 }

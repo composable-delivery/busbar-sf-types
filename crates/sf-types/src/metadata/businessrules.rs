@@ -10,113 +10,11 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BusinessVertical {
-    #[default]
-    RevenueCloud,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RuleConsumer {
-    #[default]
-    ALL,
-    DATACLOUD,
-    MULESOFT,
-    TABLEAU,
-    CORE,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RuleResourceScopeType {
-    #[default]
-    ANY,
-    FIELD,
-    RECORD,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum BusinessHoursSourceType {
     #[default]
     None,
     Case,
     Static,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RuleDefinitionClause {
-    #[default]
-    UNLESS,
-    WHEN,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RulePrincipalPath {
-    #[default]
-    IS_AUTHENTICATED,
-    ASSIGNED_PERMISSIONS_PATH,
-    USER_ID,
-    ORGANIZATION_ID,
-    USER_ROLE_ID,
-    RBAC_TAGS,
-    SCALAR_ATTRIBUTE,
-    PLURAL_ATTRIBUTE,
-    PLACEHOLDER,
-    IS_INTERNAL,
-    CONTACT_ID,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RulePrincipalScopeType {
-    #[default]
-    ANY,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RuleStatus {
-    #[default]
-    Draft,
-    Activated,
-    Deactivated,
-    Verified,
-    ActivationInProgress,
-    DeactivationInProgress,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RuleResourcePath {
-    #[default]
-    NAMESPACE,
-    ENTITY,
-    FIELD,
-    ENTITYTYPE,
-    ENTITYKIND,
-    FIELDKIND,
-    DATASPACE,
-    TAG,
-    OBJECT_TAG,
-    CLASSIFICATION,
-    IMPLICITTAG,
-    RECORDFIELD,
-    OBJECT_CLASSIFICATION,
-    EXPRESSION,
-    OBJECT_DATASPACE,
-    RECORDFIELDTYPE,
-    METADATAKIND,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RuleEngine {
-    #[default]
-    StandardConfigurator,
-    AdvancedConfigurator,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -237,6 +135,40 @@ pub enum BusinessKnowledgeModel {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum BusinessVertical {
+    #[default]
+    RevenueCloud,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RuleConsumer {
+    #[default]
+    ALL,
+    DATACLOUD,
+    MULESOFT,
+    TABLEAU,
+    CORE,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RuleContextPath {
+    #[default]
+    SESSION_DATASPACE,
+    SESSION_CONTACT_ID,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RuleDefinitionClause {
+    #[default]
+    UNLESS,
+    WHEN,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum RuleDefinitionOperator {
     #[default]
     EQUALS,
@@ -258,10 +190,78 @@ pub enum RuleDefinitionOperator {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RuleContextPath {
+pub enum RuleEngine {
     #[default]
-    SESSION_DATASPACE,
-    SESSION_CONTACT_ID,
+    StandardConfigurator,
+    AdvancedConfigurator,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RulePrincipalPath {
+    #[default]
+    IS_AUTHENTICATED,
+    ASSIGNED_PERMISSIONS_PATH,
+    USER_ID,
+    ORGANIZATION_ID,
+    USER_ROLE_ID,
+    RBAC_TAGS,
+    SCALAR_ATTRIBUTE,
+    PLURAL_ATTRIBUTE,
+    PLACEHOLDER,
+    IS_INTERNAL,
+    CONTACT_ID,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RulePrincipalScopeType {
+    #[default]
+    ANY,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RuleResourcePath {
+    #[default]
+    NAMESPACE,
+    ENTITY,
+    FIELD,
+    ENTITYTYPE,
+    ENTITYKIND,
+    FIELDKIND,
+    DATASPACE,
+    TAG,
+    OBJECT_TAG,
+    CLASSIFICATION,
+    IMPLICITTAG,
+    RECORDFIELD,
+    OBJECT_CLASSIFICATION,
+    EXPRESSION,
+    OBJECT_DATASPACE,
+    RECORDFIELDTYPE,
+    METADATAKIND,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RuleResourceScopeType {
+    #[default]
+    ANY,
+    FIELD,
+    RECORD,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RuleStatus {
+    #[default]
+    Draft,
+    Activated,
+    Deactivated,
+    Verified,
+    ActivationInProgress,
+    DeactivationInProgress,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -309,6 +309,86 @@ pub struct BusinessHoursEntry {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct BusinessProcessDefinition {
+    #[serde(rename = "businessProcessFeedbacks", default)]
+    pub business_process_feedbacks: Vec<BusinessProcessFeedback>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "sequenceNumber", default)]
+    pub sequence_number: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BusinessProcessFeedback {
+    #[serde(rename = "actionName", default)]
+    pub action_name: String,
+    #[serde(rename = "actionParam", default)]
+    pub action_param: String,
+    #[serde(rename = "actionType", default)]
+    pub action_type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BusinessProcessGroup {
+    #[serde(rename = "businessProcessDefinitions", default)]
+    pub business_process_definitions: Vec<BusinessProcessDefinition>,
+    #[serde(rename = "customerSatisfactionMetric", default)]
+    pub customer_satisfaction_metric: serde_json::Value,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BusinessProcessTypeDefinition {
+    #[serde(rename = "applicationUsageType", default)]
+    pub application_usage_type: serde_json::Value,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RuleDefinition {
+    #[serde(rename = "apiName", default)]
+    pub api_name: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "endDate", default)]
+    pub end_date: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "rulePayload", default)]
+    pub rule_payload: String,
+    #[serde(rename = "ruleStatus", default)]
+    pub rule_status: serde_json::Value,
+    #[serde(rename = "sequenceNumber", default)]
+    pub sequence_number: f64,
+    #[serde(rename = "startDate", default)]
+    pub start_date: String,
+    #[serde(rename = "usageSubType", default)]
+    pub usage_sub_type: String,
+    #[serde(rename = "usageType", default)]
+    pub usage_type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct RuleEntry {
     #[serde(rename = "assignedTo", default)]
     pub assigned_to: String,
@@ -349,32 +429,6 @@ pub struct RuleEntry {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct RuleDefinition {
-    #[serde(rename = "apiName", default)]
-    pub api_name: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "endDate", default)]
-    pub end_date: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "rulePayload", default)]
-    pub rule_payload: String,
-    #[serde(rename = "ruleStatus", default)]
-    pub rule_status: serde_json::Value,
-    #[serde(rename = "sequenceNumber", default)]
-    pub sequence_number: f64,
-    #[serde(rename = "startDate", default)]
-    pub start_date: String,
-    #[serde(rename = "usageSubType", default)]
-    pub usage_sub_type: String,
-    #[serde(rename = "usageType", default)]
-    pub usage_type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct RuleLibraryDefinition {
     #[serde(rename = "contextDefinition", default)]
     pub context_definition: String,
@@ -388,22 +442,6 @@ pub struct RuleLibraryDefinition {
     pub ruleset_definitions: Vec<RulesetDefinition>,
     #[serde(rename = "usageType", default)]
     pub usage_type: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BusinessProcessDefinition {
-    #[serde(rename = "businessProcessFeedbacks", default)]
-    pub business_process_feedbacks: Vec<BusinessProcessFeedback>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "sequenceNumber", default)]
-    pub sequence_number: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -426,42 +464,4 @@ pub struct RulesetDefinition {
     pub status: serde_json::Value,
     #[serde(rename = "usageType", default)]
     pub usage_type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BusinessProcessGroup {
-    #[serde(rename = "businessProcessDefinitions", default)]
-    pub business_process_definitions: Vec<BusinessProcessDefinition>,
-    #[serde(rename = "customerSatisfactionMetric", default)]
-    pub customer_satisfaction_metric: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BusinessProcessTypeDefinition {
-    #[serde(rename = "applicationUsageType", default)]
-    pub application_usage_type: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BusinessProcessFeedback {
-    #[serde(rename = "actionName", default)]
-    pub action_name: String,
-    #[serde(rename = "actionParam", default)]
-    pub action_param: String,
-    #[serde(rename = "actionType", default)]
-    pub action_type: serde_json::Value,
 }

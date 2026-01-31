@@ -10,6 +10,34 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ServiceAISetupDefStatus {
+    #[default]
+    FIELDS_SELECTED,
+    TRAINING,
+    READY_TO_ACTIVATE,
+    SERVING,
+    RETIRED,
+    ARCHIVED,
+    READY_FOR_REVIEW,
+    TRAINING_FAILURE,
+    INVALID_TRAINING_FIELDS,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ServiceAISetupFieldType {
+    #[default]
+    CASE_DESC,
+    CASE_SUBJ,
+    ARTICLE_TITLE,
+    ARTICLE_CONTENT,
+    ARTICLE_SUMMARY,
+    ARTICLE_ANSWER,
+    ARTICLE_QUESTION,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum ServicePlanSourceType {
     #[default]
     Case,
@@ -60,6 +88,16 @@ pub enum SvcCatalogItemAttrType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SvcCatalogItemDependencyType {
+    #[default]
+    PreprocessorApexClass,
+    FlowDefinition,
+    IntegrationProviderDef,
+    OmniScriptConfig,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum SvcCatalogItemUsageType {
     #[default]
     Employee,
@@ -78,44 +116,6 @@ pub enum SvcCtlgItemAttrAttributeType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ServiceAISetupFieldType {
-    #[default]
-    CASE_DESC,
-    CASE_SUBJ,
-    ARTICLE_TITLE,
-    ARTICLE_CONTENT,
-    ARTICLE_SUMMARY,
-    ARTICLE_ANSWER,
-    ARTICLE_QUESTION,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ServiceAISetupDefStatus {
-    #[default]
-    FIELDS_SELECTED,
-    TRAINING,
-    READY_TO_ACTIVATE,
-    SERVING,
-    RETIRED,
-    ARCHIVED,
-    READY_FOR_REVIEW,
-    TRAINING_FAILURE,
-    INVALID_TRAINING_FIELDS,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SvcCatalogItemDependencyType {
-    #[default]
-    PreprocessorApexClass,
-    FlowDefinition,
-    IntegrationProviderDef,
-    OmniScriptConfig,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum SvcCtlgItemDpndProcType {
     #[default]
     RequestForm,
@@ -127,13 +127,75 @@ pub enum SvcCtlgItemDpndProcType {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ServiceProcessAttributeTranslation {
-    #[serde(default)]
-    pub label: String,
+pub struct ServiceAISetupDefinition {
+    #[serde(rename = "appSourceType", default)]
+    pub app_source_type: serde_json::Value,
     #[serde(default)]
     pub name: String,
-    #[serde(rename = "serviceProcessName", default)]
-    pub service_process_name: String,
+    #[serde(rename = "setupStatus", default)]
+    pub setup_status: ServiceAISetupDefStatus,
+    #[serde(rename = "supportedLanguages", default)]
+    pub supported_languages: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ServiceAISetupField {
+    #[serde(default)]
+    pub entity: String,
+    #[serde(default)]
+    pub field: String,
+    #[serde(rename = "fieldMappingType", default)]
+    pub field_mapping_type: ServiceAISetupFieldType,
+    #[serde(rename = "fieldPosition", default)]
+    pub field_position: f64,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "setupDefinition", default)]
+    pub setup_definition: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ServiceChannel {
+    #[serde(rename = "acwExtensionDuration", default)]
+    pub acw_extension_duration: f64,
+    #[serde(rename = "afterConvoWorkMaxTime", default)]
+    pub after_convo_work_max_time: f64,
+    #[serde(rename = "capacityModel", default)]
+    pub capacity_model: serde_json::Value,
+    #[serde(rename = "doesCheckCapOnOwnerChange", default)]
+    pub does_check_cap_on_owner_change: bool,
+    #[serde(rename = "doesCheckCapOnStatusChange", default)]
+    pub does_check_cap_on_status_change: bool,
+    #[serde(rename = "doesMinimizeWidgetOnAccept", default)]
+    pub does_minimize_widget_on_accept: bool,
+    #[serde(rename = "hasAcwExtensionEnabled", default)]
+    pub has_acw_extension_enabled: bool,
+    #[serde(rename = "hasAfterConvoWorkTimer", default)]
+    pub has_after_convo_work_timer: bool,
+    #[serde(rename = "hasAutoAcceptEnabled", default)]
+    pub has_auto_accept_enabled: bool,
+    #[serde(rename = "interactionComponent", default)]
+    pub interaction_component: String,
+    #[serde(rename = "isInterruptible", default)]
+    pub is_interruptible: bool,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "maxExtensions", default)]
+    pub max_extensions: String,
+    #[serde(rename = "relatedEntityType", default)]
+    pub related_entity_type: String,
+    #[serde(rename = "secondaryRoutingPriorityField", default)]
+    pub secondary_routing_priority_field: String,
+    #[serde(rename = "serviceChannelFieldPriorities", default)]
+    pub service_channel_field_priorities: Vec<ServiceChannelFieldPriority>,
+    #[serde(rename = "serviceChannelStatusFieldMappings", default)]
+    pub service_channel_status_field_mappings: Vec<ServiceChannelStatusFieldMapping>,
+    #[serde(rename = "statusField", default)]
+    pub status_field: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -142,6 +204,24 @@ pub struct ServiceProcessAttributeTranslation {
 pub struct ServiceChannelFieldPriority {
     #[serde(default)]
     pub priority: f64,
+    #[serde(default)]
+    pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ServiceChannelStatus {
+    #[serde(default)]
+    pub channel: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ServiceChannelStatusFieldMapping {
+    #[serde(default)]
+    pub r#type: serde_json::Value,
     #[serde(default)]
     pub value: String,
 }
@@ -179,47 +259,11 @@ pub struct ServiceCloudConsoleConfig {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct SvcCatalogFilterCriteria {
+pub struct ServicePresenceStatus {
     #[serde(default)]
-    pub conditions: Vec<SvcCatalogFilterCondition>,
-    #[serde(rename = "criteriaRelation", default)]
-    pub criteria_relation: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "mainLabel", default)]
-    pub main_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SvcCatalogItemAttribute {
-    #[serde(default)]
-    pub field: String,
-    #[serde(rename = "inputType", default)]
-    pub input_type: SvcCatalogItemAttrDataType,
-    #[serde(rename = "inputVariable", default)]
-    pub input_variable: String,
-    #[serde(rename = "isRequired", default)]
-    pub is_required: bool,
+    pub channels: ServiceChannelStatus,
     #[serde(default)]
     pub label: String,
-    #[serde(rename = "maxValue", default)]
-    pub max_value: f64,
-    #[serde(rename = "minValue", default)]
-    pub min_value: f64,
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub object: String,
-    #[serde(default)]
-    pub options: Vec<SvcCatalogItemAttrDetail>,
-    #[serde(default)]
-    pub r#type: SvcCatalogItemAttrType,
-    #[serde(default)]
-    pub value: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -242,84 +286,6 @@ pub struct ServiceProcess {
     pub should_hide_empty_attributes: bool,
     #[serde(rename = "usageType", default)]
     pub usage_type: SvcCatalogItemUsageType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ServiceScheduleConfig {
-    #[serde(rename = "areOnlyApprovedAbsnConsidered", default)]
-    pub are_only_approved_absn_considered: bool,
-    #[serde(rename = "defaultAerialTravelSpeed", default)]
-    pub default_aerial_travel_speed: f64,
-    #[serde(rename = "distanceMeasurementUnit", default)]
-    pub distance_measurement_unit: serde_json::Value,
-    #[serde(rename = "isCmplxWrkSldngByTerrEnabled", default)]
-    pub is_cmplx_wrk_sldng_by_terr_enabled: bool,
-    #[serde(rename = "isIndvRsrcCrewSchdConsidered", default)]
-    pub is_indv_rsrc_crew_schd_considered: bool,
-    #[serde(rename = "isSvcRsrcCrewsSkillAgg", default)]
-    pub is_svc_rsrc_crews_skill_agg: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "maxDaysForSchedulingHorizon", default)]
-    pub max_days_for_scheduling_horizon: f64,
-    #[serde(rename = "schedulingMode", default)]
-    pub scheduling_mode: serde_json::Value,
-    #[serde(rename = "travelTimeBuffer", default)]
-    pub travel_time_buffer: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SvcCatalogItemDefFiltrCrit {
-    #[serde(rename = "svcCatalogFilterCriteria", default)]
-    pub svc_catalog_filter_criteria: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SvcCatalogFilterCondition {
-    #[serde(default)]
-    pub index: f64,
-    #[serde(default)]
-    pub operator: serde_json::Value,
-    #[serde(default)]
-    pub source: String,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ServiceProcessItemGroup {
-    #[serde(rename = "apiName", default)]
-    pub api_name: String,
-    #[serde(rename = "groupName", default)]
-    pub group_name: String,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SvcCatalogCategory {
-    #[serde(default)]
-    pub image: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "parentCategory", default)]
-    pub parent_category: String,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -359,19 +325,135 @@ pub struct ServiceProcessAttribute {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ServiceChannelStatus {
+pub struct ServiceProcessAttributeTranslation {
     #[serde(default)]
-    pub channel: Vec<String>,
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "serviceProcessName", default)]
+    pub service_process_name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ServiceChannelStatusFieldMapping {
+pub struct ServiceProcessDependency {
+    #[serde(rename = "dependencyReference", default)]
+    pub dependency_reference: String,
+    #[serde(rename = "processStepName", default)]
+    pub process_step_name: SvcCtlgItemDpndProcType,
     #[serde(default)]
-    pub r#type: serde_json::Value,
+    pub r#type: SvcCatalogItemDependencyType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ServiceProcessItemGroup {
+    #[serde(rename = "apiName", default)]
+    pub api_name: String,
+    #[serde(rename = "groupName", default)]
+    pub group_name: String,
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ServiceProcessItemGroupTranslation {
+    #[serde(rename = "groupName", default)]
+    pub group_name: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "serviceProcessName", default)]
+    pub service_process_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ServiceScheduleConfig {
+    #[serde(rename = "areOnlyApprovedAbsnConsidered", default)]
+    pub are_only_approved_absn_considered: bool,
+    #[serde(rename = "defaultAerialTravelSpeed", default)]
+    pub default_aerial_travel_speed: f64,
+    #[serde(rename = "distanceMeasurementUnit", default)]
+    pub distance_measurement_unit: serde_json::Value,
+    #[serde(rename = "isCmplxWrkSldngByTerrEnabled", default)]
+    pub is_cmplx_wrk_sldng_by_terr_enabled: bool,
+    #[serde(rename = "isIndvRsrcCrewSchdConsidered", default)]
+    pub is_indv_rsrc_crew_schd_considered: bool,
+    #[serde(rename = "isSvcRsrcCrewsSkillAgg", default)]
+    pub is_svc_rsrc_crews_skill_agg: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "maxDaysForSchedulingHorizon", default)]
+    pub max_days_for_scheduling_horizon: f64,
+    #[serde(rename = "schedulingMode", default)]
+    pub scheduling_mode: serde_json::Value,
+    #[serde(rename = "travelTimeBuffer", default)]
+    pub travel_time_buffer: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SvcCatalogCategory {
+    #[serde(default)]
+    pub image: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "parentCategory", default)]
+    pub parent_category: String,
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SvcCatalogCategoryItem {
+    #[serde(rename = "isPrimaryCategory", default)]
+    pub is_primary_category: bool,
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: f64,
+    #[serde(rename = "svcCatalogCategory", default)]
+    pub svc_catalog_category: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SvcCatalogFilterCondition {
+    #[serde(default)]
+    pub index: f64,
+    #[serde(default)]
+    pub operator: serde_json::Value,
+    #[serde(default)]
+    pub source: String,
     #[serde(default)]
     pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SvcCatalogFilterCriteria {
+    #[serde(default)]
+    pub conditions: Vec<SvcCatalogFilterCondition>,
+    #[serde(rename = "criteriaRelation", default)]
+    pub criteria_relation: serde_json::Value,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "mainLabel", default)]
+    pub main_label: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -401,13 +483,19 @@ pub struct SvcCatalogFulfillFlowItem {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct SvcCatalogCategoryItem {
-    #[serde(rename = "isPrimaryCategory", default)]
-    pub is_primary_category: bool,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: f64,
-    #[serde(rename = "svcCatalogCategory", default)]
-    pub svc_catalog_category: String,
+pub struct SvcCatalogFulfillmentFlow {
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub flow: String,
+    #[serde(default)]
+    pub icon: String,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(default)]
+    pub items: Vec<SvcCatalogFulfillFlowItem>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -425,77 +513,31 @@ pub struct SvcCatalogItemAttrDetail {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ServiceProcessDependency {
-    #[serde(rename = "dependencyReference", default)]
-    pub dependency_reference: String,
-    #[serde(rename = "processStepName", default)]
-    pub process_step_name: SvcCtlgItemDpndProcType,
-    #[serde(default)]
-    pub r#type: SvcCatalogItemDependencyType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ServiceProcessItemGroupTranslation {
-    #[serde(rename = "groupName", default)]
-    pub group_name: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "serviceProcessName", default)]
-    pub service_process_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SvcCatalogItemDefDataCategorySelection {
-    #[serde(default)]
-    pub category: String,
-    #[serde(rename = "categoryGroup", default)]
-    pub category_group: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ServiceAISetupField {
-    #[serde(default)]
-    pub entity: String,
+pub struct SvcCatalogItemAttribute {
     #[serde(default)]
     pub field: String,
-    #[serde(rename = "fieldMappingType", default)]
-    pub field_mapping_type: ServiceAISetupFieldType,
-    #[serde(rename = "fieldPosition", default)]
-    pub field_position: f64,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "setupDefinition", default)]
-    pub setup_definition: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ServicePresenceStatus {
-    #[serde(default)]
-    pub channels: ServiceChannelStatus,
+    #[serde(rename = "inputType", default)]
+    pub input_type: SvcCatalogItemAttrDataType,
+    #[serde(rename = "inputVariable", default)]
+    pub input_variable: String,
+    #[serde(rename = "isRequired", default)]
+    pub is_required: bool,
     #[serde(default)]
     pub label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ServiceAISetupDefinition {
-    #[serde(rename = "appSourceType", default)]
-    pub app_source_type: serde_json::Value,
+    #[serde(rename = "maxValue", default)]
+    pub max_value: f64,
+    #[serde(rename = "minValue", default)]
+    pub min_value: f64,
     #[serde(default)]
     pub name: String,
-    #[serde(rename = "setupStatus", default)]
-    pub setup_status: ServiceAISetupDefStatus,
-    #[serde(rename = "supportedLanguages", default)]
-    pub supported_languages: String,
+    #[serde(default)]
+    pub object: String,
+    #[serde(default)]
+    pub options: Vec<SvcCatalogItemAttrDetail>,
+    #[serde(default)]
+    pub r#type: SvcCatalogItemAttrType,
+    #[serde(default)]
+    pub value: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -539,59 +581,17 @@ pub struct SvcCatalogItemDef {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct SvcCatalogFulfillmentFlow {
+pub struct SvcCatalogItemDefDataCategorySelection {
     #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub flow: String,
-    #[serde(default)]
-    pub icon: String,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(default)]
-    pub items: Vec<SvcCatalogFulfillFlowItem>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
+    pub category: String,
+    #[serde(rename = "categoryGroup", default)]
+    pub category_group: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ServiceChannel {
-    #[serde(rename = "acwExtensionDuration", default)]
-    pub acw_extension_duration: f64,
-    #[serde(rename = "afterConvoWorkMaxTime", default)]
-    pub after_convo_work_max_time: f64,
-    #[serde(rename = "capacityModel", default)]
-    pub capacity_model: serde_json::Value,
-    #[serde(rename = "doesCheckCapOnOwnerChange", default)]
-    pub does_check_cap_on_owner_change: bool,
-    #[serde(rename = "doesCheckCapOnStatusChange", default)]
-    pub does_check_cap_on_status_change: bool,
-    #[serde(rename = "doesMinimizeWidgetOnAccept", default)]
-    pub does_minimize_widget_on_accept: bool,
-    #[serde(rename = "hasAcwExtensionEnabled", default)]
-    pub has_acw_extension_enabled: bool,
-    #[serde(rename = "hasAfterConvoWorkTimer", default)]
-    pub has_after_convo_work_timer: bool,
-    #[serde(rename = "hasAutoAcceptEnabled", default)]
-    pub has_auto_accept_enabled: bool,
-    #[serde(rename = "interactionComponent", default)]
-    pub interaction_component: String,
-    #[serde(rename = "isInterruptible", default)]
-    pub is_interruptible: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "maxExtensions", default)]
-    pub max_extensions: String,
-    #[serde(rename = "relatedEntityType", default)]
-    pub related_entity_type: String,
-    #[serde(rename = "secondaryRoutingPriorityField", default)]
-    pub secondary_routing_priority_field: String,
-    #[serde(rename = "serviceChannelFieldPriorities", default)]
-    pub service_channel_field_priorities: Vec<ServiceChannelFieldPriority>,
-    #[serde(rename = "serviceChannelStatusFieldMappings", default)]
-    pub service_channel_status_field_mappings: Vec<ServiceChannelStatusFieldMapping>,
-    #[serde(rename = "statusField", default)]
-    pub status_field: String,
+pub struct SvcCatalogItemDefFiltrCrit {
+    #[serde(rename = "svcCatalogFilterCriteria", default)]
+    pub svc_catalog_filter_criteria: String,
 }

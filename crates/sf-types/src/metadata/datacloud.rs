@@ -10,43 +10,39 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DataPipelineType {
+pub enum DataCategoryFilterOperation {
     #[default]
-    Pig,
+    above,
+    below,
+    at,
+    aboveOrBelow,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DataConnectorReleaseLevel {
+pub enum DataConnectionStatus {
     #[default]
-    IN_DEV,
-    PILOT,
-    BETA,
-    GA,
+    Connected,
+    Failed,
+    Disconnected,
+    NeedsReAuthentication,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DataModelType {
+pub enum DataConnectorCapability {
     #[default]
-    Source,
-    Transport,
-    Landing,
-    View,
-    Reference,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DataImportRefreshMode {
-    #[default]
-    FULL_REFRESH,
-    UPSERT,
-    INCREMENTAL,
-    PARTIAL_UPDATE,
-    REPLACE,
-    NEAR_REAL_TIME_INCREMENTAL,
-    NOT_APPLICABLE,
+    Hidden,
+    DataIn,
+    DataInStructured,
+    DataInUnstructured,
+    DataOut,
+    ZeroCopyIn,
+    UniqueGroup,
+    DataInHeader,
+    DataInSelector,
+    DataInIncremental,
+    DataInDelete,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -74,65 +70,7 @@ pub enum DataConnectorDataType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DataImportRefreshFrequency {
-    #[default]
-    NONE,
-    MINUTES_5,
-    MINUTES_15,
-    MINUTES_30,
-    HOURLY,
-    EVERY_4_HOURS,
-    EVERY_12_HOURS,
-    DAILY,
-    WEEKLY,
-    MONTHLY,
-    NOT_APPLICABLE,
-    BATCH,
-    STREAMING,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DataObjectType {
-    #[default]
-    Object,
-    Table,
-    Api,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DataImportDataExtractMethods {
-    #[default]
-    FULL_REFRESH,
-    NUMERIC_CDC,
-    BINARY_CDC,
-    DATETIME_CDC,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DataConnectionStatus {
-    #[default]
-    Connected,
-    Failed,
-    Disconnected,
-    NeedsReAuthentication,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DataCategoryFilterOperation {
-    #[default]
-    above,
-    below,
-    at,
-    aboveOrBelow,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DataConnectorCapability {
+pub enum DataConnectorFeature {
     #[default]
     Hidden,
     DataIn,
@@ -140,19 +78,24 @@ pub enum DataConnectorCapability {
     DataInUnstructured,
     DataOut,
     ZeroCopyIn,
-    UniqueGroup,
-    DataInHeader,
-    DataInSelector,
-    DataInIncremental,
-    DataInDelete,
+    DataInFrequentIngest,
+    FileBased,
+    FileBasedDataSync,
+    ObjectBased,
+    Streaming,
+    StaticSchema,
+    ReadonlyConnection,
+    Override,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DataSourceType {
+pub enum DataConnectorReleaseLevel {
     #[default]
-    SingleSobject,
-    MultipleSobjects,
+    IN_DEV,
+    PILOT,
+    BETA,
+    GA,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -183,6 +126,83 @@ pub enum DataConnectorType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DataImportDataExtractMethods {
+    #[default]
+    FULL_REFRESH,
+    NUMERIC_CDC,
+    BINARY_CDC,
+    DATETIME_CDC,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DataImportRefreshFrequency {
+    #[default]
+    NONE,
+    MINUTES_5,
+    MINUTES_15,
+    MINUTES_30,
+    HOURLY,
+    EVERY_4_HOURS,
+    EVERY_12_HOURS,
+    DAILY,
+    WEEKLY,
+    MONTHLY,
+    NOT_APPLICABLE,
+    BATCH,
+    STREAMING,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DataImportRefreshMode {
+    #[default]
+    FULL_REFRESH,
+    UPSERT,
+    INCREMENTAL,
+    PARTIAL_UPDATE,
+    REPLACE,
+    NEAR_REAL_TIME_INCREMENTAL,
+    NOT_APPLICABLE,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DataModelType {
+    #[default]
+    Source,
+    Transport,
+    Landing,
+    View,
+    Reference,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DataObjectType {
+    #[default]
+    Object,
+    Table,
+    Api,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DataPipelineType {
+    #[default]
+    Pig,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DataSourceType {
+    #[default]
+    SingleSobject,
+    MultipleSobjects,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum DatatableDataType {
     #[default]
     Boolean,
@@ -198,38 +218,40 @@ pub enum DatatableDataType {
     Url,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DataConnectorFeature {
-    #[default]
-    Hidden,
-    DataIn,
-    DataInStructured,
-    DataInUnstructured,
-    DataOut,
-    ZeroCopyIn,
-    DataInFrequentIngest,
-    FileBased,
-    FileBasedDataSync,
-    ObjectBased,
-    Streaming,
-    StaticSchema,
-    ReadonlyConnection,
-    Override,
-}
-
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct DataspaceScope {
+pub struct DataCalcInsightTemplate {
+    #[serde(rename = "builderExpression", default)]
+    pub builder_expression: String,
+    #[serde(rename = "creationType", default)]
+    pub creation_type: serde_json::Value,
+    #[serde(rename = "dataspaceName", default)]
+    pub dataspace_name: String,
+    #[serde(rename = "dataspacePrefix", default)]
+    pub dataspace_prefix: String,
+    #[serde(rename = "definitionType", default)]
+    pub definition_type: serde_json::Value,
     #[serde(default)]
     pub description: String,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(default)]
+    pub expression: String,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "metadataGroups", default)]
-    pub metadata_groups: Vec<DataspaceScopeSchemaAccess>,
+    #[serde(rename = "scheduleEndDate", default)]
+    pub schedule_end_date: String,
+    #[serde(rename = "scheduleInterval", default)]
+    pub schedule_interval: String,
+    #[serde(rename = "scheduleStartDateTime", default)]
+    pub schedule_start_date_time: String,
+    #[serde(rename = "sourceDataGraphName", default)]
+    pub source_data_graph_name: String,
+    #[serde(rename = "sourceObjectDevName", default)]
+    pub source_object_dev_name: String,
+    #[serde(rename = "templateVersion", default)]
+    pub template_version: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -247,19 +269,201 @@ pub struct DataCategory {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct DataSourceBundleDefinition {
-    #[serde(rename = "bundleVersion", default)]
-    pub bundle_version: f64,
-    #[serde(rename = "dataPlatform", default)]
-    pub data_platform: String,
+pub struct DataCategoryGroup {
+    #[serde(default)]
+    pub active: bool,
+    #[serde(rename = "dataCategory", default)]
+    pub data_category: DataCategory,
     #[serde(default)]
     pub description: String,
     #[serde(default)]
+    pub label: String,
+    #[serde(rename = "objectUsage", default)]
+    pub object_usage: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataCleanRoomProvider {
+    #[serde(rename = "creatorOrg", default)]
+    pub creator_org: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "domainUrl", default)]
+    pub domain_url: String,
+    #[serde(rename = "isInstalled", default)]
+    pub is_installed: bool,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "logoUrl", default)]
+    pub logo_url: String,
+    #[serde(rename = "offCoreTenantId", default)]
+    pub off_core_tenant_id: String,
+    #[serde(rename = "templateNames", default)]
+    pub template_names: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataConnectionParamTmpl {
+    #[serde(rename = "paramName", default)]
+    pub param_name: String,
+    #[serde(default)]
+    pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataConnector {
+    #[serde(default)]
+    pub attributes: Vec<DataConnectorAttribute>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub errors: Vec<DataConnectorError>,
+    #[serde(default)]
+    pub features: Vec<DataConnectorFeature>,
+    #[serde(default)]
     pub icon: String,
-    #[serde(rename = "isMultiDeploymentSupported", default)]
-    pub is_multi_deployment_supported: bool,
+    #[serde(rename = "licenseAgreement", default)]
+    pub license_agreement: String,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
+    #[serde(rename = "ownerLocation", default)]
+    pub owner_location: String,
+    #[serde(rename = "ownerLogo", default)]
+    pub owner_logo: String,
+    #[serde(rename = "ownerName", default)]
+    pub owner_name: String,
+    #[serde(rename = "parentConnector", default)]
+    pub parent_connector: String,
+    #[serde(rename = "releaseLevel", default)]
+    pub release_level: DataConnectorReleaseLevel,
+    #[serde(rename = "supportEmail", default)]
+    pub support_email: String,
+    #[serde(rename = "supportMessage", default)]
+    pub support_message: String,
+    #[serde(rename = "supportPhone", default)]
+    pub support_phone: String,
+    #[serde(default)]
+    pub translations: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataConnectorAttribute {
+    #[serde(default)]
+    pub capabilities: Vec<DataConnectorCapability>,
+    #[serde(default)]
+    pub command: String,
+    #[serde(rename = "commandAttributes", default)]
+    pub command_attributes: String,
+    #[serde(rename = "dataType", default)]
+    pub data_type: DataConnectorDataType,
+    #[serde(rename = "defaultValue", default)]
+    pub default_value: String,
+    #[serde(default)]
+    pub editable: bool,
+    #[serde(rename = "externalName", default)]
+    pub external_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub max: String,
+    #[serde(default)]
+    pub min: String,
+    #[serde(default)]
+    pub options: Vec<DataConnectorAttributeOpt>,
+    #[serde(default)]
+    pub order: f64,
+    #[serde(default)]
+    pub pattern: String,
+    #[serde(default)]
+    pub placeholder: String,
+    #[serde(default)]
+    pub readonly: bool,
+    #[serde(default)]
+    pub required: bool,
+    #[serde(default)]
+    pub secure: bool,
+    #[serde(default)]
+    pub tooltip: String,
+    #[serde(default)]
+    pub translations: Vec<serde_json::Value>,
+    #[serde(rename = "validationMessageError", default)]
+    pub validation_message_error: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataConnectorAttributeOpt {
+    #[serde(default)]
+    pub capabilities: Vec<DataConnectorCapability>,
+    #[serde(rename = "conditionAttributes", default)]
+    pub condition_attributes: String,
+    #[serde(rename = "externalName", default)]
+    pub external_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub order: f64,
+    #[serde(default)]
+    pub translations: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataConnectorAttributeOptTranslation {
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataConnectorAttributeTranslation {
+    #[serde(rename = "errorMessage", default)]
+    pub error_message: String,
+    #[serde(rename = "infoMessage", default)]
+    pub info_message: String,
+    #[serde(rename = "inputLabel", default)]
+    pub input_label: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub options: Vec<DataConnectorAttributeOptTranslation>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataConnectorError {
+    #[serde(rename = "externalName", default)]
+    pub external_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub translations: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataConnectorErrorTranslation {
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -272,6 +476,140 @@ pub struct DataConnectorIngestApi {
     pub master_label: String,
     #[serde(rename = "sourceName", default)]
     pub source_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataConnectorS3 {
+    #[serde(default)]
+    pub delimiter: String,
+    #[serde(rename = "fileNameWildcard", default)]
+    pub file_name_wildcard: String,
+    #[serde(rename = "fileType", default)]
+    pub file_type: String,
+    #[serde(rename = "importFromDirectory", default)]
+    pub import_from_directory: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "s3AccessKey", default)]
+    pub s_3_access_key: String,
+    #[serde(rename = "s3BucketName", default)]
+    pub s_3_bucket_name: String,
+    #[serde(rename = "s3SecretKey", default)]
+    pub s_3_secret_key: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataConnectorTranslation {
+    #[serde(default)]
+    pub attributes: Vec<DataConnectorAttributeTranslation>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub errors: Vec<DataConnectorErrorTranslation>,
+    #[serde(default)]
+    pub help: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub language: String,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataKitObjectDependency {
+    #[serde(rename = "dataPackageKitDef", default)]
+    pub data_package_kit_def: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "sourceObject", default)]
+    pub source_object: String,
+    #[serde(rename = "sourceObjectType", default)]
+    pub source_object_type: String,
+    #[serde(rename = "targetObject", default)]
+    pub target_object: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataKitObjectTemplate {
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "entityPayload", default)]
+    pub entity_payload: String,
+    #[serde(rename = "entityPayloadTokenMap", default)]
+    pub entity_payload_token_map: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "parentDataPackageKitDefinitionName", default)]
+    pub parent_data_package_kit_definition_name: String,
+    #[serde(rename = "sourceObject", default)]
+    pub source_object: String,
+    #[serde(rename = "sourceObjectType", default)]
+    pub source_object_type: String,
+    #[serde(rename = "templateVersion", default)]
+    pub template_version: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataModelTaxonomy {
+    #[serde(rename = "creationType", default)]
+    pub creation_type: serde_json::Value,
+    #[serde(rename = "dataModelType", default)]
+    pub data_model_type: DataModelType,
+    #[serde(rename = "dataObjectCategories", default)]
+    pub data_object_categories: Vec<DataObjectCategory>,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub supplier: String,
+    #[serde(rename = "updateDate", default)]
+    pub update_date: String,
+    #[serde(rename = "versionNbr", default)]
+    pub version_nbr: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataObjectBuildOrgTemplate {
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "objectDevName", default)]
+    pub object_dev_name: String,
+    #[serde(rename = "objectPayload", default)]
+    pub object_payload: String,
+    #[serde(rename = "objectType", default)]
+    pub object_type: String,
+    #[serde(rename = "templateObject", default)]
+    pub template_object: String,
+    #[serde(rename = "templateVersion", default)]
+    pub template_version: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataObjectCategory {
+    #[serde(rename = "definitionCreationType", default)]
+    pub definition_creation_type: serde_json::Value,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -292,6 +630,132 @@ pub struct DataObjectSearchIndexConf {
     pub retriever: String,
     #[serde(rename = "searchIndex", default)]
     pub search_index: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataPackageKitDefinition {
+    #[serde(rename = "dataKitSource", default)]
+    pub data_kit_source: String,
+    #[serde(rename = "dataKitType", default)]
+    pub data_kit_type: String,
+    #[serde(rename = "dataSpaceDefinitionDevName", default)]
+    pub data_space_definition_dev_name: String,
+    #[serde(rename = "deploymentOrder", default)]
+    pub deployment_order: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "isDeployed", default)]
+    pub is_deployed: bool,
+    #[serde(rename = "isEnabled", default)]
+    pub is_enabled: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "useDeterministicNaming", default)]
+    pub use_deterministic_naming: bool,
+    #[serde(rename = "versionNumber", default)]
+    pub version_number: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataPackageKitObject {
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "parentDataPackageKitDefinitionName", default)]
+    pub parent_data_package_kit_definition_name: String,
+    #[serde(rename = "referenceObjectName", default)]
+    pub reference_object_name: String,
+    #[serde(rename = "referenceObjectType", default)]
+    pub reference_object_type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataPlatDataSetBundle {
+    #[serde(rename = "bundleType", default)]
+    pub bundle_type: String,
+    #[serde(rename = "dataPlatformDataSets", default)]
+    pub data_platform_data_sets: Vec<DataPlatformDataSet>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "iconUri", default)]
+    pub icon_uri: String,
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataPlatform {
+    #[serde(rename = "dataConnectorType", default)]
+    pub data_connector_type: String,
+    #[serde(rename = "dataPlatDataSetBundles", default)]
+    pub data_plat_data_set_bundles: Vec<DataPlatDataSetBundle>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "forExportIntOrgName", default)]
+    pub for_export_int_org_name: String,
+    #[serde(rename = "forImportIntOrgName", default)]
+    pub for_import_int_org_name: String,
+    #[serde(rename = "isConfiguredByAdmin", default)]
+    pub is_configured_by_admin: bool,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "largeIconUri", default)]
+    pub large_icon_uri: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "smallIconUri", default)]
+    pub small_icon_uri: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataPlatformDataSet {
+    #[serde(rename = "dataSetType", default)]
+    pub data_set_type: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "iconUri", default)]
+    pub icon_uri: String,
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataSource {
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub prefix: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataSourceBundleDefinition {
+    #[serde(rename = "bundleVersion", default)]
+    pub bundle_version: f64,
+    #[serde(rename = "dataPlatform", default)]
+    pub data_platform: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub icon: String,
+    #[serde(rename = "isMultiDeploymentSupported", default)]
+    pub is_multi_deployment_supported: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -343,139 +807,121 @@ pub struct DataSourceField {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct DataConnectorAttributeTranslation {
-    #[serde(rename = "errorMessage", default)]
-    pub error_message: String,
-    #[serde(rename = "infoMessage", default)]
-    pub info_message: String,
-    #[serde(rename = "inputLabel", default)]
-    pub input_label: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub options: Vec<DataConnectorAttributeOptTranslation>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataPlatDataSetBundle {
-    #[serde(rename = "bundleType", default)]
-    pub bundle_type: String,
-    #[serde(rename = "dataPlatformDataSets", default)]
-    pub data_platform_data_sets: Vec<DataPlatformDataSet>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "iconUri", default)]
-    pub icon_uri: String,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataConnectionParamTmpl {
-    #[serde(rename = "paramName", default)]
-    pub param_name: String,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataConnectorAttributeOptTranslation {
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataObjectCategory {
-    #[serde(rename = "definitionCreationType", default)]
-    pub definition_creation_type: serde_json::Value,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataConnector {
-    #[serde(default)]
-    pub attributes: Vec<DataConnectorAttribute>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub errors: Vec<DataConnectorError>,
-    #[serde(default)]
-    pub features: Vec<DataConnectorFeature>,
-    #[serde(default)]
-    pub icon: String,
-    #[serde(rename = "licenseAgreement", default)]
-    pub license_agreement: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "ownerLocation", default)]
-    pub owner_location: String,
-    #[serde(rename = "ownerLogo", default)]
-    pub owner_logo: String,
-    #[serde(rename = "ownerName", default)]
-    pub owner_name: String,
-    #[serde(rename = "parentConnector", default)]
-    pub parent_connector: String,
-    #[serde(rename = "releaseLevel", default)]
-    pub release_level: DataConnectorReleaseLevel,
-    #[serde(rename = "supportEmail", default)]
-    pub support_email: String,
-    #[serde(rename = "supportMessage", default)]
-    pub support_message: String,
-    #[serde(rename = "supportPhone", default)]
-    pub support_phone: String,
-    #[serde(default)]
-    pub translations: Vec<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataCalcInsightTemplate {
-    #[serde(rename = "builderExpression", default)]
-    pub builder_expression: String,
+pub struct DataSourceObject {
+    #[serde(rename = "accelerationEnabled", default)]
+    pub acceleration_enabled: serde_json::Value,
+    #[serde(rename = "additionalDLOInfoJson", default)]
+    pub additional_dlo_info_json: String,
     #[serde(rename = "creationType", default)]
-    pub creation_type: serde_json::Value,
-    #[serde(rename = "dataspaceName", default)]
-    pub dataspace_name: String,
-    #[serde(rename = "dataspacePrefix", default)]
-    pub dataspace_prefix: String,
-    #[serde(rename = "definitionType", default)]
-    pub definition_type: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(default)]
-    pub expression: String,
+    pub creation_type: String,
+    #[serde(rename = "dataConnection", default)]
+    pub data_connection: String,
+    #[serde(rename = "dataSource", default)]
+    pub data_source: String,
+    #[serde(rename = "dataSourceFields", default)]
+    pub data_source_fields: Vec<DataSourceField>,
+    #[serde(rename = "dmoDeveloperName", default)]
+    pub dmo_developer_name: String,
+    #[serde(rename = "dmoLabel", default)]
+    pub dmo_label: String,
+    #[serde(rename = "externalDatabaseName", default)]
+    pub external_database_name: String,
+    #[serde(rename = "externalObjectName", default)]
+    pub external_object_name: String,
+    #[serde(rename = "externalRecordIdentifier", default)]
+    pub external_record_identifier: String,
+    #[serde(rename = "externalSchemaName", default)]
+    pub external_schema_name: String,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "scheduleEndDate", default)]
-    pub schedule_end_date: String,
-    #[serde(rename = "scheduleInterval", default)]
-    pub schedule_interval: String,
-    #[serde(rename = "scheduleStartDateTime", default)]
-    pub schedule_start_date_time: String,
-    #[serde(rename = "sourceDataGraphName", default)]
-    pub source_data_graph_name: String,
-    #[serde(rename = "sourceObjectDevName", default)]
-    pub source_object_dev_name: String,
+    #[serde(rename = "objectCategory", default)]
+    pub object_category: String,
+    #[serde(rename = "objectType", default)]
+    pub object_type: DataObjectType,
+    #[serde(rename = "sourceObject", default)]
+    pub source_object: String,
+    #[serde(rename = "storageType", default)]
+    pub storage_type: serde_json::Value,
     #[serde(rename = "templateVersion", default)]
     pub template_version: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataSourceTenant {
+    #[serde(rename = "externalRecordId", default)]
+    pub external_record_id: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataSrcDataModelFieldMap {
+    #[serde(rename = "filterApplied", default)]
+    pub filter_applied: bool,
+    #[serde(rename = "filterOperationType", default)]
+    pub filter_operation_type: String,
+    #[serde(rename = "filterValue", default)]
+    pub filter_value: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "sourceField", default)]
+    pub source_field: String,
+    #[serde(rename = "targetField", default)]
+    pub target_field: String,
+    #[serde(rename = "templateVersion", default)]
+    pub template_version: f64,
+    #[serde(rename = "versionNumber", default)]
+    pub version_number: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DataStreamDefinition {
+    #[serde(rename = "areHeadersIncludedInFile", default)]
+    pub are_headers_included_in_file: bool,
+    #[serde(rename = "bulkIngest", default)]
+    pub bulk_ingest: bool,
+    #[serde(rename = "creationType", default)]
+    pub creation_type: serde_json::Value,
+    #[serde(rename = "dataConnector", default)]
+    pub data_connector: String,
+    #[serde(rename = "dataConnectorType", default)]
+    pub data_connector_type: String,
+    #[serde(rename = "dataExtensionIdentifier", default)]
+    pub data_extension_identifier: String,
+    #[serde(rename = "dataExtractField", default)]
+    pub data_extract_field: String,
+    #[serde(rename = "dataExtractMethods", default)]
+    pub data_extract_methods: DataImportDataExtractMethods,
+    #[serde(rename = "dataPlatDataSetBundle", default)]
+    pub data_plat_data_set_bundle: String,
+    #[serde(rename = "dataPlatformDataSetItemName", default)]
+    pub data_platform_data_set_item_name: String,
+    #[serde(rename = "dataSource", default)]
+    pub data_source: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "fileNameWildcard", default)]
+    pub file_name_wildcard: String,
+    #[serde(rename = "internalOrganization", default)]
+    pub internal_organization: String,
+    #[serde(rename = "isLimitedToNewFiles", default)]
+    pub is_limited_to_new_files: bool,
+    #[serde(rename = "isMissingFileFailure", default)]
+    pub is_missing_file_failure: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "mktDataLakeObject", default)]
+    pub mkt_data_lake_object: String,
+    #[serde(rename = "mktDataTranObject", default)]
+    pub mkt_data_tran_object: String,
+    #[serde(default)]
+    pub parameters: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -519,19 +965,15 @@ pub struct DataStreamTemplate {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct DataspaceScopeSchemaAccess {
-    #[serde(rename = "metadataGroup", default)]
-    pub metadata_group: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataSourceTenant {
-    #[serde(rename = "externalRecordId", default)]
-    pub external_record_id: String,
+pub struct DataspaceScope {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
+    #[serde(rename = "metadataGroups", default)]
+    pub metadata_groups: Vec<DataspaceScopeSchemaAccess>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -593,449 +1035,7 @@ pub struct DataspaceScopeAccess {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct DataPlatformDataSet {
-    #[serde(rename = "dataSetType", default)]
-    pub data_set_type: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "iconUri", default)]
-    pub icon_uri: String,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataConnectorAttributeOpt {
-    #[serde(default)]
-    pub capabilities: Vec<DataConnectorCapability>,
-    #[serde(rename = "conditionAttributes", default)]
-    pub condition_attributes: String,
-    #[serde(rename = "externalName", default)]
-    pub external_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub order: f64,
-    #[serde(default)]
-    pub translations: Vec<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataCleanRoomProvider {
-    #[serde(rename = "creatorOrg", default)]
-    pub creator_org: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "domainUrl", default)]
-    pub domain_url: String,
-    #[serde(rename = "isInstalled", default)]
-    pub is_installed: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "logoUrl", default)]
-    pub logo_url: String,
-    #[serde(rename = "offCoreTenantId", default)]
-    pub off_core_tenant_id: String,
-    #[serde(rename = "templateNames", default)]
-    pub template_names: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataCategoryGroup {
-    #[serde(default)]
-    pub active: bool,
-    #[serde(rename = "dataCategory", default)]
-    pub data_category: DataCategory,
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "objectUsage", default)]
-    pub object_usage: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataKitObjectTemplate {
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "entityPayload", default)]
-    pub entity_payload: String,
-    #[serde(rename = "entityPayloadTokenMap", default)]
-    pub entity_payload_token_map: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "parentDataPackageKitDefinitionName", default)]
-    pub parent_data_package_kit_definition_name: String,
-    #[serde(rename = "sourceObject", default)]
-    pub source_object: String,
-    #[serde(rename = "sourceObjectType", default)]
-    pub source_object_type: String,
-    #[serde(rename = "templateVersion", default)]
-    pub template_version: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataSource {
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub prefix: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataConnectorErrorTranslation {
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataObjectBuildOrgTemplate {
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "objectDevName", default)]
-    pub object_dev_name: String,
-    #[serde(rename = "objectPayload", default)]
-    pub object_payload: String,
-    #[serde(rename = "objectType", default)]
-    pub object_type: String,
-    #[serde(rename = "templateObject", default)]
-    pub template_object: String,
-    #[serde(rename = "templateVersion", default)]
-    pub template_version: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataStreamDefinition {
-    #[serde(rename = "areHeadersIncludedInFile", default)]
-    pub are_headers_included_in_file: bool,
-    #[serde(rename = "bulkIngest", default)]
-    pub bulk_ingest: bool,
-    #[serde(rename = "creationType", default)]
-    pub creation_type: serde_json::Value,
-    #[serde(rename = "dataConnector", default)]
-    pub data_connector: String,
-    #[serde(rename = "dataConnectorType", default)]
-    pub data_connector_type: String,
-    #[serde(rename = "dataExtensionIdentifier", default)]
-    pub data_extension_identifier: String,
-    #[serde(rename = "dataExtractField", default)]
-    pub data_extract_field: String,
-    #[serde(rename = "dataExtractMethods", default)]
-    pub data_extract_methods: DataImportDataExtractMethods,
-    #[serde(rename = "dataPlatDataSetBundle", default)]
-    pub data_plat_data_set_bundle: String,
-    #[serde(rename = "dataPlatformDataSetItemName", default)]
-    pub data_platform_data_set_item_name: String,
-    #[serde(rename = "dataSource", default)]
-    pub data_source: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "fileNameWildcard", default)]
-    pub file_name_wildcard: String,
-    #[serde(rename = "internalOrganization", default)]
-    pub internal_organization: String,
-    #[serde(rename = "isLimitedToNewFiles", default)]
-    pub is_limited_to_new_files: bool,
-    #[serde(rename = "isMissingFileFailure", default)]
-    pub is_missing_file_failure: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "mktDataLakeObject", default)]
-    pub mkt_data_lake_object: String,
-    #[serde(rename = "mktDataTranObject", default)]
-    pub mkt_data_tran_object: String,
-    #[serde(default)]
-    pub parameters: Vec<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataPackageKitDefinition {
-    #[serde(rename = "dataKitSource", default)]
-    pub data_kit_source: String,
-    #[serde(rename = "dataKitType", default)]
-    pub data_kit_type: String,
-    #[serde(rename = "dataSpaceDefinitionDevName", default)]
-    pub data_space_definition_dev_name: String,
-    #[serde(rename = "deploymentOrder", default)]
-    pub deployment_order: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "isDeployed", default)]
-    pub is_deployed: bool,
-    #[serde(rename = "isEnabled", default)]
-    pub is_enabled: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "useDeterministicNaming", default)]
-    pub use_deterministic_naming: bool,
-    #[serde(rename = "versionNumber", default)]
-    pub version_number: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataSourceObject {
-    #[serde(rename = "accelerationEnabled", default)]
-    pub acceleration_enabled: serde_json::Value,
-    #[serde(rename = "additionalDLOInfoJson", default)]
-    pub additional_dlo_info_json: String,
-    #[serde(rename = "creationType", default)]
-    pub creation_type: String,
-    #[serde(rename = "dataConnection", default)]
-    pub data_connection: String,
-    #[serde(rename = "dataSource", default)]
-    pub data_source: String,
-    #[serde(rename = "dataSourceFields", default)]
-    pub data_source_fields: Vec<DataSourceField>,
-    #[serde(rename = "dmoDeveloperName", default)]
-    pub dmo_developer_name: String,
-    #[serde(rename = "dmoLabel", default)]
-    pub dmo_label: String,
-    #[serde(rename = "externalDatabaseName", default)]
-    pub external_database_name: String,
-    #[serde(rename = "externalObjectName", default)]
-    pub external_object_name: String,
-    #[serde(rename = "externalRecordIdentifier", default)]
-    pub external_record_identifier: String,
-    #[serde(rename = "externalSchemaName", default)]
-    pub external_schema_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "objectCategory", default)]
-    pub object_category: String,
-    #[serde(rename = "objectType", default)]
-    pub object_type: DataObjectType,
-    #[serde(rename = "sourceObject", default)]
-    pub source_object: String,
-    #[serde(rename = "storageType", default)]
-    pub storage_type: serde_json::Value,
-    #[serde(rename = "templateVersion", default)]
-    pub template_version: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataConnectorS3 {
-    #[serde(default)]
-    pub delimiter: String,
-    #[serde(rename = "fileNameWildcard", default)]
-    pub file_name_wildcard: String,
-    #[serde(rename = "fileType", default)]
-    pub file_type: String,
-    #[serde(rename = "importFromDirectory", default)]
-    pub import_from_directory: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "s3AccessKey", default)]
-    pub s_3_access_key: String,
-    #[serde(rename = "s3BucketName", default)]
-    pub s_3_bucket_name: String,
-    #[serde(rename = "s3SecretKey", default)]
-    pub s_3_secret_key: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataPlatform {
-    #[serde(rename = "dataConnectorType", default)]
-    pub data_connector_type: String,
-    #[serde(rename = "dataPlatDataSetBundles", default)]
-    pub data_plat_data_set_bundles: Vec<DataPlatDataSetBundle>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "forExportIntOrgName", default)]
-    pub for_export_int_org_name: String,
-    #[serde(rename = "forImportIntOrgName", default)]
-    pub for_import_int_org_name: String,
-    #[serde(rename = "isConfiguredByAdmin", default)]
-    pub is_configured_by_admin: bool,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "largeIconUri", default)]
-    pub large_icon_uri: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "smallIconUri", default)]
-    pub small_icon_uri: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataKitObjectDependency {
-    #[serde(rename = "dataPackageKitDef", default)]
-    pub data_package_kit_def: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "sourceObject", default)]
-    pub source_object: String,
-    #[serde(rename = "sourceObjectType", default)]
-    pub source_object_type: String,
-    #[serde(rename = "targetObject", default)]
-    pub target_object: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataConnectorTranslation {
-    #[serde(default)]
-    pub attributes: Vec<DataConnectorAttributeTranslation>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub errors: Vec<DataConnectorErrorTranslation>,
-    #[serde(default)]
-    pub help: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub language: String,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataConnectorError {
-    #[serde(rename = "externalName", default)]
-    pub external_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub translations: Vec<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataSrcDataModelFieldMap {
-    #[serde(rename = "filterApplied", default)]
-    pub filter_applied: bool,
-    #[serde(rename = "filterOperationType", default)]
-    pub filter_operation_type: String,
-    #[serde(rename = "filterValue", default)]
-    pub filter_value: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "sourceField", default)]
-    pub source_field: String,
-    #[serde(rename = "targetField", default)]
-    pub target_field: String,
-    #[serde(rename = "templateVersion", default)]
-    pub template_version: f64,
-    #[serde(rename = "versionNumber", default)]
-    pub version_number: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataPackageKitObject {
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "parentDataPackageKitDefinitionName", default)]
-    pub parent_data_package_kit_definition_name: String,
-    #[serde(rename = "referenceObjectName", default)]
-    pub reference_object_name: String,
-    #[serde(rename = "referenceObjectType", default)]
-    pub reference_object_type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataConnectorAttribute {
-    #[serde(default)]
-    pub capabilities: Vec<DataConnectorCapability>,
-    #[serde(default)]
-    pub command: String,
-    #[serde(rename = "commandAttributes", default)]
-    pub command_attributes: String,
-    #[serde(rename = "dataType", default)]
-    pub data_type: DataConnectorDataType,
-    #[serde(rename = "defaultValue", default)]
-    pub default_value: String,
-    #[serde(default)]
-    pub editable: bool,
-    #[serde(rename = "externalName", default)]
-    pub external_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub max: String,
-    #[serde(default)]
-    pub min: String,
-    #[serde(default)]
-    pub options: Vec<DataConnectorAttributeOpt>,
-    #[serde(default)]
-    pub order: f64,
-    #[serde(default)]
-    pub pattern: String,
-    #[serde(default)]
-    pub placeholder: String,
-    #[serde(default)]
-    pub readonly: bool,
-    #[serde(default)]
-    pub required: bool,
-    #[serde(default)]
-    pub secure: bool,
-    #[serde(default)]
-    pub tooltip: String,
-    #[serde(default)]
-    pub translations: Vec<serde_json::Value>,
-    #[serde(rename = "validationMessageError", default)]
-    pub validation_message_error: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DataModelTaxonomy {
-    #[serde(rename = "creationType", default)]
-    pub creation_type: serde_json::Value,
-    #[serde(rename = "dataModelType", default)]
-    pub data_model_type: DataModelType,
-    #[serde(rename = "dataObjectCategories", default)]
-    pub data_object_categories: Vec<DataObjectCategory>,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub supplier: String,
-    #[serde(rename = "updateDate", default)]
-    pub update_date: String,
-    #[serde(rename = "versionNbr", default)]
-    pub version_nbr: f64,
+pub struct DataspaceScopeSchemaAccess {
+    #[serde(rename = "metadataGroup", default)]
+    pub metadata_group: String,
 }

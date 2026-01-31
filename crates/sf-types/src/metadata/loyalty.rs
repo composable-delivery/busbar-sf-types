@@ -10,96 +10,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LoyaltyPgmProcRuleStatus {
-    #[default]
-    Draft,
-    Active,
-    Inactive,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LoyaltyPgmProcCrudActType {
-    #[default]
-    create,
-    update,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LoyaltyPgmProcActParamOper {
-    #[default]
-    Equals,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LoyaltyPgmProcParmDataType {
-    #[default]
-    Text,
-    Numeric,
-    Date,
-    DateTime,
-    Sobject,
-    Boolean,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LoyaltyPgmProcCondType {
-    #[default]
-    Literal,
-    Parameter,
-    Formula,
-    Lookup,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LoyaltyPgmProcCondOperator {
-    #[default]
-    Equals,
-    NotEquals,
-    GreaterThan,
-    GreaterThanOrEquals,
-    LessThan,
-    LessThanOrEquals,
-    Contains,
-    DoesNotContain,
-    IsNull,
-    IsNotNull,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LoyaltyPgmProcRuleType {
-    #[default]
-    Condition,
-    Action,
-    ConditionGroup,
-    DefaultPath,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LoyaltyPgmProcStatus {
-    #[default]
-    Draft,
-    Active,
-    Inactive,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LoyaltyPgmProcExecutionType {
-    #[default]
-    RealTime,
-    Batch,
-    BatchAndRealTime,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum BenefitActionDataType {
     #[default]
     String,
@@ -109,6 +19,13 @@ pub enum BenefitActionDataType {
     Picklist,
     EntityPicklist,
     Number,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum LoyaltyPgmProcActParamOper {
+    #[default]
+    Equals,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -151,11 +68,120 @@ pub enum LoyaltyPgmProcActionType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum LoyaltyPgmProcCondOperator {
+    #[default]
+    Equals,
+    NotEquals,
+    GreaterThan,
+    GreaterThanOrEquals,
+    LessThan,
+    LessThanOrEquals,
+    Contains,
+    DoesNotContain,
+    IsNull,
+    IsNotNull,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum LoyaltyPgmProcCondType {
+    #[default]
+    Literal,
+    Parameter,
+    Formula,
+    Lookup,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum LoyaltyPgmProcCrudActType {
+    #[default]
+    create,
+    update,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum LoyaltyPgmProcExecutionType {
+    #[default]
+    RealTime,
+    Batch,
+    BatchAndRealTime,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum LoyaltyPgmProcParmDataType {
+    #[default]
+    Text,
+    Numeric,
+    Date,
+    DateTime,
+    Sobject,
+    Boolean,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum LoyaltyPgmProcParmType {
     #[default]
     Variable,
     Constant,
     Formula,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum LoyaltyPgmProcRuleStatus {
+    #[default]
+    Draft,
+    Active,
+    Inactive,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum LoyaltyPgmProcRuleType {
+    #[default]
+    Condition,
+    Action,
+    ConditionGroup,
+    DefaultPath,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum LoyaltyPgmProcStatus {
+    #[default]
+    Draft,
+    Active,
+    Inactive,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BenefitAction {
+    #[serde(rename = "benefitActionParameters", default)]
+    pub benefit_action_parameters: Vec<BenefitActionParameter>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "flowDefinition", default)]
+    pub flow_definition: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "isBenefitExpirationAllowed", default)]
+    pub is_benefit_expiration_allowed: bool,
+    #[serde(rename = "isBenefitUpdateAllowed", default)]
+    pub is_benefit_update_allowed: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "memberBenefitVariableName", default)]
+    pub member_benefit_variable_name: String,
+    #[serde(rename = "processType", default)]
+    pub process_type: String,
+    #[serde(default)]
+    pub r#type: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -174,6 +200,110 @@ pub struct BenefitActionParameter {
     pub parameter_values: Vec<BenefitActionParameterValue>,
     #[serde(rename = "picklistName", default)]
     pub picklist_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BenefitActionParameterValue {
+    #[serde(rename = "parameterValue", default)]
+    pub parameter_value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LoyaltyProgramProcess {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "executionType", default)]
+    pub execution_type: LoyaltyPgmProcExecutionType,
+    #[serde(rename = "journalSubType", default)]
+    pub journal_sub_type: String,
+    #[serde(rename = "journalType", default)]
+    pub journal_type: String,
+    #[serde(rename = "loyaltyTierGroup", default)]
+    pub loyalty_tier_group: String,
+    #[serde(default)]
+    pub parameters: Vec<LoyaltyProgramProcessParameter>,
+    #[serde(rename = "processName", default)]
+    pub process_name: String,
+    #[serde(rename = "processType", default)]
+    pub process_type: String,
+    #[serde(default)]
+    pub rules: Vec<LoyaltyProgramProcessRule>,
+    #[serde(default)]
+    pub status: LoyaltyPgmProcStatus,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LoyaltyProgramProcessAction {
+    #[serde(rename = "actionName", default)]
+    pub action_name: String,
+    #[serde(rename = "actionParameters", default)]
+    pub action_parameters: Vec<LoyaltyProgramProcessActionParameter>,
+    #[serde(rename = "actionType", default)]
+    pub action_type: LoyaltyPgmProcActionType,
+    #[serde(rename = "crudActionType", default)]
+    pub crud_action_type: LoyaltyPgmProcCrudActType,
+    #[serde(rename = "decisionTable", default)]
+    pub decision_table: String,
+    #[serde(rename = "decisionTableDatasetLink", default)]
+    pub decision_table_dataset_link: String,
+    #[serde(rename = "entityApiName", default)]
+    pub entity_api_name: String,
+    #[serde(rename = "flowDefinition", default)]
+    pub flow_definition: String,
+    #[serde(rename = "loyaltyProgramProcess", default)]
+    pub loyalty_program_process: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LoyaltyProgramProcessActionParameter {
+    #[serde(default)]
+    pub operator: LoyaltyPgmProcActParamOper,
+    #[serde(rename = "parameterName", default)]
+    pub parameter_name: String,
+    #[serde(rename = "sequenceNumber", default)]
+    pub sequence_number: f64,
+    #[serde(default)]
+    pub value: String,
+    #[serde(rename = "valueType", default)]
+    pub value_type: LoyaltyPgmProcActParamType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LoyaltyProgramProcessCondition {
+    #[serde(rename = "conditionCriteria", default)]
+    pub condition_criteria: String,
+    #[serde(rename = "conditionFilterCriteria", default)]
+    pub condition_filter_criteria: Vec<LoyaltyProgramProcessConditionFilterCriteria>,
+    #[serde(rename = "conditionName", default)]
+    pub condition_name: String,
+    #[serde(rename = "conditionType", default)]
+    pub condition_type: LoyaltyPgmProcRuleType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LoyaltyProgramProcessConditionFilterCriteria {
+    #[serde(default)]
+    pub operator: LoyaltyPgmProcCondOperator,
+    #[serde(default)]
+    pub sequence: f64,
+    #[serde(rename = "sourceFieldName", default)]
+    pub source_field_name: String,
+    #[serde(default)]
+    pub value: String,
+    #[serde(rename = "valueType", default)]
+    pub value_type: LoyaltyPgmProcCondType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -207,112 +337,6 @@ pub struct LoyaltyProgramProcessParameter {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct LoyaltyProgramProcessRuleStepMapping {
-    #[serde(rename = "associatedStep", default)]
-    pub associated_step: String,
-    #[serde(rename = "parentStep", default)]
-    pub parent_step: String,
-    #[serde(default)]
-    pub sequence: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LoyaltyProgramProcessAction {
-    #[serde(rename = "actionName", default)]
-    pub action_name: String,
-    #[serde(rename = "actionParameters", default)]
-    pub action_parameters: Vec<LoyaltyProgramProcessActionParameter>,
-    #[serde(rename = "actionType", default)]
-    pub action_type: LoyaltyPgmProcActionType,
-    #[serde(rename = "crudActionType", default)]
-    pub crud_action_type: LoyaltyPgmProcCrudActType,
-    #[serde(rename = "decisionTable", default)]
-    pub decision_table: String,
-    #[serde(rename = "decisionTableDatasetLink", default)]
-    pub decision_table_dataset_link: String,
-    #[serde(rename = "entityApiName", default)]
-    pub entity_api_name: String,
-    #[serde(rename = "flowDefinition", default)]
-    pub flow_definition: String,
-    #[serde(rename = "loyaltyProgramProcess", default)]
-    pub loyalty_program_process: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LoyaltyProgramSetup {
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "programProcesses", default)]
-    pub program_processes: Vec<LoyaltyProgramProcess>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BenefitActionParameterValue {
-    #[serde(rename = "parameterValue", default)]
-    pub parameter_value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BenefitAction {
-    #[serde(rename = "benefitActionParameters", default)]
-    pub benefit_action_parameters: Vec<BenefitActionParameter>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "flowDefinition", default)]
-    pub flow_definition: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isBenefitExpirationAllowed", default)]
-    pub is_benefit_expiration_allowed: bool,
-    #[serde(rename = "isBenefitUpdateAllowed", default)]
-    pub is_benefit_update_allowed: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "memberBenefitVariableName", default)]
-    pub member_benefit_variable_name: String,
-    #[serde(rename = "processType", default)]
-    pub process_type: String,
-    #[serde(default)]
-    pub r#type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LoyaltyProgramProcess {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "executionType", default)]
-    pub execution_type: LoyaltyPgmProcExecutionType,
-    #[serde(rename = "journalSubType", default)]
-    pub journal_sub_type: String,
-    #[serde(rename = "journalType", default)]
-    pub journal_type: String,
-    #[serde(rename = "loyaltyTierGroup", default)]
-    pub loyalty_tier_group: String,
-    #[serde(default)]
-    pub parameters: Vec<LoyaltyProgramProcessParameter>,
-    #[serde(rename = "processName", default)]
-    pub process_name: String,
-    #[serde(rename = "processType", default)]
-    pub process_type: String,
-    #[serde(default)]
-    pub rules: Vec<LoyaltyProgramProcessRule>,
-    #[serde(default)]
-    pub status: LoyaltyPgmProcStatus,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct LoyaltyProgramProcessRule {
     #[serde(default)]
     pub actions: Vec<LoyaltyProgramProcessAction>,
@@ -341,45 +365,21 @@ pub struct LoyaltyProgramProcessRule {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct LoyaltyProgramProcessActionParameter {
-    #[serde(default)]
-    pub operator: LoyaltyPgmProcActParamOper,
-    #[serde(rename = "parameterName", default)]
-    pub parameter_name: String,
-    #[serde(rename = "sequenceNumber", default)]
-    pub sequence_number: f64,
-    #[serde(default)]
-    pub value: String,
-    #[serde(rename = "valueType", default)]
-    pub value_type: LoyaltyPgmProcActParamType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LoyaltyProgramProcessConditionFilterCriteria {
-    #[serde(default)]
-    pub operator: LoyaltyPgmProcCondOperator,
+pub struct LoyaltyProgramProcessRuleStepMapping {
+    #[serde(rename = "associatedStep", default)]
+    pub associated_step: String,
+    #[serde(rename = "parentStep", default)]
+    pub parent_step: String,
     #[serde(default)]
     pub sequence: f64,
-    #[serde(rename = "sourceFieldName", default)]
-    pub source_field_name: String,
-    #[serde(default)]
-    pub value: String,
-    #[serde(rename = "valueType", default)]
-    pub value_type: LoyaltyPgmProcCondType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct LoyaltyProgramProcessCondition {
-    #[serde(rename = "conditionCriteria", default)]
-    pub condition_criteria: String,
-    #[serde(rename = "conditionFilterCriteria", default)]
-    pub condition_filter_criteria: Vec<LoyaltyProgramProcessConditionFilterCriteria>,
-    #[serde(rename = "conditionName", default)]
-    pub condition_name: String,
-    #[serde(rename = "conditionType", default)]
-    pub condition_type: LoyaltyPgmProcRuleType,
+pub struct LoyaltyProgramSetup {
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "programProcesses", default)]
+    pub program_processes: Vec<LoyaltyProgramProcess>,
 }

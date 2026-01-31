@@ -49,6 +49,26 @@ pub enum ConnectedAppOauthAccessScope {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExternalServiceRegistrationProviderType {
+    #[default]
+    MuleSoft,
+    Custom,
+    SchemaInferred,
+    Standard,
+    ExternalConnector,
+    Heroku,
+    Anypoint,
+    ApexRest,
+    AgentActionOutputs,
+    IntegProcd,
+    DocumentProcessing,
+    NamedQuery,
+    ModelContextProtocol,
+    AuraEnabled,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum NamedCredentialParamType {
     #[default]
     Url,
@@ -82,70 +102,140 @@ pub enum NamedCredentialType {
     Standard,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExternalServiceRegistrationProviderType {
-    #[default]
-    MuleSoft,
-    Custom,
-    SchemaInferred,
-    Standard,
-    ExternalConnector,
-    Heroku,
-    Anypoint,
-    ApexRest,
-    AgentActionOutputs,
-    IntegProcd,
-    DocumentProcessing,
-    NamedQuery,
-    ModelContextProtocol,
-    AuraEnabled,
+#[serde(rename_all = "camelCase")]
+pub struct ConnectedApp {
+    #[serde(default)]
+    pub attributes: Vec<ConnectedAppAttribute>,
+    #[serde(default)]
+    pub canvas: serde_json::Value,
+    #[serde(rename = "canvasConfig", default)]
+    pub canvas_config: ConnectedAppCanvasConfig,
+    #[serde(rename = "contactEmail", default)]
+    pub contact_email: String,
+    #[serde(rename = "contactPhone", default)]
+    pub contact_phone: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "iconUrl", default)]
+    pub icon_url: String,
+    #[serde(rename = "infoUrl", default)]
+    pub info_url: String,
+    #[serde(rename = "ipRanges", default)]
+    pub ip_ranges: Vec<ConnectedAppIpRange>,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "logoUrl", default)]
+    pub logo_url: String,
+    #[serde(rename = "mobileAppConfig", default)]
+    pub mobile_app_config: ConnectedAppMobileDetailConfig,
+    #[serde(rename = "mobileStartUrl", default)]
+    pub mobile_start_url: String,
+    #[serde(rename = "oauthConfig", default)]
+    pub oauth_config: ConnectedAppOauthConfig,
+    #[serde(rename = "oauthPolicy", default)]
+    pub oauth_policy: ConnectedAppOauthPolicy,
+    #[serde(rename = "permissionSetName", default)]
+    pub permission_set_name: Vec<String>,
+    #[serde(default)]
+    pub plugin: String,
+    #[serde(rename = "pluginExecutionUser", default)]
+    pub plugin_execution_user: String,
+    #[serde(rename = "profileName", default)]
+    pub profile_name: Vec<String>,
+    #[serde(rename = "samlConfig", default)]
+    pub saml_config: ConnectedAppSamlConfig,
+    #[serde(rename = "sessionPolicy", default)]
+    pub session_policy: ConnectedAppSessionPolicy,
+    #[serde(rename = "startUrl", default)]
+    pub start_url: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ConnectedAppOauthIdToken {
-    #[serde(rename = "idTokenAudience", default)]
-    pub id_token_audience: String,
-    #[serde(rename = "idTokenIncludeAttributes", default)]
-    pub id_token_include_attributes: bool,
-    #[serde(rename = "idTokenIncludeCustomPerms", default)]
-    pub id_token_include_custom_perms: bool,
-    #[serde(rename = "idTokenIncludeStandardClaims", default)]
-    pub id_token_include_standard_claims: bool,
-    #[serde(rename = "idTokenValidity", default)]
-    pub id_token_validity: f64,
+pub struct ConnectedAppAttribute {
+    #[serde(default)]
+    pub formula: String,
+    #[serde(default)]
+    pub key: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ConnectedAppSamlConfig {
-    #[serde(rename = "acsUrl", default)]
-    pub acs_url: String,
+pub struct ConnectedAppCanvasConfig {
+    #[serde(rename = "accessMethod", default)]
+    pub access_method: serde_json::Value,
+    #[serde(rename = "canvasUrl", default)]
+    pub canvas_url: String,
+    #[serde(rename = "lifecycleClass", default)]
+    pub lifecycle_class: String,
     #[serde(default)]
-    pub certificate: String,
-    #[serde(rename = "encryptionCertificate", default)]
-    pub encryption_certificate: String,
-    #[serde(rename = "encryptionType", default)]
-    pub encryption_type: serde_json::Value,
-    #[serde(rename = "entityUrl", default)]
-    pub entity_url: String,
+    pub locations: Vec<serde_json::Value>,
     #[serde(default)]
-    pub issuer: String,
-    #[serde(rename = "samlIdpSLOBindingEnum", default)]
-    pub saml_idp_slo_binding_enum: serde_json::Value,
-    #[serde(rename = "samlNameIdFormat", default)]
-    pub saml_name_id_format: serde_json::Value,
-    #[serde(rename = "samlSigningAlgoType", default)]
-    pub saml_signing_algo_type: serde_json::Value,
-    #[serde(rename = "samlSloUrl", default)]
-    pub saml_slo_url: String,
-    #[serde(rename = "samlSubjectCustomAttr", default)]
-    pub saml_subject_custom_attr: String,
-    #[serde(rename = "samlSubjectType", default)]
-    pub saml_subject_type: serde_json::Value,
+    pub options: Vec<serde_json::Value>,
+    #[serde(rename = "samlInitiationMethod", default)]
+    pub saml_initiation_method: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConnectedAppIpRange {
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub end: String,
+    #[serde(default)]
+    pub start: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConnectedAppMobileDetailConfig {
+    #[serde(rename = "applicationBinaryFile", default)]
+    pub application_binary_file: String,
+    #[serde(rename = "applicationBinaryFileName", default)]
+    pub application_binary_file_name: String,
+    #[serde(rename = "applicationBundleIdentifier", default)]
+    pub application_bundle_identifier: String,
+    #[serde(rename = "applicationFileLength", default)]
+    pub application_file_length: f64,
+    #[serde(rename = "applicationIconFile", default)]
+    pub application_icon_file: String,
+    #[serde(rename = "applicationIconFileName", default)]
+    pub application_icon_file_name: String,
+    #[serde(rename = "applicationInstallUrl", default)]
+    pub application_install_url: String,
+    #[serde(rename = "devicePlatform", default)]
+    pub device_platform: serde_json::Value,
+    #[serde(rename = "deviceType", default)]
+    pub device_type: serde_json::Value,
+    #[serde(rename = "minimumOsVersion", default)]
+    pub minimum_os_version: String,
+    #[serde(rename = "privateApp", default)]
+    pub private_app: bool,
+    #[serde(default)]
+    pub version: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConnectedAppOauthAssetToken {
+    #[serde(rename = "assetAudiences", default)]
+    pub asset_audiences: String,
+    #[serde(rename = "assetIncludeAttributes", default)]
+    pub asset_include_attributes: bool,
+    #[serde(rename = "assetIncludeCustomPerms", default)]
+    pub asset_include_custom_perms: bool,
+    #[serde(rename = "assetSigningCertId", default)]
+    pub asset_signing_cert_id: String,
+    #[serde(rename = "assetValidityPeriod", default)]
+    pub asset_validity_period: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -194,6 +284,240 @@ pub struct ConnectedAppOauthConfig {
     pub scopes: Vec<ConnectedAppOauthAccessScope>,
     #[serde(rename = "singleLogoutUrl", default)]
     pub single_logout_url: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConnectedAppOauthIdToken {
+    #[serde(rename = "idTokenAudience", default)]
+    pub id_token_audience: String,
+    #[serde(rename = "idTokenIncludeAttributes", default)]
+    pub id_token_include_attributes: bool,
+    #[serde(rename = "idTokenIncludeCustomPerms", default)]
+    pub id_token_include_custom_perms: bool,
+    #[serde(rename = "idTokenIncludeStandardClaims", default)]
+    pub id_token_include_standard_claims: bool,
+    #[serde(rename = "idTokenValidity", default)]
+    pub id_token_validity: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConnectedAppOauthPolicy {
+    #[serde(rename = "ipRelaxation", default)]
+    pub ip_relaxation: String,
+    #[serde(rename = "isTokenExchangeFlowEnabled", default)]
+    pub is_token_exchange_flow_enabled: bool,
+    #[serde(rename = "refreshTokenPolicy", default)]
+    pub refresh_token_policy: String,
+    #[serde(rename = "singleLogoutUrl", default)]
+    pub single_logout_url: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConnectedAppSamlConfig {
+    #[serde(rename = "acsUrl", default)]
+    pub acs_url: String,
+    #[serde(default)]
+    pub certificate: String,
+    #[serde(rename = "encryptionCertificate", default)]
+    pub encryption_certificate: String,
+    #[serde(rename = "encryptionType", default)]
+    pub encryption_type: serde_json::Value,
+    #[serde(rename = "entityUrl", default)]
+    pub entity_url: String,
+    #[serde(default)]
+    pub issuer: String,
+    #[serde(rename = "samlIdpSLOBindingEnum", default)]
+    pub saml_idp_slo_binding_enum: serde_json::Value,
+    #[serde(rename = "samlNameIdFormat", default)]
+    pub saml_name_id_format: serde_json::Value,
+    #[serde(rename = "samlSigningAlgoType", default)]
+    pub saml_signing_algo_type: serde_json::Value,
+    #[serde(rename = "samlSloUrl", default)]
+    pub saml_slo_url: String,
+    #[serde(rename = "samlSubjectCustomAttr", default)]
+    pub saml_subject_custom_attr: String,
+    #[serde(rename = "samlSubjectType", default)]
+    pub saml_subject_type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ConnectedAppSessionPolicy {
+    #[serde(rename = "policyAction", default)]
+    pub policy_action: String,
+    #[serde(rename = "sessionLevel", default)]
+    pub session_level: String,
+    #[serde(rename = "sessionTimeout", default)]
+    pub session_timeout: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CspTrustedSite {
+    #[serde(rename = "canAccessCamera", default)]
+    pub can_access_camera: bool,
+    #[serde(rename = "canAccessMicrophone", default)]
+    pub can_access_microphone: bool,
+    #[serde(default)]
+    pub context: serde_json::Value,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "endpointUrl", default)]
+    pub endpoint_url: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "isApplicableToConnectSrc", default)]
+    pub is_applicable_to_connect_src: bool,
+    #[serde(rename = "isApplicableToFontSrc", default)]
+    pub is_applicable_to_font_src: bool,
+    #[serde(rename = "isApplicableToFrameSrc", default)]
+    pub is_applicable_to_frame_src: bool,
+    #[serde(rename = "isApplicableToImgSrc", default)]
+    pub is_applicable_to_img_src: bool,
+    #[serde(rename = "isApplicableToMediaSrc", default)]
+    pub is_applicable_to_media_src: bool,
+    #[serde(rename = "isApplicableToStyleSrc", default)]
+    pub is_applicable_to_style_src: bool,
+    #[serde(rename = "mobileExtension", default)]
+    pub mobile_extension: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EventRelayConfig {
+    #[serde(rename = "destinationResourceName", default)]
+    pub destination_resource_name: String,
+    #[serde(rename = "eventChannel", default)]
+    pub event_channel: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "relayOption", default)]
+    pub relay_option: String,
+    #[serde(default)]
+    pub state: serde_json::Value,
+    #[serde(rename = "usageType", default)]
+    pub usage_type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExternalCredential {
+    #[serde(rename = "authenticationProtocol", default)]
+    pub authentication_protocol: serde_json::Value,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "externalCredentialParameters", default)]
+    pub external_credential_parameters: Vec<serde_json::Value>,
+    #[serde(default)]
+    pub label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExternalDataSource {
+    #[serde(rename = "authProvider", default)]
+    pub auth_provider: String,
+    #[serde(default)]
+    pub certificate: String,
+    #[serde(rename = "customConfiguration", default)]
+    pub custom_configuration: String,
+    #[serde(rename = "customHttpHeaders", default)]
+    pub custom_http_headers: Vec<serde_json::Value>,
+    #[serde(default)]
+    pub endpoint: String,
+    #[serde(rename = "externalDataSrcDescriptors", default)]
+    pub external_data_src_descriptors: Vec<serde_json::Value>,
+    #[serde(rename = "isWritable", default)]
+    pub is_writable: bool,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "namedCredential", default)]
+    pub named_credential: String,
+    #[serde(rename = "oauthRefreshToken", default)]
+    pub oauth_refresh_token: String,
+    #[serde(rename = "oauthScope", default)]
+    pub oauth_scope: String,
+    #[serde(rename = "oauthToken", default)]
+    pub oauth_token: String,
+    #[serde(default)]
+    pub password: String,
+    #[serde(rename = "principalType", default)]
+    pub principal_type: serde_json::Value,
+    #[serde(default)]
+    pub protocol: serde_json::Value,
+    #[serde(default)]
+    pub repository: String,
+    #[serde(default)]
+    pub r#type: serde_json::Value,
+    #[serde(default)]
+    pub username: String,
+    #[serde(default)]
+    pub version: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExternalServiceOperation {
+    #[serde(default)]
+    pub active: bool,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExternalServiceRegistration {
+    #[serde(rename = "catalogedApiVersion", default)]
+    pub cataloged_api_version: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "namedCredential", default)]
+    pub named_credential: String,
+    #[serde(rename = "namedCredentialReference", default)]
+    pub named_credential_reference: String,
+    #[serde(default)]
+    pub operations: Vec<ExternalServiceOperation>,
+    #[serde(rename = "providerAssetEndpoint", default)]
+    pub provider_asset_endpoint: String,
+    #[serde(rename = "registrationProvider", default)]
+    pub registration_provider: String,
+    #[serde(rename = "registrationProviderType", default)]
+    pub registration_provider_type: ExternalServiceRegistrationProviderType,
+    #[serde(default)]
+    pub schema: String,
+    #[serde(rename = "schemaAbsoluteUrl", default)]
+    pub schema_absolute_url: String,
+    #[serde(rename = "schemaType", default)]
+    pub schema_type: String,
+    #[serde(rename = "schemaUploadFileExtension", default)]
+    pub schema_upload_file_extension: String,
+    #[serde(rename = "schemaUploadFileName", default)]
+    pub schema_upload_file_name: String,
+    #[serde(rename = "schemaUrl", default)]
+    pub schema_url: String,
+    #[serde(rename = "serviceBinding", default)]
+    pub service_binding: String,
+    #[serde(rename = "serviceDescriptor", default)]
+    pub service_descriptor: String,
+    #[serde(default)]
+    pub status: String,
+    #[serde(rename = "systemVersion", default)]
+    pub system_version: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -265,236 +589,6 @@ pub struct NamedCredential {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ExternalCredential {
-    #[serde(rename = "authenticationProtocol", default)]
-    pub authentication_protocol: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "externalCredentialParameters", default)]
-    pub external_credential_parameters: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExternalDataSource {
-    #[serde(rename = "authProvider", default)]
-    pub auth_provider: String,
-    #[serde(default)]
-    pub certificate: String,
-    #[serde(rename = "customConfiguration", default)]
-    pub custom_configuration: String,
-    #[serde(rename = "customHttpHeaders", default)]
-    pub custom_http_headers: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub endpoint: String,
-    #[serde(rename = "externalDataSrcDescriptors", default)]
-    pub external_data_src_descriptors: Vec<serde_json::Value>,
-    #[serde(rename = "isWritable", default)]
-    pub is_writable: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "namedCredential", default)]
-    pub named_credential: String,
-    #[serde(rename = "oauthRefreshToken", default)]
-    pub oauth_refresh_token: String,
-    #[serde(rename = "oauthScope", default)]
-    pub oauth_scope: String,
-    #[serde(rename = "oauthToken", default)]
-    pub oauth_token: String,
-    #[serde(default)]
-    pub password: String,
-    #[serde(rename = "principalType", default)]
-    pub principal_type: serde_json::Value,
-    #[serde(default)]
-    pub protocol: serde_json::Value,
-    #[serde(default)]
-    pub repository: String,
-    #[serde(default)]
-    pub r#type: serde_json::Value,
-    #[serde(default)]
-    pub username: String,
-    #[serde(default)]
-    pub version: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConnectedAppOauthPolicy {
-    #[serde(rename = "ipRelaxation", default)]
-    pub ip_relaxation: String,
-    #[serde(rename = "isTokenExchangeFlowEnabled", default)]
-    pub is_token_exchange_flow_enabled: bool,
-    #[serde(rename = "refreshTokenPolicy", default)]
-    pub refresh_token_policy: String,
-    #[serde(rename = "singleLogoutUrl", default)]
-    pub single_logout_url: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConnectedAppIpRange {
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub end: String,
-    #[serde(default)]
-    pub start: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RemoteSiteSetting {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "disableProtocolSecurity", default)]
-    pub disable_protocol_security: bool,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(default)]
-    pub url: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PlatformEventChannel {
-    #[serde(rename = "channelType", default)]
-    pub channel_type: serde_json::Value,
-    #[serde(rename = "eventType", default)]
-    pub event_type: serde_json::Value,
-    #[serde(default)]
-    pub label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConnectedAppOauthAssetToken {
-    #[serde(rename = "assetAudiences", default)]
-    pub asset_audiences: String,
-    #[serde(rename = "assetIncludeAttributes", default)]
-    pub asset_include_attributes: bool,
-    #[serde(rename = "assetIncludeCustomPerms", default)]
-    pub asset_include_custom_perms: bool,
-    #[serde(rename = "assetSigningCertId", default)]
-    pub asset_signing_cert_id: String,
-    #[serde(rename = "assetValidityPeriod", default)]
-    pub asset_validity_period: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EventRelayConfig {
-    #[serde(rename = "destinationResourceName", default)]
-    pub destination_resource_name: String,
-    #[serde(rename = "eventChannel", default)]
-    pub event_channel: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "relayOption", default)]
-    pub relay_option: String,
-    #[serde(default)]
-    pub state: serde_json::Value,
-    #[serde(rename = "usageType", default)]
-    pub usage_type: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PlatformEventChannelMember {
-    #[serde(rename = "enrichedFields", default)]
-    pub enriched_fields: Vec<serde_json::Value>,
-    #[serde(rename = "eventChannel", default)]
-    pub event_channel: String,
-    #[serde(rename = "filterExpression", default)]
-    pub filter_expression: String,
-    #[serde(rename = "selectedEntity", default)]
-    pub selected_entity: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConnectedAppAttribute {
-    #[serde(default)]
-    pub formula: String,
-    #[serde(default)]
-    pub key: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConnectedAppMobileDetailConfig {
-    #[serde(rename = "applicationBinaryFile", default)]
-    pub application_binary_file: String,
-    #[serde(rename = "applicationBinaryFileName", default)]
-    pub application_binary_file_name: String,
-    #[serde(rename = "applicationBundleIdentifier", default)]
-    pub application_bundle_identifier: String,
-    #[serde(rename = "applicationFileLength", default)]
-    pub application_file_length: f64,
-    #[serde(rename = "applicationIconFile", default)]
-    pub application_icon_file: String,
-    #[serde(rename = "applicationIconFileName", default)]
-    pub application_icon_file_name: String,
-    #[serde(rename = "applicationInstallUrl", default)]
-    pub application_install_url: String,
-    #[serde(rename = "devicePlatform", default)]
-    pub device_platform: serde_json::Value,
-    #[serde(rename = "deviceType", default)]
-    pub device_type: serde_json::Value,
-    #[serde(rename = "minimumOsVersion", default)]
-    pub minimum_os_version: String,
-    #[serde(rename = "privateApp", default)]
-    pub private_app: bool,
-    #[serde(default)]
-    pub version: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CspTrustedSite {
-    #[serde(rename = "canAccessCamera", default)]
-    pub can_access_camera: bool,
-    #[serde(rename = "canAccessMicrophone", default)]
-    pub can_access_microphone: bool,
-    #[serde(default)]
-    pub context: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "endpointUrl", default)]
-    pub endpoint_url: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isApplicableToConnectSrc", default)]
-    pub is_applicable_to_connect_src: bool,
-    #[serde(rename = "isApplicableToFontSrc", default)]
-    pub is_applicable_to_font_src: bool,
-    #[serde(rename = "isApplicableToFrameSrc", default)]
-    pub is_applicable_to_frame_src: bool,
-    #[serde(rename = "isApplicableToImgSrc", default)]
-    pub is_applicable_to_img_src: bool,
-    #[serde(rename = "isApplicableToMediaSrc", default)]
-    pub is_applicable_to_media_src: bool,
-    #[serde(rename = "isApplicableToStyleSrc", default)]
-    pub is_applicable_to_style_src: bool,
-    #[serde(rename = "mobileExtension", default)]
-    pub mobile_extension: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct NamedCredentialParameter {
     #[serde(default)]
     pub certificate: String,
@@ -525,133 +619,39 @@ pub struct NamedCredentialParameter {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ConnectedApp {
-    #[serde(default)]
-    pub attributes: Vec<ConnectedAppAttribute>,
-    #[serde(default)]
-    pub canvas: serde_json::Value,
-    #[serde(rename = "canvasConfig", default)]
-    pub canvas_config: ConnectedAppCanvasConfig,
-    #[serde(rename = "contactEmail", default)]
-    pub contact_email: String,
-    #[serde(rename = "contactPhone", default)]
-    pub contact_phone: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "iconUrl", default)]
-    pub icon_url: String,
-    #[serde(rename = "infoUrl", default)]
-    pub info_url: String,
-    #[serde(rename = "ipRanges", default)]
-    pub ip_ranges: Vec<ConnectedAppIpRange>,
+pub struct PlatformEventChannel {
+    #[serde(rename = "channelType", default)]
+    pub channel_type: serde_json::Value,
+    #[serde(rename = "eventType", default)]
+    pub event_type: serde_json::Value,
     #[serde(default)]
     pub label: String,
-    #[serde(rename = "logoUrl", default)]
-    pub logo_url: String,
-    #[serde(rename = "mobileAppConfig", default)]
-    pub mobile_app_config: ConnectedAppMobileDetailConfig,
-    #[serde(rename = "mobileStartUrl", default)]
-    pub mobile_start_url: String,
-    #[serde(rename = "oauthConfig", default)]
-    pub oauth_config: ConnectedAppOauthConfig,
-    #[serde(rename = "oauthPolicy", default)]
-    pub oauth_policy: ConnectedAppOauthPolicy,
-    #[serde(rename = "permissionSetName", default)]
-    pub permission_set_name: Vec<String>,
-    #[serde(default)]
-    pub plugin: String,
-    #[serde(rename = "pluginExecutionUser", default)]
-    pub plugin_execution_user: String,
-    #[serde(rename = "profileName", default)]
-    pub profile_name: Vec<String>,
-    #[serde(rename = "samlConfig", default)]
-    pub saml_config: ConnectedAppSamlConfig,
-    #[serde(rename = "sessionPolicy", default)]
-    pub session_policy: ConnectedAppSessionPolicy,
-    #[serde(rename = "startUrl", default)]
-    pub start_url: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ExternalServiceRegistration {
-    #[serde(rename = "catalogedApiVersion", default)]
-    pub cataloged_api_version: String,
+pub struct PlatformEventChannelMember {
+    #[serde(rename = "enrichedFields", default)]
+    pub enriched_fields: Vec<serde_json::Value>,
+    #[serde(rename = "eventChannel", default)]
+    pub event_channel: String,
+    #[serde(rename = "filterExpression", default)]
+    pub filter_expression: String,
+    #[serde(rename = "selectedEntity", default)]
+    pub selected_entity: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RemoteSiteSetting {
     #[serde(default)]
     pub description: String,
+    #[serde(rename = "disableProtocolSecurity", default)]
+    pub disable_protocol_security: bool,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
     #[serde(default)]
-    pub label: String,
-    #[serde(rename = "namedCredential", default)]
-    pub named_credential: String,
-    #[serde(rename = "namedCredentialReference", default)]
-    pub named_credential_reference: String,
-    #[serde(default)]
-    pub operations: Vec<ExternalServiceOperation>,
-    #[serde(rename = "providerAssetEndpoint", default)]
-    pub provider_asset_endpoint: String,
-    #[serde(rename = "registrationProvider", default)]
-    pub registration_provider: String,
-    #[serde(rename = "registrationProviderType", default)]
-    pub registration_provider_type: ExternalServiceRegistrationProviderType,
-    #[serde(default)]
-    pub schema: String,
-    #[serde(rename = "schemaAbsoluteUrl", default)]
-    pub schema_absolute_url: String,
-    #[serde(rename = "schemaType", default)]
-    pub schema_type: String,
-    #[serde(rename = "schemaUploadFileExtension", default)]
-    pub schema_upload_file_extension: String,
-    #[serde(rename = "schemaUploadFileName", default)]
-    pub schema_upload_file_name: String,
-    #[serde(rename = "schemaUrl", default)]
-    pub schema_url: String,
-    #[serde(rename = "serviceBinding", default)]
-    pub service_binding: String,
-    #[serde(rename = "serviceDescriptor", default)]
-    pub service_descriptor: String,
-    #[serde(default)]
-    pub status: String,
-    #[serde(rename = "systemVersion", default)]
-    pub system_version: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExternalServiceOperation {
-    #[serde(default)]
-    pub active: bool,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConnectedAppCanvasConfig {
-    #[serde(rename = "accessMethod", default)]
-    pub access_method: serde_json::Value,
-    #[serde(rename = "canvasUrl", default)]
-    pub canvas_url: String,
-    #[serde(rename = "lifecycleClass", default)]
-    pub lifecycle_class: String,
-    #[serde(default)]
-    pub locations: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub options: Vec<serde_json::Value>,
-    #[serde(rename = "samlInitiationMethod", default)]
-    pub saml_initiation_method: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConnectedAppSessionPolicy {
-    #[serde(rename = "policyAction", default)]
-    pub policy_action: String,
-    #[serde(rename = "sessionLevel", default)]
-    pub session_level: String,
-    #[serde(rename = "sessionTimeout", default)]
-    pub session_timeout: f64,
+    pub url: String,
 }

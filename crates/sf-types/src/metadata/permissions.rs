@@ -35,190 +35,6 @@ pub enum SharingModel {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ProfileSessionSetting {
-    #[serde(rename = "externalCommunityUserIdentityVerif", default)]
-    pub external_community_user_identity_verif: bool,
-    #[serde(rename = "forceLogout", default)]
-    pub force_logout: bool,
-    #[serde(default)]
-    pub profile: String,
-    #[serde(rename = "requiredSessionLevel", default)]
-    pub required_session_level: serde_json::Value,
-    #[serde(rename = "sessionPersistence", default)]
-    pub session_persistence: bool,
-    #[serde(rename = "sessionTimeout", default)]
-    pub session_timeout: f64,
-    #[serde(rename = "sessionTimeoutWarning", default)]
-    pub session_timeout_warning: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProfileCustomMetadataTypeAccess {
-    #[serde(default)]
-    pub enabled: bool,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProfileAgentAccess {
-    #[serde(rename = "agentName", default)]
-    pub agent_name: String,
-    #[serde(default)]
-    pub enabled: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PermissionSetUserPermission {
-    #[serde(default)]
-    pub enabled: bool,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProfileFieldLevelSecurity {
-    #[serde(default)]
-    pub editable: bool,
-    #[serde(default)]
-    pub field: String,
-    #[serde(default)]
-    pub readable: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProfileExternalDataSourceAccess {
-    #[serde(default)]
-    pub enabled: bool,
-    #[serde(rename = "externalDataSource", default)]
-    pub external_data_source: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PermissionSetGroup {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "hasActivationRequired", default)]
-    pub has_activation_required: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "mutingPermissionSets", default)]
-    pub muting_permission_sets: Vec<String>,
-    #[serde(rename = "permissionSets", default)]
-    pub permission_sets: Vec<String>,
-    #[serde(default)]
-    pub status: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProfileUserPermission {
-    #[serde(default)]
-    pub enabled: bool,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SharingReasonTranslation {
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PermissionSetApplicationVisibility {
-    #[serde(default)]
-    pub application: String,
-    #[serde(default)]
-    pub visible: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PermissionSetAgentAccess {
-    #[serde(rename = "agentName", default)]
-    pub agent_name: String,
-    #[serde(default)]
-    pub enabled: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProfileSearchLayouts {
-    #[serde(default)]
-    pub fields: Vec<String>,
-    #[serde(rename = "profileName", default)]
-    pub profile_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProfileLoginHours {
-    #[serde(rename = "fridayEnd", default)]
-    pub friday_end: String,
-    #[serde(rename = "fridayStart", default)]
-    pub friday_start: String,
-    #[serde(rename = "mondayEnd", default)]
-    pub monday_end: String,
-    #[serde(rename = "mondayStart", default)]
-    pub monday_start: String,
-    #[serde(rename = "saturdayEnd", default)]
-    pub saturday_end: String,
-    #[serde(rename = "saturdayStart", default)]
-    pub saturday_start: String,
-    #[serde(rename = "sundayEnd", default)]
-    pub sunday_end: String,
-    #[serde(rename = "sundayStart", default)]
-    pub sunday_start: String,
-    #[serde(rename = "thursdayEnd", default)]
-    pub thursday_end: String,
-    #[serde(rename = "thursdayStart", default)]
-    pub thursday_start: String,
-    #[serde(rename = "tuesdayEnd", default)]
-    pub tuesday_end: String,
-    #[serde(rename = "tuesdayStart", default)]
-    pub tuesday_start: String,
-    #[serde(rename = "wednesdayEnd", default)]
-    pub wednesday_end: String,
-    #[serde(rename = "wednesdayStart", default)]
-    pub wednesday_start: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProfileFlowAccess {
-    #[serde(default)]
-    pub enabled: bool,
-    #[serde(default)]
-    pub flow: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct PermissionSet {
     #[serde(rename = "agentAccesses", default)]
     pub agent_accesses: Vec<PermissionSetAgentAccess>,
@@ -269,11 +85,21 @@ pub struct PermissionSet {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PermissionSetRecordTypeVisibility {
-    #[serde(rename = "recordType", default)]
-    pub record_type: String,
+pub struct PermissionSetAgentAccess {
+    #[serde(rename = "agentName", default)]
+    pub agent_name: String,
     #[serde(default)]
-    pub visible: bool,
+    pub enabled: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PermissionSetApexClassAccess {
+    #[serde(rename = "apexClass", default)]
+    pub apex_class: String,
+    #[serde(default)]
+    pub enabled: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -289,81 +115,9 @@ pub struct PermissionSetApexPageAccess {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct SharingRules {
-    #[serde(rename = "sharingCriteriaRules", default)]
-    pub sharing_criteria_rules: Vec<serde_json::Value>,
-    #[serde(rename = "sharingGuestRules", default)]
-    pub sharing_guest_rules: Vec<serde_json::Value>,
-    #[serde(rename = "sharingOwnerRules", default)]
-    pub sharing_owner_rules: Vec<serde_json::Value>,
-    #[serde(rename = "sharingTerritoryRules", default)]
-    pub sharing_territory_rules: Vec<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SharingSet {
-    #[serde(rename = "accessMappings", default)]
-    pub access_mappings: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub profiles: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProfileCustomSettingAccess {
-    #[serde(default)]
-    pub enabled: bool,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProfileLayoutAssignment {
-    #[serde(default)]
-    pub layout: String,
-    #[serde(rename = "recordType", default)]
-    pub record_type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProfileApexClassAccess {
-    #[serde(rename = "apexClass", default)]
-    pub apex_class: String,
-    #[serde(default)]
-    pub enabled: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProfileLoginIpRange {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "endAddress", default)]
-    pub end_address: String,
-    #[serde(rename = "startAddress", default)]
-    pub start_address: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProfileApplicationVisibility {
+pub struct PermissionSetApplicationVisibility {
     #[serde(default)]
     pub application: String,
-    #[serde(default)]
-    pub default: bool,
     #[serde(default)]
     pub visible: bool,
 }
@@ -381,17 +135,115 @@ pub struct PermissionSetCustomMetadataTypeAccess {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct SharingBaseRule {
-    #[serde(rename = "accessLevel", default)]
-    pub access_level: String,
-    #[serde(rename = "accountSettings", default)]
-    pub account_settings: serde_json::Value,
+pub struct PermissionSetCustomPermissions {
+    #[serde(default)]
+    pub enabled: bool,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PermissionSetCustomSettingAccess {
+    #[serde(default)]
+    pub enabled: bool,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PermissionSetEmailRoutingAddressAccess {
+    #[serde(default)]
+    pub enabled: bool,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PermissionSetExternalCredentialPrincipalAccess {
+    #[serde(default)]
+    pub enabled: bool,
+    #[serde(rename = "externalCredentialPrincipal", default)]
+    pub external_credential_principal: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PermissionSetExternalDataSourceAccess {
+    #[serde(default)]
+    pub enabled: bool,
+    #[serde(rename = "externalDataSource", default)]
+    pub external_data_source: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PermissionSetFieldPermissions {
+    #[serde(default)]
+    pub editable: bool,
+    #[serde(default)]
+    pub field: String,
+    #[serde(default)]
+    pub readable: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PermissionSetFlowAccess {
+    #[serde(default)]
+    pub enabled: bool,
+    #[serde(default)]
+    pub flow: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PermissionSetGroup {
     #[serde(default)]
     pub description: String,
+    #[serde(rename = "hasActivationRequired", default)]
+    pub has_activation_required: bool,
     #[serde(default)]
     pub label: String,
-    #[serde(rename = "sharedTo", default)]
-    pub shared_to: serde_json::Value,
+    #[serde(rename = "mutingPermissionSets", default)]
+    pub muting_permission_sets: Vec<String>,
+    #[serde(rename = "permissionSets", default)]
+    pub permission_sets: Vec<String>,
+    #[serde(default)]
+    pub status: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PermissionSetLicenseDefinition {
+    #[serde(rename = "customPermissions", default)]
+    pub custom_permissions: Vec<PermissionSetLicenseDefinitionCustomPermission>,
+    #[serde(rename = "isSupplementLicense", default)]
+    pub is_supplement_license: bool,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "licenseExpirationPolicy", default)]
+    pub license_expiration_policy: serde_json::Value,
+    #[serde(rename = "userLicenseRestrictions", default)]
+    pub user_license_restrictions: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PermissionSetLicenseDefinitionCustomPermission {
+    #[serde(default)]
+    pub name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -425,71 +277,11 @@ pub struct PermissionSetObjectPermissions {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PermissionSetTabSetting {
+pub struct PermissionSetRecordTypeVisibility {
+    #[serde(rename = "recordType", default)]
+    pub record_type: String,
     #[serde(default)]
-    pub tab: String,
-    #[serde(default)]
-    pub visibility: PermissionSetTabVisibility,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProfileApexPageAccess {
-    #[serde(rename = "apexPage", default)]
-    pub apex_page: String,
-    #[serde(default)]
-    pub enabled: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PermissionSetFieldPermissions {
-    #[serde(default)]
-    pub editable: bool,
-    #[serde(default)]
-    pub field: String,
-    #[serde(default)]
-    pub readable: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProfileCustomPermissions {
-    #[serde(default)]
-    pub enabled: bool,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PermissionSetFlowAccess {
-    #[serde(default)]
-    pub enabled: bool,
-    #[serde(default)]
-    pub flow: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PermissionSetCustomPermissions {
-    #[serde(default)]
-    pub enabled: bool,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SharingRecalculation {
-    #[serde(rename = "className", default)]
-    pub class_name: String,
+    pub visible: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -505,91 +297,21 @@ pub struct PermissionSetServicePresenceStatusAccess {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ProfileRecordTypeVisibility {
-    #[serde(default)]
-    pub default: bool,
-    #[serde(rename = "personAccountDefault", default)]
-    pub person_account_default: bool,
-    #[serde(rename = "recordType", default)]
-    pub record_type: String,
-    #[serde(default)]
-    pub visible: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProfileServicePresenceStatusAccess {
-    #[serde(default)]
-    pub enabled: bool,
-    #[serde(rename = "servicePresenceStatus", default)]
-    pub service_presence_status: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProfileTabVisibility {
+pub struct PermissionSetTabSetting {
     #[serde(default)]
     pub tab: String,
     #[serde(default)]
-    pub visibility: serde_json::Value,
+    pub visibility: PermissionSetTabVisibility,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PermissionSetLicenseDefinition {
-    #[serde(rename = "customPermissions", default)]
-    pub custom_permissions: Vec<PermissionSetLicenseDefinitionCustomPermission>,
-    #[serde(rename = "isSupplementLicense", default)]
-    pub is_supplement_license: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "licenseExpirationPolicy", default)]
-    pub license_expiration_policy: serde_json::Value,
-    #[serde(rename = "userLicenseRestrictions", default)]
-    pub user_license_restrictions: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProfileActionOverride {
-    #[serde(rename = "actionName", default)]
-    pub action_name: String,
-    #[serde(default)]
-    pub content: String,
-    #[serde(rename = "formFactor", default)]
-    pub form_factor: serde_json::Value,
-    #[serde(rename = "pageOrSobjectType", default)]
-    pub page_or_sobject_type: String,
-    #[serde(rename = "recordType", default)]
-    pub record_type: String,
-    #[serde(default)]
-    pub r#type: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PermissionSetExternalDataSourceAccess {
+pub struct PermissionSetUserPermission {
     #[serde(default)]
     pub enabled: bool,
-    #[serde(rename = "externalDataSource", default)]
-    pub external_data_source: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProfileCategoryGroupVisibility {
-    #[serde(rename = "dataCategories", default)]
-    pub data_categories: Vec<String>,
-    #[serde(rename = "dataCategoryGroup", default)]
-    pub data_category_group: String,
     #[serde(default)]
-    pub visibility: serde_json::Value,
+    pub name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -649,7 +371,79 @@ pub struct Profile {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PermissionSetEmailRoutingAddressAccess {
+pub struct ProfileActionOverride {
+    #[serde(rename = "actionName", default)]
+    pub action_name: String,
+    #[serde(default)]
+    pub content: String,
+    #[serde(rename = "formFactor", default)]
+    pub form_factor: serde_json::Value,
+    #[serde(rename = "pageOrSobjectType", default)]
+    pub page_or_sobject_type: String,
+    #[serde(rename = "recordType", default)]
+    pub record_type: String,
+    #[serde(default)]
+    pub r#type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProfileAgentAccess {
+    #[serde(rename = "agentName", default)]
+    pub agent_name: String,
+    #[serde(default)]
+    pub enabled: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProfileApexClassAccess {
+    #[serde(rename = "apexClass", default)]
+    pub apex_class: String,
+    #[serde(default)]
+    pub enabled: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProfileApexPageAccess {
+    #[serde(rename = "apexPage", default)]
+    pub apex_page: String,
+    #[serde(default)]
+    pub enabled: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProfileApplicationVisibility {
+    #[serde(default)]
+    pub application: String,
+    #[serde(default)]
+    pub default: bool,
+    #[serde(default)]
+    pub visible: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProfileCategoryGroupVisibility {
+    #[serde(rename = "dataCategories", default)]
+    pub data_categories: Vec<String>,
+    #[serde(rename = "dataCategoryGroup", default)]
+    pub data_category_group: String,
+    #[serde(default)]
+    pub visibility: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProfileCustomMetadataTypeAccess {
     #[serde(default)]
     pub enabled: bool,
     #[serde(default)]
@@ -659,11 +453,137 @@ pub struct PermissionSetEmailRoutingAddressAccess {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PermissionSetCustomSettingAccess {
+pub struct ProfileCustomPermissions {
     #[serde(default)]
     pub enabled: bool,
     #[serde(default)]
     pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProfileCustomSettingAccess {
+    #[serde(default)]
+    pub enabled: bool,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProfileExternalDataSourceAccess {
+    #[serde(default)]
+    pub enabled: bool,
+    #[serde(rename = "externalDataSource", default)]
+    pub external_data_source: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProfileFieldLevelSecurity {
+    #[serde(default)]
+    pub editable: bool,
+    #[serde(default)]
+    pub field: String,
+    #[serde(default)]
+    pub readable: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProfileFlowAccess {
+    #[serde(default)]
+    pub enabled: bool,
+    #[serde(default)]
+    pub flow: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProfileLayoutAssignment {
+    #[serde(default)]
+    pub layout: String,
+    #[serde(rename = "recordType", default)]
+    pub record_type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProfileLoginHours {
+    #[serde(rename = "fridayEnd", default)]
+    pub friday_end: String,
+    #[serde(rename = "fridayStart", default)]
+    pub friday_start: String,
+    #[serde(rename = "mondayEnd", default)]
+    pub monday_end: String,
+    #[serde(rename = "mondayStart", default)]
+    pub monday_start: String,
+    #[serde(rename = "saturdayEnd", default)]
+    pub saturday_end: String,
+    #[serde(rename = "saturdayStart", default)]
+    pub saturday_start: String,
+    #[serde(rename = "sundayEnd", default)]
+    pub sunday_end: String,
+    #[serde(rename = "sundayStart", default)]
+    pub sunday_start: String,
+    #[serde(rename = "thursdayEnd", default)]
+    pub thursday_end: String,
+    #[serde(rename = "thursdayStart", default)]
+    pub thursday_start: String,
+    #[serde(rename = "tuesdayEnd", default)]
+    pub tuesday_end: String,
+    #[serde(rename = "tuesdayStart", default)]
+    pub tuesday_start: String,
+    #[serde(rename = "wednesdayEnd", default)]
+    pub wednesday_end: String,
+    #[serde(rename = "wednesdayStart", default)]
+    pub wednesday_start: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProfileLoginIpRange {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "endAddress", default)]
+    pub end_address: String,
+    #[serde(rename = "startAddress", default)]
+    pub start_address: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProfileObjectPermissions {
+    #[serde(rename = "allowCreate", default)]
+    pub allow_create: bool,
+    #[serde(rename = "allowDelete", default)]
+    pub allow_delete: bool,
+    #[serde(rename = "allowEdit", default)]
+    pub allow_edit: bool,
+    #[serde(rename = "allowRead", default)]
+    pub allow_read: bool,
+    #[serde(rename = "customizeSetup", default)]
+    pub customize_setup: bool,
+    #[serde(rename = "deleteSetup", default)]
+    pub delete_setup: bool,
+    #[serde(rename = "modifyAllRecords", default)]
+    pub modify_all_records: bool,
+    #[serde(default)]
+    pub object: String,
+    #[serde(rename = "viewAllFields", default)]
+    pub view_all_fields: bool,
+    #[serde(rename = "viewAllRecords", default)]
+    pub view_all_records: bool,
+    #[serde(rename = "viewSetup", default)]
+    pub view_setup: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -697,27 +617,73 @@ pub struct ProfilePasswordPolicy {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PermissionSetExternalCredentialPrincipalAccess {
+pub struct ProfileRecordTypeVisibility {
     #[serde(default)]
-    pub enabled: bool,
-    #[serde(rename = "externalCredentialPrincipal", default)]
-    pub external_credential_principal: String,
+    pub default: bool,
+    #[serde(rename = "personAccountDefault", default)]
+    pub person_account_default: bool,
+    #[serde(rename = "recordType", default)]
+    pub record_type: String,
+    #[serde(default)]
+    pub visible: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PermissionSetApexClassAccess {
-    #[serde(rename = "apexClass", default)]
-    pub apex_class: String,
+pub struct ProfileSearchLayouts {
     #[serde(default)]
-    pub enabled: bool,
+    pub fields: Vec<String>,
+    #[serde(rename = "profileName", default)]
+    pub profile_name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PermissionSetLicenseDefinitionCustomPermission {
+pub struct ProfileServicePresenceStatusAccess {
+    #[serde(default)]
+    pub enabled: bool,
+    #[serde(rename = "servicePresenceStatus", default)]
+    pub service_presence_status: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProfileSessionSetting {
+    #[serde(rename = "externalCommunityUserIdentityVerif", default)]
+    pub external_community_user_identity_verif: bool,
+    #[serde(rename = "forceLogout", default)]
+    pub force_logout: bool,
+    #[serde(default)]
+    pub profile: String,
+    #[serde(rename = "requiredSessionLevel", default)]
+    pub required_session_level: serde_json::Value,
+    #[serde(rename = "sessionPersistence", default)]
+    pub session_persistence: bool,
+    #[serde(rename = "sessionTimeout", default)]
+    pub session_timeout: f64,
+    #[serde(rename = "sessionTimeoutWarning", default)]
+    pub session_timeout_warning: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProfileTabVisibility {
+    #[serde(default)]
+    pub tab: String,
+    #[serde(default)]
+    pub visibility: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProfileUserPermission {
+    #[serde(default)]
+    pub enabled: bool,
     #[serde(default)]
     pub name: String,
 }
@@ -725,27 +691,61 @@ pub struct PermissionSetLicenseDefinitionCustomPermission {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ProfileObjectPermissions {
-    #[serde(rename = "allowCreate", default)]
-    pub allow_create: bool,
-    #[serde(rename = "allowDelete", default)]
-    pub allow_delete: bool,
-    #[serde(rename = "allowEdit", default)]
-    pub allow_edit: bool,
-    #[serde(rename = "allowRead", default)]
-    pub allow_read: bool,
-    #[serde(rename = "customizeSetup", default)]
-    pub customize_setup: bool,
-    #[serde(rename = "deleteSetup", default)]
-    pub delete_setup: bool,
-    #[serde(rename = "modifyAllRecords", default)]
-    pub modify_all_records: bool,
+pub struct SharingBaseRule {
+    #[serde(rename = "accessLevel", default)]
+    pub access_level: String,
+    #[serde(rename = "accountSettings", default)]
+    pub account_settings: serde_json::Value,
     #[serde(default)]
-    pub object: String,
-    #[serde(rename = "viewAllFields", default)]
-    pub view_all_fields: bool,
-    #[serde(rename = "viewAllRecords", default)]
-    pub view_all_records: bool,
-    #[serde(rename = "viewSetup", default)]
-    pub view_setup: bool,
+    pub description: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "sharedTo", default)]
+    pub shared_to: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SharingReasonTranslation {
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SharingRecalculation {
+    #[serde(rename = "className", default)]
+    pub class_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SharingRules {
+    #[serde(rename = "sharingCriteriaRules", default)]
+    pub sharing_criteria_rules: Vec<serde_json::Value>,
+    #[serde(rename = "sharingGuestRules", default)]
+    pub sharing_guest_rules: Vec<serde_json::Value>,
+    #[serde(rename = "sharingOwnerRules", default)]
+    pub sharing_owner_rules: Vec<serde_json::Value>,
+    #[serde(rename = "sharingTerritoryRules", default)]
+    pub sharing_territory_rules: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SharingSet {
+    #[serde(rename = "accessMappings", default)]
+    pub access_mappings: Vec<serde_json::Value>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub profiles: Vec<String>,
 }

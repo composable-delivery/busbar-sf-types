@@ -10,49 +10,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AnalyticsWorkspaceAssetType {
-    #[default]
-    AnalyticsDashboard,
-    AnalyticsVisualization,
-    SemanticModel,
-    MktDataModelObject,
-    MktCalculatedInsightObject,
-    MktDataLakeObject,
-    MktDataConnection,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AnalyticsWorkspaceAssetUsageType {
-    #[default]
-    Created,
-    Referenced,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AnalyticsWidgetType {
-    #[default]
-    visualization,
-    text,
-    filter,
-    parameter,
-    button,
-    metric,
-    container,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DatasetColumnDataType {
-    #[default]
-    Dimensions,
-    Dates,
-    Measures,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum AnalyticsActionEventType {
     #[default]
     click,
@@ -75,34 +32,81 @@ pub enum AnalyticsDynamicTokenType {
     query,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct WaveTemplateBundle {
-    #[serde(rename = "assetIcon", default)]
-    pub asset_icon: String,
-    #[serde(rename = "assetVersion", default)]
-    pub asset_version: f64,
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "templateType", default)]
-    pub template_type: String,
+pub enum AnalyticsWidgetType {
+    #[default]
+    visualization,
+    text,
+    filter,
+    parameter,
+    button,
+    metric,
+    container,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum AnalyticsWorkspaceAssetType {
+    #[default]
+    AnalyticsDashboard,
+    AnalyticsVisualization,
+    SemanticModel,
+    MktDataModelObject,
+    MktCalculatedInsightObject,
+    MktDataLakeObject,
+    MktDataConnection,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum AnalyticsWorkspaceAssetUsageType {
+    #[default]
+    Created,
+    Referenced,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DatasetColumnDataType {
+    #[default]
+    Dimensions,
+    Dates,
+    Measures,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct WaveXmdFormattingBin {
+pub struct AnalyticSnapshot {
     #[serde(default)]
-    pub bin: String,
-    #[serde(rename = "formatValue", default)]
-    pub format_value: String,
+    pub description: String,
+    #[serde(rename = "groupColumn", default)]
+    pub group_column: String,
     #[serde(default)]
-    pub label: String,
-    #[serde(rename = "sortIndex", default)]
-    pub sort_index: f64,
+    pub mappings: Vec<AnalyticSnapshotMapping>,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "runningUser", default)]
+    pub running_user: String,
+    #[serde(rename = "sourceReport", default)]
+    pub source_report: String,
+    #[serde(rename = "targetObject", default)]
+    pub target_object: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AnalyticSnapshotMapping {
+    #[serde(rename = "aggregateType", default)]
+    pub aggregate_type: serde_json::Value,
+    #[serde(rename = "sourceField", default)]
+    pub source_field: String,
+    #[serde(rename = "sourceType", default)]
+    pub source_type: serde_json::Value,
+    #[serde(rename = "targetField", default)]
+    pub target_field: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -124,15 +128,177 @@ pub struct AnalyticsAssetAction {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct AnalyticSnapshotMapping {
-    #[serde(rename = "aggregateType", default)]
-    pub aggregate_type: serde_json::Value,
-    #[serde(rename = "sourceField", default)]
-    pub source_field: String,
-    #[serde(rename = "sourceType", default)]
-    pub source_type: serde_json::Value,
-    #[serde(rename = "targetField", default)]
-    pub target_field: String,
+pub struct AnalyticsButtonWidgetDef {
+    #[serde(default)]
+    pub parameters: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AnalyticsCloudComponentLayoutItem {
+    #[serde(rename = "assetType", default)]
+    pub asset_type: String,
+    #[serde(rename = "devName", default)]
+    pub dev_name: String,
+    #[serde(default)]
+    pub error: String,
+    #[serde(default)]
+    pub filter: String,
+    #[serde(default)]
+    pub height: f64,
+    #[serde(rename = "hideOnError", default)]
+    pub hide_on_error: bool,
+    #[serde(rename = "showHeader", default)]
+    pub show_header: bool,
+    #[serde(rename = "showSharing", default)]
+    pub show_sharing: bool,
+    #[serde(rename = "showTitle", default)]
+    pub show_title: bool,
+    #[serde(default)]
+    pub width: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AnalyticsContainerWidgetDef {
+    #[serde(default)]
+    pub parameters: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AnalyticsDashPageWidget {
+    #[serde(rename = "analyticsDashboardWidget", default)]
+    pub analytics_dashboard_widget: String,
+    #[serde(default)]
+    pub colspan: String,
+    #[serde(default)]
+    pub column: String,
+    #[serde(default)]
+    pub row: String,
+    #[serde(default)]
+    pub rowspan: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AnalyticsDashboard {
+    #[serde(rename = "analyticsWorkspace", default)]
+    pub analytics_workspace: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "lastDraftModifiedDate", default)]
+    pub last_draft_modified_date: String,
+    #[serde(rename = "lastPublishedDate", default)]
+    pub last_published_date: String,
+    #[serde(default)]
+    pub layouts: Vec<AnalyticsDashboardLayout>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub style: String,
+    #[serde(rename = "templateAssetSourceName", default)]
+    pub template_asset_source_name: String,
+    #[serde(rename = "templateSource", default)]
+    pub template_source: String,
+    #[serde(default)]
+    pub version: f64,
+    #[serde(default)]
+    pub widgets: Vec<AnalyticsDashboardWidget>,
+    #[serde(rename = "workspaceAssetRelationships", default)]
+    pub workspace_asset_relationships: Vec<AnalyticsWorkspaceAsset>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AnalyticsDashboardLayout {
+    #[serde(rename = "analyticsDashboard", default)]
+    pub analytics_dashboard: String,
+    #[serde(rename = "analyticsDashboardVersion", default)]
+    pub analytics_dashboard_version: String,
+    #[serde(rename = "columnCount", default)]
+    pub column_count: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "layoutName", default)]
+    pub layout_name: String,
+    #[serde(rename = "maxWidth", default)]
+    pub max_width: String,
+    #[serde(default)]
+    pub pages: Vec<AnalyticsDashboardPage>,
+    #[serde(rename = "rowHeight", default)]
+    pub row_height: String,
+    #[serde(default)]
+    pub style: String,
+    #[serde(default)]
+    pub version: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AnalyticsDashboardPage {
+    #[serde(default)]
+    pub index: f64,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "pageName", default)]
+    pub page_name: String,
+    #[serde(rename = "pageWidgets", default)]
+    pub page_widgets: Vec<AnalyticsDashPageWidget>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AnalyticsDashboardWidget {
+    #[serde(rename = "analyticsDashboard", default)]
+    pub analytics_dashboard: String,
+    #[serde(rename = "analyticsDashboardVersion", default)]
+    pub analytics_dashboard_version: String,
+    #[serde(rename = "buttonWidgetDefs", default)]
+    pub button_widget_defs: Vec<AnalyticsButtonWidgetDef>,
+    #[serde(rename = "containerWidgetDefs", default)]
+    pub container_widget_defs: Vec<AnalyticsContainerWidgetDef>,
+    #[serde(rename = "dynamicTokens", default)]
+    pub dynamic_tokens: Vec<serde_json::Value>,
+    #[serde(rename = "filterWidgetDefs", default)]
+    pub filter_widget_defs: Vec<AnalyticsFilterWidgetDef>,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "metricWidgetDefs", default)]
+    pub metric_widget_defs: Vec<AnalyticsMetricWidgetDef>,
+    #[serde(rename = "parameterWidgetDefs", default)]
+    pub parameter_widget_defs: Vec<AnalyticsParamWidgetDef>,
+    #[serde(rename = "textWidgetDefs", default)]
+    pub text_widget_defs: Vec<AnalyticsTextWidgetDef>,
+    #[serde(default)]
+    pub r#type: AnalyticsWidgetType,
+    #[serde(rename = "vizWidgetDefs", default)]
+    pub viz_widget_defs: Vec<AnalyticsVizWidgetDef>,
+    #[serde(rename = "widgetActions", default)]
+    pub widget_actions: Vec<AnalyticsAssetAction>,
+    #[serde(rename = "widgetName", default)]
+    pub widget_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AnalyticsDatasetDefinition {
+    #[serde(rename = "datasetCategory", default)]
+    pub dataset_category: String,
+    #[serde(rename = "datasetName", default)]
+    pub dataset_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "usageCategory", default)]
+    pub usage_category: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -150,103 +316,69 @@ pub struct AnalyticsFilterWidgetDef {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct AnalyticsWorkspaceAsset {
+pub struct AnalyticsMetricWidgetDef {
     #[serde(default)]
-    pub asset: String,
-    #[serde(rename = "assetType", default)]
-    pub asset_type: AnalyticsWorkspaceAssetType,
-    #[serde(rename = "assetUsageType", default)]
-    pub asset_usage_type: AnalyticsWorkspaceAssetUsageType,
+    pub parameters: String,
+    #[serde(rename = "semanticModel", default)]
+    pub semantic_model: String,
     #[serde(default)]
-    pub workspace: String,
+    pub source: String,
+    #[serde(rename = "sourceDeprecated", default)]
+    pub source_deprecated: String,
+    #[serde(default)]
+    pub version: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct WaveXmdDimension {
-    #[serde(rename = "conditionalFormatting", default)]
-    pub conditional_formatting: Vec<WaveXmdFormattingProperty>,
-    #[serde(rename = "customActions", default)]
-    pub custom_actions: Vec<WaveXmdDimensionCustomAction>,
-    #[serde(rename = "customActionsEnabled", default)]
-    pub custom_actions_enabled: bool,
-    #[serde(rename = "dateFormat", default)]
-    pub date_format: String,
-    #[serde(rename = "defaultAction", default)]
-    pub default_action: String,
+pub struct AnalyticsParamWidgetDef {
+    #[serde(rename = "initialValues", default)]
+    pub initial_values: String,
     #[serde(default)]
-    pub description: String,
+    pub parameters: String,
     #[serde(default)]
-    pub field: String,
-    #[serde(rename = "fullyQualifiedName", default)]
-    pub fully_qualified_name: String,
-    #[serde(rename = "imageTemplate", default)]
-    pub image_template: String,
-    #[serde(rename = "isDerived", default)]
-    pub is_derived: bool,
-    #[serde(rename = "isMultiValue", default)]
-    pub is_multi_value: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "linkTemplate", default)]
-    pub link_template: String,
-    #[serde(rename = "linkTemplateEnabled", default)]
-    pub link_template_enabled: bool,
-    #[serde(rename = "linkTooltip", default)]
-    pub link_tooltip: String,
-    #[serde(default)]
-    pub members: Vec<WaveXmdDimensionMember>,
-    #[serde(default)]
-    pub origin: String,
-    #[serde(rename = "recordDisplayFields", default)]
-    pub record_display_fields: Vec<WaveXmdRecordDisplayLookup>,
-    #[serde(rename = "recordIdField", default)]
-    pub record_id_field: String,
-    #[serde(rename = "recordOrganizationIdField", default)]
-    pub record_organization_id_field: String,
-    #[serde(rename = "salesforceActions", default)]
-    pub salesforce_actions: Vec<WaveXmdDimensionSalesforceAction>,
-    #[serde(rename = "salesforceActionsEnabled", default)]
-    pub salesforce_actions_enabled: bool,
-    #[serde(rename = "showDetailsDefaultFieldIndex", default)]
-    pub show_details_default_field_index: f64,
-    #[serde(rename = "showInExplorer", default)]
-    pub show_in_explorer: bool,
-    #[serde(rename = "sortIndex", default)]
-    pub sort_index: f64,
+    pub source: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct WaveAnalyticAssetCollectionItem {
+pub struct AnalyticsTextWidgetDef {
     #[serde(default)]
-    pub asset: String,
-    #[serde(rename = "assetType", default)]
-    pub asset_type: String,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: f64,
+    pub parameters: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct DatasetImportRequest {
-    #[serde(rename = "asyncApiJob", default)]
-    pub async_api_job: String,
-    #[serde(rename = "dataConnector", default)]
-    pub data_connector: String,
-    #[serde(rename = "dataFile", default)]
-    pub data_file: String,
-    #[serde(rename = "dataPrepRecipe", default)]
-    pub data_prep_recipe: String,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
+pub struct AnalyticsVisualization {
+    #[serde(default)]
+    pub actions: Vec<AnalyticsAssetAction>,
+    #[serde(rename = "analyticsWorkspace", default)]
+    pub analytics_workspace: String,
+    #[serde(rename = "dataSource", default)]
+    pub data_source: String,
+    #[serde(default)]
+    pub fields: Vec<AnalyticsVizField>,
+    #[serde(rename = "lastDraftModifiedDate", default)]
+    pub last_draft_modified_date: String,
+    #[serde(rename = "lastPublishedDate", default)]
+    pub last_published_date: String,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
+    #[serde(rename = "templateAssetSourceName", default)]
+    pub template_asset_source_name: String,
+    #[serde(rename = "templateSource", default)]
+    pub template_source: String,
     #[serde(default)]
-    pub user: String,
+    pub version: f64,
+    #[serde(default)]
+    pub views: Vec<AnalyticsVizViewDef>,
+    #[serde(rename = "visualSpecification", default)]
+    pub visual_specification: String,
+    #[serde(rename = "workspaceAssetRelationships", default)]
+    pub workspace_asset_relationships: Vec<AnalyticsWorkspaceAsset>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -280,89 +412,111 @@ pub struct AnalyticsVizField {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct WaveXmd {
-    #[serde(default)]
-    pub application: String,
-    #[serde(default)]
-    pub dataset: String,
-    #[serde(rename = "datasetConnector", default)]
-    pub dataset_connector: String,
-    #[serde(rename = "datasetFullyQualifiedName", default)]
-    pub dataset_fully_qualified_name: String,
-    #[serde(default)]
-    pub dates: Vec<WaveXmdDate>,
-    #[serde(default)]
-    pub dimensions: Vec<WaveXmdDimension>,
-    #[serde(default)]
-    pub measures: Vec<WaveXmdMeasure>,
-    #[serde(default)]
-    pub organizations: Vec<WaveXmdOrganization>,
-    #[serde(default)]
-    pub origin: String,
-    #[serde(default)]
-    pub r#type: String,
-    #[serde(rename = "waveVisualization", default)]
-    pub wave_visualization: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AnalyticSnapshot {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "groupColumn", default)]
-    pub group_column: String,
-    #[serde(default)]
-    pub mappings: Vec<AnalyticSnapshotMapping>,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "runningUser", default)]
-    pub running_user: String,
-    #[serde(rename = "sourceReport", default)]
-    pub source_report: String,
-    #[serde(rename = "targetObject", default)]
-    pub target_object: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AnalyticsDashboardPage {
-    #[serde(default)]
-    pub index: f64,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "pageName", default)]
-    pub page_name: String,
-    #[serde(rename = "pageWidgets", default)]
-    pub page_widgets: Vec<AnalyticsDashPageWidget>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AnalyticsDashboardLayout {
-    #[serde(rename = "analyticsDashboard", default)]
-    pub analytics_dashboard: String,
-    #[serde(rename = "analyticsDashboardVersion", default)]
-    pub analytics_dashboard_version: String,
-    #[serde(rename = "columnCount", default)]
-    pub column_count: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "layoutName", default)]
-    pub layout_name: String,
-    #[serde(rename = "maxWidth", default)]
-    pub max_width: String,
-    #[serde(default)]
-    pub pages: Vec<AnalyticsDashboardPage>,
-    #[serde(rename = "rowHeight", default)]
-    pub row_height: String,
-    #[serde(default)]
-    pub style: String,
+pub struct AnalyticsVizViewDef {
+    #[serde(rename = "analyticsVizVersion", default)]
+    pub analytics_viz_version: String,
+    #[serde(rename = "fullName", default)]
+    pub full_name: String,
+    #[serde(rename = "isOriginal", default)]
+    pub is_original: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
     #[serde(default)]
     pub version: f64,
+    #[serde(rename = "viewSpecification", default)]
+    pub view_specification: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AnalyticsVizWidgetDef {
+    #[serde(rename = "analyticsVisualization", default)]
+    pub analytics_visualization: String,
+    #[serde(rename = "analyticsVizVersion", default)]
+    pub analytics_viz_version: String,
+    #[serde(default)]
+    pub parameters: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AnalyticsWorkspace {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "workspaceAssetRelationships", default)]
+    pub workspace_asset_relationships: Vec<AnalyticsWorkspaceAsset>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AnalyticsWorkspaceAsset {
+    #[serde(default)]
+    pub asset: String,
+    #[serde(rename = "assetType", default)]
+    pub asset_type: AnalyticsWorkspaceAssetType,
+    #[serde(rename = "assetUsageType", default)]
+    pub asset_usage_type: AnalyticsWorkspaceAssetUsageType,
+    #[serde(default)]
+    pub workspace: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DatasetImportRequest {
+    #[serde(rename = "asyncApiJob", default)]
+    pub async_api_job: String,
+    #[serde(rename = "dataConnector", default)]
+    pub data_connector: String,
+    #[serde(rename = "dataFile", default)]
+    pub data_file: String,
+    #[serde(rename = "dataPrepRecipe", default)]
+    pub data_prep_recipe: String,
+    #[serde(rename = "isProtected", default)]
+    pub is_protected: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub user: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WaveAnalyticAssetCollection {
+    #[serde(rename = "collectionType", default)]
+    pub collection_type: String,
+    #[serde(default)]
+    pub color: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub folder: String,
+    #[serde(default)]
+    pub items: Vec<WaveAnalyticAssetCollectionItem>,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub shares: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WaveAnalyticAssetCollectionItem {
+    #[serde(default)]
+    pub asset: String,
+    #[serde(rename = "assetType", default)]
+    pub asset_type: String,
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -388,31 +542,75 @@ pub struct WaveApplication {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct AnalyticsVizViewDef {
-    #[serde(rename = "analyticsVizVersion", default)]
-    pub analytics_viz_version: String,
-    #[serde(rename = "fullName", default)]
-    pub full_name: String,
-    #[serde(rename = "isOriginal", default)]
-    pub is_original: bool,
+pub struct WaveDataset {
+    #[serde(default)]
+    pub application: String,
+    #[serde(default)]
+    pub description: String,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
+    #[serde(rename = "templateAssetSourceName", default)]
+    pub template_asset_source_name: String,
     #[serde(default)]
-    pub version: f64,
-    #[serde(rename = "viewSpecification", default)]
-    pub view_specification: String,
+    pub r#type: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct WaveXmdDimensionSalesforceAction {
+pub struct WaveTemplateBundle {
+    #[serde(rename = "assetIcon", default)]
+    pub asset_icon: String,
+    #[serde(rename = "assetVersion", default)]
+    pub asset_version: f64,
     #[serde(default)]
-    pub enabled: bool,
-    #[serde(rename = "salesforceActionName", default)]
-    pub salesforce_action_name: String,
-    #[serde(rename = "sortIndex", default)]
-    pub sort_index: f64,
+    pub description: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "templateType", default)]
+    pub template_type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WaveTemplateExternalDataMetadata {
+    #[serde(rename = "edgemartLabel", default)]
+    pub edgemart_label: String,
+    #[serde(default)]
+    pub format: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "simulatedRowCount", default)]
+    pub simulated_row_count: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WaveXmd {
+    #[serde(default)]
+    pub application: String,
+    #[serde(default)]
+    pub dataset: String,
+    #[serde(rename = "datasetConnector", default)]
+    pub dataset_connector: String,
+    #[serde(rename = "datasetFullyQualifiedName", default)]
+    pub dataset_fully_qualified_name: String,
+    #[serde(default)]
+    pub dates: Vec<WaveXmdDate>,
+    #[serde(default)]
+    pub dimensions: Vec<WaveXmdDimension>,
+    #[serde(default)]
+    pub measures: Vec<WaveXmdMeasure>,
+    #[serde(default)]
+    pub organizations: Vec<WaveXmdOrganization>,
+    #[serde(default)]
+    pub origin: String,
+    #[serde(default)]
+    pub r#type: String,
+    #[serde(rename = "waveVisualization", default)]
+    pub wave_visualization: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -474,57 +672,57 @@ pub struct WaveXmdDate {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct AnalyticsDatasetDefinition {
-    #[serde(rename = "datasetCategory", default)]
-    pub dataset_category: String,
-    #[serde(rename = "datasetName", default)]
-    pub dataset_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "usageCategory", default)]
-    pub usage_category: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AnalyticsTextWidgetDef {
-    #[serde(default)]
-    pub parameters: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct WaveAnalyticAssetCollection {
-    #[serde(rename = "collectionType", default)]
-    pub collection_type: String,
-    #[serde(default)]
-    pub color: String,
+pub struct WaveXmdDimension {
+    #[serde(rename = "conditionalFormatting", default)]
+    pub conditional_formatting: Vec<WaveXmdFormattingProperty>,
+    #[serde(rename = "customActions", default)]
+    pub custom_actions: Vec<WaveXmdDimensionCustomAction>,
+    #[serde(rename = "customActionsEnabled", default)]
+    pub custom_actions_enabled: bool,
+    #[serde(rename = "dateFormat", default)]
+    pub date_format: String,
+    #[serde(rename = "defaultAction", default)]
+    pub default_action: String,
     #[serde(default)]
     pub description: String,
     #[serde(default)]
-    pub folder: String,
-    #[serde(default)]
-    pub items: Vec<WaveAnalyticAssetCollectionItem>,
+    pub field: String,
+    #[serde(rename = "fullyQualifiedName", default)]
+    pub fully_qualified_name: String,
+    #[serde(rename = "imageTemplate", default)]
+    pub image_template: String,
+    #[serde(rename = "isDerived", default)]
+    pub is_derived: bool,
+    #[serde(rename = "isMultiValue", default)]
+    pub is_multi_value: bool,
     #[serde(default)]
     pub label: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
+    #[serde(rename = "linkTemplate", default)]
+    pub link_template: String,
+    #[serde(rename = "linkTemplateEnabled", default)]
+    pub link_template_enabled: bool,
+    #[serde(rename = "linkTooltip", default)]
+    pub link_tooltip: String,
     #[serde(default)]
-    pub shares: Vec<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AnalyticsParamWidgetDef {
-    #[serde(rename = "initialValues", default)]
-    pub initial_values: String,
+    pub members: Vec<WaveXmdDimensionMember>,
     #[serde(default)]
-    pub parameters: String,
-    #[serde(default)]
-    pub source: String,
+    pub origin: String,
+    #[serde(rename = "recordDisplayFields", default)]
+    pub record_display_fields: Vec<WaveXmdRecordDisplayLookup>,
+    #[serde(rename = "recordIdField", default)]
+    pub record_id_field: String,
+    #[serde(rename = "recordOrganizationIdField", default)]
+    pub record_organization_id_field: String,
+    #[serde(rename = "salesforceActions", default)]
+    pub salesforce_actions: Vec<WaveXmdDimensionSalesforceAction>,
+    #[serde(rename = "salesforceActionsEnabled", default)]
+    pub salesforce_actions_enabled: bool,
+    #[serde(rename = "showDetailsDefaultFieldIndex", default)]
+    pub show_details_default_field_index: f64,
+    #[serde(rename = "showInExplorer", default)]
+    pub show_in_explorer: bool,
+    #[serde(rename = "sortIndex", default)]
+    pub sort_index: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -547,6 +745,78 @@ pub struct WaveXmdDimensionCustomAction {
     pub tooltip: String,
     #[serde(default)]
     pub url: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WaveXmdDimensionMember {
+    #[serde(default)]
+    pub color: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub member: String,
+    #[serde(rename = "sortIndex", default)]
+    pub sort_index: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WaveXmdDimensionSalesforceAction {
+    #[serde(default)]
+    pub enabled: bool,
+    #[serde(rename = "salesforceActionName", default)]
+    pub salesforce_action_name: String,
+    #[serde(rename = "sortIndex", default)]
+    pub sort_index: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WaveXmdFormattingBin {
+    #[serde(default)]
+    pub bin: String,
+    #[serde(rename = "formatValue", default)]
+    pub format_value: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "sortIndex", default)]
+    pub sort_index: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WaveXmdFormattingPredicate {
+    #[serde(rename = "formatValue", default)]
+    pub format_value: String,
+    #[serde(default)]
+    pub operator: String,
+    #[serde(rename = "sortIndex", default)]
+    pub sort_index: f64,
+    #[serde(default)]
+    pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WaveXmdFormattingProperty {
+    #[serde(rename = "formattingBins", default)]
+    pub formatting_bins: Vec<WaveXmdFormattingBin>,
+    #[serde(rename = "formattingPredicates", default)]
+    pub formatting_predicates: Vec<WaveXmdFormattingPredicate>,
+    #[serde(default)]
+    pub property: String,
+    #[serde(rename = "referenceField", default)]
+    pub reference_field: String,
+    #[serde(rename = "sortIndex", default)]
+    pub sort_index: f64,
+    #[serde(default)]
+    pub r#type: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -604,197 +874,15 @@ pub struct WaveXmdMeasure {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct WaveXmdFormattingProperty {
-    #[serde(rename = "formattingBins", default)]
-    pub formatting_bins: Vec<WaveXmdFormattingBin>,
-    #[serde(rename = "formattingPredicates", default)]
-    pub formatting_predicates: Vec<WaveXmdFormattingPredicate>,
+pub struct WaveXmdOrganization {
+    #[serde(rename = "instanceUrl", default)]
+    pub instance_url: String,
     #[serde(default)]
-    pub property: String,
-    #[serde(rename = "referenceField", default)]
-    pub reference_field: String,
+    pub label: String,
+    #[serde(rename = "organizationIdentifier", default)]
+    pub organization_identifier: String,
     #[serde(rename = "sortIndex", default)]
     pub sort_index: f64,
-    #[serde(default)]
-    pub r#type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct WaveTemplateExternalDataMetadata {
-    #[serde(rename = "edgemartLabel", default)]
-    pub edgemart_label: String,
-    #[serde(default)]
-    pub format: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "simulatedRowCount", default)]
-    pub simulated_row_count: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AnalyticsDashPageWidget {
-    #[serde(rename = "analyticsDashboardWidget", default)]
-    pub analytics_dashboard_widget: String,
-    #[serde(default)]
-    pub colspan: String,
-    #[serde(default)]
-    pub column: String,
-    #[serde(default)]
-    pub row: String,
-    #[serde(default)]
-    pub rowspan: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AnalyticsCloudComponentLayoutItem {
-    #[serde(rename = "assetType", default)]
-    pub asset_type: String,
-    #[serde(rename = "devName", default)]
-    pub dev_name: String,
-    #[serde(default)]
-    pub error: String,
-    #[serde(default)]
-    pub filter: String,
-    #[serde(default)]
-    pub height: f64,
-    #[serde(rename = "hideOnError", default)]
-    pub hide_on_error: bool,
-    #[serde(rename = "showHeader", default)]
-    pub show_header: bool,
-    #[serde(rename = "showSharing", default)]
-    pub show_sharing: bool,
-    #[serde(rename = "showTitle", default)]
-    pub show_title: bool,
-    #[serde(default)]
-    pub width: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AnalyticsMetricWidgetDef {
-    #[serde(default)]
-    pub parameters: String,
-    #[serde(rename = "semanticModel", default)]
-    pub semantic_model: String,
-    #[serde(default)]
-    pub source: String,
-    #[serde(rename = "sourceDeprecated", default)]
-    pub source_deprecated: String,
-    #[serde(default)]
-    pub version: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AnalyticsButtonWidgetDef {
-    #[serde(default)]
-    pub parameters: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AnalyticsDashboard {
-    #[serde(rename = "analyticsWorkspace", default)]
-    pub analytics_workspace: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "lastDraftModifiedDate", default)]
-    pub last_draft_modified_date: String,
-    #[serde(rename = "lastPublishedDate", default)]
-    pub last_published_date: String,
-    #[serde(default)]
-    pub layouts: Vec<AnalyticsDashboardLayout>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub style: String,
-    #[serde(rename = "templateAssetSourceName", default)]
-    pub template_asset_source_name: String,
-    #[serde(rename = "templateSource", default)]
-    pub template_source: String,
-    #[serde(default)]
-    pub version: f64,
-    #[serde(default)]
-    pub widgets: Vec<AnalyticsDashboardWidget>,
-    #[serde(rename = "workspaceAssetRelationships", default)]
-    pub workspace_asset_relationships: Vec<AnalyticsWorkspaceAsset>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AnalyticsDashboardWidget {
-    #[serde(rename = "analyticsDashboard", default)]
-    pub analytics_dashboard: String,
-    #[serde(rename = "analyticsDashboardVersion", default)]
-    pub analytics_dashboard_version: String,
-    #[serde(rename = "buttonWidgetDefs", default)]
-    pub button_widget_defs: Vec<AnalyticsButtonWidgetDef>,
-    #[serde(rename = "containerWidgetDefs", default)]
-    pub container_widget_defs: Vec<AnalyticsContainerWidgetDef>,
-    #[serde(rename = "dynamicTokens", default)]
-    pub dynamic_tokens: Vec<serde_json::Value>,
-    #[serde(rename = "filterWidgetDefs", default)]
-    pub filter_widget_defs: Vec<AnalyticsFilterWidgetDef>,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "metricWidgetDefs", default)]
-    pub metric_widget_defs: Vec<AnalyticsMetricWidgetDef>,
-    #[serde(rename = "parameterWidgetDefs", default)]
-    pub parameter_widget_defs: Vec<AnalyticsParamWidgetDef>,
-    #[serde(rename = "textWidgetDefs", default)]
-    pub text_widget_defs: Vec<AnalyticsTextWidgetDef>,
-    #[serde(default)]
-    pub r#type: AnalyticsWidgetType,
-    #[serde(rename = "vizWidgetDefs", default)]
-    pub viz_widget_defs: Vec<AnalyticsVizWidgetDef>,
-    #[serde(rename = "widgetActions", default)]
-    pub widget_actions: Vec<AnalyticsAssetAction>,
-    #[serde(rename = "widgetName", default)]
-    pub widget_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct WaveXmdDimensionMember {
-    #[serde(default)]
-    pub color: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub member: String,
-    #[serde(rename = "sortIndex", default)]
-    pub sort_index: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AnalyticsContainerWidgetDef {
-    #[serde(default)]
-    pub parameters: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AnalyticsVizWidgetDef {
-    #[serde(rename = "analyticsVisualization", default)]
-    pub analytics_visualization: String,
-    #[serde(rename = "analyticsVizVersion", default)]
-    pub analytics_viz_version: String,
-    #[serde(default)]
-    pub parameters: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -803,94 +891,6 @@ pub struct AnalyticsVizWidgetDef {
 pub struct WaveXmdRecordDisplayLookup {
     #[serde(rename = "recordDisplayField", default)]
     pub record_display_field: String,
-    #[serde(rename = "sortIndex", default)]
-    pub sort_index: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AnalyticsVisualization {
-    #[serde(default)]
-    pub actions: Vec<AnalyticsAssetAction>,
-    #[serde(rename = "analyticsWorkspace", default)]
-    pub analytics_workspace: String,
-    #[serde(rename = "dataSource", default)]
-    pub data_source: String,
-    #[serde(default)]
-    pub fields: Vec<AnalyticsVizField>,
-    #[serde(rename = "lastDraftModifiedDate", default)]
-    pub last_draft_modified_date: String,
-    #[serde(rename = "lastPublishedDate", default)]
-    pub last_published_date: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "templateAssetSourceName", default)]
-    pub template_asset_source_name: String,
-    #[serde(rename = "templateSource", default)]
-    pub template_source: String,
-    #[serde(default)]
-    pub version: f64,
-    #[serde(default)]
-    pub views: Vec<AnalyticsVizViewDef>,
-    #[serde(rename = "visualSpecification", default)]
-    pub visual_specification: String,
-    #[serde(rename = "workspaceAssetRelationships", default)]
-    pub workspace_asset_relationships: Vec<AnalyticsWorkspaceAsset>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AnalyticsWorkspace {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "workspaceAssetRelationships", default)]
-    pub workspace_asset_relationships: Vec<AnalyticsWorkspaceAsset>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct WaveXmdFormattingPredicate {
-    #[serde(rename = "formatValue", default)]
-    pub format_value: String,
-    #[serde(default)]
-    pub operator: String,
-    #[serde(rename = "sortIndex", default)]
-    pub sort_index: f64,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct WaveDataset {
-    #[serde(default)]
-    pub application: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "templateAssetSourceName", default)]
-    pub template_asset_source_name: String,
-    #[serde(default)]
-    pub r#type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct WaveXmdOrganization {
-    #[serde(rename = "instanceUrl", default)]
-    pub instance_url: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "organizationIdentifier", default)]
-    pub organization_identifier: String,
     #[serde(rename = "sortIndex", default)]
     pub sort_index: f64,
 }

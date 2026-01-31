@@ -10,16 +10,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AssessmentType {
+pub enum AssessmentConfigurationOption {
     #[default]
-    DiscoveryFramework,
+    Send,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AssessmentConfigurationOption {
+pub enum AssessmentType {
     #[default]
-    Send,
+    DiscoveryFramework,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -36,20 +36,6 @@ pub struct AssessmentConfiguration {
     pub resolution: String,
     #[serde(default)]
     pub r#type: AssessmentType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AssessmentQuestionVersionChoice {
-    #[serde(rename = "displayOrder", default)]
-    pub display_order: f64,
-    #[serde(default)]
-    pub icon: String,
-    #[serde(default)]
-    pub key: String,
-    #[serde(default)]
-    pub name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -136,4 +122,18 @@ pub struct AssessmentQuestionVersion {
     pub status: String,
     #[serde(rename = "versionNumber", default)]
     pub version_number: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AssessmentQuestionVersionChoice {
+    #[serde(rename = "displayOrder", default)]
+    pub display_order: f64,
+    #[serde(default)]
+    pub icon: String,
+    #[serde(default)]
+    pub key: String,
+    #[serde(default)]
+    pub name: String,
 }

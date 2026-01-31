@@ -10,113 +10,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ChartLegendPosition {
+pub enum APIAccessLevel {
     #[default]
-    Right,
-    Bottom,
-    OnChart,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ChartUnits {
-    #[default]
-    Auto,
-    Integer,
-    Hundreds,
-    Thousands,
-    Millions,
-    Billions,
-    Trillions,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PlatformCacheType {
-    #[default]
-    Session,
-    Organization,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DeployStatus {
-    #[default]
-    Pending,
-    InProgress,
-    Finalizing,
-    FinalizingFailed,
-    Succeeded,
-    SucceededPartial,
-    Failed,
-    Canceling,
-    Canceled,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum Gender {
-    #[default]
-    Neuter,
-    Masculine,
-    Feminine,
-    AnimateMasculine,
-    ClassI,
-    ClassIII,
-    ClassV,
-    ClassVII,
-    ClassIX,
-    ClassXI,
-    ClassXIV,
-    ClassXV,
-    ClassXVI,
-    ClassXVII,
-    ClassXVIII,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum UiBehavior {
-    #[default]
-    Edit,
-    Required,
-    Readonly,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SetupObjectVisibility {
-    #[default]
-    PackageProtected,
-    Protected,
-    Public,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FilterOperation {
-    #[default]
-    equals,
-    notEqual,
-    lessThan,
-    greaterThan,
-    lessOrEqual,
-    greaterOrEqual,
-    contains,
-    notContain,
-    startsWith,
-    includes,
-    excludes,
-    within,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ChartBackgroundDirection {
-    #[default]
-    TopToBottom,
-    LeftToRight,
-    Diagonal,
+    Unrestricted,
+    Restricted,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -146,83 +43,121 @@ pub enum ActionEmailRecipientTypes {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum WebLinkWindowType {
+pub enum ActionEmailSenderType {
     #[default]
-    newWindow,
-    sidebar,
-    noSidebar,
-    replace,
-    onClickJavaScript,
+    CurrentUser,
+    OrgWideEmailAddress,
+    DefaultWorkflowUser,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum WebLinkAvailability {
+pub enum ActionTaskAssignedToTypes {
     #[default]
-    online,
-    offline,
+    user,
+    role,
+    opportunityTeam,
+    accountTeam,
+    owner,
+    accountOwner,
+    creator,
+    accountCreator,
+    partnerUser,
+    portalRole,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FilterScope {
-    #[default]
-    Everything,
-    Mine,
-    Queue,
-    Delegated,
-    MyTerritory,
-    MyTeamTerritory,
-    Team,
-    SalesTeam,
-    AssignedToMe,
-    MineAndMyGroups,
-    ScopingRule,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum StartsWith {
-    #[default]
-    Consonant,
-    Vowel,
-    Special,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum TreatBlanksAs {
-    #[default]
-    BlankAsBlank,
-    BlankAsZero,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum WebLinkDisplayType {
-    #[default]
-    link,
-    button,
-    massActionButton,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum Possessive {
+pub enum Article {
     #[default]
     None,
-    First,
-    Second,
+    Indefinite,
+    Definite,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RetrieveStatus {
+pub enum ChartBackgroundDirection {
     #[default]
-    Pending,
-    InProgress,
-    Succeeded,
-    Failed,
+    TopToBottom,
+    LeftToRight,
+    Diagonal,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ChartLegendPosition {
+    #[default]
+    Right,
+    Bottom,
+    OnChart,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ChartPosition {
+    #[default]
+    CHART_TOP,
+    CHART_BOTTOM,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ChartRangeType {
+    #[default]
+    Auto,
+    Manual,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ChartTheme {
+    #[default]
+    light,
+    dark,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ChartType {
+    #[default]
+    None,
+    Scatter,
+    ScatterGrouped,
+    Bubble,
+    BubbleGrouped,
+    HorizontalBar,
+    HorizontalBarGrouped,
+    HorizontalBarStacked,
+    HorizontalBarStackedTo100,
+    VerticalColumn,
+    VerticalColumnGrouped,
+    VerticalColumnStacked,
+    VerticalColumnStackedTo100,
+    Line,
+    LineGrouped,
+    LineCumulative,
+    LineCumulativeGrouped,
+    Pie,
+    Donut,
+    Funnel,
+    VerticalColumnLine,
+    VerticalColumnGroupedLine,
+    VerticalColumnStackedLine,
+    Plugin,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ChartUnits {
+    #[default]
+    Auto,
+    Integer,
+    Hundreds,
+    Thousands,
+    Millions,
+    Billions,
+    Trillions,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -234,10 +169,34 @@ pub enum ComponentInstancePropertyTypeEnum {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SortOrder {
+pub enum DeleteConstraint {
     #[default]
-    Asc,
-    Desc,
+    Cascade,
+    Restrict,
+    SetNull,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DeployStatus {
+    #[default]
+    Pending,
+    InProgress,
+    Finalizing,
+    FinalizingFailed,
+    Succeeded,
+    SucceededPartial,
+    Failed,
+    Canceling,
+    Canceled,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DeploymentStatus {
+    #[default]
+    InDevelopment,
+    Deployed,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -265,26 +224,31 @@ pub enum Encoding {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SummaryLayoutStyle {
+pub enum EncryptedFieldMaskChar {
     #[default]
-    Default,
-    QuoteTemplate,
-    DefaultQuoteTemplate,
-    ServiceReportTemplate,
-    ChildServiceReportTemplateStyle,
-    DefaultServiceReportTemplate,
-    CaseInteraction,
-    QuickActionLayoutLeftRight,
-    QuickActionLayoutTopDown,
-    PathAssistant,
+    asterisk,
+    X,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ChartTheme {
+pub enum EncryptedFieldMaskType {
     #[default]
-    light,
-    dark,
+    all,
+    creditCard,
+    ssn,
+    lastFour,
+    sin,
+    nino,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FieldManageability {
+    #[default]
+    DeveloperControlled,
+    SubscriberControlled,
+    Locked,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -339,37 +303,70 @@ pub enum FieldUpdateOperation {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EncryptedFieldMaskChar {
+pub enum FilterOperation {
     #[default]
-    asterisk,
-    X,
+    equals,
+    notEqual,
+    lessThan,
+    greaterThan,
+    lessOrEqual,
+    greaterOrEqual,
+    contains,
+    notContain,
+    startsWith,
+    includes,
+    excludes,
+    within,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DeploymentStatus {
+pub enum FilterScope {
     #[default]
-    InDevelopment,
-    Deployed,
+    Everything,
+    Mine,
+    Queue,
+    Delegated,
+    MyTerritory,
+    MyTeamTerritory,
+    Team,
+    SalesTeam,
+    AssignedToMe,
+    MineAndMyGroups,
+    ScopingRule,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum APIAccessLevel {
+pub enum ForecastCategories {
     #[default]
-    Unrestricted,
-    Restricted,
+    Omitted,
+    Pipeline,
+    BestCase,
+    MostLikely,
+    Forecast,
+    Closed,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum WebLinkType {
+pub enum Gender {
     #[default]
-    url,
-    sControl,
-    javascript,
-    page,
-    flow,
+    Neuter,
+    Masculine,
+    Feminine,
+    AnimateMasculine,
+    ClassI,
+    ClassIII,
+    ClassV,
+    ClassVII,
+    ClassIX,
+    ClassXI,
+    ClassXIV,
+    ClassXV,
+    ClassXVI,
+    ClassXVII,
+    ClassXVIII,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -599,120 +596,6 @@ pub enum Language {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DeleteConstraint {
-    #[default]
-    Cascade,
-    Restrict,
-    SetNull,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ChartType {
-    #[default]
-    None,
-    Scatter,
-    ScatterGrouped,
-    Bubble,
-    BubbleGrouped,
-    HorizontalBar,
-    HorizontalBarGrouped,
-    HorizontalBarStacked,
-    HorizontalBarStackedTo100,
-    VerticalColumn,
-    VerticalColumnGrouped,
-    VerticalColumnStacked,
-    VerticalColumnStackedTo100,
-    Line,
-    LineGrouped,
-    LineCumulative,
-    LineCumulativeGrouped,
-    Pie,
-    Donut,
-    Funnel,
-    VerticalColumnLine,
-    VerticalColumnGroupedLine,
-    VerticalColumnStackedLine,
-    Plugin,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActionEmailSenderType {
-    #[default]
-    CurrentUser,
-    OrgWideEmailAddress,
-    DefaultWorkflowUser,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum Article {
-    #[default]
-    None,
-    Indefinite,
-    Definite,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum TabVisibility {
-    #[default]
-    Hidden,
-    DefaultOff,
-    DefaultOn,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActionTaskAssignedToTypes {
-    #[default]
-    user,
-    role,
-    opportunityTeam,
-    accountTeam,
-    owner,
-    accountOwner,
-    creator,
-    accountCreator,
-    partnerUser,
-    portalRole,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ChartPosition {
-    #[default]
-    CHART_TOP,
-    CHART_BOTTOM,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ForecastCategories {
-    #[default]
-    Omitted,
-    Pipeline,
-    BestCase,
-    MostLikely,
-    Forecast,
-    Closed,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EncryptedFieldMaskType {
-    #[default]
-    all,
-    creditCard,
-    ssn,
-    lastFour,
-    sin,
-    nino,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum ManageableState {
     #[default]
     released,
@@ -738,6 +621,118 @@ pub enum MonitoredEvents {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum PlatformCacheType {
+    #[default]
+    Session,
+    Organization,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum Possessive {
+    #[default]
+    None,
+    First,
+    Second,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RetrieveStatus {
+    #[default]
+    Pending,
+    InProgress,
+    Succeeded,
+    Failed,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SetupObjectVisibility {
+    #[default]
+    PackageProtected,
+    Protected,
+    Public,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SortOrder {
+    #[default]
+    Asc,
+    Desc,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum StartsWith {
+    #[default]
+    Consonant,
+    Vowel,
+    Special,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SummaryLayoutStyle {
+    #[default]
+    Default,
+    QuoteTemplate,
+    DefaultQuoteTemplate,
+    ServiceReportTemplate,
+    ChildServiceReportTemplateStyle,
+    DefaultServiceReportTemplate,
+    CaseInteraction,
+    QuickActionLayoutLeftRight,
+    QuickActionLayoutTopDown,
+    PathAssistant,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum TabVisibility {
+    #[default]
+    Hidden,
+    DefaultOff,
+    DefaultOn,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum TreatBlanksAs {
+    #[default]
+    BlankAsBlank,
+    BlankAsZero,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum UiBehavior {
+    #[default]
+    Edit,
+    Required,
+    Readonly,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum WebLinkAvailability {
+    #[default]
+    online,
+    offline,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum WebLinkDisplayType {
+    #[default]
+    link,
+    button,
+    massActionButton,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum WebLinkPosition {
     #[default]
     fullScreen,
@@ -747,17 +742,22 @@ pub enum WebLinkPosition {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FieldManageability {
+pub enum WebLinkType {
     #[default]
-    DeveloperControlled,
-    SubscriberControlled,
-    Locked,
+    url,
+    sControl,
+    javascript,
+    page,
+    flow,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ChartRangeType {
+pub enum WebLinkWindowType {
     #[default]
-    Auto,
-    Manual,
+    newWindow,
+    sidebar,
+    noSidebar,
+    replace,
+    onClickJavaScript,
 }

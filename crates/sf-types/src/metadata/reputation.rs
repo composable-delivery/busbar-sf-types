@@ -39,21 +39,21 @@ pub struct ReputationLevelDefinitions {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ReputationPointsRule {
-    #[serde(rename = "eventType", default)]
-    pub event_type: String,
-    #[serde(default)]
-    pub points: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct ReputationLevels {
     #[serde(rename = "chatterAnswersReputationLevels", default)]
     pub chatter_answers_reputation_levels: Vec<serde_json::Value>,
     #[serde(rename = "ideaReputationLevels", default)]
     pub idea_reputation_levels: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ReputationPointsRule {
+    #[serde(rename = "eventType", default)]
+    pub event_type: String,
+    #[serde(default)]
+    pub points: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
