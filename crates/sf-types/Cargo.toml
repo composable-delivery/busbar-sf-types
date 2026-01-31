@@ -1,0 +1,423 @@
+[package]
+name = "busbar-sf-types"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Auto-generated Salesforce metadata types with modular feature flags"
+readme = "README.md"
+keywords = ["salesforce", "metadata", "types", "codegen"]
+categories = ["development-tools", "encoding"]
+
+[dependencies]
+serde = { workspace = true, features = ["derive"] }
+serde_json.workspace = true
+schemars = { version = "0.8", optional = true, features = ["derive"] }
+
+[[bin]]
+name = "schema-gen"
+path = "src/bin/schema_gen.rs"
+required-features = ["schemars"]
+
+[features]
+default = ["common"]
+schemars = ["dep:schemars"]
+
+# =============================================================================
+# Core types (always light)
+# =============================================================================
+# Common enums used across multiple metadata types
+common = []
+
+# =============================================================================
+# By domain - fine-grained feature flags
+# =============================================================================
+
+# Org settings types (~227 types) for org context capture and scratch org definitions
+settings = ["common"]
+
+# Custom objects, fields, and related schema types
+objects = ["common"]
+
+# Page layouts and UI configuration
+layouts = ["common"]
+
+# Permission sets, profiles, and sharing rules
+permissions = ["common"]
+
+# Flow definitions and process automation
+flows = ["common"]
+
+# Apex classes, triggers, and components
+apex = ["common"]
+
+# Lightning Web Components and Aura bundles
+lwc = ["common"]
+
+# Workflow rules, approval processes, and automation
+automation = ["common"]
+
+# Experience Cloud, communities, and networks
+experience = ["common"]
+
+# Reports, dashboards
+reports = ["common"]
+
+# 1GP and 2GP package types
+packaging = ["common"]
+
+# Email templates and configuration
+email = ["common"]
+
+# Einstein Bots and conversational AI
+bots = ["common"]
+
+# Connected apps, external services, and integrations
+integration = ["common"]
+
+# =============================================================================
+# New categories (Phase 1 Expansion)
+# =============================================================================
+
+# Wave Analytics, CRM Analytics, Tableau CRM
+analytics = ["common"]
+
+# OmniStudio, FlexiPages, OmniScripts, DataRaptors
+omnistudio = ["common"]
+
+# AI, Machine Learning, Einstein, Prompt Templates
+ai = ["common"]
+
+# Decision Tables, Expression Sets, Business Rules
+decisions = ["common"]
+
+# Data Cloud, CDP, Data Sources, Data Connections
+datacloud = ["common"]
+
+# Service Cloud, Cases, Knowledge, Entitlements, Embedded Service
+servicecloud = ["common"]
+
+# Service Catalog items and configurations
+servicecatalog = ["common"]
+
+# Messaging, Chat, Conversations, Chatter
+messaging = ["common"]
+
+# Loyalty Cloud, Programs, Benefits, Vouchers
+loyalty = ["common"]
+
+# Identity, SAML, OAuth, Authentication, SSO
+identity = ["common"]
+
+# Scheduling, Field Service, Appointments, Territories
+scheduling = ["common"]
+
+# Batch Jobs, Async Processing, Queues
+batch = ["common"]
+
+# Quick Actions, Global Actions, Action Links
+quickactions = ["common"]
+
+# Custom Metadata, Custom Labels, Custom Tabs
+custommetadata = ["common"]
+
+# Record Actions, Record Aggregations, Record Alerts
+recordactions = ["common"]
+
+# External Client Apps, Mobile Apps, Canvas Apps
+externalapps = ["common"]
+
+# Einstein Discovery, Predictive Analytics
+discovery = ["common"]
+
+# Marketing Cloud Connect, Campaigns, Audiences
+marketing = ["common"]
+
+# Search customization and configuration
+search = ["common"]
+
+# Platform Events, Event Subscriptions, Notifications
+platformevents = ["common"]
+
+# User Access Policies, User Provisioning, User Criteria
+useraccess = ["common"]
+
+# Context Definitions, Activation Platform, Enablement
+activation = ["common"]
+
+# Industry Cloud types (Health, Insurance, Manufacturing, Automotive)
+industries = ["common"]
+
+# Commerce Cloud, Web Stores, Products, Pricing
+commerce = ["common"]
+
+# Field Mappings, Field Restrictions, Field Configurations
+fieldmappings = ["common"]
+
+# =============================================================================
+# Phase 2 Categories
+# =============================================================================
+
+# Einstein Copilot, Agentforce, Assistant definitions
+copilot = ["common"]
+
+# Sales Forecasting, Advanced Account Forecasting
+forecasting = ["common"]
+
+# Next Best Action, Recommendations, Strategy Builder
+nba = ["common"]
+
+# Omni-Channel routing, Presence, Skills
+omnichannel = ["common"]
+
+# Mobile Security Policies, Mobile Applications
+mobilesecurity = ["common"]
+
+# Document Templates, Content Assets, OCR
+documents = ["common"]
+
+# Sales Stages, Path Assistant, Stage Definitions
+stages = ["common"]
+
+# Configure-Price-Quote, Pricing Rules, Price Sheets
+cpq = ["common"]
+
+# Applications, App Menus, App Branding
+applications = ["common"]
+
+# Call Center, CTI, Telephony Integration
+callcenter = ["common"]
+
+# Business Processes, Business Knowledge Models, Rule Definitions
+businessrules = ["common"]
+
+# Assessments, Surveys, Question Sets
+assessments = ["common"]
+
+# Einstein Analytics Visualizations, Charts
+visualization = ["common"]
+
+# Telemetry Definitions, Usage Tracking
+telemetry = ["common"]
+
+# Navigation Menus, Navigation Links
+navigation = ["common"]
+
+# Transaction Security Policies, Event Monitoring
+transactionsecurity = ["common"]
+
+# Invocable Actions, Action Extensions
+invocable = ["common"]
+
+# Channel Definitions, Channel Layouts
+channels = ["common"]
+
+# Folders, Folder Sharing, Public Access
+folders = ["common"]
+
+# Community Reputation, Points, Levels
+reputation = ["common"]
+
+# Digital Experience Configuration
+digitalexperience = ["common"]
+
+# Field Service Briefcase, Offline Data
+briefcase = ["common"]
+
+# Life Sciences Cloud, Clinical, Healthcare
+lifesciences = ["common"]
+
+# Translations, Localization
+translations = ["common"]
+
+# Managed Content, Managed Topics, CMS
+managedcontent = ["common"]
+
+# Object Mappings, Object Relationships
+objectmappings = ["common"]
+
+# Component Instances, Component Configuration
+components = ["common"]
+
+# Feed Items, Feed Layouts, Chatter Feed
+feed = ["common"]
+
+# Apex Code Coverage, Test Results
+codecoverage = ["common"]
+
+# Slack Integration, Slack Record Layouts
+slack = ["common"]
+
+# AI Explainability, Message Templates
+explainability = ["common"]
+
+# Portal Configuration, Portal Roles
+portals = ["common"]
+
+# Picklist Values, Picklist Translations
+picklists = ["common"]
+
+# Related Records, Related Content
+relatedrecords = ["common"]
+
+# Home Page Components, Home Page Layouts
+homepage = ["common"]
+
+# UI Configuration, UI Formulas, UI Formats
+uiconfig = ["common"]
+
+# Condition Types, Condition Filters
+conditions = ["common"]
+
+# Security Policies, Policy Rules, Policy Definitions
+policies = ["common"]
+
+# Feature Parameters, Feature Configuration
+features = ["common"]
+
+# General Mapping Types, Mapping Operations
+mappings = ["common"]
+
+# Deploy Options, Deploy Details, Deploy Problems
+deploy = ["common"]
+
+# Lightning Bolt, Lightning Framework Types
+lightning = ["common"]
+
+# Workspace Mappings, Console Configuration
+workspace = ["common"]
+
+# Standard Permission Sets, Standard Fields
+standard = ["common"]
+
+# =============================================================================
+# Use case bundles - convenient feature combinations
+# =============================================================================
+
+# Org settings for context capture (minimal footprint)
+org-shape = ["settings"]
+
+# Deploy operations (objects, layouts, permissions, apex, flows, automation)
+deployments = ["common", "objects", "layouts", "permissions", "apex", "flows", "automation"]
+
+# Metadata ETL (full schema access)
+metadata-etl = ["full"]
+
+# Package development (2GP/1GP operations)
+package-dev = ["packaging", "objects", "permissions", "apex"]
+
+# Experience Cloud development
+experience-dev = ["experience", "objects", "layouts", "permissions"]
+
+# Data Cloud operations
+data-operations = ["datacloud", "batch", "analytics"]
+
+# Service Cloud operations
+service-operations = ["servicecloud", "servicecatalog", "messaging", "quickactions"]
+
+# AI/ML development
+ai-dev = ["ai", "bots", "discovery"]
+
+# Industry Cloud development
+industry-dev = ["industries", "servicecloud", "commerce", "lifesciences"]
+
+# Sales operations
+sales-operations = ["forecasting", "cpq", "stages", "nba"]
+
+# Content management
+content-management = ["documents", "managedcontent", "feed"]
+
+# =============================================================================
+# Full access
+# =============================================================================
+# All types - use sparingly, prefer specific features
+full = [
+    "settings",
+    "objects",
+    "layouts",
+    "permissions",
+    "flows",
+    "apex",
+    "lwc",
+    "automation",
+    "experience",
+    "reports",
+    "packaging",
+    "email",
+    "bots",
+    "integration",
+    "analytics",
+    "omnistudio",
+    "ai",
+    "decisions",
+    "datacloud",
+    "servicecloud",
+    "servicecatalog",
+    "messaging",
+    "loyalty",
+    "identity",
+    "scheduling",
+    "batch",
+    "quickactions",
+    "custommetadata",
+    "recordactions",
+    "externalapps",
+    "discovery",
+    "marketing",
+    "search",
+    "platformevents",
+    "useraccess",
+    "activation",
+    "industries",
+    "commerce",
+    "fieldmappings",
+    "copilot",
+    "forecasting",
+    "nba",
+    "omnichannel",
+    "mobilesecurity",
+    "documents",
+    "stages",
+    "cpq",
+    "applications",
+    "callcenter",
+    "businessrules",
+    "assessments",
+    "visualization",
+    "telemetry",
+    "navigation",
+    "transactionsecurity",
+    "invocable",
+    "channels",
+    "folders",
+    "reputation",
+    "digitalexperience",
+    "briefcase",
+    "lifesciences",
+    "translations",
+    "managedcontent",
+    "objectmappings",
+    "components",
+    "feed",
+    "codecoverage",
+    "slack",
+    "explainability",
+    "portals",
+    "picklists",
+    "relatedrecords",
+    "homepage",
+    "uiconfig",
+    "conditions",
+    "policies",
+    "features",
+    "mappings",
+    "deploy",
+    "lightning",
+    "workspace",
+    "standard"
+]
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]

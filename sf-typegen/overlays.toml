@@ -1,0 +1,30 @@
+# Overlays for Salesforce Metadata Types
+# This file allows injecting descriptions and documentation into generated types.
+
+[SecuritySettings]
+description = "Represents the security settings for an organization."
+[SecuritySettings.fields]
+passwordPolicies = "Settings related to password complexity, expiration, and history."
+sessionSettings = "Settings related to session timeouts and security."
+
+[CustomObject]
+description = "Represents a custom object or standard object configuration."
+[CustomObject.fields]
+fullName = "The full name of the object, including namespace."
+label = "The label of the object as it appears in the UI."
+deploymentStatus = "The deployment status of the object (Deployed or InDevelopment)."
+fields = "List of custom fields defined on this object."
+sharingModel = "The sharing model (e.g., ReadWrite, Private) for the object."
+
+[PermissionSet]
+description = "Represents a set of permissions that can be assigned to users."
+[PermissionSet.fields]
+label = "The label of the permission set."
+userPermissions = "List of user permissions enabled in this set."
+fieldPermissions = "List of field-level security permissions."
+objectPermissions = "List of object-level permissions (CRUD)."
+
+[Layout]
+description = "Represents a page layout for a standard or custom object."
+[Layout.fields]
+layoutSections = "Sections containing fields and other components in the layout."

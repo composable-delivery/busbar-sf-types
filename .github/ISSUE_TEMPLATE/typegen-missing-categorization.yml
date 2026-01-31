@@ -1,0 +1,116 @@
+name: "Typegen: Missing Categorization / Unclassified Type"
+description: "Track a newly discovered Salesforce type that is not assigned to a feature-gated module/category (or is incorrectly categorized)."
+title: "Typegen: Categorize <TypeName>"
+labels:
+  - "typegen"
+  - "needs-categorization"
+  - "generation"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue tracks a **Salesforce type discovered during generation** that is currently **uncategorized** or incorrectly categorized.
+
+        **Goal:** assign the type to an appropriate category/module so it compiles behind the correct feature flag and appears in the intended module tree.
+
+        Please include the generator output snippet (or CI log excerpt) that indicates the missing categorization.
+
+  - type: input
+    id: type_name
+    attributes:
+      label: Type name
+      description: "Exact Salesforce type name as it appears in @salesforce/types (case sensitive)."
+      placeholder: "e.g. AgentType, SomeNewMetadataThing, FooSettings"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Type kind
+      description: "What kind of type is it?"
+      options:
+        - "Metadata type (interface / struct)"
+        - "Enum / union"
+        - "Other / not sure"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: observed_in
+    attributes:
+      label: Observed in generation output
+      description: "Where did you see the problem?"
+      options:
+        - "CI regen job"
+        - "Local ./scripts/generate.sh"
+        - "Manual generator run"
+    validations:
+      required: true
+
+  - type: textarea
+    id: generator_output
+    attributes:
+      label: Generator output / CI log excerpt
+      description: |
+        Paste the relevant lines from the generator that show the missing categorization.
+        Include enough context to identify the type and what the generator did (or failed to do).
+      placeholder: |
+        Example:
+        WARNING: uncategorized type: FooBarBaz
+        WARNING: no category match for: FooBarBaz
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_category
+    attributes:
+      label: Suggested category / module (if known)
+      description: |
+        If you know where this should go, suggest the feature/module.
+        Examples: settings, objects, layouts, permissions, flows, apex, lwc, automation, experience, reports, etc.
+        If unknown, leave blank and add any hints below.
+      placeholder: |
+        Suggested feature: servicecloud
+        Suggested module path: metadata/servicecloud.rs
+    validations:
+      required: false
+
+  - type: textarea
+    id: reasoning
+    attributes:
+      label: Reasoning / hints
+      description: |
+        Any hints to help categorize correctly:
+        - What Salesforce product area does it belong to?
+        - Does it look like a Settings type?
+        - Does it appear to be part of a known module (e.g. OmniStudio, Data Cloud, etc.)?
+      placeholder: |
+        Looks like a Data Cloud metadata type; naming matches other Data Cloud types (Data* / CDP*).
+    validations:
+      required: false
+
+  - type: dropdown
+    id: breaking
+    attributes:
+      label: Does this break builds?
+      description: "Is CI failing or does the crate still compile (but with the type placed in uncategorized/full)?"
+      options:
+        - "Yes, builds fail (must fix ASAP)"
+        - "No, builds pass but type is only available under full/uncategorized"
+        - "Not sure"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: "Definition of done for this issue."
+      options:
+        - label: "Type is assigned to an appropriate category / module with correct feature gating"
+          required: true
+        - label: "If necessary, categorization rules are updated so future runs classify it automatically"
+          required: true
+        - label: "CI regen job passes without categorization warnings for this type"
+          required: false

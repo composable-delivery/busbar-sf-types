@@ -1,8 +1,8 @@
 [workspace]
 resolver = "2"
 members = [
-    "sf-generated-types",
-    "sf-wsdl",
+    "crates/sf-types",
+    "sf-typegen",
 ]
 
 [workspace.package]
@@ -37,8 +37,8 @@ regex = "1.10"
 tempfile = "3.0"
 
 # Internal path dependencies
-sf-generated-types = { path = "sf-generated-types" }
-sf-wsdl = { path = "sf-wsdl" }
+sf-typegen = { path = "sf-typegen" }
+busbar-sf-types = { path = "crates/sf-types" }
 
 [profile.release]
 opt-level = 3

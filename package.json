@@ -1,12 +1,14 @@
 {
-  "name": "busbar-sf-types-workspace",
-  "version": "1.0.0",
-  "description": "Workspace for Salesforce Rust type generation",
+  "name": "busbar-sf-types-type-tracker",
   "private": true,
-  "devDependencies": {
-    "@salesforce/types": "^1.2.0"
+  "version": "0.0.0",
+  "description": "Internal npm manifest used only to let Dependabot track @salesforce/types and trigger Rust type regeneration in CI.",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kantext-dev/busbar-sf-types"
   },
-  "scripts": {
-    "generate": "cd sf-wsdl && cargo run --bin generate_from_typescript -- --output-dir ../sf-generated-types/src --input-file ../node_modules/@salesforce/types/src/metadata.ts"
+  "dependencies": {
+    "@salesforce/types": "^1.0.0"
   }
 }

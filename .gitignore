@@ -1,0 +1,12 @@
+# Rust / Cargo
+target/
+
+# IDE/editor noise
+.DS_Store
+.idea/
+.vscode/
+
+node_modules/
+
+# Logs
+*.log

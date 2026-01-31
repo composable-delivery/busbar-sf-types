@@ -1,0 +1,137 @@
+name: "Typegen: Missing Overlay (docs / schemars / attributes)"
+description: "Track a newly detected missing overlay (documentation, schemars hints, or generation attributes) for Salesforce types during generation."
+title: "Typegen: Add overlay for <TypeName>"
+labels:
+  - "typegen"
+  - "needs-overlay"
+  - "generation"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue tracks a **missing overlay** detected during type generation.
+
+        Overlays are used to add or correct generation-time metadata such as:
+        - documentation / docstrings
+        - `schemars`-related attributes or schema hints
+        - other generation annotations that are not present (or not reliably present) in `@salesforce/types`
+
+        **Goal:** update overlay sources so regeneration no longer reports missing overlay info and the generated Rust code remains stable.
+
+  - type: input
+    id: type_name
+    attributes:
+      label: Type name
+      description: "Exact Salesforce type name as it appears in @salesforce/types (case sensitive)."
+      placeholder: "e.g. DigitalExperienceConfig, FooBarBazSettings"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: overlay_kind
+    attributes:
+      label: Overlay kind
+      description: "What kind of overlay is missing?"
+      options:
+        - "Documentation overlay (docstrings)"
+        - "schemars overlay (JsonSchema / attributes / schema hints)"
+        - "Serde overlay (Serialize/Deserialize attrs or renames)"
+        - "Other generation attribute overlay"
+        - "Not sure"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: detected_by
+    attributes:
+      label: Detected by
+      description: "Where did you see the missing overlay report?"
+      options:
+        - "CI regen job"
+        - "Local ./scripts/generate.sh"
+        - "Manual generator run"
+    validations:
+      required: true
+
+  - type: textarea
+    id: generator_output
+    attributes:
+      label: Generator output / CI log excerpt
+      description: |
+        Paste the relevant log lines that indicate an overlay is missing.
+        Include enough context to identify the type, overlay kind, and any referenced overlay file/section.
+      placeholder: |
+        Example:
+        WARNING: missing overlay for type: FooBarBaz
+        WARNING: missing schemars overlay: FooBarBaz -> required field '...'
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact / symptoms
+      description: |
+        Describe what goes wrong without the overlay, e.g.:
+        - docs missing or incorrect
+        - schemars build fails or produces bad schemas
+        - serde rename required for correctness
+        - compilation failure under certain feature flags
+      placeholder: |
+        - JsonSchema derive fails due to unsupported field shape
+        - schema output missing expected title/description
+    validations:
+      required: false
+
+  - type: textarea
+    id: suggested_overlay
+    attributes:
+      label: Suggested overlay content (if known)
+      description: |
+        If you already know what overlay should be applied, paste a proposed snippet or describe the intended attributes/docs.
+        Do NOT include secrets.
+      placeholder: |
+        Proposed docs:
+        "Represents ..."
+
+        Proposed schemars attrs:
+        #[schemars(rename = "...")]
+        #[schemars(with = "...")]
+    validations:
+      required: false
+
+  - type: input
+    id: salesforce_types_version
+    attributes:
+      label: @salesforce/types version
+      description: "The version of @salesforce/types that triggered this overlay gap (from package-lock.json / npm view)."
+      placeholder: "e.g. 1.4.3"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: breaking
+    attributes:
+      label: Does this break builds?
+      description: "Is CI failing, or is this just a warning?"
+      options:
+        - "Yes, builds fail (must fix ASAP)"
+        - "No, builds pass but overlays are missing"
+        - "Not sure"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: "Definition of done for this issue."
+      options:
+        - label: "Overlay source is updated (e.g., overlays config / generator rules) to cover the referenced type(s)"
+          required: true
+        - label: "Regeneration produces no missing-overlay warnings for the referenced type(s)"
+          required: true
+        - label: "If applicable, `schemars` generation succeeds and emitted schemas look correct"
+          required: false
+        - label: "CI regen + clippy + tests pass"
+          required: false
