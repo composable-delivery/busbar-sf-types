@@ -51,7 +51,7 @@ jobs:
 
       - name: Upload typegen reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: typegen-reports
           path: .typegen-reports/
@@ -123,7 +123,7 @@ jobs:
   #       run: cargo run -p busbar-sf-types --bin schema-gen --features "full schemars" -- schemas
   #
   #     - name: Upload JSON Schemas
-  #       uses: actions/upload-artifact@v4
+  #       uses: actions/upload-artifact@v6
   #       with:
   #         name: salesforce-json-schemas
   #         path: schemas/
