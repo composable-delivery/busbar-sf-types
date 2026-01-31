@@ -15,17 +15,17 @@ regex.workspace = true
 # Serialization
 serde.workspace = true
 serde_json.workspace = true
-toml = "0.8"
+toml = "0.9"
 
 # TypeScript AST parsing - using oxc
-oxc_parser = "0.36"
+oxc_parser = "0.111"
 oxc_ast = "0.111"
-oxc_allocator = "0.36"
-oxc_span = "0.36"
-oxc_diagnostics = "0.36"
+oxc_allocator = "0.111"
+oxc_span = "0.111"
+oxc_diagnostics = "0.111"
 
 # Code generation utilities
-convert_case = "0.6"
+convert_case = "0.10"
 
 # Error handling
 thiserror.workspace = true
