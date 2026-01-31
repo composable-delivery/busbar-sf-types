@@ -92,8 +92,8 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           
-          # Create a branch name with timestamp
-          BRANCH_NAME="auto-regen/types-$(date +%Y%m%d-%H%M%S)"
+          # Create a branch name with commit SHA and run ID for uniqueness
+          BRANCH_NAME="auto-regen/types-${GITHUB_SHA::7}-${GITHUB_RUN_ID}"
           
           # Create and switch to new branch
           git checkout -b "$BRANCH_NAME"
@@ -102,14 +102,12 @@ jobs:
           git add -A
           
           # Commit changes
-          COMMIT_MSG="chore: auto-regenerate types from latest @salesforce/types
+          git commit -m "chore: auto-regenerate types from latest @salesforce/types
 
-          This is an automated commit created by CI when type regeneration
-          produced changes that were not committed.
-          
-          Original commit: ${{ github.sha }}"
-          
-          git commit -m "$COMMIT_MSG"
+This is an automated commit created by CI when type regeneration
+produced changes that were not committed.
+
+Original commit: ${{ github.sha }}"
           
           # Push to remote
           git push origin "$BRANCH_NAME"
