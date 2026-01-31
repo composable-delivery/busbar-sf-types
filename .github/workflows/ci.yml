@@ -8,8 +8,9 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   issues: write
+  pull-requests: write
 
 env:
   RUST_BACKTRACE: 1
@@ -66,11 +67,66 @@ jobs:
           TYPEGEN_CLOSE_WHEN_CLEAN: "true"
         run: node .github/actions/typegen-issues/index.js
 
-      - name: Fail if generation produces a diff (requires committed output)
+      - name: Check for changes after regeneration
+        id: check-changes
         run: |
           git status --porcelain=v1
-          git diff --exit-code
-          git diff --cached --exit-code
+          if [[ -n "$(git status --porcelain=v1)" ]]; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "::notice::Changes detected after regeneration"
+          else
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "::notice::No changes detected after regeneration"
+          fi
+
+      - name: Create branch and PR for changes (main branch only)
+        if: steps.check-changes.outputs.changes == 'true' && github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Configure git
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # Create a branch name with timestamp
+          BRANCH_NAME="auto-regen/types-$(date +%Y%m%d-%H%M%S)"
+          
+          # Create and switch to new branch
+          git checkout -b "$BRANCH_NAME"
+          
+          # Stage all changes
+          git add -A
+          
+          # Commit changes
+          git commit -m "chore: auto-regenerate types from latest @salesforce/types
+
+          This is an automated commit created by CI when type regeneration
+          produced changes that were not committed.
+          
+          Original commit: ${{ github.sha }}"
+          
+          # Push to remote
+          git push origin "$BRANCH_NAME"
+          
+          # Create PR
+          gh pr create \
+            --title "Auto-regenerate types from @salesforce/types" \
+            --body "This PR was automatically created because type regeneration produced changes that were not committed.
+
+          **Original commit:** ${{ github.sha }}
+          **Triggered by:** ${{ github.event.head_commit.message }}
+          
+          Please review the changes and merge if they look correct." \
+            --base main \
+            --head "$BRANCH_NAME"
+
+      - name: Fail if generation produces a diff (non-main branches)
+        if: steps.check-changes.outputs.changes == 'true' && (github.ref != 'refs/heads/main' || github.event_name != 'push')
+        run: |
+          echo "::error::Generation produced changes that are not committed."
+          echo "::error::Please run './scripts/generate.sh' locally and commit the changes."
+          git diff
+          exit 1
 
   clippy:
     name: Clippy (-D warnings)
