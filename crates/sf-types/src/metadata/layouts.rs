@@ -76,6 +76,7 @@ pub struct FeedLayoutFilter {
     pub feed_item_type: serde_json::Value,
 }
 
+/// Represents a page layout for a standard or custom object.
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]

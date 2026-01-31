@@ -612,10 +612,19 @@ impl ModularGenerator {
             })
             .collect();
 
+        // Filter out structs categorized into common_enums: that category only generates
+        // enums, so any struct placed there is never emitted as a Rust type.  Generating a
+        // trait impl for a non-existent type causes a compilation error.
+        let generated_structs: Vec<String> = struct_names
+            .iter()
+            .filter(|name| find_category(name).map(|c| c.name) != Some("common_enums"))
+            .cloned()
+            .collect();
+
         // Build a map of type name -> feature flag name so we can cfg-gate each impl
         // to match the module feature gates (keeps builds slim).
         let mut feature_by_type: HashMap<String, String> = HashMap::new();
-        for name in struct_names {
+        for name in &generated_structs {
             if let Some(cat) = find_category(name) {
                 feature_by_type.insert(name.clone(), cat.feature.to_string());
             } else {
@@ -625,7 +634,7 @@ impl ModularGenerator {
         }
 
         let impl_code = generate_all_trait_impls(
-            struct_names,
+            &generated_structs,
             &fields_by_type,
             &self.config.trait_config,
             Some(&feature_by_type),
@@ -896,6 +905,17 @@ impl ModularGenerator {
         output_dir: &Path,
         result: &mut GenerationResult,
     ) -> anyhow::Result<()> {
+        // Build a map from feature name -> top-level module (first path segment of module_path).
+        // Categories whose module_path starts with "metadata/" live under `crate::metadata::<child>`,
+        // while others (e.g. "settings/…", "packaging/…") are top-level: `crate::<module>`.
+        let feature_to_top_module: HashMap<&str, &str> = CATEGORIES
+            .iter()
+            .map(|c| {
+                let top = c.module_path.split('/').next().unwrap_or(c.name);
+                (c.feature, top)
+            })
+            .collect();
+
         let mut content = String::new();
         content.push_str(&self.file_header());
         content.push_str("//! Prelude: feature-gated re-exports of enabled Salesforce types.\n");
@@ -911,18 +931,21 @@ impl ModularGenerator {
         // Common is always available
         content.push_str("pub use crate::common::*;\n\n");
 
-        // Settings types live in `crate::settings::*`
-        content.push_str("#[cfg(feature = \"settings\")]\n");
-        content.push_str("pub use crate::settings::*;\n\n");
-
-        // Metadata domain types live in `crate::metadata::<domain>::*`
-        // Re-export each metadata child module behind its feature.
+        // Re-export each domain feature behind its feature gate.
+        // The crate path depends on whether the category lives under `metadata/` or at the top level.
         for feat in DOMAIN_FEATURES {
-            if *feat == "settings" {
-                continue;
-            }
+            let top_module = feature_to_top_module
+                .get(feat)
+                .copied()
+                .unwrap_or("metadata");
+
             content.push_str(&format!("#[cfg(feature = \"{}\")]\n", feat));
-            content.push_str(&format!("pub use crate::metadata::{}::*;\n\n", feat));
+            if top_module == "metadata" {
+                content.push_str(&format!("pub use crate::metadata::{}::*;\n\n", feat));
+            } else {
+                // Top-level module (e.g. settings, packaging)
+                content.push_str(&format!("pub use crate::{}::*;\n\n", top_module));
+            }
         }
 
         // Uncategorized types are only available under `full`

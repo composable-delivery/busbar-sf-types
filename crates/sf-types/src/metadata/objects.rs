@@ -249,6 +249,7 @@ pub struct CustomFieldTranslation {
     pub starts_with: serde_json::Value,
 }
 
+/// Represents a custom object or standard object configuration.
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]

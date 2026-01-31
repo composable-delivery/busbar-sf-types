@@ -160,8 +160,8 @@ info "==> Running rustfmt"
 cargo fmt --all
 
 info ""
-info "==> Running cargo check (workspace)"
-cargo check --workspace
+info "==> Running cargo check (workspace, all features)"
+cargo check --workspace --all-features
 
 # --- Post checks / hints ------------------------------------------------------
 

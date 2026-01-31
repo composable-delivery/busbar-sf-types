@@ -706,6 +706,18 @@ pub enum LiveChatButtonType {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct CaseSubjectParticle {
+    #[serde(default)]
+    pub index: f64,
+    #[serde(rename = "textField", default)]
+    pub text_field: String,
+    #[serde(default)]
+    pub r#type: CaseSubjectParticleType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct EmbeddedMessagingChannel {
     #[serde(rename = "allowedFileTypes", default)]
     pub allowed_file_types: String,

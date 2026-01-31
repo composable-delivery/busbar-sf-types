@@ -784,11 +784,22 @@ fn apply_overlays(
 }
 
 fn get_overlays() -> HashMap<String, TypeOverlay> {
-    let overlay_path = Path::new("overlays.toml");
-    if !overlay_path.exists() {
-        println!("Warning: overlays.toml not found, proceeding without overlays.");
-        return HashMap::new();
-    }
+    // Try multiple candidate paths: the file lives next to the sf-typegen Cargo.toml,
+    // but the generator is typically invoked from the repo root via scripts/generate.sh.
+    let candidates = [
+        // When run from repo root (the usual CI / generate.sh path)
+        Path::new("sf-typegen/overlays.toml"),
+        // When run from inside the sf-typegen directory
+        Path::new("overlays.toml"),
+    ];
+
+    let overlay_path = match candidates.iter().find(|p| p.exists()) {
+        Some(p) => *p,
+        None => {
+            println!("Warning: overlays.toml not found, proceeding without overlays.");
+            return HashMap::new();
+        }
+    };
 
     let content = fs::read_to_string(overlay_path).expect("Failed to read overlays.toml");
     let overlays: HashMap<String, TypeOverlay> =
