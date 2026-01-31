@@ -67,6 +67,7 @@ jobs:
           TYPEGEN_CLOSE_WHEN_CLEAN: "true"
         run: node .github/actions/typegen-issues/index.js
 
+      # Check if regeneration produced any changes
       - name: Check for changes after regeneration
         id: check-changes
         run: |
@@ -79,6 +80,9 @@ jobs:
             echo "::notice::No changes detected after regeneration"
           fi
 
+      # On push to main: if regeneration produced changes, automatically create a PR
+      # This allows main to have commits that don't include regenerated output,
+      # and CI will create a follow-up PR with the regenerated types.
       - name: Create branch and PR for changes (main branch only)
         if: steps.check-changes.outputs.changes == 'true' && github.ref == 'refs/heads/main' && github.event_name == 'push'
         env:
@@ -98,15 +102,23 @@ jobs:
           git add -A
           
           # Commit changes
-          git commit -m "chore: auto-regenerate types from latest @salesforce/types
+          COMMIT_MSG="chore: auto-regenerate types from latest @salesforce/types
 
           This is an automated commit created by CI when type regeneration
           produced changes that were not committed.
           
           Original commit: ${{ github.sha }}"
           
+          git commit -m "$COMMIT_MSG"
+          
           # Push to remote
           git push origin "$BRANCH_NAME"
+          
+          # Get the original commit message for context
+          ORIGINAL_MSG="${{ github.event.head_commit.message }}"
+          if [[ -z "$ORIGINAL_MSG" ]]; then
+            ORIGINAL_MSG="(manual workflow dispatch)"
+          fi
           
           # Create PR
           gh pr create \
@@ -114,12 +126,14 @@ jobs:
             --body "This PR was automatically created because type regeneration produced changes that were not committed.
 
           **Original commit:** ${{ github.sha }}
-          **Triggered by:** ${{ github.event.head_commit.message }}
+          **Triggered by:** $ORIGINAL_MSG
           
           Please review the changes and merge if they look correct." \
             --base main \
             --head "$BRANCH_NAME"
 
+      # On pull requests and other events: fail if there are uncommitted changes
+      # This ensures that PRs have committed their regenerated output.
       - name: Fail if generation produces a diff (non-main branches)
         if: steps.check-changes.outputs.changes == 'true' && (github.ref != 'refs/heads/main' || github.event_name != 'push')
         run: |
