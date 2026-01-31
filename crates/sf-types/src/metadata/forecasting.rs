@@ -459,3 +459,4 @@ pub struct ForecastingTypeSource {
     #[serde(rename = "sourceGroup", default)]
     pub source_group: f64,
 }
+

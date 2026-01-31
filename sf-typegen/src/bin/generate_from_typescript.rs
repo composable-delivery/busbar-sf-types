@@ -602,7 +602,7 @@ use schemars::JsonSchema;
         // Determine api_name logic
         let api_name_impl = if let Some(fields) = defs.interface_types.get(type_name) {
             if fields.iter().any(|f| f.name == "fullName") {
-                r#"self.full_name.as_deref()"#
+                r#"Some(&self.full_name)"#
             } else {
                 r#"None"#
             }

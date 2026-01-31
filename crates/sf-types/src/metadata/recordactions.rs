@@ -326,3 +326,4 @@ pub struct RecordTypeTranslation {
     #[serde(default)]
     pub name: String,
 }
+

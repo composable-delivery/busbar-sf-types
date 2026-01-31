@@ -69,3 +69,4 @@ pub struct NavigationSubMenu {
     #[serde(rename = "navigationMenuItem", default)]
     pub navigation_menu_item: Vec<NavigationMenuItem>,
 }
+

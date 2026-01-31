@@ -119,3 +119,4 @@ pub struct Translations {
     #[serde(rename = "svcCatalogItemGroups", default)]
     pub svc_catalog_item_groups: Vec<serde_json::Value>,
 }
+

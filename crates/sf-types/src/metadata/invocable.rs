@@ -1225,3 +1225,4 @@ pub struct InvocableActionExtensionTargetAttribute {
     #[serde(default)]
     pub value: String,
 }
+

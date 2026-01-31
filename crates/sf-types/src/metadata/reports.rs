@@ -1125,3 +1125,4 @@ pub struct ReportTypeTranslation {
     #[serde(default)]
     pub sections: Vec<ReportTypeSectionTranslation>,
 }
+

@@ -373,3 +373,4 @@ pub struct DiscoveryStoryOutcome {
     #[serde(default)]
     pub r#type: DiscoveryStoryOutcomeType,
 }
+

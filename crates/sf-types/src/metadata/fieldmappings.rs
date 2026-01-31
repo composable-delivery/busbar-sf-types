@@ -267,3 +267,4 @@ pub struct FieldValue {
     #[serde(default)]
     pub value: serde_json::Value,
 }
+

@@ -128,3 +128,4 @@ pub struct VisualizationType {
     #[serde(rename = "scriptBootstrapMethod", default)]
     pub script_bootstrap_method: String,
 }
+

@@ -584,3 +584,4 @@ pub struct SamlSsoConfig {
     #[serde(rename = "validationCert", default)]
     pub validation_cert: String,
 }
+

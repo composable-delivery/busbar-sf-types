@@ -56,3 +56,4 @@ pub enum ConditionType {
     SingleCriterion,
     Aggregation,
 }
+

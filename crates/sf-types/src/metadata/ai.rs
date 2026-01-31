@@ -1357,3 +1357,4 @@ pub struct PromptVersionTranslation {
     #[serde(rename = "videoLink", default)]
     pub video_link: String,
 }
+

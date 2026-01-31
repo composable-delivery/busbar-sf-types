@@ -63,3 +63,4 @@ pub struct ReputationPointsRules {
     #[serde(rename = "pointsRule", default)]
     pub points_rule: Vec<ReputationPointsRule>,
 }
+

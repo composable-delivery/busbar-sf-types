@@ -109,3 +109,4 @@ pub struct FeedFilterCriterion {
     #[serde(rename = "relatedSObjectType", default)]
     pub related_s_object_type: String,
 }
+

@@ -270,3 +270,4 @@ pub struct StgFulfillmentStepDpndDef {
     #[serde(default)]
     pub step: String,
 }
+

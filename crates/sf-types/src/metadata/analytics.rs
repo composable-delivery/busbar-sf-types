@@ -894,3 +894,4 @@ pub struct WaveXmdRecordDisplayLookup {
     #[serde(rename = "sortIndex", default)]
     pub sort_index: f64,
 }
+

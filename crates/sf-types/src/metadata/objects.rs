@@ -692,3 +692,4 @@ pub struct WebLink {
     #[serde(default)]
     pub width: f64,
 }
+

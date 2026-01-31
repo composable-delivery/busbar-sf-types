@@ -1039,3 +1039,4 @@ pub struct DataspaceScopeSchemaAccess {
     #[serde(rename = "metadataGroup", default)]
     pub metadata_group: String,
 }
+
