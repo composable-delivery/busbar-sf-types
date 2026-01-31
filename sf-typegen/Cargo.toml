@@ -18,7 +18,7 @@ serde_json.workspace = true
 toml = "0.8"
 
 # TypeScript AST parsing - using oxc
-oxc_parser = "0.36"
+oxc_parser = "0.111"
 oxc_ast = "0.111"
 oxc_allocator = "0.36"
 oxc_span = "0.36"
