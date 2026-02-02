@@ -1,12 +1,12 @@
 {
-  "name": "busbar-sf-types-type-tracker",
+  "name": "busbar-sf-types",
   "private": true,
-  "version": "0.0.0",
-  "description": "Internal npm manifest used only to let Dependabot track @salesforce/types and trigger Rust type regeneration in CI.",
-  "license": "UNLICENSED",
+  "version": "1.0.0",
+  "description": "Rust types automatically generated from Salesforce @salesforce/types",
+  "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kantext-dev/busbar-sf-types"
+    "url": "https://github.com/composable-delivery/busbar-sf-types"
   },
   "dependencies": {
     "@salesforce/types": "^1.0.0"

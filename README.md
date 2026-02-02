@@ -1,21 +1,45 @@
 # busbar-sf-types
 
-Modular, feature-flagged Rust types for Salesforce metadata, generated from `@salesforce/types`.
+Modular, feature-flagged Rust types for Salesforce metadata, **automatically generated** from [`@salesforce/types`](https://www.npmjs.com/package/@salesforce/types).
 
-This repository houses the generation strategy and the resulting crate for strictly typed Salesforce development in Rust. It aims to solve the problem of massive, monolithic type definitions by breaking them down into granular, domain-specific feature flags.
+This is a **fully codegen-built crate**—no manual type definitions. All Rust types are automatically generated from Salesforce metadata definitions via the [`@salesforce/types`](https://github.com/forcedotcom/wsdl) npm package.
+
+## About Generated Types
+
+This repository contains:
+- **Generated types** in `crates/sf-types/src/metadata/` (derived from Salesforce metadata)
+- **Codegen tooling** in `sf-typegen/` (Rust tool that performs the generation)
+
+Every version of this crate corresponds to a version of `@salesforce/types`. The crate version is aligned with the npm package version:
+- `@salesforce/types@1.0.0` → crate `1.0.0`
+- `@salesforce/types@1.1.0` → crate `1.1.0`  
+- `@salesforce/types@1.1.0` (codegen fix) → crate `1.1.1`
+
+See [ATTRIBUTION.md](ATTRIBUTION.md) for licensing and attribution requirements.
+
+## Reproducibility
+
+The generated nature of this crate is explicit and reproducible:
+
+```bash
+# To regenerate from scratch:
+npm install  # Fetches @salesforce/types
+bash scripts/generate.sh
+# Output in crates/sf-types/src/ will exactly match what's committed
+```
 
 ## Components
 
 This workspace consists of two main crates:
 
-1. **`sf-generated-types`**: The library crate containing the generated Rust structs and enums.
-2. **`sf-wsdl`**: The generation toolchain that parses Salesforce's TypeScript definitions and produces the modular Rust code.
+1. **`busbar-sf-types`**: The library crate containing auto-generated Rust structs and enums
+2. **`sf-typegen`**: The codegen toolchain that parses `@salesforce/types` and produces modular Rust code
 
 ---
 
-## sf-generated-types
+## busbar-sf-types Library
 
-The core library provides Rust types generated from Salesforce's official [`@salesforce/types`](https://github.com/forcedotcom/wsdl) TypeScript definitions.
+The core library provides Rust types generated from Salesforce's [`@salesforce/types`](https://github.com/forcedotcom/wsdl) metadata definitions.
 
 ### Features
 
@@ -42,7 +66,7 @@ Types are organized by domain, allowing you to include only what you need to kee
 | `datacloud` | Data Cloud, CDP, Data Sources |
 | `servicecloud` | Service Cloud, Cases, Knowledge |
 
-*(See `sf-generated-types/Cargo.toml` for the full list of 80+ supported categories)*
+*(See `crates/sf-types/Cargo.toml` for the full list of 80+ supported categories)*
 
 ### Usage
 

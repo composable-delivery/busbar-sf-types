@@ -1,40 +1,37 @@
 [workspace]
 resolver = "2"
-members = [
-    "crates/sf-types",
-    "sf-typegen",
-]
+members = ["crates/sf-types", "sf-typegen"]
 
 [workspace.package]
-version = "0.1.0"
+version = "1.0.0"
 edition = "2021"
-authors = ["Jason Lantz <jason@kantext.dev>"]
+authors = ["Jason Lantz <jason@kantext.dev>", "Muselab LLC"]
 license = "BSD-3-Clause"
-repository = "https://github.com/kantext-dev/busbar-sf-types"
+repository = "https://github.com/composable-delivery/busbar-sf-types"
 
 [workspace.dependencies]
 # Core dependencies
-anyhow = "1.0"
-thiserror = "2.0"
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-schemars = "1.2"
+anyhow = "1.0.100"
+thiserror = "2.0.18"
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = { version = "1.0.149" }
+schemars = "1.2.1"
 
 # Async runtime
-tokio = { version = "1.45", features = ["full"] }
-async-trait = "0.1"
+tokio = { version = "1.49.0", features = ["full"] }
+async-trait = "0.1.89"
 
 # HTTP
 reqwest = { version = "0.13", features = ["json"] }
 http = "1.3"
 
 # XML/WSDL parsing
-roxmltree = "0.20"
-xsd-parser = "1.3"
-regex = "1.10"
+roxmltree = "0.21.1"
+xsd-parser = "1.4.0"
+regex = "1.12.2"
 
 # Utilities
-tempfile = "3.0"
+tempfile = "3.24.0"
 
 # Internal path dependencies
 sf-typegen = { path = "sf-typegen" }

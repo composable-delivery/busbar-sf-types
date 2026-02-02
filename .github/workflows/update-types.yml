@@ -44,12 +44,52 @@ jobs:
       - name: Regenerate Rust types
         run: bash ./scripts/generate.sh
 
+      - name: Extract @salesforce/types version
+        id: versions
+        run: |
+          SFDC_VERSION=$(cat .typegen-reports/salesforce_types_version.txt)
+          echo "salesforce_types_version=$SFDC_VERSION" >> $GITHUB_OUTPUT
+          
+          # For now, crate version matches salesforce/types major.minor
+          # This can be updated if different versioning scheme is needed
+          CRATE_VERSION="$SFDC_VERSION"
+          echo "crate_version=$CRATE_VERSION" >> $GITHUB_OUTPUT
+          
+          echo "Salesforce Types Version: $SFDC_VERSION"
+          echo "Crate Version: $CRATE_VERSION"
+
+      - name: Check if open PR exists for this version
+        id: check-pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SFDC_VERSION: ${{ steps.versions.outputs.salesforce_types_version }}
+        run: |
+          # Search for existing PRs with version-based branch name pattern
+          # Branch format: types/salesforce-X.Y.Z
+          BRANCH_PATTERN="types/salesforce-${SFDC_VERSION}"
+          
+          PR_COUNT=$(gh pr list \
+            --head "$BRANCH_PATTERN" \
+            --state open \
+            --json number \
+            --jq 'length' 2>/dev/null || echo "0")
+          
+          if [ "$PR_COUNT" -gt 0 ]; then
+            echo "has_open_pr=true" >> $GITHUB_OUTPUT
+            echo "Found existing open PR for version $SFDC_VERSION"
+          else
+            echo "has_open_pr=false" >> $GITHUB_OUTPUT
+            echo "No existing PR for version $SFDC_VERSION"
+          fi
+
       - name: Check for changes
         id: git-check
         run: |
           # Use git status to also detect untracked new files (e.g., new category modules)
           if [[ -n "$(git status --porcelain=v1)" ]]; then
             echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "changes=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Commit and Push changes
@@ -90,25 +130,38 @@ jobs:
                fi
              done
           else
-             # If this is a scheduled run, create a new PR
-             # Use commit SHA to make branch name unique and avoid conflicts
-             BRANCH_NAME="auto-regen/types-${{ github.sha }}-$(date +%s)"
-             git commit -m "chore: auto-regenerate types from latest @salesforce/types.  This is an automated commit created by CI when type regeneration produced changes that were not committed.  Original commit: ${{ github.sha }}"
-             
-             # Check if branch already exists remotely
-             if git ls-remote --heads origin "$BRANCH_NAME" | grep -q "$BRANCH_NAME"; then
-               echo "Branch $BRANCH_NAME already exists remotely, using timestamp suffix"
-               BRANCH_NAME="auto-regen/types-${{ github.sha }}-$(date +%s)-$$"
+             # If this is a scheduled/manual run, only create PR if no existing PR for this version
+             if [ "${{ steps.check-pr.outputs.has_open_pr }}" == "true" ]; then
+               echo "Skipping PR creation: open PR already exists for @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }}"
+               exit 0
              fi
              
+             # Create PR with version-based branch name
+             # Branch format: types/salesforce-X.Y.Z
+             BRANCH_NAME="types/salesforce-${{ steps.versions.outputs.salesforce_types_version }}"
+             CRATE_VERSION="${{ steps.versions.outputs.crate_version }}"
+             
+             git commit -m "chore: regenerate types for @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }}"
              git checkout -b "$BRANCH_NAME"
              
              # Retry push up to 3 times
              for i in 1 2 3; do
                if git push origin "$BRANCH_NAME"; then
                  echo "Push succeeded"
-                 gh pr create --title "chore: auto-regenerate types from latest @salesforce/types" \
-                   --body "Automated update from @salesforce/types package.  This PR was automatically created because type regeneration detected changes.Original commit: ${{ github.sha }}" || echo "PR may already exist"
+                 gh pr create \
+                   --title "chore: types for @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }} (crate v$CRATE_VERSION)" \
+                   --body "## Generated from @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }}
+                   
+Automatically generated types update.
+
+**Source**: @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }}
+**Crate Version**: $CRATE_VERSION
+
+This crate is fully auto-generated. No manual type definitions—only Salesforce metadata via codegen.
+
+Changes are tracked in \`.typegen-reports/\` for CI automation." \
+                   --label "automation" \
+                   --label "types" || echo "PR may already exist"
                  break
                else
                  if [ $i -lt 3 ]; then
