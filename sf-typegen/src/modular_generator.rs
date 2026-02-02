@@ -15,9 +15,9 @@
 //!   will instead generate `settings/org_settings.rs`.
 
 use crate::categories::{
-    CATEGORIES, CategorizedType, TypeCategory, find_category, group_by_category,
+    find_category, group_by_category, CategorizedType, TypeCategory, CATEGORIES,
 };
-use crate::traits_gen::{TraitGenConfig, generate_all_trait_impls, generate_traits_module};
+use crate::traits_gen::{generate_all_trait_impls, generate_traits_module, TraitGenConfig};
 use convert_case::{Case, Casing};
 use std::collections::{BTreeMap, HashMap, HashSet};
 use std::fs;
