@@ -26,7 +26,7 @@ oxc_span = "0.111"
 oxc_diagnostics = "0.111"
 
 # Code generation utilities
-convert_case = "0.10"
+convert_case = "0.11"
 
 # Error handling
 thiserror.workspace = true
