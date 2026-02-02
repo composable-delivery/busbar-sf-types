@@ -1,4 +1,5 @@
 pub mod categories;
+pub mod categorization;
 pub mod error;
 pub mod graph;
 pub mod modular_generator;

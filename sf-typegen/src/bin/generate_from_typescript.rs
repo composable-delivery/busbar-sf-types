@@ -23,6 +23,7 @@ use oxc_parser::{Parser, ParserReturn};
 use oxc_span::SourceType;
 use regex::Regex;
 use sf_typegen::categories::find_category;
+use sf_typegen::categorization::{categorize_by_graph, print_category_report};
 use sf_typegen::graph::{GraphExport, RelationshipType, TypeGraph};
 use sf_typegen::modular_generator::{
     FieldDef, ModularGenerator, ModularGeneratorConfig, TypeDefinitions,
@@ -100,8 +101,13 @@ fn main() -> Result<()> {
     println!("   - Nodes (types): {}", type_graph.get_all_types().len());
     println!("   - Root types (in-degree 0): {}", type_graph.get_root_types().len());
 
+    // Perform graph-based categorization
+    println!("\n🎯 Performing graph-based categorization...");
+    let graph_categories = categorize_by_graph(&type_graph);
+    print_category_report(&graph_categories, &type_graph);
+
     // Export the graph to JSON for analysis and downstream tooling
-    let graph_export = export_graph_with_categories(&type_graph, &type_definitions);
+    let graph_export = export_graph_with_categories_from_graph(&type_graph, &graph_categories);
     export_graph_to_file(&graph_export)?;
 
     // Print categorization statistics
@@ -914,13 +920,19 @@ fn is_primitive_or_special(type_name: &str) -> bool {
     )
 }
 
-/// Export the graph with category information
-fn export_graph_with_categories(graph: &TypeGraph, _defs: &TypeDefinitions) -> GraphExport {
+/// Export the graph with category information from graph-based categorization
+fn export_graph_with_categories_from_graph(
+    graph: &TypeGraph,
+    graph_categories: &sf_typegen::categorization::CategoryAssignment,
+) -> GraphExport {
     let mut export = graph.export();
     
     // Add category information for each type
     for type_name in graph.get_all_types() {
-        if let Some(cat) = find_category(&type_name) {
+        if let Some(category) = graph_categories.get_category(&type_name) {
+            export.categories.insert(type_name.clone(), category.to_string());
+        } else if let Some(cat) = find_category(&type_name) {
+            // Fallback to pattern-based categorization
             export.categories.insert(type_name.clone(), cat.name.to_string());
         } else {
             export.categories.insert(type_name.clone(), "uncategorized".to_string());
