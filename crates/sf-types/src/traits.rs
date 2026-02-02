@@ -3,7 +3,7 @@
 //! These traits can be used as bounds in API client generics to enable
 //! type-safe metadata operations.
 
-use serde::{de::DeserializeOwned, Serialize};
+use serde::{Serialize, de::DeserializeOwned};
 
 /// Error type for XML serialization operations
 #[derive(Debug, Clone)]
