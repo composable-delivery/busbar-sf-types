@@ -142,9 +142,33 @@ bash scripts/generate.sh
 This command will:
 1. Fetch the latest `metadata.ts` from `@salesforce/types` npm package
 2. Parse the TypeScript AST using oxc parser
-3. Apply **manual documentation overlays** (descriptions for key types)
-4. Apply categorization rules defined in `sf-typegen/src/categories.rs`
-5. Generate modular Rust files in `crates/sf-types/src/metadata/`
+3. **Build a type dependency graph** to analyze relationships between types
+4. **Perform graph-based categorization** to automatically assign types to modules
+5. Apply **manual documentation overlays** (descriptions for key types)
+6. Apply categorization rules defined in `sf-typegen/src/categories.rs`
+7. Generate modular Rust files in `crates/sf-types/src/metadata/`
+8. Export type graph to `assets/type-graph.json` and `assets/type-graph.dot`
+
+### Type Dependency Graph
+
+The generator now includes a sophisticated type dependency graph that:
+
+- **Analyzes** TypeScript AST to build a directed graph of type relationships
+- **Categorizes** types automatically based on their dependencies
+- **Detects** shared types used by multiple categories (assigned to "common" module)
+- **Exports** to JSON and DOT formats for analysis and visualization
+
+The graph contains:
+- **2682 nodes** (types from Salesforce metadata)
+- **4906 edges** (dependency relationships)
+- **267 shared types** automatically identified and moved to common module
+
+See [`assets/README.md`](assets/README.md) for detailed information on using the type graph.
+
+To visualize the graph:
+```bash
+dot -Tpng assets/type-graph.dot -o type-graph.png
+```
 
 ### Memory Requirements
 
