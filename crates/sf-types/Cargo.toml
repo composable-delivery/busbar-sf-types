@@ -2,6 +2,7 @@
 name = "busbar-sf-types"
 version.workspace = true
 edition.workspace = true
+rust-version.workspace = true
 authors.workspace = true
 license.workspace = true
 repository.workspace = true
@@ -299,7 +300,15 @@ standard = ["common"]
 org-shape = ["settings"]
 
 # Deploy operations (objects, layouts, permissions, apex, flows, automation)
-deployments = ["common", "objects", "layouts", "permissions", "apex", "flows", "automation"]
+deployments = [
+    "common",
+    "objects",
+    "layouts",
+    "permissions",
+    "apex",
+    "flows",
+    "automation",
+]
 
 # Metadata ETL (full schema access)
 metadata-etl = ["full"]
@@ -314,7 +323,12 @@ experience-dev = ["experience", "objects", "layouts", "permissions"]
 data-operations = ["datacloud", "batch", "analytics"]
 
 # Service Cloud operations
-service-operations = ["servicecloud", "servicecatalog", "messaging", "quickactions"]
+service-operations = [
+    "servicecloud",
+    "servicecatalog",
+    "messaging",
+    "quickactions",
+]
 
 # AI/ML development
 ai-dev = ["ai", "bots", "discovery"]
@@ -415,7 +429,7 @@ full = [
     "deploy",
     "lightning",
     "workspace",
-    "standard"
+    "standard",
 ]
 
 [package.metadata.docs.rs]
