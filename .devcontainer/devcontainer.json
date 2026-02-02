@@ -18,6 +18,10 @@
     },
     // Features to add to the dev container
     "features": {
+        "ghcr.io/devcontainers/features/rust:1": {
+            "version": "1.91.0",
+            "profile": "default"
+        },
         "ghcr.io/devcontainers/features/node:1": {
             "version": "lts"
         },

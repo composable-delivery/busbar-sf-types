@@ -5,7 +5,7 @@ members = ["crates/sf-types", "sf-typegen"]
 [workspace.package]
 version = "0.0.1"
 edition = "2024"
-rust-version = "1.90"
+rust-version = "1.91"
 authors = ["Jason Lantz <jason@kantext.dev>", "Muselab LLC"]
 license = "BSD-3-Clause"
 repository = "https://github.com/composable-delivery/busbar-sf-types"
