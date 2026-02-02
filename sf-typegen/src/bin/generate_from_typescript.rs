@@ -135,10 +135,10 @@ fn parse_generation_mode(args: &[String]) -> GenerationMode {
 fn parse_output_dir(args: &[String]) -> String {
     let mut iter = args.iter().peekable();
     while let Some(arg) = iter.next() {
-        if arg == "--output-dir"
-            && let Some(dir) = iter.next()
-        {
-            return dir.clone();
+        if arg == "--output-dir" {
+            if let Some(dir) = iter.next() {
+                return dir.clone();
+            }
         }
     }
     "../crates/sf-types/src".to_string()
@@ -147,10 +147,10 @@ fn parse_output_dir(args: &[String]) -> String {
 fn parse_input_file(args: &[String]) -> Option<String> {
     let mut iter = args.iter().peekable();
     while let Some(arg) = iter.next() {
-        if arg == "--input-file"
-            && let Some(file) = iter.next()
-        {
-            return Some(file.clone());
+        if arg == "--input-file" {
+            if let Some(file) = iter.next() {
+                return Some(file.clone());
+            }
         }
     }
     None
@@ -309,59 +309,59 @@ fn parse_and_extract(source: &str) -> Result<TypeDefinitions> {
 
     // Walk through all statements in the program
     for stmt in &program.body {
-        if let Statement::ExportNamedDeclaration(export) = stmt
-            && let Some(Declaration::TSTypeAliasDeclaration(type_alias)) = &export.declaration
-        {
-            let type_name = type_alias.id.name.to_string();
+        if let Statement::ExportNamedDeclaration(export) = stmt {
+            if let Some(Declaration::TSTypeAliasDeclaration(type_alias)) = &export.declaration {
+                let type_name = type_alias.id.name.to_string();
 
-            // Check if it's a single string literal type (e.g., export type ElementType = 'Float')
-            if let TSType::TSLiteralType(lit) = &type_alias.type_annotation
-                && let TSLiteral::StringLiteral(s) = &lit.literal
-            {
-                union_types.insert(type_name.clone(), vec![s.value.to_string()]);
-            }
+                // Check if it's a single string literal type (e.g., export type ElementType = 'Float')
+                if let TSType::TSLiteralType(lit) = &type_alias.type_annotation {
+                    if let TSLiteral::StringLiteral(s) = &lit.literal {
+                        union_types.insert(type_name.clone(), vec![s.value.to_string()]);
+                    }
+                }
 
-            // Check if it's a union type (enum) - ONLY string literal unions
-            if let TSType::TSUnionType(union) = &type_alias.type_annotation {
-                let mut variants = Vec::new();
-                let mut is_string_union = true;
+                // Check if it's a union type (enum) - ONLY string literal unions
+                if let TSType::TSUnionType(union) = &type_alias.type_annotation {
+                    let mut variants = Vec::new();
+                    let mut is_string_union = true;
 
-                for t in &union.types {
-                    if let TSType::TSLiteralType(lit) = t {
-                        if let TSLiteral::StringLiteral(s) = &lit.literal {
-                            variants.push(s.value.to_string());
+                    for t in &union.types {
+                        if let TSType::TSLiteralType(lit) = t {
+                            if let TSLiteral::StringLiteral(s) = &lit.literal {
+                                variants.push(s.value.to_string());
+                            } else {
+                                is_string_union = false;
+                                break;
+                            }
                         } else {
                             is_string_union = false;
                             break;
                         }
-                    } else {
-                        is_string_union = false;
-                        break;
+                    }
+
+                    if is_string_union && !variants.is_empty() {
+                        union_types.insert(type_name.clone(), variants);
                     }
                 }
 
-                if is_string_union && !variants.is_empty() {
-                    union_types.insert(type_name.clone(), variants);
-                }
-            }
-
-            // Check if it's an intersection type (struct extending Metadata)
-            if let TSType::TSIntersectionType(intersection) = &type_alias.type_annotation {
-                for t in &intersection.types {
-                    if let TSType::TSTypeLiteral(type_lit) = t {
-                        let fields = extract_fields_from_type_lit(type_lit);
-                        if !fields.is_empty() {
-                            interface_types.insert(type_name.clone(), fields);
+                // Check if it's an intersection type (struct extending Metadata)
+                if let TSType::TSIntersectionType(intersection) = &type_alias.type_annotation {
+                    for t in &intersection.types {
+                        if let TSType::TSTypeLiteral(type_lit) = t {
+                            let fields = extract_fields_from_type_lit(type_lit);
+                            if !fields.is_empty() {
+                                interface_types.insert(type_name.clone(), fields);
+                            }
                         }
                     }
                 }
-            }
 
-            // Check for plain type literals (structs not extending Metadata)
-            if let TSType::TSTypeLiteral(type_lit) = &type_alias.type_annotation {
-                let fields = extract_fields_from_type_lit(type_lit);
-                if !fields.is_empty() {
-                    interface_types.insert(type_name.clone(), fields);
+                // Check for plain type literals (structs not extending Metadata)
+                if let TSType::TSTypeLiteral(type_lit) = &type_alias.type_annotation {
+                    let fields = extract_fields_from_type_lit(type_lit);
+                    if !fields.is_empty() {
+                        interface_types.insert(type_name.clone(), fields);
+                    }
                 }
             }
         }
