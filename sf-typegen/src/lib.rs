@@ -15,7 +15,7 @@ pub mod traits_gen;
 /// name is kept for compatibility with existing internal code.
 pub use error::{Result, WsdlError};
 
-pub use categories::{CATEGORIES, TypeCategory, find_category};
+pub use categories::{find_category, TypeCategory, CATEGORIES};
 
 pub use modular_generator::{
     FieldDef, GenerationResult, ModularGenerator, ModularGeneratorConfig, TypeDefinitions,
