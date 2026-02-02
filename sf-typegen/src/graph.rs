@@ -181,6 +181,55 @@ pub struct GraphExport {
     pub categories: HashMap<String, String>,
 }
 
+impl GraphExport {
+    /// Export the graph in DOT format for visualization with Graphviz
+    pub fn to_dot(&self) -> String {
+        let mut output = String::from("digraph TypeDependencies {\n");
+        output.push_str("  rankdir=LR;\n");
+        output.push_str("  node [shape=box];\n\n");
+        
+        // Group nodes by category
+        let mut categories_map: HashMap<&str, Vec<&str>> = HashMap::new();
+        for (node, category) in &self.categories {
+            categories_map
+                .entry(category.as_str())
+                .or_default()
+                .push(node.as_str());
+        }
+        
+        // Output nodes grouped by category in subgraphs
+        for (i, (category, nodes)) in categories_map.iter().enumerate() {
+            output.push_str(&format!("  subgraph cluster_{} {{\n", i));
+            output.push_str(&format!("    label=\"{}\";\n", category));
+            
+            for node in nodes {
+                let safe_node = node.replace('"', "\\\"");
+                output.push_str(&format!("    \"{}\";\n", safe_node));
+            }
+            
+            output.push_str("  }\n\n");
+        }
+        
+        // Output edges
+        for edge in &self.edges {
+            let safe_source = edge.source.replace('"', "\\\"");
+            let safe_target = edge.target.replace('"', "\\\"");
+            let label = match edge.relationship {
+                RelationshipType::Contains => "contains",
+                RelationshipType::Extends => "extends",
+                RelationshipType::Generic => "generic",
+            };
+            output.push_str(&format!(
+                "  \"{}\" -> \"{}\" [label=\"{}\"];\n",
+                safe_source, safe_target, label
+            ));
+        }
+        
+        output.push_str("}\n");
+        output
+    }
+}
+
 /// A single edge in the exported graph
 #[derive(Debug, Serialize, Deserialize)]
 pub struct GraphEdge {

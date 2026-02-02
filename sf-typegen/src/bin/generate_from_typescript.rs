@@ -951,14 +951,25 @@ fn export_graph_to_file(export: &GraphExport) -> Result<()> {
             .context("Failed to create assets directory")?;
     }
     
-    let output_path = assets_dir.join("type-graph.json");
+    // Export as JSON
+    let json_path = assets_dir.join("type-graph.json");
     let json = serde_json::to_string_pretty(export)
         .context("Failed to serialize graph export")?;
     
-    fs::write(&output_path, json)
+    fs::write(&json_path, json)
         .context("Failed to write graph export")?;
     
-    println!("   ✅ Exported type graph to {}", output_path.display());
+    println!("   ✅ Exported type graph to {}", json_path.display());
+    
+    // Export as DOT for visualization
+    let dot_path = assets_dir.join("type-graph.dot");
+    let dot = export.to_dot();
+    
+    fs::write(&dot_path, dot)
+        .context("Failed to write DOT export")?;
+    
+    println!("   ✅ Exported DOT graph to {} (use: dot -Tpng {} -o type-graph.png)", 
+             dot_path.display(), dot_path.display());
     
     Ok(())
 }
