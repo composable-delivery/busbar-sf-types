@@ -126,36 +126,40 @@ This will output files like `schemas/CustomObject.json` and `schemas/SecuritySet
 
 ## Generating Types
 
-The types are generated using the `sf-wsdl` crate included in this repository.
+The types are generated using the `sf-typegen` crate included in this repository.
 
 ### Prerequisites
 
-- Rust toolchain (stable)
+- Rust toolchain (1.91.0 or later)
+- Node.js and npm (for `@salesforce/types`)
 
 ### How to Regenerate
 
-1. Navigate to the generator directory:
-   ```bash
-   cd sf-wsdl
-   ```
-
-2. Run the generator:
-   ```bash
-   cargo run --bin generate_from_typescript -- --output-dir ../sf-generated-types/src
-   ```
+```bash
+bash scripts/generate.sh
+```
 
 This command will:
-1. Fetch the latest `metadata.ts` from `forcedotcom/wsdl` on GitHub.
-2. Parse the TypeScript AST.
-3. Apply **manual documentation overlays** (descriptions injected for key types like `CustomObject`).
-4. Apply categorization rules defined in `sf-wsdl/src/categories.rs`.
-5. Generate modular Rust files in `sf-generated-types/src/metadata/`.
+1. Fetch the latest `metadata.ts` from `@salesforce/types` npm package
+2. Parse the TypeScript AST using oxc parser
+3. Apply **manual documentation overlays** (descriptions for key types)
+4. Apply categorization rules defined in `sf-typegen/src/categories.rs`
+5. Generate modular Rust files in `crates/sf-types/src/metadata/`
+
+### Memory Requirements
+
+**Note:** Building with `--all-features` requires >8GB of memory and may fail in memory-constrained environments (CI runners, devcontainers). This is due to the large number of feature flags (80+).
+
+For development and CI, we recommend:
+- Use specific feature subsets: `cargo build --features "objects,flows,apex"`
+- Or use default features: `cargo build` (includes common types only)
+- Full feature compilation works on machines with 16GB+ RAM
 
 ### Documentation Overlays
 
 Since the source `@salesforce/types` definitions do not include comments, we support a manual overlay system to inject documentation into the generated Rust code (and resulting JSON schemas).
 
-These are defined in `sf-wsdl/src/bin/generate_from_typescript.rs` in the `get_overlays()` function.
+These are defined in `sf-typegen/src/bin/generate_from_typescript.rs` in the `apply_overlays()` function.
 
 ## License
 
