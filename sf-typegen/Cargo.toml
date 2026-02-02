@@ -13,6 +13,9 @@ description = "Internal TypeScript → Rust code generation utilities for busbar
 # Regex for fallback extraction
 regex.workspace = true
 
+# Graph data structures for type dependency analysis
+petgraph = { version = "0.6", features = ["serde-1"] }
+
 # Serialization
 serde.workspace = true
 serde_json.workspace = true
