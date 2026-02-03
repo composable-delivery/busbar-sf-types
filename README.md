@@ -150,6 +150,7 @@ This command will:
 6. Apply categorization rules defined in `sf-typegen/src/categories.rs`
 7. Generate modular Rust files in `crates/sf-types/src/metadata/`
 8. Export type graph to `assets/type-graph.json` and `assets/type-graph.dot`
+9. **Copy type graph to `docs/type-graph.json` for GitHub Pages deployment**
 
 ### Type Dependency Graph
 

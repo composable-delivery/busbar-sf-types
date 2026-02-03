@@ -155,6 +155,13 @@ done
 # Always persist a short text log excerpt for debugging issue automation
 cp "$GEN_LOG" "$REPORT_DIR/generate.log"
 
+# Copy type-graph.json to docs directory for GitHub Pages
+if [[ -f "assets/type-graph.json" ]]; then
+  info ""
+  info "==> Copying type-graph.json to docs directory for GitHub Pages"
+  cp "assets/type-graph.json" "docs/type-graph.json"
+fi
+
 info ""
 info "==> Running rustfmt"
 cargo fmt --all
