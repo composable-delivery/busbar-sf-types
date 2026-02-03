@@ -76,9 +76,71 @@ pub trait SettingsType: JsonSerializable {
 
 /// Trait for types that support XML serialization (Metadata API format).
 pub trait XmlSerializable: MetadataType {
-    fn to_metadata_xml(&self) -> Result<String, XmlError>;
-    fn from_metadata_xml(xml: &str) -> Result<Self, XmlError>;
+    /// Serialize to Salesforce Metadata API XML format with proper namespace.
+    fn to_metadata_xml(&self) -> Result<String, XmlError> {
+        // Serialize the struct to XML string using quick-xml
+        let xml = quick_xml::se::to_string(self).map_err(|e| XmlError::Serialize(e.to_string()))?;
+
+        // Inject namespace into the root tag
+        // Match the opening root tag specifically: <TagName> or <TagName />
+        // This regex ensures we only match the first occurrence of the opening tag
+        let root_pattern = format!(
+            r"^(<{}\s*/?>|<{}\s+[^>]*>)",
+            Self::XML_ROOT_ELEMENT,
+            Self::XML_ROOT_ELEMENT
+        );
+
+        // For safety, we'll use a more precise approach:
+        // Find the first occurrence of "<{XML_ROOT_ELEMENT}" that's followed by either '>' or whitespace
+        let search_pattern = format!("<{}", Self::XML_ROOT_ELEMENT);
+        if let Some(pos) = xml.find(&search_pattern) {
+            // Find the end of the opening tag (either '>' or '/>')
+            if let Some(end_pos) = xml[pos..].find('>') {
+                let tag_end = pos + end_pos;
+                let opening_tag = &xml[pos..=tag_end];
+
+                // Check if it's a self-closing tag
+                let is_self_closing = opening_tag.ends_with("/>");
+
+                // Create replacement with namespace
+                let replacement = if is_self_closing {
+                    format!(
+                        "<{} xmlns=\"http://soap.sforce.com/2006/04/metadata\"/>",
+                        Self::XML_ROOT_ELEMENT
+                    )
+                } else {
+                    format!(
+                        "<{} xmlns=\"http://soap.sforce.com/2006/04/metadata\">",
+                        Self::XML_ROOT_ELEMENT
+                    )
+                };
+
+                // Replace the opening tag
+                let xml_with_ns = format!("{}{}{}", &xml[..pos], replacement, &xml[tag_end + 1..]);
+
+                // Add XML declaration
+                return Ok(format!(
+                    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n{}",
+                    xml_with_ns
+                ));
+            }
+        }
+
+        // Fallback: if we couldn't find/parse the tag properly, return an error
+        Err(XmlError::Serialize(format!(
+            "Could not find root element '{}' in serialized XML",
+            Self::XML_ROOT_ELEMENT
+        )))
+    }
+
+    /// Deserialize from Salesforce Metadata API XML format.
+    fn from_metadata_xml(xml: &str) -> Result<Self, XmlError> {
+        quick_xml::de::from_str(xml).map_err(|e| XmlError::Deserialize(e.to_string()))
+    }
 }
+
+/// Blanket implementation: all MetadataType types automatically support XML serialization
+impl<T: MetadataType> XmlSerializable for T {}
 
 /// Trait for types that represent package components.
 pub trait PackageComponent: MetadataType {

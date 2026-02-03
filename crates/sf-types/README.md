@@ -374,3 +374,46 @@ Licensed under either of:
 - MIT license ([LICENSE-MIT](LICENSE-MIT))
 
 at your option.
+## XML Serialization
+
+All Salesforce metadata types now support bi-directional XML serialization through the `XmlSerializable` trait. This allows you to convert between Rust structs and Salesforce Metadata API XML format.
+
+### Usage
+
+```rust
+use busbar_sf_types::settings::org_settings::AccountPlanSettings;
+use busbar_sf_types::traits::XmlSerializable;
+
+// Create a settings object
+let settings = AccountPlanSettings {
+    enable_account_plan: true,
+};
+
+// Serialize to XML
+let xml = settings.to_metadata_xml()?;
+// Output:
+// <?xml version="1.0" encoding="UTF-8"?>
+// <AccountPlanSettings xmlns="http://soap.sforce.com/2006/04/metadata">
+//     <enableAccountPlan>true</enableAccountPlan>
+// </AccountPlanSettings>
+
+// Deserialize from XML
+let deserialized = AccountPlanSettings::from_metadata_xml(&xml)?;
+```
+
+### Features
+
+- **Automatic namespace handling**: The Salesforce namespace `xmlns="http://soap.sforce.com/2006/04/metadata"` is automatically added during serialization
+- **XML declaration**: Proper XML declaration is included in all serialized output
+- **Roundtrip safe**: Serialization and deserialization preserve all data
+- **Error handling**: Clear error messages for serialization/deserialization failures
+- **Works with all types**: Any type implementing `MetadataType` automatically supports XML serialization
+
+### Examples
+
+See `examples/xml_demo.rs` for a complete working example:
+
+```bash
+cargo run --example xml_demo --features settings
+```
+
