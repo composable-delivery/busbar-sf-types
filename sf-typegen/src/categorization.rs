@@ -54,10 +54,10 @@ impl Default for CategoryAssignment {
 /// 4. Assign categories: Non-shared types get their single category, shared types go to "common"
 pub fn categorize_by_graph(graph: &TypeGraph) -> CategoryAssignment {
     let mut assignment = CategoryAssignment::new();
-    
+
     // Track which categories can reach each type
     let mut type_to_categories: HashMap<String, HashSet<&'static str>> = HashMap::new();
-    
+
     // Phase 1: Seed roots from explicit_types in categories
     for category in CATEGORIES {
         for &explicit_type in category.explicit_types {
@@ -66,16 +66,16 @@ pub fn categorize_by_graph(graph: &TypeGraph) -> CategoryAssignment {
                 .entry(explicit_type.to_string())
                 .or_default()
                 .insert(category.name);
-            
+
             // Traverse from this seed to find reachable types
             let reachable = graph.traverse_from(explicit_type);
-            
+
             for reachable_type in reachable {
                 // Skip the seed itself (already marked)
                 if reachable_type == explicit_type {
                     continue;
                 }
-                
+
                 // Mark this type as reachable from this category
                 type_to_categories
                     .entry(reachable_type)
@@ -84,39 +84,44 @@ pub fn categorize_by_graph(graph: &TypeGraph) -> CategoryAssignment {
             }
         }
     }
-    
+
     // Phase 2: Detect shared types and assign categories
     for (type_name, categories) in &type_to_categories {
         if categories.len() > 1 {
             // Type is shared across multiple categories
             assignment.shared_types.insert(type_name.clone());
-            assignment.assignments.insert(type_name.clone(), "common".to_string());
+            assignment
+                .assignments
+                .insert(type_name.clone(), "common".to_string());
         } else if let Some(&category_name) = categories.iter().next() {
             // Type belongs to exactly one category
-            assignment.assignments.insert(type_name.clone(), category_name.to_string());
+            assignment
+                .assignments
+                .insert(type_name.clone(), category_name.to_string());
         }
     }
-    
+
     // Phase 3: Identify root types (potential uncategorized top-level types)
-    assignment.root_types = graph.get_root_types()
+    assignment.root_types = graph
+        .get_root_types()
         .into_iter()
         .filter(|type_name| {
             // Only include types that aren't already categorized
             !assignment.assignments.contains_key(type_name)
         })
         .collect();
-    
+
     assignment
 }
 
 /// Get statistics about category assignments
 pub fn get_category_statistics(assignment: &CategoryAssignment) -> HashMap<String, usize> {
     let mut stats: HashMap<String, usize> = HashMap::new();
-    
+
     for category in assignment.assignments.values() {
         *stats.entry(category.clone()).or_insert(0) += 1;
     }
-    
+
     stats
 }
 
@@ -125,25 +130,31 @@ pub fn print_category_report(assignment: &CategoryAssignment, graph: &TypeGraph)
     println!("\n📊 Graph-Based Categorization Report:");
     println!("   Total types analyzed: {}", graph.get_all_types().len());
     println!("   Types categorized: {}", assignment.assignments.len());
-    println!("   Shared types (-> common): {}", assignment.shared_types.len());
-    println!("   Uncategorized root types: {}", assignment.root_types.len());
-    
+    println!(
+        "   Shared types (-> common): {}",
+        assignment.shared_types.len()
+    );
+    println!(
+        "   Uncategorized root types: {}",
+        assignment.root_types.len()
+    );
+
     // Show statistics by category
     let stats = get_category_statistics(assignment);
     if !stats.is_empty() {
         println!("\n   By category (graph-based):");
         let mut sorted_stats: Vec<_> = stats.iter().collect();
         sorted_stats.sort_by(|a, b| b.1.cmp(a.1));
-        
+
         for (category, count) in sorted_stats.iter().take(20) {
             println!("   - {}: {} types", category, count);
         }
-        
+
         if sorted_stats.len() > 20 {
             println!("   ... and {} more categories", sorted_stats.len() - 20);
         }
     }
-    
+
     // Show some example shared types
     if !assignment.shared_types.is_empty() {
         println!("\n   Example shared types:");
@@ -154,7 +165,7 @@ pub fn print_category_report(assignment: &CategoryAssignment, graph: &TypeGraph)
             println!("   ... and {} more", assignment.shared_types.len() - 10);
         }
     }
-    
+
     // Show some uncategorized root types
     if !assignment.root_types.is_empty() {
         println!("\n   ⚠️  Uncategorized root types (need review):");
@@ -175,12 +186,12 @@ mod tests {
     #[test]
     fn test_categorize_simple() {
         let mut graph = TypeGraph::new();
-        
+
         // Create a simple graph: CustomObject -> CustomField
         graph.add_dependency("CustomObject", "CustomField", RelationshipType::Contains);
-        
+
         let assignment = categorize_by_graph(&graph);
-        
+
         // Both should be categorized under "objects" since CustomObject is an explicit type
         assert!(assignment.assignments.contains_key("CustomObject"));
         assert!(assignment.assignments.contains_key("CustomField"));
@@ -189,14 +200,14 @@ mod tests {
     #[test]
     fn test_shared_types() {
         let mut graph = TypeGraph::new();
-        
+
         // Create a diamond: A -> C, B -> C
         // If A and B are in different categories, C should be shared
         graph.add_dependency("CustomObject", "SharedType", RelationshipType::Contains);
         graph.add_dependency("Layout", "SharedType", RelationshipType::Contains);
-        
+
         let assignment = categorize_by_graph(&graph);
-        
+
         // SharedType should be marked as shared
         assert!(assignment.is_shared("SharedType"));
         assert_eq!(assignment.get_category("SharedType"), Some("common"));
