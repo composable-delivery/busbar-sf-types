@@ -144,25 +144,26 @@ jobs:
              git commit -m "chore: regenerate types for @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }}"
              git checkout -b "$BRANCH_NAME"
              
-             # Retry push up to 3 times
-             for i in 1 2 3; do
-               if git push origin "$BRANCH_NAME"; then
-                 echo "Push succeeded"
-                 gh pr create \
-                   --title "chore: types for @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }} (crate v$CRATE_VERSION)" \
-                   --body "## Generated from @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }}
-                   
-Automatically generated types update.
-
-**Source**: @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }}
-**Crate Version**: $CRATE_VERSION
-
-This crate is fully auto-generated. No manual type definitions—only Salesforce metadata via codegen.
-
-Changes are tracked in \`.typegen-reports/\` for CI automation." \
-                   --label "automation" \
-                   --label "types" || echo "PR may already exist"
-                 break
+              # Retry push up to 3 times
+              for i in 1 2 3; do
+                if git push origin "$BRANCH_NAME"; then
+                  echo "Push succeeded"
+                  PR_BODY="## Generated from @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }}
+              
+              Automatically generated types update.
+              
+              **Source**: @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }}
+              **Crate Version**: $CRATE_VERSION
+              
+              This crate is fully auto-generated. No manual type definitions—only Salesforce metadata via codegen.
+              
+              Changes are tracked in \`.typegen-reports/\` for CI automation."
+                  gh pr create \
+                    --title "chore: types for @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }} (crate v$CRATE_VERSION)" \
+                    --body "$PR_BODY" \
+                    --label "automation" \
+                    --label "types" || echo "PR may already exist"
+                  break
                else
                  if [ $i -lt 3 ]; then
                    echo "Push failed, attempt $i of 3. Retrying..."
