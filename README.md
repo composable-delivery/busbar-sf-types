@@ -174,25 +174,40 @@ Explore the type dependency graph interactively in your browser:
 
 **🔗 [Launch Salesforce Types Explorer](https://composable-delivery.github.io/busbar-sf-types/)**
 
-The interactive explorer provides:
-- 🔍 **Search** - Find types by name across 2600+ types
+The interactive explorer is built with **React**, **reagraph** (WebGL graph visualization), and **reablocks** and provides:
+- 🔍 **Search** - Find types by name across 2600+ types with real-time results
 - 📊 **Category Browsing** - Browse types organized into 80+ categories
-- 🎯 **Dependency Visualization** - See type relationships with different edge types:
+- 🎯 **Interactive Graph** - Click nodes in the WebGL-rendered dependency graph to navigate
+  - **Overview mode** - Shows top 20 categories by type count
+  - **Type-specific mode** - Displays dependencies for the selected type
+- 🎨 **Relationship Types** - Filter and visualize different edge types:
   - **Contains** - Type A has a field of Type B
   - **Extends** - Type A extends/inherits from Type B  
   - **Generic** - Type A is a generic instantiation of Type B
+- 📑 **Tabbed Interface** - Switch between type Details and JSON Schema views
 - 📈 **Statistics** - View graph metrics and category distributions
 - 🎨 **Color-coded** - Types colored by category for easy identification
-- 🌐 **Overview Graph** - Shows top categories on initial page load, click to drill down into specific types
+
+**Developing the Site:**
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+See [SITE_README.md](SITE_README.md) for detailed information about the site architecture.
 
 **Testing the Graph Viewer:**
 
 The graph viewer includes comprehensive Playwright tests to ensure reliability:
 
 ```bash
-# Install dependencies
-npm install
-
 # Run tests
 npm test
 
