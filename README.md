@@ -4,6 +4,8 @@ Modular, feature-flagged Rust types for Salesforce metadata, **automatically gen
 
 This is a **fully codegen-built crate**—no manual type definitions. All Rust types are automatically generated from Salesforce metadata definitions via the [`@salesforce/types`](https://github.com/forcedotcom/wsdl) npm package.
 
+📊 **[Explore the interactive type dependency graph →](https://composable-delivery.github.io/busbar-sf-types/)**
+
 ## About Generated Types
 
 This repository contains:
@@ -165,7 +167,23 @@ The graph contains:
 
 See [`assets/README.md`](assets/README.md) for detailed information on using the type graph.
 
-To visualize the graph:
+#### Interactive Type Explorer
+
+Explore the type dependency graph interactively in your browser:
+
+**🔗 [Launch Salesforce Types Explorer](https://composable-delivery.github.io/busbar-sf-types/)**
+
+The interactive explorer provides:
+- 🔍 **Search** - Find types by name across 2600+ types
+- 📊 **Category Browsing** - Browse types organized into 80+ categories
+- 🎯 **Dependency Visualization** - See type relationships with different edge types:
+  - **Contains** - Type A has a field of Type B
+  - **Extends** - Type A extends/inherits from Type B  
+  - **Generic** - Type A is a generic instantiation of Type B
+- 📈 **Statistics** - View graph metrics and category distributions
+- 🎨 **Color-coded** - Types colored by category for easy identification
+
+To visualize the graph locally with Graphviz:
 ```bash
 dot -Tpng assets/type-graph.dot -o type-graph.png
 ```
