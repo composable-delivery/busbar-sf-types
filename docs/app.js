@@ -3,6 +3,7 @@ let graphData = null;
 let selectedType = null;
 let canvas = null;
 let ctx = null;
+let graphNodes = []; // Track node positions for click detection
 
 // Relationship type filters
 const filters = {
@@ -56,6 +57,10 @@ function initializeApp() {
     // Initialize canvas
     canvas = document.getElementById('graph');
     ctx = canvas.getContext('2d');
+    
+    // Add click handler to canvas
+    canvas.addEventListener('click', handleCanvasClick);
+    canvas.style.cursor = 'pointer';
     
     // Draw initial overview graph
     drawOverviewGraph();
@@ -286,8 +291,9 @@ function showWelcomeMessage() {
 function drawGraph(typeName) {
     if (!ctx) return;
     
-    // Clear canvas
+    // Clear canvas and reset node tracking
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    graphNodes = [];
     
     // Get dependencies for the selected type
     const dependencies = graphData.edges.filter(edge => {
@@ -317,6 +323,14 @@ function drawGraph(typeName) {
     ctx.arc(centerX, centerY, 30, 0, 2 * Math.PI);
     ctx.fill();
     
+    // Track center node for clicks
+    graphNodes.push({
+        x: centerX,
+        y: centerY,
+        radius: 30,
+        typeName: typeName
+    });
+    
     ctx.fillStyle = '#fff';
     ctx.font = 'bold 14px sans-serif';
     ctx.textAlign = 'center';
@@ -345,6 +359,14 @@ function drawGraph(typeName) {
         ctx.arc(x, y, 20, 0, 2 * Math.PI);
         ctx.fill();
         
+        // Track node for clicks
+        graphNodes.push({
+            x: x,
+            y: y,
+            radius: 20,
+            typeName: dep.target
+        });
+        
         // Draw label
         ctx.fillStyle = '#181818';
         ctx.font = '11px sans-serif';
@@ -356,6 +378,26 @@ function drawGraph(typeName) {
     
     // Draw legend
     drawLegend();
+}
+
+// Handle clicks on canvas graph
+function handleCanvasClick(event) {
+    if (!canvas || graphNodes.length === 0) return;
+    
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const x = (event.clientX - rect.left) * scaleX;
+    const y = (event.clientY - rect.top) * scaleY;
+    
+    // Check if click is within any node
+    for (const node of graphNodes) {
+        const distance = Math.sqrt(Math.pow(x - node.x, 2) + Math.pow(y - node.y, 2));
+        if (distance <= node.radius) {
+            selectType(node.typeName);
+            return;
+        }
+    }
 }
 
 // Draw legend for relationship types
