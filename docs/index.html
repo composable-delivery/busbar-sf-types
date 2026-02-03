@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salesforce Types Explorer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🔍 Salesforce Types Explorer</h1>
+            <p>Interactive visualization of Salesforce metadata type dependencies</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search types..." />
+                </div>
+                
+                <div class="stats">
+                    <h3>Graph Statistics</h3>
+                    <div class="stat-item">
+                        <span class="stat-label">Total Types:</span>
+                        <span class="stat-value" id="totalTypes">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Dependencies:</span>
+                        <span class="stat-value" id="totalEdges">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Categories:</span>
+                        <span class="stat-value" id="totalCategories">-</span>
+                    </div>
+                </div>
+
+                <div class="filters">
+                    <h3>Filters</h3>
+                    <label>
+                        <input type="checkbox" id="filterContains" checked>
+                        <span class="relationship-badge contains">Contains</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" id="filterExtends" checked>
+                        <span class="relationship-badge extends">Extends</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" id="filterGeneric" checked>
+                        <span class="relationship-badge generic">Generic</span>
+                    </label>
+                </div>
+
+                <div class="categories" id="categoriesList">
+                    <h3>Categories</h3>
+                    <div id="categoriesContent">Loading...</div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="content">
+                <!-- Type Details Panel -->
+                <div class="type-details" id="typeDetails">
+                    <h2>Welcome to Salesforce Types Explorer</h2>
+                    <p>Select a type from the search results or click on a node in the graph to explore dependencies.</p>
+                    <div class="info-box">
+                        <h3>About</h3>
+                        <p>This interactive tool visualizes the dependency graph of Salesforce metadata types. The graph shows:</p>
+                        <ul>
+                            <li><strong>Contains:</strong> Type A has a field of Type B</li>
+                            <li><strong>Extends:</strong> Type A extends/inherits from Type B</li>
+                            <li><strong>Generic:</strong> Type A is a generic instantiation of Type B</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Graph Visualization -->
+                <div class="graph-container">
+                    <div class="graph-controls">
+                        <button id="resetZoom" title="Reset Zoom">🔄 Reset View</button>
+                        <button id="centerGraph" title="Center Graph">📍 Center</button>
+                        <button id="fitToScreen" title="Fit to Screen">⛶ Fit Screen</button>
+                    </div>
+                    <svg id="graph"></svg>
+                    <div id="tooltip" class="tooltip"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>
+                Generated from <a href="https://github.com/composable-delivery/busbar-sf-types" target="_blank">busbar-sf-types</a> •
+                Data: <a href="../assets/type-graph.json" target="_blank">type-graph.json</a> •
+                <span id="generatedDate"></span>
+            </p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
