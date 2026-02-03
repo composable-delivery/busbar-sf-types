@@ -99,7 +99,10 @@ fn main() -> Result<()> {
     println!("\n🔗 Building type dependency graph...");
     let type_graph = build_type_graph(&type_definitions);
     println!("   - Nodes (types): {}", type_graph.get_all_types().len());
-    println!("   - Root types (in-degree 0): {}", type_graph.get_root_types().len());
+    println!(
+        "   - Root types (in-degree 0): {}",
+        type_graph.get_root_types().len()
+    );
 
     // Perform graph-based categorization
     println!("\n🎯 Performing graph-based categorization...");
@@ -859,33 +862,35 @@ fn report_missing_overlays(defs: &TypeDefinitions) {
 /// Build a type dependency graph from extracted type definitions
 fn build_type_graph(defs: &TypeDefinitions) -> TypeGraph {
     let mut graph = TypeGraph::new();
-    
+
     // Add all types as nodes first
     for type_name in defs.union_types.keys() {
         graph.add_node(type_name);
     }
-    
+
     for type_name in defs.interface_types.keys() {
         graph.add_node(type_name);
     }
-    
+
     // Add edges for struct field dependencies
     for (type_name, fields) in &defs.interface_types {
         for field in fields {
             let field_type = extract_base_type(&field.type_ref);
-            
+
             // Skip primitive types and special Rust types
             if is_primitive_or_special(&field_type) {
                 continue;
             }
-            
+
             // Check if the field type is a known type in our definitions
-            if defs.union_types.contains_key(&field_type) || defs.interface_types.contains_key(&field_type) {
+            if defs.union_types.contains_key(&field_type)
+                || defs.interface_types.contains_key(&field_type)
+            {
                 graph.add_dependency(type_name, &field_type, RelationshipType::Contains);
             }
         }
     }
-    
+
     graph
 }
 
@@ -926,19 +931,25 @@ fn export_graph_with_categories_from_graph(
     graph_categories: &sf_typegen::categorization::CategoryAssignment,
 ) -> GraphExport {
     let mut export = graph.export();
-    
+
     // Add category information for each type
     for type_name in graph.get_all_types() {
         if let Some(category) = graph_categories.get_category(&type_name) {
-            export.categories.insert(type_name.clone(), category.to_string());
+            export
+                .categories
+                .insert(type_name.clone(), category.to_string());
         } else if let Some(cat) = find_category(&type_name) {
             // Fallback to pattern-based categorization
-            export.categories.insert(type_name.clone(), cat.name.to_string());
+            export
+                .categories
+                .insert(type_name.clone(), cat.name.to_string());
         } else {
-            export.categories.insert(type_name.clone(), "uncategorized".to_string());
+            export
+                .categories
+                .insert(type_name.clone(), "uncategorized".to_string());
         }
     }
-    
+
     export
 }
 
@@ -947,29 +958,28 @@ fn export_graph_to_file(export: &GraphExport) -> Result<()> {
     // Create assets directory if it doesn't exist
     let assets_dir = Path::new("assets");
     if !assets_dir.exists() {
-        fs::create_dir_all(assets_dir)
-            .context("Failed to create assets directory")?;
+        fs::create_dir_all(assets_dir).context("Failed to create assets directory")?;
     }
-    
+
     // Export as JSON
     let json_path = assets_dir.join("type-graph.json");
-    let json = serde_json::to_string_pretty(export)
-        .context("Failed to serialize graph export")?;
-    
-    fs::write(&json_path, json)
-        .context("Failed to write graph export")?;
-    
+    let json = serde_json::to_string_pretty(export).context("Failed to serialize graph export")?;
+
+    fs::write(&json_path, json).context("Failed to write graph export")?;
+
     println!("   ✅ Exported type graph to {}", json_path.display());
-    
+
     // Export as DOT for visualization
     let dot_path = assets_dir.join("type-graph.dot");
     let dot = export.to_dot();
-    
-    fs::write(&dot_path, dot)
-        .context("Failed to write DOT export")?;
-    
-    println!("   ✅ Exported DOT graph to {} (use: dot -Tpng {} -o type-graph.png)", 
-             dot_path.display(), dot_path.display());
-    
+
+    fs::write(&dot_path, dot).context("Failed to write DOT export")?;
+
+    println!(
+        "   ✅ Exported DOT graph to {} (use: dot -Tpng {} -o type-graph.png)",
+        dot_path.display(),
+        dot_path.display()
+    );
+
     Ok(())
 }
