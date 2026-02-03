@@ -44,10 +44,10 @@ function TypeDetails({ graphData, selectedType, searchQuery, onTypeSelect }) {
           Found {searchResults.length} types matching "<strong>{searchQuery}</strong>"
         </p>
         {searchResults.length > 50 && <p><em>Showing first 50 results</em></p>}
-        <div className="dependency-list">
+        <div className="type-list">
           {searchResults.slice(0, 50).map((type) => (
-            <div key={type} className="dependency-item" onClick={() => onTypeSelect(type)}>
-              {type}
+            <div key={type} className="type-list-item" onClick={() => onTypeSelect(type)}>
+              <span className="type-name">{type}</span>
               <span className="relationship-badge contains">
                 {graphData.categories[type] || 'unknown'}
               </span>

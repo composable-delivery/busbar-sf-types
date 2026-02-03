@@ -3,11 +3,13 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import GraphVisualization from './components/GraphVisualization';
 import TypeDetails from './components/TypeDetails';
+import Dashboard from './components/Dashboard';
 
 function App() {
   const [graphData, setGraphData] = useState(null);
   const [selectedType, setSelectedType] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [viewMode, setViewMode] = useState('dashboard'); // 'dashboard' or 'graph'
   const [filters, setFilters] = useState({
     contains: true,
     extends: true,
@@ -34,6 +36,7 @@ function App() {
   const handleTypeSelect = (typeName) => {
     setSelectedType(typeName);
     setSearchQuery('');
+    setViewMode('graph');
   };
 
   const handleFilterChange = (filterName, value) => {
@@ -59,7 +62,7 @@ function App() {
 
   return (
     <div className="app">
-      <Header />
+      <Header viewMode={viewMode} onViewModeChange={setViewMode} />
       <main className="main-container">
         <div className="layout">
           <Sidebar
@@ -69,20 +72,30 @@ function App() {
             filters={filters}
             onFilterChange={handleFilterChange}
             onTypeSelect={handleTypeSelect}
+            viewMode={viewMode}
           />
           <div className="content">
-            <GraphVisualization
-              graphData={graphData}
-              selectedType={selectedType}
-              filters={filters}
-              onTypeSelect={handleTypeSelect}
-            />
-            <TypeDetails
-              graphData={graphData}
-              selectedType={selectedType}
-              searchQuery={searchQuery}
-              onTypeSelect={handleTypeSelect}
-            />
+            {viewMode === 'dashboard' ? (
+              <Dashboard
+                graphData={graphData}
+                onTypeSelect={handleTypeSelect}
+              />
+            ) : (
+              <>
+                <GraphVisualization
+                  graphData={graphData}
+                  selectedType={selectedType}
+                  filters={filters}
+                  onTypeSelect={handleTypeSelect}
+                />
+                <TypeDetails
+                  graphData={graphData}
+                  selectedType={selectedType}
+                  searchQuery={searchQuery}
+                  onTypeSelect={handleTypeSelect}
+                />
+              </>
+            )}
           </div>
         </div>
       </main>

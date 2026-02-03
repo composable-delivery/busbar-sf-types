@@ -37,7 +37,7 @@ body {
 .header {
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: white;
-  padding: 2rem 0;
+  padding: 1.5rem 0;
   box-shadow: 0 2px 4px var(--shadow);
 }
 
@@ -52,9 +52,46 @@ body {
   opacity: 0.95;
 }
 
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.view-mode-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.view-mode-btn {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  borderradius: 4px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.view-mode-btn.active {
+  background: white;
+  color: var(--primary-color);
+}
+
+.view-mode-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.view-mode-btn.active:hover {
+  background: white;
+}
+
 /* Container */
 .container {
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
@@ -69,7 +106,7 @@ body {
   display: grid;
   grid-template-columns: 300px 1fr;
   gap: 1.5rem;
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
@@ -87,8 +124,17 @@ body {
   overflow-y: auto;
 }
 
-.search-box {
+.sidebar-section {
   margin-bottom: 1.5rem;
+}
+
+.sidebar h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .search-input {
@@ -103,21 +149,6 @@ body {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(1, 118, 211, 0.1);
-}
-
-.stats,
-.filters,
-.categories {
-  margin-bottom: 1.5rem;
-}
-
-.sidebar h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-  color: var(--text-primary);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 .stat-item {
@@ -201,13 +232,141 @@ body {
   gap: 1.5rem;
 }
 
+/* Card */
+.card {
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+/* Dashboard */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.stat-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.stat-card {
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px var(--shadow);
+  text-align: center;
+}
+
+.stat-card .stat-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.stat-card .stat-label {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.relationship-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.relationship-stat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  background: var(--background);
+  border-radius: 4px;
+}
+
+.relationship-stat-item .count {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.type-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.type-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.type-list-item:hover {
+  background: var(--background);
+}
+
+.type-list-item .type-name {
+  font-weight: 500;
+}
+
+.connection-badge {
+  background: #e3f2fd;
+  color: #1565c0;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.category-card {
+  padding: 1rem;
+  background: var(--background);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+
+.category-card:hover {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.category-card .category-name {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.category-card .category-count {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
 /* Graph Container */
 .graph-container {
   background: var(--surface);
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 2px 8px var(--shadow);
-  order: -1; /* This ensures graph appears first/on top */
 }
 
 .graph-container h3 {
@@ -370,6 +529,11 @@ body {
     position: relative;
     top: 0;
     max-height: none;
+  }
+
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
