@@ -37,12 +37,12 @@ function initializeApp() {
     document.getElementById('totalCategories').textContent = uniqueCategories.size.toLocaleString();
     
     // Set generated date
-    const now = new Date().toLocaleDateString('en-US', { 
+    const currentDate = new Date().toLocaleDateString('en-US', { 
         year: 'numeric', 
         month: 'long', 
         day: 'numeric' 
     });
-    document.getElementById('generatedDate').textContent = `Updated: ${now}`;
+    document.getElementById('generatedDate').textContent = `Updated: ${currentDate}`;
     
     // Setup search
     setupSearch();
