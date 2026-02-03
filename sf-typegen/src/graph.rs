@@ -53,12 +53,7 @@ impl TypeGraph {
     /// * `from` - The type that depends on another type
     /// * `to` - The type being depended upon
     /// * `rel_type` - The type of relationship
-    pub fn add_dependency(
-        &mut self,
-        from: &str,
-        to: &str,
-        rel_type: RelationshipType,
-    ) {
+    pub fn add_dependency(&mut self, from: &str, to: &str, rel_type: RelationshipType) {
         let from_idx = self.add_node(from);
         let to_idx = self.add_node(to);
         self.graph.add_edge(from_idx, to_idx, rel_type);
@@ -138,11 +133,15 @@ impl TypeGraph {
 
     /// Export the graph to a JSON-serializable format
     pub fn export(&self) -> GraphExport {
-        let nodes: Vec<String> = self.graph.node_indices()
+        let nodes: Vec<String> = self
+            .graph
+            .node_indices()
             .map(|idx| self.graph[idx].clone())
             .collect();
 
-        let edges: Vec<GraphEdge> = self.graph.edge_indices()
+        let edges: Vec<GraphEdge> = self
+            .graph
+            .edge_indices()
             .filter_map(|edge_idx| {
                 let (source, target) = self.graph.edge_endpoints(edge_idx)?;
                 let source_name = self.graph[source].clone();
@@ -187,7 +186,7 @@ impl GraphExport {
         let mut output = String::from("digraph TypeDependencies {\n");
         output.push_str("  rankdir=LR;\n");
         output.push_str("  node [shape=box];\n\n");
-        
+
         // Group nodes by category
         let mut categories_map: HashMap<&str, Vec<&str>> = HashMap::new();
         for (node, category) in &self.categories {
@@ -196,20 +195,20 @@ impl GraphExport {
                 .or_default()
                 .push(node.as_str());
         }
-        
+
         // Output nodes grouped by category in subgraphs
         for (i, (category, nodes)) in categories_map.iter().enumerate() {
             output.push_str(&format!("  subgraph cluster_{} {{\n", i));
             output.push_str(&format!("    label=\"{}\";\n", category));
-            
+
             for node in nodes {
                 let safe_node = node.replace('"', "\\\"");
                 output.push_str(&format!("    \"{}\";\n", safe_node));
             }
-            
+
             output.push_str("  }\n\n");
         }
-        
+
         // Output edges
         for edge in &self.edges {
             let safe_source = edge.source.replace('"', "\\\"");
@@ -224,7 +223,7 @@ impl GraphExport {
                 safe_source, safe_target, label
             ));
         }
-        
+
         output.push_str("}\n");
         output
     }
@@ -257,7 +256,7 @@ mod tests {
     fn test_add_dependency() {
         let mut graph = TypeGraph::new();
         graph.add_dependency("CustomObject", "CustomField", RelationshipType::Contains);
-        
+
         let deps = graph.get_dependencies("CustomObject");
         assert_eq!(deps.len(), 1);
         assert_eq!(deps[0], "CustomField");
@@ -267,7 +266,7 @@ mod tests {
     fn test_get_dependents() {
         let mut graph = TypeGraph::new();
         graph.add_dependency("CustomObject", "CustomField", RelationshipType::Contains);
-        
+
         let dependents = graph.get_dependents("CustomField");
         assert_eq!(dependents.len(), 1);
         assert_eq!(dependents[0], "CustomObject");
@@ -278,7 +277,7 @@ mod tests {
         let mut graph = TypeGraph::new();
         graph.add_node("CustomObject");
         graph.add_dependency("CustomObject", "CustomField", RelationshipType::Contains);
-        
+
         let roots = graph.get_root_types();
         assert!(roots.contains(&"CustomObject".to_string()));
         assert!(!roots.contains(&"CustomField".to_string()));
@@ -289,7 +288,7 @@ mod tests {
         let mut graph = TypeGraph::new();
         graph.add_dependency("A", "B", RelationshipType::Contains);
         graph.add_dependency("B", "C", RelationshipType::Contains);
-        
+
         let reachable = graph.traverse_from("A");
         assert_eq!(reachable.len(), 3);
         assert!(reachable.contains(&"A".to_string()));
