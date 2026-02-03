@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'reablocks';
 
 function Header({ viewMode, onViewModeChange }) {
   return (
@@ -9,18 +10,20 @@ function Header({ viewMode, onViewModeChange }) {
           <p>Interactive visualization of Salesforce metadata type dependencies</p>
         </div>
         <div className="view-mode-buttons">
-          <button
-            className={`view-mode-btn ${viewMode === 'dashboard' ? 'active' : ''}`}
+          <Button
+            variant={viewMode === 'dashboard' ? 'filled' : 'outline'}
+            color={viewMode === 'dashboard' ? 'primary' : 'default'}
             onClick={() => onViewModeChange('dashboard')}
           >
             📊 Dashboard
-          </button>
-          <button
-            className={`view-mode-btn ${viewMode === 'graph' ? 'active' : ''}`}
+          </Button>
+          <Button
+            variant={viewMode === 'graph' ? 'filled' : 'outline'}
+            color={viewMode === 'graph' ? 'primary' : 'default'}
             onClick={() => onViewModeChange('graph')}
           >
             🔗 Graph
-          </button>
+          </Button>
         </div>
       </div>
     </header>
