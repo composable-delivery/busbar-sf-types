@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salesforce Types Explorer</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
     <header>
@@ -66,7 +65,7 @@
                 <!-- Type Details Panel -->
                 <div class="type-details" id="typeDetails">
                     <h2>Welcome to Salesforce Types Explorer</h2>
-                    <p>Select a type from the search results or click on a node in the graph to explore dependencies.</p>
+                    <p>Select a type from the search results or browse by category to explore dependencies.</p>
                     <div class="info-box">
                         <h3>About</h3>
                         <p>This interactive tool visualizes the dependency graph of Salesforce metadata types. The graph shows:</p>
@@ -80,13 +79,9 @@
 
                 <!-- Graph Visualization -->
                 <div class="graph-container">
-                    <div class="graph-controls">
-                        <button id="resetZoom" title="Reset Zoom">🔄 Reset View</button>
-                        <button id="centerGraph" title="Center Graph">📍 Center</button>
-                        <button id="fitToScreen" title="Fit to Screen">⛶ Fit Screen</button>
-                    </div>
-                    <svg id="graph"></svg>
-                    <div id="tooltip" class="tooltip"></div>
+                    <h3>Dependency Graph</h3>
+                    <p class="graph-note">Select a type to visualize its dependencies</p>
+                    <canvas id="graph" width="800" height="600"></canvas>
                 </div>
             </div>
         </div>
@@ -96,7 +91,7 @@
         <div class="container">
             <p>
                 Generated from <a href="https://github.com/composable-delivery/busbar-sf-types" target="_blank">busbar-sf-types</a> •
-                Data: <a href="../assets/type-graph.json" target="_blank">type-graph.json</a> •
+                Data: <a href="type-graph.json" target="_blank">type-graph.json</a> •
                 <span id="generatedDate"></span>
             </p>
         </div>

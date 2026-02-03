@@ -1,12 +1,8 @@
 // Global state
 let graphData = null;
 let selectedType = null;
-let simulation = null;
-let svg = null;
-let g = null;
-let zoom = null;
-let links = null;
-let nodes = null;
+let canvas = null;
+let ctx = null;
 
 // Relationship type filters
 const filters = {
@@ -18,7 +14,7 @@ const filters = {
 // Load the type graph data
 async function loadGraphData() {
     try {
-        const response = await fetch('../assets/type-graph.json');
+        const response = await fetch('type-graph.json');
         graphData = await response.json();
         initializeApp();
     } catch (error) {
@@ -57,8 +53,9 @@ function initializeApp() {
     // Setup categories
     setupCategories();
     
-    // Initialize graph visualization
-    initializeGraph();
+    // Initialize canvas
+    canvas = document.getElementById('graph');
+    ctx = canvas.getContext('2d');
 }
 
 // Setup search functionality
@@ -126,17 +123,23 @@ function displaySearchResults(results, query) {
 function setupFilters() {
     document.getElementById('filterContains').addEventListener('change', (e) => {
         filters.contains = e.target.checked;
-        updateGraphVisualization();
+        if (selectedType) {
+            drawGraph(selectedType);
+        }
     });
     
     document.getElementById('filterExtends').addEventListener('change', (e) => {
         filters.extends = e.target.checked;
-        updateGraphVisualization();
+        if (selectedType) {
+            drawGraph(selectedType);
+        }
     });
     
     document.getElementById('filterGeneric').addEventListener('change', (e) => {
         filters.generic = e.target.checked;
-        updateGraphVisualization();
+        if (selectedType) {
+            drawGraph(selectedType);
+        }
     });
 }
 
@@ -201,7 +204,7 @@ function displayCategoryTypes(category, types) {
 function selectType(typeName) {
     selectedType = typeName;
     showTypeDetails(typeName);
-    highlightTypeInGraph(typeName);
+    drawGraph(typeName);
     
     // Clear search
     document.getElementById('searchInput').value = '';
@@ -263,7 +266,7 @@ function showTypeDetails(typeName) {
 function showWelcomeMessage() {
     document.getElementById('typeDetails').innerHTML = `
         <h2>Welcome to Salesforce Types Explorer</h2>
-        <p>Select a type from the search results or click on a node in the graph to explore dependencies.</p>
+        <p>Select a type from the search results or browse by category to explore dependencies.</p>
         <div class="info-box">
             <h3>About</h3>
             <p>This interactive tool visualizes the dependency graph of Salesforce metadata types. The graph shows:</p>
@@ -276,162 +279,122 @@ function showWelcomeMessage() {
     `;
 }
 
-// Initialize D3.js graph visualization
-function initializeGraph() {
-    const container = document.getElementById('graph');
-    const width = container.clientWidth;
-    const height = 600;
+// Draw graph visualization using Canvas
+function drawGraph(typeName) {
+    if (!ctx) return;
     
-    // Create SVG
-    svg = d3.select('#graph')
-        .attr('width', width)
-        .attr('height', height);
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    // Setup zoom behavior
-    zoom = d3.zoom()
-        .scaleExtent([0.1, 10])
-        .on('zoom', (event) => {
-            g.attr('transform', event.transform);
-        });
-    
-    svg.call(zoom);
-    
-    // Create container group
-    g = svg.append('g');
-    
-    // Setup graph controls
-    document.getElementById('resetZoom').addEventListener('click', resetZoom);
-    document.getElementById('centerGraph').addEventListener('click', centerGraph);
-    document.getElementById('fitToScreen').addEventListener('click', fitToScreen);
-    
-    // Render initial graph with a subset of data
-    renderGraph();
-}
-
-// Render the graph visualization
-function renderGraph() {
-    // For performance, show only types with significant connections
-    const nodeSet = new Set();
-    const filteredEdges = [];
-    
-    // Filter edges based on relationship filters
-    graphData.edges.forEach(edge => {
+    // Get dependencies for the selected type
+    const dependencies = graphData.edges.filter(edge => {
+        if (edge.source !== typeName) return false;
         const rel = edge.relationship.toLowerCase();
-        if ((rel === 'contains' && filters.contains) ||
-            (rel === 'extends' && filters.extends) ||
-            (rel === 'generic' && filters.generic)) {
-            filteredEdges.push(edge);
-            nodeSet.add(edge.source);
-            nodeSet.add(edge.target);
-        }
+        return (rel === 'contains' && filters.contains) ||
+               (rel === 'extends' && filters.extends) ||
+               (rel === 'generic' && filters.generic);
     });
     
-    // Limit to most connected types for performance (top 200 by connection count)
-    const connectionCounts = {};
-    filteredEdges.forEach(edge => {
-        connectionCounts[edge.source] = (connectionCounts[edge.source] || 0) + 1;
-        connectionCounts[edge.target] = (connectionCounts[edge.target] || 0) + 1;
-    });
-    
-    const topNodes = Object.entries(connectionCounts)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 200)
-        .map(([node, _]) => node);
-    
-    const topNodeSet = new Set(topNodes);
-    const displayEdges = filteredEdges.filter(edge => 
-        topNodeSet.has(edge.source) && topNodeSet.has(edge.target)
-    );
-    
-    // Prepare data
-    const nodesData = topNodes.map(node => ({
-        id: node,
-        category: graphData.categories[node] || 'unknown'
-    }));
-    
-    // Clear previous graph
-    g.selectAll('*').remove();
-    
-    // Create force simulation
-    simulation = d3.forceSimulation(nodesData)
-        .force('link', d3.forceLink(displayEdges)
-            .id(d => d.id)
-            .distance(100))
-        .force('charge', d3.forceManyBody().strength(-300))
-        .force('center', d3.forceCenter(svg.attr('width') / 2, svg.attr('height') / 2))
-        .force('collision', d3.forceCollide().radius(30));
-    
-    // Create links
-    links = g.append('g')
-        .selectAll('line')
-        .data(displayEdges)
-        .join('line')
-        .attr('class', d => `link ${d.relationship.toLowerCase()}`)
-        .attr('stroke-width', 1.5);
-    
-    // Create nodes
-    nodes = g.append('g')
-        .selectAll('g')
-        .data(nodesData)
-        .join('g')
-        .attr('class', 'node')
-        .call(d3.drag()
-            .on('start', dragstarted)
-            .on('drag', dragged)
-            .on('end', dragended));
-    
-    nodes.append('circle')
-        .attr('r', 8)
-        .attr('fill', d => getCategoryColor(d.category));
-    
-    nodes.append('text')
-        .attr('dy', 20)
-        .text(d => d.id.length > 15 ? d.id.substring(0, 15) + '...' : d.id)
-        .style('font-size', '10px')
-        .style('fill', '#333');
-    
-    // Add hover effects
-    nodes.on('mouseover', function(event, d) {
-        showTooltip(event, d);
-        d3.select(this).select('circle').attr('r', 12);
-    })
-    .on('mouseout', function() {
-        hideTooltip();
-        d3.select(this).select('circle').attr('r', 8);
-    })
-    .on('click', function(event, d) {
-        selectType(d.id);
-    });
-    
-    // Update positions on each tick
-    simulation.on('tick', () => {
-        links
-            .attr('x1', d => d.source.x)
-            .attr('y1', d => d.source.y)
-            .attr('x2', d => d.target.x)
-            .attr('y2', d => d.target.y);
-        
-        nodes.attr('transform', d => `translate(${d.x},${d.y})`);
-    });
-}
-
-// Update graph visualization based on filters
-function updateGraphVisualization() {
-    renderGraph();
-}
-
-// Highlight a type in the graph
-function highlightTypeInGraph(typeName) {
-    if (!nodes) return;
-    
-    nodes.classed('selected', d => d.id === typeName);
-    
-    // Highlight related links
-    if (links) {
-        links.classed('highlighted', d => 
-            d.source.id === typeName || d.target.id === typeName
-        );
+    if (dependencies.length === 0) {
+        ctx.fillStyle = '#706e6b';
+        ctx.font = '16px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('No dependencies to display', canvas.width / 2, canvas.height / 2);
+        return;
     }
+    
+    // Calculate layout
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = Math.min(canvas.width, canvas.height) * 0.3;
+    
+    // Draw center node (selected type)
+    ctx.fillStyle = '#0176d3';
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, 30, 0, 2 * Math.PI);
+    ctx.fill();
+    
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 14px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(typeName.length > 12 ? typeName.substring(0, 12) + '...' : typeName, centerX, centerY);
+    
+    // Draw dependencies in a circle
+    const angleStep = (2 * Math.PI) / dependencies.length;
+    dependencies.forEach((dep, index) => {
+        const angle = index * angleStep - Math.PI / 2;
+        const x = centerX + radius * Math.cos(angle);
+        const y = centerY + radius * Math.sin(angle);
+        
+        // Draw line
+        const lineColor = getRelationshipColor(dep.relationship);
+        ctx.strokeStyle = lineColor;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        
+        // Draw node
+        ctx.fillStyle = getCategoryColor(graphData.categories[dep.target] || 'unknown');
+        ctx.beginPath();
+        ctx.arc(x, y, 20, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        // Draw label
+        ctx.fillStyle = '#181818';
+        ctx.font = '11px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+        const label = dep.target.length > 10 ? dep.target.substring(0, 10) + '...' : dep.target;
+        ctx.fillText(label, x, y + 25);
+    });
+    
+    // Draw legend
+    drawLegend();
+}
+
+// Draw legend for relationship types
+function drawLegend() {
+    const legendX = 10;
+    const legendY = canvas.height - 80;
+    
+    ctx.font = '12px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    
+    const relationships = [
+        { name: 'Contains', color: '#1565c0' },
+        { name: 'Extends', color: '#7b1fa2' },
+        { name: 'Generic', color: '#e65100' }
+    ];
+    
+    relationships.forEach((rel, index) => {
+        const y = legendY + index * 20;
+        
+        // Draw line
+        ctx.strokeStyle = rel.color;
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(legendX, y);
+        ctx.lineTo(legendX + 30, y);
+        ctx.stroke();
+        
+        // Draw label
+        ctx.fillStyle = '#181818';
+        ctx.fillText(rel.name, legendX + 40, y);
+    });
+}
+
+// Get color for relationship type
+function getRelationshipColor(relationship) {
+    const colors = {
+        'Contains': '#1565c0',
+        'Extends': '#7b1fa2',
+        'Generic': '#e65100'
+    };
+    return colors[relationship] || '#546e7a';
 }
 
 // Get color for a category
@@ -444,92 +407,12 @@ function getCategoryColor(category) {
         'apex': '#d32f2f',
         'lwc': '#00838f',
         'ai': '#6a1b9a',
-        'datacloud': '#00695c'
+        'ai_ml': '#6a1b9a',
+        'datacloud': '#00695c',
+        'data_cloud': '#00695c'
     };
     
     return colors[category] || '#546e7a';
-}
-
-// Drag functions
-function dragstarted(event, d) {
-    if (!event.active) simulation.alphaTarget(0.3).restart();
-    d.fx = d.x;
-    d.fy = d.y;
-}
-
-function dragged(event, d) {
-    d.fx = event.x;
-    d.fy = event.y;
-}
-
-function dragended(event, d) {
-    if (!event.active) simulation.alphaTarget(0);
-    d.fx = null;
-    d.fy = null;
-}
-
-// Tooltip functions
-function showTooltip(event, d) {
-    const tooltip = document.getElementById('tooltip');
-    const dependencies = graphData.edges.filter(e => e.source === d.id).length;
-    const dependents = graphData.edges.filter(e => e.target === d.id).length;
-    
-    tooltip.innerHTML = `
-        <strong>${d.id}</strong><br>
-        Category: ${d.category}<br>
-        Dependencies: ${dependencies}<br>
-        Used by: ${dependents} types
-    `;
-    
-    tooltip.style.left = (event.pageX + 10) + 'px';
-    tooltip.style.top = (event.pageY - 10) + 'px';
-    tooltip.classList.add('visible');
-}
-
-function hideTooltip() {
-    document.getElementById('tooltip').classList.remove('visible');
-}
-
-// Zoom controls
-function resetZoom() {
-    svg.transition().duration(750).call(zoom.transform, d3.zoomIdentity);
-}
-
-function centerGraph() {
-    const bounds = g.node().getBBox();
-    const parent = svg.node().getBoundingClientRect();
-    const fullWidth = parent.width;
-    const fullHeight = parent.height;
-    const width = bounds.width;
-    const height = bounds.height;
-    const midX = bounds.x + width / 2;
-    const midY = bounds.y + height / 2;
-    
-    const translate = [fullWidth / 2 - midX, fullHeight / 2 - midY];
-    
-    svg.transition().duration(750).call(
-        zoom.transform,
-        d3.zoomIdentity.translate(translate[0], translate[1])
-    );
-}
-
-function fitToScreen() {
-    const bounds = g.node().getBBox();
-    const parent = svg.node().getBoundingClientRect();
-    const fullWidth = parent.width;
-    const fullHeight = parent.height;
-    const width = bounds.width;
-    const height = bounds.height;
-    const midX = bounds.x + width / 2;
-    const midY = bounds.y + height / 2;
-    
-    const scale = 0.9 / Math.max(width / fullWidth, height / fullHeight);
-    const translate = [fullWidth / 2 - scale * midX, fullHeight / 2 - scale * midY];
-    
-    svg.transition().duration(750).call(
-        zoom.transform,
-        d3.zoomIdentity.translate(translate[0], translate[1]).scale(scale)
-    );
 }
 
 // Initialize on page load

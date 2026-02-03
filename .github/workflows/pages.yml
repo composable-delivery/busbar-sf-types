@@ -25,6 +25,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Copy type-graph.json to docs
+        run: cp assets/type-graph.json docs/
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
