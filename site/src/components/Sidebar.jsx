@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { Checkbox } from 'reablocks';
 
 function Sidebar({ graphData, searchQuery, setSearchQuery, filters, onFilterChange, onTypeSelect, viewMode }) {
   // Calculate statistics
@@ -67,30 +68,27 @@ function Sidebar({ graphData, searchQuery, setSearchQuery, filters, onFilterChan
       {viewMode === 'graph' && (
         <div className="sidebar-section">
           <h3>Relationship Filters</h3>
-          <label className="filter-label">
-            <input
-              type="checkbox"
+          <div className="filter-label">
+            <Checkbox
               checked={filters.contains}
               onChange={(e) => onFilterChange('contains', e.target.checked)}
             />
             <span className="relationship-badge contains">Contains</span>
-          </label>
-          <label className="filter-label">
-            <input
-              type="checkbox"
+          </div>
+          <div className="filter-label">
+            <Checkbox
               checked={filters.extends}
               onChange={(e) => onFilterChange('extends', e.target.checked)}
             />
             <span className="relationship-badge extends">Extends</span>
-          </label>
-          <label className="filter-label">
-            <input
-              type="checkbox"
+          </div>
+          <div className="filter-label">
+            <Checkbox
               checked={filters.generic}
               onChange={(e) => onFilterChange('generic', e.target.checked)}
             />
             <span className="relationship-badge generic">Generic</span>
-          </label>
+          </div>
         </div>
       )}
 

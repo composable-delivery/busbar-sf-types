@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { BarList } from 'reaviz';
 
 function Dashboard({ graphData, onTypeSelect }) {
   const stats = useMemo(() => {
@@ -41,13 +42,27 @@ function Dashboard({ graphData, onTypeSelect }) {
       .sort((a, b) => b[1] - a[1])
       .slice(0, 10);
 
+    // Format data for reaviz BarList
+    const relationshipChartData = Object.entries(relationshipStats).map(([key, data]) => ({
+      key,
+      data
+    }));
+
+    const topCategoriesChartData = topCategories.map(([category, stats]) => ({
+      key: category,
+      data: stats.count,
+      metadata: stats.types
+    }));
+
     return {
       totalTypes: graphData.nodes.length,
       totalEdges: graphData.edges.length,
       totalCategories: Object.keys(categoryStats).length,
       categoryStats,
       relationshipStats,
+      relationshipChartData,
       topCategories,
+      topCategoriesChartData,
       mostConnected,
     };
   }, [graphData]);
@@ -78,16 +93,13 @@ function Dashboard({ graphData, onTypeSelect }) {
         </div>
       </div>
 
-      {/* Relationship Stats */}
+      {/* Relationship Stats with Reaviz */}
       <div className="card">
         <h3>Relationship Distribution</h3>
-        <div className="relationship-stats">
-          {Object.entries(stats.relationshipStats).map(([rel, count]) => (
-            <div key={rel} className="relationship-stat-item">
-              <span className={`relationship-badge ${rel.toLowerCase()}`}>{rel}</span>
-              <span className="count">{count.toLocaleString()}</span>
-            </div>
-          ))}
+        <div style={{ height: '200px', padding: '1rem 0' }}>
+          <BarList
+            data={stats.relationshipChartData}
+          />
         </div>
       </div>
 
@@ -110,20 +122,18 @@ function Dashboard({ graphData, onTypeSelect }) {
         </div>
       </div>
 
-      {/* Quick Access to Categories */}
+      {/* Top Categories with Reaviz */}
       <div className="card">
-        <h3>Browse by Category</h3>
-        <div className="category-grid">
-          {stats.topCategories.map(([category, data]) => (
-            <div
-              key={category}
-              className="category-card"
-              onClick={() => onTypeSelect(data.types[0])}
-            >
-              <div className="category-name">{category}</div>
-              <div className="category-count">{data.count} types</div>
-            </div>
-          ))}
+        <h3>Top Categories by Type Count</h3>
+        <div style={{ height: '400px', padding: '1rem 0' }}>
+          <BarList
+            data={stats.topCategoriesChartData}
+            onItemClick={(item) => {
+              if (item.metadata && item.metadata.length > 0) {
+                onTypeSelect(item.metadata[0]);
+              }
+            }}
+          />
         </div>
       </div>
     </div>

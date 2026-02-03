@@ -157,7 +157,15 @@ function GraphVisualization({ graphData, selectedType, filters, onTypeSelect }) 
           ? `Multi-level dependency tree for: ${selectedType}`
           : 'Overview of type relationships - click any type to explore its dependency tree'}
       </p>
-      <div style={{ width: '100%', height: '700px', border: '1px solid #ddd', borderRadius: '8px', background: '#fafafa' }}>
+      <div style={{ 
+        width: '100%', 
+        height: '700px', 
+        border: '1px solid #ddd', 
+        borderRadius: '8px', 
+        background: '#fafafa',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
         <GraphCanvas
           nodes={nodes}
           edges={edges}

@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react';
-import { SimpleTabs, SimpleTab } from './SimpleTabs';
+import { Tabs, TabList, Tab, TabPanel } from 'reablocks';
 
 function TypeDetails({ graphData, selectedType, searchQuery, onTypeSelect }) {
-  const [activeTab, setActiveTab] = useState('details');
+  const [activeTab, setActiveTab] = useState(0);
 
   // Search functionality
   const searchResults = useMemo(() => {
@@ -86,8 +86,13 @@ function TypeDetails({ graphData, selectedType, searchQuery, onTypeSelect }) {
     <div className="type-details">
       <h2>{selectedType}</h2>
       
-      <SimpleTabs value={activeTab} onChange={setActiveTab}>
-        <SimpleTab value="details" label="Details">
+      <Tabs selectedIndex={activeTab} onSelect={setActiveTab}>
+        <TabList>
+          <Tab>Details</Tab>
+          <Tab>JSON Schema</Tab>
+        </TabList>
+        
+        <TabPanel>
           <div className="tab-content">
             <div className="info-box">
               <strong>Category:</strong> {typeInfo.category}
@@ -138,9 +143,9 @@ function TypeDetails({ graphData, selectedType, searchQuery, onTypeSelect }) {
               </div>
             )}
           </div>
-        </SimpleTab>
+        </TabPanel>
 
-        <SimpleTab value="schema" label="JSON Schema">
+        <TabPanel>
           <div className="tab-content">
             <div className="info-box">
               <h3>JSON Schema</h3>
@@ -157,8 +162,8 @@ function TypeDetails({ graphData, selectedType, searchQuery, onTypeSelect }) {
               </p>
             </div>
           </div>
-        </SimpleTab>
-      </SimpleTabs>
+        </TabPanel>
+      </Tabs>
     </div>
   );
 }
