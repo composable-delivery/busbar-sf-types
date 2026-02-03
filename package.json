@@ -9,14 +9,24 @@
     "url": "https://github.com/composable-delivery/busbar-sf-types"
   },
   "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
     "test:debug": "playwright test --debug"
   },
   "dependencies": {
-    "@salesforce/types": "^1.0.0"
+    "@salesforce/types": "^1.0.0",
+    "reablocks": "^9.2.2",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "reagraph": "^4.30.8",
+    "reaviz": "^16.1.1"
   },
   "devDependencies": {
-    "@playwright/test": "^1.48.0"
+    "@playwright/test": "^1.48.0",
+    "@vitejs/plugin-react": "^5.1.3",
+    "vite": "^7.3.1"
   }
 }

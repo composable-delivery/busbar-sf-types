@@ -8,6 +8,9 @@ target/
 
 node_modules/
 
+# Site source (built output goes to docs/)
+/site/
+
 # Playwright
 /test-results/
 /playwright-report/
