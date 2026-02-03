@@ -1,6 +1,28 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
 
+/**
+ * Helper function to check if a canvas has been drawn on (is not blank/white)
+ * @param {import('@playwright/test').Page} page - The Playwright page object
+ * @returns {Promise<boolean>} - True if canvas has content, false if blank
+ */
+async function canvasHasContent(page) {
+  return await page.evaluate(() => {
+    const canvas = document.getElementById('graph');
+    const ctx = canvas.getContext('2d');
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    
+    // Check if any pixel is not white/blank
+    // Using 250 as threshold instead of 255 to account for canvas background color (#fafafa = 250,250,250)
+    for (let i = 0; i < imageData.data.length; i += 4) {
+      if (imageData.data[i] !== 250 || imageData.data[i+1] !== 250 || imageData.data[i+2] !== 250) {
+        return true;
+      }
+    }
+    return false;
+  });
+}
+
 test.describe('Graph Viewer', () => {
   test('should display page and load graph data', async ({ page }) => {
     await page.goto('/');
@@ -32,18 +54,7 @@ test.describe('Graph Viewer', () => {
     await expect(canvas).toBeVisible();
 
     // Verify canvas has been drawn on by checking it's not blank
-    const hasContent = await page.evaluate(() => {
-      const canvas = document.getElementById('graph');
-      const ctx = canvas.getContext('2d');
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      // Check if any pixel is not white (meaning something was drawn)
-      for (let i = 0; i < imageData.data.length; i += 4) {
-        if (imageData.data[i] !== 250 || imageData.data[i+1] !== 250 || imageData.data[i+2] !== 250) {
-          return true;
-        }
-      }
-      return false;
-    });
+    const hasContent = await canvasHasContent(page);
     expect(hasContent).toBe(true);
   });
 
@@ -87,18 +98,7 @@ test.describe('Graph Viewer', () => {
     await expect(page.locator('text=CustomField')).toBeVisible();
 
     // Verify canvas has been redrawn with type-specific graph
-    const hasContent = await page.evaluate(() => {
-      const canvas = document.getElementById('graph');
-      const ctx = canvas.getContext('2d');
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      // Check if any pixel is not white
-      for (let i = 0; i < imageData.data.length; i += 4) {
-        if (imageData.data[i] !== 250 || imageData.data[i+1] !== 250 || imageData.data[i+2] !== 250) {
-          return true;
-        }
-      }
-      return false;
-    });
+    const hasContent = await canvasHasContent(page);
     expect(hasContent).toBe(true);
   });
 
@@ -202,21 +202,8 @@ test.describe('Graph Viewer', () => {
     // Should show type details even with no dependencies
     await expect(page.locator('h2')).toContainText('Gender');
 
-    // Graph should show message about no dependencies
-    const graphHasContent = await page.evaluate(() => {
-      const canvas = document.getElementById('graph');
-      const ctx = canvas.getContext('2d');
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      // Check if canvas has any content
-      let hasNonWhitePixels = false;
-      for (let i = 0; i < imageData.data.length; i += 4) {
-        if (imageData.data[i] !== 250 || imageData.data[i+1] !== 250 || imageData.data[i+2] !== 250) {
-          hasNonWhitePixels = true;
-          break;
-        }
-      }
-      return hasNonWhitePixels;
-    });
+    // Graph should show message about no dependencies or be drawn
+    const graphHasContent = await canvasHasContent(page);
     // Graph might show "No dependencies" text
     expect(graphHasContent).toBeTruthy();
   });
