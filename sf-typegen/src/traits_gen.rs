@@ -107,9 +107,29 @@ pub trait SettingsType: JsonSerializable {
 
 /// Trait for types that support XML serialization (Metadata API format).
 pub trait XmlSerializable: MetadataType {
-    fn to_metadata_xml(&self) -> Result<String, XmlError>;
-    fn from_metadata_xml(xml: &str) -> Result<Self, XmlError>;
+    /// Serialize to Salesforce Metadata API XML format with proper namespace.
+    fn to_metadata_xml(&self) -> Result<String, XmlError> {
+        // Serialize the struct to XML string using quick-xml
+        let xml = quick_xml::se::to_string(self)
+            .map_err(|e| XmlError::Serialize(e.to_string()))?;
+        
+        // Inject namespace into the root tag
+        // <CustomObject> -> <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+        let root_tag = format!("<{}", Self::XML_ROOT_ELEMENT);
+        let replacement = format!("<{} xmlns=\"http://soap.sforce.com/2006/04/metadata\"", Self::XML_ROOT_ELEMENT);
+        
+        // Add XML declaration and replaced XML with namespace
+        Ok(format!("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n{}", xml.replace(&root_tag, &replacement)))
+    }
+
+    /// Deserialize from Salesforce Metadata API XML format.
+    fn from_metadata_xml(xml: &str) -> Result<Self, XmlError> {
+        quick_xml::de::from_str(xml).map_err(|e| XmlError::Deserialize(e.to_string()))
+    }
 }
+
+/// Blanket implementation: all MetadataType types automatically support XML serialization
+impl<T: MetadataType> XmlSerializable for T {}
 
 /// Trait for types that represent package components.
 pub trait PackageComponent: MetadataType {
