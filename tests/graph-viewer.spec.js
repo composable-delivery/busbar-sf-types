@@ -20,8 +20,8 @@ test.describe('Graph Viewer', () => {
   test('should display initial overview graph on page load', async ({ page }) => {
     await page.goto('/');
 
-    // Wait for graph to load
-    await page.waitForTimeout(1000);
+    // Wait for graph to be drawn by checking for the graph note
+    await page.waitForSelector('.graph-note', { state: 'visible' });
 
     // Check that graph note mentions overview
     const graphNote = page.locator('.graph-note');
@@ -68,11 +68,14 @@ test.describe('Graph Viewer', () => {
     // Click on objects category first
     await page.getByText('objects (39)').click();
     
+    // Wait for category header to appear
+    await page.waitForSelector('h2:has-text("Category: objects")', { state: 'visible' });
+    
     // Then click on CustomObject type
     await page.getByText('CustomObject', { exact: true }).click();
 
-    // Wait for type details to load
-    await page.waitForTimeout(500);
+    // Wait for type details heading to appear
+    await page.waitForSelector('h2:has-text("CustomObject")', { state: 'visible' });
 
     // Check type details are displayed
     await expect(page.locator('h2')).toContainText('CustomObject');
@@ -104,12 +107,12 @@ test.describe('Graph Viewer', () => {
 
     // Navigate to a type with dependencies
     await page.getByText('objects (39)').click();
+    await page.waitForSelector('h2:has-text("Category: objects")', { state: 'visible' });
     await page.getByText('CustomObject', { exact: true }).click();
-    await page.waitForTimeout(500);
+    await page.waitForSelector('h2:has-text("CustomObject")', { state: 'visible' });
 
     // Uncheck "Contains" filter
     await page.locator('#filterContains').uncheck();
-    await page.waitForTimeout(300);
 
     // Check that filter is unchecked
     await expect(page.locator('#filterContains')).not.toBeChecked();
@@ -124,7 +127,9 @@ test.describe('Graph Viewer', () => {
 
     // Type in search box
     await page.locator('#searchInput').fill('CustomObject');
-    await page.waitForTimeout(500);
+    
+    // Wait for search results to appear
+    await page.waitForSelector('h2:has-text("Search Results")', { state: 'visible' });
 
     // Check search results are displayed
     await expect(page.locator('h2')).toContainText('Search Results');
@@ -132,7 +137,9 @@ test.describe('Graph Viewer', () => {
 
     // Click on a search result
     await page.getByText('CustomObject', { exact: true }).first().click();
-    await page.waitForTimeout(500);
+    
+    // Wait for type details to appear
+    await page.waitForSelector('h2:has-text("CustomObject")', { state: 'visible' });
 
     // Verify type details are shown
     await expect(page.locator('h2')).toContainText('CustomObject');
@@ -143,7 +150,9 @@ test.describe('Graph Viewer', () => {
 
     // Search for something
     await page.locator('#searchInput').fill('Flow');
-    await page.waitForTimeout(500);
+    
+    // Wait for search results
+    await page.waitForSelector('h2:has-text("Search Results")', { state: 'visible' });
 
     // Click on a category
     await page.getByText('flows (51)').click();
@@ -161,12 +170,15 @@ test.describe('Graph Viewer', () => {
 
     // Navigate to CustomObject
     await page.getByText('objects (39)').click();
+    await page.waitForSelector('h2:has-text("Category: objects")', { state: 'visible' });
     await page.getByText('CustomObject', { exact: true }).click();
-    await page.waitForTimeout(500);
+    await page.waitForSelector('h2:has-text("CustomObject")', { state: 'visible' });
 
     // Click on a dependency (CustomField)
     await page.getByText('CustomField').first().click();
-    await page.waitForTimeout(500);
+    
+    // Wait for CustomField details to appear
+    await page.waitForSelector('h2:has-text("CustomField")', { state: 'visible' });
 
     // Verify we navigated to CustomField
     await expect(page.locator('h2')).toContainText('CustomField');
@@ -177,11 +189,15 @@ test.describe('Graph Viewer', () => {
 
     // Search for a type that likely has no dependencies
     await page.locator('#searchInput').fill('Gender');
-    await page.waitForTimeout(500);
+    
+    // Wait for search results
+    await page.waitForSelector('h2:has-text("Search Results")', { state: 'visible' });
 
     // Click on it
     await page.getByText('Gender', { exact: true }).first().click();
-    await page.waitForTimeout(500);
+    
+    // Wait for type details to appear
+    await page.waitForSelector('h2:has-text("Gender")', { state: 'visible' });
 
     // Should show type details even with no dependencies
     await expect(page.locator('h2')).toContainText('Gender');
