@@ -39,8 +39,7 @@ fn test_metadata_type_with_vec_deserialization() {
     <testClassName>TestClass3</testClassName>
 </ApexTestSuite>"#;
 
-    let test_suite = ApexTestSuite::from_metadata_xml(xml)
-        .expect("Failed to deserialize");
+    let test_suite = ApexTestSuite::from_metadata_xml(xml).expect("Failed to deserialize");
 
     assert_eq!(test_suite.test_class_name.len(), 3);
     assert_eq!(test_suite.test_class_name[0], "TestClass1");
@@ -51,15 +50,11 @@ fn test_metadata_type_with_vec_deserialization() {
 #[test]
 fn test_metadata_type_with_vec_roundtrip() {
     let original = ApexTestSuite {
-        test_class_name: vec![
-            "MyTestClass".to_string(),
-            "AnotherTestClass".to_string(),
-        ],
+        test_class_name: vec!["MyTestClass".to_string(), "AnotherTestClass".to_string()],
     };
 
     let xml = original.to_metadata_xml().expect("Failed to serialize");
-    let deserialized = ApexTestSuite::from_metadata_xml(&xml)
-        .expect("Failed to deserialize");
+    let deserialized = ApexTestSuite::from_metadata_xml(&xml).expect("Failed to deserialize");
 
     assert_eq!(original.test_class_name, deserialized.test_class_name);
 }
@@ -78,8 +73,7 @@ fn test_metadata_type_with_empty_vec() {
     assert!(xml.contains("ApexTestSuite"));
 
     // Deserialize back
-    let deserialized = ApexTestSuite::from_metadata_xml(&xml)
-        .expect("Failed to deserialize");
+    let deserialized = ApexTestSuite::from_metadata_xml(&xml).expect("Failed to deserialize");
 
     assert_eq!(deserialized.test_class_name.len(), 0);
 }

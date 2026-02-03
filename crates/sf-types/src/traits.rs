@@ -79,16 +79,21 @@ pub trait XmlSerializable: MetadataType {
     /// Serialize to Salesforce Metadata API XML format with proper namespace.
     fn to_metadata_xml(&self) -> Result<String, XmlError> {
         // Serialize the struct to XML string using quick-xml
-        let xml = quick_xml::se::to_string(self)
-            .map_err(|e| XmlError::Serialize(e.to_string()))?;
-        
+        let xml = quick_xml::se::to_string(self).map_err(|e| XmlError::Serialize(e.to_string()))?;
+
         // Inject namespace into the root tag
         // <CustomObject> -> <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
         let root_tag = format!("<{}", Self::XML_ROOT_ELEMENT);
-        let replacement = format!("<{} xmlns=\"http://soap.sforce.com/2006/04/metadata\"", Self::XML_ROOT_ELEMENT);
-        
+        let replacement = format!(
+            "<{} xmlns=\"http://soap.sforce.com/2006/04/metadata\"",
+            Self::XML_ROOT_ELEMENT
+        );
+
         // Add XML declaration and replaced XML with namespace
-        Ok(format!("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n{}", xml.replace(&root_tag, &replacement)))
+        Ok(format!(
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n{}",
+            xml.replace(&root_tag, &replacement)
+        ))
     }
 
     /// Deserialize from Salesforce Metadata API XML format.

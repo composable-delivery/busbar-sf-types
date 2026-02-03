@@ -85,14 +85,19 @@ fn test_complex_type_deserialization() {
     <showMyTasksHoverLinks>false</showMyTasksHoverLinks>
 </ActivitiesSettings>"#;
 
-    let settings = ActivitiesSettings::from_metadata_xml(xml)
-        .expect("Failed to deserialize");
+    let settings = ActivitiesSettings::from_metadata_xml(xml).expect("Failed to deserialize");
 
     // Verify some key fields
-    assert_eq!(settings.allow_users_to_relate_multiple_contacts_to_tasks_and_events, true);
+    assert_eq!(
+        settings.allow_users_to_relate_multiple_contacts_to_tasks_and_events,
+        true
+    );
     assert_eq!(settings.auto_relate_event_attendees, false);
     assert_eq!(settings.enable_activity_reminders, true);
-    assert_eq!(settings.meeting_requests_logo, "https://example.com/logo.png");
+    assert_eq!(
+        settings.meeting_requests_logo,
+        "https://example.com/logo.png"
+    );
     assert_eq!(settings.show_custom_logo_meeting_requests, true);
 }
 
@@ -129,14 +134,27 @@ fn test_complex_type_roundtrip() {
     };
 
     let xml = original.to_metadata_xml().expect("Failed to serialize");
-    let deserialized = ActivitiesSettings::from_metadata_xml(&xml)
-        .expect("Failed to deserialize");
+    let deserialized = ActivitiesSettings::from_metadata_xml(&xml).expect("Failed to deserialize");
 
     // Verify roundtrip preserves all field values
-    assert_eq!(original.allow_users_to_relate_multiple_contacts_to_tasks_and_events, 
-               deserialized.allow_users_to_relate_multiple_contacts_to_tasks_and_events);
-    assert_eq!(original.auto_relate_event_attendees, deserialized.auto_relate_event_attendees);
-    assert_eq!(original.enable_activity_reminders, deserialized.enable_activity_reminders);
-    assert_eq!(original.meeting_requests_logo, deserialized.meeting_requests_logo);
-    assert_eq!(original.show_custom_logo_meeting_requests, deserialized.show_custom_logo_meeting_requests);
+    assert_eq!(
+        original.allow_users_to_relate_multiple_contacts_to_tasks_and_events,
+        deserialized.allow_users_to_relate_multiple_contacts_to_tasks_and_events
+    );
+    assert_eq!(
+        original.auto_relate_event_attendees,
+        deserialized.auto_relate_event_attendees
+    );
+    assert_eq!(
+        original.enable_activity_reminders,
+        deserialized.enable_activity_reminders
+    );
+    assert_eq!(
+        original.meeting_requests_logo,
+        deserialized.meeting_requests_logo
+    );
+    assert_eq!(
+        original.show_custom_logo_meeting_requests,
+        deserialized.show_custom_logo_meeting_requests
+    );
 }

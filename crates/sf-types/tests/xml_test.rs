@@ -14,7 +14,9 @@ fn test_to_metadata_xml_includes_xml_declaration() {
         enable_account_plan: true,
     };
 
-    let xml = settings.to_metadata_xml().expect("Failed to serialize to XML");
+    let xml = settings
+        .to_metadata_xml()
+        .expect("Failed to serialize to XML");
 
     // Check that XML declaration is present
     assert!(
@@ -29,7 +31,9 @@ fn test_to_metadata_xml_includes_namespace() {
         enable_account_plan: true,
     };
 
-    let xml = settings.to_metadata_xml().expect("Failed to serialize to XML");
+    let xml = settings
+        .to_metadata_xml()
+        .expect("Failed to serialize to XML");
 
     // Check that namespace is present in the root element
     assert!(
@@ -44,7 +48,9 @@ fn test_to_metadata_xml_uses_correct_root_element() {
         enable_account_plan: true,
     };
 
-    let xml = settings.to_metadata_xml().expect("Failed to serialize to XML");
+    let xml = settings
+        .to_metadata_xml()
+        .expect("Failed to serialize to XML");
 
     // Check that the correct root element is used
     assert!(
@@ -63,17 +69,16 @@ fn test_to_metadata_xml_serializes_fields() {
         enable_account_plan: true,
     };
 
-    let xml = settings.to_metadata_xml().expect("Failed to serialize to XML");
+    let xml = settings
+        .to_metadata_xml()
+        .expect("Failed to serialize to XML");
 
     // Check that fields are serialized with camelCase
     assert!(
         xml.contains("<enableAccountPlan>"),
         "XML should contain enableAccountPlan field"
     );
-    assert!(
-        xml.contains("true"),
-        "XML should contain the field value"
-    );
+    assert!(xml.contains("true"), "XML should contain the field value");
 }
 
 #[test]
@@ -83,8 +88,8 @@ fn test_from_metadata_xml_deserializes_correctly() {
     <enableAccountPlan>true</enableAccountPlan>
 </AccountPlanSettings>"#;
 
-    let settings = AccountPlanSettings::from_metadata_xml(xml)
-        .expect("Failed to deserialize from XML");
+    let settings =
+        AccountPlanSettings::from_metadata_xml(xml).expect("Failed to deserialize from XML");
 
     assert_eq!(settings.enable_account_plan, true);
 }
@@ -96,8 +101,8 @@ fn test_from_metadata_xml_handles_false_value() {
     <enableAccountPlan>false</enableAccountPlan>
 </AccountPlanSettings>"#;
 
-    let settings = AccountPlanSettings::from_metadata_xml(xml)
-        .expect("Failed to deserialize from XML");
+    let settings =
+        AccountPlanSettings::from_metadata_xml(xml).expect("Failed to deserialize from XML");
 
     assert_eq!(settings.enable_account_plan, false);
 }
@@ -113,11 +118,13 @@ fn test_roundtrip_serialization() {
     let xml = original.to_metadata_xml().expect("Failed to serialize");
 
     // Deserialize back
-    let deserialized = AccountPlanSettings::from_metadata_xml(&xml)
-        .expect("Failed to deserialize");
+    let deserialized = AccountPlanSettings::from_metadata_xml(&xml).expect("Failed to deserialize");
 
     // Check that values match
-    assert_eq!(original.enable_account_plan, deserialized.enable_account_plan);
+    assert_eq!(
+        original.enable_account_plan,
+        deserialized.enable_account_plan
+    );
 }
 
 #[test]
@@ -153,10 +160,7 @@ fn test_xml_error_display() {
     use busbar_sf_types::traits::XmlError;
 
     let error = XmlError::Serialize("test error".to_string());
-    assert_eq!(
-        format!("{}", error),
-        "XML serialization error: test error"
-    );
+    assert_eq!(format!("{}", error), "XML serialization error: test error");
 
     let error = XmlError::Deserialize("test error".to_string());
     assert_eq!(
