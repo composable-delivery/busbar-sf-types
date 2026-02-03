@@ -10,6 +10,3 @@ node_modules/
 
 # Logs
 *.log
-
-# Generated files in docs
-docs/type-graph.json
