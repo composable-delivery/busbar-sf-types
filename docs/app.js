@@ -56,6 +56,9 @@ function initializeApp() {
     // Initialize canvas
     canvas = document.getElementById('graph');
     ctx = canvas.getContext('2d');
+    
+    // Draw initial overview graph
+    drawOverviewGraph();
 }
 
 // Setup search functionality
@@ -413,6 +416,118 @@ function getCategoryColor(category) {
     };
     
     return colors[category] || '#546e7a';
+}
+
+// Draw overview graph showing category relationships
+function drawOverviewGraph() {
+    if (!ctx) return;
+    
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Get category statistics
+    const categoryStats = {};
+    Object.entries(graphData.categories).forEach(([type, category]) => {
+        if (!categoryStats[category]) {
+            categoryStats[category] = {
+                count: 0,
+                dependencies: 0
+            };
+        }
+        categoryStats[category].count++;
+    });
+    
+    // Count dependencies per category
+    graphData.edges.forEach(edge => {
+        const sourceCategory = graphData.categories[edge.source];
+        if (sourceCategory && categoryStats[sourceCategory]) {
+            categoryStats[sourceCategory].dependencies++;
+        }
+    });
+    
+    // Get top categories by type count
+    const topCategories = Object.entries(categoryStats)
+        .sort((a, b) => b[1].count - a[1].count)
+        .slice(0, 20); // Show top 20 categories
+    
+    if (topCategories.length === 0) return;
+    
+    // Calculate layout
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = Math.min(canvas.width, canvas.height) * 0.35;
+    const angleStep = (2 * Math.PI) / topCategories.length;
+    
+    // Draw title
+    ctx.fillStyle = '#181818';
+    ctx.font = 'bold 18px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('Top Categories by Type Count', centerX, 30);
+    
+    // Draw center info
+    ctx.fillStyle = '#0176d3';
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, 40, 0, 2 * Math.PI);
+    ctx.fill();
+    
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 16px sans-serif';
+    ctx.fillText(graphData.nodes.length.toLocaleString(), centerX, centerY - 8);
+    ctx.font = '12px sans-serif';
+    ctx.fillText('types', centerX, centerY + 8);
+    
+    // Draw categories
+    topCategories.forEach(([category, stats], index) => {
+        const angle = index * angleStep - Math.PI / 2;
+        const x = centerX + radius * Math.cos(angle);
+        const y = centerY + radius * Math.sin(angle);
+        
+        // Draw line from center
+        ctx.strokeStyle = 'rgba(1, 118, 211, 0.3)';
+        ctx.lineWidth = Math.max(1, Math.min(10, stats.dependencies / 50));
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        
+        // Draw node
+        const nodeRadius = Math.max(15, Math.min(35, stats.count / 10));
+        ctx.fillStyle = getCategoryColor(category);
+        ctx.beginPath();
+        ctx.arc(x, y, nodeRadius, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        // Draw border
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        // Draw count
+        ctx.fillStyle = '#fff';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(stats.count.toString(), x, y);
+        
+        // Draw label
+        ctx.fillStyle = '#181818';
+        ctx.font = '10px sans-serif';
+        ctx.textBaseline = angle > Math.PI / 2 && angle < 3 * Math.PI / 2 ? 'bottom' : 'top';
+        const labelY = angle > Math.PI / 2 && angle < 3 * Math.PI / 2 ? y - nodeRadius - 5 : y + nodeRadius + 5;
+        const label = category.replace(/_/g, ' ');
+        ctx.fillText(label.length > 12 ? label.substring(0, 12) + '...' : label, x, labelY);
+    });
+    
+    // Draw legend
+    ctx.font = '12px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    ctx.fillStyle = '#706e6b';
+    ctx.fillText('Click a type or category to explore dependencies', 10, canvas.height - 25);
+    
+    // Update info message
+    document.querySelector('.graph-note').textContent = 'Overview of top categories - click a type or category to drill down';
 }
 
 // Initialize on page load

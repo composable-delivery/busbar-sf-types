@@ -8,7 +8,15 @@
     "type": "git",
     "url": "https://github.com/composable-delivery/busbar-sf-types"
   },
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug"
+  },
   "dependencies": {
     "@salesforce/types": "^1.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0"
   }
 }

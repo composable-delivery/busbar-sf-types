@@ -183,6 +183,33 @@ The interactive explorer provides:
   - **Generic** - Type A is a generic instantiation of Type B
 - 📈 **Statistics** - View graph metrics and category distributions
 - 🎨 **Color-coded** - Types colored by category for easy identification
+- 🌐 **Overview Graph** - Shows top categories on initial page load, click to drill down into specific types
+
+**Testing the Graph Viewer:**
+
+The graph viewer includes comprehensive Playwright tests to ensure reliability:
+
+```bash
+# Install dependencies
+npm install
+
+# Run tests
+npm test
+
+# Run tests in UI mode (interactive)
+npm run test:ui
+
+# Debug tests
+npm run test:debug
+```
+
+Tests cover:
+- Initial page load and overview graph display
+- Type selection and dependency visualization
+- Search functionality
+- Category browsing
+- Relationship filtering (Contains/Extends/Generic)
+- Navigation between related types
 
 To visualize the graph locally with Graphviz:
 ```bash
