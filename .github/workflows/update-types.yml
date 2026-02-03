@@ -150,7 +150,7 @@ jobs:
                   echo "Push succeeded"
                   gh pr create \
                     --title "chore: types for @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }} (crate v$CRATE_VERSION)" \
-                    --body $'## Generated from @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }}\n\nAutomatically generated types update.\n\n**Source**: @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }}\n**Crate Version**: '$CRATE_VERSION$'\n\nThis crate is fully auto-generated. No manual type definitions—only Salesforce metadata via codegen.\n\nChanges are tracked in \`.typegen-reports/\` for CI automation.' \
+                    --body $'## Generated from @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }}\n\nAutomatically generated types update.\n\n**Source**: @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }}\n**Crate Version**: '"$CRATE_VERSION"$'\n\nThis crate is fully auto-generated. No manual type definitions—only Salesforce metadata via codegen.\n\nChanges are tracked in \`.typegen-reports/\` for CI automation.' \
                     --label "automation" \
                     --label "types" || echo "PR may already exist"
                   break
