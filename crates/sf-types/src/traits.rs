@@ -82,18 +82,55 @@ pub trait XmlSerializable: MetadataType {
         let xml = quick_xml::se::to_string(self).map_err(|e| XmlError::Serialize(e.to_string()))?;
 
         // Inject namespace into the root tag
-        // <CustomObject> -> <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
-        let root_tag = format!("<{}", Self::XML_ROOT_ELEMENT);
-        let replacement = format!(
-            "<{} xmlns=\"http://soap.sforce.com/2006/04/metadata\"",
+        // Match the opening root tag specifically: <TagName> or <TagName />
+        // This regex ensures we only match the first occurrence of the opening tag
+        let root_pattern = format!(
+            r"^(<{}\s*/?>|<{}\s+[^>]*>)",
+            Self::XML_ROOT_ELEMENT,
             Self::XML_ROOT_ELEMENT
         );
 
-        // Add XML declaration and replaced XML with namespace
-        Ok(format!(
-            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n{}",
-            xml.replace(&root_tag, &replacement)
-        ))
+        // For safety, we'll use a more precise approach:
+        // Find the first occurrence of "<{XML_ROOT_ELEMENT}" that's followed by either '>' or whitespace
+        let search_pattern = format!("<{}", Self::XML_ROOT_ELEMENT);
+        if let Some(pos) = xml.find(&search_pattern) {
+            // Find the end of the opening tag (either '>' or '/>')
+            if let Some(end_pos) = xml[pos..].find('>') {
+                let tag_end = pos + end_pos;
+                let opening_tag = &xml[pos..=tag_end];
+
+                // Check if it's a self-closing tag
+                let is_self_closing = opening_tag.ends_with("/>");
+
+                // Create replacement with namespace
+                let replacement = if is_self_closing {
+                    format!(
+                        "<{} xmlns=\"http://soap.sforce.com/2006/04/metadata\"/>",
+                        Self::XML_ROOT_ELEMENT
+                    )
+                } else {
+                    format!(
+                        "<{} xmlns=\"http://soap.sforce.com/2006/04/metadata\">",
+                        Self::XML_ROOT_ELEMENT
+                    )
+                };
+
+                // Replace the opening tag
+                let xml_with_ns = format!("{}{}{}", &xml[..pos], replacement, &xml[tag_end + 1..]);
+
+                // Add XML declaration
+                return Ok(format!(
+                    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n{}",
+                    xml_with_ns
+                ));
+            }
+        }
+
+        // Fallback: if we couldn't find/parse the tag properly, return an error
+        Err(XmlError::Serialize(format!(
+            "Could not find root element '{}' in serialized XML",
+            Self::XML_ROOT_ELEMENT
+        )))
     }
 
     /// Deserialize from Salesforce Metadata API XML format.
