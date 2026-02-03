@@ -71,7 +71,7 @@ body {
   border: 2px solid white;
   padding: 0.5rem 1rem;
   cursor: pointer;
-  borderradius: 4px;
+  border-radius: 4px;
   font-weight: 500;
   transition: all 0.2s;
 }
