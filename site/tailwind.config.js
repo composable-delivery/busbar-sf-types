@@ -1,9 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./site/index.html",
-    "./site/src/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/reablocks/**/*.{js,ts,jsx,tsx}",
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: 'class',
   theme: {
@@ -11,34 +10,35 @@ export default {
       colors: {
         primary: {
           DEFAULT: '#3b82f6',
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
           300: '#93c5fd',
           400: '#60a5fa',
           500: '#3b82f6',
-        },
-        secondary: {
-          DEFAULT: '#64748b',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
         },
         surface: {
           DEFAULT: '#1e293b',
           dark: '#0f172a',
           light: '#334155',
         },
-        background: {
-          DEFAULT: '#0f172a',
-        },
         category: {
-          1: '#3b82f6',
-          2: '#8b5cf6',
-          3: '#ec4899',
-          4: '#f59e0b',
-          5: '#10b981',
-          6: '#06b6d4',
-          7: '#f97316',
-          8: '#a855f7',
-        },
+          1: '#f59e0b',
+          2: '#10b981',
+          3: '#8b5cf6',
+          4: '#ec4899',
+          5: '#14b8a6',
+          6: '#f97316',
+          7: '#6366f1',
+          8: '#84cc16',
+        }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in',
@@ -55,7 +55,7 @@ export default {
           '100%': { transform: 'translateY(0)', opacity: '1' },
         },
         scaleIn: {
-          '0%': { transform: 'scale(0.95)', opacity: '0' },
+          '0%': { transform: 'scale(0.9)', opacity: '0' },
           '100%': { transform: 'scale(1)', opacity: '1' },
         },
       },
