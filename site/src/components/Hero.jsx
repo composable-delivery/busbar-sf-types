@@ -8,7 +8,7 @@ export default function Hero({ searchQuery, onSearchChange, onSearch }) {
   };
 
   return (
-    <div className="relative bg-gradient-to-br from-primary-600 via-primary-500 to-primary-700 text-white animate-fade-in">
+    <div className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-blue-700 text-white animate-fade-in">
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDE zNGg4djhoLTh6TTI4IDM0aDh2OGgtOHpNMjggMjZoOHY4aC04ek0yMCAyNmg4djhoLTh6TTIwIDE4aDh2OGgtOHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30"></div>
       
       <div className="relative max-w-7xl mx-auto px-6 py-16 lg:py-24">
@@ -32,11 +32,9 @@ export default function Hero({ searchQuery, onSearchChange, onSearch }) {
                   size="large"
                 />
               </div>
-              <Button 
+              <Button
                 onClick={onSearch}
-                variant="filled"
-                size="large"
-                className="px-8"
+                className="bg-white text-blue-600 hover:bg-blue-50 font-semibold px-8"
               >
                 Search
               </Button>

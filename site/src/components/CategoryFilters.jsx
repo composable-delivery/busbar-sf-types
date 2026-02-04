@@ -24,7 +24,7 @@ export default function CategoryFilters({ categories, selectedCategory, onCatego
         <Button
           onClick={() => onCategorySelect(null)}
           variant={selectedCategory === null ? 'filled' : 'outline'}
-          className={`flex-shrink-0 ${selectedCategory === null ? 'bg-primary-600' : ''}`}
+          className={`flex-shrink-0 ${selectedCategory === null ? 'bg-blue-600' : ''}`}
         >
           All Categories
         </Button>

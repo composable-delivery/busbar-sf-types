@@ -9,10 +9,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#3b82f6',
-        secondary: '#64748b',
-        surface: '#1e293b',
-        background: '#0f172a',
+        primary: {
+          DEFAULT: '#3b82f6',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
+        },
+        secondary: {
+          DEFAULT: '#64748b',
+        },
+        surface: {
+          DEFAULT: '#1e293b',
+          dark: '#0f172a',
+          light: '#334155',
+        },
+        background: {
+          DEFAULT: '#0f172a',
+        },
         category: {
           1: '#3b82f6',
           2: '#8b5cf6',
