@@ -326,3 +326,15 @@ pub mod prelude;
     feature = "full"
 ))]
 mod trait_impls;
+
+// Generated registry produced by build script: maps XML root element -> concrete parser
+#[allow(clippy::all)]
+pub mod generated_registry;
+
+/// Convenience wrapper to parse a metadata XML string by its root element name
+pub fn parse_metadata_by_root(
+    root: &str,
+    xml: &str,
+) -> Result<serde_json::Value, crate::traits::XmlError> {
+    generated_registry::parse_by_root(root, xml)
+}
