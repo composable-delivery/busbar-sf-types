@@ -48,7 +48,7 @@ export default function TypeTable({ types, onTypeSelect, showCategory = true }) 
   };
 
   return (
-    <Card className="bg-surface border border-surface-light p-6">
+    <Card className="bg-slate-800 border border-slate-700 p-6">
       <div className="mb-4">
         <h3 className="text-xl font-bold text-white mb-3">Type Explorer</h3>
         <Input
@@ -61,7 +61,7 @@ export default function TypeTable({ types, onTypeSelect, showCategory = true }) 
 
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
-          <thead className="border-b border-surface-light">
+          <thead className="border-b border-slate-700">
             <tr className="text-left text-gray-400">
               <th 
                 className="py-3 px-4 font-semibold cursor-pointer hover:text-white transition-colors"
@@ -92,14 +92,14 @@ export default function TypeTable({ types, onTypeSelect, showCategory = true }) 
             {sortedAndFiltered.map((type) => (
               <tr 
                 key={type.name}
-                className="border-b border-surface-light hover:bg-surface-light/30 transition-colors"
+                className="border-b border-slate-700 hover:bg-slate-700/50 transition-colors"
               >
                 <td className="py-3 px-4 font-medium text-white">
                   {type.name}
                 </td>
                 {showCategory && (
                   <td className="py-3 px-4 text-gray-300">
-                    <span className="inline-flex items-center px-2 py-1 rounded text-xs bg-surface-light">
+                    <span className="inline-flex items-center px-2 py-1 rounded text-xs bg-slate-700">
                       {type.category?.name || 'uncategorized'}
                     </span>
                   </td>

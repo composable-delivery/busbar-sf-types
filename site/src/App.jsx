@@ -126,9 +126,9 @@ function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-surface-dark flex items-center justify-center">
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="text-4xl font-bold text-primary-400 mb-4 animate-pulse">
+          <div className="text-4xl font-bold text-blue-400 mb-4 animate-pulse">
             Loading Salesforce Types Explorer...
           </div>
           <div className="text-gray-400">Processing {stats.totalTypes || '2,682'} types</div>
@@ -139,8 +139,8 @@ function App() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-surface-dark flex items-center justify-center">
-        <div className="max-w-2xl bg-surface border border-red-500 p-8 rounded-lg">
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+        <div className="max-w-2xl bg-slate-800 border border-red-500 p-8 rounded-lg">
           <h2 className="text-2xl font-bold text-red-400 mb-4">Error Loading Data</h2>
           <p className="text-gray-300">Could not load the type graph data: {error}</p>
         </div>
@@ -151,7 +151,7 @@ function App() {
   const selectedTypeData = selectedType ? metadata.get(selectedType) : null;
 
   return (
-    <div className="min-h-screen bg-surface-dark">
+    <div className="min-h-screen bg-slate-900">
       {/* Hero Section */}
       {!selectedType && (
         <Hero
@@ -199,7 +199,7 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-surface border-t border-surface-light mt-20">
+      <footer className="bg-slate-800 border-t border-slate-700 mt-20">
         <div className="max-w-7xl mx-auto px-6 py-8 text-center text-gray-400">
           <p>
             Generated from{' '}
@@ -207,7 +207,7 @@ function App() {
               href="https://github.com/composable-delivery/busbar-sf-types" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-primary-400 hover:text-primary-300 transition-colors"
+              className="text-blue-400 hover:text-blue-300 transition-colors"
             >
               busbar-sf-types
             </a>
@@ -217,7 +217,7 @@ function App() {
               href="/busbar-sf-types/type-graph.json" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-primary-400 hover:text-primary-300 transition-colors"
+              className="text-blue-400 hover:text-blue-300 transition-colors"
             >
               type-graph.json
             </a>

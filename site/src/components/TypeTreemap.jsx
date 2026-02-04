@@ -41,7 +41,7 @@ export default function TypeTreemap({ data, onTypeSelect }) {
 
   if (!data || data.length === 0) {
     return (
-      <Card className="bg-surface border border-surface-light p-12 text-center">
+      <Card className="bg-slate-800 border border-slate-700 p-12 text-center">
         <div className="text-gray-400">No data available for treemap</div>
       </Card>
     );
@@ -50,13 +50,13 @@ export default function TypeTreemap({ data, onTypeSelect }) {
   const formattedData = formatData(data);
 
   return (
-    <Card className="bg-surface border border-surface-light p-6 animate-scale-in">
+    <Card className="bg-slate-800 border border-slate-700 p-6 animate-scale-in">
       <div className="mb-4">
         <h2 className="text-2xl font-bold text-white">Type Hierarchy</h2>
         <p className="text-gray-400 mt-1">Click any cell to explore that type</p>
       </div>
       
-      <div className="h-[600px] rounded-lg overflow-hidden border border-surface-light">
+      <div className="h-[600px] rounded-lg overflow-hidden border border-slate-700">
         <Treemap
           data={formattedData}
           onClick={handleCellClick}
