@@ -5,10 +5,7 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    @apply border-border;
-  }
   body {
-    @apply bg-surface-dark text-white antialiased;
+    @apply bg-background text-white antialiased font-sans;
   }
 }
