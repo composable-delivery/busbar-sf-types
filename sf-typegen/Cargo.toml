@@ -14,7 +14,7 @@ description = "Internal TypeScript → Rust code generation utilities for busbar
 regex.workspace = true
 
 # Graph data structures for type dependency analysis
-petgraph = { version = "0.6", features = ["serde-1"] }
+petgraph = { version = "0.8", features = ["serde-1"] }
 
 # Serialization
 serde.workspace = true
