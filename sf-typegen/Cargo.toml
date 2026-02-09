@@ -24,7 +24,7 @@ toml = "0.9"
 # TypeScript AST parsing - using oxc
 oxc_parser = "0.111"
 oxc_ast = "0.111"
-oxc_allocator = "0.111"
+oxc_allocator = "0.112"
 oxc_span = "0.111"
 oxc_diagnostics = "0.111"
 
