@@ -52,7 +52,7 @@ jobs:
 
       - name: Upload typegen reports
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: typegen-reports
           path: .typegen-reports/
@@ -199,7 +199,7 @@ jobs:
       
       - name: Upload Playwright report
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-report
           path: playwright-report/
@@ -221,7 +221,7 @@ jobs:
   #       run: cargo run -p busbar-sf-types --bin schema-gen --features "full schemars" -- schemas
   #
   #     - name: Upload JSON Schemas
-  #       uses: actions/upload-artifact@v6
+  #       uses: actions/upload-artifact@v7
   #       with:
   #         name: salesforce-json-schemas
   #         path: schemas/
