@@ -25,7 +25,7 @@ toml = "0.9"
 oxc_parser = "0.111"
 oxc_ast = "0.111"
 oxc_allocator = "0.111"
-oxc_span = "0.111"
+oxc_span = "0.123"
 oxc_diagnostics = "0.111"
 
 # Code generation utilities
