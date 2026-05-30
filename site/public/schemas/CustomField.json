@@ -1,0 +1,334 @@
+{
+  "$defs": {
+    "CustomValue": {
+      "properties": {
+        "color": {
+          "default": "",
+          "type": "string"
+        },
+        "default": {
+          "default": false,
+          "type": "boolean"
+        },
+        "description": {
+          "default": "",
+          "type": "string"
+        },
+        "isActive": {
+          "default": false,
+          "type": "boolean"
+        },
+        "label": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ValueSet": {
+      "properties": {
+        "controllingField": {
+          "default": "",
+          "type": "string"
+        },
+        "restricted": {
+          "default": false,
+          "type": "boolean"
+        },
+        "valueSetDefinition": {
+          "$ref": "#/$defs/ValueSetValuesDefinition",
+          "default": {
+            "sorted": false,
+            "value": []
+          }
+        },
+        "valueSetName": {
+          "default": "",
+          "type": "string"
+        },
+        "valueSettings": {
+          "default": [],
+          "items": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ValueSetValuesDefinition": {
+      "properties": {
+        "sorted": {
+          "default": false,
+          "type": "boolean"
+        },
+        "value": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/CustomValue"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "businessOwnerGroup": {
+      "default": "",
+      "type": "string"
+    },
+    "businessOwnerUser": {
+      "default": "",
+      "type": "string"
+    },
+    "businessStatus": {
+      "default": "",
+      "type": "string"
+    },
+    "caseSensitive": {
+      "default": false,
+      "type": "boolean"
+    },
+    "complianceGroup": {
+      "default": "",
+      "type": "string"
+    },
+    "customDataType": {
+      "default": "",
+      "type": "string"
+    },
+    "defaultValue": {
+      "default": "",
+      "type": "string"
+    },
+    "deleteConstraint": {
+      "default": null
+    },
+    "deprecated": {
+      "default": false,
+      "type": "boolean"
+    },
+    "description": {
+      "default": "",
+      "type": "string"
+    },
+    "displayFormat": {
+      "default": "",
+      "type": "string"
+    },
+    "displayLocationInDecimal": {
+      "default": false,
+      "type": "boolean"
+    },
+    "elementType": {
+      "default": null
+    },
+    "encryptionScheme": {
+      "default": null
+    },
+    "escapeMarkup": {
+      "default": false,
+      "type": "boolean"
+    },
+    "externalDeveloperName": {
+      "default": "",
+      "type": "string"
+    },
+    "externalId": {
+      "default": false,
+      "type": "boolean"
+    },
+    "fieldManageability": {
+      "default": null
+    },
+    "formula": {
+      "default": "",
+      "type": "string"
+    },
+    "formulaTreatBlanksAs": {
+      "default": null
+    },
+    "inlineHelpText": {
+      "default": "",
+      "type": "string"
+    },
+    "isAIPredictionField": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isConvertLeadDisabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isFilteringDisabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isNameField": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isSortingDisabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "label": {
+      "default": "",
+      "type": "string"
+    },
+    "length": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "lookupFilter": {
+      "default": null
+    },
+    "maskChar": {
+      "default": null
+    },
+    "maskType": {
+      "default": null
+    },
+    "metadataRelationshipControllingField": {
+      "default": "",
+      "type": "string"
+    },
+    "mktDataLakeFieldAttributes": {
+      "default": null
+    },
+    "mktDataModelFieldAttributes": {
+      "default": null
+    },
+    "picklist": {
+      "default": null
+    },
+    "populateExistingRows": {
+      "default": false,
+      "type": "boolean"
+    },
+    "precision": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "readOnlyProxy": {
+      "default": false,
+      "type": "boolean"
+    },
+    "referenceTargetField": {
+      "default": "",
+      "type": "string"
+    },
+    "referenceTo": {
+      "default": "",
+      "type": "string"
+    },
+    "relationshipLabel": {
+      "default": "",
+      "type": "string"
+    },
+    "relationshipName": {
+      "default": "",
+      "type": "string"
+    },
+    "relationshipOrder": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "reparentableMasterDetail": {
+      "default": false,
+      "type": "boolean"
+    },
+    "required": {
+      "default": false,
+      "type": "boolean"
+    },
+    "restrictedAdminField": {
+      "default": false,
+      "type": "boolean"
+    },
+    "scale": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "securityClassification": {
+      "default": "",
+      "type": "string"
+    },
+    "startingNumber": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "stripMarkup": {
+      "default": false,
+      "type": "boolean"
+    },
+    "summarizedField": {
+      "default": "",
+      "type": "string"
+    },
+    "summaryFilterItems": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "summaryForeignKey": {
+      "default": "",
+      "type": "string"
+    },
+    "summaryOperation": {
+      "default": null
+    },
+    "trackFeedHistory": {
+      "default": false,
+      "type": "boolean"
+    },
+    "trackHistory": {
+      "default": false,
+      "type": "boolean"
+    },
+    "trackTrending": {
+      "default": false,
+      "type": "boolean"
+    },
+    "translateData": {
+      "default": false,
+      "type": "boolean"
+    },
+    "type": {
+      "default": null
+    },
+    "unique": {
+      "default": false,
+      "type": "boolean"
+    },
+    "valueSet": {
+      "$ref": "#/$defs/ValueSet",
+      "default": {
+        "controllingField": "",
+        "restricted": false,
+        "valueSetDefinition": {
+          "sorted": false,
+          "value": []
+        },
+        "valueSetName": "",
+        "valueSettings": []
+      }
+    },
+    "visibleLines": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "writeRequiresMasterRead": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "CustomField",
+  "type": "object"
+}

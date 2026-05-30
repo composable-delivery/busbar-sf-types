@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableAddressAutoComplete": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMapsAndLocation": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "MapsAndLocationSettings",
+  "type": "object"
+}

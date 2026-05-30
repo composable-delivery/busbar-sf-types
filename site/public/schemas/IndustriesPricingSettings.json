@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableDebugPriceLogs": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHighAvailability": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHighestPriceCompliance": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLowestPriceCompliance": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePriceGuidanceAccess": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePricingProcParallelization": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePricingWaterfall": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePricingWaterfallPersistence": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSalesforcePricing": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "IndustriesPricingSettings",
+  "type": "object"
+}

@@ -4,7 +4,7 @@
 //! dependency relationships in the type graph.
 
 use crate::categories::CATEGORIES;
-use crate::graph::TypeGraph;
+use crate::graph::{RelationshipType, TypeGraph};
 use std::collections::{HashMap, HashSet};
 
 /// Result of graph-based categorization
@@ -55,6 +55,8 @@ impl Default for CategoryAssignment {
 pub fn categorize_by_graph(graph: &TypeGraph) -> CategoryAssignment {
     let mut assignment = CategoryAssignment::new();
 
+    let allowed_relationships = category_relationships();
+
     // Track which categories can reach each type
     let mut type_to_categories: HashMap<String, HashSet<&'static str>> = HashMap::new();
 
@@ -68,7 +70,7 @@ pub fn categorize_by_graph(graph: &TypeGraph) -> CategoryAssignment {
                 .insert(category.name);
 
             // Traverse from this seed to find reachable types
-            let reachable = graph.traverse_from(explicit_type);
+            let reachable = graph.traverse_from_filtered(explicit_type, &allowed_relationships);
 
             for reachable_type in reachable {
                 // Skip the seed itself (already marked)
@@ -112,6 +114,23 @@ pub fn categorize_by_graph(graph: &TypeGraph) -> CategoryAssignment {
         .collect();
 
     assignment
+}
+
+fn category_relationships() -> HashSet<RelationshipType> {
+    use RelationshipType::*;
+
+    // Policy: propagate categories through structural dependencies only.
+    // Adjust this list as needed for tighter or broader classification.
+    [
+        Contains,
+        Extends,
+        AliasOf,
+        GenericBase,
+        GenericArg,
+        CollectionOf,
+    ]
+    .into_iter()
+    .collect()
 }
 
 /// Get statistics about category assignments

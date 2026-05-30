@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "bypassMeteringBlock": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableApexLimitEvents": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDeleteMonitoringData": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDynamicStreamingChannel": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEventLogGeneration": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEventLogWaveIntegration": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLightningLoggerEvents": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLoginForensics": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableStreamingApi": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTransactionSecurityPolicies": {
+      "default": false,
+      "type": "boolean"
+    },
+    "eventLogRetentionDuration": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    }
+  },
+  "title": "EventSettings",
+  "type": "object"
+}

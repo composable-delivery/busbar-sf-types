@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableQuote": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableQuotesWithoutOppEnabled": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "QuoteSettings",
+  "type": "object"
+}

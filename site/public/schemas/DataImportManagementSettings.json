@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableDataConnectorHubspot": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEasyImport": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "DataImportManagementSettings",
+  "type": "object"
+}

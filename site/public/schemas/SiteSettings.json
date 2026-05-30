@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableExpBuilderCopilot": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProxyLoginICHeader": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTopicsInSites": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "SiteSettings",
+  "type": "object"
+}

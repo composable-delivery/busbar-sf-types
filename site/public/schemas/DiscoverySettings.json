@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "einsteinAR4ConvOnDmndRecs": {
+      "default": false,
+      "type": "boolean"
+    },
+    "einsteinARForConvo": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEinsteinAnswersPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEinsteinArticleRecommendations": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEinsteinArticleRecommendationsOnDC": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "DiscoverySettings",
+  "type": "object"
+}

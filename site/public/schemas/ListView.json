@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "booleanFilter": {
+      "default": "",
+      "type": "string"
+    },
+    "columns": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "division": {
+      "default": "",
+      "type": "string"
+    },
+    "filterScope": {
+      "default": null
+    },
+    "filters": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "label": {
+      "default": "",
+      "type": "string"
+    },
+    "language": {
+      "default": null
+    },
+    "queue": {
+      "default": "",
+      "type": "string"
+    },
+    "sharedTo": {
+      "default": null
+    }
+  },
+  "title": "ListView",
+  "type": "object"
+}

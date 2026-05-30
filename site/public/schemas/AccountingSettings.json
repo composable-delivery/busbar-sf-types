@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableAccountingSubledger": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFinancePeriod": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePaymentMethodAdjust": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableScheduledJob": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSkipReversalLogic": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "AccountingSettings",
+  "type": "object"
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableDFOFallout": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDFOJeopardy": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDFOPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDROBulkDequeUsingMQ": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDROFutureDatedTasks": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDROInflightRequest": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDROTaskSource": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "DynamicFulfillmentOrchestratorSettings",
+  "type": "object"
+}

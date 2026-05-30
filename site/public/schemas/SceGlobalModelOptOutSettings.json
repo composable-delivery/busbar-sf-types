@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableConfigurableSceGlobalModelOptOut": {
+      "default": false,
+      "type": "boolean"
+    },
+    "sceGlobalModelOptOut": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "SceGlobalModelOptOutSettings",
+  "type": "object"
+}

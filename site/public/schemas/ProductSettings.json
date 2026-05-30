@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableCascadeActivateToRelatedPrices": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMySettings": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableQuantitySchedule": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRevenueSchedule": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ProductSettings",
+  "type": "object"
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "deliveryEstimationEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableActivityFeedPerChangeOrder": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableB2CHighScaleOrders": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableB2CIntegration": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableBillingTypeOrdSummCreation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDuplicateManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHighScaleOrders": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndividualOrderItemTaxAdjustments": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMRURecordCaching": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOMAutomation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOrderManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePersonAccountsForShoppers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "initOMAutomation": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "OrderManagementSettings",
+  "type": "object"
+}

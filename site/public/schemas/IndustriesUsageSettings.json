@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableUsage": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUsageReleaseTask258": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "IndustriesUsageSettings",
+  "type": "object"
+}

@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "doesForgotPasswordRequireAuth": {
+      "default": false,
+      "type": "boolean"
+    },
+    "doesPasswordLoginRequireAuth": {
+      "default": false,
+      "type": "boolean"
+    },
+    "doesPwdlessLoginRequireAuth": {
+      "default": false,
+      "type": "boolean"
+    },
+    "doesRegistrationRequireAuth": {
+      "default": false,
+      "type": "boolean"
+    },
+    "emailTmplsAllowlist": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "headlessDiscoveryExecutionUser": {
+      "default": "",
+      "type": "string"
+    },
+    "headlessDiscoveryHandler": {
+      "default": "",
+      "type": "string"
+    },
+    "isFirstPartyAppsAllowed": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isForgotPwdAllowed": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isForgotPwdEmailTemplateAllowlistingEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isHeadlessUserRegistrationAllowed": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isPwdlessLoginAllowed": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isRecaptchaRequiredForgotPwd": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isRecaptchaRequiredPwdlessLogin": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isRecaptchaRequiredRgstr": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isUniversalClientRgstrAllowed": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isUserDisambiguationAllowedForgotPwd": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isUserDisambiguationAllowedUsernamePwd": {
+      "default": false,
+      "type": "boolean"
+    },
+    "maxPasswordResetAttempts": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "recaptchaScoreThreshold": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "recaptchaSecretKey": {
+      "default": "",
+      "type": "string"
+    },
+    "registrationExecutionUser": {
+      "default": "",
+      "type": "string"
+    },
+    "registrationHandler": {
+      "default": "",
+      "type": "string"
+    },
+    "registrationUserDefaultProfile": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "title": "NetworkAuthApiSettings",
+  "type": "object"
+}

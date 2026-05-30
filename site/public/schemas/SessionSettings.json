@@ -1,0 +1,245 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "allowUserAuthenticationByCertificate": {
+      "default": false,
+      "type": "boolean"
+    },
+    "allowUserCertBasedAuthenticationWithOcspValidation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "auraBoxcarReductionPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "canConfirmEmailChangeInLightningCommunities": {
+      "default": false,
+      "type": "boolean"
+    },
+    "canConfirmIdentityBySmsOnly": {
+      "default": false,
+      "type": "boolean"
+    },
+    "disableTimeoutWarning": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableBuiltInAuthenticator": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCSPOnEmail": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCSRFOnGet": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCSRFOnPost": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCacheAndAutocomplete": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableClickjackNonsetupSFDC": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableClickjackNonsetupUser": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableClickjackNonsetupUserHeaderless": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableClickjackSetup": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCoepHeader": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContentSniffingProtection": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCoopHeader": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLightningLogin": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLightningLoginOnlyWithUserPerm": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMFADirectUILoginOptIn": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOauthCorsPolicy": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePermissionsPolicy": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePostForSessions": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSMSIdentity": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableU2F": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enforceIpRangesEveryRequest": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enforceUserDeviceRevoked": {
+      "default": false,
+      "type": "boolean"
+    },
+    "forceLogoutOnSessionTimeout": {
+      "default": false,
+      "type": "boolean"
+    },
+    "forceRelogin": {
+      "default": false,
+      "type": "boolean"
+    },
+    "grantCameraAccess": {
+      "default": "",
+      "type": "string"
+    },
+    "grantMicrophoneAccess": {
+      "default": "",
+      "type": "string"
+    },
+    "hasRetainedLoginHints": {
+      "default": false,
+      "type": "boolean"
+    },
+    "hasUserSwitching": {
+      "default": false,
+      "type": "boolean"
+    },
+    "hstsOnForcecomSites": {
+      "default": false,
+      "type": "boolean"
+    },
+    "identityConfirmationOnEmailChange": {
+      "default": false,
+      "type": "boolean"
+    },
+    "identityConfirmationOnTwoFactorRegistrationEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "lockSessionsToDomain": {
+      "default": false,
+      "type": "boolean"
+    },
+    "lockSessionsToIp": {
+      "default": false,
+      "type": "boolean"
+    },
+    "lockerServiceAPIVersion": {
+      "default": "",
+      "type": "string"
+    },
+    "lockerServiceCSP": {
+      "default": false,
+      "type": "boolean"
+    },
+    "lockerServiceNext": {
+      "default": false,
+      "type": "boolean"
+    },
+    "lockerServiceNextControl": {
+      "default": false,
+      "type": "boolean"
+    },
+    "lockerTrustedMode": {
+      "default": false,
+      "type": "boolean"
+    },
+    "lockerTrustedResources": {
+      "default": "",
+      "type": "string"
+    },
+    "logoutURL": {
+      "default": "",
+      "type": "string"
+    },
+    "redirectBlockModeEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "redirectionWarning": {
+      "default": false,
+      "type": "boolean"
+    },
+    "referrerPolicy": {
+      "default": false,
+      "type": "boolean"
+    },
+    "referrerPolicyDirective": {
+      "default": "",
+      "type": "string"
+    },
+    "requireHttpOnly": {
+      "default": false,
+      "type": "boolean"
+    },
+    "sendCspForUncommonClients": {
+      "default": false,
+      "type": "boolean"
+    },
+    "sessionTimeout": {
+      "default": null
+    },
+    "sidToken3rdPartyAuraApp": {
+      "default": false,
+      "type": "boolean"
+    },
+    "skipSFAWhenMFADirectUILogin": {
+      "default": false,
+      "type": "boolean"
+    },
+    "terminateUserSessionsWhenAdminResetsPassword": {
+      "default": false,
+      "type": "boolean"
+    },
+    "untrustedRedirect": {
+      "default": null
+    },
+    "useEAPIRateLimitForConnectAPI": {
+      "default": false,
+      "type": "boolean"
+    },
+    "useLocalStorageForLogoutUrl": {
+      "default": false,
+      "type": "boolean"
+    },
+    "welcomeEmailTemplateId": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "title": "SessionSettings",
+  "type": "object"
+}

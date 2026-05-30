@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "autoCalculateEndDate": {
+      "default": false,
+      "type": "boolean"
+    },
+    "autoExpirationDelay": {
+      "default": "",
+      "type": "string"
+    },
+    "autoExpirationRecipient": {
+      "default": "",
+      "type": "string"
+    },
+    "autoExpireContracts": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContractHistoryTracking": {
+      "default": false,
+      "type": "boolean"
+    },
+    "notifyOwnersOnContractExpiration": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ContractSettings",
+  "type": "object"
+}

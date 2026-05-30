@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableEmployeeFieldMaskDefaults": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEmployeeFieldMasking": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "EmployeeFieldAccessSettings",
+  "type": "object"
+}

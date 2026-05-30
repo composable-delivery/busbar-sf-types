@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableGlobalPromotionsEvaluation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGlobalPromotionsForRevenueCloud": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGlobalPromotionsProductCatalogManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUnifiedPromotions": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "IndustriesUnifiedPromotionsSettings",
+  "type": "object"
+}

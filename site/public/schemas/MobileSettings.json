@@ -1,0 +1,44 @@
+{
+  "$defs": {
+    "DashboardMobileSettings": {
+      "properties": {
+        "enableDashboardIPadApp": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "dashboardMobile": {
+      "$ref": "#/$defs/DashboardMobileSettings",
+      "default": {
+        "enableDashboardIPadApp": false
+      }
+    },
+    "enableImportContactFromDevice": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOfflineDraftsEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePopulateNameManuallyInToday": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableS1EncryptedStoragePref2": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableS1OfflinePref": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "MobileSettings",
+  "type": "object"
+}

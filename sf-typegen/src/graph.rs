@@ -4,8 +4,10 @@
 //! enabling automated categorization and detection of shared/common types.
 
 use petgraph::graph::{DiGraph, NodeIndex};
+use petgraph::visit::EdgeRef;
+use petgraph::Direction;
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet, VecDeque};
 
 /// Type of relationship between types
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
@@ -16,6 +18,34 @@ pub enum RelationshipType {
     Extends,
     /// Type A is a generic instantiation of Type B
     Generic,
+    /// Type A is an alias of Type B
+    AliasOf,
+    /// Type A includes Type B in a union
+    UnionMember,
+    /// Type A includes Type B in an intersection
+    IntersectionMember,
+    /// Type A references a generic base type
+    GenericBase,
+    /// Type A references a generic argument type
+    GenericArg,
+    /// Type A is a collection of Type B
+    CollectionOf,
+    /// Type A includes Type B as a map key
+    MapKey,
+    /// Type A includes Type B as a map value
+    MapValue,
+    /// Type A references Type B semantically (non-containment)
+    References,
+    /// CustomField lookup relationship to CustomObject
+    LookupRelationship,
+    /// CustomField master-detail relationship to CustomObject
+    MasterDetailRelationship,
+    /// CustomField formula reference to another component
+    FormulaReference,
+    /// Validation rule reference to a field
+    ValidationReference,
+    /// Rollup summary relationship to an object
+    RollupSummary,
 }
 
 /// A directed graph of type dependencies
@@ -56,6 +86,17 @@ impl TypeGraph {
     pub fn add_dependency(&mut self, from: &str, to: &str, rel_type: RelationshipType) {
         let from_idx = self.add_node(from);
         let to_idx = self.add_node(to);
+
+        // Avoid duplicate edges of the same type between the same nodes
+        use petgraph::visit::EdgeRef;
+        if self
+            .graph
+            .edges_connecting(from_idx, to_idx)
+            .any(|e| *e.weight() == rel_type)
+        {
+            return;
+        }
+
         self.graph.add_edge(from_idx, to_idx, rel_type);
     }
 
@@ -129,6 +170,42 @@ impl TypeGraph {
         } else {
             Vec::new()
         }
+    }
+
+    /// Perform a breadth-first traversal from a given type, filtering by relationship types
+    pub fn traverse_from_filtered(
+        &self,
+        start_type: &str,
+        allowed: &HashSet<RelationshipType>,
+    ) -> Vec<String> {
+        let Some(&start_idx) = self.node_indices.get(start_type) else {
+            return Vec::new();
+        };
+
+        let mut visited: HashSet<NodeIndex> = HashSet::new();
+        let mut queue: VecDeque<NodeIndex> = VecDeque::new();
+        let mut reachable = Vec::new();
+
+        visited.insert(start_idx);
+        queue.push_back(start_idx);
+
+        while let Some(node_idx) = queue.pop_front() {
+            reachable.push(self.graph[node_idx].clone());
+
+            for edge in self.graph.edges_directed(node_idx, Direction::Outgoing) {
+                let rel = *edge.weight();
+                if !allowed.contains(&rel) {
+                    continue;
+                }
+
+                let target = edge.target();
+                if visited.insert(target) {
+                    queue.push_back(target);
+                }
+            }
+        }
+
+        reachable
     }
 
     /// Export the graph to a JSON-serializable format
@@ -217,6 +294,20 @@ impl GraphExport {
                 RelationshipType::Contains => "contains",
                 RelationshipType::Extends => "extends",
                 RelationshipType::Generic => "generic",
+                RelationshipType::AliasOf => "alias_of",
+                RelationshipType::UnionMember => "union_member",
+                RelationshipType::IntersectionMember => "intersection_member",
+                RelationshipType::GenericBase => "generic_base",
+                RelationshipType::GenericArg => "generic_arg",
+                RelationshipType::CollectionOf => "collection_of",
+                RelationshipType::MapKey => "map_key",
+                RelationshipType::MapValue => "map_value",
+                RelationshipType::References => "references",
+                RelationshipType::LookupRelationship => "lookup_relationship",
+                RelationshipType::MasterDetailRelationship => "master_detail_relationship",
+                RelationshipType::FormulaReference => "formula_reference",
+                RelationshipType::ValidationReference => "validation_reference",
+                RelationshipType::RollupSummary => "rollup_summary",
             };
             output.push_str(&format!(
                 "  \"{}\" -> \"{}\" [label=\"{}\"];\n",

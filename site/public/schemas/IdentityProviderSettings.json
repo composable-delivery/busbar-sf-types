@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "certificateName": {
+      "default": "",
+      "type": "string"
+    },
+    "enableIdentityProvider": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "IdentityProviderSettings",
+  "type": "object"
+}

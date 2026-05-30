@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "accountFilterId": {
+      "default": "",
+      "type": "string"
+    },
+    "accountForecastFormulas": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "acctPrdctPrdFrcstVolCnt": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "calculationFrequency": {
+      "default": null
+    },
+    "displayDuration": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "displayedForecastMetrics": {
+      "default": "",
+      "type": "string"
+    },
+    "displayedRevenueMetrics": {
+      "default": "",
+      "type": "string"
+    },
+    "editableAtStartOfPeriod": {
+      "default": false,
+      "type": "boolean"
+    },
+    "editsAllowedFor": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "forecastFrequency": {
+      "default": null
+    },
+    "objectMapping": {
+      "default": null
+    },
+    "opportunityItemScheduleEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "opportunityProbabilityEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "primaryNotifEmailAddress": {
+      "default": "",
+      "type": "string"
+    },
+    "productFilterId": {
+      "default": "",
+      "type": "string"
+    },
+    "recalculateAllFrcstCnt": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "regenerateForecastCnt": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "salesAgreementFilterId": {
+      "default": "",
+      "type": "string"
+    },
+    "secondaryNotifEmailAddress": {
+      "default": "",
+      "type": "string"
+    },
+    "startingPeriod": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    }
+  },
+  "title": "AccountForecastSettings",
+  "type": "object"
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "canEncryptManagedPackageFields": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDeterministicEncryption": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEncryptFieldHistory": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEncryptionSearchEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEventBusEncryption": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isMEKForEncryptionRequired": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isUseHighAssuranceKeysRequired": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "PlatformEncryptionSettings",
+  "type": "object"
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableCallDisposition": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableConsentReminder": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDefaultRecording": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableVoiceCallList": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableVoiceCallRecording": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableVoiceCoaching": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableVoiceConferencing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableVoiceLocalPresence": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableVoiceMail": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableVoiceMailDrop": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "VoiceSettings",
+  "type": "object"
+}

@@ -4,6 +4,7 @@ pub mod error;
 pub mod graph;
 pub mod modular_generator;
 pub mod traits_gen;
+pub mod type_expr;
 
 // Build utilities were historically used for WSDL-based generation.
 // Those modules have been removed/renamed as this crate is now a TypeScript → Rust type generator.
@@ -22,3 +23,5 @@ pub use categories::{find_category, TypeCategory, CATEGORIES};
 pub use modular_generator::{
     FieldDef, GenerationResult, ModularGenerator, ModularGeneratorConfig, TypeDefinitions,
 };
+
+pub use type_expr::TypeExpr;

@@ -1,0 +1,384 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "alwaysGenPreviews": {
+      "default": false,
+      "type": "boolean"
+    },
+    "analyticsAdoptionMetadata": {
+      "default": false,
+      "type": "boolean"
+    },
+    "autoInstallApps": {
+      "default": false,
+      "type": "boolean"
+    },
+    "bundleCachingOptOut": {
+      "default": false,
+      "type": "boolean"
+    },
+    "canAccessAnalyticsViaAPI": {
+      "default": false,
+      "type": "boolean"
+    },
+    "canAnnotateDashboards": {
+      "default": false,
+      "type": "boolean"
+    },
+    "canEnableSavedView": {
+      "default": false,
+      "type": "boolean"
+    },
+    "canExploreDataConversationally": {
+      "default": false,
+      "type": "boolean"
+    },
+    "canShareAppsWithCommunities": {
+      "default": false,
+      "type": "boolean"
+    },
+    "canViewThumbnailAssets": {
+      "default": false,
+      "type": "boolean"
+    },
+    "cdpQueryCachingOptIn": {
+      "default": false,
+      "type": "boolean"
+    },
+    "concurrencyLimitSharing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "disableIncrementalDatasetCreation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAmazonRedshiftOutputConnector": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAnalyticsEncryption": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAnalyticsSharingEnable": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAutoCompleteCombo": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAutonomousExperience": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAzureDLGen2OutputConnector": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableC360GlobalProfileData": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCreateLegacyDataflows": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCrmaDataCloudIntegration": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCrtSetupLightningUiPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDashboardComponentSnapshot": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDashboardFlexiTable": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDashboardSubOrgEmailPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDashboardToPDFEnable": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDataCloudReportingPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEmailReportsToPortalUsers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFirebirdEditor": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFloatingReportHeaders": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIncludeDisclaimerMessage": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIncrementalUpsert": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInsights": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInsightsHCMode": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLightningReportBuilder": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLotusNotesImages": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMassEnableReportBuilder": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNewChartsEngine": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNullDimension": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOrgCanSeeLivePreviews": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOrgCanViewTableau": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOrgCanViewThumbnailForOA": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOrgHasMobileOfflineEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOrgHasWatchlistEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOrgWideEmailNotification": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePupparazziForNotifications": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableQueryLiveConnectors": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRemoveFooterForRepDisplay": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRemoveFooterFromRepExp": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableReportCdnPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableReportEscapeCharsPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableReportHideXlsExportPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableReportInlineEditPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableReportNotificationsEnable": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableReportSubOrgEmailPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableReportingOnSDMPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRequestPrioritySchdl": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableS1AnalyticsEclairEnable": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableS3OutputConnector": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSFXJoinedReportsEnable": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSalesforceOutputConnector": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSecureImageSharing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableShowHighContrastChart": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSnowflakeOutputConnector": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSummaryFilterOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTableauHyperOutputConnector": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUseOldChartsLookAndFeel": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUseReportTableSettingPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWaveAssetsNewDateVersion": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWaveCustomFiscal": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWaveIndexMVDim": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWaveIndexMVDimV2": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWaveMultiCurrency": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWaveRecordNavigation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWaveReplication": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWaveSharingInheritance": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWaveSqlCFIndexing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWaveTrendedDatasetCleanup": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWriteToDataCloud": {
+      "default": false,
+      "type": "boolean"
+    },
+    "etlOrchestrationPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "incrementalUpsertEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isDiscoveryOptimizationEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isHighVolumePushbackEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "maxHoursAppInProgress": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "queryCachingOptOut": {
+      "default": false,
+      "type": "boolean"
+    },
+    "recipeDirectDataPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "recipeFiscalPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "recipePreCachingOptOut": {
+      "default": false,
+      "type": "boolean"
+    },
+    "recipeStagedDataPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "replaceBlankMeasuresWithNulls": {
+      "default": false,
+      "type": "boolean"
+    },
+    "setWaveIsYearEndFiscalYear": {
+      "default": false,
+      "type": "boolean"
+    },
+    "sonicEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "turnOnTimeZones": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "AnalyticsSettings",
+  "type": "object"
+}

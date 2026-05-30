@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableComplianceBcc": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEmailConsentManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEmailSenderIdCompliance": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEmailSpfCompliance": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEmailToSalesforce": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEmailTrackingIPBlocklist": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEmailWorkflowApproval": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEnhancedEmailEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHandleBouncedEmails": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHtmlEmail": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInternationalEmailAddresses": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableListEmailLogActivities": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableResendBouncedEmails": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRestrictTlsToDomains": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSendThroughGmailPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSendViaExchangePref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSendViaGmailPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTinyMceSalesEmailEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUseOrgFootersForExtTrans": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableVerifyEmailDomainByDkim": {
+      "default": false,
+      "type": "boolean"
+    },
+    "sendEmailsEvenWhenAutomationUpdatesSameRecord": {
+      "default": false,
+      "type": "boolean"
+    },
+    "sendMassEmailNotification": {
+      "default": false,
+      "type": "boolean"
+    },
+    "sendTextOnlySystemEmails": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "EmailAdministrationSettings",
+  "type": "object"
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableContentHubAllowed": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContentHubCvtLinksAllowed": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContentHubEOSearchLayout": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "FilesConnectSettings",
+  "type": "object"
+}

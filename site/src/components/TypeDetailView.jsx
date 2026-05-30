@@ -1,6 +1,6 @@
-import { Card, Button, Tabs, TabList, Tab, TabPanel } from "reablocks";
+import { Card, Button, Tabs, TabList, Tab, TabPanel, JsonTree } from "reablocks";
 import TypeNetwork from "./TypeNetwork";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export default function TypeDetailView({
     typeData,
@@ -8,6 +8,16 @@ export default function TypeDetailView({
     onBack,
     onTypeSelect,
 }) {
+    const [schemaJson, setSchemaJson] = useState(null);
+    const [schemaError, setSchemaError] = useState(null);
+    const formatRelationshipLabel = (rel) => {
+        if (!rel) return "Unknown";
+        return rel
+            .replace(/_/g, " ")
+            .replace(/([a-z])([A-Z])/g, "$1 $2")
+            .replace(/\b\w/g, (c) => c.toUpperCase());
+    };
+
     const relationshipBadgeClass = (rel) => {
         const baseClass =
             "inline-flex items-center px-3 py-1 rounded-full text-xs font-medium";
@@ -17,7 +27,32 @@ export default function TypeDetailView({
             case "Extends":
                 return `${baseClass} bg-purple-500/20 text-purple-300`;
             case "Generic":
+            case "GenericBase":
+            case "GenericArg":
                 return `${baseClass} bg-orange-500/20 text-orange-300`;
+            case "AliasOf":
+                return `${baseClass} bg-teal-500/20 text-teal-300`;
+            case "UnionMember":
+                return `${baseClass} bg-pink-500/20 text-pink-300`;
+            case "IntersectionMember":
+                return `${baseClass} bg-indigo-500/20 text-indigo-300`;
+            case "CollectionOf":
+                return `${baseClass} bg-emerald-500/20 text-emerald-300`;
+            case "MapKey":
+            case "MapValue":
+                return `${baseClass} bg-yellow-500/20 text-yellow-300`;
+            case "References":
+                return `${baseClass} bg-sky-500/20 text-sky-300`;
+            case "LookupRelationship":
+                return `${baseClass} bg-cyan-500/20 text-cyan-300`;
+            case "MasterDetailRelationship":
+                return `${baseClass} bg-blue-500/20 text-blue-300`;
+            case "FormulaReference":
+                return `${baseClass} bg-emerald-500/20 text-emerald-300`;
+            case "ValidationReference":
+                return `${baseClass} bg-pink-500/20 text-pink-300`;
+            case "RollupSummary":
+                return `${baseClass} bg-amber-500/20 text-amber-300`;
             default:
                 return `${baseClass} bg-gray-500/20 text-gray-300`;
         }
@@ -54,6 +89,29 @@ export default function TypeDetailView({
             edges: edges,
         };
     }, [typeData, graphData]);
+
+    useEffect(() => {
+        if (!typeData?.name) return;
+        const loadSchema = async () => {
+            try {
+                setSchemaError(null);
+                const response = await fetch(
+                    `${import.meta.env.BASE_URL}schemas/${typeData.name}.json`,
+                );
+                if (!response.ok) {
+                    setSchemaJson(null);
+                    return;
+                }
+                const json = await response.json();
+                setSchemaJson(json);
+            } catch (error) {
+                setSchemaError(error.message);
+                setSchemaJson(null);
+            }
+        };
+
+        loadSchema();
+    }, [typeData?.name]);
 
     if (!typeData) {
         return (
@@ -102,7 +160,7 @@ export default function TypeDetailView({
                     </div>
 
                     <div className="flex gap-6">
-                        <div className="bg-white/5 border border-white/10 p-6 rounded-xl min-w-[140px]">
+                        <div className="bg-white/5 border border-white/10 p-6 rounded-xl min-w-35">
                             <div className="text-4xl font-bold text-white mb-1">
                                 {typeData.dependencies.length}
                             </div>
@@ -110,7 +168,7 @@ export default function TypeDetailView({
                                 Dependencies
                             </div>
                         </div>
-                        <div className="bg-white/5 border border-white/10 p-6 rounded-xl min-w-[140px]">
+                        <div className="bg-white/5 border border-white/10 p-6 rounded-xl min-w-35">
                             <div className="text-4xl font-bold text-white mb-1">
                                 {typeData.dependents.length}
                             </div>
@@ -123,7 +181,7 @@ export default function TypeDetailView({
             </div>
 
             {/* Graph Section */}
-            <div className="h-[700px]">
+            <div className="h-175">
                 <TypeNetwork
                     graphData={localGraph}
                     selectedType={typeData.name}
@@ -140,14 +198,14 @@ export default function TypeDetailView({
                 <Card className="bg-black border border-white/10 p-8 rounded-2xl shadow-xl">
                     <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
                         <span className="w-2 h-2 rounded-full bg-blue-500"></span>
-                        Dependencies ({typeData.dependencies.length})
+                        Parent/Required Types ({typeData.dependencies.length})
                     </h3>
                     {typeData.dependencies.length === 0 ? (
                         <div className="py-12 text-center text-gray-600 border border-dashed border-white/10 rounded-xl">
-                            This type has no defined dependencies
+                            This type has no parent or required types
                         </div>
                     ) : (
-                        <div className="grid gap-2">
+                        <div className="grid gap-2 max-h-96 overflow-y-auto">
                             {typeData.dependencies.map((dep, index) => (
                                 <div
                                     key={index}
@@ -162,7 +220,9 @@ export default function TypeDetailView({
                                             dep.relationship,
                                         )}
                                     >
-                                        {dep.relationship}
+                                        {formatRelationshipLabel(
+                                            dep.relationship,
+                                        )}
                                     </span>
                                 </div>
                             ))}
@@ -173,14 +233,14 @@ export default function TypeDetailView({
                 <Card className="bg-black border border-white/10 p-8 rounded-2xl shadow-xl">
                     <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
                         <span className="w-2 h-2 rounded-full bg-green-500"></span>
-                        Dependents ({typeData.dependents.length})
+                        Child/Dependent Types ({typeData.dependents.length})
                     </h3>
                     {typeData.dependents.length === 0 ? (
                         <div className="py-12 text-center text-gray-600 border border-dashed border-white/10 rounded-xl">
-                            No types depend on this type
+                            This type has no child or dependent types
                         </div>
                     ) : (
-                        <div className="grid gap-2">
+                        <div className="grid gap-2 max-h-96 overflow-y-auto">
                             {typeData.dependents.map((dep, index) => (
                                 <div
                                     key={index}
@@ -195,7 +255,9 @@ export default function TypeDetailView({
                                             dep.relationship,
                                         )}
                                     >
-                                        {dep.relationship}
+                                        {formatRelationshipLabel(
+                                            dep.relationship,
+                                        )}
                                     </span>
                                 </div>
                             ))}
@@ -203,6 +265,26 @@ export default function TypeDetailView({
                     )}
                 </Card>
             </div>
+
+            {/* JSON Schema */}
+            <Card className="bg-black border border-white/10 p-8 rounded-2xl shadow-xl">
+                <h3 className="text-xl font-bold text-white mb-4">
+                    JSON Schema
+                </h3>
+                {schemaError && (
+                    <div className="text-sm text-red-400">{schemaError}</div>
+                )}
+                {!schemaError && !schemaJson && (
+                    <div className="text-sm text-gray-500">
+                        Schema not available for this type.
+                    </div>
+                )}
+                {schemaJson && (
+                    <div className="bg-white/5 border border-white/10 rounded-xl p-4 overflow-x-auto max-h-96">
+                        <JsonTree data={schemaJson} expandDepth={2} />
+                    </div>
+                )}
+            </Card>
         </div>
     );
 }

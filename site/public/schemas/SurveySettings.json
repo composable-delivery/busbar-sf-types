@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableConversationalSurveys": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGenerativeAISurveys": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndustriesCxmEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSurvey": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSurveyInvLinkWithoutAppExtension": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSurveyOwnerCanManageResponse": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "SurveySettings",
+  "type": "object"
+}

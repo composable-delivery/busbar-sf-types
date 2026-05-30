@@ -18,6 +18,7 @@ use crate::categories::{
     find_category, group_by_category, CategorizedType, TypeCategory, CATEGORIES,
 };
 use crate::traits_gen::{generate_all_trait_impls, generate_traits_module, TraitGenConfig};
+use crate::type_expr::TypeExpr;
 use convert_case::{Case, Casing};
 use std::collections::{BTreeMap, HashMap, HashSet};
 use std::fs;
@@ -127,6 +128,7 @@ const DOMAIN_FEATURES: &[&str] = &[
 pub struct FieldDef {
     pub name: String,
     pub type_ref: String,
+    pub type_expr: TypeExpr,
     pub optional: bool,
     pub is_array: bool,
     pub description: Option<String>,
@@ -139,6 +141,8 @@ pub struct TypeDefinitions {
     pub union_types: HashMap<String, Vec<String>>,
     /// Interface types (become Rust structs)
     pub interface_types: HashMap<String, Vec<FieldDef>>,
+    /// Rich type aliases for dependency analysis
+    pub type_aliases: HashMap<String, TypeExpr>,
     pub descriptions: HashMap<String, String>,
 }
 
@@ -317,6 +321,9 @@ impl ModularGenerator {
         if self.config.generate_lib_rs {
             self.generate_lib_rs(output_dir, &groups, &mut result)?;
         }
+
+        // Generate schema registry (schemars helpers)
+        self.generate_schema_registry_rs(output_dir, &all_types, &mut result)?;
 
         // Generate monolithic file only if explicitly enabled (modular-only by default)
         if self.config.generate_monolithic {
@@ -717,6 +724,10 @@ impl ModularGenerator {
         content.push_str("// Core traits for type-safe API usage\n");
         content.push_str("pub mod traits;\n\n");
 
+        content.push_str("// Schema registry (schemars)\n");
+        content.push_str("#[cfg(feature = \"schemars\")]\n");
+        content.push_str("pub mod schema_registry;\n\n");
+
         // Feature-gated modules
         content.push_str("// Feature-gated modules\n\n");
 
@@ -970,6 +981,64 @@ impl ModularGenerator {
 "#
         .to_string()
     }
+
+    /// Generate schema_registry.rs for schemars lookups
+    fn generate_schema_registry_rs(
+        &self,
+        output_dir: &Path,
+        all_types: &[CategorizedType],
+        result: &mut GenerationResult,
+    ) -> anyhow::Result<()> {
+        let mut content = String::new();
+        content.push_str(&self.file_header());
+        content.push_str("//! Auto-generated schema registry for schemars.\n\n");
+        content.push_str("use schemars::schema_for;\n");
+        content.push_str("use serde_json::Value;\n\n");
+
+        let mut sorted_types: Vec<_> = all_types.iter().collect();
+        sorted_types.sort_by(|a, b| a.name.cmp(&b.name));
+
+        content.push_str("pub fn all_schema_types() -> &'static [&'static str] {\n");
+        content.push_str("    &[\n");
+        for ct in &sorted_types {
+            let feature = ct.category.map(|c| c.feature).unwrap_or("full");
+            content.push_str(&format!("        #[cfg(feature = \"{}\")]\n", feature));
+            content.push_str(&format!("        \"{}\",\n", ct.name));
+        }
+        content.push_str("    ]\n");
+        content.push_str("}\n\n");
+
+        content.push_str("pub fn schema_for_type(type_name: &str) -> Option<Value> {\n");
+        content.push_str("    match type_name {\n");
+        for ct in &sorted_types {
+            let feature = ct.category.map(|c| c.feature).unwrap_or("full");
+            let module_path = schema_module_path(ct);
+            content.push_str(&format!("        #[cfg(feature = \"{}\")]\n", feature));
+            content.push_str(&format!(
+                "        \"{}\" => Some(serde_json::to_value(schema_for!({}::{})).unwrap()),\n",
+                ct.name, module_path, ct.name
+            ));
+        }
+        content.push_str("        _ => None,\n");
+        content.push_str("    }\n");
+        content.push_str("}\n");
+
+        let path = output_dir.join("schema_registry.rs");
+        fs::write(&path, &content)?;
+        result.files_written.push(path.display().to_string());
+
+        Ok(())
+    }
+}
+
+fn schema_module_path(ct: &CategorizedType) -> String {
+    let module_path = ct
+        .category
+        .map(|c| c.module_path)
+        .unwrap_or("uncategorized.rs");
+    let trimmed = module_path.trim_end_matches(".rs");
+    let rust_path = trimmed.replace('/', "::");
+    format!("crate::{}", rust_path)
 }
 
 /// Capitalize the first letter of a string
@@ -1300,6 +1369,7 @@ mod tests {
             FieldDef {
                 name: "fullName".to_string(),
                 type_ref: "String".to_string(),
+                type_expr: TypeExpr::named("String"),
                 optional: true,
                 is_array: false,
                 description: None,
@@ -1307,6 +1377,7 @@ mod tests {
             FieldDef {
                 name: "fields".to_string(),
                 type_ref: "CustomField".to_string(),
+                type_expr: TypeExpr::named("CustomField"),
                 optional: true,
                 is_array: true,
                 description: None,
@@ -1328,6 +1399,7 @@ mod tests {
             FieldDef {
                 name: "fullName".to_string(),
                 type_ref: "String".to_string(),
+                type_expr: TypeExpr::named("String"),
                 optional: true,
                 is_array: false,
                 description: None,
@@ -1335,6 +1407,7 @@ mod tests {
             FieldDef {
                 name: "otherType".to_string(),
                 type_ref: "SomeOtherType".to_string(),
+                type_expr: TypeExpr::named("SomeOtherType"),
                 optional: true,
                 is_array: false,
                 description: None,

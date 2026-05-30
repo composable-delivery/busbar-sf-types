@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "groupingStringEnum": {
+      "default": "",
+      "type": "string"
+    },
+    "sorted": {
+      "default": false,
+      "type": "boolean"
+    },
+    "standardValue": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    }
+  },
+  "title": "StandardValueSet",
+  "type": "object"
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "controllingFieldValue": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "valueName": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "title": "ValueSettings",
+  "type": "object"
+}

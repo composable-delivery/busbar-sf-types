@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "doesEnableLeadConvertDefaultSubjectBlankTaskCreation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "doesHideOpportunityInConvertLeadWindow": {
+      "default": false,
+      "type": "boolean"
+    },
+    "doesPreserveLeadStatus": {
+      "default": false,
+      "type": "boolean"
+    },
+    "doesSelectNoOpportunityOnConvertLead": {
+      "default": false,
+      "type": "boolean"
+    },
+    "doesTrackHistory": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableConversionsOnMobile": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOrgWideMergeAndDelete": {
+      "default": false,
+      "type": "boolean"
+    },
+    "shouldLeadConvertRequireValidation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "shouldSendNotificationEmailWhenLeadOwnerUpdatesViaApexInLEX": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "LeadConfigSettings",
+  "type": "object"
+}

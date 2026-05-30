@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableCanadaIcuFormat": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDataTranslation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEndUserLanguages": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableICULocaleDateFormat": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLanguageExtensionPackage": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLocalNamesForStdObjects": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLocaleInsensitiveFiltering": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePlatformLanguages": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTranslationWorkbench": {
+      "default": false,
+      "type": "boolean"
+    },
+    "useLanguageFallback": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "LanguageSettings",
+  "type": "object"
+}

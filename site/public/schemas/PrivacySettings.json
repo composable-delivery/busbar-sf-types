@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "authorizationCaptureBrowser": {
+      "default": false,
+      "type": "boolean"
+    },
+    "authorizationCaptureEmail": {
+      "default": false,
+      "type": "boolean"
+    },
+    "authorizationCaptureIp": {
+      "default": false,
+      "type": "boolean"
+    },
+    "authorizationCaptureLocation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "authorizationCustomSharing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "authorizationCustomSharingPCU": {
+      "default": false,
+      "type": "boolean"
+    },
+    "authorizationLockingAndVersioning": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableConfigurableUserPIIActive": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableConsentAuditTrail": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableConsentEventStream": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDefaultMetadataValues": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSalesforceArchive": {
+      "default": false,
+      "type": "boolean"
+    },
+    "useUmaDefaultConsentRecs": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "PrivacySettings",
+  "type": "object"
+}

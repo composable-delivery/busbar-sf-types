@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableRating": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRatingWaterfall": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRatingWaterfallPersistence": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "IndustriesRatingSettings",
+  "type": "object"
+}

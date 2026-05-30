@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "documentReaderConfidenceOrgValue": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    }
+  },
+  "title": "IndustriesEinsteinFeatureSettings",
+  "type": "object"
+}

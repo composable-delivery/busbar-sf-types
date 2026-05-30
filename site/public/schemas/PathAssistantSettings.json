@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "canOverrideAutoPathCollapseWithUserPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "pathAssistantEnabled": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "PathAssistantSettings",
+  "type": "object"
+}

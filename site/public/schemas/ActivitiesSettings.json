@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "allowUsersToRelateMultipleContactsToTasksAndEvents": {
+      "default": false,
+      "type": "boolean"
+    },
+    "autoRelateEventAttendees": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableActivityReminders": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCalendarHomeLWC": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableClickCreateEvents": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDragAndDropScheduling": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEmailTracking": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFlowTaskNotifsViaApex": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGroupTasks": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHideChildEventsPreference": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableListViewScheduling": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLogNote": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMLSingleClientProfile": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMultidayEvents": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRecurringEvents": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRecurringTasks": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRollUpActivToContactsAcct": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSidebarCalendarShortcut": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSimpleTaskCreateUI": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTimelineCompDateSort": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUNSTaskDelegatedToNotifications": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUserListViewCalendars": {
+      "default": false,
+      "type": "boolean"
+    },
+    "meetingRequestsLogo": {
+      "default": "",
+      "type": "string"
+    },
+    "showCustomLogoMeetingRequests": {
+      "default": false,
+      "type": "boolean"
+    },
+    "showEventDetailsMultiUserCalendar": {
+      "default": false,
+      "type": "boolean"
+    },
+    "showHomePageHoverLinksForEvents": {
+      "default": false,
+      "type": "boolean"
+    },
+    "showMyTasksHoverLinks": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ActivitiesSettings",
+  "type": "object"
+}

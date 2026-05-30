@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableCallCoaching": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCallCoachingZoom": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCallExplorer": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCallSummarization": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableConversationMining": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDiarizationPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableECIOOTBFlows": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGenerativeConvInsights": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableManualUpload": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOpptyMatching": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRealtimeInsights": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUnifiedActivities": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ConversationalIntelligenceSettings",
+  "type": "object"
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableMediaAdOppSummaryEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMediaProposalAgentEnabled": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "MediaAgentSettings",
+  "type": "object"
+}

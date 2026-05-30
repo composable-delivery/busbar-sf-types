@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "dispositions": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "noHtmlUploadAsAttachment": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "FileUploadAndDownloadSecuritySettings",
+  "type": "object"
+}

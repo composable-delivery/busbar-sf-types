@@ -1,0 +1,1104 @@
+{
+  "$defs": {
+    "ActionOverride": {
+      "properties": {
+        "actionName": {
+          "default": "",
+          "type": "string"
+        },
+        "comment": {
+          "default": "",
+          "type": "string"
+        },
+        "content": {
+          "default": "",
+          "type": "string"
+        },
+        "formFactor": {
+          "default": null
+        },
+        "skipRecordTypeSelect": {
+          "default": false,
+          "type": "boolean"
+        },
+        "type": {
+          "$ref": "#/$defs/ActionOverrideType",
+          "default": "Default"
+        }
+      },
+      "type": "object"
+    },
+    "ActionOverrideType": {
+      "enum": [
+        "Default",
+        "Standard",
+        "Scontrol",
+        "Visualforce",
+        "Flexipage",
+        "LightningComponent"
+      ],
+      "type": "string"
+    },
+    "BusinessProcess": {
+      "properties": {
+        "description": {
+          "default": "",
+          "type": "string"
+        },
+        "isActive": {
+          "default": false,
+          "type": "boolean"
+        },
+        "values": {
+          "default": [],
+          "items": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "CompactLayout": {
+      "properties": {
+        "fields": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "label": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CustomField": {
+      "properties": {
+        "businessOwnerGroup": {
+          "default": "",
+          "type": "string"
+        },
+        "businessOwnerUser": {
+          "default": "",
+          "type": "string"
+        },
+        "businessStatus": {
+          "default": "",
+          "type": "string"
+        },
+        "caseSensitive": {
+          "default": false,
+          "type": "boolean"
+        },
+        "complianceGroup": {
+          "default": "",
+          "type": "string"
+        },
+        "customDataType": {
+          "default": "",
+          "type": "string"
+        },
+        "defaultValue": {
+          "default": "",
+          "type": "string"
+        },
+        "deleteConstraint": {
+          "default": null
+        },
+        "deprecated": {
+          "default": false,
+          "type": "boolean"
+        },
+        "description": {
+          "default": "",
+          "type": "string"
+        },
+        "displayFormat": {
+          "default": "",
+          "type": "string"
+        },
+        "displayLocationInDecimal": {
+          "default": false,
+          "type": "boolean"
+        },
+        "elementType": {
+          "default": null
+        },
+        "encryptionScheme": {
+          "default": null
+        },
+        "escapeMarkup": {
+          "default": false,
+          "type": "boolean"
+        },
+        "externalDeveloperName": {
+          "default": "",
+          "type": "string"
+        },
+        "externalId": {
+          "default": false,
+          "type": "boolean"
+        },
+        "fieldManageability": {
+          "default": null
+        },
+        "formula": {
+          "default": "",
+          "type": "string"
+        },
+        "formulaTreatBlanksAs": {
+          "default": null
+        },
+        "inlineHelpText": {
+          "default": "",
+          "type": "string"
+        },
+        "isAIPredictionField": {
+          "default": false,
+          "type": "boolean"
+        },
+        "isConvertLeadDisabled": {
+          "default": false,
+          "type": "boolean"
+        },
+        "isFilteringDisabled": {
+          "default": false,
+          "type": "boolean"
+        },
+        "isNameField": {
+          "default": false,
+          "type": "boolean"
+        },
+        "isSortingDisabled": {
+          "default": false,
+          "type": "boolean"
+        },
+        "label": {
+          "default": "",
+          "type": "string"
+        },
+        "length": {
+          "default": 0.0,
+          "format": "double",
+          "type": "number"
+        },
+        "lookupFilter": {
+          "default": null
+        },
+        "maskChar": {
+          "default": null
+        },
+        "maskType": {
+          "default": null
+        },
+        "metadataRelationshipControllingField": {
+          "default": "",
+          "type": "string"
+        },
+        "mktDataLakeFieldAttributes": {
+          "default": null
+        },
+        "mktDataModelFieldAttributes": {
+          "default": null
+        },
+        "picklist": {
+          "default": null
+        },
+        "populateExistingRows": {
+          "default": false,
+          "type": "boolean"
+        },
+        "precision": {
+          "default": 0.0,
+          "format": "double",
+          "type": "number"
+        },
+        "readOnlyProxy": {
+          "default": false,
+          "type": "boolean"
+        },
+        "referenceTargetField": {
+          "default": "",
+          "type": "string"
+        },
+        "referenceTo": {
+          "default": "",
+          "type": "string"
+        },
+        "relationshipLabel": {
+          "default": "",
+          "type": "string"
+        },
+        "relationshipName": {
+          "default": "",
+          "type": "string"
+        },
+        "relationshipOrder": {
+          "default": 0.0,
+          "format": "double",
+          "type": "number"
+        },
+        "reparentableMasterDetail": {
+          "default": false,
+          "type": "boolean"
+        },
+        "required": {
+          "default": false,
+          "type": "boolean"
+        },
+        "restrictedAdminField": {
+          "default": false,
+          "type": "boolean"
+        },
+        "scale": {
+          "default": 0.0,
+          "format": "double",
+          "type": "number"
+        },
+        "securityClassification": {
+          "default": "",
+          "type": "string"
+        },
+        "startingNumber": {
+          "default": 0.0,
+          "format": "double",
+          "type": "number"
+        },
+        "stripMarkup": {
+          "default": false,
+          "type": "boolean"
+        },
+        "summarizedField": {
+          "default": "",
+          "type": "string"
+        },
+        "summaryFilterItems": {
+          "default": [],
+          "items": true,
+          "type": "array"
+        },
+        "summaryForeignKey": {
+          "default": "",
+          "type": "string"
+        },
+        "summaryOperation": {
+          "default": null
+        },
+        "trackFeedHistory": {
+          "default": false,
+          "type": "boolean"
+        },
+        "trackHistory": {
+          "default": false,
+          "type": "boolean"
+        },
+        "trackTrending": {
+          "default": false,
+          "type": "boolean"
+        },
+        "translateData": {
+          "default": false,
+          "type": "boolean"
+        },
+        "type": {
+          "default": null
+        },
+        "unique": {
+          "default": false,
+          "type": "boolean"
+        },
+        "valueSet": {
+          "$ref": "#/$defs/ValueSet",
+          "default": {
+            "controllingField": "",
+            "restricted": false,
+            "valueSetDefinition": {
+              "sorted": false,
+              "value": []
+            },
+            "valueSetName": "",
+            "valueSettings": []
+          }
+        },
+        "visibleLines": {
+          "default": 0.0,
+          "format": "double",
+          "type": "number"
+        },
+        "writeRequiresMasterRead": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "CustomValue": {
+      "properties": {
+        "color": {
+          "default": "",
+          "type": "string"
+        },
+        "default": {
+          "default": false,
+          "type": "boolean"
+        },
+        "description": {
+          "default": "",
+          "type": "string"
+        },
+        "isActive": {
+          "default": false,
+          "type": "boolean"
+        },
+        "label": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "FieldSet": {
+      "properties": {
+        "availableFields": {
+          "default": [],
+          "items": true,
+          "type": "array"
+        },
+        "description": {
+          "default": "",
+          "type": "string"
+        },
+        "displayedFields": {
+          "default": [],
+          "items": true,
+          "type": "array"
+        },
+        "label": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "HistoryRetentionPolicy": {
+      "properties": {
+        "archiveAfterMonths": {
+          "default": 0.0,
+          "format": "double",
+          "type": "number"
+        },
+        "archiveRetentionYears": {
+          "default": 0.0,
+          "format": "double",
+          "type": "number"
+        },
+        "description": {
+          "default": "",
+          "type": "string"
+        },
+        "gracePeriodDays": {
+          "default": 0.0,
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "Index": {
+      "properties": {
+        "fields": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/IndexField"
+          },
+          "type": "array"
+        },
+        "label": {
+          "default": "",
+          "type": "string"
+        },
+        "minNumRequiredIndexedFields": {
+          "default": 0.0,
+          "format": "double",
+          "type": "number"
+        },
+        "type": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "IndexField": {
+      "properties": {
+        "name": {
+          "default": "",
+          "type": "string"
+        },
+        "sortDirection": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ListView": {
+      "properties": {
+        "booleanFilter": {
+          "default": "",
+          "type": "string"
+        },
+        "columns": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "division": {
+          "default": "",
+          "type": "string"
+        },
+        "filterScope": {
+          "default": null
+        },
+        "filters": {
+          "default": [],
+          "items": true,
+          "type": "array"
+        },
+        "label": {
+          "default": "",
+          "type": "string"
+        },
+        "language": {
+          "default": null
+        },
+        "queue": {
+          "default": "",
+          "type": "string"
+        },
+        "sharedTo": {
+          "default": null
+        }
+      },
+      "type": "object"
+    },
+    "RecordType": {
+      "properties": {
+        "active": {
+          "default": false,
+          "type": "boolean"
+        },
+        "businessProcess": {
+          "default": "",
+          "type": "string"
+        },
+        "compactLayoutAssignment": {
+          "default": "",
+          "type": "string"
+        },
+        "description": {
+          "default": "",
+          "type": "string"
+        },
+        "label": {
+          "default": "",
+          "type": "string"
+        },
+        "picklistValues": {
+          "default": [],
+          "items": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "SearchLayouts": {
+      "properties": {
+        "customTabListAdditionalFields": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "excludedStandardButtons": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "listViewButtons": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "lookupDialogsAdditionalFields": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "lookupFilterFields": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "lookupPhoneDialogsAdditionalFields": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "massQuickActions": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "searchFilterFields": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "searchResultsAdditionalFields": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "searchResultsCustomButtons": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "SharingReason": {
+      "properties": {
+        "label": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ValidationRule": {
+      "properties": {
+        "active": {
+          "default": false,
+          "type": "boolean"
+        },
+        "description": {
+          "default": "",
+          "type": "string"
+        },
+        "errorConditionFormula": {
+          "default": "",
+          "type": "string"
+        },
+        "errorDisplayField": {
+          "default": "",
+          "type": "string"
+        },
+        "errorMessage": {
+          "default": "",
+          "type": "string"
+        },
+        "shouldEvaluateOnClient": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "ValueSet": {
+      "properties": {
+        "controllingField": {
+          "default": "",
+          "type": "string"
+        },
+        "restricted": {
+          "default": false,
+          "type": "boolean"
+        },
+        "valueSetDefinition": {
+          "$ref": "#/$defs/ValueSetValuesDefinition",
+          "default": {
+            "sorted": false,
+            "value": []
+          }
+        },
+        "valueSetName": {
+          "default": "",
+          "type": "string"
+        },
+        "valueSettings": {
+          "default": [],
+          "items": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ValueSetValuesDefinition": {
+      "properties": {
+        "sorted": {
+          "default": false,
+          "type": "boolean"
+        },
+        "value": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/CustomValue"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "WebLink": {
+      "properties": {
+        "availability": {
+          "default": null
+        },
+        "description": {
+          "default": "",
+          "type": "string"
+        },
+        "displayType": {
+          "default": null
+        },
+        "encodingKey": {
+          "default": null
+        },
+        "hasMenubar": {
+          "default": false,
+          "type": "boolean"
+        },
+        "hasScrollbars": {
+          "default": false,
+          "type": "boolean"
+        },
+        "hasToolbar": {
+          "default": false,
+          "type": "boolean"
+        },
+        "height": {
+          "default": 0.0,
+          "format": "double",
+          "type": "number"
+        },
+        "isResizable": {
+          "default": false,
+          "type": "boolean"
+        },
+        "linkType": {
+          "default": null
+        },
+        "masterLabel": {
+          "default": "",
+          "type": "string"
+        },
+        "openType": {
+          "default": null
+        },
+        "page": {
+          "default": "",
+          "type": "string"
+        },
+        "position": {
+          "default": null
+        },
+        "protected": {
+          "default": false,
+          "type": "boolean"
+        },
+        "requireRowSelection": {
+          "default": false,
+          "type": "boolean"
+        },
+        "scontrol": {
+          "default": "",
+          "type": "string"
+        },
+        "showsLocation": {
+          "default": false,
+          "type": "boolean"
+        },
+        "showsStatus": {
+          "default": false,
+          "type": "boolean"
+        },
+        "url": {
+          "default": "",
+          "type": "string"
+        },
+        "width": {
+          "default": 0.0,
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Represents a custom object or standard object configuration.",
+  "properties": {
+    "actionOverrides": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ActionOverride"
+      },
+      "type": "array"
+    },
+    "allowInChatterGroups": {
+      "default": false,
+      "type": "boolean"
+    },
+    "articleTypeChannelDisplay": {
+      "default": null
+    },
+    "businessProcesses": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/BusinessProcess"
+      },
+      "type": "array"
+    },
+    "compactLayoutAssignment": {
+      "default": "",
+      "type": "string"
+    },
+    "compactLayouts": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/CompactLayout"
+      },
+      "type": "array"
+    },
+    "customHelp": {
+      "default": "",
+      "type": "string"
+    },
+    "customHelpPage": {
+      "default": "",
+      "type": "string"
+    },
+    "customSettingsType": {
+      "default": null
+    },
+    "deploymentStatus": {
+      "default": null
+    },
+    "deprecated": {
+      "default": false,
+      "type": "boolean"
+    },
+    "description": {
+      "default": "",
+      "type": "string"
+    },
+    "enableActivities": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableBulkApi": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDataTranslation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDivisions": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEnhancedLookup": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFeeds": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHistory": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLicensing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePublishStatusTracking": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableReports": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSearch": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSharing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableStreamingApi": {
+      "default": false,
+      "type": "boolean"
+    },
+    "eventType": {
+      "default": null
+    },
+    "externalDataSource": {
+      "default": "",
+      "type": "string"
+    },
+    "externalIndexAvailable": {
+      "default": false,
+      "type": "boolean"
+    },
+    "externalName": {
+      "default": "",
+      "type": "string"
+    },
+    "externalRepository": {
+      "default": "",
+      "type": "string"
+    },
+    "externalSharingModel": {
+      "default": null
+    },
+    "fieldSets": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/FieldSet"
+      },
+      "type": "array"
+    },
+    "fields": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/CustomField"
+      },
+      "type": "array"
+    },
+    "gender": {
+      "default": null
+    },
+    "historyRetentionPolicy": {
+      "$ref": "#/$defs/HistoryRetentionPolicy",
+      "default": {
+        "archiveAfterMonths": 0.0,
+        "archiveRetentionYears": 0.0,
+        "description": "",
+        "gracePeriodDays": 0.0
+      }
+    },
+    "household": {
+      "default": false,
+      "type": "boolean"
+    },
+    "indexes": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/Index"
+      },
+      "type": "array"
+    },
+    "label": {
+      "default": "",
+      "type": "string"
+    },
+    "listViews": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ListView"
+      },
+      "type": "array"
+    },
+    "mktDataLakeAttributes": {
+      "default": null
+    },
+    "mktDataModelAttributes": {
+      "default": null
+    },
+    "nameField": {
+      "$ref": "#/$defs/CustomField",
+      "default": {
+        "businessOwnerGroup": "",
+        "businessOwnerUser": "",
+        "businessStatus": "",
+        "caseSensitive": false,
+        "complianceGroup": "",
+        "customDataType": "",
+        "defaultValue": "",
+        "deleteConstraint": null,
+        "deprecated": false,
+        "description": "",
+        "displayFormat": "",
+        "displayLocationInDecimal": false,
+        "elementType": null,
+        "encryptionScheme": null,
+        "escapeMarkup": false,
+        "externalDeveloperName": "",
+        "externalId": false,
+        "fieldManageability": null,
+        "formula": "",
+        "formulaTreatBlanksAs": null,
+        "inlineHelpText": "",
+        "isAIPredictionField": false,
+        "isConvertLeadDisabled": false,
+        "isFilteringDisabled": false,
+        "isNameField": false,
+        "isSortingDisabled": false,
+        "label": "",
+        "length": 0.0,
+        "lookupFilter": null,
+        "maskChar": null,
+        "maskType": null,
+        "metadataRelationshipControllingField": "",
+        "mktDataLakeFieldAttributes": null,
+        "mktDataModelFieldAttributes": null,
+        "picklist": null,
+        "populateExistingRows": false,
+        "precision": 0.0,
+        "readOnlyProxy": false,
+        "referenceTargetField": "",
+        "referenceTo": "",
+        "relationshipLabel": "",
+        "relationshipName": "",
+        "relationshipOrder": 0.0,
+        "reparentableMasterDetail": false,
+        "required": false,
+        "restrictedAdminField": false,
+        "scale": 0.0,
+        "securityClassification": "",
+        "startingNumber": 0.0,
+        "stripMarkup": false,
+        "summarizedField": "",
+        "summaryFilterItems": [],
+        "summaryForeignKey": "",
+        "summaryOperation": null,
+        "trackFeedHistory": false,
+        "trackHistory": false,
+        "trackTrending": false,
+        "translateData": false,
+        "type": null,
+        "unique": false,
+        "valueSet": {
+          "controllingField": "",
+          "restricted": false,
+          "valueSetDefinition": {
+            "sorted": false,
+            "value": []
+          },
+          "valueSetName": "",
+          "valueSettings": []
+        },
+        "visibleLines": 0.0,
+        "writeRequiresMasterRead": false
+      }
+    },
+    "pluralLabel": {
+      "default": "",
+      "type": "string"
+    },
+    "profileSearchLayouts": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "publishBehavior": {
+      "default": null
+    },
+    "recordTypeTrackFeedHistory": {
+      "default": false,
+      "type": "boolean"
+    },
+    "recordTypeTrackHistory": {
+      "default": false,
+      "type": "boolean"
+    },
+    "recordTypes": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/RecordType"
+      },
+      "type": "array"
+    },
+    "searchLayouts": {
+      "$ref": "#/$defs/SearchLayouts",
+      "default": {
+        "customTabListAdditionalFields": [],
+        "excludedStandardButtons": [],
+        "listViewButtons": [],
+        "lookupDialogsAdditionalFields": [],
+        "lookupFilterFields": [],
+        "lookupPhoneDialogsAdditionalFields": [],
+        "massQuickActions": [],
+        "searchFilterFields": [],
+        "searchResultsAdditionalFields": [],
+        "searchResultsCustomButtons": []
+      }
+    },
+    "sharingModel": {
+      "default": null
+    },
+    "sharingReasons": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/SharingReason"
+      },
+      "type": "array"
+    },
+    "sharingRecalculations": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "startsWith": {
+      "default": null
+    },
+    "validationRules": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ValidationRule"
+      },
+      "type": "array"
+    },
+    "visibility": {
+      "default": null
+    },
+    "webLinks": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/WebLink"
+      },
+      "type": "array"
+    }
+  },
+  "title": "CustomObject",
+  "type": "object"
+}

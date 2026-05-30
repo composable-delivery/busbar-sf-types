@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "areLegacyRedirectsMaintained": {
+      "default": false,
+      "type": "boolean"
+    },
+    "areLgcyRdirMaintainedWntr26": {
+      "default": false,
+      "type": "boolean"
+    },
+    "canOnlyLoginWithMyDomainUrl": {
+      "default": false,
+      "type": "boolean"
+    },
+    "doesApiLoginRequireOrgDomain": {
+      "default": false,
+      "type": "boolean"
+    },
+    "doesWarnOnForceComRedirect": {
+      "default": false,
+      "type": "boolean"
+    },
+    "doesWarnOnRedirect": {
+      "default": false,
+      "type": "boolean"
+    },
+    "domainPartition": {
+      "default": null
+    },
+    "edgeRoutingMethod": {
+      "default": null
+    },
+    "enableCrossDomainPreviewCookies": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEdgeDuringRollout": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableExtendedRedirections": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLegacyRedirections": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNativeBrowserForAuthOnAndroid": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNativeBrowserForAuthOnIos": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableShareBrowserSessionAndroidForAuth": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableShareBrowserSessionIOSForAuth": {
+      "default": false,
+      "type": "boolean"
+    },
+    "instancedUrlRedirectHandling": {
+      "default": null
+    },
+    "isFirstPartyCookieUseRequired": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isIcorInstApiTrafficBlocked": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isInstancedApiTrafficBlocked": {
+      "default": false,
+      "type": "boolean"
+    },
+    "logRedirections": {
+      "default": false,
+      "type": "boolean"
+    },
+    "myDomainName": {
+      "default": "",
+      "type": "string"
+    },
+    "myDomainSuffix": {
+      "default": null
+    },
+    "onboardCustomerSpecificSuffix": {
+      "default": false,
+      "type": "boolean"
+    },
+    "redirectForceComSiteUrls": {
+      "default": false,
+      "type": "boolean"
+    },
+    "redirectPriorMyDomain": {
+      "default": false,
+      "type": "boolean"
+    },
+    "use3rdPartyCookieBlockingCompatibleHostnames": {
+      "default": false,
+      "type": "boolean"
+    },
+    "useEdge": {
+      "default": false,
+      "type": "boolean"
+    },
+    "useEnhancedDomainsInSandbox": {
+      "default": false,
+      "type": "boolean"
+    },
+    "useStabilizedMyDomainHostnames": {
+      "default": false,
+      "type": "boolean"
+    },
+    "useStabilizedSandboxMyDomainHostnames": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "MyDomainSettings",
+  "type": "object"
+}

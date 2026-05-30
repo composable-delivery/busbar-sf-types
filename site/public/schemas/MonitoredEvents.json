@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "enum": [
+    "AuditTrail",
+    "Login",
+    "Entity",
+    "DataExport",
+    "AccessResource"
+  ],
+  "title": "MonitoredEvents",
+  "type": "string"
+}

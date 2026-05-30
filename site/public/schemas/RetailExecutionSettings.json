@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableProductHierarchy": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRetailExecution": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableVisitSharing": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "RetailExecutionSettings",
+  "type": "object"
+}

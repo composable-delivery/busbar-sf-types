@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "devicePlatform": {
+      "default": null
+    },
+    "deviceType": {
+      "default": null
+    },
+    "externalClientApplication": {
+      "default": "",
+      "type": "string"
+    },
+    "label": {
+      "default": "",
+      "type": "string"
+    },
+    "minimumOsVersion": {
+      "default": "",
+      "type": "string"
+    },
+    "policy1": {
+      "default": "",
+      "type": "string"
+    },
+    "policy1DevManaged": {
+      "default": false,
+      "type": "boolean"
+    },
+    "policy2": {
+      "default": "",
+      "type": "string"
+    },
+    "policy2DevManaged": {
+      "default": false,
+      "type": "boolean"
+    },
+    "version": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "title": "ExtlClntAppSampleSettings",
+  "type": "object"
+}

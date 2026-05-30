@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableDesignRegistration": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePriceProtection": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ChannelRevMgmtSettings",
+  "type": "object"
+}

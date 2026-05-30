@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableAutoAgentsPilot": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAutomotiveAgents": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAutomotiveAppraisals": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAutomotiveCloud": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAutomotiveScheduler": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAutomotiveServiceExcellence": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableConnectedVehSrvcsCmpnt": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDealerEssntlsAutomotive": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGenAiForAutoPilot": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "IndustriesAutomotiveSettings",
+  "type": "object"
+}

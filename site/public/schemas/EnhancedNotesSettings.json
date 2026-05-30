@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableEnhancedNotes": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTasksOnEnhancedNotes": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "EnhancedNotesSettings",
+  "type": "object"
+}

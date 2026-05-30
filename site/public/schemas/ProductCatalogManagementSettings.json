@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "productDeepCloneContextDefOrgValue": {
+      "default": "",
+      "type": "string"
+    },
+    "productDeepCloneExpressionSetOrgValue": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "title": "ProductCatalogManagementSettings",
+  "type": "object"
+}

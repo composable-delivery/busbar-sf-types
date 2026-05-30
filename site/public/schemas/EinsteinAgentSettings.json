@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "einsteinAgentRecommendations": {
+      "default": false,
+      "type": "boolean"
+    },
+    "reRunAttributeBasedRules": {
+      "default": false,
+      "type": "boolean"
+    },
+    "runAssignmentRules": {
+      "default": false,
+      "type": "boolean"
+    },
+    "summarizationCopilot": {
+      "default": false,
+      "type": "boolean"
+    },
+    "summarizationRecs": {
+      "default": false,
+      "type": "boolean"
+    },
+    "voiceWrapUpRecs": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "EinsteinAgentSettings",
+  "type": "object"
+}

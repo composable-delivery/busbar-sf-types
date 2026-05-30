@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableBatchManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInventoryCount": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProductInventoryOperations": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "IndustriesUnifiedInventorySettings",
+  "type": "object"
+}

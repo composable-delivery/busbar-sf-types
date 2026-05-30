@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "dciCSharingOptimization": {
+      "default": false,
+      "type": "boolean"
+    },
+    "dciCustomSharing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "deleteDCIWithFiles": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enhancedDocValCmp": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "DocumentChecklistSettings",
+  "type": "object"
+}

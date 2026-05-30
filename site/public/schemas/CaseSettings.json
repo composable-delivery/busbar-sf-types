@@ -1,0 +1,390 @@
+{
+  "$defs": {
+    "EmailToCaseSettings": {
+      "properties": {
+        "enableE2CAttachmentAsFile": {
+          "default": false,
+          "type": "boolean"
+        },
+        "enableE2CDeduplicateAttachments": {
+          "default": false,
+          "type": "boolean"
+        },
+        "enableE2CExternalServer": {
+          "default": false,
+          "type": "boolean"
+        },
+        "enableE2CSourceTracking": {
+          "default": false,
+          "type": "boolean"
+        },
+        "enableEmailToCase": {
+          "default": false,
+          "type": "boolean"
+        },
+        "enableEmailTranslation": {
+          "default": false,
+          "type": "boolean"
+        },
+        "enableHtmlEmail": {
+          "default": false,
+          "type": "boolean"
+        },
+        "enableNewToReadTriggers": {
+          "default": false,
+          "type": "boolean"
+        },
+        "enableOnDemandEmailToCase": {
+          "default": false,
+          "type": "boolean"
+        },
+        "enableThreadIDInBody": {
+          "default": false,
+          "type": "boolean"
+        },
+        "enableThreadIDInSubject": {
+          "default": false,
+          "type": "boolean"
+        },
+        "enableThreadTokenInBody": {
+          "default": false,
+          "type": "boolean"
+        },
+        "enableThreadTokenInSubject": {
+          "default": false,
+          "type": "boolean"
+        },
+        "movingEmailEnabled": {
+          "default": false,
+          "type": "boolean"
+        },
+        "notifyOwnerOnNewCaseEmail": {
+          "default": false,
+          "type": "boolean"
+        },
+        "notifySenderE2CError": {
+          "default": false,
+          "type": "boolean"
+        },
+        "overEmailLimitAction": {
+          "default": null
+        },
+        "preQuoteSignature": {
+          "default": false,
+          "type": "boolean"
+        },
+        "replyWithNewContentOnly": {
+          "default": false,
+          "type": "boolean"
+        },
+        "routingAddresses": {
+          "default": [],
+          "items": true,
+          "type": "array"
+        },
+        "showServiceEmailOpenPrompt": {
+          "default": false,
+          "type": "boolean"
+        },
+        "showWordCountInComposer": {
+          "default": false,
+          "type": "boolean"
+        },
+        "unauthorizedSenderAction": {
+          "default": null
+        },
+        "useEmailHeadersForThreading": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "FeedItemSettings": {
+      "properties": {
+        "characterLimit": {
+          "default": 0.0,
+          "format": "double",
+          "type": "number"
+        },
+        "displayFormat": {
+          "default": null
+        },
+        "feedItemType": {
+          "default": null
+        }
+      },
+      "type": "object"
+    },
+    "WebToCaseSettings": {
+      "properties": {
+        "caseOrigin": {
+          "default": "",
+          "type": "string"
+        },
+        "defaultResponseTemplate": {
+          "default": "",
+          "type": "string"
+        },
+        "enableWebToCase": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "caseAssignNotificationTemplate": {
+      "default": "",
+      "type": "string"
+    },
+    "caseAutoProcUser": {
+      "default": false,
+      "type": "boolean"
+    },
+    "caseCloseNotificationTemplate": {
+      "default": "",
+      "type": "string"
+    },
+    "caseCommentNotificationTemplate": {
+      "default": "",
+      "type": "string"
+    },
+    "caseCreateNotificationTemplate": {
+      "default": "",
+      "type": "string"
+    },
+    "caseFeedItemSettings": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/FeedItemSettings"
+      },
+      "type": "array"
+    },
+    "caseFeedReadUnreadLtng": {
+      "default": false,
+      "type": "boolean"
+    },
+    "caseMergeInLightning": {
+      "default": false,
+      "type": "boolean"
+    },
+    "closeCaseThroughStatusChange": {
+      "default": false,
+      "type": "boolean"
+    },
+    "defaultCaseFeedLayoutOn": {
+      "default": false,
+      "type": "boolean"
+    },
+    "defaultCaseOwner": {
+      "default": "",
+      "type": "string"
+    },
+    "defaultCaseOwnerType": {
+      "default": "",
+      "type": "string"
+    },
+    "defaultCaseUser": {
+      "default": "",
+      "type": "string"
+    },
+    "emailActionDefaultsHandlerClass": {
+      "default": "",
+      "type": "string"
+    },
+    "emailToCase": {
+      "$ref": "#/$defs/EmailToCaseSettings",
+      "default": {
+        "enableE2CAttachmentAsFile": false,
+        "enableE2CDeduplicateAttachments": false,
+        "enableE2CExternalServer": false,
+        "enableE2CSourceTracking": false,
+        "enableEmailToCase": false,
+        "enableEmailTranslation": false,
+        "enableHtmlEmail": false,
+        "enableNewToReadTriggers": false,
+        "enableOnDemandEmailToCase": false,
+        "enableThreadIDInBody": false,
+        "enableThreadIDInSubject": false,
+        "enableThreadTokenInBody": false,
+        "enableThreadTokenInSubject": false,
+        "movingEmailEnabled": false,
+        "notifyOwnerOnNewCaseEmail": false,
+        "notifySenderE2CError": false,
+        "overEmailLimitAction": null,
+        "preQuoteSignature": false,
+        "replyWithNewContentOnly": false,
+        "routingAddresses": [],
+        "showServiceEmailOpenPrompt": false,
+        "showWordCountInComposer": false,
+        "unauthorizedSenderAction": null,
+        "useEmailHeadersForThreading": false
+      }
+    },
+    "enableCaseFeed": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCaseSwarming": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCollapseEmailThread": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDraftEmails": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEarlyEscalationRuleTriggers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEmailActionDefaultsHandler": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEmailContactOnCasePost": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEscalateQfiToCaseInternal": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEscalateQfiToCaseNetworks": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableExtNetworksCaseFeedEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMultiLangSolnSrchCSS": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMultiLangSolnSrchPKB": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMultiLangSolution": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSolutionCategory": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSolutionInlineCategory": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSolutionShortSummary": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSuggestedArticlesApplication": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSuggestedArticlesCustomerPortal": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSuggestedArticlesPartnerPortal": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSuggestedSolutions": {
+      "default": false,
+      "type": "boolean"
+    },
+    "escalateCaseBefore": {
+      "default": false,
+      "type": "boolean"
+    },
+    "genericMessageEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "hidePublicInCaseComment": {
+      "default": false,
+      "type": "boolean"
+    },
+    "keepCaseMergeRecords": {
+      "default": false,
+      "type": "boolean"
+    },
+    "keepRecordTypeOnAssignmentRule": {
+      "default": false,
+      "type": "boolean"
+    },
+    "notifyContactOnCaseComment": {
+      "default": false,
+      "type": "boolean"
+    },
+    "notifyDefaultCaseOwner": {
+      "default": false,
+      "type": "boolean"
+    },
+    "notifyOwnerOnCaseComment": {
+      "default": false,
+      "type": "boolean"
+    },
+    "notifyOwnerOnCaseOwnerChange": {
+      "default": false,
+      "type": "boolean"
+    },
+    "predictiveSupportEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "rtaCaseComment": {
+      "default": false,
+      "type": "boolean"
+    },
+    "rtaCaseDescription": {
+      "default": false,
+      "type": "boolean"
+    },
+    "showEmailAttachmentsInCaseAttachmentsRL": {
+      "default": false,
+      "type": "boolean"
+    },
+    "showFewerCloseActions": {
+      "default": false,
+      "type": "boolean"
+    },
+    "systemUserEmail": {
+      "default": "",
+      "type": "string"
+    },
+    "useSystemEmailAddress": {
+      "default": false,
+      "type": "boolean"
+    },
+    "useSystemUserAsDefaultCaseUser": {
+      "default": false,
+      "type": "boolean"
+    },
+    "visibleInCssCheckbox": {
+      "default": false,
+      "type": "boolean"
+    },
+    "webToCase": {
+      "$ref": "#/$defs/WebToCaseSettings",
+      "default": {
+        "caseOrigin": "",
+        "defaultResponseTemplate": "",
+        "enableWebToCase": false
+      }
+    }
+  },
+  "title": "CaseSettings",
+  "type": "object"
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableChatterProfile": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHtmlIdea": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIdeaMultipleCategory": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIdeaThemes": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIdeas": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIdeasControllerExtensions": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIdeasReputation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "halfLife": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "ideasProfilePage": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "title": "IdeasSettings",
+  "type": "object"
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "doesEmailLogAsEmailMessageInOutlook": {
+      "default": false,
+      "type": "boolean"
+    },
+    "doesGmailStayConnectedToSalesforce": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContactAndEventSync": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContextualEverywhere": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEmailTrackingInMobile": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEngageForOutlook": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableExtensionHostUnrestricted": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGmailIntegration": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInboxInternalEmailTracking": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInboxMobileIntune": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInboxUseGraphApi": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOutlookIntegration": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOutlookMobileIntegration": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProductivityFeatures": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSupplementalContactInfoInMobile": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isLayoutCustomizationAllowed": {
+      "default": false,
+      "type": "boolean"
+    },
+    "orgIsSyncingEventsOutbound": {
+      "default": false,
+      "type": "boolean"
+    },
+    "shouldUseTrustedDomainsList": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "EmailIntegrationSettings",
+  "type": "object"
+}

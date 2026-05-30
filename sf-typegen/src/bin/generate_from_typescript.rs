@@ -28,6 +28,7 @@ use sf_typegen::graph::{GraphExport, RelationshipType, TypeGraph};
 use sf_typegen::modular_generator::{
     FieldDef, ModularGenerator, ModularGeneratorConfig, TypeDefinitions,
 };
+use sf_typegen::TypeExpr;
 use std::collections::{BTreeMap, HashMap};
 use std::env;
 use std::fs;
@@ -325,13 +326,30 @@ fn parse_and_extract(source: &str) -> Result<TypeDefinitions> {
 
     let mut union_types = HashMap::new();
     let mut interface_types = HashMap::new();
+    let mut type_aliases = HashMap::new();
     let mut descriptions = HashMap::new();
 
     // Walk through all statements in the program
     for stmt in &program.body {
         if let Statement::ExportNamedDeclaration(export) = stmt {
+            // Handle interfaces (Salesforce uses these for almost everything now)
+            if let Some(Declaration::TSInterfaceDeclaration(interface)) = &export.declaration {
+                let type_name = interface.id.name.to_string();
+                let mut fields = Vec::new();
+                for member in &interface.body.body {
+                    if let TSSignature::TSPropertySignature(prop) = member {
+                        extract_property_signature(prop, &mut fields);
+                    }
+                }
+                interface_types.insert(type_name.clone(), fields);
+            }
+
             if let Some(Declaration::TSTypeAliasDeclaration(type_alias)) = &export.declaration {
                 let type_name = type_alias.id.name.to_string();
+
+                // Capture the full type expression for dependency analysis
+                let type_expr = extract_type_expr(&type_alias.type_annotation);
+                type_aliases.insert(type_name.clone(), type_expr);
 
                 // Check if it's a single string literal type (e.g., export type ElementType = 'Float')
                 if let TSType::TSLiteralType(lit) = &type_alias.type_annotation {
@@ -413,6 +431,7 @@ fn parse_and_extract(source: &str) -> Result<TypeDefinitions> {
     Ok(TypeDefinitions {
         union_types,
         interface_types,
+        type_aliases,
         descriptions,
     })
 }
@@ -436,15 +455,16 @@ fn extract_property_signature(prop: &TSPropertySignature, fields: &mut Vec<Field
         let field_name = ident.name.to_string();
         let optional = prop.optional;
 
-        let (type_ref, is_array) = if let Some(type_ann) = &prop.type_annotation {
-            extract_type_info(&type_ann.type_annotation)
+        let (type_expr, type_ref, is_array) = if let Some(type_ann) = &prop.type_annotation {
+            extract_type_expr_info(&type_ann.type_annotation)
         } else {
-            ("String".to_string(), false)
+            (TypeExpr::named("String"), "String".to_string(), false)
         };
 
         fields.push(FieldDef {
             name: field_name,
             type_ref,
+            type_expr,
             optional,
             is_array,
             description: None,
@@ -453,22 +473,66 @@ fn extract_property_signature(prop: &TSPropertySignature, fields: &mut Vec<Field
 }
 
 /// Extract type information from a TypeScript type
-fn extract_type_info(ts_type: &TSType) -> (String, bool) {
+fn extract_type_expr_info(ts_type: &TSType) -> (TypeExpr, String, bool) {
+    let type_expr = extract_type_expr(ts_type);
+    let (type_ref, is_array) = base_type_and_array(&type_expr);
+    (type_expr, type_ref, is_array)
+}
+
+fn extract_type_expr(ts_type: &TSType) -> TypeExpr {
     match ts_type {
-        TSType::TSStringKeyword(_) => ("String".to_string(), false),
-        TSType::TSBooleanKeyword(_) => ("bool".to_string(), false),
-        TSType::TSNumberKeyword(_) => ("f64".to_string(), false),
+        TSType::TSStringKeyword(_) => TypeExpr::named("String"),
+        TSType::TSBooleanKeyword(_) => TypeExpr::named("bool"),
+        TSType::TSNumberKeyword(_) => TypeExpr::named("f64"),
         TSType::TSArrayType(array) => {
-            let (inner_type, _) = extract_type_info(&array.element_type);
-            (inner_type, true)
+            TypeExpr::Array(Box::new(extract_type_expr(&array.element_type)))
         }
         TSType::TSTypeReference(type_ref) => {
             if let TSTypeName::IdentifierReference(ident) = &type_ref.type_name {
-                (ident.name.to_string(), false)
+                let base = ident.name.to_string();
+                if let Some(type_arguments) = &type_ref.type_arguments {
+                    let args = type_arguments
+                        .params
+                        .iter()
+                        .map(extract_type_expr)
+                        .collect::<Vec<_>>();
+                    TypeExpr::Generic { base, args }
+                } else {
+                    TypeExpr::Named(base)
+                }
             } else {
-                ("serde_json::Value".to_string(), false)
+                TypeExpr::Unknown
             }
         }
+        TSType::TSUnionType(union) => TypeExpr::Union(
+            union
+                .types
+                .iter()
+                .map(extract_type_expr)
+                .collect::<Vec<_>>(),
+        ),
+        TSType::TSIntersectionType(intersection) => TypeExpr::Intersection(
+            intersection
+                .types
+                .iter()
+                .map(extract_type_expr)
+                .collect::<Vec<_>>(),
+        ),
+        TSType::TSTypeLiteral(_) => TypeExpr::Object,
+        TSType::TSLiteralType(lit) => match &lit.literal {
+            TSLiteral::StringLiteral(s) => TypeExpr::Literal(s.value.to_string()),
+            _ => TypeExpr::Unknown,
+        },
+        TSType::TSTupleType(_) => TypeExpr::Tuple(Vec::new()),
+        _ => TypeExpr::Unknown,
+    }
+}
+
+fn base_type_and_array(type_expr: &TypeExpr) -> (String, bool) {
+    match type_expr {
+        TypeExpr::Array(inner) => (base_type_and_array(inner).0, true),
+        TypeExpr::Named(name) => (name.clone(), false),
+        TypeExpr::Generic { base, .. } => (base.clone(), false),
         _ => ("serde_json::Value".to_string(), false),
     }
 }
@@ -518,10 +582,16 @@ fn extract_structs_with_regex(source: &str) -> Result<HashMap<String, Vec<FieldD
                 .to_string();
 
             let type_ref = convert_typescript_type_to_rust(&raw_type);
+            let type_expr = if is_array {
+                TypeExpr::Array(Box::new(TypeExpr::named(type_ref.clone())))
+            } else {
+                TypeExpr::named(type_ref.clone())
+            };
 
             fields.push(FieldDef {
                 name: field_name,
                 type_ref,
+                type_expr,
                 optional,
                 is_array,
                 description: None,
@@ -828,6 +898,36 @@ fn get_overlays() -> HashMap<String, TypeOverlay> {
     overlays
 }
 
+#[derive(Debug, Deserialize, Default)]
+struct ReferenceDataset {
+    relationships: HashMap<String, HashMap<String, RelationshipSpec>>,
+}
+
+#[derive(Debug, Deserialize, Default)]
+struct RelationshipSpec {
+    relationship: Option<RelationshipType>,
+    targets: Vec<String>,
+}
+
+fn get_reference_dataset() -> ReferenceDataset {
+    let candidates = [
+        Path::new("sf-typegen/metadata_relationships.json"),
+        Path::new("metadata_relationships.json"),
+    ];
+
+    let dataset_path = match candidates.iter().find(|p| p.exists()) {
+        Some(p) => *p,
+        None => return ReferenceDataset::default(),
+    };
+
+    let content = match fs::read_to_string(dataset_path) {
+        Ok(value) => value,
+        Err(_) => return ReferenceDataset::default(),
+    };
+
+    serde_json::from_str(&content).unwrap_or_default()
+}
+
 fn report_missing_overlays(defs: &TypeDefinitions) {
     let overlays = get_overlays();
     let mut missing = Vec::new();
@@ -862,6 +962,7 @@ fn report_missing_overlays(defs: &TypeDefinitions) {
 /// Build a type dependency graph from extracted type definitions
 fn build_type_graph(defs: &TypeDefinitions) -> TypeGraph {
     let mut graph = TypeGraph::new();
+    let reference_dataset = get_reference_dataset();
 
     // Add all types as nodes first
     for type_name in defs.union_types.keys() {
@@ -872,39 +973,199 @@ fn build_type_graph(defs: &TypeDefinitions) -> TypeGraph {
         graph.add_node(type_name);
     }
 
+    for type_name in defs.type_aliases.keys() {
+        graph.add_node(type_name);
+    }
+
     // Add edges for struct field dependencies
     for (type_name, fields) in &defs.interface_types {
         for field in fields {
-            let field_type = extract_base_type(&field.type_ref);
-
-            // Skip primitive types and special Rust types
-            if is_primitive_or_special(&field_type) {
-                continue;
-            }
-
-            // Check if the field type is a known type in our definitions
-            if defs.union_types.contains_key(&field_type)
-                || defs.interface_types.contains_key(&field_type)
-            {
-                graph.add_dependency(type_name, &field_type, RelationshipType::Contains);
-            }
+            add_contains_edges_for_expr(&mut graph, type_name, &field.type_expr);
+            add_specific_edges_for_field_expr(&mut graph, type_name, &field.type_expr);
+            add_reference_edges_from_dataset(&mut graph, &reference_dataset, type_name, field);
         }
+    }
+
+    // Add edges for non-struct type aliases
+    for (type_name, type_expr) in &defs.type_aliases {
+        if defs.interface_types.contains_key(type_name) || defs.union_types.contains_key(type_name)
+        {
+            continue;
+        }
+
+        add_contains_edges_for_expr(&mut graph, type_name, type_expr);
+        add_specific_edges_for_alias_expr(&mut graph, type_name, type_expr);
     }
 
     graph
 }
 
-/// Extract the base type name from a type reference (handles arrays, Options, etc.)
-fn extract_base_type(type_ref: &str) -> String {
-    // Remove common Rust wrappers
-    type_ref
-        .trim()
-        .trim_start_matches("Option<")
-        .trim_start_matches("Vec<")
-        .trim_start_matches("Box<")
-        .trim_end_matches('>')
-        .trim()
-        .to_string()
+fn add_reference_edges_from_dataset(
+    graph: &mut TypeGraph,
+    dataset: &ReferenceDataset,
+    owner: &str,
+    field: &FieldDef,
+) {
+    let Some(type_refs) = dataset.relationships.get(owner) else {
+        return;
+    };
+
+    let Some(spec) = type_refs.get(field.name.as_str()) else {
+        return;
+    };
+
+    let rel = spec.relationship.unwrap_or(RelationshipType::References);
+    for target in &spec.targets {
+        add_edge_if_valid(graph, owner, target, rel);
+    }
+}
+
+fn add_contains_edges_for_expr(graph: &mut TypeGraph, owner: &str, expr: &TypeExpr) {
+    let mut names = Vec::new();
+    collect_named_types(expr, &mut names);
+    names.sort();
+    names.dedup();
+
+    for name in names {
+        add_edge_if_valid(graph, owner, &name, RelationshipType::Contains);
+    }
+}
+
+fn add_specific_edges_for_field_expr(graph: &mut TypeGraph, owner: &str, expr: &TypeExpr) {
+    match expr {
+        TypeExpr::Array(inner) => {
+            add_edge_for_expr(graph, owner, inner, RelationshipType::CollectionOf);
+            add_specific_edges_for_field_expr(graph, owner, inner);
+        }
+        TypeExpr::Generic { base, args } => {
+            add_edge_if_valid(graph, owner, base, RelationshipType::GenericBase);
+            for arg in args {
+                add_edge_for_expr(graph, owner, arg, RelationshipType::GenericArg);
+                add_specific_edges_for_field_expr(graph, owner, arg);
+            }
+        }
+        TypeExpr::Union(items) => {
+            for item in items {
+                add_edge_for_expr(graph, owner, item, RelationshipType::UnionMember);
+                add_specific_edges_for_field_expr(graph, owner, item);
+            }
+        }
+        TypeExpr::Intersection(items) => {
+            for item in items {
+                add_edge_for_expr(graph, owner, item, RelationshipType::IntersectionMember);
+                add_specific_edges_for_field_expr(graph, owner, item);
+            }
+        }
+        TypeExpr::Tuple(items) => {
+            for item in items {
+                add_specific_edges_for_field_expr(graph, owner, item);
+            }
+        }
+        _ => {}
+    }
+}
+
+fn add_specific_edges_for_alias_expr(graph: &mut TypeGraph, owner: &str, expr: &TypeExpr) {
+    match expr {
+        TypeExpr::Named(name) => {
+            add_edge_if_valid(graph, owner, name, RelationshipType::AliasOf);
+        }
+        TypeExpr::Generic { base, args } => {
+            add_edge_if_valid(graph, owner, base, RelationshipType::AliasOf);
+            add_edge_if_valid(graph, owner, base, RelationshipType::GenericBase);
+            for arg in args {
+                add_edge_for_expr(graph, owner, arg, RelationshipType::GenericArg);
+            }
+        }
+        TypeExpr::Union(items) => {
+            for item in items {
+                add_edge_for_expr(graph, owner, item, RelationshipType::UnionMember);
+            }
+        }
+        TypeExpr::Intersection(items) => {
+            for item in items {
+                add_edge_for_expr(graph, owner, item, RelationshipType::IntersectionMember);
+            }
+            if contains_named_type(expr, "Metadata") {
+                add_edge_if_valid(graph, owner, "Metadata", RelationshipType::Extends);
+            }
+        }
+        _ => {}
+    }
+}
+
+fn add_edge_for_expr(graph: &mut TypeGraph, owner: &str, expr: &TypeExpr, rel: RelationshipType) {
+    if let Some(name) = first_named_type(expr) {
+        add_edge_if_valid(graph, owner, &name, rel);
+    }
+}
+
+fn add_edge_if_valid(graph: &mut TypeGraph, owner: &str, target: &str, rel: RelationshipType) {
+    if should_skip_type_for_relationship(target, rel) {
+        return;
+    }
+
+    graph.add_dependency(owner, target, rel);
+}
+
+fn should_skip_type_for_relationship(type_name: &str, rel: RelationshipType) -> bool {
+    if is_primitive_or_special(type_name) {
+        return !(rel == RelationshipType::Extends && type_name == "Metadata");
+    }
+    false
+}
+
+fn collect_named_types(expr: &TypeExpr, out: &mut Vec<String>) {
+    match expr {
+        TypeExpr::Named(name) => out.push(name.clone()),
+        TypeExpr::Array(inner) => collect_named_types(inner, out),
+        TypeExpr::Generic { base, args } => {
+            out.push(base.clone());
+            for arg in args {
+                collect_named_types(arg, out);
+            }
+        }
+        TypeExpr::Union(items) | TypeExpr::Intersection(items) | TypeExpr::Tuple(items) => {
+            for item in items {
+                collect_named_types(item, out);
+            }
+        }
+        _ => {}
+    }
+}
+
+fn first_named_type(expr: &TypeExpr) -> Option<String> {
+    match expr {
+        TypeExpr::Named(name) => Some(name.clone()),
+        TypeExpr::Array(inner) => first_named_type(inner),
+        TypeExpr::Generic { base, .. } => Some(base.clone()),
+        TypeExpr::Union(items) | TypeExpr::Intersection(items) | TypeExpr::Tuple(items) => {
+            for item in items {
+                if let Some(name) = first_named_type(item) {
+                    return Some(name);
+                }
+            }
+            None
+        }
+        _ => None,
+    }
+}
+
+fn contains_named_type(expr: &TypeExpr, target: &str) -> bool {
+    match expr {
+        TypeExpr::Named(name) => name == target,
+        TypeExpr::Array(inner) => contains_named_type(inner, target),
+        TypeExpr::Generic { base, args } => {
+            if base == target {
+                return true;
+            }
+            args.iter().any(|arg| contains_named_type(arg, target))
+        }
+        TypeExpr::Union(items) | TypeExpr::Intersection(items) | TypeExpr::Tuple(items) => {
+            items.iter().any(|item| contains_named_type(item, target))
+        }
+        _ => false,
+    }
 }
 
 /// Check if a type is a primitive or special Rust type

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "allowForecastingSubmissions": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ForecastingSubmissionSettings",
+  "type": "object"
+}

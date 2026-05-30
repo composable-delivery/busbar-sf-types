@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "emailFollowersOnBestAnswer": {
+      "default": false,
+      "type": "boolean"
+    },
+    "emailFollowersOnReply": {
+      "default": false,
+      "type": "boolean"
+    },
+    "emailOwnerOnPrivateReply": {
+      "default": false,
+      "type": "boolean"
+    },
+    "emailOwnerOnReply": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAnswerViaEmail": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableChatterAnswers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFacebookSSO": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInlinePublisher": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableReputation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRichTextEditor": {
+      "default": false,
+      "type": "boolean"
+    },
+    "facebookAuthProvider": {
+      "default": "",
+      "type": "string"
+    },
+    "showInPortals": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ChatterAnswersSettings",
+  "type": "object"
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "aiAttributionTimeframe": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "enableAIAttribution": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAccountsAsCM": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAutoCampInfluenceDisabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableB2bmaCampaignInfluence2": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCampaignHistoryTrackEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCampaignInfluence2": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCampaignMemberTWCF": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEKAI": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOpportunityInfluence": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSuppressNoValueCI2": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "CampaignSettings",
+  "type": "object"
+}

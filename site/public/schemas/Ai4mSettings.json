@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableEinsteinMCDesiger": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableStoEmailPooledModel": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUmaEef": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUmaEefWhatsappSetting": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUmaEes": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUmaEesSmsSetting": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUmaEesWhatsappSetting": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUmaGlobalModel": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUmaSto": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "Ai4mSettings",
+  "type": "object"
+}

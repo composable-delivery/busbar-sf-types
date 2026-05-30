@@ -1,0 +1,61 @@
+{
+  "$defs": {
+    "KnowledgeCaseFieldsSettings": {
+      "properties": {
+        "field": {
+          "default": [],
+          "items": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "KnowledgeWorkOrderFieldsSettings": {
+      "properties": {
+        "field": {
+          "default": [],
+          "items": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "KnowledgeWorkOrderLineItemFieldsSettings": {
+      "properties": {
+        "field": {
+          "default": [],
+          "items": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "caseFields": {
+      "$ref": "#/$defs/KnowledgeCaseFieldsSettings",
+      "default": {
+        "field": []
+      }
+    },
+    "useSuggestedArticlesForCase": {
+      "default": false,
+      "type": "boolean"
+    },
+    "workOrderFields": {
+      "$ref": "#/$defs/KnowledgeWorkOrderFieldsSettings",
+      "default": {
+        "field": []
+      }
+    },
+    "workOrderLineItemFields": {
+      "$ref": "#/$defs/KnowledgeWorkOrderLineItemFieldsSettings",
+      "default": {
+        "field": []
+      }
+    }
+  },
+  "title": "KnowledgeSuggestedArticlesSettings",
+  "type": "object"
+}

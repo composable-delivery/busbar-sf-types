@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableAutomaticMemberTierAssessmentSelection": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAutomaticVoucherCodeGeneration": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableConfigureClubs": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFixedTypeNQPAggregation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLoyaltyApiAccessForExternalSiteUsers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLoyaltyGenerativeAi": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLoyaltyRedeemedPointsExpirationInfoPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLoyaltyRulesVerifyCdpMemberSegment": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLoyaltyServiceExcellence": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNQPRealTimePointBalance": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNegativePointBalance": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNonQualifyingPointsConsolidation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePointsLifecycleTracking": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePromSetupProcRuleStatusInheritDplymt": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableQPRealTimePointBalance": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSegmentQueryApiMultipleDataSpace": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSegmentQueryByDataGraph": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTransferPointsToMemberGroupsRealtime": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUsePromPtyUsageForEngmtTrail": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "IndustriesLoyaltySettings",
+  "type": "object"
+}

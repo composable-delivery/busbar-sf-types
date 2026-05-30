@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "enum": [
+    "url",
+    "sControl",
+    "javascript",
+    "page",
+    "flow"
+  ],
+  "title": "WebLinkType",
+  "type": "string"
+}

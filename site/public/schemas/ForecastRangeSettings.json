@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "beginning": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "displaying": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "periodType": {
+      "default": null
+    }
+  },
+  "title": "ForecastRangeSettings",
+  "type": "object"
+}

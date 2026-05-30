@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableSampleDataDeleted": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "TrialOrgSettings",
+  "type": "object"
+}

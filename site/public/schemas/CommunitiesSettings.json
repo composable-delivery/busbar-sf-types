@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "applyLoginPageTypeToEmbeddedLogin": {
+      "default": false,
+      "type": "boolean"
+    },
+    "blockEmbeddedLoginUnknownURLRedirect": {
+      "default": false,
+      "type": "boolean"
+    },
+    "canModerateAllFeedPosts": {
+      "default": false,
+      "type": "boolean"
+    },
+    "canModerateInternalFeedPosts": {
+      "default": false,
+      "type": "boolean"
+    },
+    "embeddedVisualforcePages": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCommunityWorkspaces": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCspContactVisibilityPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCspNotesOnAccConPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEnablePRM": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableExternalAccHierPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGuestPermDisOptOutCruc": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGuestSecurityOptOutCruc": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGuvSecurityOptOutPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInviteChatterGuestEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNameFieldsUserPIIEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNetPortalUserReportOpts": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNetworksEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOotbProfExtUserOpsEnable": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePRMAccRelPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePowerCustomerCaseStatus": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePreventBadgeGuestAccess": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRelaxPartnerAccountFieldPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUnsupportedBrowserModalPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUsernameUniqForOrgPref": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "CommunitiesSettings",
+  "type": "object"
+}

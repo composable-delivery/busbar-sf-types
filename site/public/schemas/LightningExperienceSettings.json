@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "activeThemeName": {
+      "default": "",
+      "type": "string"
+    },
+    "enableAccessCheckCrucPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableApiUserLtngOutAccessPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAuraBoxcarReductionPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAuraCDNPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAuraSecStaticResCRUCPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDeferRenderingWorkspacePage": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableErrorExperienceEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFeedbackInMobile": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGoogleSheetsForSfdcEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHideOpenInQuip": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIE11DeprecationMsgHidden": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIE11LEXCrucPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInAppLearning": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInAppTooltips": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLEXExtensionComponentCustomization": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLEXExtensionDarkMode": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLEXExtensionInlineEditModifier": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLEXExtensionLinkGrabber": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLEXExtensionRelatedLists": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLEXExtensionRequiredFields": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLEXExtensionTrailhead": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLEXOnIpadEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLexEndUsersNoSwitching": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLightningPreviewPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNavPersonalizationOptOut": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNoBackgroundNavigations": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableQuip": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRemoveThemeBrandBanner": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableS1BannerPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableS1BrowserEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableS1DesktopEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableS1UiLoggingEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSalesforceNext": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSidToken3rdPartyAuraApp": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSkypeChatEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSparkAllUsers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSparkConversationEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableStackedModalManagerEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTryLightningOptOut": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUseS1AlohaDesktop": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUsersAreLightningOnly": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWebExEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWebexAllUsers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isLEXExtensionComponentCustomizationOff": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isLEXExtensionDarkModeOff": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isLEXExtensionLinkGrabberOff": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isLEXExtensionOff": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "LightningExperienceSettings",
+  "type": "object"
+}

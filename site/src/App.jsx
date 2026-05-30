@@ -1,15 +1,12 @@
 import { useState, useEffect, useMemo } from "react";
 import Hero from "./components/Hero";
-import StatsBar from "./components/StatsBar";
-import TypeTreemap from "./components/TypeTreemap";
-import CategoryFilters from "./components/CategoryFilters";
 import TypeTable from "./components/TypeTable";
 import TypeDetailView from "./components/TypeDetailView";
-import NavigationTree from "./components/NavigationTree";
+import GraphExplorer from "./components/GraphExplorer";
+import GraphInsights from "./components/GraphInsights";
 import {
     buildTypeMetadata,
     assignCategories,
-    buildTreemapData,
     getCategoryStats,
     getRelationshipStats,
     parseDotClusters,
@@ -92,12 +89,6 @@ function App() {
         };
     }, [graphData, metadata]);
 
-    // Build treemap data
-    const treemapData = useMemo(() => {
-        if (!metadata) return [];
-        return buildTreemapData(metadata, selectedCategory);
-    }, [metadata, selectedCategory]);
-
     // Get category stats for filters
     const categoryStats = useMemo(() => {
         if (!metadata) return [];
@@ -164,25 +155,17 @@ function App() {
 
     return (
         <div className="flex h-screen bg-black text-white overflow-hidden font-sans selection:bg-blue-500/30">
-            {/* Sidebar Navigation */}
-            {metadata && (
-                <NavigationTree
-                    metadata={metadata}
-                    onTypeSelect={handleTypeSelect}
-                    activeType={selectedType}
-                />
-            )}
-
             {/* Main Content Area */}
             <main className="flex-1 overflow-y-auto overflow-x-hidden relative scroll-smooth bg-black">
                 {/* Visual context gradients */}
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-600/5 blur-[120px] rounded-full pointer-events-none" />
+                <div className="absolute top-0 right-0 w-125 h-125 bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-100 h-100 bg-indigo-600/5 blur-[120px] rounded-full pointer-events-none" />
 
                 <div className="relative z-10 p-8 lg:p-12 min-h-full">
                     {selectedType ? (
                         <TypeDetailView
                             typeData={metadata.get(selectedType)}
+                            graphData={graphData}
                             onBack={handleBackToOverview}
                             onTypeSelect={handleTypeSelect}
                         />
@@ -194,47 +177,60 @@ function App() {
                                 onSearch={handleSearch}
                             />
 
-                            <StatsBar stats={stats} />
+                            <div className="grid grid-cols-1 2xl:grid-cols-[minmax(0,1fr)_360px] gap-10 items-start">
+                                <GraphExplorer
+                                    graphData={graphData}
+                                    metadata={metadata}
+                                    selectedType={selectedType}
+                                    onTypeSelect={handleTypeSelect}
+                                />
+                                <GraphInsights
+                                    graphData={graphData}
+                                    metadata={metadata}
+                                    onTypeSelect={handleTypeSelect}
+                                />
+                            </div>
 
-                            <div className="grid grid-cols-1 3xl:grid-cols-2 gap-16 items-start">
-                                <section className="space-y-8 min-w-0">
-                                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 px-2">
-                                        <h2 className="text-4xl font-black text-white uppercase tracking-tighter italic">
-                                            Distribution
-                                        </h2>
-                                        <CategoryFilters
-                                            categories={categoryStats}
-                                            selectedCategory={selectedCategory}
-                                            onCategorySelect={
-                                                setSelectedCategory
-                                            }
-                                        />
-                                    </div>
-                                    <div className="bg-black border border-white/10 rounded-[2rem] p-8 h-[700px] shadow-[0_0_50px_-12px_rgba(59,130,246,0.15)] relative overflow-hidden">
-                                        <TypeTreemap
-                                            data={treemapData}
-                                            onTypeSelect={handleTypeSelect}
-                                        />
-                                    </div>
-                                </section>
-
-                                <section className="space-y-8 min-w-0">
-                                    <h2 className="text-4xl font-black text-white uppercase tracking-tighter italic px-2">
+                            <section className="space-y-8 min-w-0">
+                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 px-2">
+                                    <h2 className="text-4xl font-black text-white uppercase tracking-tighter italic">
                                         Type Registry
                                     </h2>
-                                    <div className="bg-black border border-white/10 rounded-[2rem] overflow-hidden shadow-2xl">
-                                        <TypeTable
-                                            types={allTypes.filter(
-                                                (t) =>
-                                                    !selectedCategory ||
-                                                    t.category?.name ===
-                                                        selectedCategory,
-                                            )}
-                                            onTypeSelect={handleTypeSelect}
-                                        />
+                                    <div className="flex items-center gap-3 text-sm text-gray-500">
+                                        <span>Filter:</span>
+                                        <select
+                                            value={selectedCategory || ""}
+                                            onChange={(e) =>
+                                                setSelectedCategory(
+                                                    e.target.value || null,
+                                                )
+                                            }
+                                            className="bg-white/5 border border-white/10 text-white rounded-lg px-3 py-2"
+                                        >
+                                            <option value="">All Categories</option>
+                                            {categoryStats.map((category) => (
+                                                <option
+                                                    key={category.name}
+                                                    value={category.name}
+                                                >
+                                                    {category.name} ({category.count})
+                                                </option>
+                                            ))}
+                                        </select>
                                     </div>
-                                </section>
-                            </div>
+                                </div>
+                                <div className="bg-black border border-white/10 rounded-4xl overflow-hidden shadow-2xl">
+                                    <TypeTable
+                                        types={allTypes.filter(
+                                            (t) =>
+                                                !selectedCategory ||
+                                                t.category?.name ===
+                                                    selectedCategory,
+                                        )}
+                                        onTypeSelect={handleTypeSelect}
+                                    />
+                                </div>
+                            </section>
                         </div>
                     )}
                 </div>

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "allowButtonColor": {
+      "default": "",
+      "type": "string"
+    },
+    "allowButtonTextColor": {
+      "default": "",
+      "type": "string"
+    },
+    "bannerColor": {
+      "default": "",
+      "type": "string"
+    },
+    "bannerFontFamily": {
+      "default": null
+    },
+    "bannerMessage": {
+      "default": "",
+      "type": "string"
+    },
+    "bannerPosition": {
+      "default": null
+    },
+    "bannerTextColor": {
+      "default": "",
+      "type": "string"
+    },
+    "declineButtonColor": {
+      "default": "",
+      "type": "string"
+    },
+    "declineButtonTextColor": {
+      "default": "",
+      "type": "string"
+    },
+    "infoText": {
+      "default": "",
+      "type": "string"
+    },
+    "infoUrl": {
+      "default": "",
+      "type": "string"
+    },
+    "privacyPolicyText": {
+      "default": "",
+      "type": "string"
+    },
+    "privacyPolicyUrl": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "title": "ConsentBannerSettings",
+  "type": "object"
+}

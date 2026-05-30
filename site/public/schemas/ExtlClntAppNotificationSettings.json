@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "externalClientApplication": {
+      "default": "",
+      "type": "string"
+    },
+    "label": {
+      "default": "",
+      "type": "string"
+    },
+    "notificationTypes": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    }
+  },
+  "title": "ExtlClntAppNotificationSettings",
+  "type": "object"
+}

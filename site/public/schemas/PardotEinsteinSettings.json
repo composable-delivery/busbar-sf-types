@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableCampaignInsight": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEngagementScore": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "PardotEinsteinSettings",
+  "type": "object"
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableClientSecretInRestApiAccess": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableConsumerSecretApiAccess": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePackageEcaOauthFromDevOrg": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ExternalClientAppSettings",
+  "type": "object"
+}

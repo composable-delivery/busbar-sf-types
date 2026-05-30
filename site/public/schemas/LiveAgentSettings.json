@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableChatFindOrCreateEnable": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLiveAgent": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableQuickTextEnabled": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "LiveAgentSettings",
+  "type": "object"
+}

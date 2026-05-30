@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "enum": [
+    "Default",
+    "Standard",
+    "Scontrol",
+    "Visualforce",
+    "Flexipage",
+    "LightningComponent"
+  ],
+  "title": "ActionOverrideType",
+  "type": "string"
+}

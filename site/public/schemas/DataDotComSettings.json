@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableAccountExportButtonOff": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAccountImportButtonOff": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAllowDupeContactFromLead": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAllowDupeLeadFromContact": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContactExportButtonOff": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContactImportButtonOff": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDDCSocialKeyEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDataDotComCleanEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDataDotComOptOutsEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDatacloudAPIEnabled": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "DataDotComSettings",
+  "type": "object"
+}

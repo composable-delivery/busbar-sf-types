@@ -39,23 +39,73 @@ export function buildTypeMetadata(graphData) {
         const sourceData = metadata.get(edge.source);
         const targetData = metadata.get(edge.target);
 
-        // DIRECTION FIX:
-        // If Source -> Target in the data, it means Target depends on Source.
+        // For "Contains" relationships, reverse the direction:
+        // If CustomObject Contains ActionOverride, then ActionOverride depends on CustomObject
+        const isContainment = edge.relationship === "Contains";
 
-        if (sourceData) {
-            sourceData.dependents.push({
-                source: edge.target,
-                relationship: edge.relationship,
-            });
-            sourceData.connectionCount++;
-        }
+        if (isContainment) {
+            // Target depends on source (e.g., ActionOverride depends on CustomObject)
+            if (targetData) {
+                const exists = targetData.dependencies.some(
+                    (d) =>
+                        d.target === edge.source &&
+                        d.relationship === edge.relationship,
+                );
+                if (!exists) {
+                    targetData.dependencies.push({
+                        target: edge.source,
+                        relationship: edge.relationship,
+                    });
+                    targetData.connectionCount++;
+                }
+            }
 
-        if (targetData) {
-            targetData.dependencies.push({
-                target: edge.source,
-                relationship: edge.relationship,
-            });
-            targetData.connectionCount++;
+            // Source has target as child (e.g., CustomObject has ActionOverride)
+            if (sourceData) {
+                const exists = sourceData.dependents.some(
+                    (d) =>
+                        d.source === edge.target &&
+                        d.relationship === edge.relationship,
+                );
+                if (!exists) {
+                    sourceData.dependents.push({
+                        source: edge.target,
+                        relationship: edge.relationship,
+                    });
+                    sourceData.connectionCount++;
+                }
+            }
+        } else {
+            // For other relationships, keep original direction
+            if (sourceData) {
+                const exists = sourceData.dependencies.some(
+                    (d) =>
+                        d.target === edge.target &&
+                        d.relationship === edge.relationship,
+                );
+                if (!exists) {
+                    sourceData.dependencies.push({
+                        target: edge.target,
+                        relationship: edge.relationship,
+                    });
+                    sourceData.connectionCount++;
+                }
+            }
+
+            if (targetData) {
+                const exists = targetData.dependents.some(
+                    (d) =>
+                        d.source === edge.source &&
+                        d.relationship === edge.relationship,
+                );
+                if (!exists) {
+                    targetData.dependents.push({
+                        source: edge.source,
+                        relationship: edge.relationship,
+                    });
+                    targetData.connectionCount++;
+                }
+            }
         }
     });
 
@@ -218,16 +268,11 @@ export function searchTypes(metadata, query) {
 }
 
 export function getRelationshipStats(graphData) {
-    const stats = {
-        Contains: 0,
-        Extends: 0,
-        Generic: 0,
-    };
+    const stats = {};
 
     graphData.edges.forEach((edge) => {
-        if (stats.hasOwnProperty(edge.relationship)) {
-            stats[edge.relationship]++;
-        }
+        const rel = edge.relationship || "Unknown";
+        stats[rel] = (stats[rel] || 0) + 1;
     });
 
     return stats;

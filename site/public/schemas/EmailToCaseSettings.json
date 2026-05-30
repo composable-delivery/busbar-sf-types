@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableE2CAttachmentAsFile": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableE2CDeduplicateAttachments": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableE2CExternalServer": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableE2CSourceTracking": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEmailToCase": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEmailTranslation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHtmlEmail": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNewToReadTriggers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOnDemandEmailToCase": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableThreadIDInBody": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableThreadIDInSubject": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableThreadTokenInBody": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableThreadTokenInSubject": {
+      "default": false,
+      "type": "boolean"
+    },
+    "movingEmailEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "notifyOwnerOnNewCaseEmail": {
+      "default": false,
+      "type": "boolean"
+    },
+    "notifySenderE2CError": {
+      "default": false,
+      "type": "boolean"
+    },
+    "overEmailLimitAction": {
+      "default": null
+    },
+    "preQuoteSignature": {
+      "default": false,
+      "type": "boolean"
+    },
+    "replyWithNewContentOnly": {
+      "default": false,
+      "type": "boolean"
+    },
+    "routingAddresses": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "showServiceEmailOpenPrompt": {
+      "default": false,
+      "type": "boolean"
+    },
+    "showWordCountInComposer": {
+      "default": false,
+      "type": "boolean"
+    },
+    "unauthorizedSenderAction": {
+      "default": null
+    },
+    "useEmailHeadersForThreading": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "EmailToCaseSettings",
+  "type": "object"
+}

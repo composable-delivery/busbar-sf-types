@@ -1,0 +1,43 @@
+{
+  "$defs": {
+    "ActionOverrideType": {
+      "enum": [
+        "Default",
+        "Standard",
+        "Scontrol",
+        "Visualforce",
+        "Flexipage",
+        "LightningComponent"
+      ],
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "actionName": {
+      "default": "",
+      "type": "string"
+    },
+    "comment": {
+      "default": "",
+      "type": "string"
+    },
+    "content": {
+      "default": "",
+      "type": "string"
+    },
+    "formFactor": {
+      "default": null
+    },
+    "skipRecordTypeSelect": {
+      "default": false,
+      "type": "boolean"
+    },
+    "type": {
+      "$ref": "#/$defs/ActionOverrideType",
+      "default": "Default"
+    }
+  },
+  "title": "ActionOverride",
+  "type": "object"
+}

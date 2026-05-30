@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "caseValues": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "gender": {
+      "default": null
+    },
+    "help": {
+      "default": "",
+      "type": "string"
+    },
+    "label": {
+      "default": "",
+      "type": "string"
+    },
+    "lookupFilter": {
+      "default": null
+    },
+    "name": {
+      "default": "",
+      "type": "string"
+    },
+    "picklistValues": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "relationshipLabel": {
+      "default": "",
+      "type": "string"
+    },
+    "startsWith": {
+      "default": null
+    }
+  },
+  "title": "CustomFieldTranslation",
+  "type": "object"
+}

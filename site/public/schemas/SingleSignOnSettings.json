@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableCaseInsensitiveFederationID": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableForceDelegatedCallout": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMultipleSamlConfigs": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSamlJitProvisioning": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSamlLogin": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isLoginWithSalesforceCredentialsDisabled": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "SingleSignOnSettings",
+  "type": "object"
+}

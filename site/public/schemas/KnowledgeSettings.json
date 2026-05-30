@@ -1,0 +1,303 @@
+{
+  "$defs": {
+    "KnowledgeAnswerSettings": {
+      "properties": {
+        "assignTo": {
+          "default": "",
+          "type": "string"
+        },
+        "defaultArticleType": {
+          "default": "",
+          "type": "string"
+        },
+        "enableArticleCreation": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "KnowledgeCaseFieldsSettings": {
+      "properties": {
+        "field": {
+          "default": [],
+          "items": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "KnowledgeCaseSettings": {
+      "properties": {
+        "articlePDFCreationProfile": {
+          "default": "",
+          "type": "string"
+        },
+        "articlePublicSharingCommunities": {
+          "$ref": "#/$defs/KnowledgeCommunitiesSettings",
+          "default": {
+            "community": []
+          }
+        },
+        "articlePublicSharingSites": {
+          "$ref": "#/$defs/KnowledgeSitesSettings",
+          "default": {
+            "site": []
+          }
+        },
+        "articlePublicSharingSitesChatterAnswers": {
+          "$ref": "#/$defs/KnowledgeSitesSettings",
+          "default": {
+            "site": []
+          }
+        },
+        "assignTo": {
+          "default": "",
+          "type": "string"
+        },
+        "customizationClass": {
+          "default": "",
+          "type": "string"
+        },
+        "defaultContributionArticleType": {
+          "default": "",
+          "type": "string"
+        },
+        "editor": {
+          "default": null
+        },
+        "enableArticleCreation": {
+          "default": false,
+          "type": "boolean"
+        },
+        "enableArticlePublicSharingSites": {
+          "default": false,
+          "type": "boolean"
+        },
+        "enableCaseDataCategoryMapping": {
+          "default": false,
+          "type": "boolean"
+        },
+        "useProfileForPDFCreation": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "KnowledgeCommunitiesSettings": {
+      "properties": {
+        "community": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "KnowledgeLanguageSettings": {
+      "properties": {
+        "language": {
+          "default": [],
+          "items": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "KnowledgeSitesSettings": {
+      "properties": {
+        "site": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "KnowledgeSuggestedArticlesSettings": {
+      "properties": {
+        "caseFields": {
+          "$ref": "#/$defs/KnowledgeCaseFieldsSettings",
+          "default": {
+            "field": []
+          }
+        },
+        "useSuggestedArticlesForCase": {
+          "default": false,
+          "type": "boolean"
+        },
+        "workOrderFields": {
+          "$ref": "#/$defs/KnowledgeWorkOrderFieldsSettings",
+          "default": {
+            "field": []
+          }
+        },
+        "workOrderLineItemFields": {
+          "$ref": "#/$defs/KnowledgeWorkOrderLineItemFieldsSettings",
+          "default": {
+            "field": []
+          }
+        }
+      },
+      "type": "object"
+    },
+    "KnowledgeWorkOrderFieldsSettings": {
+      "properties": {
+        "field": {
+          "default": [],
+          "items": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "KnowledgeWorkOrderLineItemFieldsSettings": {
+      "properties": {
+        "field": {
+          "default": [],
+          "items": true,
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "answers": {
+      "$ref": "#/$defs/KnowledgeAnswerSettings",
+      "default": {
+        "assignTo": "",
+        "defaultArticleType": "",
+        "enableArticleCreation": false
+      }
+    },
+    "cases": {
+      "$ref": "#/$defs/KnowledgeCaseSettings",
+      "default": {
+        "articlePDFCreationProfile": "",
+        "articlePublicSharingCommunities": {
+          "community": []
+        },
+        "articlePublicSharingSites": {
+          "site": []
+        },
+        "articlePublicSharingSitesChatterAnswers": {
+          "site": []
+        },
+        "assignTo": "",
+        "customizationClass": "",
+        "defaultContributionArticleType": "",
+        "editor": null,
+        "enableArticleCreation": false,
+        "enableArticlePublicSharingSites": false,
+        "enableCaseDataCategoryMapping": false,
+        "useProfileForPDFCreation": false
+      }
+    },
+    "defaultLanguage": {
+      "default": "",
+      "type": "string"
+    },
+    "enableChatterQuestionKBDeflection": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCreateEditOnArticlesTab": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableExternalMediaContent": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableKbStandardSharing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableKnowledge": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableKnowledgeAgentContribution": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableKnowledgeAnswersPromotion": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableKnowledgeArticleTextHighlights": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableKnowledgeCaseRL": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableKnowledgeKeywordAutoComplete": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableKnowledgeTitleAutoComplete": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLightningKbAutoLoadRichTextField": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLightningKnowledge": {
+      "default": false,
+      "type": "boolean"
+    },
+    "languages": {
+      "$ref": "#/$defs/KnowledgeLanguageSettings",
+      "default": {
+        "language": []
+      }
+    },
+    "showArticleSummariesCustomerPortal": {
+      "default": false,
+      "type": "boolean"
+    },
+    "showArticleSummariesInternalApp": {
+      "default": false,
+      "type": "boolean"
+    },
+    "showArticleSummariesPartnerPortal": {
+      "default": false,
+      "type": "boolean"
+    },
+    "showValidationStatusField": {
+      "default": false,
+      "type": "boolean"
+    },
+    "suggestedArticles": {
+      "$ref": "#/$defs/KnowledgeSuggestedArticlesSettings",
+      "default": {
+        "caseFields": {
+          "field": []
+        },
+        "useSuggestedArticlesForCase": false,
+        "workOrderFields": {
+          "field": []
+        },
+        "workOrderLineItemFields": {
+          "field": []
+        }
+      }
+    },
+    "votingEnabled": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "KnowledgeSettings",
+  "type": "object"
+}

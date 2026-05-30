@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableAccountDiscovery": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAccountHistoryTracking": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAccountInsightsInMobile": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAccountOwnerReport": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAccountTeams": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContactHistoryTracking": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRelateContactToMultipleAccounts": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableReportsToOnPersonAccount": {
+      "default": false,
+      "type": "boolean"
+    },
+    "showViewHierarchyLink": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "AccountSettings",
+  "type": "object"
+}

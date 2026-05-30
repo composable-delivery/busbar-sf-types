@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "enum": [
+    "group",
+    "role",
+    "user",
+    "opportunityTeam",
+    "accountTeam",
+    "roleSubordinates",
+    "owner",
+    "creator",
+    "partnerUser",
+    "accountOwner",
+    "customerPortalUser",
+    "portalRole",
+    "portalRoleSubordinates",
+    "contactLookup",
+    "userLookup",
+    "roleSubordinatesInternal",
+    "email",
+    "caseTeam",
+    "campaignMemberDerivedOwner"
+  ],
+  "title": "ActionEmailRecipientTypes",
+  "type": "string"
+}

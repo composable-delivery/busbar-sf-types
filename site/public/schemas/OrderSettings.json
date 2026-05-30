@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableEnhancedCommerceOrders": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNegativeQuantity": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOptionalPricebook": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOrderEvents": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOrderWithMultiplePriceBooks": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOrders": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableReductionOrders": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableZeroQuantity": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "OrderSettings",
+  "type": "object"
+}

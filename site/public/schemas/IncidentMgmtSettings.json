@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableAiKnowledgeCreation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAlertBroadcastType": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAutoClosureOfChildIncident": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAutoCreationOfProblem": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableChangePriorityMatrix": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableChangePriorityOverride": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableChangeRequestValidations": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableChatToIncidentAi": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCnfgItemCopyForRecords": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDedupE2IncidentAttachment": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEmailBroadcastType": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEmailToIncident": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEmailToIncidentAi": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableITSMChangeMgmt": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableITSMIncidentMgmt": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableITSMMajorIncParent": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableITSMProblemMgmt": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIncPriorityMatrix": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIncPriorityOverride": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIncidentMgmt": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIncidentValidations": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProbPriorityMatrix": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProbPriorityOverride": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProblemValidations": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRiskAssessment": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSaveE2IncidentAttachment": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSiteBannerBroadcastType": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSlackBroadcastType": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "IncidentMgmtSettings",
+  "type": "object"
+}

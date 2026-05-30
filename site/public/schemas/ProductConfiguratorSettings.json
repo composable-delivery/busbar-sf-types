@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableProductConfigurator": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ProductConfiguratorSettings",
+  "type": "object"
+}

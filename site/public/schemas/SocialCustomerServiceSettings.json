@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "caseSubjectOption": {
+      "default": null
+    },
+    "enableAllFBResponseAccounts": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInboundProcessingConcurrency": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSocialApprovals": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSocialCaseAssignmentRules": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSocialCustomerService": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSocialPersonaHistoryTracking": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSocialPostHistoryTracking": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSocialReceiveParentPost": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "SocialCustomerServiceSettings",
+  "type": "object"
+}

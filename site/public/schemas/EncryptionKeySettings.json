@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "canEncryptTransactionalDatabase": {
+      "default": false,
+      "type": "boolean"
+    },
+    "canExternalKeyManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "canManageDataCloudKeys": {
+      "default": false,
+      "type": "boolean"
+    },
+    "canOptOutOfDerivationWithBYOK": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCacheOnlyKeys": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableReplayDetection": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "EncryptionKeySettings",
+  "type": "object"
+}

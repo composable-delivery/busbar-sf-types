@@ -1,0 +1,33 @@
+{
+  "$defs": {
+    "FiscalYearSettings": {
+      "properties": {
+        "fiscalYearNameBasedOn": {
+          "default": "",
+          "type": "string"
+        },
+        "startMonth": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableCustomFiscalYear": {
+      "default": false,
+      "type": "boolean"
+    },
+    "fiscalYear": {
+      "$ref": "#/$defs/FiscalYearSettings",
+      "default": {
+        "fiscalYearNameBasedOn": "",
+        "startMonth": ""
+      }
+    }
+  },
+  "title": "CompanySettings",
+  "type": "object"
+}

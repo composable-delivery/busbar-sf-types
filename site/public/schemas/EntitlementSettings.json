@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "assetLookupLimitedToActiveEntitlementsOnAccount": {
+      "default": false,
+      "type": "boolean"
+    },
+    "assetLookupLimitedToActiveEntitlementsOnContact": {
+      "default": false,
+      "type": "boolean"
+    },
+    "assetLookupLimitedToSameAccount": {
+      "default": false,
+      "type": "boolean"
+    },
+    "assetLookupLimitedToSameContact": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEntitlementVersioning": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEntitlements": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMilestoneFeedItem": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMilestoneStoppedTime": {
+      "default": false,
+      "type": "boolean"
+    },
+    "entitlementLookupLimitedToActiveStatus": {
+      "default": false,
+      "type": "boolean"
+    },
+    "entitlementLookupLimitedToSameAccount": {
+      "default": false,
+      "type": "boolean"
+    },
+    "entitlementLookupLimitedToSameAsset": {
+      "default": false,
+      "type": "boolean"
+    },
+    "entitlementLookupLimitedToSameContact": {
+      "default": false,
+      "type": "boolean"
+    },
+    "ignoreMilestoneBusinessHours": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "EntitlementSettings",
+  "type": "object"
+}

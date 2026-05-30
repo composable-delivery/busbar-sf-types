@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "implementationField": {
+      "default": "",
+      "type": "string"
+    },
+    "interfaceField": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "title": "CustomFieldBinding",
+  "type": "object"
+}

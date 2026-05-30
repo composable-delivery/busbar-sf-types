@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "canUseAdoptionApps": {
+      "default": false,
+      "type": "boolean"
+    },
+    "doesScheduledSwitcherRunDaily": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCustomHelpGlobalSection": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHelpMenuShowFeedback": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHelpMenuShowHelp": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHelpMenuShowNewUser": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHelpMenuShowSearch": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHelpMenuShowSfdcContent": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHelpMenuShowShortcut": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHelpMenuShowSupport": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHelpMenuShowTrailhead": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIBILOptOutDashboards": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIBILOptOutEvents": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIBILOptOutReports": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIBILOptOutTasks": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLexToClassicFeedbackEnable": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOrchestrationInSandbox": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOrgUserAssistEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableScheduledSwitcher": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSfdcProductFeedbackSurvey": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableShowSalesforceUserAssist": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isAutoTransitionDelayed": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isCrucNotificationDisabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isCustomProfileAutoTransitionDelayed": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isLEXWelcomeMatDisabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isMeetTheAssistantDisabledInClassic": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isMeetTheAssistantDisabledInLightning": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isSmartNudgesDisabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "optimizerAppEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "suggestedForYou": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "UserEngagementSettings",
+  "type": "object"
+}

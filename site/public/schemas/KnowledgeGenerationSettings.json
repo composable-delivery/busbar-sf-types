@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableKSUsingHybridSearch": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableKnowledgeGeneration": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "KnowledgeGenerationSettings",
+  "type": "object"
+}

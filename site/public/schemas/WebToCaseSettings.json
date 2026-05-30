@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "caseOrigin": {
+      "default": "",
+      "type": "string"
+    },
+    "defaultResponseTemplate": {
+      "default": "",
+      "type": "string"
+    },
+    "enableWebToCase": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "WebToCaseSettings",
+  "type": "object"
+}
