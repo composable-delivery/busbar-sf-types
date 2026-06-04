@@ -304,6 +304,11 @@ impl ModularGenerator {
             &types_by_category,
         )?;
 
+        // Generate the `ScratchOrgSettings` container that maps a scratch-org-definition
+        // `settings` object onto the typed `*Settings` structs. Registered as a settings
+        // submodule *before* `generate_aggregated_mod_files` so `settings/mod.rs` re-exports it.
+        self.generate_settings_container(output_dir, defs, &mut result, &mut module_tracker)?;
+
         // Generate aggregated mod.rs files for each directory
         self.generate_aggregated_mod_files(output_dir, &module_tracker, &mut result)?;
 
@@ -595,6 +600,185 @@ impl ModularGenerator {
         let path = output_dir.join("uncategorized.rs");
         fs::write(&path, &content)?;
         result.files_written.push(path.display().to_string());
+
+        Ok(())
+    }
+
+    /// Generate the `ScratchOrgSettings` container module (`settings/scratch_def.rs`).
+    ///
+    /// This emits a single struct whose fields are the *top-level* `*Settings` types (one
+    /// `Option<T>` field per type, keyed by the type's `SCRATCH_DEF_KEY` / camelCase name).
+    /// It deserializes a scratch-org-definition `settings` object and can emit each present
+    /// setting as Metadata-API XML for an MDAPI deploy.
+    ///
+    /// "Top-level" filtering: a `*Settings` type `T` is included iff it is NOT referenced as a
+    /// field type by any *non-registry* interface (i.e. it is not nested inside another settings
+    /// type, like `SessionSettings` inside `SecuritySettings`). The Salesforce schema-map type
+    /// (`ApiSchemaTypes`) references every settings type, so it is excluded from the reference
+    /// set via a registry heuristic (any interface that references a majority of all settings
+    /// types). Without that exclusion, every settings type would look "nested" and the container
+    /// would be empty.
+    fn generate_settings_container(
+        &self,
+        output_dir: &Path,
+        defs: &TypeDefinitions,
+        result: &mut GenerationResult,
+        module_tracker: &mut ModuleTracker,
+    ) -> anyhow::Result<()> {
+        // Collect all *generated* `*Settings` struct types that live under the `settings` feature.
+        // We only include types that are actually emitted as structs (interface_types) and that
+        // categorize to the `settings` feature, so the container compiles under that feature and
+        // every field type is reachable via `crate::settings::*`.
+        let all_settings: HashSet<&str> = defs
+            .interface_types
+            .keys()
+            .map(|s| s.as_str())
+            .filter(|name| name.ends_with("Settings"))
+            .filter(|name| find_category(name).map(|c| c.feature) == Some("settings"))
+            .collect();
+
+        if all_settings.is_empty() {
+            // Nothing to do (e.g. settings types weren't parsed). Don't emit an empty container.
+            return Ok(());
+        }
+
+        // Build the set of settings types that are *referenced* (nested) as a field type by
+        // another interface, excluding registry/aggregator types. A registry is any interface
+        // that references a majority of all settings types (the SF `ApiSchemaTypes` schema-map
+        // references *every* settings type). Genuine nesting parents reference only a handful.
+        let registry_threshold = all_settings.len() / 2;
+        let mut referenced: HashSet<&str> = HashSet::new();
+        for (owner, fields) in &defs.interface_types {
+            // How many distinct settings types does this owner reference?
+            let owner_settings_refs = fields
+                .iter()
+                .map(|f| f.type_ref.as_str())
+                .filter(|tr| all_settings.contains(tr))
+                .collect::<HashSet<_>>();
+
+            // Skip self-references and registry/schema-map types: they don't represent nesting.
+            if owner_settings_refs.len() > registry_threshold {
+                continue;
+            }
+
+            for tr in owner_settings_refs {
+                if tr != owner.as_str() {
+                    referenced.insert(tr);
+                }
+            }
+        }
+
+        // Top-level = settings types not nested inside any (non-registry) interface.
+        let mut top_level: Vec<&str> = all_settings
+            .iter()
+            .copied()
+            .filter(|name| !referenced.contains(name))
+            .collect();
+        // Sort alphabetically by type name for deterministic, stable output.
+        top_level.sort_unstable();
+
+        // --- Emit settings/scratch_def.rs ----------------------------------------------------
+        let mut content = String::new();
+        content.push_str(&self.file_header());
+        content.push_str("//! Strongly-typed container for a scratch-org-definition `settings` object.\n");
+        content.push_str("//!\n");
+        content.push_str(
+            "//! [`ScratchOrgSettings`] maps the `settings` map of a Salesforce scratch org\n",
+        );
+        content.push_str(
+            "//! definition (e.g. `{\"lightningExperienceSettings\": {...}, \"mobileSettings\": {...}}`)\n",
+        );
+        content.push_str(
+            "//! onto the typed `*Settings` structs, and can emit each present setting as\n",
+        );
+        content.push_str("//! Metadata-API XML for an MDAPI deploy.\n\n");
+        content.push_str("use crate::settings::org_settings::*;\n");
+        content.push_str("use crate::traits::XmlSerializable;\n");
+        content.push_str("use serde::{Deserialize, Serialize};\n\n");
+
+        content.push_str("/// A scratch-org-definition `settings` object, mapped onto the typed\n");
+        content.push_str("/// top-level `*Settings` structs.\n");
+        content.push_str("///\n");
+        content.push_str(&format!(
+            "/// Contains one optional field per top-level settings type ({} total). Nested\n",
+            top_level.len()
+        ));
+        content.push_str("/// sub-settings (settings types that only appear inside another settings type)\n");
+        content.push_str("/// are intentionally omitted, since they are not independently deployable.\n");
+        content.push_str("#[derive(Debug, Clone, Default, Serialize, Deserialize)]\n");
+        content.push_str("#[cfg_attr(feature = \"schemars\", derive(schemars::JsonSchema))]\n");
+        content.push_str("pub struct ScratchOrgSettings {\n");
+        for type_name in &top_level {
+            let serde_key = type_name.to_case(Case::Camel);
+            let field_name = to_snake_case(type_name);
+            content.push_str(&format!(
+                "    #[serde(rename = \"{}\", default, skip_serializing_if = \"Option::is_none\")]\n",
+                serde_key
+            ));
+            content.push_str(&format!("    pub {}: Option<{}>,\n", field_name, type_name));
+        }
+        content.push_str("}\n\n");
+
+        // Impl: to_metadata_files + is_empty
+        content.push_str("impl ScratchOrgSettings {\n");
+        content.push_str(
+            "    /// Returns `(member, xml)` for each present setting, where `member` is the\n",
+        );
+        content.push_str(
+            "    /// package.xml `<members>` value / `<member>.settings` filename stem (the type\n",
+        );
+        content.push_str(
+            "    /// name minus the trailing `\"Settings\"`, e.g. `AccountSettings` -> `\"Account\"`),\n",
+        );
+        content.push_str(
+            "    /// and `xml` is the Metadata-API XML produced by [`XmlSerializable::to_metadata_xml`].\n",
+        );
+        content.push_str(
+            "    pub fn to_metadata_files(&self) -> Result<Vec<(String, String)>, crate::traits::XmlError> {\n",
+        );
+        content.push_str("        let mut files = Vec::new();\n");
+        for type_name in &top_level {
+            let field_name = to_snake_case(type_name);
+            let member = type_name.strip_suffix("Settings").unwrap_or(type_name);
+            content.push_str(&format!("        if let Some(v) = &self.{} {{\n", field_name));
+            content.push_str(&format!(
+                "            files.push((\"{}\".to_string(), v.to_metadata_xml()?));\n",
+                member
+            ));
+            content.push_str("        }\n");
+        }
+        content.push_str("        Ok(files)\n");
+        content.push_str("    }\n\n");
+
+        content.push_str("    /// Returns `true` if no settings are present.\n");
+        content.push_str("    pub fn is_empty(&self) -> bool {\n");
+        content.push_str("        ");
+        let checks: Vec<String> = top_level
+            .iter()
+            .map(|t| format!("self.{}.is_none()", to_snake_case(t)))
+            .collect();
+        content.push_str(&checks.join("\n            && "));
+        content.push_str("\n    }\n");
+        content.push_str("}\n");
+
+        let file_path = output_dir.join("settings").join("scratch_def.rs");
+        // Ensure the settings dir exists even if the settings category produced no module
+        // (defensive; in practice the settings category already created it).
+        if let Some(parent) = file_path.parent() {
+            fs::create_dir_all(parent)?;
+        }
+        fs::write(&file_path, &content)?;
+        result.files_written.push(file_path.display().to_string());
+        result.types_generated += 1;
+
+        // Register `scratch_def` as a settings submodule so `settings/mod.rs` re-exports it.
+        let settings_dir = output_dir.join("settings");
+        module_tracker.add_submodule(
+            &settings_dir.display().to_string(),
+            "scratch_def",
+            "Scratch-org-definition settings container (ScratchOrgSettings)",
+            "settings",
+        );
 
         Ok(())
     }

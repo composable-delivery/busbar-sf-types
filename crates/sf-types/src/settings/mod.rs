@@ -8,5 +8,8 @@
 
 /// Org settings types (~227 types) for org context and scratch org definitions
 pub mod org_settings;
+/// Scratch-org-definition settings container (ScratchOrgSettings)
+pub mod scratch_def;
 
 pub use org_settings::*;
+pub use scratch_def::*;
