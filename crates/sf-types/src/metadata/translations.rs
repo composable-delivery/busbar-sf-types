@@ -68,8 +68,8 @@ pub enum TranslationAspect {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct StandardFieldTranslation {
-    #[serde(default)]
-    pub label: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
     #[serde(default)]
     pub name: String,
 }
@@ -96,6 +96,10 @@ pub struct Translations {
     pub custom_page_web_links: Vec<serde_json::Value>,
     #[serde(rename = "customTabs", default)]
     pub custom_tabs: Vec<serde_json::Value>,
+    #[serde(rename = "dashboardComponents", default)]
+    pub dashboard_components: Vec<serde_json::Value>,
+    #[serde(default)]
+    pub dashboards: Vec<serde_json::Value>,
     #[serde(rename = "dataConnectors", default)]
     pub data_connectors: Vec<serde_json::Value>,
     #[serde(rename = "desFieldTemplateMessages", default)]
@@ -106,17 +110,26 @@ pub struct Translations {
     pub identity_verification_custom_field_labels: Vec<serde_json::Value>,
     #[serde(rename = "pipelineInspMetricConfigs", default)]
     pub pipeline_insp_metric_configs: Vec<serde_json::Value>,
+    #[serde(rename = "productSpecificationTypes", default)]
+    pub product_specification_types: Vec<serde_json::Value>,
     #[serde(default)]
     pub prompts: Vec<serde_json::Value>,
     #[serde(rename = "quickActions", default)]
     pub quick_actions: Vec<serde_json::Value>,
+    #[serde(rename = "recordAlertCategories", default)]
+    pub record_alert_categories: Vec<serde_json::Value>,
+    #[serde(rename = "recordAlertTemplates", default)]
+    pub record_alert_templates: Vec<serde_json::Value>,
     #[serde(rename = "reportTypes", default)]
     pub report_types: Vec<serde_json::Value>,
+    #[serde(default)]
+    pub reports: Vec<serde_json::Value>,
     #[serde(default)]
     pub scontrols: Vec<serde_json::Value>,
     #[serde(rename = "svcCatalogItemAttributes", default)]
     pub svc_catalog_item_attributes: Vec<serde_json::Value>,
     #[serde(rename = "svcCatalogItemGroups", default)]
     pub svc_catalog_item_groups: Vec<serde_json::Value>,
+    #[serde(rename = "timelineObjectDefinitions", default)]
+    pub timeline_object_definitions: Vec<serde_json::Value>,
 }
-

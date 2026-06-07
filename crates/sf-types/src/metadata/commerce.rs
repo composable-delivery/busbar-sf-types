@@ -18,13 +18,6 @@ pub enum OrderLifeCycleType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ProductFamilyUsageType {
-    #[default]
-    AccountForecasting,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum ProductGrouping {
     #[default]
     BestMatch,
@@ -45,12 +38,20 @@ pub enum WebStoreType {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct PaymentGatewayProvider {
-    #[serde(rename = "apexAdapter", default)]
-    pub apex_adapter: String,
-    #[serde(default)]
-    pub comments: String,
-    #[serde(rename = "gatewayType", default)]
-    pub gateway_type: serde_json::Value,
+    #[serde(
+        rename = "apexAdapter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub apex_adapter: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub comments: Option<String>,
+    #[serde(
+        rename = "gatewayType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub gateway_type: Option<serde_json::Value>,
     #[serde(rename = "idempotencySupported", default)]
     pub idempotency_supported: serde_json::Value,
     #[serde(rename = "masterLabel", default)]
@@ -75,8 +76,8 @@ pub struct ProductAttrDisplayConfig {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ProductAttributeSet {
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "developerName", default)]
     pub developer_name: String,
     #[serde(rename = "masterLabel", default)]
@@ -91,18 +92,14 @@ pub struct ProductAttributeSet {
 pub struct ProductAttributeSetItem {
     #[serde(default)]
     pub field: String,
-    #[serde(rename = "isGroupedBy", default)]
-    pub is_grouped_by: bool,
+    #[serde(
+        rename = "isGroupedBy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_grouped_by: Option<bool>,
     #[serde(default)]
     pub sequence: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ProductFamilyUsage {
-    #[serde(rename = "productFamilyUsageType", default)]
-    pub product_family_usage_type: ProductFamilyUsageType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -123,8 +120,8 @@ pub struct ProductSpecificationRecType {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ProductSpecificationType {
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
 }
@@ -132,50 +129,122 @@ pub struct ProductSpecificationType {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct WebStoreBundle {
-    #[serde(rename = "autoFacetingEnabled", default)]
-    pub auto_faceting_enabled: bool,
-    #[serde(rename = "cartToOrderAutoCustomFieldMapping", default)]
-    pub cart_to_order_auto_custom_field_mapping: bool,
-    #[serde(rename = "commerceEinsteinActivitiesTracked", default)]
-    pub commerce_einstein_activities_tracked: bool,
-    #[serde(rename = "commerceEinsteinDeployed", default)]
-    pub commerce_einstein_deployed: bool,
+pub struct ProductSpecificationTypeTranslation {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
     #[serde(default)]
-    pub country: serde_json::Value,
-    #[serde(rename = "defaultCurrency", default)]
-    pub default_currency: String,
-    #[serde(rename = "defaultLanguage", default)]
-    pub default_language: String,
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WebStoreBundle {
+    #[serde(
+        rename = "autoFacetingEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub auto_faceting_enabled: Option<bool>,
+    #[serde(
+        rename = "cartToOrderAutoCustomFieldMapping",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub cart_to_order_auto_custom_field_mapping: Option<bool>,
+    #[serde(
+        rename = "commerceEinsteinActivitiesTracked",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub commerce_einstein_activities_tracked: Option<bool>,
+    #[serde(
+        rename = "commerceEinsteinDeployed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub commerce_einstein_deployed: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub country: Option<serde_json::Value>,
+    #[serde(
+        rename = "defaultCurrency",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_currency: Option<String>,
+    #[serde(
+        rename = "defaultLanguage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_language: Option<String>,
     #[serde(rename = "defaultTaxLocaleType", default)]
     pub default_tax_locale_type: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "guestBrowsingEnabled", default)]
-    pub guest_browsing_enabled: bool,
-    #[serde(rename = "guestCartTimeToLive", default)]
-    pub guest_cart_time_to_live: f64,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "guestBrowsingEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub guest_browsing_enabled: Option<bool>,
+    #[serde(
+        rename = "guestCartTimeToLive",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub guest_cart_time_to_live: Option<f64>,
     #[serde(default)]
     pub label: String,
-    #[serde(rename = "orderLifeCycleType", default)]
-    pub order_life_cycle_type: OrderLifeCycleType,
+    #[serde(
+        rename = "orderLifeCycleType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub order_life_cycle_type: Option<OrderLifeCycleType>,
     #[serde(rename = "pricingStrategy", default)]
     pub pricing_strategy: serde_json::Value,
-    #[serde(rename = "productGrouping", default)]
-    pub product_grouping: ProductGrouping,
-    #[serde(rename = "skipAdditionalEntitlementCheckForSearch", default)]
-    pub skip_additional_entitlement_check_for_search: bool,
-    #[serde(rename = "skuDetectionEnabled", default)]
-    pub sku_detection_enabled: bool,
-    #[serde(rename = "storeName", default)]
-    pub store_name: String,
-    #[serde(rename = "supportedCurrencies", default)]
-    pub supported_currencies: String,
-    #[serde(rename = "supportedLanguages", default)]
-    pub supported_languages: String,
-    #[serde(rename = "supportedShipToCountries", default)]
-    pub supported_ship_to_countries: String,
-    #[serde(default)]
+    #[serde(
+        rename = "productGrouping",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub product_grouping: Option<ProductGrouping>,
+    #[serde(
+        rename = "skipAdditionalEntitlementCheckForSearch",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub skip_additional_entitlement_check_for_search: Option<bool>,
+    #[serde(
+        rename = "skuDetectionEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sku_detection_enabled: Option<bool>,
+    #[serde(rename = "storeName", default, skip_serializing_if = "Option::is_none")]
+    pub store_name: Option<String>,
+    #[serde(
+        rename = "supportedCurrencies",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub supported_currencies: Option<String>,
+    #[serde(
+        rename = "supportedLanguages",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub supported_languages: Option<String>,
+    #[serde(
+        rename = "supportedShipToCountries",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub supported_ship_to_countries: Option<String>,
+    #[serde(rename = "type", default)]
     pub r#type: WebStoreType,
 }
 
@@ -183,71 +252,154 @@ pub struct WebStoreBundle {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct WebStoreTemplate {
-    #[serde(rename = "autoFacetingEnabled", default)]
-    pub auto_faceting_enabled: bool,
-    #[serde(rename = "cartAsyncProcessingEnabled", default)]
-    pub cart_async_processing_enabled: bool,
-    #[serde(rename = "cartCalculateEnabled", default)]
-    pub cart_calculate_enabled: bool,
-    #[serde(rename = "cartToOrderAutoCustomFieldMapping", default)]
-    pub cart_to_order_auto_custom_field_mapping: bool,
-    #[serde(rename = "checkoutTimeToLive", default)]
-    pub checkout_time_to_live: f64,
-    #[serde(rename = "checkoutValidAfterDate", default)]
-    pub checkout_valid_after_date: String,
-    #[serde(rename = "commerceEinsteinActivitiesTracked", default)]
-    pub commerce_einstein_activities_tracked: bool,
-    #[serde(rename = "commerceEinsteinDeployed", default)]
-    pub commerce_einstein_deployed: bool,
-    #[serde(default)]
-    pub country: serde_json::Value,
-    #[serde(rename = "defaultCurrency", default)]
-    pub default_currency: String,
+    #[serde(
+        rename = "autoFacetingEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub auto_faceting_enabled: Option<bool>,
+    #[serde(
+        rename = "cartAsyncProcessingEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub cart_async_processing_enabled: Option<bool>,
+    #[serde(
+        rename = "cartCalculateEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub cart_calculate_enabled: Option<bool>,
+    #[serde(
+        rename = "cartToOrderAutoCustomFieldMapping",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub cart_to_order_auto_custom_field_mapping: Option<bool>,
+    #[serde(
+        rename = "checkoutTimeToLive",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub checkout_time_to_live: Option<f64>,
+    #[serde(
+        rename = "checkoutValidAfterDate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub checkout_valid_after_date: Option<serde_json::Value>,
+    #[serde(
+        rename = "commerceEinsteinActivitiesTracked",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub commerce_einstein_activities_tracked: Option<bool>,
+    #[serde(
+        rename = "commerceEinsteinDeployed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub commerce_einstein_deployed: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub country: Option<serde_json::Value>,
+    #[serde(
+        rename = "defaultCurrency",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_currency: Option<String>,
     #[serde(rename = "defaultLanguage", default)]
     pub default_language: String,
     #[serde(rename = "defaultTaxLocaleType", default)]
     pub default_tax_locale_type: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "duplicateCartItemsEnabled", default)]
-    pub duplicate_cart_items_enabled: bool,
-    #[serde(rename = "guestBrowsingEnabled", default)]
-    pub guest_browsing_enabled: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "duplicateCartItemsEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub duplicate_cart_items_enabled: Option<bool>,
+    #[serde(
+        rename = "guestBrowsingEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub guest_browsing_enabled: Option<bool>,
     #[serde(rename = "guestCartEnabled", default)]
     pub guest_cart_enabled: bool,
-    #[serde(rename = "guestCartTimeToLive", default)]
-    pub guest_cart_time_to_live: f64,
+    #[serde(
+        rename = "guestCartTimeToLive",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub guest_cart_time_to_live: Option<f64>,
     #[serde(rename = "guestCheckoutEnabled", default)]
     pub guest_checkout_enabled: bool,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "maxValuesPerFacet", default)]
-    pub max_values_per_facet: f64,
-    #[serde(rename = "orderActivationStatus", default)]
-    pub order_activation_status: String,
-    #[serde(rename = "orderLifeCycleType", default)]
-    pub order_life_cycle_type: OrderLifeCycleType,
-    #[serde(rename = "paginationSize", default)]
-    pub pagination_size: f64,
+    #[serde(
+        rename = "maxValuesPerFacet",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub max_values_per_facet: Option<f64>,
+    #[serde(
+        rename = "orderActivationStatus",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub order_activation_status: Option<String>,
+    #[serde(
+        rename = "orderLifeCycleType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub order_life_cycle_type: Option<OrderLifeCycleType>,
+    #[serde(
+        rename = "paginationSize",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub pagination_size: Option<f64>,
     #[serde(rename = "preserveGuestCartEnabled", default)]
     pub preserve_guest_cart_enabled: bool,
     #[serde(rename = "pricingStrategy", default)]
     pub pricing_strategy: serde_json::Value,
-    #[serde(rename = "productGrouping", default)]
-    pub product_grouping: ProductGrouping,
-    #[serde(rename = "skipAdditionalEntitlementCheckForSearch", default)]
-    pub skip_additional_entitlement_check_for_search: bool,
-    #[serde(rename = "skuDetectionEnabled", default)]
-    pub sku_detection_enabled: bool,
+    #[serde(
+        rename = "productGrouping",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub product_grouping: Option<ProductGrouping>,
+    #[serde(
+        rename = "skipAdditionalEntitlementCheckForSearch",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub skip_additional_entitlement_check_for_search: Option<bool>,
+    #[serde(
+        rename = "skuDetectionEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sku_detection_enabled: Option<bool>,
     #[serde(rename = "splitShipmentEnabled", default)]
     pub split_shipment_enabled: bool,
-    #[serde(rename = "supportedCurrencies", default)]
-    pub supported_currencies: String,
+    #[serde(
+        rename = "supportedCurrencies",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub supported_currencies: Option<String>,
     #[serde(rename = "supportedLanguages", default)]
     pub supported_languages: String,
-    #[serde(rename = "supportedShipToCountries", default)]
-    pub supported_ship_to_countries: String,
-    #[serde(default)]
+    #[serde(
+        rename = "supportedShipToCountries",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub supported_ship_to_countries: Option<String>,
+    #[serde(rename = "type", default)]
     pub r#type: WebStoreType,
 }
-

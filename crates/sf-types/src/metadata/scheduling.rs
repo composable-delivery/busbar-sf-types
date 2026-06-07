@@ -18,29 +18,11 @@ pub enum SchedulingCategory {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SchedulingMode {
-    #[default]
-    Sliding,
-    Reshuffle,
-    Normal,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum SchedulingObjectiveType {
     #[default]
     AgentPreference,
     BalanceShifts,
     BalanceNonStandardShifts,
-    ASAP,
-    MinimizeGaps,
-    MinimizeOvertime,
-    MinimizeTravel,
-    PreferredResource,
-    ResourcePriority,
-    SameSite,
-    SkillLevel,
-    SkillPreferences,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -54,40 +36,6 @@ pub enum SchedulingParameterKey {
     C,
     ConsiderAbsence,
     ConsiderSTM,
-    CountTimeResolution,
-    CountType,
-    CountObject,
-    CustomFieldName,
-    DefaultLimit,
-    ResourceProperty,
-    ServiceAppointmentMatchingField,
-    EnhancedMatchLinkingObject,
-    ServiceLinkingObjectReferenceField,
-    IsTimeBound,
-    WorkRuleStartDateTimeField,
-    WorkRuleEndDateTimeField,
-    ValueIsTrue,
-    ServiceProperty,
-    BooleanOperator,
-    IsSkillLevelMatched,
-    SkillType,
-    MatchingSkillsOperator,
-    ServiceScheduleTimeProperty,
-    ServiceTimeOperator,
-    ServiceTimeProperty,
-    CanPassEmptyValues,
-    MaximumTravelFromHomeType,
-    MaximumTravelFromHome,
-    AreCrewResourcesAvailable,
-    IsFixedGap,
-    MinimumGap,
-    BreakStart,
-    BreakDuration,
-    IsOvertimeEnabled,
-    TravelFromHome,
-    TravelToHome,
-    IsPrimaryLocationEnabled,
-    MaximumExtraResourcesForCrews,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -102,28 +50,6 @@ pub enum SchedulingRuleType {
     Q,
     C,
     LimitNonstandardShifts,
-    Count,
-    ExcludedResources,
-    ExtendedMatch,
-    MatchBoolean,
-    MatchFields,
-    MatchTime,
-    MaximumTravelFromHome,
-    RequiredResources,
-    ServiceAppointmentVisitingHours,
-    MatchCrewSize,
-    TimeSlotDesignatedWork,
-    CapacityLimit,
-    WorkingLocations,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ShiftSegmentTypeCategory {
-    #[default]
-    Work,
-    Break,
-    NonWork,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -144,16 +70,32 @@ pub struct AppointmentAssignmentPolicy {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct AppointmentSchedulingPolicy {
-    #[serde(rename = "appointmentAssignmentPolicy", default)]
-    pub appointment_assignment_policy: String,
+    #[serde(
+        rename = "appointmentAssignmentPolicy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub appointment_assignment_policy: Option<String>,
     #[serde(rename = "appointmentStartTimeInterval", default)]
     pub appointment_start_time_interval: String,
-    #[serde(rename = "extCalEventHandler", default)]
-    pub ext_cal_event_handler: String,
-    #[serde(rename = "isSvcTerrOpHoursWithShiftsUsed", default)]
-    pub is_svc_terr_op_hours_with_shifts_used: bool,
-    #[serde(rename = "isSvcTerritoryMemberShiftUsed", default)]
-    pub is_svc_territory_member_shift_used: bool,
+    #[serde(
+        rename = "extCalEventHandler",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub ext_cal_event_handler: Option<String>,
+    #[serde(
+        rename = "isSvcTerrOpHoursWithShiftsUsed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_svc_terr_op_hours_with_shifts_used: Option<bool>,
+    #[serde(
+        rename = "isSvcTerritoryMemberShiftUsed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_svc_territory_member_shift_used: Option<bool>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
     #[serde(rename = "shouldCheckExternalCalendar", default)]
@@ -180,20 +122,48 @@ pub struct AppointmentSchedulingPolicy {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct FieldServiceMobileConfig {
-    #[serde(rename = "ascAutomaticMode", default)]
-    pub asc_automatic_mode: serde_json::Value,
-    #[serde(rename = "ascCancellationTimerInSec", default)]
-    pub asc_cancellation_timer_in_sec: f64,
-    #[serde(rename = "ascCompletedStatus", default)]
-    pub asc_completed_status: String,
-    #[serde(rename = "ascOnSiteStatus", default)]
-    pub asc_on_site_status: String,
-    #[serde(rename = "ascRadiusInMeters", default)]
-    pub asc_radius_in_meters: f64,
-    #[serde(rename = "ascTimeLimitationInMin", default)]
-    pub asc_time_limitation_in_min: f64,
-    #[serde(rename = "ascTravelStatus", default)]
-    pub asc_travel_status: String,
+    #[serde(
+        rename = "ascAutomaticMode",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub asc_automatic_mode: Option<serde_json::Value>,
+    #[serde(
+        rename = "ascCancellationTimerInSec",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub asc_cancellation_timer_in_sec: Option<f64>,
+    #[serde(
+        rename = "ascCompletedStatus",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub asc_completed_status: Option<String>,
+    #[serde(
+        rename = "ascOnSiteStatus",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub asc_on_site_status: Option<String>,
+    #[serde(
+        rename = "ascRadiusInMeters",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub asc_radius_in_meters: Option<f64>,
+    #[serde(
+        rename = "ascTimeLimitationInMin",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub asc_time_limitation_in_min: Option<f64>,
+    #[serde(
+        rename = "ascTravelStatus",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub asc_travel_status: Option<String>,
     #[serde(rename = "bgGeoLocationAccuracy", default)]
     pub bg_geo_location_accuracy: serde_json::Value,
     #[serde(rename = "bgGeoLocationMinUpdateFreqMins", default)]
@@ -216,50 +186,126 @@ pub struct FieldServiceMobileConfig {
     pub days_after_current_service_date: f64,
     #[serde(rename = "daysBeforeCurrentServiceDate", default)]
     pub days_before_current_service_date: f64,
-    #[serde(rename = "defaultListViewDeveloperName", default)]
-    pub default_list_view_developer_name: String,
-    #[serde(rename = "destinationType", default)]
-    pub destination_type: serde_json::Value,
+    #[serde(
+        rename = "defaultListViewDeveloperName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_list_view_developer_name: Option<String>,
+    #[serde(
+        rename = "destinationType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub destination_type: Option<serde_json::Value>,
     #[serde(rename = "feedbackPrimaryColor", default)]
     pub feedback_primary_color: String,
     #[serde(rename = "feedbackSecondaryColor", default)]
     pub feedback_secondary_color: String,
     #[serde(rename = "feedbackSelectedColor", default)]
     pub feedback_selected_color: String,
-    #[serde(rename = "feedbackTertiaryColor", default)]
-    pub feedback_tertiary_color: String,
+    #[serde(
+        rename = "feedbackTertiaryColor",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub feedback_tertiary_color: Option<String>,
     #[serde(rename = "futureDaysInDatePicker", default)]
     pub future_days_in_date_picker: f64,
     #[serde(rename = "geoLocationAccuracy", default)]
     pub geo_location_accuracy: serde_json::Value,
     #[serde(rename = "geoLocationMinUpdateFreqMins", default)]
     pub geo_location_min_update_freq_mins: f64,
-    #[serde(rename = "isAscTimeLimitEnabled", default)]
-    pub is_asc_time_limit_enabled: bool,
-    #[serde(rename = "isAssignmentNotification", default)]
-    pub is_assignment_notification: bool,
-    #[serde(rename = "isDispatchNotification", default)]
-    pub is_dispatch_notification: bool,
-    #[serde(rename = "isLimitedLocTrackingEnabled", default)]
-    pub is_limited_loc_tracking_enabled: bool,
-    #[serde(rename = "isOptimizedImageUploadEnabled", default)]
-    pub is_optimized_image_upload_enabled: bool,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "isScheduleViewResourceAbsences", default)]
-    pub is_schedule_view_resource_absences: bool,
-    #[serde(rename = "isSendLocationHistory", default)]
-    pub is_send_location_history: bool,
-    #[serde(rename = "isShowEditFullRecord", default)]
-    pub is_show_edit_full_record: bool,
-    #[serde(rename = "isTimeSheetEnabled", default)]
-    pub is_time_sheet_enabled: bool,
-    #[serde(rename = "isTimeZoneEnabled", default)]
-    pub is_time_zone_enabled: bool,
-    #[serde(rename = "isUseSalesforceMobileActions", default)]
-    pub is_use_salesforce_mobile_actions: bool,
-    #[serde(rename = "isVirtualMeasurement", default)]
-    pub is_virtual_measurement: bool,
+    #[serde(
+        rename = "isAscTimeLimitEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_asc_time_limit_enabled: Option<bool>,
+    #[serde(
+        rename = "isAssignmentNotification",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_assignment_notification: Option<bool>,
+    #[serde(
+        rename = "isDispatchNotification",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_dispatch_notification: Option<bool>,
+    #[serde(
+        rename = "isFeedDisabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_feed_disabled: Option<bool>,
+    #[serde(
+        rename = "isFeedPrimingDisabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_feed_priming_disabled: Option<bool>,
+    #[serde(
+        rename = "isLimitedLocTrackingEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_limited_loc_tracking_enabled: Option<bool>,
+    #[serde(
+        rename = "isOptimizedImageUploadEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_optimized_image_upload_enabled: Option<bool>,
+    #[serde(
+        rename = "isProtected",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_protected: Option<bool>,
+    #[serde(
+        rename = "isScheduleViewResourceAbsences",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_schedule_view_resource_absences: Option<bool>,
+    #[serde(
+        rename = "isSendLocationHistory",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_send_location_history: Option<bool>,
+    #[serde(
+        rename = "isShowEditFullRecord",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_show_edit_full_record: Option<bool>,
+    #[serde(
+        rename = "isTimeSheetEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_time_sheet_enabled: Option<bool>,
+    #[serde(
+        rename = "isTimeZoneEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_time_zone_enabled: Option<bool>,
+    #[serde(
+        rename = "isUseSalesforceMobileActions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_use_salesforce_mobile_actions: Option<bool>,
+    #[serde(
+        rename = "isVirtualMeasurement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_virtual_measurement: Option<bool>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
     #[serde(rename = "maxNumberOfServiceAppointments", default)]
@@ -270,20 +316,32 @@ pub struct FieldServiceMobileConfig {
     pub navbar_background_color: String,
     #[serde(rename = "navbarInvertedColor", default)]
     pub navbar_inverted_color: String,
-    #[serde(rename = "optimizeImageSizeInMb", default)]
-    pub optimize_image_size_in_mb: String,
+    #[serde(
+        rename = "optimizeImageSizeInMb",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub optimize_image_size_in_mb: Option<String>,
     #[serde(rename = "pastDaysInDatePicker", default)]
     pub past_days_in_date_picker: f64,
     #[serde(rename = "primaryBrandColor", default)]
     pub primary_brand_color: String,
-    #[serde(rename = "quickStatusChangeFlowName", default)]
-    pub quick_status_change_flow_name: String,
+    #[serde(
+        rename = "quickStatusChangeFlowName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub quick_status_change_flow_name: Option<String>,
     #[serde(rename = "recordDataCacheTimeMins", default)]
     pub record_data_cache_time_mins: f64,
     #[serde(rename = "secondaryBrandColor", default)]
     pub secondary_brand_color: String,
-    #[serde(rename = "timeIntervalSetupMins", default)]
-    pub time_interval_setup_mins: serde_json::Value,
+    #[serde(
+        rename = "timeIntervalSetupMins",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub time_interval_setup_mins: Option<serde_json::Value>,
     #[serde(rename = "updateScheduleTimeMins", default)]
     pub update_schedule_time_mins: f64,
 }
@@ -291,9 +349,37 @@ pub struct FieldServiceMobileConfig {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct FieldServiceMobileExtension {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "fileName", default)]
+    pub file_name: String,
+    #[serde(
+        rename = "masterLabel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub master_label: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub size: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub version: Option<f64>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct SchedulingObjective {
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "isProtected",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_protected: Option<bool>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
     #[serde(rename = "schedulingCategory", default)]
@@ -310,16 +396,80 @@ pub struct SchedulingObjective {
 pub struct SchedulingObjectiveParameter {
     #[serde(rename = "parameterKey", default)]
     pub parameter_key: serde_json::Value,
-    #[serde(default)]
-    pub value: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub value: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SchedulingRecipeSetting {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub active: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub criteria: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "expectedBehavior",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub expected_behavior: Option<String>,
+    #[serde(
+        rename = "lklThreshold",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub lkl_threshold: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
+    #[serde(
+        rename = "postActions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub post_actions: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub priority: Option<f64>,
+    #[serde(
+        rename = "scenarioSpecific",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub scenario_specific: Option<f64>,
+    #[serde(
+        rename = "scenarioType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub scenario_type: Option<String>,
+    #[serde(
+        rename = "schedulingPolicy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub scheduling_policy: Option<String>,
+    #[serde(
+        rename = "semiAutomated",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub semi_automated: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct SchedulingRule {
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "isProtected",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_protected: Option<bool>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
     #[serde(rename = "schedulingCategory", default)]
@@ -336,52 +486,70 @@ pub struct SchedulingRule {
 pub struct SchedulingRuleParameter {
     #[serde(rename = "schedulingParameterKey", default)]
     pub scheduling_parameter_key: SchedulingParameterKey,
-    #[serde(default)]
-    pub value: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub value: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ShiftSegmentType {
-    #[serde(rename = "adherenceThreshold", default)]
-    pub adherence_threshold: f64,
-    #[serde(default)]
-    pub category: ShiftSegmentTypeCategory,
-    #[serde(default)]
-    pub color: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "servicePresenceStatus", default)]
-    pub service_presence_status: String,
+pub struct Territory {
+    #[serde(
+        rename = "accountAccessLevel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub account_access_level: Option<String>,
+    #[serde(
+        rename = "parentTerritory",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub parent_territory: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct Territory2 {
-    #[serde(rename = "accountAccessLevel", default)]
-    pub account_access_level: String,
-    #[serde(rename = "caseAccessLevel", default)]
-    pub case_access_level: String,
-    #[serde(rename = "contactAccessLevel", default)]
-    pub contact_access_level: String,
+    #[serde(
+        rename = "accountAccessLevel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub account_access_level: Option<String>,
+    #[serde(
+        rename = "caseAccessLevel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub case_access_level: Option<String>,
+    #[serde(
+        rename = "contactAccessLevel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub contact_access_level: Option<String>,
     #[serde(rename = "customFields", default)]
     pub custom_fields: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(default)]
     pub name: String,
     #[serde(rename = "objectAccessLevels", default)]
     pub object_access_levels: Vec<Territory2AccessLevel>,
-    #[serde(rename = "opportunityAccessLevel", default)]
-    pub opportunity_access_level: String,
-    #[serde(rename = "parentTerritory", default)]
-    pub parent_territory: String,
+    #[serde(
+        rename = "opportunityAccessLevel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub opportunity_access_level: Option<String>,
+    #[serde(
+        rename = "parentTerritory",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub parent_territory: Option<String>,
     #[serde(rename = "ruleAssociations", default)]
     pub rule_associations: Vec<Territory2RuleAssociation>,
     #[serde(rename = "territory2Type", default)]
@@ -404,12 +572,22 @@ pub struct Territory2AccessLevel {
 pub struct Territory2Model {
     #[serde(rename = "customFields", default)]
     pub custom_fields: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(default)]
     pub name: String,
-    #[serde(rename = "recordVisibility", default)]
-    pub record_visibility: String,
+    #[serde(
+        rename = "recordVisibility",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub record_visibility: Option<String>,
+    #[serde(
+        rename = "userRecordAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub user_record_access: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -418,8 +596,12 @@ pub struct Territory2Model {
 pub struct Territory2Rule {
     #[serde(default)]
     pub active: bool,
-    #[serde(rename = "booleanFilter", default)]
-    pub boolean_filter: String,
+    #[serde(
+        rename = "booleanFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub boolean_filter: Option<String>,
     #[serde(default)]
     pub name: String,
     #[serde(rename = "objectType", default)]
@@ -446,16 +628,20 @@ pub struct Territory2RuleItem {
     pub field: String,
     #[serde(default)]
     pub operation: serde_json::Value,
-    #[serde(default)]
-    pub value: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub value: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct Territory2SettingsOpportunityFilter {
-    #[serde(rename = "apexClassName", default)]
-    pub apex_class_name: String,
+    #[serde(
+        rename = "apexClassName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub apex_class_name: Option<String>,
     #[serde(rename = "enableFilter", default)]
     pub enable_filter: bool,
     #[serde(rename = "runMultiThreaded", default)]
@@ -480,11 +666,10 @@ pub struct Territory2SupportedObject {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct Territory2Type {
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(default)]
     pub name: String,
     #[serde(default)]
     pub priority: f64,
 }
-

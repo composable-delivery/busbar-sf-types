@@ -40,8 +40,6 @@ pub mod commerce;
 pub mod components;
 /// Condition Types, Condition Filters
 pub mod conditions;
-/// Einstein Copilot, Agentforce, Assistant definitions
-pub mod copilot;
 /// Configure-Price-Quote, Pricing Rules, Price Sheets
 pub mod cpq;
 /// Custom Metadata, Custom Labels, Custom Tabs
@@ -66,8 +64,6 @@ pub mod experience;
 pub mod explainability;
 /// External Client Apps, Mobile Apps, Canvas Apps
 pub mod externalapps;
-/// Feature Parameters, Feature Configuration
-pub mod features;
 /// Feed Items, Feed Layouts, Chatter Feed
 pub mod feed;
 /// Field Mappings, Field Restrictions, Field Configurations
@@ -90,12 +86,8 @@ pub mod integration;
 pub mod invocable;
 /// Page layouts and UI configuration
 pub mod layouts;
-/// Life Sciences Cloud, Clinical, Healthcare
-pub mod lifesciences;
 /// Lightning Bolt, Lightning Framework Types
 pub mod lightning;
-/// Loyalty Cloud, Programs, Benefits, Vouchers
-pub mod loyalty;
 /// Lightning Web Components and Aura bundles
 pub mod lwc;
 /// Managed Content, Managed Topics, CMS
@@ -148,12 +140,8 @@ pub mod search;
 pub mod servicecatalog;
 /// Service Cloud, Cases, Knowledge, Entitlements, Embedded Service
 pub mod servicecloud;
-/// Slack Integration, Slack Record Layouts
-pub mod slack;
 /// Sales Stages, Path Assistant, Stage Definitions
 pub mod stages;
-/// Standard Permission Sets, Standard Fields
-pub mod standard;
 /// Telemetry Definitions, Usage Tracking
 pub mod telemetry;
 /// Transaction Security Policies, Event Monitoring
@@ -186,7 +174,6 @@ pub use codecoverage::*;
 pub use commerce::*;
 pub use components::*;
 pub use conditions::*;
-pub use copilot::*;
 pub use cpq::*;
 pub use custommetadata::*;
 pub use datacloud::*;
@@ -199,7 +186,6 @@ pub use email::*;
 pub use experience::*;
 pub use explainability::*;
 pub use externalapps::*;
-pub use features::*;
 pub use feed::*;
 pub use fieldmappings::*;
 pub use flows::*;
@@ -211,9 +197,7 @@ pub use industries::*;
 pub use integration::*;
 pub use invocable::*;
 pub use layouts::*;
-pub use lifesciences::*;
 pub use lightning::*;
-pub use loyalty::*;
 pub use lwc::*;
 pub use managedcontent::*;
 pub use mappings::*;
@@ -240,9 +224,7 @@ pub use scheduling::*;
 pub use search::*;
 pub use servicecatalog::*;
 pub use servicecloud::*;
-pub use slack::*;
 pub use stages::*;
-pub use standard::*;
 pub use telemetry::*;
 pub use transactionsecurity::*;
 pub use translations::*;

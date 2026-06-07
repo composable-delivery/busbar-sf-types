@@ -32,6 +32,14 @@ pub enum SharingModel {
     ControlledByCampaign,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MutingPermissionSet {
+    #[serde(default)]
+    pub label: String,
+}
+
 /// Represents a set of permissions that can be assigned to users.
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
@@ -49,26 +57,33 @@ pub struct PermissionSet {
     pub custom_permissions: Vec<PermissionSetCustomPermissions>,
     #[serde(rename = "customSettingAccesses", default)]
     pub custom_setting_accesses: Vec<PermissionSetCustomSettingAccess>,
-    #[serde(rename = "dataspaceScopes", default)]
-    pub dataspace_scopes: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "emailRoutingAddressAccesses", default)]
     pub email_routing_address_accesses: Vec<PermissionSetEmailRoutingAddressAccess>,
     #[serde(rename = "externalCredentialPrincipalAccesses", default)]
     pub external_credential_principal_accesses: Vec<PermissionSetExternalCredentialPrincipalAccess>,
     #[serde(rename = "externalDataSourceAccesses", default)]
     pub external_data_source_accesses: Vec<PermissionSetExternalDataSourceAccess>,
+    /// List of field-level security permissions.
     #[serde(rename = "fieldPermissions", default)]
     pub field_permissions: Vec<PermissionSetFieldPermissions>,
     #[serde(rename = "flowAccesses", default)]
     pub flow_accesses: Vec<PermissionSetFlowAccess>,
-    #[serde(rename = "hasActivationRequired", default)]
-    pub has_activation_required: bool,
+    #[serde(rename = "genComputingSummaryDefAccesses", default)]
+    pub gen_computing_summary_def_accesses: Vec<PermissionSetGenComputingSummaryDefAccess>,
+    #[serde(
+        rename = "hasActivationRequired",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub has_activation_required: Option<bool>,
+    /// The label of the permission set.
     #[serde(default)]
     pub label: String,
-    #[serde(default)]
-    pub license: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub license: Option<String>,
+    /// List of object-level permissions (CRUD).
     #[serde(rename = "objectPermissions", default)]
     pub object_permissions: Vec<PermissionSetObjectPermissions>,
     #[serde(rename = "pageAccesses", default)]
@@ -79,6 +94,7 @@ pub struct PermissionSet {
     pub service_presence_status_accesses: Vec<PermissionSetServicePresenceStatusAccess>,
     #[serde(rename = "tabSettings", default)]
     pub tab_settings: Vec<PermissionSetTabSetting>,
+    /// List of user permissions enabled in this set.
     #[serde(rename = "userPermissions", default)]
     pub user_permissions: Vec<PermissionSetUserPermission>,
 }
@@ -191,8 +207,8 @@ pub struct PermissionSetFieldPermissions {
     pub editable: bool,
     #[serde(default)]
     pub field: String,
-    #[serde(default)]
-    pub readable: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub readable: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -208,35 +224,85 @@ pub struct PermissionSetFlowAccess {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PermissionSetGroup {
+pub struct PermissionSetGenComputingSummaryDefAccess {
+    #[serde(rename = "configName", default)]
+    pub config_name: String,
     #[serde(default)]
-    pub description: String,
-    #[serde(rename = "hasActivationRequired", default)]
-    pub has_activation_required: bool,
+    pub enabled: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PermissionSetGroup {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "hasActivationRequired",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub has_activation_required: Option<bool>,
     #[serde(default)]
     pub label: String,
     #[serde(rename = "mutingPermissionSets", default)]
     pub muting_permission_sets: Vec<String>,
     #[serde(rename = "permissionSets", default)]
     pub permission_sets: Vec<String>,
-    #[serde(default)]
-    pub status: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub status: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct PermissionSetLicenseDefinition {
+    #[serde(rename = "componentAccess", default)]
+    pub component_access: serde_json::Value,
+    #[serde(rename = "customObjects", default)]
+    pub custom_objects: Vec<PermissionSetLicenseDefinitionCustomObject>,
     #[serde(rename = "customPermissions", default)]
     pub custom_permissions: Vec<PermissionSetLicenseDefinitionCustomPermission>,
-    #[serde(rename = "isSupplementLicense", default)]
-    pub is_supplement_license: bool,
+    #[serde(rename = "defaultTrialLengthInDays", default)]
+    pub default_trial_length_in_days: f64,
+    #[serde(rename = "defaultTrialLicenseCount", default)]
+    pub default_trial_license_count: f64,
     #[serde(default)]
     pub label: String,
-    #[serde(rename = "licenseExpirationPolicy", default)]
-    pub license_expiration_policy: serde_json::Value,
-    #[serde(rename = "userLicenseRestrictions", default)]
-    pub user_license_restrictions: String,
+    #[serde(
+        rename = "userLicenseRestrictions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub user_license_restrictions: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PermissionSetLicenseDefinitionCustomObject {
+    #[serde(
+        rename = "allowCreate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_create: Option<bool>,
+    #[serde(
+        rename = "allowDelete",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_delete: Option<bool>,
+    #[serde(rename = "allowRead", default, skip_serializing_if = "Option::is_none")]
+    pub allow_read: Option<bool>,
+    #[serde(
+        rename = "allowUpdate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_update: Option<bool>,
+    #[serde(default)]
+    pub name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -259,20 +325,18 @@ pub struct PermissionSetObjectPermissions {
     pub allow_edit: bool,
     #[serde(rename = "allowRead", default)]
     pub allow_read: bool,
-    #[serde(rename = "customizeSetup", default)]
-    pub customize_setup: bool,
-    #[serde(rename = "deleteSetup", default)]
-    pub delete_setup: bool,
     #[serde(rename = "modifyAllRecords", default)]
     pub modify_all_records: bool,
     #[serde(default)]
     pub object: String,
-    #[serde(rename = "viewAllFields", default)]
-    pub view_all_fields: bool,
+    #[serde(
+        rename = "viewAllFields",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub view_all_fields: Option<bool>,
     #[serde(rename = "viewAllRecords", default)]
     pub view_all_records: bool,
-    #[serde(rename = "viewSetup", default)]
-    pub view_setup: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -327,28 +391,34 @@ pub struct Profile {
     pub category_group_visibilities: Vec<ProfileCategoryGroupVisibility>,
     #[serde(rename = "classAccesses", default)]
     pub class_accesses: Vec<ProfileApexClassAccess>,
-    #[serde(default)]
-    pub custom: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub custom: Option<bool>,
     #[serde(rename = "customMetadataTypeAccesses", default)]
     pub custom_metadata_type_accesses: Vec<ProfileCustomMetadataTypeAccess>,
     #[serde(rename = "customPermissions", default)]
     pub custom_permissions: Vec<ProfileCustomPermissions>,
     #[serde(rename = "customSettingAccesses", default)]
     pub custom_setting_accesses: Vec<ProfileCustomSettingAccess>,
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "externalDataSourceAccesses", default)]
     pub external_data_source_accesses: Vec<ProfileExternalDataSourceAccess>,
     #[serde(rename = "fieldPermissions", default)]
     pub field_permissions: Vec<ProfileFieldLevelSecurity>,
     #[serde(rename = "flowAccesses", default)]
     pub flow_accesses: Vec<ProfileFlowAccess>,
+    #[serde(rename = "genComputingSummaryDefAccesses", default)]
+    pub gen_computing_summary_def_accesses: Vec<ProfileGenComputingSummaryDefAccess>,
     #[serde(rename = "layoutAssignments", default)]
     pub layout_assignments: Vec<ProfileLayoutAssignment>,
     #[serde(rename = "loginFlows", default)]
     pub login_flows: Vec<serde_json::Value>,
-    #[serde(rename = "loginHours", default)]
-    pub login_hours: ProfileLoginHours,
+    #[serde(
+        rename = "loginHours",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub login_hours: Option<ProfileLoginHours>,
     #[serde(rename = "loginIpRanges", default)]
     pub login_ip_ranges: Vec<ProfileLoginIpRange>,
     #[serde(rename = "objectPermissions", default)]
@@ -363,8 +433,12 @@ pub struct Profile {
     pub service_presence_status_accesses: Vec<ProfileServicePresenceStatusAccess>,
     #[serde(rename = "tabVisibilities", default)]
     pub tab_visibilities: Vec<ProfileTabVisibility>,
-    #[serde(rename = "userLicense", default)]
-    pub user_license: String,
+    #[serde(
+        rename = "userLicense",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub user_license: Option<String>,
     #[serde(rename = "userPermissions", default)]
     pub user_permissions: Vec<ProfileUserPermission>,
 }
@@ -375,15 +449,19 @@ pub struct Profile {
 pub struct ProfileActionOverride {
     #[serde(rename = "actionName", default)]
     pub action_name: String,
-    #[serde(default)]
-    pub content: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub content: Option<String>,
     #[serde(rename = "formFactor", default)]
     pub form_factor: serde_json::Value,
     #[serde(rename = "pageOrSobjectType", default)]
     pub page_or_sobject_type: String,
-    #[serde(rename = "recordType", default)]
-    pub record_type: String,
-    #[serde(default)]
+    #[serde(
+        rename = "recordType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub record_type: Option<String>,
+    #[serde(rename = "type", default)]
     pub r#type: serde_json::Value,
 }
 
@@ -415,6 +493,16 @@ pub struct ProfileApexPageAccess {
     pub apex_page: String,
     #[serde(default)]
     pub enabled: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProfileApiOptions {
+    #[serde(default)]
+    pub project: serde_json::Value,
+    #[serde(rename = "includeUserLicenses", default)]
+    pub include_user_licenses: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -489,8 +577,8 @@ pub struct ProfileFieldLevelSecurity {
     pub editable: bool,
     #[serde(default)]
     pub field: String,
-    #[serde(default)]
-    pub readable: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub readable: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -506,53 +594,111 @@ pub struct ProfileFlowAccess {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct ProfileGenComputingSummaryDefAccess {
+    #[serde(rename = "configName", default)]
+    pub config_name: String,
+    #[serde(default)]
+    pub enabled: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct ProfileLayoutAssignment {
     #[serde(default)]
     pub layout: String,
-    #[serde(rename = "recordType", default)]
-    pub record_type: String,
+    #[serde(
+        rename = "recordType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub record_type: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ProfileLoginHours {
-    #[serde(rename = "fridayEnd", default)]
-    pub friday_end: String,
-    #[serde(rename = "fridayStart", default)]
-    pub friday_start: String,
-    #[serde(rename = "mondayEnd", default)]
-    pub monday_end: String,
-    #[serde(rename = "mondayStart", default)]
-    pub monday_start: String,
-    #[serde(rename = "saturdayEnd", default)]
-    pub saturday_end: String,
-    #[serde(rename = "saturdayStart", default)]
-    pub saturday_start: String,
-    #[serde(rename = "sundayEnd", default)]
-    pub sunday_end: String,
-    #[serde(rename = "sundayStart", default)]
-    pub sunday_start: String,
-    #[serde(rename = "thursdayEnd", default)]
-    pub thursday_end: String,
-    #[serde(rename = "thursdayStart", default)]
-    pub thursday_start: String,
-    #[serde(rename = "tuesdayEnd", default)]
-    pub tuesday_end: String,
-    #[serde(rename = "tuesdayStart", default)]
-    pub tuesday_start: String,
-    #[serde(rename = "wednesdayEnd", default)]
-    pub wednesday_end: String,
-    #[serde(rename = "wednesdayStart", default)]
-    pub wednesday_start: String,
+    #[serde(rename = "fridayEnd", default, skip_serializing_if = "Option::is_none")]
+    pub friday_end: Option<String>,
+    #[serde(
+        rename = "fridayStart",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub friday_start: Option<String>,
+    #[serde(rename = "mondayEnd", default, skip_serializing_if = "Option::is_none")]
+    pub monday_end: Option<String>,
+    #[serde(
+        rename = "mondayStart",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub monday_start: Option<String>,
+    #[serde(
+        rename = "saturdayEnd",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub saturday_end: Option<String>,
+    #[serde(
+        rename = "saturdayStart",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub saturday_start: Option<String>,
+    #[serde(rename = "sundayEnd", default, skip_serializing_if = "Option::is_none")]
+    pub sunday_end: Option<String>,
+    #[serde(
+        rename = "sundayStart",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sunday_start: Option<String>,
+    #[serde(
+        rename = "thursdayEnd",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub thursday_end: Option<String>,
+    #[serde(
+        rename = "thursdayStart",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub thursday_start: Option<String>,
+    #[serde(
+        rename = "tuesdayEnd",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub tuesday_end: Option<String>,
+    #[serde(
+        rename = "tuesdayStart",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub tuesday_start: Option<String>,
+    #[serde(
+        rename = "wednesdayEnd",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub wednesday_end: Option<String>,
+    #[serde(
+        rename = "wednesdayStart",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub wednesday_start: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ProfileLoginIpRange {
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "endAddress", default)]
     pub end_address: String,
     #[serde(rename = "startAddress", default)]
@@ -563,46 +709,68 @@ pub struct ProfileLoginIpRange {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ProfileObjectPermissions {
-    #[serde(rename = "allowCreate", default)]
-    pub allow_create: bool,
-    #[serde(rename = "allowDelete", default)]
-    pub allow_delete: bool,
-    #[serde(rename = "allowEdit", default)]
-    pub allow_edit: bool,
-    #[serde(rename = "allowRead", default)]
-    pub allow_read: bool,
-    #[serde(rename = "customizeSetup", default)]
-    pub customize_setup: bool,
-    #[serde(rename = "deleteSetup", default)]
-    pub delete_setup: bool,
-    #[serde(rename = "modifyAllRecords", default)]
-    pub modify_all_records: bool,
+    #[serde(
+        rename = "allowCreate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_create: Option<bool>,
+    #[serde(
+        rename = "allowDelete",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_delete: Option<bool>,
+    #[serde(rename = "allowEdit", default, skip_serializing_if = "Option::is_none")]
+    pub allow_edit: Option<bool>,
+    #[serde(rename = "allowRead", default, skip_serializing_if = "Option::is_none")]
+    pub allow_read: Option<bool>,
+    #[serde(
+        rename = "modifyAllRecords",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub modify_all_records: Option<bool>,
     #[serde(default)]
     pub object: String,
-    #[serde(rename = "viewAllFields", default)]
-    pub view_all_fields: bool,
-    #[serde(rename = "viewAllRecords", default)]
-    pub view_all_records: bool,
-    #[serde(rename = "viewSetup", default)]
-    pub view_setup: bool,
+    #[serde(
+        rename = "viewAllFields",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub view_all_fields: Option<bool>,
+    #[serde(
+        rename = "viewAllRecords",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub view_all_records: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ProfilePasswordPolicy {
-    #[serde(rename = "forgotPasswordRedirect", default)]
-    pub forgot_password_redirect: bool,
+    #[serde(
+        rename = "forgotPasswordRedirect",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub forgot_password_redirect: Option<bool>,
     #[serde(rename = "lockoutInterval", default)]
     pub lockout_interval: f64,
     #[serde(rename = "maxLoginAttempts", default)]
     pub max_login_attempts: f64,
     #[serde(rename = "minimumPasswordLength", default)]
     pub minimum_password_length: f64,
-    #[serde(rename = "minimumPasswordLifetime", default)]
-    pub minimum_password_lifetime: bool,
-    #[serde(default)]
-    pub obscure: bool,
+    #[serde(
+        rename = "minimumPasswordLifetime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub minimum_password_lifetime: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub obscure: Option<bool>,
     #[serde(rename = "passwordComplexity", default)]
     pub password_complexity: f64,
     #[serde(rename = "passwordExpiration", default)]
@@ -621,8 +789,12 @@ pub struct ProfilePasswordPolicy {
 pub struct ProfileRecordTypeVisibility {
     #[serde(default)]
     pub default: bool,
-    #[serde(rename = "personAccountDefault", default)]
-    pub person_account_default: bool,
+    #[serde(
+        rename = "personAccountDefault",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub person_account_default: Option<bool>,
     #[serde(rename = "recordType", default)]
     pub record_type: String,
     #[serde(default)]
@@ -635,8 +807,12 @@ pub struct ProfileRecordTypeVisibility {
 pub struct ProfileSearchLayouts {
     #[serde(default)]
     pub fields: Vec<String>,
-    #[serde(rename = "profileName", default)]
-    pub profile_name: String,
+    #[serde(
+        rename = "profileName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub profile_name: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -659,8 +835,12 @@ pub struct ProfileSessionSetting {
     pub force_logout: bool,
     #[serde(default)]
     pub profile: String,
-    #[serde(rename = "requiredSessionLevel", default)]
-    pub required_session_level: serde_json::Value,
+    #[serde(
+        rename = "requiredSessionLevel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub required_session_level: Option<serde_json::Value>,
     #[serde(rename = "sessionPersistence", default)]
     pub session_persistence: bool,
     #[serde(rename = "sessionTimeout", default)]
@@ -695,14 +875,58 @@ pub struct ProfileUserPermission {
 pub struct SharingBaseRule {
     #[serde(rename = "accessLevel", default)]
     pub access_level: String,
-    #[serde(rename = "accountSettings", default)]
-    pub account_settings: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
+    #[serde(
+        rename = "accountSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub account_settings: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(default)]
     pub label: String,
     #[serde(rename = "sharedTo", default)]
     pub shared_to: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SharingCriteriaRule {
+    #[serde(
+        rename = "booleanFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub boolean_filter: Option<String>,
+    #[serde(rename = "criteriaItems", default)]
+    pub criteria_items: Vec<serde_json::Value>,
+    #[serde(rename = "includeRecordsOwnedByAll", default)]
+    pub include_records_owned_by_all: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SharingGuestRule {
+    #[serde(
+        rename = "booleanFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub boolean_filter: Option<String>,
+    #[serde(rename = "criteriaItems", default)]
+    pub criteria_items: Vec<serde_json::Value>,
+    #[serde(rename = "includeHVUOwnedRecords", default)]
+    pub include_hvu_owned_records: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SharingOwnerRule {
+    #[serde(rename = "sharedFrom", default)]
+    pub shared_from: serde_json::Value,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -728,11 +952,11 @@ pub struct SharingRecalculation {
 #[serde(rename_all = "camelCase")]
 pub struct SharingRules {
     #[serde(rename = "sharingCriteriaRules", default)]
-    pub sharing_criteria_rules: Vec<serde_json::Value>,
+    pub sharing_criteria_rules: Vec<SharingCriteriaRule>,
     #[serde(rename = "sharingGuestRules", default)]
-    pub sharing_guest_rules: Vec<serde_json::Value>,
+    pub sharing_guest_rules: Vec<SharingGuestRule>,
     #[serde(rename = "sharingOwnerRules", default)]
-    pub sharing_owner_rules: Vec<serde_json::Value>,
+    pub sharing_owner_rules: Vec<SharingOwnerRule>,
     #[serde(rename = "sharingTerritoryRules", default)]
     pub sharing_territory_rules: Vec<serde_json::Value>,
 }
@@ -743,11 +967,10 @@ pub struct SharingRules {
 pub struct SharingSet {
     #[serde(rename = "accessMappings", default)]
     pub access_mappings: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(default)]
     pub name: String,
     #[serde(default)]
     pub profiles: Vec<String>,
 }
-

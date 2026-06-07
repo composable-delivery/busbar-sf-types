@@ -58,7 +58,7 @@ pub trait MetadataType: Serialize + DeserializeOwned + Send + Sync + Clone + 'st
 }
 
 /// Trait for types that support JSON serialization for scratch org definitions.
-pub trait JsonSerializable: MetadataType {
+pub trait JsonSerializable: Serialize + DeserializeOwned + Send + Sync + Clone + 'static {
     fn to_scratch_def_json(&self) -> Result<serde_json::Value, serde_json::Error> {
         serde_json::to_value(self)
     }
@@ -66,6 +66,12 @@ pub trait JsonSerializable: MetadataType {
     fn from_scratch_def_json(value: serde_json::Value) -> Result<Self, serde_json::Error> {
         serde_json::from_value(value)
     }
+}
+
+/// Core trait for Salesforce JSON-only Tooling API types (e.g., packaging).
+pub trait ToolingType: Serialize + DeserializeOwned + Send + Sync + Clone + 'static {
+    /// The Tooling API SObject name (e.g., "Package2", "Package2Version").
+    const TOOLING_TYPE_NAME: &'static str;
 }
 
 /// Trait specifically for org Settings types.
@@ -84,8 +90,12 @@ pub trait XmlSerializable: MetadataType {
         // Inject namespace into the root tag
         // Match the opening root tag specifically: <TagName> or <TagName />
         // This regex ensures we only match the first occurrence of the opening tag
-        let root_pattern = format!(r"^(<{}\s*/?>|<{}\s+[^>]*>)", Self::XML_ROOT_ELEMENT, Self::XML_ROOT_ELEMENT);
-        
+        let root_pattern = format!(
+            r"^(<{}\s*/?>|<{}\s+[^>]*>)",
+            Self::XML_ROOT_ELEMENT,
+            Self::XML_ROOT_ELEMENT
+        );
+
         // For safety, we'll use a more precise approach:
         // Find the first occurrence of "<{XML_ROOT_ELEMENT}" that's followed by either '>' or whitespace
         let search_pattern = format!("<{}", Self::XML_ROOT_ELEMENT);
@@ -94,20 +104,26 @@ pub trait XmlSerializable: MetadataType {
             if let Some(end_pos) = xml[pos..].find('>') {
                 let tag_end = pos + end_pos;
                 let opening_tag = &xml[pos..=tag_end];
-                
+
                 // Check if it's a self-closing tag
                 let is_self_closing = opening_tag.ends_with("/>");
-                
+
                 // Create replacement with namespace
                 let replacement = if is_self_closing {
-                    format!("<{} xmlns=\"http://soap.sforce.com/2006/04/metadata\"/>", Self::XML_ROOT_ELEMENT)
+                    format!(
+                        "<{} xmlns=\"http://soap.sforce.com/2006/04/metadata\"/>",
+                        Self::XML_ROOT_ELEMENT
+                    )
                 } else {
-                    format!("<{} xmlns=\"http://soap.sforce.com/2006/04/metadata\">", Self::XML_ROOT_ELEMENT)
+                    format!(
+                        "<{} xmlns=\"http://soap.sforce.com/2006/04/metadata\">",
+                        Self::XML_ROOT_ELEMENT
+                    )
                 };
-                
+
                 // Replace the opening tag
                 let xml_with_ns = format!("{}{}{}", &xml[..pos], replacement, &xml[tag_end + 1..]);
-                
+
                 // Add XML declaration
                 return Ok(format!(
                     "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n{}",
@@ -115,7 +131,7 @@ pub trait XmlSerializable: MetadataType {
                 ));
             }
         }
-        
+
         // Fallback: if we couldn't find/parse the tag properly, return an error
         Err(XmlError::Serialize(format!(
             "Could not find root element '{}' in serialized XML",
@@ -140,3 +156,20 @@ pub trait PackageComponent: MetadataType {
 }
 
 impl<T: MetadataType> PackageComponent for T {}
+
+/// Extension trait to help with generic api_name retrieval.
+pub trait ToApiName {
+    fn to_api_name(&self) -> Option<&str>;
+}
+
+impl ToApiName for String {
+    fn to_api_name(&self) -> Option<&str> {
+        Some(self.as_str())
+    }
+}
+
+impl ToApiName for Option<String> {
+    fn to_api_name(&self) -> Option<&str> {
+        self.as_deref()
+    }
+}

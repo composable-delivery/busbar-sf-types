@@ -761,4 +761,3 @@ pub enum WebLinkWindowType {
     replace,
     onClickJavaScript,
 }
-

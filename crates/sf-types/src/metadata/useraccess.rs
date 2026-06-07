@@ -10,75 +10,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum UserAccessPolicyActionTargetType {
-    #[default]
-    PermissionSet,
-    PermissionSetGroup,
-    PermissionSetLicense,
-    PackageLicense,
-    Group,
-    Queue,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum UserAccessPolicyActionType {
-    #[default]
-    Grant,
-    Revoke,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum UserAccessPolicyFilterOperation {
-    #[default]
-    equals,
-    equalsIgnoreCase,
-    notEquals,
-    #[serde(rename = "in")]
-    r#in,
-    includes,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum UserAccessPolicyFilterTargetType {
-    #[default]
-    Group,
-    Queue,
-    PermissionSet,
-    PermissionSetGroup,
-    PermissionSetLicense,
-    Profile,
-    UserRole,
-    PackageLicense,
-    User,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum UserAccessPolicyStatus {
-    #[default]
-    Design,
-    Testing,
-    Migrate,
-    Updating,
-    Failed,
-    Active,
-    Completed,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum UserAccessPolicyTriggerType {
-    #[default]
-    Create,
-    Update,
-    CreateAndUpdate,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum UserDateGranularity {
     #[default]
     None,
@@ -168,67 +99,41 @@ pub enum UserDateInterval {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct UserAccessPolicy {
-    #[serde(rename = "booleanFilter", default)]
-    pub boolean_filter: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
+pub struct UserAuthCertificate {
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(
+        rename = "expirationDate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub expiration_date: Option<serde_json::Value>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
+    #[serde(rename = "serialNumber", default)]
+    pub serial_number: String,
     #[serde(default)]
-    pub order: f64,
-    #[serde(default)]
-    pub status: UserAccessPolicyStatus,
-    #[serde(rename = "triggerType", default)]
-    pub trigger_type: UserAccessPolicyTriggerType,
-    #[serde(rename = "userAccessPolicyActions", default)]
-    pub user_access_policy_actions: Vec<UserAccessPolicyAction>,
-    #[serde(rename = "userAccessPolicyFilters", default)]
-    pub user_access_policy_filters: Vec<UserAccessPolicyFilter>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct UserAccessPolicyAction {
-    #[serde(default)]
-    pub action: UserAccessPolicyActionType,
-    #[serde(default)]
-    pub target: String,
-    #[serde(default)]
-    pub r#type: UserAccessPolicyActionTargetType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct UserAccessPolicyFilter {
-    #[serde(rename = "columnName", default)]
-    pub column_name: String,
-    #[serde(default)]
-    pub operation: UserAccessPolicyFilterOperation,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: f64,
-    #[serde(default)]
-    pub target: String,
-    #[serde(default)]
-    pub r#type: UserAccessPolicyFilterTargetType,
-    #[serde(default)]
-    pub value: String,
+    pub user: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct UserCriteria {
-    #[serde(rename = "creationAgeInSeconds", default)]
-    pub creation_age_in_seconds: f64,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "lastChatterActivityAgeInSeconds", default)]
-    pub last_chatter_activity_age_in_seconds: f64,
+    #[serde(
+        rename = "creationAgeInSeconds",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub creation_age_in_seconds: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "lastChatterActivityAgeInSeconds",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub last_chatter_activity_age_in_seconds: Option<f64>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
     #[serde(default)]
@@ -240,71 +145,53 @@ pub struct UserCriteria {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct UserLicenseDefinition {
-    #[serde(rename = "cloudServiceProvider", default)]
-    pub cloud_service_provider: String,
-    #[serde(rename = "defaultLicenseDuration", default)]
-    pub default_license_duration: f64,
-    #[serde(rename = "defaultStatus", default)]
-    pub default_status: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "hasDynamicResourceGroupKey", default)]
-    pub has_dynamic_resource_group_key: bool,
-    #[serde(rename = "includedFeatures", default)]
-    pub included_features: Vec<serde_json::Value>,
-    #[serde(rename = "isPermissionSetLicense", default)]
-    pub is_permission_set_license: bool,
-    #[serde(rename = "licenseKey", default)]
-    pub license_key: String,
-    #[serde(rename = "licenseOwner", default)]
-    pub license_owner: String,
-    #[serde(rename = "licensingAuthority", default)]
-    pub licensing_authority: String,
-    #[serde(rename = "managementServiceProvider", default)]
-    pub management_service_provider: String,
-    #[serde(rename = "managementTenantId", default)]
-    pub management_tenant_id: String,
-    #[serde(rename = "minPlatformVersion", default)]
-    pub min_platform_version: f64,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "recordVisibility", default)]
-    pub record_visibility: String,
-    #[serde(rename = "settingItems", default)]
-    pub setting_items: Vec<serde_json::Value>,
-    #[serde(rename = "settingUsageDefinitions", default)]
-    pub setting_usage_definitions: Vec<serde_json::Value>,
-    #[serde(rename = "standardPermissionSets", default)]
-    pub standard_permission_sets: Vec<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct UserProvisioningConfig {
-    #[serde(rename = "approvalRequired", default)]
-    pub approval_required: String,
+    #[serde(
+        rename = "approvalRequired",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub approval_required: Option<String>,
     #[serde(rename = "connectedApp", default)]
     pub connected_app: String,
-    #[serde(default)]
-    pub enabled: bool,
-    #[serde(rename = "enabledOperations", default)]
-    pub enabled_operations: String,
-    #[serde(default)]
-    pub flow: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub enabled: Option<bool>,
+    #[serde(
+        rename = "enabledOperations",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enabled_operations: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub flow: Option<String>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "namedCredential", default)]
-    pub named_credential: String,
-    #[serde(default)]
-    pub notes: String,
-    #[serde(rename = "onUpdateAttributes", default)]
-    pub on_update_attributes: String,
-    #[serde(rename = "reconFilter", default)]
-    pub recon_filter: String,
-    #[serde(rename = "userAccountMapping", default)]
-    pub user_account_mapping: String,
+    #[serde(
+        rename = "namedCredential",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub named_credential: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub notes: Option<String>,
+    #[serde(
+        rename = "onUpdateAttributes",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub on_update_attributes: Option<String>,
+    #[serde(
+        rename = "reconFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recon_filter: Option<String>,
+    #[serde(
+        rename = "userAccountMapping",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub user_account_mapping: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -314,4 +201,3 @@ pub struct Users {
     #[serde(default)]
     pub user: Vec<String>,
 }
-

@@ -19,241 +19,6 @@ pub enum BusinessHoursSourceType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BusinessKnowledgeModel {
-    #[default]
-    CreditPoints,
-    DebitPoints,
-    IssueVoucher,
-    IncreaseUsageForCumulativePromotion,
-    UpdateUsageForCumulativePromotion,
-    AssignParameterValues,
-    RunFlow,
-    GetOutputsFromDecisionTable,
-    UpdatePointBalance,
-    GetMemberPointBalance,
-    GetMemberTier,
-    BreAggregator,
-    GetOutputsFromDecisionMatrix,
-    GetMemberAttributesValues,
-    UpdateCurrentValueForMemberAttribute,
-    BreAggregatorAssignment,
-    Crud,
-    AssignBadgeToMember,
-    CheckMemberBadgeAssignment,
-    ChangeMemberTier,
-    RunProgramProcess,
-    GetMemberPromotions,
-    TestCustomElement,
-    AiAcceleratorSubscriberChurnPrediction,
-    RedeemVoucher,
-    ListPrice,
-    PriceAdjustmentMatrix,
-    SendMail,
-    VolumeDiscount,
-    GetUserData,
-    ListGroupCalculation,
-    RecordAlert,
-    AutomatedClaimsProcessingValidation,
-    EvaluateQualification,
-    EvaluateCategoryQualification,
-    EvaluateCategoryDisqualification,
-    SampleBusinessElementWithContext,
-    EvaluateDisqualification,
-    SampleDynamicCustomElement,
-    AttributeDiscount,
-    GroupingAndAggregatePricing,
-    ManualDiscount,
-    SubscriptionPricing,
-    Proration,
-    BundleDiscount,
-    ListGroup,
-    StopPricing,
-    PromotionsDiscount,
-    RoundingValues,
-    VolumeTierDiscount,
-    SampleCustomElementWithExpressionAndListFilter,
-    PricingSettings,
-    ApexAction,
-    DerivedPricing,
-    RecordAction,
-    IntegrationOrchestration,
-    FormulaBasedPricing,
-    ComplianceCheck,
-    DiscountDistributionService,
-    RatingVolumeDiscount,
-    BaseRate,
-    RatingAttributeDiscount,
-    RatingSetting,
-    RuleFetch,
-    MapProduct,
-    AssetDiscovery,
-    RatingTierDiscount,
-    AssignmentElement,
-    ComplianceControlLog,
-    CommercePricing,
-    MinimumPrice,
-    FormulaBasedRating,
-    GroupingAndAggregateRating,
-    RatingRoundingValues,
-    StopRating,
-    ManualRatingDiscount,
-    RateAdjustmentMatrix,
-    RateAssignment,
-    PriceGuidance,
-    RateCardResolution,
-    RateCardEntryResolution,
-    RateAdjustmentByTierResolution,
-    Constraint,
-    RateAdjustmentByAttributeResolution,
-    ApexListAction,
-    TermGpaCalculation,
-    TermGpaReporting,
-    MultiRecipientProductQualification,
-    NegotiatedRateCardEntryResolution,
-    UpsertRecord,
-    NegotiatedBaseRate,
-    BreakdownLineMapping,
-    NegotiatedTierAdjustment,
-    NegotiatedVolumeAdjustment,
-    DiscoverySettings,
-    IssueExtendedReward,
-    GetCustomerPromotionAttrValue,
-    UpdateCustomerPromotionAttrValue,
-    CalculateQuantity,
-    BindingObjectRateCardEntryResolution,
-    BindingObjectRateAdjustmentResolution,
-    PricingPropagation,
-    PriceRevision,
-    AteprlRecordCreator,
-    PromotionExecution,
-    AssignmentRuleCustomUser,
-    AssignmentRuleCustomQueue,
-    CommitmentAdjustment,
-    RatingBreakdownLineMapping,
-    DynamicRulesExecutor,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BusinessVertical {
-    #[default]
-    RevenueCloud,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RuleConsumer {
-    #[default]
-    ALL,
-    DATACLOUD,
-    MULESOFT,
-    TABLEAU,
-    CORE,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RuleContextPath {
-    #[default]
-    SESSION_DATASPACE,
-    SESSION_CONTACT_ID,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RuleDefinitionClause {
-    #[default]
-    UNLESS,
-    WHEN,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RuleDefinitionOperator {
-    #[default]
-    EQUALS,
-    NOT_EQUALS,
-    GREATER_THAN,
-    LESS_THAN,
-    GREATER_THAN_OR_EQUAL,
-    LESS_THAN_OR_EQUALS,
-    IN,
-    LIKE,
-    CONTAINS_ANY,
-    CONTAINS_NONE,
-    CONTAINS_ALL,
-    IS,
-    EXISTS,
-    HIERARCHICALLY_ABOVE,
-    HIERARCHICALLY_BELOW,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RuleEngine {
-    #[default]
-    StandardConfigurator,
-    AdvancedConfigurator,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RulePrincipalPath {
-    #[default]
-    IS_AUTHENTICATED,
-    ASSIGNED_PERMISSIONS_PATH,
-    USER_ID,
-    ORGANIZATION_ID,
-    USER_ROLE_ID,
-    RBAC_TAGS,
-    SCALAR_ATTRIBUTE,
-    PLURAL_ATTRIBUTE,
-    PLACEHOLDER,
-    IS_INTERNAL,
-    CONTACT_ID,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RulePrincipalScopeType {
-    #[default]
-    ANY,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RuleResourcePath {
-    #[default]
-    NAMESPACE,
-    ENTITY,
-    FIELD,
-    ENTITYTYPE,
-    ENTITYKIND,
-    FIELDKIND,
-    DATASPACE,
-    TAG,
-    OBJECT_TAG,
-    CLASSIFICATION,
-    IMPLICITTAG,
-    RECORDFIELD,
-    OBJECT_CLASSIFICATION,
-    EXPRESSION,
-    OBJECT_DATASPACE,
-    RECORDFIELDTYPE,
-    METADATAKIND,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RuleResourceScopeType {
-    #[default]
-    ANY,
-    FIELD,
-    RECORD,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum RuleStatus {
     #[default]
     Draft,
@@ -268,42 +33,102 @@ pub enum RuleStatus {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct BusinessHoursEntry {
-    #[serde(default)]
-    pub active: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub active: Option<bool>,
     #[serde(default)]
     pub default: bool,
-    #[serde(rename = "fridayEndTime", default)]
-    pub friday_end_time: String,
-    #[serde(rename = "fridayStartTime", default)]
-    pub friday_start_time: String,
-    #[serde(rename = "mondayEndTime", default)]
-    pub monday_end_time: String,
-    #[serde(rename = "mondayStartTime", default)]
-    pub monday_start_time: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "saturdayEndTime", default)]
-    pub saturday_end_time: String,
-    #[serde(rename = "saturdayStartTime", default)]
-    pub saturday_start_time: String,
-    #[serde(rename = "sundayEndTime", default)]
-    pub sunday_end_time: String,
-    #[serde(rename = "sundayStartTime", default)]
-    pub sunday_start_time: String,
-    #[serde(rename = "thursdayEndTime", default)]
-    pub thursday_end_time: String,
-    #[serde(rename = "thursdayStartTime", default)]
-    pub thursday_start_time: String,
-    #[serde(rename = "timeZoneId", default)]
-    pub time_zone_id: String,
-    #[serde(rename = "tuesdayEndTime", default)]
-    pub tuesday_end_time: String,
-    #[serde(rename = "tuesdayStartTime", default)]
-    pub tuesday_start_time: String,
-    #[serde(rename = "wednesdayEndTime", default)]
-    pub wednesday_end_time: String,
-    #[serde(rename = "wednesdayStartTime", default)]
-    pub wednesday_start_time: String,
+    #[serde(
+        rename = "fridayEndTime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub friday_end_time: Option<serde_json::Value>,
+    #[serde(
+        rename = "fridayStartTime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub friday_start_time: Option<serde_json::Value>,
+    #[serde(
+        rename = "mondayEndTime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub monday_end_time: Option<serde_json::Value>,
+    #[serde(
+        rename = "mondayStartTime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub monday_start_time: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
+    #[serde(
+        rename = "saturdayEndTime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub saturday_end_time: Option<serde_json::Value>,
+    #[serde(
+        rename = "saturdayStartTime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub saturday_start_time: Option<serde_json::Value>,
+    #[serde(
+        rename = "sundayEndTime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sunday_end_time: Option<serde_json::Value>,
+    #[serde(
+        rename = "sundayStartTime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sunday_start_time: Option<serde_json::Value>,
+    #[serde(
+        rename = "thursdayEndTime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub thursday_end_time: Option<serde_json::Value>,
+    #[serde(
+        rename = "thursdayStartTime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub thursday_start_time: Option<serde_json::Value>,
+    #[serde(
+        rename = "timeZoneId",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub time_zone_id: Option<String>,
+    #[serde(
+        rename = "tuesdayEndTime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub tuesday_end_time: Option<serde_json::Value>,
+    #[serde(
+        rename = "tuesdayStartTime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub tuesday_start_time: Option<serde_json::Value>,
+    #[serde(
+        rename = "wednesdayEndTime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub wednesday_end_time: Option<serde_json::Value>,
+    #[serde(
+        rename = "wednesdayStartTime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub wednesday_start_time: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -312,8 +137,8 @@ pub struct BusinessHoursEntry {
 pub struct BusinessProcessDefinition {
     #[serde(rename = "businessProcessFeedbacks", default)]
     pub business_process_feedbacks: Vec<BusinessProcessFeedback>,
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "developerName", default)]
     pub developer_name: String,
     #[serde(rename = "masterLabel", default)]
@@ -342,20 +167,8 @@ pub struct BusinessProcessGroup {
     pub business_process_definitions: Vec<BusinessProcessDefinition>,
     #[serde(rename = "customerSatisfactionMetric", default)]
     pub customer_satisfaction_metric: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BusinessProcessTypeDefinition {
-    #[serde(rename = "applicationUsageType", default)]
-    pub application_usage_type: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
 }
@@ -366,22 +179,30 @@ pub struct BusinessProcessTypeDefinition {
 pub struct RuleDefinition {
     #[serde(rename = "apiName", default)]
     pub api_name: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "endDate", default)]
-    pub end_date: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "endDate", default, skip_serializing_if = "Option::is_none")]
+    pub end_date: Option<serde_json::Value>,
     #[serde(default)]
     pub label: String,
     #[serde(rename = "rulePayload", default)]
     pub rule_payload: String,
     #[serde(rename = "ruleStatus", default)]
     pub rule_status: serde_json::Value,
-    #[serde(rename = "sequenceNumber", default)]
-    pub sequence_number: f64,
+    #[serde(
+        rename = "sequenceNumber",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sequence_number: Option<f64>,
     #[serde(rename = "startDate", default)]
-    pub start_date: String,
-    #[serde(rename = "usageSubType", default)]
-    pub usage_sub_type: String,
+    pub start_date: serde_json::Value,
+    #[serde(
+        rename = "usageSubType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub usage_sub_type: Option<String>,
     #[serde(rename = "usageType", default)]
     pub usage_type: String,
 }
@@ -390,40 +211,88 @@ pub struct RuleDefinition {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct RuleEntry {
-    #[serde(rename = "assignedTo", default)]
-    pub assigned_to: String,
-    #[serde(rename = "assignedToType", default)]
-    pub assigned_to_type: serde_json::Value,
-    #[serde(rename = "booleanFilter", default)]
-    pub boolean_filter: String,
-    #[serde(rename = "businessHours", default)]
-    pub business_hours: String,
-    #[serde(rename = "businessHoursSource", default)]
-    pub business_hours_source: BusinessHoursSourceType,
+    #[serde(
+        rename = "assignedTo",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub assigned_to: Option<String>,
+    #[serde(
+        rename = "assignedToType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub assigned_to_type: Option<serde_json::Value>,
+    #[serde(
+        rename = "booleanFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub boolean_filter: Option<String>,
+    #[serde(
+        rename = "businessHours",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub business_hours: Option<String>,
+    #[serde(
+        rename = "businessHoursSource",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub business_hours_source: Option<BusinessHoursSourceType>,
     #[serde(rename = "criteriaItems", default)]
     pub criteria_items: Vec<serde_json::Value>,
-    #[serde(rename = "disableEscalationWhenModified", default)]
-    pub disable_escalation_when_modified: bool,
+    #[serde(
+        rename = "disableEscalationWhenModified",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub disable_escalation_when_modified: Option<bool>,
     #[serde(rename = "escalationAction", default)]
     pub escalation_action: Vec<serde_json::Value>,
-    #[serde(rename = "escalationStartTime", default)]
-    pub escalation_start_time: serde_json::Value,
-    #[serde(default)]
-    pub formula: String,
-    #[serde(rename = "notifyCcRecipients", default)]
-    pub notify_cc_recipients: bool,
-    #[serde(rename = "overrideExistingTeams", default)]
-    pub override_existing_teams: bool,
-    #[serde(rename = "replyToEmail", default)]
-    pub reply_to_email: String,
-    #[serde(rename = "senderEmail", default)]
-    pub sender_email: String,
-    #[serde(rename = "senderName", default)]
-    pub sender_name: String,
+    #[serde(
+        rename = "escalationStartTime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub escalation_start_time: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub formula: Option<String>,
+    #[serde(
+        rename = "notifyCcRecipients",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub notify_cc_recipients: Option<bool>,
+    #[serde(
+        rename = "overrideExistingTeams",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub override_existing_teams: Option<bool>,
+    #[serde(
+        rename = "replyToEmail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub reply_to_email: Option<String>,
+    #[serde(
+        rename = "senderEmail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sender_email: Option<String>,
+    #[serde(
+        rename = "senderName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sender_name: Option<String>,
     #[serde(default)]
     pub team: Vec<String>,
-    #[serde(default)]
-    pub template: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub template: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -434,8 +303,8 @@ pub struct RuleLibraryDefinition {
     pub context_definition: String,
     #[serde(rename = "contextRuleStatus", default)]
     pub context_rule_status: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(default)]
     pub label: String,
     #[serde(rename = "rulesetDefinitions", default)]
@@ -450,19 +319,18 @@ pub struct RuleLibraryDefinition {
 pub struct RulesetDefinition {
     #[serde(rename = "apiName", default)]
     pub api_name: String,
-    #[serde(rename = "endDate", default)]
-    pub end_date: String,
+    #[serde(rename = "endDate", default, skip_serializing_if = "Option::is_none")]
+    pub end_date: Option<serde_json::Value>,
     #[serde(rename = "executionType", default)]
     pub execution_type: serde_json::Value,
     #[serde(default)]
     pub label: String,
     #[serde(rename = "ruleDefinitions", default)]
     pub rule_definitions: Vec<RuleDefinition>,
-    #[serde(rename = "startDate", default)]
-    pub start_date: String,
+    #[serde(rename = "startDate", default, skip_serializing_if = "Option::is_none")]
+    pub start_date: Option<serde_json::Value>,
     #[serde(default)]
     pub status: serde_json::Value,
     #[serde(rename = "usageType", default)]
     pub usage_type: String,
 }
-

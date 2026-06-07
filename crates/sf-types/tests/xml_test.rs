@@ -11,7 +11,7 @@ use busbar_sf_types::traits::XmlSerializable;
 #[test]
 fn test_to_metadata_xml_includes_xml_declaration() {
     let settings = AccountPlanSettings {
-        enable_account_plan: true,
+        enable_account_plan: Some(true),
     };
 
     let xml = settings
@@ -28,7 +28,7 @@ fn test_to_metadata_xml_includes_xml_declaration() {
 #[test]
 fn test_to_metadata_xml_includes_namespace() {
     let settings = AccountPlanSettings {
-        enable_account_plan: true,
+        enable_account_plan: Some(true),
     };
 
     let xml = settings
@@ -45,7 +45,7 @@ fn test_to_metadata_xml_includes_namespace() {
 #[test]
 fn test_to_metadata_xml_uses_correct_root_element() {
     let settings = AccountPlanSettings {
-        enable_account_plan: true,
+        enable_account_plan: Some(true),
     };
 
     let xml = settings
@@ -66,7 +66,7 @@ fn test_to_metadata_xml_uses_correct_root_element() {
 #[test]
 fn test_to_metadata_xml_serializes_fields() {
     let settings = AccountPlanSettings {
-        enable_account_plan: true,
+        enable_account_plan: Some(true),
     };
 
     let xml = settings
@@ -91,7 +91,7 @@ fn test_from_metadata_xml_deserializes_correctly() {
     let settings =
         AccountPlanSettings::from_metadata_xml(xml).expect("Failed to deserialize from XML");
 
-    assert_eq!(settings.enable_account_plan, true);
+    assert_eq!(settings.enable_account_plan, Some(true));
 }
 
 #[test]
@@ -104,14 +104,14 @@ fn test_from_metadata_xml_handles_false_value() {
     let settings =
         AccountPlanSettings::from_metadata_xml(xml).expect("Failed to deserialize from XML");
 
-    assert_eq!(settings.enable_account_plan, false);
+    assert_eq!(settings.enable_account_plan, Some(false));
 }
 
 #[test]
 fn test_roundtrip_serialization() {
     // Create a struct
     let original = AccountPlanSettings {
-        enable_account_plan: true,
+        enable_account_plan: Some(true),
     };
 
     // Serialize to XML
@@ -138,7 +138,7 @@ fn test_from_metadata_xml_without_namespace() {
     let settings = AccountPlanSettings::from_metadata_xml(xml)
         .expect("Failed to deserialize XML without namespace");
 
-    assert_eq!(settings.enable_account_plan, true);
+    assert_eq!(settings.enable_account_plan, Some(true));
 }
 
 #[test]
@@ -151,8 +151,8 @@ fn test_from_metadata_xml_handles_default_values() {
     let settings = AccountPlanSettings::from_metadata_xml(xml)
         .expect("Failed to deserialize XML with missing fields");
 
-    // Default value for bool is false
-    assert_eq!(settings.enable_account_plan, false);
+    // Default value for optional field is None
+    assert_eq!(settings.enable_account_plan, None);
 }
 
 #[test]

@@ -51,18 +51,30 @@ pub enum ChannelType {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ChannelLayout {
-    #[serde(rename = "doesExcludeFieldLabels", default)]
-    pub does_exclude_field_labels: bool,
-    #[serde(rename = "doesExcludeFiles", default)]
-    pub does_exclude_files: bool,
+    #[serde(
+        rename = "doesExcludeFieldLabels",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_exclude_field_labels: Option<bool>,
+    #[serde(
+        rename = "doesExcludeFiles",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_exclude_files: Option<bool>,
     #[serde(rename = "enabledChannels", default)]
     pub enabled_channels: Vec<String>,
     #[serde(default)]
     pub label: String,
     #[serde(rename = "layoutItems", default)]
     pub layout_items: Vec<ChannelLayoutItem>,
-    #[serde(rename = "recordType", default)]
-    pub record_type: String,
+    #[serde(
+        rename = "recordType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub record_type: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -83,8 +95,8 @@ pub struct ChannelObjectLinkingRule {
     pub action_for_single_record_found: serde_json::Value,
     #[serde(rename = "channelType", default)]
     pub channel_type: ChannelType,
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "isLinkedRecordOpenedAsSubTab", default)]
     pub is_linked_record_opened_as_sub_tab: bool,
     #[serde(rename = "isRuleActive", default)]
@@ -96,4 +108,3 @@ pub struct ChannelObjectLinkingRule {
     #[serde(rename = "ruleName", default)]
     pub rule_name: String,
 }
-

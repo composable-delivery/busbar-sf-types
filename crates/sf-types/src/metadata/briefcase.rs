@@ -30,29 +30,18 @@ pub enum BriefcaseRuleRelationshipType {
     ChildToParent,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BriefcaseType {
-    #[default]
-    Standard,
-    HighVolume,
-    MobileAppSync,
-}
-
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct BriefcaseDefinition {
     #[serde(rename = "briefcaseRules", default)]
     pub briefcase_rules: Vec<BriefcaseRule>,
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "isActive", default)]
     pub is_active: bool,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(default)]
-    pub r#type: BriefcaseType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -61,28 +50,46 @@ pub struct BriefcaseDefinition {
 pub struct BriefcaseRule {
     #[serde(rename = "briefcaseRuleFilters", default)]
     pub briefcase_rule_filters: Vec<BriefcaseRuleFilter>,
-    #[serde(rename = "filterLogic", default)]
-    pub filter_logic: String,
-    #[serde(rename = "fldSvcBriefcaseRuleConfig", default)]
-    pub fld_svc_briefcase_rule_config: serde_json::Value,
-    #[serde(rename = "isAscendingOrder", default)]
-    pub is_ascending_order: bool,
-    #[serde(rename = "isRelatedFilesRule", default)]
-    pub is_related_files_rule: bool,
-    #[serde(rename = "orderBy", default)]
-    pub order_by: String,
-    #[serde(rename = "queryScope", default)]
-    pub query_scope: serde_json::Value,
-    #[serde(rename = "recordLimit", default)]
-    pub record_limit: f64,
-    #[serde(rename = "recordLimitDist", default)]
-    pub record_limit_dist: f64,
+    #[serde(
+        rename = "filterLogic",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub filter_logic: Option<String>,
+    #[serde(
+        rename = "isAscendingOrder",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_ascending_order: Option<bool>,
+    #[serde(rename = "orderBy", default, skip_serializing_if = "Option::is_none")]
+    pub order_by: Option<String>,
+    #[serde(
+        rename = "queryScope",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub query_scope: Option<serde_json::Value>,
+    #[serde(
+        rename = "recordLimit",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub record_limit: Option<f64>,
     #[serde(rename = "relatedRules", default)]
     pub related_rules: Vec<Box<BriefcaseRule>>,
-    #[serde(rename = "relationshipField", default)]
-    pub relationship_field: String,
-    #[serde(rename = "relationshipType", default)]
-    pub relationship_type: BriefcaseRuleRelationshipType,
+    #[serde(
+        rename = "relationshipField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub relationship_field: Option<String>,
+    #[serde(
+        rename = "relationshipType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub relationship_type: Option<BriefcaseRuleRelationshipType>,
     #[serde(rename = "targetEntity", default)]
     pub target_entity: String,
 }
@@ -95,9 +102,12 @@ pub struct BriefcaseRuleFilter {
     pub filter_operator: BriefcaseFilterOperator,
     #[serde(rename = "filterSeqNumber", default)]
     pub filter_seq_number: f64,
-    #[serde(rename = "filterValue", default)]
-    pub filter_value: String,
+    #[serde(
+        rename = "filterValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub filter_value: Option<String>,
     #[serde(rename = "targetEntityField", default)]
     pub target_entity_field: String,
 }
-

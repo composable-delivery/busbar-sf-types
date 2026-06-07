@@ -13,7 +13,6 @@ use serde::{Deserialize, Serialize};
 pub enum SearchCriteriaConfigurationConfigurationType {
     #[default]
     DefaultSearch,
-    ClinicalTrialSearch,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -32,61 +31,96 @@ pub enum SearchCriteriaConfigurationResultDisplayFormat {
     CARD,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SearchResultActionScope {
-    #[default]
-    Global,
-    Inline,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SearchResultActionType {
-    #[default]
-    FlowDefinition,
-    OmniScript,
-    LightningWebComponent,
-}
-
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct SearchCriteriaConfiguration {
-    #[serde(rename = "actionList", default)]
-    pub action_list: String,
-    #[serde(rename = "additionalSearchCriteria", default)]
-    pub additional_search_criteria: String,
-    #[serde(rename = "aggrCriteriaFieldset", default)]
-    pub aggr_criteria_fieldset: serde_json::Value,
-    #[serde(rename = "configurationType", default)]
-    pub configuration_type: SearchCriteriaConfigurationConfigurationType,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "distanceCriteria", default)]
-    pub distance_criteria: String,
-    #[serde(rename = "filterType", default)]
-    pub filter_type: SearchCriteriaConfigurationFilterType,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isSingleFieldSort", default)]
-    pub is_single_field_sort: bool,
+    #[serde(
+        rename = "actionList",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub action_list: Option<String>,
+    #[serde(
+        rename = "additionalSearchCriteria",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub additional_search_criteria: Option<String>,
+    #[serde(
+        rename = "aggrCriteriaFieldset",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub aggr_criteria_fieldset: Option<serde_json::Value>,
+    #[serde(
+        rename = "configurationType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub configuration_type: Option<SearchCriteriaConfigurationConfigurationType>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "distanceCriteria",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub distance_criteria: Option<String>,
+    #[serde(
+        rename = "filterType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub filter_type: Option<SearchCriteriaConfigurationFilterType>,
+    #[serde(rename = "isActive", default, skip_serializing_if = "Option::is_none")]
+    pub is_active: Option<bool>,
+    #[serde(
+        rename = "isSingleFieldSort",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_single_field_sort: Option<bool>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "resultDisplayFormat", default)]
-    pub result_display_format: SearchCriteriaConfigurationResultDisplayFormat,
-    #[serde(rename = "resultFieldset", default)]
-    pub result_fieldset: serde_json::Value,
-    #[serde(rename = "resultFlexCard", default)]
-    pub result_flex_card: String,
-    #[serde(rename = "searchCriteriaFieldset", default)]
-    pub search_criteria_fieldset: serde_json::Value,
-    #[serde(rename = "searchableObjDataSyncInfo", default)]
-    pub searchable_obj_data_sync_info: String,
+    #[serde(
+        rename = "resultDisplayFormat",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub result_display_format: Option<SearchCriteriaConfigurationResultDisplayFormat>,
+    #[serde(
+        rename = "resultFieldset",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub result_fieldset: Option<serde_json::Value>,
+    #[serde(
+        rename = "resultFlexCard",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub result_flex_card: Option<String>,
+    #[serde(
+        rename = "searchCriteriaFieldset",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub search_criteria_fieldset: Option<serde_json::Value>,
+    #[serde(
+        rename = "searchableObjDataSyncInfo",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub searchable_obj_data_sync_info: Option<String>,
     #[serde(rename = "searchableObject", default)]
     pub searchable_object: String,
-    #[serde(rename = "sortingCriteriaFieldset", default)]
-    pub sorting_criteria_fieldset: serde_json::Value,
+    #[serde(
+        rename = "sortingCriteriaFieldset",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sorting_criteria_fieldset: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -111,9 +145,9 @@ pub struct SearchCustomization {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct SearchCustomizationExplicitFilter {
-    #[serde(rename = "fieldPath", default)]
-    pub field_path: String,
-    #[serde(default)]
+    #[serde(rename = "fieldPath", default, skip_serializing_if = "Option::is_none")]
+    pub field_path: Option<String>,
+    #[serde(rename = "type", default)]
     pub r#type: String,
 }
 
@@ -139,8 +173,8 @@ pub struct SearchCustomizationObjectOverride {
     pub object_api_name: String,
     #[serde(default)]
     pub rule: Vec<SearchCustomizationRule>,
-    #[serde(default)]
-    pub searchable: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub searchable: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -159,8 +193,12 @@ pub struct SearchCustomizationRule {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct SearchCustomizationRuleValue {
-    #[serde(rename = "targetObjectApiName", default)]
-    pub target_object_api_name: String,
+    #[serde(
+        rename = "targetObjectApiName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub target_object_api_name: Option<String>,
     #[serde(default)]
     pub value: String,
 }
@@ -171,10 +209,14 @@ pub struct SearchCustomizationRuleValue {
 pub struct SearchOrgWideFieldConfig {
     #[serde(rename = "fieldReference", default)]
     pub field_reference: String,
-    #[serde(rename = "isSearchable", default)]
-    pub is_searchable: bool,
-    #[serde(rename = "isSecure", default)]
-    pub is_secure: bool,
+    #[serde(
+        rename = "isSearchable",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_searchable: Option<bool>,
+    #[serde(rename = "isSecure", default, skip_serializing_if = "Option::is_none")]
+    pub is_secure: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -192,58 +234,7 @@ pub struct SearchOrgWideObjectConfig {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct SearchResultActionConfig {
-    #[serde(rename = "actionReference", default)]
-    pub action_reference: String,
-    #[serde(rename = "actionScope", default)]
-    pub action_scope: SearchResultActionScope,
-    #[serde(rename = "actionType", default)]
-    pub action_type: SearchResultActionType,
-    #[serde(rename = "agentConfirmationMessage", default)]
-    pub agent_confirmation_message: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isAiAction", default)]
-    pub is_ai_action: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct SearchSettingsByObject {
     #[serde(rename = "searchSettingsByObject", default)]
     pub search_settings_by_object: Vec<serde_json::Value>,
 }
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SearchableObjDataSyncInfo {
-    #[serde(rename = "dataSyncActive", default)]
-    pub data_sync_active: bool,
-    #[serde(rename = "dataSyncJob", default)]
-    pub data_sync_job: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "displayFieldSet", default)]
-    pub display_field_set: serde_json::Value,
-    #[serde(rename = "lastDataSyncRunDate", default)]
-    pub last_data_sync_run_date: String,
-    #[serde(rename = "lookupMappings", default)]
-    pub lookup_mappings: serde_json::Value,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "parsingFieldSet", default)]
-    pub parsing_field_set: serde_json::Value,
-    #[serde(rename = "picklistMappings", default)]
-    pub picklist_mappings: Vec<serde_json::Value>,
-    #[serde(rename = "scheduleFrequencyInHours", default)]
-    pub schedule_frequency_in_hours: String,
-    #[serde(rename = "searchableObject", default)]
-    pub searchable_object: String,
-    #[serde(rename = "typeAheadMappings", default)]
-    pub type_ahead_mappings: Vec<serde_json::Value>,
-}
-

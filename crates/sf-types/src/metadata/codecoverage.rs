@@ -55,6 +55,7 @@ pub enum CodeStatus {
     Suspended,
     Imported,
     Verifying,
+    Failed,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -84,8 +85,8 @@ pub struct CodeCoverageResult {
     pub method_info: Vec<CodeLocation>,
     #[serde(default)]
     pub name: String,
-    #[serde(default)]
-    pub namespace: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub namespace: Option<String>,
     #[serde(rename = "numLocations", default)]
     pub num_locations: f64,
     #[serde(rename = "numLocationsNotCovered", default)]
@@ -94,7 +95,7 @@ pub struct CodeCoverageResult {
     pub soql_info: Vec<CodeLocation>,
     #[serde(rename = "soslInfo", default)]
     pub sosl_info: Vec<CodeLocation>,
-    #[serde(default)]
+    #[serde(rename = "type", default)]
     pub r#type: String,
 }
 
@@ -106,10 +107,10 @@ pub struct CodeCoverageWarning {
     pub id: serde_json::Value,
     #[serde(default)]
     pub message: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub namespace: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub namespace: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -125,4 +126,3 @@ pub struct CodeLocation {
     #[serde(default)]
     pub time: f64,
 }
-

@@ -8,16 +8,78 @@
 
 use serde::{Deserialize, Serialize};
 
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum PackageIdType {
+    #[default]
+    PackageId,
+    SubscriberPackageVersionId,
+    PackageInstallRequestId,
+    PackageUninstallRequestId,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum PackageType {
+    #[default]
+    Managed,
+    Unlocked,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct InstalledBundleRecord {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(
+        rename = "PackageBundleId",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub package_bundle_id: Option<String>,
+    #[serde(
+        rename = "PackageBundleVersionId",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub package_bundle_version_id: Option<String>,
+    #[serde(rename = "BundleName", default)]
+    pub bundle_name: String,
+    #[serde(rename = "BundleVersionName", default)]
+    pub bundle_version_name: String,
+    #[serde(rename = "MajorVersion", default)]
+    pub major_version: f64,
+    #[serde(rename = "MinorVersion", default)]
+    pub minor_version: f64,
+    #[serde(
+        rename = "CreatedDate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub created_date: Option<String>,
+    #[serde(
+        rename = "LastModifiedDate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub last_modified_date: Option<String>,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct InstalledPackage {
     #[serde(rename = "activateRSS", default)]
     pub activate_rss: bool,
-    #[serde(default)]
-    pub password: String,
-    #[serde(rename = "securityType", default)]
-    pub security_type: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub password: Option<String>,
+    #[serde(
+        rename = "securityType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub security_type: Option<String>,
     #[serde(rename = "versionNumber", default)]
     pub version_number: String,
 }
@@ -25,27 +87,779 @@ pub struct InstalledPackage {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct Package {
-    #[serde(rename = "apiAccessLevel", default)]
-    pub api_access_level: serde_json::Value,
-    #[serde(default)]
+pub struct InstalledPackageBundleVersion {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "BundleName", default)]
+    pub bundle_name: String,
+    #[serde(rename = "BundleId", default)]
+    pub bundle_id: String,
+    #[serde(rename = "BundleVersionId", default)]
+    pub bundle_version_id: String,
+    #[serde(rename = "BundleVersionName", default)]
+    pub bundle_version_name: String,
+    #[serde(rename = "MajorVersion", default)]
+    pub major_version: f64,
+    #[serde(rename = "MinorVersion", default)]
+    pub minor_version: f64,
+    #[serde(rename = "Description", default)]
     pub description: String,
-    #[serde(rename = "namespacePrefix", default)]
-    pub namespace_prefix: String,
+    #[serde(rename = "InstalledDate", default)]
+    pub installed_date: String,
+    #[serde(rename = "LastUpgradedDate", default)]
+    pub last_upgraded_date: String,
+    #[serde(rename = "Components", default)]
+    pub components: Vec<InstalledPackageBundleVersionComponent>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct InstalledPackageBundleVersionComponent {
+    #[serde(rename = "ExpectedPackageName", default)]
+    pub expected_package_name: String,
+    #[serde(rename = "ExpectedPackageVersionNumber", default)]
+    pub expected_package_version_number: String,
+    #[serde(rename = "ActualPackageName", default)]
+    pub actual_package_name: String,
+    #[serde(rename = "ActualPackageVersionNumber", default)]
+    pub actual_package_version_number: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct InstalledPackageBundleVersionQueryRecord {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "PackageBundleVersion", default)]
+    pub package_bundle_version: serde_json::Value,
+    #[serde(rename = "InstalledDate", default)]
+    pub installed_date: String,
+    #[serde(rename = "LastUpgradedDate", default)]
+    pub last_upgraded_date: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct InstalledPackageRecord {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "SubscriberPackageId", default)]
+    pub subscriber_package_id: String,
+    #[serde(rename = "SubscriberPackage", default)]
+    pub subscriber_package: serde_json::Value,
+    #[serde(rename = "SubscriberPackageVersion", default)]
+    pub subscriber_package_version: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct InstalledPackages {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "SubscriberPackageId", default)]
+    pub subscriber_package_id: String,
+    #[serde(rename = "SubscriberPackageVersionId", default)]
+    pub subscriber_package_version_id: String,
+    #[serde(rename = "MinPackageVersionId", default)]
+    pub min_package_version_id: String,
+    #[serde(
+        rename = "SubscriberPackage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub subscriber_package: Option<serde_json::Value>,
+    #[serde(
+        rename = "SubscriberPackageVersion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub subscriber_package_version: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct InstalledSubscriberPackage {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "SubscriberPackageId", default)]
+    pub subscriber_package_id: String,
+    #[serde(rename = "SubscriberPackageVersionId", default)]
+    pub subscriber_package_version_id: String,
+    #[serde(rename = "MinPackageVersionId", default)]
+    pub min_package_version_id: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct InstalledSubscriberPackageVersion {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "SubscriberPackageId", default)]
+    pub subscriber_package_id: String,
+    #[serde(rename = "Name", default)]
+    pub name: String,
+    #[serde(rename = "Description", default)]
+    pub description: String,
+    #[serde(rename = "PublisherName", default)]
+    pub publisher_name: String,
+    #[serde(rename = "MajorVersion", default)]
+    pub major_version: f64,
+    #[serde(rename = "MinorVersion", default)]
+    pub minor_version: f64,
+    #[serde(rename = "PatchVersion", default)]
+    pub patch_version: f64,
+    #[serde(rename = "BuildNumber", default)]
+    pub build_number: f64,
+    #[serde(rename = "ReleaseState", default)]
+    pub release_state: String,
+    #[serde(rename = "IsManaged", default)]
+    pub is_managed: bool,
+    #[serde(rename = "IsDeprecated", default)]
+    pub is_deprecated: bool,
+    #[serde(rename = "IsPasswordProtected", default)]
+    pub is_password_protected: bool,
+    #[serde(rename = "IsBeta", default)]
+    pub is_beta: bool,
+    #[serde(rename = "Package2ContainerOptions", default)]
+    pub package_2_container_options: String,
+    #[serde(rename = "IsSecurityReviewed", default)]
+    pub is_security_reviewed: bool,
+    #[serde(rename = "IsOrgDependent", default)]
+    pub is_org_dependent: bool,
+    #[serde(rename = "AppExchangePackageName", default)]
+    pub app_exchange_package_name: String,
+    #[serde(rename = "AppExchangeDescription", default)]
+    pub app_exchange_description: String,
+    #[serde(rename = "AppExchangePublisherName", default)]
+    pub app_exchange_publisher_name: String,
+    #[serde(rename = "AppExchangeLogoUrl", default)]
+    pub app_exchange_logo_url: String,
+    #[serde(rename = "ReleaseNotesUrl", default)]
+    pub release_notes_url: String,
+    #[serde(rename = "PostInstallUrl", default)]
+    pub post_install_url: String,
+    #[serde(rename = "RemoteSiteSettings", default)]
+    pub remote_site_settings: serde_json::Value,
+    #[serde(rename = "CspTrustedSites", default)]
+    pub csp_trusted_sites: serde_json::Value,
+    #[serde(rename = "Profiles", default)]
+    pub profiles: serde_json::Value,
+    #[serde(rename = "Dependencies", default)]
+    pub dependencies: serde_json::Value,
+    #[serde(rename = "InstallValidationStatus", default)]
+    pub install_validation_status: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Package {
+    #[serde(
+        rename = "apiAccessLevel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub api_access_level: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "namespacePrefix",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub namespace_prefix: Option<String>,
     #[serde(rename = "objectPermissions", default)]
     pub object_permissions: Vec<serde_json::Value>,
-    #[serde(rename = "packageType", default)]
-    pub package_type: String,
-    #[serde(rename = "postInstallClass", default)]
-    pub post_install_class: String,
-    #[serde(rename = "setupWeblink", default)]
-    pub setup_weblink: String,
+    #[serde(
+        rename = "packageType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub package_type: Option<String>,
+    #[serde(
+        rename = "postInstallClass",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub post_install_class: Option<String>,
+    #[serde(
+        rename = "setupWeblink",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub setup_weblink: Option<String>,
     #[serde(default)]
     pub types: Vec<PackageTypeMembers>,
-    #[serde(rename = "uninstallClass", default)]
-    pub uninstall_class: String,
+    #[serde(
+        rename = "uninstallClass",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub uninstall_class: Option<String>,
     #[serde(default)]
     pub version: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Package1Display {
+    #[serde(rename = "MetadataPackageVersionId", default)]
+    pub metadata_package_version_id: String,
+    #[serde(rename = "MetadataPackageId", default)]
+    pub metadata_package_id: String,
+    #[serde(rename = "Name", default)]
+    pub name: String,
+    #[serde(rename = "Version", default)]
+    pub version: String,
+    #[serde(rename = "ReleaseState", default)]
+    pub release_state: String,
+    #[serde(rename = "BuildNumber", default)]
+    pub build_number: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Package2 {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "IsDeleted", default)]
+    pub is_deleted: bool,
+    #[serde(rename = "CreatedDate", default)]
+    pub created_date: f64,
+    #[serde(rename = "CreatedById", default)]
+    pub created_by_id: String,
+    #[serde(rename = "LastModifiedDate", default)]
+    pub last_modified_date: f64,
+    #[serde(rename = "LastModifiedById", default)]
+    pub last_modified_by_id: String,
+    #[serde(rename = "SystemModstamp", default)]
+    pub system_modstamp: f64,
+    #[serde(rename = "SubscriberPackageId", default)]
+    pub subscriber_package_id: String,
+    #[serde(rename = "Name", default)]
+    pub name: String,
+    #[serde(rename = "Description", default)]
+    pub description: String,
+    #[serde(rename = "NamespacePrefix", default)]
+    pub namespace_prefix: String,
+    #[serde(rename = "ContainerOptions", default)]
+    pub container_options: PackageType,
+    #[serde(rename = "IsDeprecated", default)]
+    pub is_deprecated: bool,
+    #[serde(rename = "IsOrgDependent", default)]
+    pub is_org_dependent: bool,
+    #[serde(rename = "ConvertedFromPackageId", default)]
+    pub converted_from_package_id: String,
+    #[serde(rename = "PackageErrorUsername", default)]
+    pub package_error_username: String,
+    #[serde(
+        rename = "AppAnalyticsEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub app_analytics_enabled: Option<bool>,
+    #[serde(
+        rename = "RecommendedVersionId",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recommended_version_id: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Package2Version {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "IsDeleted", default)]
+    pub is_deleted: bool,
+    #[serde(rename = "CreatedDate", default)]
+    pub created_date: f64,
+    #[serde(rename = "CreatedById", default)]
+    pub created_by_id: String,
+    #[serde(rename = "LastModifiedDate", default)]
+    pub last_modified_date: f64,
+    #[serde(rename = "LastModifiedById", default)]
+    pub last_modified_by_id: String,
+    #[serde(rename = "SystemModstamp", default)]
+    pub system_modstamp: f64,
+    #[serde(rename = "Package2Id", default)]
+    pub package_2_id: String,
+    #[serde(rename = "SubscriberPackageVersionId", default)]
+    pub subscriber_package_version_id: String,
+    #[serde(rename = "Tag", default)]
+    pub tag: String,
+    #[serde(rename = "Branch", default)]
+    pub branch: String,
+    #[serde(rename = "AncestorId", default)]
+    pub ancestor_id: String,
+    #[serde(rename = "ValidationSkipped", default)]
+    pub validation_skipped: bool,
+    #[serde(
+        rename = "ValidatedAsync",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub validated_async: Option<bool>,
+    #[serde(rename = "Name", default)]
+    pub name: String,
+    #[serde(rename = "Description", default)]
+    pub description: String,
+    #[serde(rename = "MajorVersion", default)]
+    pub major_version: f64,
+    #[serde(rename = "MinorVersion", default)]
+    pub minor_version: f64,
+    #[serde(rename = "PatchVersion", default)]
+    pub patch_version: f64,
+    #[serde(rename = "BuildNumber", default)]
+    pub build_number: f64,
+    #[serde(rename = "IsDeprecated", default)]
+    pub is_deprecated: bool,
+    #[serde(rename = "IsPasswordProtected", default)]
+    pub is_password_protected: bool,
+    #[serde(rename = "CodeCoverage", default)]
+    pub code_coverage: serde_json::Value,
+    #[serde(rename = "CodeCoveragePercentages", default)]
+    pub code_coverage_percentages: serde_json::Value,
+    #[serde(rename = "HasPassedCodeCoverageCheck", default)]
+    pub has_passed_code_coverage_check: bool,
+    #[serde(rename = "InstallKey", default)]
+    pub install_key: String,
+    #[serde(rename = "IsReleased", default)]
+    pub is_released: bool,
+    #[serde(rename = "ConvertedFromVersionId", default)]
+    pub converted_from_version_id: String,
+    #[serde(rename = "ReleaseVersion", default)]
+    pub release_version: f64,
+    #[serde(rename = "BuildDurationInSeconds", default)]
+    pub build_duration_in_seconds: f64,
+    #[serde(rename = "HasMetadataRemoved", default)]
+    pub has_metadata_removed: bool,
+    #[serde(rename = "Language", default)]
+    pub language: String,
+    #[serde(
+        rename = "EndToEndBuildDurationInSeconds",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub end_to_end_build_duration_in_seconds: Option<f64>,
+    #[serde(rename = "TotalNumberOfMetadataFiles", default)]
+    pub total_number_of_metadata_files: f64,
+    #[serde(rename = "TotalSizeOfMetadataFiles", default)]
+    pub total_size_of_metadata_files: f64,
+    #[serde(
+        rename = "DeveloperUsePkgZip",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub developer_use_pkg_zip: Option<String>,
+    #[serde(rename = "HasVpi", default, skip_serializing_if = "Option::is_none")]
+    pub has_vpi: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Package2VersionCreateRequest {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "IsDeleted", default)]
+    pub is_deleted: bool,
+    #[serde(rename = "CreatedDate", default)]
+    pub created_date: f64,
+    #[serde(rename = "CreatedById", default)]
+    pub created_by_id: String,
+    #[serde(rename = "LastModifiedDate", default)]
+    pub last_modified_date: f64,
+    #[serde(rename = "LastModifiedById", default)]
+    pub last_modified_by_id: String,
+    #[serde(rename = "SystemModstamp", default)]
+    pub system_modstamp: f64,
+    #[serde(rename = "Package2Id", default)]
+    pub package_2_id: String,
+    #[serde(rename = "Package2VersionId", default)]
+    pub package_2_version_id: String,
+    #[serde(rename = "Tag", default)]
+    pub tag: String,
+    #[serde(rename = "Branch", default)]
+    pub branch: String,
+    #[serde(rename = "Status", default)]
+    pub status: serde_json::Value,
+    #[serde(rename = "Instance", default)]
+    pub instance: String,
+    #[serde(rename = "IsPasswordProtected", default)]
+    pub is_password_protected: bool,
+    #[serde(rename = "InstallKey", default)]
+    pub install_key: String,
+    #[serde(rename = "CalculateCodeCoverage", default)]
+    pub calculate_code_coverage: bool,
+    #[serde(rename = "SkipValidation", default)]
+    pub skip_validation: bool,
+    #[serde(rename = "IsConversionRequest", default)]
+    pub is_conversion_request: bool,
+    #[serde(rename = "VersionInfo", default)]
+    pub version_info: String,
+    #[serde(rename = "Language", default)]
+    pub language: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Package2VersionCreateRequestError {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "IsDeleted", default)]
+    pub is_deleted: bool,
+    #[serde(rename = "CreatedDate", default)]
+    pub created_date: f64,
+    #[serde(rename = "CreatedById", default)]
+    pub created_by_id: String,
+    #[serde(rename = "LastModifiedDate", default)]
+    pub last_modified_date: f64,
+    #[serde(rename = "LastModifiedById", default)]
+    pub last_modified_by_id: String,
+    #[serde(rename = "SystemModstamp", default)]
+    pub system_modstamp: f64,
+    #[serde(rename = "ParentRequestId", default)]
+    pub parent_request_id: String,
+    #[serde(rename = "Message", default)]
+    pub message: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageAncestryNodeAttributes {
+    #[serde(default)]
+    pub node: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageAncestryNodeData {
+    #[serde(default)]
+    pub data: PackageAncestryNodeOptions,
+    #[serde(default)]
+    pub children: Vec<Box<PackageAncestryNodeData>>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageAncestryNodeOptions {
+    #[serde(
+        rename = "AncestorId",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub ancestor_id: Option<String>,
+    #[serde(rename = "SubscriberPackageVersionId", default)]
+    pub subscriber_package_version_id: String,
+    #[serde(rename = "MajorVersion", default)]
+    pub major_version: serde_json::Value,
+    #[serde(rename = "MinorVersion", default)]
+    pub minor_version: serde_json::Value,
+    #[serde(rename = "PatchVersion", default)]
+    pub patch_version: serde_json::Value,
+    #[serde(rename = "BuildNumber", default)]
+    pub build_number: serde_json::Value,
+    #[serde(rename = "depthCounter", default)]
+    pub depth_counter: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageAncestryOptions {
+    #[serde(rename = "packageId", default)]
+    pub package_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub project: Option<serde_json::Value>,
+    #[serde(default)]
+    pub connection: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageBundleVersionCreateRequestResult {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "PackageBundleVersionId", default)]
+    pub package_bundle_version_id: String,
+    #[serde(rename = "RequestStatus", default)]
+    pub request_status: serde_json::Value,
+    #[serde(rename = "CreatedDate", default)]
+    pub created_date: String,
+    #[serde(rename = "CreatedById", default)]
+    pub created_by_id: String,
+    #[serde(rename = "Error", default, skip_serializing_if = "Option::is_none")]
+    pub error: Option<Vec<String>>,
+    #[serde(
+        rename = "ValidationError",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub validation_error: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageCreateOptions {
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "noNamespace", default)]
+    pub no_namespace: bool,
+    #[serde(rename = "orgDependent", default)]
+    pub org_dependent: bool,
+    #[serde(rename = "packageType", default)]
+    pub package_type: PackageType,
+    #[serde(rename = "errorNotificationUsername", default)]
+    pub error_notification_username: String,
+    #[serde(default)]
+    pub path: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageInstallOptions {
+    #[serde(
+        rename = "publishFrequency",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub publish_frequency: Option<serde_json::Value>,
+    #[serde(
+        rename = "publishTimeout",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub publish_timeout: Option<serde_json::Value>,
+    #[serde(
+        rename = "pollingFrequency",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub polling_frequency: Option<serde_json::Value>,
+    #[serde(
+        rename = "pollingTimeout",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub polling_timeout: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageInstallRequest {
+    #[serde(default)]
+    pub attributes: serde_json::Value,
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "IsDeleted", default)]
+    pub is_deleted: bool,
+    #[serde(rename = "CreatedDate", default)]
+    pub created_date: String,
+    #[serde(rename = "CreatedById", default)]
+    pub created_by_id: String,
+    #[serde(rename = "LastModifiedDate", default)]
+    pub last_modified_date: String,
+    #[serde(rename = "LastModifiedById", default)]
+    pub last_modified_by_id: String,
+    #[serde(rename = "SystemModstamp", default)]
+    pub system_modstamp: String,
+    #[serde(rename = "SubscriberPackageVersionKey", default)]
+    pub subscriber_package_version_key: String,
+    #[serde(rename = "NameConflictResolution", default)]
+    pub name_conflict_resolution: serde_json::Value,
+    #[serde(rename = "SecurityType", default)]
+    pub security_type: serde_json::Value,
+    #[serde(rename = "PackageInstallSource", default)]
+    pub package_install_source: String,
+    #[serde(rename = "ProfileMappings", default)]
+    pub profile_mappings: serde_json::Value,
+    #[serde(rename = "Password", default)]
+    pub password: serde_json::Value,
+    #[serde(rename = "EnableRss", default)]
+    pub enable_rss: bool,
+    #[serde(rename = "UpgradeType", default)]
+    pub upgrade_type: serde_json::Value,
+    #[serde(rename = "ApexCompileType", default)]
+    pub apex_compile_type: serde_json::Value,
+    #[serde(rename = "SkipHandlers", default)]
+    pub skip_handlers: serde_json::Value,
+    #[serde(rename = "Status", default)]
+    pub status: serde_json::Value,
+    #[serde(rename = "Errors", default)]
+    pub errors: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageOptions {
+    #[serde(default)]
+    pub connection: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub project: Option<serde_json::Value>,
+    #[serde(rename = "packageAliasOrId", default)]
+    pub package_alias_or_id: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackagePushRequestAbortQueryOptions {
+    #[serde(rename = "packagePushRequestId", default)]
+    pub package_push_request_id: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackagePushRequestJobCountByStatusResult {
+    #[serde(rename = "expr0", default)]
+    pub expr_0: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackagePushRequestListQueryOptions {
+    #[serde(rename = "packageId", default)]
+    pub package_id: String,
+    #[serde(
+        rename = "scheduledLastDays",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub scheduled_last_days: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub status: Option<serde_json::Value>,
+    #[serde(
+        rename = "isMigration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_migration: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackagePushRequestListResult {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "PackageVersionId", default)]
+    pub package_version_id: String,
+    #[serde(rename = "PackageVersion", default)]
+    pub package_version: serde_json::Value,
+    #[serde(rename = "Status", default)]
+    pub status: String,
+    #[serde(rename = "ScheduledStartTime", default)]
+    pub scheduled_start_time: String,
+    #[serde(rename = "StartTime", default)]
+    pub start_time: String,
+    #[serde(rename = "EndTime", default)]
+    pub end_time: String,
+    #[serde(rename = "OrgsScheduled", default)]
+    pub orgs_scheduled: f64,
+    #[serde(rename = "OrgsUpgradeSucceeded", default)]
+    pub orgs_upgrade_succeeded: f64,
+    #[serde(rename = "OrgsUpgradeFailed", default)]
+    pub orgs_upgrade_failed: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackagePushRequestReportJobFailuresResult {
+    #[serde(rename = "ErrorMessage", default)]
+    pub error_message: String,
+    #[serde(rename = "ErrorDetails", default)]
+    pub error_details: String,
+    #[serde(rename = "ErrorTitle", default)]
+    pub error_title: String,
+    #[serde(rename = "ErrorSeverity", default)]
+    pub error_severity: String,
+    #[serde(rename = "ErrorType", default)]
+    pub error_type: String,
+    #[serde(rename = "PackagePushJobId", default)]
+    pub package_push_job_id: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackagePushRequestReportQueryOptions {
+    #[serde(rename = "packagePushRequestId", default)]
+    pub package_push_request_id: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackagePushRequestReportResult {
+    #[serde(rename = "PackageVersion", default)]
+    pub package_version: serde_json::Value,
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "PackageVersionId", default)]
+    pub package_version_id: String,
+    #[serde(rename = "Status", default)]
+    pub status: String,
+    #[serde(rename = "ScheduledStartTime", default)]
+    pub scheduled_start_time: serde_json::Value,
+    #[serde(rename = "StartTime", default)]
+    pub start_time: serde_json::Value,
+    #[serde(rename = "EndTime", default)]
+    pub end_time: serde_json::Value,
+    #[serde(rename = "DurationSeconds", default)]
+    pub duration_seconds: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackagePushScheduleQueryOptions {
+    #[serde(rename = "packageVersionId", default)]
+    pub package_version_id: String,
+    #[serde(
+        rename = "scheduledStartTime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub scheduled_start_time: Option<String>,
+    #[serde(rename = "orgList", default)]
+    pub org_list: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackagePushScheduleResult {
+    #[serde(rename = "PushRequestId", default)]
+    pub push_request_id: String,
+    #[serde(rename = "ScheduledStartTime", default)]
+    pub scheduled_start_time: serde_json::Value,
+    #[serde(rename = "Status", default)]
+    pub status: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -61,14 +875,761 @@ pub struct PackageTypeMembers {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct PackageUpdateOptions {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "Name", default, skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
+    #[serde(
+        rename = "Description",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub description: Option<String>,
+    #[serde(
+        rename = "PackageErrorUsername",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub package_error_username: Option<String>,
+    #[serde(
+        rename = "AppAnalyticsEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub app_analytics_enabled: Option<bool>,
+    #[serde(
+        rename = "RecommendedVersionId",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recommended_version_id: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageUploadRequest {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "IsDeleted", default)]
+    pub is_deleted: bool,
+    #[serde(rename = "CreatedDate", default)]
+    pub created_date: f64,
+    #[serde(rename = "CreatedById", default)]
+    pub created_by_id: String,
+    #[serde(rename = "LastModifiedDate", default)]
+    pub last_modified_date: f64,
+    #[serde(rename = "LastModifiedById", default)]
+    pub last_modified_by_id: String,
+    #[serde(rename = "SystemModstamp", default)]
+    pub system_modstamp: f64,
+    #[serde(rename = "MetadataPackageId", default)]
+    pub metadata_package_id: String,
+    #[serde(rename = "MetadataPackageVersionId", default)]
+    pub metadata_package_version_id: String,
+    #[serde(rename = "IsReleaseVersion", default)]
+    pub is_release_version: bool,
+    #[serde(rename = "VersionName", default)]
+    pub version_name: String,
+    #[serde(rename = "Description", default)]
+    pub description: String,
+    #[serde(rename = "MajorVersion", default)]
+    pub major_version: f64,
+    #[serde(rename = "MinorVersion", default)]
+    pub minor_version: f64,
+    #[serde(rename = "ReleaseNotesUrl", default)]
+    pub release_notes_url: String,
+    #[serde(rename = "PostInstallUrl", default)]
+    pub post_install_url: String,
+    #[serde(rename = "Password", default)]
+    pub password: String,
+    #[serde(rename = "Status", default)]
+    pub status: String,
+    #[serde(rename = "Errors", default)]
+    pub errors: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct PackageVersion {
     #[serde(rename = "majorNumber", default)]
     pub major_number: f64,
     #[serde(rename = "minorNumber", default)]
     pub minor_number: f64,
-    #[serde(default)]
-    pub namespace: String,
-    #[serde(rename = "packageId", default)]
-    pub package_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub namespace: Option<String>,
+    #[serde(rename = "packageId", default, skip_serializing_if = "Option::is_none")]
+    pub package_id: Option<String>,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageVersionCreateEventData {
+    #[serde(default)]
+    pub id: String,
+    #[serde(
+        rename = "packageUpdated",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub package_updated: Option<bool>,
+    #[serde(rename = "packageVersionCreateRequestResult", default)]
+    pub package_version_create_request_result: PackageVersionCreateRequestResult,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub message: Option<String>,
+    #[serde(
+        rename = "timeRemaining",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub time_remaining: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageVersionCreateOptions {
+    #[serde(default)]
+    pub connection: serde_json::Value,
+    #[serde(default)]
+    pub project: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageVersionCreateReportProgress {
+    #[serde(rename = "remainingWaitTime", default)]
+    pub remaining_wait_time: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageVersionCreateRequest {
+    #[serde(rename = "Package2Id", default)]
+    pub package_2_id: String,
+    #[serde(rename = "VersionInfo", default)]
+    pub version_info: String,
+    #[serde(rename = "Tag", default, skip_serializing_if = "Option::is_none")]
+    pub tag: Option<String>,
+    #[serde(rename = "Branch", default, skip_serializing_if = "Option::is_none")]
+    pub branch: Option<String>,
+    #[serde(
+        rename = "InstallKey",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub install_key: Option<String>,
+    #[serde(rename = "Instance", default, skip_serializing_if = "Option::is_none")]
+    pub instance: Option<String>,
+    #[serde(rename = "SourceOrg", default, skip_serializing_if = "Option::is_none")]
+    pub source_org: Option<String>,
+    #[serde(rename = "Language", default, skip_serializing_if = "Option::is_none")]
+    pub language: Option<String>,
+    #[serde(rename = "CalculateCodeCoverage", default)]
+    pub calculate_code_coverage: bool,
+    #[serde(rename = "SkipValidation", default)]
+    pub skip_validation: bool,
+    #[serde(
+        rename = "AsyncValidation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub async_validation: Option<bool>,
+    #[serde(
+        rename = "IsDevUsePkgZipRequested",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_dev_use_pkg_zip_requested: Option<bool>,
+    #[serde(
+        rename = "CalcTransitiveDependencies",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub calc_transitive_dependencies: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageVersionCreateRequestError {
+    #[serde(rename = "Message", default)]
+    pub message: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageVersionCreateRequestOptions {
+    #[serde(default)]
+    pub path: String,
+    #[serde(default)]
+    pub preserve: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub definitionfile: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub codecoverage: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub branch: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub skipancestorcheck: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageVersionCreateRequestQueryOptions {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub createdlastdays: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub status: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub id: Option<String>,
+    #[serde(
+        rename = "showConversionsOnly",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_conversions_only: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageVersionCreateRequestResult {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "Status", default)]
+    pub status: serde_json::Value,
+    #[serde(rename = "Package2Id", default)]
+    pub package_2_id: String,
+    #[serde(rename = "Package2Name", default)]
+    pub package_2_name: serde_json::Value,
+    #[serde(rename = "Package2VersionId", default)]
+    pub package_2_version_id: String,
+    #[serde(rename = "SubscriberPackageVersionId", default)]
+    pub subscriber_package_version_id: serde_json::Value,
+    #[serde(rename = "Tag", default)]
+    pub tag: String,
+    #[serde(rename = "Branch", default)]
+    pub branch: String,
+    #[serde(rename = "Error", default)]
+    pub error: Vec<serde_json::Value>,
+    #[serde(rename = "CreatedDate", default)]
+    pub created_date: String,
+    #[serde(rename = "HasMetadataRemoved", default)]
+    pub has_metadata_removed: serde_json::Value,
+    #[serde(rename = "HasPassedCodeCoverageCheck", default)]
+    pub has_passed_code_coverage_check: serde_json::Value,
+    #[serde(rename = "CodeCoverage", default)]
+    pub code_coverage: serde_json::Value,
+    #[serde(rename = "VersionNumber", default)]
+    pub version_number: serde_json::Value,
+    #[serde(rename = "CreatedBy", default)]
+    pub created_by: String,
+    #[serde(rename = "ConvertedFromVersionId", default)]
+    pub converted_from_version_id: serde_json::Value,
+    #[serde(rename = "TotalNumberOfMetadataFiles", default)]
+    pub total_number_of_metadata_files: serde_json::Value,
+    #[serde(rename = "TotalSizeOfMetadataFiles", default)]
+    pub total_size_of_metadata_files: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageVersionDependencyOptions {
+    #[serde(rename = "packageVersionId", default)]
+    pub package_version_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub project: Option<serde_json::Value>,
+    #[serde(default)]
+    pub connection: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub verbose: Option<bool>,
+    #[serde(
+        rename = "edgeDirection",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub edge_direction: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageVersionListOptions {
+    #[serde(rename = "orderBy", default, skip_serializing_if = "Option::is_none")]
+    pub order_by: Option<String>,
+    #[serde(
+        rename = "modifiedLastDays",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub modified_last_days: Option<f64>,
+    #[serde(
+        rename = "createdLastDays",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub created_last_days: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub packages: Option<Vec<String>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub verbose: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub concise: Option<bool>,
+    #[serde(
+        rename = "isReleased",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_released: Option<bool>,
+    #[serde(
+        rename = "showConversionsOnly",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_conversions_only: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub branch: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageVersionListResult {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "Package2Id", default)]
+    pub package_2_id: String,
+    #[serde(rename = "SubscriberPackageVersionId", default)]
+    pub subscriber_package_version_id: String,
+    #[serde(rename = "Name", default)]
+    pub name: String,
+    #[serde(rename = "Package2", default)]
+    pub package_2: serde_json::Value,
+    #[serde(rename = "Description", default)]
+    pub description: String,
+    #[serde(rename = "Tag", default)]
+    pub tag: String,
+    #[serde(rename = "Branch", default)]
+    pub branch: String,
+    #[serde(rename = "MajorVersion", default)]
+    pub major_version: String,
+    #[serde(rename = "MinorVersion", default)]
+    pub minor_version: String,
+    #[serde(rename = "PatchVersion", default)]
+    pub patch_version: String,
+    #[serde(rename = "BuildNumber", default)]
+    pub build_number: String,
+    #[serde(rename = "IsReleased", default)]
+    pub is_released: bool,
+    #[serde(rename = "CreatedDate", default)]
+    pub created_date: String,
+    #[serde(rename = "LastModifiedDate", default)]
+    pub last_modified_date: String,
+    #[serde(rename = "IsPasswordProtected", default)]
+    pub is_password_protected: bool,
+    #[serde(rename = "AncestorId", default)]
+    pub ancestor_id: String,
+    #[serde(rename = "ValidationSkipped", default)]
+    pub validation_skipped: bool,
+    #[serde(
+        rename = "ValidatedAsync",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub validated_async: Option<bool>,
+    #[serde(rename = "CreatedById", default)]
+    pub created_by_id: String,
+    #[serde(
+        rename = "CodeCoverage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub code_coverage: Option<serde_json::Value>,
+    #[serde(
+        rename = "HasPassedCodeCoverageCheck",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub has_passed_code_coverage_check: Option<bool>,
+    #[serde(
+        rename = "ConvertedFromVersionId",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub converted_from_version_id: Option<String>,
+    #[serde(
+        rename = "ReleaseVersion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub release_version: Option<String>,
+    #[serde(
+        rename = "BuildDurationInSeconds",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub build_duration_in_seconds: Option<f64>,
+    #[serde(
+        rename = "HasMetadataRemoved",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub has_metadata_removed: Option<bool>,
+    #[serde(rename = "Language", default, skip_serializing_if = "Option::is_none")]
+    pub language: Option<String>,
+    #[serde(rename = "HasVpi", default, skip_serializing_if = "Option::is_none")]
+    pub has_vpi: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageVersionMetadataDownloadOptions {
+    #[serde(rename = "subscriberPackageVersionId", default)]
+    pub subscriber_package_version_id: String,
+    #[serde(
+        rename = "destinationFolder",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub destination_folder: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageVersionOptions {
+    #[serde(default)]
+    pub connection: serde_json::Value,
+    #[serde(rename = "idOrAlias", default)]
+    pub id_or_alias: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub project: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageVersionReportResult {
+    #[serde(rename = "Package2", default)]
+    pub package_2: serde_json::Value,
+    #[serde(
+        rename = "SubscriberPackageVersion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub subscriber_package_version: Option<serde_json::Value>,
+    #[serde(rename = "Version", default)]
+    pub version: String,
+    #[serde(
+        rename = "AncestorVersion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub ancestor_version: Option<serde_json::Value>,
+    #[serde(
+        rename = "AncestorId",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub ancestor_id: Option<serde_json::Value>,
+    #[serde(
+        rename = "PackageType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub package_type: Option<serde_json::Value>,
+    #[serde(
+        rename = "HasPassedCodeCoverageCheck",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub has_passed_code_coverage_check: Option<serde_json::Value>,
+    #[serde(
+        rename = "HasMetadataRemoved",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub has_metadata_removed: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageVersionUninstallRequestError {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "IsDeleted", default)]
+    pub is_deleted: bool,
+    #[serde(rename = "CreatedDate", default)]
+    pub created_date: f64,
+    #[serde(rename = "CreatedById", default)]
+    pub created_by_id: String,
+    #[serde(rename = "LastModifiedDate", default)]
+    pub last_modified_date: f64,
+    #[serde(rename = "LastModifiedById", default)]
+    pub last_modified_by_id: String,
+    #[serde(rename = "SystemModstamp", default)]
+    pub system_modstamp: f64,
+    #[serde(rename = "SubscriberPackageVersionId", default)]
+    pub subscriber_package_version_id: String,
+    #[serde(rename = "Status", default)]
+    pub status: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageVersionUpdateOptions {
+    #[serde(
+        rename = "InstallKey",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub install_key: Option<String>,
+    #[serde(
+        rename = "VersionName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub version_name: Option<String>,
+    #[serde(
+        rename = "VersionDescription",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub version_description: Option<String>,
+    #[serde(rename = "Branch", default, skip_serializing_if = "Option::is_none")]
+    pub branch: Option<String>,
+    #[serde(rename = "Tag", default, skip_serializing_if = "Option::is_none")]
+    pub tag: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SubscriberPackage {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "Name", default)]
+    pub name: String,
+    #[serde(rename = "NamespacePrefix", default)]
+    pub namespace_prefix: String,
+    #[serde(rename = "Description", default)]
+    pub description: String,
+    #[serde(rename = "IsPackageValid", default)]
+    pub is_package_valid: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SubscriberPackageCspTrustedSite {
+    #[serde(rename = "endpointUrl", default)]
+    pub endpoint_url: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SubscriberPackageCspTrustedSites {
+    #[serde(default)]
+    pub settings: Vec<SubscriberPackageCspTrustedSite>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SubscriberPackageDependencies {
+    #[serde(default)]
+    pub ids: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SubscriberPackageDestinationProfile {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "displayName", default)]
+    pub display_name: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "noAccess", default)]
+    pub no_access: bool,
+    #[serde(rename = "profileId", default)]
+    pub profile_id: String,
+    #[serde(rename = "type", default)]
+    pub r#type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SubscriberPackageInstallError {
+    #[serde(default)]
+    pub message: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SubscriberPackageInstallErrors {
+    #[serde(default)]
+    pub errors: Vec<SubscriberPackageInstallError>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SubscriberPackageProfileMapping {
+    #[serde(default)]
+    pub source: String,
+    #[serde(default)]
+    pub target: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SubscriberPackageProfileMappings {
+    #[serde(rename = "profileMappings", default)]
+    pub profile_mappings: Vec<SubscriberPackageProfileMapping>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SubscriberPackageProfiles {
+    #[serde(rename = "destinationProfiles", default)]
+    pub destination_profiles: Vec<SubscriberPackageDestinationProfile>,
+    #[serde(rename = "sourceProfiles", default)]
+    pub source_profiles: Vec<SubscriberPackageSourceProfile>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SubscriberPackageRemoteSiteSetting {
+    #[serde(default)]
+    pub secure: bool,
+    #[serde(default)]
+    pub url: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SubscriberPackageSourceProfile {
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SubscriberPackageVersion {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "SubscriberPackageId", default)]
+    pub subscriber_package_id: String,
+    #[serde(rename = "Name", default)]
+    pub name: String,
+    #[serde(rename = "Description", default)]
+    pub description: String,
+    #[serde(rename = "PublisherName", default)]
+    pub publisher_name: String,
+    #[serde(rename = "MajorVersion", default)]
+    pub major_version: f64,
+    #[serde(rename = "MinorVersion", default)]
+    pub minor_version: f64,
+    #[serde(rename = "PatchVersion", default)]
+    pub patch_version: f64,
+    #[serde(rename = "BuildNumber", default)]
+    pub build_number: f64,
+    #[serde(rename = "ReleaseState", default)]
+    pub release_state: String,
+    #[serde(rename = "IsManaged", default)]
+    pub is_managed: bool,
+    #[serde(rename = "IsDeprecated", default)]
+    pub is_deprecated: bool,
+    #[serde(rename = "IsPasswordProtected", default)]
+    pub is_password_protected: bool,
+    #[serde(rename = "IsBeta", default)]
+    pub is_beta: bool,
+    #[serde(rename = "Package2ContainerOptions", default)]
+    pub package_2_container_options: PackageType,
+    #[serde(rename = "IsSecurityReviewed", default)]
+    pub is_security_reviewed: bool,
+    #[serde(rename = "IsOrgDependent", default)]
+    pub is_org_dependent: bool,
+    #[serde(rename = "AppExchangePackageName", default)]
+    pub app_exchange_package_name: String,
+    #[serde(rename = "AppExchangeDescription", default)]
+    pub app_exchange_description: String,
+    #[serde(rename = "AppExchangePublisherName", default)]
+    pub app_exchange_publisher_name: String,
+    #[serde(rename = "AppExchangeLogoUrl", default)]
+    pub app_exchange_logo_url: String,
+    #[serde(rename = "ReleaseNotesUrl", default)]
+    pub release_notes_url: String,
+    #[serde(rename = "PostInstallUrl", default)]
+    pub post_install_url: String,
+    #[serde(rename = "RemoteSiteSettings", default)]
+    pub remote_site_settings: serde_json::Value,
+    #[serde(rename = "CspTrustedSites", default)]
+    pub csp_trusted_sites: SubscriberPackageCspTrustedSites,
+    #[serde(rename = "Profiles", default)]
+    pub profiles: SubscriberPackageProfiles,
+    #[serde(rename = "Dependencies", default)]
+    pub dependencies: SubscriberPackageDependencies,
+    #[serde(rename = "InstallValidationStatus", default)]
+    pub install_validation_status: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SubscriberPackageVersionOptions {
+    #[serde(default)]
+    pub connection: serde_json::Value,
+    #[serde(rename = "aliasOrId", default)]
+    pub alias_or_id: String,
+    #[serde(default)]
+    pub password: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SubscriberPackageVersionUninstallRequest {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "IsDeleted", default)]
+    pub is_deleted: bool,
+    #[serde(rename = "CreatedDate", default)]
+    pub created_date: f64,
+    #[serde(rename = "CreatedById", default)]
+    pub created_by_id: String,
+    #[serde(rename = "LastModifiedDate", default)]
+    pub last_modified_date: f64,
+    #[serde(rename = "LastModifiedById", default)]
+    pub last_modified_by_id: String,
+    #[serde(rename = "SystemModstamp", default)]
+    pub system_modstamp: f64,
+    #[serde(rename = "SubscriberPackageVersionId", default)]
+    pub subscriber_package_version_id: String,
+    #[serde(rename = "Status", default)]
+    pub status: serde_json::Value,
+}

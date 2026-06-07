@@ -32,24 +32,3 @@ pub enum MappingOperation {
     Autofill,
     Overwrite,
 }
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MappingType {
-    #[default]
-    WorkPlans_WorkPlanTemplate_WorkPlan,
-    WorkPlans_WorkStepTemplate_WorkStep,
-    WorkPlans_WorkPlanTemplateEntry_WorkStep,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MappingUsageType {
-    #[default]
-    ConvertToSalesAgreement,
-    EligibleProgramRebateType,
-    MapJournalToMemberAggregate,
-    TransformationMapping,
-    CLMFieldMapping,
-}
-

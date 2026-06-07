@@ -26,12 +26,10 @@ pub enum FeedItemType {
     AdvancedTextPost,
     LinkPost,
     ContentPost,
-    DashboardComponentAlert,
     PollPost,
     RypplePost,
     ProfileSkillPost,
     DashboardComponentSnapshot,
-    TestItem,
     ApprovalPost,
     CaseCommentPost,
     ReplyPost,
@@ -43,11 +41,9 @@ pub enum FeedItemType {
     ActivityEvent,
     ChatTranscriptPost,
     CollaborationGroupCreated,
-    AttachExternalDocumentEvent,
     CollaborationGroupUnarchived,
     SocialPost,
     QuestionPost,
-    Undefined,
     FacebookPost,
     BasicTemplateFeedItem,
     CreateRecordEvent,
@@ -73,8 +69,6 @@ pub enum FeedLayoutComponentType {
     Followers,
     CustomLinks,
     Milestones,
-    SimilarCases,
-    CaseExperts,
     Topics,
     CaseUnifiedFiles,
     Visualforce,
@@ -104,9 +98,16 @@ pub enum FeedLayoutFilterType {
 pub struct FeedFilterCriterion {
     #[serde(rename = "feedItemType", default)]
     pub feed_item_type: FeedItemType,
-    #[serde(rename = "feedItemVisibility", default)]
-    pub feed_item_visibility: FeedItemVisibility,
-    #[serde(rename = "relatedSObjectType", default)]
-    pub related_s_object_type: String,
+    #[serde(
+        rename = "feedItemVisibility",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub feed_item_visibility: Option<FeedItemVisibility>,
+    #[serde(
+        rename = "relatedSObjectType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub related_s_object_type: Option<String>,
 }
-

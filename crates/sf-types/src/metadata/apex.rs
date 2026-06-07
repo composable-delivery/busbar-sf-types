@@ -20,11 +20,41 @@ pub enum ApexCodeUnitStatus {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct ApexClass {
+    #[serde(rename = "apiVersion", default)]
+    pub api_version: f64,
+    #[serde(rename = "packageVersions", default)]
+    pub package_versions: Vec<serde_json::Value>,
+    #[serde(default)]
+    pub status: ApexCodeUnitStatus,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ApexComponent {
+    #[serde(
+        rename = "apiVersion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub api_version: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "packageVersions", default)]
+    pub package_versions: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct ApexEmailNotification {
-    #[serde(default)]
-    pub email: String,
-    #[serde(default)]
-    pub user: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub email: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub user: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -38,8 +68,67 @@ pub struct ApexEmailNotifications {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct ApexLimit {
+    #[serde(default)]
+    pub name: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub value: Option<f64>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ApexPage {
+    #[serde(rename = "apiVersion", default)]
+    pub api_version: f64,
+    #[serde(
+        rename = "availableInTouch",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub available_in_touch: Option<bool>,
+    #[serde(
+        rename = "confirmationTokenRequired",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub confirmation_token_required: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "packageVersions", default)]
+    pub package_versions: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct ApexTestSuite {
     #[serde(rename = "testClassName", default)]
     pub test_class_name: Vec<String>,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ApexTrigger {
+    #[serde(rename = "apiVersion", default)]
+    pub api_version: f64,
+    #[serde(rename = "packageVersions", default)]
+    pub package_versions: Vec<serde_json::Value>,
+    #[serde(default)]
+    pub status: ApexCodeUnitStatus,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct StaticResource {
+    #[serde(rename = "cacheControl", default)]
+    pub cache_control: serde_json::Value,
+    #[serde(rename = "contentType", default)]
+    pub content_type: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+}

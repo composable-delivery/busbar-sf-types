@@ -47,71 +47,6 @@ pub enum AudienceCriterionType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AudienceFieldType {
-    #[default]
-    Boolean,
-    Text,
-    Encrypted,
-    Number,
-    Double,
-    Date,
-    DateTime,
-    Email,
-    Phone,
-    Time,
-    URL,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MarketAudienceStatus {
-    #[default]
-    New,
-    Counting,
-    Activating,
-    Activated,
-    Disabled,
-    Error,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MarketSegmentType {
-    #[default]
-    UI,
-    DBT,
-    Lookalike,
-    EinsteinGptSegmentsUI,
-    Waterfall,
-    Realtime,
-    Dynamic,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MktDataConnectionMethod {
-    #[default]
-    Ingress,
-    Egress,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MktDataConnectionStatus {
-    #[default]
-    PROCESSING,
-    INACTIVE,
-    TESTING,
-    ACTIVE,
-    ERROR,
-    DELETING,
-    SCHEMA_REQUIRED,
-    PENDING_WITH_ADMIN,
-    PENDING_WITH_ADMIN_EXPIRED,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum MktDataModelFieldUsageTag {
     #[default]
     None,
@@ -128,30 +63,22 @@ pub struct Audience {
     pub container: String,
     #[serde(default)]
     pub criteria: AudienceCriteria,
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub formula: String,
-    #[serde(rename = "formulaFilterType", default)]
-    pub formula_filter_type: serde_json::Value,
-    #[serde(rename = "isDefaultAudience", default)]
-    pub is_default_audience: bool,
-    #[serde(default)]
-    pub targets: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AudienceContactPoint {
-    #[serde(rename = "audienceDefinition", default)]
-    pub audience_definition: String,
-    #[serde(rename = "audienceVersion", default)]
-    pub audience_version: f64,
-    #[serde(rename = "contactPointType", default)]
-    pub contact_point_type: serde_json::Value,
-    #[serde(rename = "slotName", default)]
-    pub slot_name: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub formula: Option<String>,
+    #[serde(
+        rename = "formulaFilterType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub formula_filter_type: Option<serde_json::Value>,
+    #[serde(
+        rename = "isDefaultAudience",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_default_audience: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -166,43 +93,75 @@ pub struct AudienceCriteria {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct AudienceCriteriaValue {
-    #[serde(rename = "audienceDeveloperName", default)]
-    pub audience_developer_name: String,
-    #[serde(default)]
-    pub city: String,
-    #[serde(default)]
-    pub country: String,
-    #[serde(default)]
-    pub domain: String,
-    #[serde(rename = "entityField", default)]
-    pub entity_field: String,
-    #[serde(rename = "entityType", default)]
-    pub entity_type: String,
-    #[serde(rename = "fieldValue", default)]
-    pub field_value: String,
-    #[serde(rename = "isEnabled", default)]
-    pub is_enabled: String,
-    #[serde(rename = "permissionName", default)]
-    pub permission_name: String,
-    #[serde(rename = "permissionType", default)]
-    pub permission_type: String,
-    #[serde(default)]
-    pub profile: String,
-    #[serde(default)]
-    pub subdivision: String,
+    #[serde(
+        rename = "audienceDeveloperName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub audience_developer_name: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub city: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub country: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub domain: Option<String>,
+    #[serde(
+        rename = "entityField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub entity_field: Option<String>,
+    #[serde(
+        rename = "entityType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub entity_type: Option<String>,
+    #[serde(
+        rename = "fieldValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub field_value: Option<String>,
+    #[serde(rename = "isEnabled", default, skip_serializing_if = "Option::is_none")]
+    pub is_enabled: Option<String>,
+    #[serde(
+        rename = "permissionName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub permission_name: Option<String>,
+    #[serde(
+        rename = "permissionType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub permission_type: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub profile: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub subdivision: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct AudienceCriterion {
-    #[serde(rename = "criteriaNumber", default)]
-    pub criteria_number: f64,
-    #[serde(rename = "criterionValue", default)]
-    pub criterion_value: AudienceCriteriaValue,
-    #[serde(default)]
-    pub operator: AudienceCriterionOperator,
-    #[serde(default)]
+    #[serde(
+        rename = "criteriaNumber",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub criteria_number: Option<f64>,
+    #[serde(
+        rename = "criterionValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub criterion_value: Option<AudienceCriteriaValue>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub operator: Option<AudienceCriterionOperator>,
+    #[serde(rename = "type", default)]
     pub r#type: AudienceCriterionType,
 }
 
@@ -210,375 +169,250 @@ pub struct AudienceCriterion {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CampaignInfluenceModel {
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
+    #[serde(rename = "isActive", default, skip_serializing_if = "Option::is_none")]
+    pub is_active: Option<bool>,
     #[serde(rename = "isDefaultModel", default)]
     pub is_default_model: bool,
     #[serde(rename = "isModelLocked", default)]
     pub is_model_locked: bool,
-    #[serde(rename = "modelDescription", default)]
-    pub model_description: String,
+    #[serde(
+        rename = "modelDescription",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub model_description: Option<String>,
     #[serde(default)]
     pub name: String,
-    #[serde(rename = "recordPreference", default)]
-    pub record_preference: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CampaignTemplateDefinition {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MarketAudienceDefinition {
-    #[serde(rename = "audienceContactPoints", default)]
-    pub audience_contact_points: Vec<AudienceContactPoint>,
-    #[serde(rename = "audiencePackageOwner", default)]
-    pub audience_package_owner: String,
-    #[serde(default)]
-    pub channels: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "externalKey", default)]
-    pub external_key: String,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "lastAudienceExcludedCount", default)]
-    pub last_audience_excluded_count: f64,
-    #[serde(rename = "lastAudienceMemberCount", default)]
-    pub last_audience_member_count: f64,
-    #[serde(rename = "marketAudienceFields", default)]
-    pub market_audience_fields: Vec<MarketAudienceField>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub status: MarketAudienceStatus,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MarketAudienceField {
-    #[serde(rename = "audienceDefinition", default)]
-    pub audience_definition: String,
-    #[serde(rename = "audienceVersion", default)]
-    pub audience_version: f64,
-    #[serde(rename = "fieldDataType", default)]
-    pub field_data_type: AudienceFieldType,
-    #[serde(rename = "fieldDescription", default)]
-    pub field_description: String,
-    #[serde(rename = "fieldName", default)]
-    pub field_name: String,
-    #[serde(rename = "slotName", default)]
-    pub slot_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MarketSegmentDefinition {
-    #[serde(rename = "additionalMetadata", default)]
-    pub additional_metadata: String,
-    #[serde(rename = "excludeCriteria", default)]
-    pub exclude_criteria: String,
-    #[serde(rename = "includeCriteria", default)]
-    pub include_criteria: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "segmentOn", default)]
-    pub segment_on: String,
-    #[serde(rename = "segmentType", default)]
-    pub segment_type: MarketSegmentType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MarketingAppExtAction {
-    #[serde(rename = "actionName", default)]
-    pub action_name: String,
-    #[serde(rename = "actionParams", default)]
-    pub action_params: String,
-    #[serde(rename = "actionSchema", default)]
-    pub action_schema: String,
-    #[serde(rename = "actionSelector", default)]
-    pub action_selector: String,
-    #[serde(rename = "apiName", default)]
-    pub api_name: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "marketingAppExtension", default)]
-    pub marketing_app_extension: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MarketingAppExtActivity {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "endpointUrl", default)]
-    pub endpoint_url: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "marketingAppExtension", default)]
-    pub marketing_app_extension: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MarketingAppExtension {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "marketingAppExtActions", default)]
-    pub marketing_app_ext_actions: Vec<MarketingAppExtAction>,
-    #[serde(rename = "marketingAppExtActivities", default)]
-    pub marketing_app_ext_activities: Vec<MarketingAppExtActivity>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MktCalcInsightObjectDef {
-    #[serde(rename = "builderExpression", default)]
-    pub builder_expression: String,
-    #[serde(rename = "creationType", default)]
-    pub creation_type: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub expression: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MktDataConnection {
-    #[serde(rename = "connectionMethod", default)]
-    pub connection_method: MktDataConnectionMethod,
-    #[serde(rename = "connectionStatus", default)]
-    pub connection_status: MktDataConnectionStatus,
-    #[serde(rename = "connectorName", default)]
-    pub connector_name: String,
-    #[serde(default)]
-    pub credentials: Vec<MktDataConnectionCred>,
-    #[serde(rename = "externalRecordIdentifier", default)]
-    pub external_record_identifier: String,
-    #[serde(rename = "isSentosEnabled", default)]
-    pub is_sentos_enabled: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub parameters: Vec<MktDataConnectionParam>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MktDataConnectionCred {
-    #[serde(rename = "credentialName", default)]
-    pub credential_name: String,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MktDataConnectionParam {
-    #[serde(rename = "paramName", default)]
-    pub param_name: String,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MktDataConnectionSrcParam {
-    #[serde(rename = "paramName", default)]
-    pub param_name: String,
-    #[serde(default)]
-    pub value: String,
+    #[serde(
+        rename = "recordPreference",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub record_preference: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct MktDataLakeAttributes {
-    #[serde(rename = "creationType", default)]
-    pub creation_type: serde_json::Value,
-    #[serde(rename = "isEnabled", default)]
-    pub is_enabled: bool,
-    #[serde(rename = "objectCategory", default)]
-    pub object_category: String,
+    #[serde(
+        rename = "creationType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub creation_type: Option<serde_json::Value>,
+    #[serde(rename = "isEnabled", default, skip_serializing_if = "Option::is_none")]
+    pub is_enabled: Option<bool>,
+    #[serde(
+        rename = "objectCategory",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub object_category: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct MktDataLakeFieldAttributes {
-    #[serde(rename = "dateFormat", default)]
-    pub date_format: String,
-    #[serde(rename = "definitionCreationType", default)]
-    pub definition_creation_type: serde_json::Value,
-    #[serde(rename = "externalName", default)]
-    pub external_name: String,
-    #[serde(rename = "isEventDate", default)]
-    pub is_event_date: bool,
-    #[serde(rename = "isInternalOrganization", default)]
-    pub is_internal_organization: bool,
-    #[serde(rename = "isRecordModified", default)]
-    pub is_record_modified: bool,
-    #[serde(rename = "keyQualifierName", default)]
-    pub key_qualifier_name: String,
-    #[serde(rename = "mktDatalakeSrcKeyQualifier", default)]
-    pub mkt_datalake_src_key_qualifier: String,
-    #[serde(rename = "primaryIndexOrder", default)]
-    pub primary_index_order: f64,
-    #[serde(rename = "usageTag", default)]
-    pub usage_tag: serde_json::Value,
+    #[serde(
+        rename = "dateFormat",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub date_format: Option<String>,
+    #[serde(
+        rename = "definitionCreationType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub definition_creation_type: Option<serde_json::Value>,
+    #[serde(
+        rename = "externalName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub external_name: Option<String>,
+    #[serde(
+        rename = "isEventDate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_event_date: Option<bool>,
+    #[serde(
+        rename = "isInternalOrganization",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_internal_organization: Option<bool>,
+    #[serde(
+        rename = "isRecordModified",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_record_modified: Option<bool>,
+    #[serde(
+        rename = "keyQualifierName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub key_qualifier_name: Option<String>,
+    #[serde(
+        rename = "mktDatalakeSrcKeyQualifier",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub mkt_datalake_src_key_qualifier: Option<String>,
+    #[serde(
+        rename = "primaryIndexOrder",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub primary_index_order: Option<f64>,
+    #[serde(rename = "usageTag", default, skip_serializing_if = "Option::is_none")]
+    pub usage_tag: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct MktDataModelAttributes {
-    #[serde(rename = "creationType", default)]
-    pub creation_type: serde_json::Value,
-    #[serde(rename = "dataModelTaxonomy", default)]
-    pub data_model_taxonomy: String,
-    #[serde(rename = "dataSpaceName", default)]
-    pub data_space_name: String,
-    #[serde(rename = "dataSpacePrefix", default)]
-    pub data_space_prefix: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isEnabled", default)]
-    pub is_enabled: bool,
-    #[serde(rename = "isSegmentable", default)]
-    pub is_segmentable: bool,
-    #[serde(rename = "isUsedForMetrics", default)]
-    pub is_used_for_metrics: bool,
-    #[serde(rename = "labelOverride", default)]
-    pub label_override: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "objectCategory", default)]
-    pub object_category: String,
-    #[serde(rename = "referenceEntityGroup", default)]
-    pub reference_entity_group: String,
-    #[serde(rename = "referenceEntityName", default)]
-    pub reference_entity_name: String,
-    #[serde(rename = "referenceEntitySubjectArea", default)]
-    pub reference_entity_subject_area: String,
+    #[serde(
+        rename = "creationType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub creation_type: Option<serde_json::Value>,
+    #[serde(
+        rename = "dataModelTaxonomy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub data_model_taxonomy: Option<String>,
+    #[serde(
+        rename = "dataSpaceName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub data_space_name: Option<String>,
+    #[serde(
+        rename = "dataSpacePrefix",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub data_space_prefix: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "isEnabled", default, skip_serializing_if = "Option::is_none")]
+    pub is_enabled: Option<bool>,
+    #[serde(
+        rename = "isSegmentable",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_segmentable: Option<bool>,
+    #[serde(
+        rename = "isUsedForMetrics",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_used_for_metrics: Option<bool>,
+    #[serde(
+        rename = "labelOverride",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub label_override: Option<String>,
+    #[serde(
+        rename = "masterLabel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub master_label: Option<String>,
+    #[serde(
+        rename = "objectCategory",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub object_category: Option<String>,
+    #[serde(
+        rename = "referenceEntityGroup",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub reference_entity_group: Option<String>,
+    #[serde(
+        rename = "referenceEntityName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub reference_entity_name: Option<String>,
+    #[serde(
+        rename = "referenceEntitySubjectArea",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub reference_entity_subject_area: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct MktDataModelFieldAttributes {
-    #[serde(rename = "definitionCreationType", default)]
-    pub definition_creation_type: serde_json::Value,
-    #[serde(rename = "invalidMergeActionType", default)]
-    pub invalid_merge_action_type: serde_json::Value,
-    #[serde(rename = "isDynamicLookup", default)]
-    pub is_dynamic_lookup: bool,
-    #[serde(rename = "keyQualifierName", default)]
-    pub key_qualifier_name: String,
-    #[serde(rename = "labelOverride", default)]
-    pub label_override: String,
-    #[serde(rename = "mappingAlertType", default)]
-    pub mapping_alert_type: serde_json::Value,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "primaryIndexOrder", default)]
-    pub primary_index_order: f64,
-    #[serde(rename = "refAttrDeveloperName", default)]
-    pub ref_attr_developer_name: String,
-    #[serde(rename = "usageTag", default)]
-    pub usage_tag: MktDataModelFieldUsageTag,
+    #[serde(
+        rename = "definitionCreationType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub definition_creation_type: Option<serde_json::Value>,
+    #[serde(
+        rename = "invalidMergeActionType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub invalid_merge_action_type: Option<serde_json::Value>,
+    #[serde(
+        rename = "isDynamicLookup",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_dynamic_lookup: Option<bool>,
+    #[serde(
+        rename = "keyQualifierName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub key_qualifier_name: Option<String>,
+    #[serde(
+        rename = "labelOverride",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub label_override: Option<String>,
+    #[serde(
+        rename = "mappingAlertType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub mapping_alert_type: Option<serde_json::Value>,
+    #[serde(
+        rename = "masterLabel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub master_label: Option<String>,
+    #[serde(
+        rename = "primaryIndexOrder",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub primary_index_order: Option<f64>,
+    #[serde(
+        rename = "refAttrDeveloperName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub ref_attr_developer_name: Option<String>,
+    #[serde(rename = "usageTag", default, skip_serializing_if = "Option::is_none")]
+    pub usage_tag: Option<MktDataModelFieldUsageTag>,
 }
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MktDataTranField {
-    #[serde(rename = "creationType", default)]
-    pub creation_type: serde_json::Value,
-    #[serde(default)]
-    pub datatype: String,
-    #[serde(rename = "dateFormat", default)]
-    pub date_format: String,
-    #[serde(rename = "externalName", default)]
-    pub external_name: String,
-    #[serde(rename = "isDataRequired", default)]
-    pub is_data_required: bool,
-    #[serde(default)]
-    pub length: f64,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub precision: f64,
-    #[serde(rename = "primaryIndexOrder", default)]
-    pub primary_index_order: f64,
-    #[serde(default)]
-    pub scale: f64,
-    #[serde(default)]
-    pub sequence: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MktDataTranObject {
-    #[serde(default)]
-    pub connector: String,
-    #[serde(rename = "creationType", default)]
-    pub creation_type: serde_json::Value,
-    #[serde(rename = "dataSource", default)]
-    pub data_source: String,
-    #[serde(rename = "dataSourceObject", default)]
-    pub data_source_object: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "mktDataTranFields", default)]
-    pub mkt_data_tran_fields: Vec<MktDataTranField>,
-    #[serde(rename = "objectCategory", default)]
-    pub object_category: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MktDatalakeSrcKeyQualifier {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-

@@ -10,14 +10,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EventDeliveryType {
-    #[default]
-    StartFlow,
-    ResumeFlow,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum EventRelayAdminState {
     #[default]
     RUN,
@@ -91,8 +83,6 @@ pub enum PlatformActionListContext {
     Dockable,
     Lookup,
     Assistant,
-    ActionDefinition,
-    MetadataExplorer,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -142,27 +132,6 @@ pub enum PlatformEventType {
     ExternalEvent,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PlatformSchemaContentType {
-    #[default]
-    Json,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EventDelivery {
-    #[serde(rename = "eventParameters", default)]
-    pub event_parameters: Vec<EventParameterMap>,
-    #[serde(rename = "eventSubscription", default)]
-    pub event_subscription: String,
-    #[serde(rename = "referenceData", default)]
-    pub reference_data: String,
-    #[serde(default)]
-    pub r#type: EventDeliveryType,
-}
-
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
@@ -176,47 +145,25 @@ pub struct EventLogObject {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct EventParameterMap {
-    #[serde(rename = "parameterName", default)]
-    pub parameter_name: String,
-    #[serde(rename = "parameterValue", default)]
-    pub parameter_value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EventSubscription {
-    #[serde(default)]
-    pub active: bool,
-    #[serde(rename = "eventParameters", default)]
-    pub event_parameters: Vec<EventParameterMap>,
-    #[serde(rename = "eventType", default)]
-    pub event_type: String,
-    #[serde(rename = "referenceData", default)]
-    pub reference_data: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EventSubtype {
-    #[serde(rename = "apiName", default)]
-    pub api_name: String,
-    #[serde(default)]
-    pub label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct NotificationChannels {
-    #[serde(rename = "desktopEnabled", default)]
-    pub desktop_enabled: bool,
-    #[serde(rename = "mobileEnabled", default)]
-    pub mobile_enabled: bool,
-    #[serde(rename = "slackEnabled", default)]
-    pub slack_enabled: bool,
+    #[serde(
+        rename = "desktopEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub desktop_enabled: Option<bool>,
+    #[serde(
+        rename = "mobileEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub mobile_enabled: Option<bool>,
+    #[serde(
+        rename = "slackEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub slack_enabled: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -230,117 +177,9 @@ pub struct NotificationTypeConfig {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct NtfcnChannelActionDef {
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "notificationActionName", default)]
-    pub notification_action_name: String,
-    #[serde(rename = "targetType", default)]
-    pub target_type: String,
-    #[serde(rename = "targetUrl", default)]
-    pub target_url: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct NtfcnChannelCont {
-    #[serde(rename = "emailTemplate", default)]
-    pub email_template: String,
-    #[serde(rename = "messageBody", default)]
-    pub message_body: String,
-    #[serde(rename = "messageTitle", default)]
-    pub message_title: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct NtfcnChannelDef {
-    #[serde(default)]
-    pub active: bool,
-    #[serde(rename = "channelType", default)]
-    pub channel_type: String,
-    #[serde(rename = "ntfcnChannelActionDefs", default)]
-    pub ntfcn_channel_action_defs: Vec<NtfcnChannelActionDef>,
-    #[serde(rename = "ntfcnChannelConts", default)]
-    pub ntfcn_channel_conts: Vec<NtfcnChannelCont>,
-    #[serde(rename = "ntfcnChannelRecs", default)]
-    pub ntfcn_channel_recs: Vec<NtfcnChannelRec>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct NtfcnChannelRec {
-    #[serde(default)]
-    pub active: bool,
-    #[serde(default)]
-    pub recipient: String,
-    #[serde(rename = "recipientType", default)]
-    pub recipient_type: String,
-    #[serde(rename = "targetIdentifier", default)]
-    pub target_identifier: String,
-    #[serde(rename = "teamIdentifier", default)]
-    pub team_identifier: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct NtfcnCondition {
-    #[serde(rename = "fieldName", default)]
-    pub field_name: String,
-    #[serde(default)]
-    pub operator: String,
-    #[serde(rename = "sequenceNumber", default)]
-    pub sequence_number: f64,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct NtfcnCriteria {
-    #[serde(default)]
-    pub condition: Vec<NtfcnCondition>,
-    #[serde(rename = "criteriaName", default)]
-    pub criteria_name: String,
-    #[serde(rename = "customExpression", default)]
-    pub custom_expression: String,
-    #[serde(rename = "expressionType", default)]
-    pub expression_type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct NtfcnDefinition {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "notificationCriteria", default)]
-    pub notification_criteria: Vec<NtfcnCriteria>,
-    #[serde(rename = "ntfcnChannelDefs", default)]
-    pub ntfcn_channel_defs: Vec<NtfcnChannelDef>,
-    #[serde(rename = "referenceObject", default)]
-    pub reference_object: String,
-    #[serde(default)]
-    pub status: String,
-    #[serde(rename = "triggerEventType", default)]
-    pub trigger_event_type: String,
-    #[serde(rename = "usageType", default)]
-    pub usage_type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct PlatformCachePartition {
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "isDefaultPartition", default)]
     pub is_default_partition: bool,
     #[serde(rename = "masterLabel", default)]
@@ -369,53 +208,30 @@ pub struct PlatformCachePartitionType {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct PlatformEventSubscriberConfig {
-    #[serde(rename = "batchSize", default)]
-    pub batch_size: f64,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
+    #[serde(rename = "batchSize", default, skip_serializing_if = "Option::is_none")]
+    pub batch_size: Option<f64>,
+    #[serde(
+        rename = "isProtected",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_protected: Option<bool>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "numPartitions", default)]
-    pub num_partitions: f64,
-    #[serde(rename = "partitionKey", default)]
-    pub partition_key: String,
+    #[serde(
+        rename = "numPartitions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub num_partitions: Option<f64>,
+    #[serde(
+        rename = "partitionKey",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub partition_key: Option<String>,
     #[serde(rename = "platformEventConsumer", default)]
     pub platform_event_consumer: String,
-    #[serde(default)]
-    pub user: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub user: Option<String>,
 }
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PlatformLicenseDefinition {
-    #[serde(rename = "cloudServiceProvider", default)]
-    pub cloud_service_provider: String,
-    #[serde(rename = "defaultLicenseDuration", default)]
-    pub default_license_duration: f64,
-    #[serde(rename = "defaultStatus", default)]
-    pub default_status: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "hasDynamicResourceGroupKey", default)]
-    pub has_dynamic_resource_group_key: bool,
-    #[serde(rename = "includedFeatures", default)]
-    pub included_features: Vec<serde_json::Value>,
-    #[serde(rename = "licenseOwner", default)]
-    pub license_owner: String,
-    #[serde(rename = "managementServiceProvider", default)]
-    pub management_service_provider: String,
-    #[serde(rename = "managementTenantId", default)]
-    pub management_tenant_id: String,
-    #[serde(rename = "minPlatformVersion", default)]
-    pub min_platform_version: f64,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "recordVisibility", default)]
-    pub record_visibility: String,
-    #[serde(rename = "settingItems", default)]
-    pub setting_items: Vec<serde_json::Value>,
-    #[serde(rename = "settingUsageDefinitions", default)]
-    pub setting_usage_definitions: Vec<serde_json::Value>,
-}
-

@@ -25,10 +25,18 @@ pub struct DeployDetails {
     pub component_failures: Vec<DeployMessage>,
     #[serde(rename = "componentSuccesses", default)]
     pub component_successes: Vec<DeployMessage>,
-    #[serde(rename = "retrieveResult", default)]
-    pub retrieve_result: serde_json::Value,
-    #[serde(rename = "runTestResult", default)]
-    pub run_test_result: serde_json::Value,
+    #[serde(
+        rename = "retrieveResult",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub retrieve_result: Option<serde_json::Value>,
+    #[serde(
+        rename = "runTestResult",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub run_test_result: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -37,28 +45,44 @@ pub struct DeployDetails {
 pub struct DeployMessage {
     #[serde(default)]
     pub changed: bool,
-    #[serde(rename = "columnNumber", default)]
-    pub column_number: f64,
-    #[serde(rename = "componentType", default)]
-    pub component_type: String,
+    #[serde(
+        rename = "columnNumber",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub column_number: Option<f64>,
+    #[serde(
+        rename = "componentType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub component_type: Option<String>,
     #[serde(default)]
     pub created: bool,
     #[serde(rename = "createdDate", default)]
-    pub created_date: String,
+    pub created_date: serde_json::Value,
     #[serde(default)]
     pub deleted: bool,
     #[serde(rename = "fileName", default)]
     pub file_name: String,
     #[serde(rename = "fullName", default)]
     pub full_name: String,
-    #[serde(default)]
-    pub id: String,
-    #[serde(rename = "lineNumber", default)]
-    pub line_number: f64,
-    #[serde(default)]
-    pub problem: String,
-    #[serde(rename = "problemType", default)]
-    pub problem_type: DeployProblemType,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub id: Option<String>,
+    #[serde(
+        rename = "lineNumber",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub line_number: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub problem: Option<String>,
+    #[serde(
+        rename = "problemType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub problem_type: Option<DeployProblemType>,
     #[serde(default)]
     pub success: bool,
 }
@@ -93,42 +117,70 @@ pub struct DeployOptions {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DeployResult {
-    #[serde(rename = "canceledBy", default)]
-    pub canceled_by: String,
-    #[serde(rename = "canceledByName", default)]
-    pub canceled_by_name: String,
+    #[serde(
+        rename = "canceledBy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub canceled_by: Option<String>,
+    #[serde(
+        rename = "canceledByName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub canceled_by_name: Option<String>,
     #[serde(rename = "checkOnly", default)]
     pub check_only: bool,
-    #[serde(rename = "completedDate", default)]
-    pub completed_date: String,
+    #[serde(
+        rename = "completedDate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub completed_date: Option<serde_json::Value>,
     #[serde(rename = "createdBy", default)]
     pub created_by: String,
     #[serde(rename = "createdByName", default)]
     pub created_by_name: String,
     #[serde(rename = "createdDate", default)]
-    pub created_date: String,
+    pub created_date: serde_json::Value,
     #[serde(default)]
     pub details: DeployDetails,
     #[serde(default)]
     pub done: bool,
-    #[serde(rename = "errorMessage", default)]
-    pub error_message: String,
-    #[serde(rename = "errorStatusCode", default)]
-    pub error_status_code: serde_json::Value,
+    #[serde(
+        rename = "errorMessage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub error_message: Option<String>,
+    #[serde(
+        rename = "errorStatusCode",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub error_status_code: Option<serde_json::Value>,
     #[serde(default)]
     pub id: serde_json::Value,
     #[serde(rename = "ignoreWarnings", default)]
     pub ignore_warnings: bool,
-    #[serde(rename = "lastModifiedDate", default)]
-    pub last_modified_date: String,
+    #[serde(
+        rename = "lastModifiedDate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub last_modified_date: Option<serde_json::Value>,
     #[serde(rename = "numberComponentErrors", default)]
     pub number_component_errors: f64,
     #[serde(rename = "numberComponentsDeployed", default)]
     pub number_components_deployed: f64,
     #[serde(rename = "numberComponentsTotal", default)]
     pub number_components_total: f64,
-    #[serde(rename = "numberFiles", default)]
-    pub number_files: f64,
+    #[serde(
+        rename = "numberFiles",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub number_files: Option<f64>,
     #[serde(rename = "numberTestErrors", default)]
     pub number_test_errors: f64,
     #[serde(rename = "numberTestsCompleted", default)]
@@ -139,15 +191,18 @@ pub struct DeployResult {
     pub rollback_on_error: bool,
     #[serde(rename = "runTestsEnabled", default)]
     pub run_tests_enabled: bool,
-    #[serde(rename = "startDate", default)]
-    pub start_date: String,
-    #[serde(rename = "stateDetail", default)]
-    pub state_detail: String,
+    #[serde(rename = "startDate", default, skip_serializing_if = "Option::is_none")]
+    pub start_date: Option<serde_json::Value>,
+    #[serde(
+        rename = "stateDetail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub state_detail: Option<String>,
     #[serde(default)]
     pub status: serde_json::Value,
     #[serde(default)]
     pub success: bool,
-    #[serde(rename = "zipSize", default)]
-    pub zip_size: f64,
+    #[serde(rename = "zipSize", default, skip_serializing_if = "Option::is_none")]
+    pub zip_size: Option<f64>,
 }
-

@@ -11,29 +11,33 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct DigitalExperienceBundle {
+pub struct DigitalExperience {
+    #[serde(rename = "fileName", default)]
+    pub file_name: String,
+    #[serde(rename = "filePath", default, skip_serializing_if = "Option::is_none")]
+    pub file_path: Option<String>,
     #[serde(default)]
-    pub description: String,
-    #[serde(rename = "digitalExperienceFolderShares", default)]
-    pub digital_experience_folder_shares: DigitalExperienceFolderShares,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub modules: DigitalExperienceModuleCollection,
-    #[serde(rename = "spaceResources", default)]
-    pub space_resources: Vec<serde_json::Value>,
+    pub format: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct DigitalExperienceConfig {
+pub struct DigitalExperienceBundle {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "digitalExperienceFolderShares",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub digital_experience_folder_shares: Option<DigitalExperienceFolderShares>,
     #[serde(default)]
     pub label: String,
-    #[serde(default)]
-    pub site: serde_json::Value,
-    #[serde(default)]
-    pub space: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub modules: Option<DigitalExperienceModuleCollection>,
+    #[serde(rename = "spaceResources", default)]
+    pub space_resources: Vec<DigitalExperience>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -71,4 +75,3 @@ pub struct DigitalExperienceModuleCollection {
     #[serde(default)]
     pub module: Vec<DigitalExperienceModule>,
 }
-

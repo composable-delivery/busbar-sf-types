@@ -12,10 +12,10 @@ use serde::{Deserialize, Serialize};
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct PresenceConfigAssignments {
-    #[serde(default)]
-    pub profiles: PresenceConfigProfileAssignments,
-    #[serde(default)]
-    pub users: PresenceConfigUserAssignments,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub profiles: Option<PresenceConfigProfileAssignments>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub users: Option<PresenceConfigUserAssignments>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -46,66 +46,122 @@ pub struct PresenceDeclineReason {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct PresenceUserConfig {
-    #[serde(rename = "acwExtensionDuration", default)]
-    pub acw_extension_duration: f64,
-    #[serde(rename = "afterConvoWorkMaxTime", default)]
-    pub after_convo_work_max_time: f64,
-    #[serde(default)]
-    pub assignments: PresenceConfigAssignments,
+    #[serde(
+        rename = "acwExtensionDuration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub acw_extension_duration: Option<f64>,
+    #[serde(
+        rename = "afterConvoWorkMaxTime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub after_convo_work_max_time: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub assignments: Option<PresenceConfigAssignments>,
     #[serde(default)]
     pub capacity: f64,
     #[serde(rename = "declineReasons", default)]
     pub decline_reasons: Vec<String>,
-    #[serde(rename = "enableAutoAccept", default)]
-    pub enable_auto_accept: bool,
-    #[serde(rename = "enableDecline", default)]
-    pub enable_decline: bool,
-    #[serde(rename = "enableDeclineReason", default)]
-    pub enable_decline_reason: bool,
-    #[serde(rename = "enableDisconnectSound", default)]
-    pub enable_disconnect_sound: bool,
-    #[serde(rename = "enableRequestSound", default)]
-    pub enable_request_sound: bool,
-    #[serde(rename = "hasAcwExtensionEnabled", default)]
-    pub has_acw_extension_enabled: bool,
-    #[serde(rename = "hasAfterConvoWorkTimer", default)]
-    pub has_after_convo_work_timer: bool,
-    #[serde(rename = "interruptibleCapacity", default)]
-    pub interruptible_capacity: f64,
+    #[serde(
+        rename = "enableAutoAccept",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_auto_accept: Option<bool>,
+    #[serde(
+        rename = "enableDecline",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_decline: Option<bool>,
+    #[serde(
+        rename = "enableDeclineReason",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_decline_reason: Option<bool>,
+    #[serde(
+        rename = "enableDisconnectSound",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_disconnect_sound: Option<bool>,
+    #[serde(
+        rename = "enableRequestSound",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_request_sound: Option<bool>,
+    #[serde(
+        rename = "hasAcwExtensionEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub has_acw_extension_enabled: Option<bool>,
+    #[serde(
+        rename = "hasAfterConvoWorkTimer",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub has_after_convo_work_timer: Option<bool>,
+    #[serde(
+        rename = "interruptibleCapacity",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub interruptible_capacity: Option<f64>,
     #[serde(default)]
     pub label: String,
-    #[serde(rename = "maxExtensions", default)]
-    pub max_extensions: String,
-    #[serde(rename = "presenceStatusOnDecline", default)]
-    pub presence_status_on_decline: String,
-    #[serde(rename = "presenceStatusOnPushTimeout", default)]
-    pub presence_status_on_push_timeout: String,
-    #[serde(rename = "userDisplayName", default)]
-    pub user_display_name: String,
+    #[serde(
+        rename = "maxExtensions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub max_extensions: Option<String>,
+    #[serde(
+        rename = "presenceStatusOnDecline",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub presence_status_on_decline: Option<String>,
+    #[serde(
+        rename = "presenceStatusOnPushTimeout",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub presence_status_on_push_timeout: Option<String>,
+    #[serde(
+        rename = "userDisplayName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub user_display_name: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct Skill {
-    #[serde(default)]
-    pub assignments: SkillAssignments,
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub assignments: Option<SkillAssignments>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(default)]
     pub label: String,
-    #[serde(rename = "skillType", default)]
-    pub skill_type: String,
+    #[serde(rename = "skillType", default, skip_serializing_if = "Option::is_none")]
+    pub skill_type: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct SkillAssignments {
-    #[serde(default)]
-    pub profiles: SkillProfileAssignments,
-    #[serde(default)]
-    pub users: SkillUserAssignments,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub profiles: Option<SkillProfileAssignments>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub users: Option<SkillUserAssignments>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -131,36 +187,3 @@ pub struct SkillUserAssignments {
     #[serde(default)]
     pub user: Vec<String>,
 }
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct WorkSkillRouting {
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "relatedEntity", default)]
-    pub related_entity: String,
-    #[serde(rename = "workSkillRoutingAttributes", default)]
-    pub work_skill_routing_attributes: Vec<WorkSkillRoutingAttribute>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct WorkSkillRoutingAttribute {
-    #[serde(default)]
-    pub field: String,
-    #[serde(rename = "isAdditionalSkill", default)]
-    pub is_additional_skill: bool,
-    #[serde(default)]
-    pub skill: String,
-    #[serde(rename = "skillLevel", default)]
-    pub skill_level: f64,
-    #[serde(rename = "skillPriority", default)]
-    pub skill_priority: f64,
-    #[serde(default)]
-    pub value: String,
-}
-

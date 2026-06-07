@@ -28,14 +28,6 @@ pub enum LightningBoltCategory {
     GeneralBusiness,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LightningDesignSystemVersion {
-    #[default]
-    SLDS_v1,
-    SLDS_v2,
-}
-
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
@@ -60,8 +52,8 @@ pub struct LightningBolt {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct LightningBoltFeatures {
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(default)]
     pub order: f64,
     #[serde(default)]
@@ -84,7 +76,7 @@ pub struct LightningBoltImages {
 pub struct LightningBoltItems {
     #[serde(default)]
     pub name: String,
-    #[serde(default)]
+    #[serde(rename = "type", default)]
     pub r#type: String,
 }
 
@@ -92,9 +84,8 @@ pub struct LightningBoltItems {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct LightningMessageField {
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "fieldName", default)]
     pub field_name: String,
 }
-

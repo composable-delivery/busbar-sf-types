@@ -10,14 +10,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ComponentInstanceType {
-    #[default]
-    Component,
-    Card,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum ComponentName {
     #[default]
     ActionsAndRecommendations,
@@ -33,28 +25,28 @@ pub struct ComponentInstance {
     pub component_instance_properties: Vec<ComponentInstanceProperty>,
     #[serde(rename = "componentName", default)]
     pub component_name: String,
-    #[serde(rename = "componentType", default)]
-    pub component_type: ComponentInstanceType,
-    #[serde(rename = "flexipageDataSources", default)]
-    pub flexipage_data_sources: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub identifier: String,
-    #[serde(rename = "visibilityRule", default)]
-    pub visibility_rule: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub identifier: Option<String>,
+    #[serde(
+        rename = "visibilityRule",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub visibility_rule: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ComponentInstanceProperty {
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub r#type: serde_json::Value,
-    #[serde(default)]
-    pub value: String,
-    #[serde(rename = "valueList", default)]
-    pub value_list: ComponentInstancePropertyList,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
+    #[serde(rename = "type", default, skip_serializing_if = "Option::is_none")]
+    pub r#type: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub value: Option<String>,
+    #[serde(rename = "valueList", default, skip_serializing_if = "Option::is_none")]
+    pub value_list: Option<ComponentInstancePropertyList>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -69,9 +61,12 @@ pub struct ComponentInstancePropertyList {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ComponentInstancePropertyListItem {
-    #[serde(default)]
-    pub value: String,
-    #[serde(rename = "visibilityRule", default)]
-    pub visibility_rule: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub value: Option<String>,
+    #[serde(
+        rename = "visibilityRule",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub visibility_rule: Option<serde_json::Value>,
 }
-

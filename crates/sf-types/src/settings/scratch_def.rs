@@ -18,7 +18,7 @@ use serde::{Deserialize, Serialize};
 /// A scratch-org-definition `settings` object, mapped onto the typed
 /// top-level `*Settings` structs.
 ///
-/// Contains one optional field per top-level settings type (228 total). Nested
+/// Contains one optional field per top-level settings type (259 total). Nested
 /// sub-settings (settings types that only appear inside another settings type)
 /// are intentionally omitted, since they are not independently deployable.
 #[derive(Debug, Clone, Default, Serialize, Deserialize)]
@@ -30,12 +30,6 @@ pub struct ScratchOrgSettings {
         skip_serializing_if = "Option::is_none"
     )]
     pub ai_reply_recommendations_settings: Option<AIReplyRecommendationsSettings>,
-    #[serde(
-        rename = "accountForecastSettings",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub account_forecast_settings: Option<AccountForecastSettings>,
     #[serde(
         rename = "accountIntelligenceSettings",
         default,
@@ -61,12 +55,6 @@ pub struct ScratchOrgSettings {
     )]
     pub accounting_settings: Option<AccountingSettings>,
     #[serde(
-        rename = "acctMgrTargetSettings",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub acct_mgr_target_settings: Option<AcctMgrTargetSettings>,
-    #[serde(
         rename = "actionsSettings",
         default,
         skip_serializing_if = "Option::is_none"
@@ -91,6 +79,12 @@ pub struct ScratchOrgSettings {
     )]
     pub agent_platform_settings: Option<AgentPlatformSettings>,
     #[serde(
+        rename = "agentforceAccountManagementSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub agentforce_account_management_settings: Option<AgentforceAccountManagementSettings>,
+    #[serde(
         rename = "agentforceForDevelopersSettings",
         default,
         skip_serializing_if = "Option::is_none"
@@ -108,6 +102,12 @@ pub struct ScratchOrgSettings {
         skip_serializing_if = "Option::is_none"
     )]
     pub analytics_settings: Option<AnalyticsSettings>,
+    #[serde(
+        rename = "apexLimitSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub apex_limit_settings: Option<ApexLimitSettings>,
     #[serde(
         rename = "apexSettings",
         default,
@@ -127,6 +127,12 @@ pub struct ScratchOrgSettings {
     )]
     pub app_experience_settings: Option<AppExperienceSettings>,
     #[serde(
+        rename = "appointmentBookingSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub appointment_booking_settings: Option<AppointmentBookingSettings>,
+    #[serde(
         rename = "associationEngineSettings",
         default,
         skip_serializing_if = "Option::is_none"
@@ -138,6 +144,12 @@ pub struct ScratchOrgSettings {
         skip_serializing_if = "Option::is_none"
     )]
     pub automated_contacts_settings: Option<AutomatedContactsSettings>,
+    #[serde(
+        rename = "automatorConfigSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub automator_config_settings: Option<AutomatorConfigSettings>,
     #[serde(
         rename = "billingSettings",
         default,
@@ -162,6 +174,12 @@ pub struct ScratchOrgSettings {
         skip_serializing_if = "Option::is_none"
     )]
     pub branch_management_settings: Option<BranchManagementSettings>,
+    #[serde(
+        rename = "brandKitSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub brand_kit_settings: Option<BrandKitSettings>,
     #[serde(
         rename = "businessHoursSettings",
         default,
@@ -211,12 +229,6 @@ pub struct ScratchOrgSettings {
     )]
     pub chatter_settings: Option<ChatterSettings>,
     #[serde(
-        rename = "claimFinancialSettings",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub claim_financial_settings: Option<ClaimFinancialSettings>,
-    #[serde(
         rename = "claimMgmtFoundationEnabledSettings",
         default,
         skip_serializing_if = "Option::is_none"
@@ -247,12 +259,6 @@ pub struct ScratchOrgSettings {
     )]
     pub comms_service_console_settings: Option<CommsServiceConsoleSettings>,
     #[serde(
-        rename = "commsUpsellSettings",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub comms_upsell_settings: Option<CommsUpsellSettings>,
-    #[serde(
         rename = "communitiesSettings",
         default,
         skip_serializing_if = "Option::is_none"
@@ -270,12 +276,6 @@ pub struct ScratchOrgSettings {
         skip_serializing_if = "Option::is_none"
     )]
     pub connected_app_settings: Option<ConnectedAppSettings>,
-    #[serde(
-        rename = "consentBannerSettings",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub consent_banner_settings: Option<ConsentBannerSettings>,
     #[serde(
         rename = "contentSettings",
         default,
@@ -300,6 +300,12 @@ pub struct ScratchOrgSettings {
         skip_serializing_if = "Option::is_none"
     )]
     pub conversational_intelligence_settings: Option<ConversationalIntelligenceSettings>,
+    #[serde(
+        rename = "criteriaSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub criteria_settings: Option<CriteriaSettings>,
     #[serde(
         rename = "currencySettings",
         default,
@@ -349,6 +355,12 @@ pub struct ScratchOrgSettings {
     )]
     pub dev_hub_settings: Option<DevHubSettings>,
     #[serde(
+        rename = "dictionariesSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub dictionaries_settings: Option<DictionariesSettings>,
+    #[serde(
         rename = "discoverySettings",
         default,
         skip_serializing_if = "Option::is_none"
@@ -360,6 +372,12 @@ pub struct ScratchOrgSettings {
         skip_serializing_if = "Option::is_none"
     )]
     pub document_checklist_settings: Option<DocumentChecklistSettings>,
+    #[serde(
+        rename = "dripFeedConfigSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub drip_feed_config_settings: Option<DripFeedConfigSettings>,
     #[serde(
         rename = "dxGlobalTermsSettings",
         default,
@@ -378,6 +396,12 @@ pub struct ScratchOrgSettings {
         skip_serializing_if = "Option::is_none"
     )]
     pub dynamic_fulfillment_orchestrator_settings: Option<DynamicFulfillmentOrchestratorSettings>,
+    #[serde(
+        rename = "dynamicGanttSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub dynamic_gantt_settings: Option<DynamicGanttSettings>,
     #[serde(
         rename = "eacSettings",
         default,
@@ -433,6 +457,12 @@ pub struct ScratchOrgSettings {
     )]
     pub email_administration_settings: Option<EmailAdministrationSettings>,
     #[serde(
+        rename = "emailAuthorizationSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub email_authorization_settings: Option<EmailAuthorizationSettings>,
+    #[serde(
         rename = "emailIntegrationSettings",
         default,
         skip_serializing_if = "Option::is_none"
@@ -450,6 +480,12 @@ pub struct ScratchOrgSettings {
         skip_serializing_if = "Option::is_none"
     )]
     pub embedded_service_menu_settings: Option<EmbeddedServiceMenuSettings>,
+    #[serde(
+        rename = "emergencySettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub emergency_settings: Option<EmergencySettings>,
     #[serde(
         rename = "employeeFieldAccessSettings",
         default,
@@ -517,6 +553,18 @@ pub struct ScratchOrgSettings {
     )]
     pub external_client_app_settings: Option<ExternalClientAppSettings>,
     #[serde(
+        rename = "extlClntAppAttestSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub extl_clnt_app_attest_settings: Option<ExtlClntAppAttestSettings>,
+    #[serde(
+        rename = "extlClntAppCanvasSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub extl_clnt_app_canvas_settings: Option<ExtlClntAppCanvasSettings>,
+    #[serde(
         rename = "extlClntAppGlobalOauthSettings",
         default,
         skip_serializing_if = "Option::is_none"
@@ -535,6 +583,12 @@ pub struct ScratchOrgSettings {
     )]
     pub extl_clnt_app_notification_settings: Option<ExtlClntAppNotificationSettings>,
     #[serde(
+        rename = "extlClntAppOauthSecuritySettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub extl_clnt_app_oauth_security_settings: Option<ExtlClntAppOauthSecuritySettings>,
+    #[serde(
         rename = "extlClntAppOauthSettings",
         default,
         skip_serializing_if = "Option::is_none"
@@ -546,24 +600,6 @@ pub struct ScratchOrgSettings {
         skip_serializing_if = "Option::is_none"
     )]
     pub extl_clnt_app_push_settings: Option<ExtlClntAppPushSettings>,
-    #[serde(
-        rename = "extlClntAppSampleSettings",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub extl_clnt_app_sample_settings: Option<ExtlClntAppSampleSettings>,
-    #[serde(
-        rename = "fTestAccessSettings",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub f_test_access_settings: Option<FTestAccessSettings>,
-    #[serde(
-        rename = "fTestSettings",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub f_test_settings: Option<FTestSettings>,
     #[serde(
         rename = "fieldServiceSettings",
         default,
@@ -606,6 +642,24 @@ pub struct ScratchOrgSettings {
         skip_serializing_if = "Option::is_none"
     )]
     pub formula_settings: Option<FormulaSettings>,
+    #[serde(
+        rename = "grcIntelligenceUddSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub grc_intelligence_udd_settings: Option<GRCIntelligenceUddSettings>,
+    #[serde(
+        rename = "generalConfigSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub general_config_settings: Option<GeneralConfigSettings>,
+    #[serde(
+        rename = "geocodeSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub geocode_settings: Option<GeocodeSettings>,
     #[serde(
         rename = "googleAppsSettings",
         default,
@@ -680,6 +734,12 @@ pub struct ScratchOrgSettings {
     )]
     pub industries_connected_service_settings: Option<IndustriesConnectedServiceSettings>,
     #[serde(
+        rename = "industriesConstraintsSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub industries_constraints_settings: Option<IndustriesConstraintsSettings>,
+    #[serde(
         rename = "industriesContextSettings",
         default,
         skip_serializing_if = "Option::is_none"
@@ -691,6 +751,13 @@ pub struct ScratchOrgSettings {
         skip_serializing_if = "Option::is_none"
     )]
     pub industries_einstein_feature_settings: Option<IndustriesEinsteinFeatureSettings>,
+    #[serde(
+        rename = "industriesEnergyUtilitiesMultiSiteSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub industries_energy_utilities_multi_site_settings:
+        Option<IndustriesEnergyUtilitiesMultiSiteSettings>,
     #[serde(
         rename = "industriesEventOrchSettings",
         default,
@@ -728,6 +795,12 @@ pub struct ScratchOrgSettings {
     )]
     pub industries_manufacturing_settings: Option<IndustriesManufacturingSettings>,
     #[serde(
+        rename = "industriesMfgSampleManagementSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub industries_mfg_sample_management_settings: Option<IndustriesMfgSampleManagementSettings>,
+    #[serde(
         rename = "industriesPricingSettings",
         default,
         skip_serializing_if = "Option::is_none"
@@ -764,6 +837,12 @@ pub struct ScratchOrgSettings {
     )]
     pub industries_usage_settings: Option<IndustriesUsageSettings>,
     #[serde(
+        rename = "industriesVectorSearchSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub industries_vector_search_settings: Option<IndustriesVectorSearchSettings>,
+    #[serde(
         rename = "insuranceBrokerageSettings",
         default,
         skip_serializing_if = "Option::is_none"
@@ -781,6 +860,12 @@ pub struct ScratchOrgSettings {
         skip_serializing_if = "Option::is_none"
     )]
     pub inv_late_pymnt_risk_calc_settings: Option<InvLatePymntRiskCalcSettings>,
+    #[serde(
+        rename = "inventoryAllocationSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub inventory_allocation_settings: Option<InventoryAllocationSettings>,
     #[serde(
         rename = "inventoryReplenishmentSettings",
         default,
@@ -872,6 +957,12 @@ pub struct ScratchOrgSettings {
     )]
     pub live_message_settings: Option<LiveMessageSettings>,
     #[serde(
+        rename = "logicSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub logic_settings: Option<LogicSettings>,
+    #[serde(
         rename = "macroSettings",
         default,
         skip_serializing_if = "Option::is_none"
@@ -883,6 +974,12 @@ pub struct ScratchOrgSettings {
         skip_serializing_if = "Option::is_none"
     )]
     pub mail_merge_settings: Option<MailMergeSettings>,
+    #[serde(
+        rename = "mapReportSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub map_report_settings: Option<MapReportSettings>,
     #[serde(
         rename = "mapsAndLocationSettings",
         default,
@@ -950,6 +1047,12 @@ pub struct ScratchOrgSettings {
     )]
     pub object_linking_settings: Option<ObjectLinkingSettings>,
     #[serde(
+        rename = "objectMappingSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub object_mapping_settings: Option<ObjectMappingSettings>,
+    #[serde(
         rename = "omniChannelPricingSettings",
         default,
         skip_serializing_if = "Option::is_none"
@@ -985,6 +1088,12 @@ pub struct ScratchOrgSettings {
         skip_serializing_if = "Option::is_none"
     )]
     pub opportunity_settings: Option<OpportunitySettings>,
+    #[serde(
+        rename = "optimizationSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub optimization_settings: Option<OptimizationSettings>,
     #[serde(
         rename = "orderManagementSettings",
         default,
@@ -1046,6 +1155,12 @@ pub struct ScratchOrgSettings {
     )]
     pub payments_sharing_settings: Option<PaymentsSharingSettings>,
     #[serde(
+        rename = "paynowStarterUpgradeEnabledSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub paynow_starter_upgrade_enabled_settings: Option<PaynowStarterUpgradeEnabledSettings>,
+    #[serde(
         rename = "picklistSettings",
         default,
         skip_serializing_if = "Option::is_none"
@@ -1069,6 +1184,12 @@ pub struct ScratchOrgSettings {
         skip_serializing_if = "Option::is_none"
     )]
     pub platform_slack_settings: Option<PlatformSlackSettings>,
+    #[serde(
+        rename = "platformWebIdeSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub platform_web_ide_settings: Option<PlatformWebIdeSettings>,
     #[serde(
         rename = "portalsSettings",
         default,
@@ -1117,6 +1238,12 @@ pub struct ScratchOrgSettings {
         skip_serializing_if = "Option::is_none"
     )]
     pub product_settings: Option<ProductSettings>,
+    #[serde(
+        rename = "purchaseOrderMgmtSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub purchase_order_mgmt_settings: Option<PurchaseOrderMgmtSettings>,
     #[serde(
         rename = "quickTextSettings",
         default,
@@ -1172,17 +1299,11 @@ pub struct ScratchOrgSettings {
     )]
     pub revenue_management_settings: Option<RevenueManagementSettings>,
     #[serde(
-        rename = "salesAccountAgentSettings",
+        rename = "riskMgmtSettings",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub sales_account_agent_settings: Option<SalesAccountAgentSettings>,
-    #[serde(
-        rename = "salesAgreementSettings",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub sales_agreement_settings: Option<SalesAgreementSettings>,
+    pub risk_mgmt_settings: Option<RiskMgmtSettings>,
     #[serde(
         rename = "salesDealAgentSettings",
         default,
@@ -1208,6 +1329,12 @@ pub struct ScratchOrgSettings {
     )]
     pub sce_global_model_opt_out_settings: Option<SceGlobalModelOptOutSettings>,
     #[serde(
+        rename = "schedulingRecipeSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub scheduling_recipe_settings: Option<SchedulingRecipeSettings>,
+    #[serde(
         rename = "schemaSettings",
         default,
         skip_serializing_if = "Option::is_none"
@@ -1219,6 +1346,12 @@ pub struct ScratchOrgSettings {
         skip_serializing_if = "Option::is_none"
     )]
     pub search_settings: Option<SearchSettings>,
+    #[serde(
+        rename = "securityAgentSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub security_agent_settings: Option<SecurityAgentSettings>,
     #[serde(
         rename = "securityHubSettings",
         default,
@@ -1263,11 +1396,29 @@ pub struct ScratchOrgSettings {
     )]
     pub service_itsm_intelligence_udd_settings: Option<ServiceItsmIntelligenceUddSettings>,
     #[serde(
+        rename = "serviceLegalStatusesSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub service_legal_statuses_settings: Option<ServiceLegalStatusesSettings>,
+    #[serde(
+        rename = "serviceProcessSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub service_process_settings: Option<ServiceProcessSettings>,
+    #[serde(
         rename = "serviceSetupAssistantSettings",
         default,
         skip_serializing_if = "Option::is_none"
     )]
     pub service_setup_assistant_settings: Option<ServiceSetupAssistantSettings>,
+    #[serde(
+        rename = "setupCopilotSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub setup_copilot_settings: Option<SetupCopilotSettings>,
     #[serde(
         rename = "sharingSettings",
         default,
@@ -1281,11 +1432,11 @@ pub struct ScratchOrgSettings {
     )]
     pub site_settings: Option<SiteSettings>,
     #[serde(
-        rename = "slackFeatureSettings",
+        rename = "soFieldMappingSettings",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub slack_feature_settings: Option<SlackFeatureSettings>,
+    pub so_field_mapping_settings: Option<SoFieldMappingSettings>,
     #[serde(
         rename = "socialCustomerServiceSettings",
         default,
@@ -1299,6 +1450,12 @@ pub struct ScratchOrgSettings {
     )]
     pub source_tracking_settings: Option<SourceTrackingSettings>,
     #[serde(
+        rename = "stockRotationSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub stock_rotation_settings: Option<StockRotationSettings>,
+    #[serde(
         rename = "subscriptionManagementSettings",
         default,
         skip_serializing_if = "Option::is_none"
@@ -1310,6 +1467,12 @@ pub struct ScratchOrgSettings {
         skip_serializing_if = "Option::is_none"
     )]
     pub survey_settings: Option<SurveySettings>,
+    #[serde(
+        rename = "synchronizeSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub synchronize_settings: Option<SynchronizeSettings>,
     #[serde(
         rename = "systemNotificationSettings",
         default,
@@ -1329,6 +1492,12 @@ pub struct ScratchOrgSettings {
     )]
     pub tmf_outbound_notification_settings: Option<TmfOutboundNotificationSettings>,
     #[serde(
+        rename = "tmshtLaborCostOptimAiSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub tmsht_labor_cost_optim_ai_settings: Option<TmshtLaborCostOptimAiSettings>,
+    #[serde(
         rename = "trailheadSettings",
         default,
         skip_serializing_if = "Option::is_none"
@@ -1340,6 +1509,24 @@ pub struct ScratchOrgSettings {
         skip_serializing_if = "Option::is_none"
     )]
     pub trial_org_settings: Option<TrialOrgSettings>,
+    #[serde(
+        rename = "triggerConfigurationsSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub trigger_configurations_settings: Option<TriggerConfigurationsSettings>,
+    #[serde(
+        rename = "uiBundleSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub ui_bundle_settings: Option<UIBundleSettings>,
+    #[serde(
+        rename = "unifiedSalesIntelligenceSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub unified_sales_intelligence_settings: Option<UnifiedSalesIntelligenceSettings>,
     #[serde(
         rename = "userEngagementSettings",
         default,
@@ -1406,9 +1593,6 @@ impl ScratchOrgSettings {
         if let Some(v) = &self.ai_reply_recommendations_settings {
             files.push(("AIReplyRecommendations".to_string(), v.to_metadata_xml()?));
         }
-        if let Some(v) = &self.account_forecast_settings {
-            files.push(("AccountForecast".to_string(), v.to_metadata_xml()?));
-        }
         if let Some(v) = &self.account_intelligence_settings {
             files.push(("AccountIntelligence".to_string(), v.to_metadata_xml()?));
         }
@@ -1420,9 +1604,6 @@ impl ScratchOrgSettings {
         }
         if let Some(v) = &self.accounting_settings {
             files.push(("Accounting".to_string(), v.to_metadata_xml()?));
-        }
-        if let Some(v) = &self.acct_mgr_target_settings {
-            files.push(("AcctMgrTarget".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.actions_settings {
             files.push(("Actions".to_string(), v.to_metadata_xml()?));
@@ -1436,6 +1617,12 @@ impl ScratchOrgSettings {
         if let Some(v) = &self.agent_platform_settings {
             files.push(("AgentPlatform".to_string(), v.to_metadata_xml()?));
         }
+        if let Some(v) = &self.agentforce_account_management_settings {
+            files.push((
+                "AgentforceAccountManagement".to_string(),
+                v.to_metadata_xml()?,
+            ));
+        }
         if let Some(v) = &self.agentforce_for_developers_settings {
             files.push(("AgentforceForDevelopers".to_string(), v.to_metadata_xml()?));
         }
@@ -1444,6 +1631,9 @@ impl ScratchOrgSettings {
         }
         if let Some(v) = &self.analytics_settings {
             files.push(("Analytics".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.apex_limit_settings {
+            files.push(("ApexLimit".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.apex_settings {
             files.push(("Apex".to_string(), v.to_metadata_xml()?));
@@ -1454,11 +1644,17 @@ impl ScratchOrgSettings {
         if let Some(v) = &self.app_experience_settings {
             files.push(("AppExperience".to_string(), v.to_metadata_xml()?));
         }
+        if let Some(v) = &self.appointment_booking_settings {
+            files.push(("AppointmentBooking".to_string(), v.to_metadata_xml()?));
+        }
         if let Some(v) = &self.association_engine_settings {
             files.push(("AssociationEngine".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.automated_contacts_settings {
             files.push(("AutomatedContacts".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.automator_config_settings {
+            files.push(("AutomatorConfig".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.billing_settings {
             files.push(("Billing".to_string(), v.to_metadata_xml()?));
@@ -1471,6 +1667,9 @@ impl ScratchOrgSettings {
         }
         if let Some(v) = &self.branch_management_settings {
             files.push(("BranchManagement".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.brand_kit_settings {
+            files.push(("BrandKit".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.business_hours_settings {
             files.push(("BusinessHours".to_string(), v.to_metadata_xml()?));
@@ -1496,9 +1695,6 @@ impl ScratchOrgSettings {
         if let Some(v) = &self.chatter_settings {
             files.push(("Chatter".to_string(), v.to_metadata_xml()?));
         }
-        if let Some(v) = &self.claim_financial_settings {
-            files.push(("ClaimFinancial".to_string(), v.to_metadata_xml()?));
-        }
         if let Some(v) = &self.claim_mgmt_foundation_enabled_settings {
             files.push((
                 "ClaimMgmtFoundationEnabled".to_string(),
@@ -1517,9 +1713,6 @@ impl ScratchOrgSettings {
         if let Some(v) = &self.comms_service_console_settings {
             files.push(("CommsServiceConsole".to_string(), v.to_metadata_xml()?));
         }
-        if let Some(v) = &self.comms_upsell_settings {
-            files.push(("CommsUpsell".to_string(), v.to_metadata_xml()?));
-        }
         if let Some(v) = &self.communities_settings {
             files.push(("Communities".to_string(), v.to_metadata_xml()?));
         }
@@ -1528,9 +1721,6 @@ impl ScratchOrgSettings {
         }
         if let Some(v) = &self.connected_app_settings {
             files.push(("ConnectedApp".to_string(), v.to_metadata_xml()?));
-        }
-        if let Some(v) = &self.consent_banner_settings {
-            files.push(("ConsentBanner".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.content_settings {
             files.push(("Content".to_string(), v.to_metadata_xml()?));
@@ -1549,6 +1739,9 @@ impl ScratchOrgSettings {
                 "ConversationalIntelligence".to_string(),
                 v.to_metadata_xml()?,
             ));
+        }
+        if let Some(v) = &self.criteria_settings {
+            files.push(("Criteria".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.currency_settings {
             files.push(("Currency".to_string(), v.to_metadata_xml()?));
@@ -1577,11 +1770,17 @@ impl ScratchOrgSettings {
         if let Some(v) = &self.dev_hub_settings {
             files.push(("DevHub".to_string(), v.to_metadata_xml()?));
         }
+        if let Some(v) = &self.dictionaries_settings {
+            files.push(("Dictionaries".to_string(), v.to_metadata_xml()?));
+        }
         if let Some(v) = &self.discovery_settings {
             files.push(("Discovery".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.document_checklist_settings {
             files.push(("DocumentChecklist".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.drip_feed_config_settings {
+            files.push(("DripFeedConfig".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.dx_global_terms_settings {
             files.push(("DxGlobalTerms".to_string(), v.to_metadata_xml()?));
@@ -1594,6 +1793,9 @@ impl ScratchOrgSettings {
                 "DynamicFulfillmentOrchestrator".to_string(),
                 v.to_metadata_xml()?,
             ));
+        }
+        if let Some(v) = &self.dynamic_gantt_settings {
+            files.push(("DynamicGantt".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.eac_settings {
             files.push(("EAC".to_string(), v.to_metadata_xml()?));
@@ -1622,6 +1824,9 @@ impl ScratchOrgSettings {
         if let Some(v) = &self.email_administration_settings {
             files.push(("EmailAdministration".to_string(), v.to_metadata_xml()?));
         }
+        if let Some(v) = &self.email_authorization_settings {
+            files.push(("EmailAuthorization".to_string(), v.to_metadata_xml()?));
+        }
         if let Some(v) = &self.email_integration_settings {
             files.push(("EmailIntegration".to_string(), v.to_metadata_xml()?));
         }
@@ -1630,6 +1835,9 @@ impl ScratchOrgSettings {
         }
         if let Some(v) = &self.embedded_service_menu_settings {
             files.push(("EmbeddedServiceMenu".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.emergency_settings {
+            files.push(("Emergency".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.employee_field_access_settings {
             files.push(("EmployeeFieldAccess".to_string(), v.to_metadata_xml()?));
@@ -1664,6 +1872,12 @@ impl ScratchOrgSettings {
         if let Some(v) = &self.external_client_app_settings {
             files.push(("ExternalClientApp".to_string(), v.to_metadata_xml()?));
         }
+        if let Some(v) = &self.extl_clnt_app_attest_settings {
+            files.push(("ExtlClntAppAttest".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.extl_clnt_app_canvas_settings {
+            files.push(("ExtlClntAppCanvas".to_string(), v.to_metadata_xml()?));
+        }
         if let Some(v) = &self.extl_clnt_app_global_oauth_settings {
             files.push(("ExtlClntAppGlobalOauth".to_string(), v.to_metadata_xml()?));
         }
@@ -1673,20 +1887,14 @@ impl ScratchOrgSettings {
         if let Some(v) = &self.extl_clnt_app_notification_settings {
             files.push(("ExtlClntAppNotification".to_string(), v.to_metadata_xml()?));
         }
+        if let Some(v) = &self.extl_clnt_app_oauth_security_settings {
+            files.push(("ExtlClntAppOauthSecurity".to_string(), v.to_metadata_xml()?));
+        }
         if let Some(v) = &self.extl_clnt_app_oauth_settings {
             files.push(("ExtlClntAppOauth".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.extl_clnt_app_push_settings {
             files.push(("ExtlClntAppPush".to_string(), v.to_metadata_xml()?));
-        }
-        if let Some(v) = &self.extl_clnt_app_sample_settings {
-            files.push(("ExtlClntAppSample".to_string(), v.to_metadata_xml()?));
-        }
-        if let Some(v) = &self.f_test_access_settings {
-            files.push(("FTestAccess".to_string(), v.to_metadata_xml()?));
-        }
-        if let Some(v) = &self.f_test_settings {
-            files.push(("FTest".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.field_service_settings {
             files.push(("FieldService".to_string(), v.to_metadata_xml()?));
@@ -1711,6 +1919,15 @@ impl ScratchOrgSettings {
         }
         if let Some(v) = &self.formula_settings {
             files.push(("Formula".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.grc_intelligence_udd_settings {
+            files.push(("GRCIntelligenceUdd".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.general_config_settings {
+            files.push(("GeneralConfig".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.geocode_settings {
+            files.push(("Geocode".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.google_apps_settings {
             files.push(("GoogleApps".to_string(), v.to_metadata_xml()?));
@@ -1754,12 +1971,21 @@ impl ScratchOrgSettings {
                 v.to_metadata_xml()?,
             ));
         }
+        if let Some(v) = &self.industries_constraints_settings {
+            files.push(("IndustriesConstraints".to_string(), v.to_metadata_xml()?));
+        }
         if let Some(v) = &self.industries_context_settings {
             files.push(("IndustriesContext".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.industries_einstein_feature_settings {
             files.push((
                 "IndustriesEinsteinFeature".to_string(),
+                v.to_metadata_xml()?,
+            ));
+        }
+        if let Some(v) = &self.industries_energy_utilities_multi_site_settings {
+            files.push((
+                "IndustriesEnergyUtilitiesMultiSite".to_string(),
                 v.to_metadata_xml()?,
             ));
         }
@@ -1780,6 +2006,12 @@ impl ScratchOrgSettings {
         }
         if let Some(v) = &self.industries_manufacturing_settings {
             files.push(("IndustriesManufacturing".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.industries_mfg_sample_management_settings {
+            files.push((
+                "IndustriesMfgSampleManagement".to_string(),
+                v.to_metadata_xml()?,
+            ));
         }
         if let Some(v) = &self.industries_pricing_settings {
             files.push(("IndustriesPricing".to_string(), v.to_metadata_xml()?));
@@ -1805,6 +2037,9 @@ impl ScratchOrgSettings {
         if let Some(v) = &self.industries_usage_settings {
             files.push(("IndustriesUsage".to_string(), v.to_metadata_xml()?));
         }
+        if let Some(v) = &self.industries_vector_search_settings {
+            files.push(("IndustriesVectorSearch".to_string(), v.to_metadata_xml()?));
+        }
         if let Some(v) = &self.insurance_brokerage_settings {
             files.push(("InsuranceBrokerage".to_string(), v.to_metadata_xml()?));
         }
@@ -1813,6 +2048,9 @@ impl ScratchOrgSettings {
         }
         if let Some(v) = &self.inv_late_pymnt_risk_calc_settings {
             files.push(("InvLatePymntRiskCalc".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.inventory_allocation_settings {
+            files.push(("InventoryAllocation".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.inventory_replenishment_settings {
             files.push(("InventoryReplenishment".to_string(), v.to_metadata_xml()?));
@@ -1862,11 +2100,17 @@ impl ScratchOrgSettings {
         if let Some(v) = &self.live_message_settings {
             files.push(("LiveMessage".to_string(), v.to_metadata_xml()?));
         }
+        if let Some(v) = &self.logic_settings {
+            files.push(("Logic".to_string(), v.to_metadata_xml()?));
+        }
         if let Some(v) = &self.macro_settings {
             files.push(("Macro".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.mail_merge_settings {
             files.push(("MailMerge".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.map_report_settings {
+            files.push(("MapReport".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.maps_and_location_settings {
             files.push(("MapsAndLocation".to_string(), v.to_metadata_xml()?));
@@ -1901,6 +2145,9 @@ impl ScratchOrgSettings {
         if let Some(v) = &self.object_linking_settings {
             files.push(("ObjectLinking".to_string(), v.to_metadata_xml()?));
         }
+        if let Some(v) = &self.object_mapping_settings {
+            files.push(("ObjectMapping".to_string(), v.to_metadata_xml()?));
+        }
         if let Some(v) = &self.omni_channel_pricing_settings {
             files.push(("OmniChannelPricing".to_string(), v.to_metadata_xml()?));
         }
@@ -1918,6 +2165,9 @@ impl ScratchOrgSettings {
         }
         if let Some(v) = &self.opportunity_settings {
             files.push(("Opportunity".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.optimization_settings {
+            files.push(("Optimization".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.order_management_settings {
             files.push(("OrderManagement".to_string(), v.to_metadata_xml()?));
@@ -1952,6 +2202,12 @@ impl ScratchOrgSettings {
         if let Some(v) = &self.payments_sharing_settings {
             files.push(("PaymentsSharing".to_string(), v.to_metadata_xml()?));
         }
+        if let Some(v) = &self.paynow_starter_upgrade_enabled_settings {
+            files.push((
+                "PaynowStarterUpgradeEnabled".to_string(),
+                v.to_metadata_xml()?,
+            ));
+        }
         if let Some(v) = &self.picklist_settings {
             files.push(("Picklist".to_string(), v.to_metadata_xml()?));
         }
@@ -1963,6 +2219,9 @@ impl ScratchOrgSettings {
         }
         if let Some(v) = &self.platform_slack_settings {
             files.push(("PlatformSlack".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.platform_web_ide_settings {
+            files.push(("PlatformWebIde".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.portals_settings {
             files.push(("Portals".to_string(), v.to_metadata_xml()?));
@@ -1987,6 +2246,9 @@ impl ScratchOrgSettings {
         }
         if let Some(v) = &self.product_settings {
             files.push(("Product".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.purchase_order_mgmt_settings {
+            files.push(("PurchaseOrderMgmt".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.quick_text_settings {
             files.push(("QuickText".to_string(), v.to_metadata_xml()?));
@@ -2015,11 +2277,8 @@ impl ScratchOrgSettings {
         if let Some(v) = &self.revenue_management_settings {
             files.push(("RevenueManagement".to_string(), v.to_metadata_xml()?));
         }
-        if let Some(v) = &self.sales_account_agent_settings {
-            files.push(("SalesAccountAgent".to_string(), v.to_metadata_xml()?));
-        }
-        if let Some(v) = &self.sales_agreement_settings {
-            files.push(("SalesAgreement".to_string(), v.to_metadata_xml()?));
+        if let Some(v) = &self.risk_mgmt_settings {
+            files.push(("RiskMgmt".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.sales_deal_agent_settings {
             files.push(("SalesDealAgent".to_string(), v.to_metadata_xml()?));
@@ -2033,11 +2292,17 @@ impl ScratchOrgSettings {
         if let Some(v) = &self.sce_global_model_opt_out_settings {
             files.push(("SceGlobalModelOptOut".to_string(), v.to_metadata_xml()?));
         }
+        if let Some(v) = &self.scheduling_recipe_settings {
+            files.push(("SchedulingRecipe".to_string(), v.to_metadata_xml()?));
+        }
         if let Some(v) = &self.schema_settings {
             files.push(("Schema".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.search_settings {
             files.push(("Search".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.security_agent_settings {
+            files.push(("SecurityAgent".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.security_hub_settings {
             files.push(("SecurityHub".to_string(), v.to_metadata_xml()?));
@@ -2066,8 +2331,17 @@ impl ScratchOrgSettings {
                 v.to_metadata_xml()?,
             ));
         }
+        if let Some(v) = &self.service_legal_statuses_settings {
+            files.push(("ServiceLegalStatuses".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.service_process_settings {
+            files.push(("ServiceProcess".to_string(), v.to_metadata_xml()?));
+        }
         if let Some(v) = &self.service_setup_assistant_settings {
             files.push(("ServiceSetupAssistant".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.setup_copilot_settings {
+            files.push(("SetupCopilot".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.sharing_settings {
             files.push(("Sharing".to_string(), v.to_metadata_xml()?));
@@ -2075,8 +2349,8 @@ impl ScratchOrgSettings {
         if let Some(v) = &self.site_settings {
             files.push(("Site".to_string(), v.to_metadata_xml()?));
         }
-        if let Some(v) = &self.slack_feature_settings {
-            files.push(("SlackFeature".to_string(), v.to_metadata_xml()?));
+        if let Some(v) = &self.so_field_mapping_settings {
+            files.push(("SoFieldMapping".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.social_customer_service_settings {
             files.push(("SocialCustomerService".to_string(), v.to_metadata_xml()?));
@@ -2084,11 +2358,17 @@ impl ScratchOrgSettings {
         if let Some(v) = &self.source_tracking_settings {
             files.push(("SourceTracking".to_string(), v.to_metadata_xml()?));
         }
+        if let Some(v) = &self.stock_rotation_settings {
+            files.push(("StockRotation".to_string(), v.to_metadata_xml()?));
+        }
         if let Some(v) = &self.subscription_management_settings {
             files.push(("SubscriptionManagement".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.survey_settings {
             files.push(("Survey".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.synchronize_settings {
+            files.push(("Synchronize".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.system_notification_settings {
             files.push(("SystemNotification".to_string(), v.to_metadata_xml()?));
@@ -2099,11 +2379,23 @@ impl ScratchOrgSettings {
         if let Some(v) = &self.tmf_outbound_notification_settings {
             files.push(("TmfOutboundNotification".to_string(), v.to_metadata_xml()?));
         }
+        if let Some(v) = &self.tmsht_labor_cost_optim_ai_settings {
+            files.push(("TmshtLaborCostOptimAi".to_string(), v.to_metadata_xml()?));
+        }
         if let Some(v) = &self.trailhead_settings {
             files.push(("Trailhead".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.trial_org_settings {
             files.push(("TrialOrg".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.trigger_configurations_settings {
+            files.push(("TriggerConfigurations".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.ui_bundle_settings {
+            files.push(("UIBundle".to_string(), v.to_metadata_xml()?));
+        }
+        if let Some(v) = &self.unified_sales_intelligence_settings {
+            files.push(("UnifiedSalesIntelligence".to_string(), v.to_metadata_xml()?));
         }
         if let Some(v) = &self.user_engagement_settings {
             files.push(("UserEngagement".to_string(), v.to_metadata_xml()?));
@@ -2138,28 +2430,31 @@ impl ScratchOrgSettings {
     /// Returns `true` if no settings are present.
     pub fn is_empty(&self) -> bool {
         self.ai_reply_recommendations_settings.is_none()
-            && self.account_forecast_settings.is_none()
             && self.account_intelligence_settings.is_none()
             && self.account_plan_settings.is_none()
             && self.account_settings.is_none()
             && self.accounting_settings.is_none()
-            && self.acct_mgr_target_settings.is_none()
             && self.actions_settings.is_none()
             && self.activities_settings.is_none()
             && self.address_settings.is_none()
             && self.agent_platform_settings.is_none()
+            && self.agentforce_account_management_settings.is_none()
             && self.agentforce_for_developers_settings.is_none()
             && self.ai_4_m_settings.is_none()
             && self.analytics_settings.is_none()
+            && self.apex_limit_settings.is_none()
             && self.apex_settings.is_none()
             && self.app_analytics_settings.is_none()
             && self.app_experience_settings.is_none()
+            && self.appointment_booking_settings.is_none()
             && self.association_engine_settings.is_none()
             && self.automated_contacts_settings.is_none()
+            && self.automator_config_settings.is_none()
             && self.billing_settings.is_none()
             && self.blockchain_settings.is_none()
             && self.bot_settings.is_none()
             && self.branch_management_settings.is_none()
+            && self.brand_kit_settings.is_none()
             && self.business_hours_settings.is_none()
             && self.campaign_settings.is_none()
             && self.care_benefit_verify_settings.is_none()
@@ -2168,21 +2463,19 @@ impl ScratchOrgSettings {
             && self.chatter_answers_settings.is_none()
             && self.chatter_emails_md_settings.is_none()
             && self.chatter_settings.is_none()
-            && self.claim_financial_settings.is_none()
             && self.claim_mgmt_foundation_enabled_settings.is_none()
             && self.code_builder_settings.is_none()
             && self.collections_dashboard_settings.is_none()
             && self.commerce_settings.is_none()
             && self.comms_service_console_settings.is_none()
-            && self.comms_upsell_settings.is_none()
             && self.communities_settings.is_none()
             && self.company_settings.is_none()
             && self.connected_app_settings.is_none()
-            && self.consent_banner_settings.is_none()
             && self.content_settings.is_none()
             && self.contract_settings.is_none()
             && self.conversation_service_integration_settings.is_none()
             && self.conversational_intelligence_settings.is_none()
+            && self.criteria_settings.is_none()
             && self.currency_settings.is_none()
             && self.custom_address_field_settings.is_none()
             && self.customer_data_platform_settings.is_none()
@@ -2191,11 +2484,14 @@ impl ScratchOrgSettings {
             && self.data_import_management_settings.is_none()
             && self.deployment_settings.is_none()
             && self.dev_hub_settings.is_none()
+            && self.dictionaries_settings.is_none()
             && self.discovery_settings.is_none()
             && self.document_checklist_settings.is_none()
+            && self.drip_feed_config_settings.is_none()
             && self.dx_global_terms_settings.is_none()
             && self.dynamic_forms_settings.is_none()
             && self.dynamic_fulfillment_orchestrator_settings.is_none()
+            && self.dynamic_gantt_settings.is_none()
             && self.eac_settings.is_none()
             && self.einstein_ai_settings.is_none()
             && self.einstein_agent_settings.is_none()
@@ -2205,9 +2501,11 @@ impl ScratchOrgSettings {
             && self.einstein_document_capture_settings.is_none()
             && self.einstein_gpt_settings.is_none()
             && self.email_administration_settings.is_none()
+            && self.email_authorization_settings.is_none()
             && self.email_integration_settings.is_none()
             && self.email_template_settings.is_none()
             && self.embedded_service_menu_settings.is_none()
+            && self.emergency_settings.is_none()
             && self.employee_field_access_settings.is_none()
             && self.employee_user_settings.is_none()
             && self.encryption_key_settings.is_none()
@@ -2219,14 +2517,14 @@ impl ScratchOrgSettings {
             && self.evf_settings.is_none()
             && self.experience_bundle_settings.is_none()
             && self.external_client_app_settings.is_none()
+            && self.extl_clnt_app_attest_settings.is_none()
+            && self.extl_clnt_app_canvas_settings.is_none()
             && self.extl_clnt_app_global_oauth_settings.is_none()
             && self.extl_clnt_app_mobile_settings.is_none()
             && self.extl_clnt_app_notification_settings.is_none()
+            && self.extl_clnt_app_oauth_security_settings.is_none()
             && self.extl_clnt_app_oauth_settings.is_none()
             && self.extl_clnt_app_push_settings.is_none()
-            && self.extl_clnt_app_sample_settings.is_none()
-            && self.f_test_access_settings.is_none()
-            && self.f_test_settings.is_none()
             && self.field_service_settings.is_none()
             && self.file_upload_and_download_security_settings.is_none()
             && self.files_connect_settings.is_none()
@@ -2234,6 +2532,9 @@ impl ScratchOrgSettings {
             && self.forecasting_object_list_settings.is_none()
             && self.forecasting_settings.is_none()
             && self.formula_settings.is_none()
+            && self.grc_intelligence_udd_settings.is_none()
+            && self.general_config_settings.is_none()
+            && self.geocode_settings.is_none()
             && self.google_apps_settings.is_none()
             && self.heroku_app_link_settings.is_none()
             && self.high_velocity_sales_settings.is_none()
@@ -2246,23 +2547,30 @@ impl ScratchOrgSettings {
             && self.industries_automotive_settings.is_none()
             && self.industries_channel_partner_inventory_settings.is_none()
             && self.industries_connected_service_settings.is_none()
+            && self.industries_constraints_settings.is_none()
             && self.industries_context_settings.is_none()
             && self.industries_einstein_feature_settings.is_none()
+            && self
+                .industries_energy_utilities_multi_site_settings
+                .is_none()
             && self.industries_event_orch_settings.is_none()
             && self.industries_field_service_settings.is_none()
             && self.industries_gamification_settings.is_none()
             && self.industries_loyalty_settings.is_none()
             && self.industries_ls_commercial_settings.is_none()
             && self.industries_manufacturing_settings.is_none()
+            && self.industries_mfg_sample_management_settings.is_none()
             && self.industries_pricing_settings.is_none()
             && self.industries_rating_settings.is_none()
             && self.industries_settings.is_none()
             && self.industries_unified_inventory_settings.is_none()
             && self.industries_unified_promotions_settings.is_none()
             && self.industries_usage_settings.is_none()
+            && self.industries_vector_search_settings.is_none()
             && self.insurance_brokerage_settings.is_none()
             && self.interest_tagging_settings.is_none()
             && self.inv_late_pymnt_risk_calc_settings.is_none()
+            && self.inventory_allocation_settings.is_none()
             && self.inventory_replenishment_settings.is_none()
             && self.inventory_settings.is_none()
             && self.invocable_action_settings.is_none()
@@ -2278,8 +2586,10 @@ impl ScratchOrgSettings {
             && self.lightning_experience_settings.is_none()
             && self.live_agent_settings.is_none()
             && self.live_message_settings.is_none()
+            && self.logic_settings.is_none()
             && self.macro_settings.is_none()
             && self.mail_merge_settings.is_none()
+            && self.map_report_settings.is_none()
             && self.maps_and_location_settings.is_none()
             && self.media_ad_sales_settings.is_none()
             && self.media_agent_settings.is_none()
@@ -2291,12 +2601,14 @@ impl ScratchOrgSettings {
             && self.notifications_settings.is_none()
             && self.oauth_oidc_settings.is_none()
             && self.object_linking_settings.is_none()
+            && self.object_mapping_settings.is_none()
             && self.omni_channel_pricing_settings.is_none()
             && self.omni_channel_settings.is_none()
             && self.omni_studio_settings.is_none()
             && self.online_sales_settings.is_none()
             && self.opportunity_score_settings.is_none()
             && self.opportunity_settings.is_none()
+            && self.optimization_settings.is_none()
             && self.order_management_settings.is_none()
             && self.order_settings.is_none()
             && self.org_settings.is_none()
@@ -2307,10 +2619,12 @@ impl ScratchOrgSettings {
             && self.payments_management_enabled_settings.is_none()
             && self.payments_settings.is_none()
             && self.payments_sharing_settings.is_none()
+            && self.paynow_starter_upgrade_enabled_settings.is_none()
             && self.picklist_settings.is_none()
             && self.platform_encryption_settings.is_none()
             && self.platform_event_settings.is_none()
             && self.platform_slack_settings.is_none()
+            && self.platform_web_ide_settings.is_none()
             && self.portals_settings.is_none()
             && self.prediction_builder_settings.is_none()
             && self.privacy_settings.is_none()
@@ -2319,6 +2633,7 @@ impl ScratchOrgSettings {
             && self.product_configurator_settings.is_none()
             && self.product_discovery_settings.is_none()
             && self.product_settings.is_none()
+            && self.purchase_order_mgmt_settings.is_none()
             && self.quick_text_settings.is_none()
             && self.quote_settings.is_none()
             && self.real_time_event_settings.is_none()
@@ -2328,14 +2643,15 @@ impl ScratchOrgSettings {
             && self.release_mgmt_settings.is_none()
             && self.retail_execution_settings.is_none()
             && self.revenue_management_settings.is_none()
-            && self.sales_account_agent_settings.is_none()
-            && self.sales_agreement_settings.is_none()
+            && self.risk_mgmt_settings.is_none()
             && self.sales_deal_agent_settings.is_none()
             && self.sales_work_queue_settings.is_none()
             && self.sandbox_settings.is_none()
             && self.sce_global_model_opt_out_settings.is_none()
+            && self.scheduling_recipe_settings.is_none()
             && self.schema_settings.is_none()
             && self.search_settings.is_none()
+            && self.security_agent_settings.is_none()
             && self.security_hub_settings.is_none()
             && self.security_settings.is_none()
             && self.sequence_service_settings.is_none()
@@ -2345,19 +2661,28 @@ impl ScratchOrgSettings {
                 .is_none()
             && self.service_cloud_voice_settings.is_none()
             && self.service_itsm_intelligence_udd_settings.is_none()
+            && self.service_legal_statuses_settings.is_none()
+            && self.service_process_settings.is_none()
             && self.service_setup_assistant_settings.is_none()
+            && self.setup_copilot_settings.is_none()
             && self.sharing_settings.is_none()
             && self.site_settings.is_none()
-            && self.slack_feature_settings.is_none()
+            && self.so_field_mapping_settings.is_none()
             && self.social_customer_service_settings.is_none()
             && self.source_tracking_settings.is_none()
+            && self.stock_rotation_settings.is_none()
             && self.subscription_management_settings.is_none()
             && self.survey_settings.is_none()
+            && self.synchronize_settings.is_none()
             && self.system_notification_settings.is_none()
             && self.territory_2_settings.is_none()
             && self.tmf_outbound_notification_settings.is_none()
+            && self.tmsht_labor_cost_optim_ai_settings.is_none()
             && self.trailhead_settings.is_none()
             && self.trial_org_settings.is_none()
+            && self.trigger_configurations_settings.is_none()
+            && self.ui_bundle_settings.is_none()
+            && self.unified_sales_intelligence_settings.is_none()
             && self.user_engagement_settings.is_none()
             && self.user_interface_settings.is_none()
             && self.user_management_settings.is_none()

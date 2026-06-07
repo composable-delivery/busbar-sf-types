@@ -10,15 +10,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DashboardComponentColumnType {
-    #[default]
-    aggregate,
-    detail,
-    grouping,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum DashboardComponentFilter {
     #[default]
     RowLabelAscending,
@@ -70,6 +61,7 @@ pub enum DashboardComponentType {
     Image,
     RichText,
     PulseMetric,
+    LightningWebComponent,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -189,19 +181,6 @@ pub enum ReportSortType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ReportStatus {
-    #[default]
-    NEW,
-    TRAINING,
-    COMPLETED,
-    ERROR,
-    NOT_ENOUGH_DATA_AFTER_PARSING,
-    NOT_ENOUGH_DATA_WITH_CONTACT_REASON,
-    LOW_CLUSTER_QUALITY,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum ReportSummaryType {
     #[default]
     Sum,
@@ -254,42 +233,102 @@ pub struct Dashboard {
     pub background_fade_direction: serde_json::Value,
     #[serde(rename = "backgroundStartColor", default)]
     pub background_start_color: String,
-    #[serde(rename = "chartTheme", default)]
-    pub chart_theme: serde_json::Value,
-    #[serde(rename = "colorPalette", default)]
-    pub color_palette: serde_json::Value,
-    #[serde(rename = "dashboardChartTheme", default)]
-    pub dashboard_chart_theme: serde_json::Value,
-    #[serde(rename = "dashboardColorPalette", default)]
-    pub dashboard_color_palette: serde_json::Value,
+    #[serde(
+        rename = "chartTheme",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub chart_theme: Option<serde_json::Value>,
+    #[serde(
+        rename = "colorPalette",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub color_palette: Option<serde_json::Value>,
+    #[serde(
+        rename = "dashboardChartTheme",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub dashboard_chart_theme: Option<serde_json::Value>,
+    #[serde(
+        rename = "dashboardColorPalette",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub dashboard_color_palette: Option<serde_json::Value>,
     #[serde(rename = "dashboardFilters", default)]
     pub dashboard_filters: Vec<DashboardFilter>,
-    #[serde(rename = "dashboardGridLayout", default)]
-    pub dashboard_grid_layout: DashboardGridLayout,
-    #[serde(rename = "dashboardResultRefreshedDate", default)]
-    pub dashboard_result_refreshed_date: String,
-    #[serde(rename = "dashboardResultRunningUser", default)]
-    pub dashboard_result_running_user: String,
-    #[serde(rename = "dashboardType", default)]
-    pub dashboard_type: DashboardType,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "folderName", default)]
-    pub folder_name: String,
-    #[serde(rename = "isGridLayout", default)]
-    pub is_grid_layout: bool,
-    #[serde(rename = "leftSection", default)]
-    pub left_section: DashboardComponentSection,
-    #[serde(rename = "middleSection", default)]
-    pub middle_section: DashboardComponentSection,
-    #[serde(rename = "numSubscriptions", default)]
-    pub num_subscriptions: f64,
-    #[serde(default)]
-    pub owner: String,
-    #[serde(rename = "rightSection", default)]
-    pub right_section: DashboardComponentSection,
-    #[serde(rename = "runningUser", default)]
-    pub running_user: String,
+    #[serde(
+        rename = "dashboardGridLayout",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub dashboard_grid_layout: Option<DashboardGridLayout>,
+    #[serde(
+        rename = "dashboardResultRefreshedDate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub dashboard_result_refreshed_date: Option<String>,
+    #[serde(
+        rename = "dashboardResultRunningUser",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub dashboard_result_running_user: Option<String>,
+    #[serde(
+        rename = "dashboardType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub dashboard_type: Option<DashboardType>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "folderName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub folder_name: Option<String>,
+    #[serde(
+        rename = "isGridLayout",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_grid_layout: Option<bool>,
+    #[serde(
+        rename = "leftSection",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub left_section: Option<DashboardComponentSection>,
+    #[serde(
+        rename = "middleSection",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub middle_section: Option<DashboardComponentSection>,
+    #[serde(
+        rename = "numSubscriptions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub num_subscriptions: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub owner: Option<String>,
+    #[serde(
+        rename = "rightSection",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub right_section: Option<DashboardComponentSection>,
+    #[serde(
+        rename = "runningUser",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub running_user: Option<String>,
     #[serde(rename = "textColor", default)]
     pub text_color: String,
     #[serde(default)]
@@ -304,18 +343,38 @@ pub struct Dashboard {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DashboardComponent {
-    #[serde(rename = "autoselectColumnsFromReport", default)]
-    pub autoselect_columns_from_report: bool,
-    #[serde(rename = "chartAxisRange", default)]
-    pub chart_axis_range: serde_json::Value,
-    #[serde(rename = "chartAxisRangeMax", default)]
-    pub chart_axis_range_max: f64,
-    #[serde(rename = "chartAxisRangeMin", default)]
-    pub chart_axis_range_min: f64,
+    #[serde(
+        rename = "autoselectColumnsFromReport",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub autoselect_columns_from_report: Option<bool>,
+    #[serde(
+        rename = "chartAxisRange",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub chart_axis_range: Option<serde_json::Value>,
+    #[serde(
+        rename = "chartAxisRangeMax",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub chart_axis_range_max: Option<f64>,
+    #[serde(
+        rename = "chartAxisRangeMin",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub chart_axis_range_min: Option<f64>,
     #[serde(rename = "chartSummary", default)]
     pub chart_summary: Vec<serde_json::Value>,
-    #[serde(rename = "componentChartTheme", default)]
-    pub component_chart_theme: serde_json::Value,
+    #[serde(
+        rename = "componentChartTheme",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub component_chart_theme: Option<serde_json::Value>,
     #[serde(rename = "componentType", default)]
     pub component_type: DashboardComponentType,
     #[serde(rename = "dashboardComponentContents", default)]
@@ -326,128 +385,278 @@ pub struct DashboardComponent {
     pub dashboard_filter_columns: Vec<DashboardFilterColumn>,
     #[serde(rename = "dashboardTableColumn", default)]
     pub dashboard_table_column: Vec<DashboardTableColumn>,
-    #[serde(rename = "decimalPrecision", default)]
-    pub decimal_precision: f64,
-    #[serde(rename = "displayUnits", default)]
-    pub display_units: serde_json::Value,
-    #[serde(rename = "drillDownUrl", default)]
-    pub drill_down_url: String,
-    #[serde(rename = "drillEnabled", default)]
-    pub drill_enabled: bool,
-    #[serde(rename = "drillToDetailEnabled", default)]
-    pub drill_to_detail_enabled: bool,
-    #[serde(rename = "enableHover", default)]
-    pub enable_hover: bool,
-    #[serde(rename = "expandOthers", default)]
-    pub expand_others: bool,
-    #[serde(rename = "flexComponentProperties", default)]
-    pub flex_component_properties: DashboardFlexTableComponentProperties,
-    #[serde(default)]
-    pub footer: String,
-    #[serde(rename = "gaugeMax", default)]
-    pub gauge_max: f64,
-    #[serde(rename = "gaugeMin", default)]
-    pub gauge_min: f64,
+    #[serde(
+        rename = "decimalPrecision",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub decimal_precision: Option<f64>,
+    #[serde(
+        rename = "displayUnits",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub display_units: Option<serde_json::Value>,
+    #[serde(
+        rename = "drillDownUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub drill_down_url: Option<String>,
+    #[serde(
+        rename = "drillEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub drill_enabled: Option<bool>,
+    #[serde(
+        rename = "drillToDetailEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub drill_to_detail_enabled: Option<bool>,
+    #[serde(
+        rename = "enableHover",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_hover: Option<bool>,
+    #[serde(
+        rename = "expandOthers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub expand_others: Option<bool>,
+    #[serde(
+        rename = "flexComponentProperties",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub flex_component_properties: Option<DashboardFlexTableComponentProperties>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub footer: Option<String>,
+    #[serde(rename = "gaugeMax", default, skip_serializing_if = "Option::is_none")]
+    pub gauge_max: Option<f64>,
+    #[serde(rename = "gaugeMin", default, skip_serializing_if = "Option::is_none")]
+    pub gauge_min: Option<f64>,
     #[serde(rename = "groupingColumn", default)]
     pub grouping_column: Vec<String>,
-    #[serde(rename = "groupingSortProperties", default)]
-    pub grouping_sort_properties: DashboardComponentGroupingSortProperties,
-    #[serde(default)]
-    pub header: String,
-    #[serde(rename = "indicatorBreakpoint1", default)]
-    pub indicator_breakpoint_1: f64,
-    #[serde(rename = "indicatorBreakpoint2", default)]
-    pub indicator_breakpoint_2: f64,
-    #[serde(rename = "indicatorHighColor", default)]
-    pub indicator_high_color: String,
-    #[serde(rename = "indicatorLowColor", default)]
-    pub indicator_low_color: String,
-    #[serde(rename = "indicatorMiddleColor", default)]
-    pub indicator_middle_color: String,
-    #[serde(rename = "legendPosition", default)]
-    pub legend_position: serde_json::Value,
-    #[serde(rename = "maxValuesDisplayed", default)]
-    pub max_values_displayed: f64,
-    #[serde(rename = "metricLabel", default)]
-    pub metric_label: String,
-    #[serde(default)]
-    pub page: String,
-    #[serde(rename = "pageHeightInPixels", default)]
-    pub page_height_in_pixels: f64,
-    #[serde(default)]
-    pub report: String,
-    #[serde(default)]
-    pub scontrol: String,
-    #[serde(rename = "scontrolHeightInPixels", default)]
-    pub scontrol_height_in_pixels: f64,
-    #[serde(rename = "showPercentage", default)]
-    pub show_percentage: bool,
-    #[serde(rename = "showPicturesOnCharts", default)]
-    pub show_pictures_on_charts: bool,
-    #[serde(rename = "showPicturesOnTables", default)]
-    pub show_pictures_on_tables: bool,
-    #[serde(rename = "showRange", default)]
-    pub show_range: bool,
-    #[serde(rename = "showTotal", default)]
-    pub show_total: bool,
-    #[serde(rename = "showValues", default)]
-    pub show_values: bool,
-    #[serde(rename = "sortBy", default)]
-    pub sort_by: DashboardComponentFilter,
-    #[serde(rename = "sortLegendValues", default)]
-    pub sort_legend_values: bool,
-    #[serde(default)]
-    pub title: String,
-    #[serde(rename = "useReportChart", default)]
-    pub use_report_chart: bool,
+    #[serde(
+        rename = "groupingSortProperties",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub grouping_sort_properties: Option<DashboardComponentGroupingSortProperties>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub header: Option<String>,
+    #[serde(
+        rename = "indicatorBreakpoint1",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub indicator_breakpoint_1: Option<f64>,
+    #[serde(
+        rename = "indicatorBreakpoint2",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub indicator_breakpoint_2: Option<f64>,
+    #[serde(
+        rename = "indicatorHighColor",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub indicator_high_color: Option<String>,
+    #[serde(
+        rename = "indicatorLowColor",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub indicator_low_color: Option<String>,
+    #[serde(
+        rename = "indicatorMiddleColor",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub indicator_middle_color: Option<String>,
+    #[serde(
+        rename = "legendPosition",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub legend_position: Option<serde_json::Value>,
+    #[serde(
+        rename = "maxValuesDisplayed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub max_values_displayed: Option<f64>,
+    #[serde(
+        rename = "metricLabel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub metric_label: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub page: Option<String>,
+    #[serde(
+        rename = "pageHeightInPixels",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub page_height_in_pixels: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub report: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub scontrol: Option<String>,
+    #[serde(
+        rename = "scontrolHeightInPixels",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub scontrol_height_in_pixels: Option<f64>,
+    #[serde(
+        rename = "showPercentage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_percentage: Option<bool>,
+    #[serde(
+        rename = "showPicturesOnCharts",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_pictures_on_charts: Option<bool>,
+    #[serde(
+        rename = "showPicturesOnTables",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_pictures_on_tables: Option<bool>,
+    #[serde(rename = "showRange", default, skip_serializing_if = "Option::is_none")]
+    pub show_range: Option<bool>,
+    #[serde(rename = "showTotal", default, skip_serializing_if = "Option::is_none")]
+    pub show_total: Option<bool>,
+    #[serde(
+        rename = "showValues",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_values: Option<bool>,
+    #[serde(rename = "sortBy", default, skip_serializing_if = "Option::is_none")]
+    pub sort_by: Option<DashboardComponentFilter>,
+    #[serde(
+        rename = "sortLegendValues",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sort_legend_values: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub title: Option<String>,
+    #[serde(
+        rename = "useReportChart",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub use_report_chart: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DashboardComponentColumn {
-    #[serde(rename = "breakPoint1", default)]
-    pub break_point_1: f64,
-    #[serde(rename = "breakPoint2", default)]
-    pub break_point_2: f64,
-    #[serde(rename = "breakPointOrder", default)]
-    pub break_point_order: f64,
-    #[serde(rename = "highRangeColor", default)]
-    pub high_range_color: f64,
-    #[serde(rename = "lowRangeColor", default)]
-    pub low_range_color: f64,
-    #[serde(rename = "midRangeColor", default)]
-    pub mid_range_color: f64,
+    #[serde(
+        rename = "breakPoint1",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub break_point_1: Option<f64>,
+    #[serde(
+        rename = "breakPoint2",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub break_point_2: Option<f64>,
+    #[serde(
+        rename = "breakPointOrder",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub break_point_order: Option<f64>,
+    #[serde(
+        rename = "highRangeColor",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub high_range_color: Option<f64>,
+    #[serde(
+        rename = "lowRangeColor",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub low_range_color: Option<f64>,
+    #[serde(
+        rename = "midRangeColor",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub mid_range_color: Option<f64>,
     #[serde(rename = "reportColumn", default)]
     pub report_column: String,
-    #[serde(rename = "showSubTotal", default)]
-    pub show_sub_total: bool,
-    #[serde(rename = "showTotal", default)]
-    pub show_total: bool,
-    #[serde(default)]
-    pub r#type: DashboardComponentColumnType,
+    #[serde(
+        rename = "showSubTotal",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_sub_total: Option<bool>,
+    #[serde(rename = "showTotal", default, skip_serializing_if = "Option::is_none")]
+    pub show_total: Option<bool>,
+    #[serde(rename = "type", default)]
+    pub r#type: serde_json::Value,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DashboardComponentContent {
-    #[serde(rename = "additionalInfo", default)]
-    pub additional_info: String,
-    #[serde(rename = "altText", default)]
-    pub alt_text: String,
-    #[serde(rename = "fileName", default)]
-    pub file_name: String,
-    #[serde(default)]
-    pub fit: serde_json::Value,
-    #[serde(rename = "horizontalAlignment", default)]
-    pub horizontal_alignment: serde_json::Value,
-    #[serde(rename = "richTextContent", default)]
-    pub rich_text_content: String,
-    #[serde(default)]
-    pub tooltip: String,
-    #[serde(rename = "verticalAlignment", default)]
-    pub vertical_alignment: serde_json::Value,
+    #[serde(
+        rename = "additionalInfo",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub additional_info: Option<String>,
+    #[serde(rename = "altText", default, skip_serializing_if = "Option::is_none")]
+    pub alt_text: Option<String>,
+    #[serde(
+        rename = "componentParameters",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub component_parameters: Option<String>,
+    #[serde(rename = "fileName", default, skip_serializing_if = "Option::is_none")]
+    pub file_name: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub fit: Option<serde_json::Value>,
+    #[serde(
+        rename = "horizontalAlignment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub horizontal_alignment: Option<serde_json::Value>,
+    #[serde(
+        rename = "richTextContent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub rich_text_content: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub tooltip: Option<String>,
+    #[serde(
+        rename = "verticalAlignment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub vertical_alignment: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -456,12 +665,20 @@ pub struct DashboardComponentContent {
 pub struct DashboardComponentGroupingSort {
     #[serde(rename = "groupingLevel", default)]
     pub grouping_level: String,
-    #[serde(rename = "inheritedReportGroupingSort", default)]
-    pub inherited_report_grouping_sort: String,
-    #[serde(rename = "sortColumn", default)]
-    pub sort_column: String,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: String,
+    #[serde(
+        rename = "inheritedReportGroupingSort",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub inherited_report_grouping_sort: Option<String>,
+    #[serde(
+        rename = "sortColumn",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sort_column: Option<String>,
+    #[serde(rename = "sortOrder", default, skip_serializing_if = "Option::is_none")]
+    pub sort_order: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -486,22 +703,48 @@ pub struct DashboardComponentSection {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DashboardComponentSortInfo {
-    #[serde(rename = "sortColumn", default)]
-    pub sort_column: String,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: String,
+    #[serde(
+        rename = "sortColumn",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sort_column: Option<String>,
+    #[serde(rename = "sortOrder", default, skip_serializing_if = "Option::is_none")]
+    pub sort_order: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DashboardComponentTranslation {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub footer: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    #[serde(default)]
+    pub name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DashboardDynamicValue {
-    #[serde(rename = "additionalInfo", default)]
-    pub additional_info: String,
+    #[serde(
+        rename = "additionalInfo",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub additional_info: Option<String>,
     #[serde(rename = "fieldName", default)]
     pub field_name: String,
-    #[serde(rename = "isDynamicUser", default)]
-    pub is_dynamic_user: bool,
+    #[serde(
+        rename = "isDynamicUser",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_dynamic_user: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -536,16 +779,32 @@ pub struct DashboardFilterOption {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DashboardFlexTableComponentProperties {
-    #[serde(rename = "decimalPrecision", default)]
-    pub decimal_precision: f64,
+    #[serde(
+        rename = "decimalPrecision",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub decimal_precision: Option<f64>,
     #[serde(rename = "flexTableColumn", default)]
     pub flex_table_column: Vec<DashboardComponentColumn>,
-    #[serde(rename = "flexTableSortInfo", default)]
-    pub flex_table_sort_info: DashboardComponentSortInfo,
-    #[serde(rename = "hideChatterPhotos", default)]
-    pub hide_chatter_photos: bool,
-    #[serde(rename = "useReportTableSetting", default)]
-    pub use_report_table_setting: bool,
+    #[serde(
+        rename = "flexTableSortInfo",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub flex_table_sort_info: Option<DashboardComponentSortInfo>,
+    #[serde(
+        rename = "hideChatterPhotos",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub hide_chatter_photos: Option<bool>,
+    #[serde(
+        rename = "useReportTableSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub use_report_table_setting: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -580,20 +839,48 @@ pub struct DashboardGridLayout {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DashboardTableColumn {
-    #[serde(rename = "aggregateType", default)]
-    pub aggregate_type: ReportSummaryType,
-    #[serde(rename = "calculatePercent", default)]
-    pub calculate_percent: bool,
+    #[serde(
+        rename = "aggregateType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub aggregate_type: Option<ReportSummaryType>,
+    #[serde(
+        rename = "calculatePercent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub calculate_percent: Option<bool>,
     #[serde(default)]
     pub column: String,
-    #[serde(rename = "decimalPlaces", default)]
-    pub decimal_places: f64,
-    #[serde(rename = "showSubTotal", default)]
-    pub show_sub_total: bool,
-    #[serde(rename = "showTotal", default)]
-    pub show_total: bool,
-    #[serde(rename = "sortBy", default)]
-    pub sort_by: DashboardComponentFilter,
+    #[serde(
+        rename = "decimalPlaces",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub decimal_places: Option<f64>,
+    #[serde(
+        rename = "showSubTotal",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_sub_total: Option<bool>,
+    #[serde(rename = "showTotal", default, skip_serializing_if = "Option::is_none")]
+    pub show_total: Option<bool>,
+    #[serde(rename = "sortBy", default, skip_serializing_if = "Option::is_none")]
+    pub sort_by: Option<DashboardComponentFilter>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DashboardTranslation {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    #[serde(default)]
+    pub name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -606,32 +893,36 @@ pub struct Report {
     pub aggregates: Vec<ReportAggregate>,
     #[serde(default)]
     pub block: Vec<Box<Report>>,
-    #[serde(rename = "blockInfo", default)]
-    pub block_info: ReportBlockInfo,
+    #[serde(rename = "blockInfo", default, skip_serializing_if = "Option::is_none")]
+    pub block_info: Option<ReportBlockInfo>,
     #[serde(default)]
     pub buckets: Vec<ReportBucketField>,
-    #[serde(default)]
-    pub chart: ReportChart,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub chart: Option<ReportChart>,
     #[serde(rename = "colorRanges", default)]
     pub color_ranges: Vec<ReportColorRange>,
     #[serde(default)]
     pub columns: Vec<ReportColumn>,
     #[serde(rename = "crossFilters", default)]
     pub cross_filters: Vec<ReportCrossFilter>,
-    #[serde(default)]
-    pub currency: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub currency: Option<serde_json::Value>,
     #[serde(rename = "customDetailFormulas", default)]
     pub custom_detail_formulas: Vec<ReportCustomDetailFormula>,
     #[serde(rename = "dataCategoryFilters", default)]
     pub data_category_filters: Vec<ReportDataCategoryFilter>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub division: String,
-    #[serde(default)]
-    pub filter: ReportFilter,
-    #[serde(rename = "folderName", default)]
-    pub folder_name: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub division: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub filter: Option<ReportFilter>,
+    #[serde(
+        rename = "folderName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub folder_name: Option<String>,
     #[serde(default)]
     pub format: ReportFormat,
     #[serde(rename = "formattingRules", default)]
@@ -640,72 +931,140 @@ pub struct Report {
     pub groupings_across: Vec<ReportGrouping>,
     #[serde(rename = "groupingsDown", default)]
     pub groupings_down: Vec<ReportGrouping>,
-    #[serde(rename = "historicalSelector", default)]
-    pub historical_selector: ReportHistoricalSelector,
-    #[serde(rename = "isSmartTotalDisabled", default)]
-    pub is_smart_total_disabled: bool,
+    #[serde(
+        rename = "historicalSelector",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub historical_selector: Option<ReportHistoricalSelector>,
+    #[serde(
+        rename = "isSmartTotalDisabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_smart_total_disabled: Option<bool>,
     #[serde(default)]
     pub name: String,
-    #[serde(rename = "numSubscriptions", default)]
-    pub num_subscriptions: f64,
+    #[serde(
+        rename = "numSubscriptions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub num_subscriptions: Option<f64>,
     #[serde(default)]
     pub params: Vec<ReportParam>,
     #[serde(rename = "reportType", default)]
     pub report_type: String,
-    #[serde(rename = "reportTypeApiName", default)]
-    pub report_type_api_name: String,
-    #[serde(rename = "roleHierarchyFilter", default)]
-    pub role_hierarchy_filter: String,
-    #[serde(rename = "rowLimit", default)]
-    pub row_limit: f64,
-    #[serde(default)]
-    pub scope: String,
-    #[serde(rename = "showCurrentDate", default)]
-    pub show_current_date: bool,
-    #[serde(rename = "showDetails", default)]
-    pub show_details: bool,
-    #[serde(rename = "showGrandTotal", default)]
-    pub show_grand_total: bool,
-    #[serde(rename = "showSubTotals", default)]
-    pub show_sub_totals: bool,
-    #[serde(rename = "sortColumn", default)]
-    pub sort_column: String,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: serde_json::Value,
-    #[serde(rename = "territoryHierarchyFilter", default)]
-    pub territory_hierarchy_filter: String,
-    #[serde(rename = "timeFrameFilter", default)]
-    pub time_frame_filter: ReportTimeFrameFilter,
-    #[serde(rename = "userFilter", default)]
-    pub user_filter: String,
+    #[serde(
+        rename = "reportTypeApiName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub report_type_api_name: Option<String>,
+    #[serde(
+        rename = "roleHierarchyFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub role_hierarchy_filter: Option<String>,
+    #[serde(rename = "rowLimit", default, skip_serializing_if = "Option::is_none")]
+    pub row_limit: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub scope: Option<String>,
+    #[serde(
+        rename = "showCurrentDate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_current_date: Option<bool>,
+    #[serde(
+        rename = "showDetails",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_details: Option<bool>,
+    #[serde(
+        rename = "showGrandTotal",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_grand_total: Option<bool>,
+    #[serde(
+        rename = "showSubTotals",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_sub_totals: Option<bool>,
+    #[serde(
+        rename = "sortColumn",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sort_column: Option<String>,
+    #[serde(rename = "sortOrder", default, skip_serializing_if = "Option::is_none")]
+    pub sort_order: Option<serde_json::Value>,
+    #[serde(
+        rename = "territoryHierarchyFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub territory_hierarchy_filter: Option<String>,
+    #[serde(
+        rename = "timeFrameFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub time_frame_filter: Option<ReportTimeFrameFilter>,
+    #[serde(
+        rename = "userFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub user_filter: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ReportAggregate {
-    #[serde(rename = "acrossGroupingContext", default)]
-    pub across_grouping_context: String,
+    #[serde(
+        rename = "acrossGroupingContext",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub across_grouping_context: Option<String>,
     #[serde(rename = "calculatedFormula", default)]
     pub calculated_formula: String,
     #[serde(default)]
     pub datatype: ReportAggregateDatatype,
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "developerName", default)]
     pub developer_name: String,
-    #[serde(rename = "downGroupingContext", default)]
-    pub down_grouping_context: String,
+    #[serde(
+        rename = "downGroupingContext",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub down_grouping_context: Option<String>,
     #[serde(rename = "isActive", default)]
     pub is_active: bool,
-    #[serde(rename = "isCrossBlock", default)]
-    pub is_cross_block: bool,
+    #[serde(
+        rename = "isCrossBlock",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_cross_block: Option<bool>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "reportType", default)]
-    pub report_type: String,
-    #[serde(default)]
-    pub scale: f64,
+    #[serde(
+        rename = "reportType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub report_type: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub scale: Option<f64>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -750,14 +1109,22 @@ pub struct ReportBucketField {
     pub developer_name: String,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "nullTreatment", default)]
-    pub null_treatment: ReportFormulaNullTreatment,
-    #[serde(rename = "otherBucketLabel", default)]
-    pub other_bucket_label: String,
+    #[serde(
+        rename = "nullTreatment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub null_treatment: Option<ReportFormulaNullTreatment>,
+    #[serde(
+        rename = "otherBucketLabel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub other_bucket_label: Option<String>,
     #[serde(rename = "sourceColumnName", default)]
     pub source_column_name: String,
-    #[serde(rename = "useOther", default)]
-    pub use_other: bool,
+    #[serde(rename = "useOther", default, skip_serializing_if = "Option::is_none")]
+    pub use_other: Option<bool>,
     #[serde(default)]
     pub values: Vec<ReportBucketFieldValue>,
 }
@@ -766,12 +1133,16 @@ pub struct ReportBucketField {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ReportBucketFieldSourceValue {
-    #[serde(default)]
-    pub from: String,
-    #[serde(rename = "sourceValue", default)]
-    pub source_value: String,
-    #[serde(default)]
-    pub to: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub from: Option<String>,
+    #[serde(
+        rename = "sourceValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub source_value: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub to: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -788,92 +1159,172 @@ pub struct ReportBucketFieldValue {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ReportChart {
-    #[serde(rename = "backgroundColor1", default)]
-    pub background_color_1: String,
-    #[serde(rename = "backgroundColor2", default)]
-    pub background_color_2: String,
-    #[serde(rename = "backgroundFadeDir", default)]
-    pub background_fade_dir: serde_json::Value,
+    #[serde(
+        rename = "backgroundColor1",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub background_color_1: Option<String>,
+    #[serde(
+        rename = "backgroundColor2",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub background_color_2: Option<String>,
+    #[serde(
+        rename = "backgroundFadeDir",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub background_fade_dir: Option<serde_json::Value>,
     #[serde(rename = "chartSummaries", default)]
     pub chart_summaries: Vec<serde_json::Value>,
     #[serde(rename = "chartType", default)]
     pub chart_type: serde_json::Value,
-    #[serde(rename = "enableHoverLabels", default)]
-    pub enable_hover_labels: bool,
-    #[serde(rename = "expandOthers", default)]
-    pub expand_others: bool,
-    #[serde(rename = "groupingColumn", default)]
-    pub grouping_column: String,
-    #[serde(rename = "legendPosition", default)]
-    pub legend_position: serde_json::Value,
-    #[serde(default)]
-    pub location: serde_json::Value,
-    #[serde(rename = "secondaryGroupingColumn", default)]
-    pub secondary_grouping_column: String,
-    #[serde(rename = "showAxisLabels", default)]
-    pub show_axis_labels: bool,
-    #[serde(rename = "showPercentage", default)]
-    pub show_percentage: bool,
-    #[serde(rename = "showTotal", default)]
-    pub show_total: bool,
-    #[serde(rename = "showValues", default)]
-    pub show_values: bool,
-    #[serde(default)]
-    pub size: ReportChartSize,
-    #[serde(rename = "summaryAxisManualRangeEnd", default)]
-    pub summary_axis_manual_range_end: f64,
-    #[serde(rename = "summaryAxisManualRangeStart", default)]
-    pub summary_axis_manual_range_start: f64,
-    #[serde(rename = "summaryAxisRange", default)]
-    pub summary_axis_range: serde_json::Value,
-    #[serde(rename = "textColor", default)]
-    pub text_color: String,
-    #[serde(rename = "textSize", default)]
-    pub text_size: f64,
-    #[serde(default)]
-    pub title: String,
-    #[serde(rename = "titleColor", default)]
-    pub title_color: String,
-    #[serde(rename = "titleSize", default)]
-    pub title_size: f64,
+    #[serde(
+        rename = "enableHoverLabels",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_hover_labels: Option<bool>,
+    #[serde(
+        rename = "expandOthers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub expand_others: Option<bool>,
+    #[serde(
+        rename = "groupingColumn",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub grouping_column: Option<String>,
+    #[serde(
+        rename = "legendPosition",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub legend_position: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub location: Option<serde_json::Value>,
+    #[serde(
+        rename = "secondaryGroupingColumn",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub secondary_grouping_column: Option<String>,
+    #[serde(
+        rename = "showAxisLabels",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_axis_labels: Option<bool>,
+    #[serde(
+        rename = "showPercentage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_percentage: Option<bool>,
+    #[serde(rename = "showTotal", default, skip_serializing_if = "Option::is_none")]
+    pub show_total: Option<bool>,
+    #[serde(
+        rename = "showValues",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_values: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub size: Option<ReportChartSize>,
+    #[serde(
+        rename = "summaryAxisManualRangeEnd",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub summary_axis_manual_range_end: Option<f64>,
+    #[serde(
+        rename = "summaryAxisManualRangeStart",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub summary_axis_manual_range_start: Option<f64>,
+    #[serde(
+        rename = "summaryAxisRange",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub summary_axis_range: Option<serde_json::Value>,
+    #[serde(rename = "textColor", default, skip_serializing_if = "Option::is_none")]
+    pub text_color: Option<String>,
+    #[serde(rename = "textSize", default, skip_serializing_if = "Option::is_none")]
+    pub text_size: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub title: Option<String>,
+    #[serde(
+        rename = "titleColor",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub title_color: Option<String>,
+    #[serde(rename = "titleSize", default, skip_serializing_if = "Option::is_none")]
+    pub title_size: Option<f64>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ReportChartComponentLayoutItem {
-    #[serde(rename = "cacheData", default)]
-    pub cache_data: bool,
-    #[serde(rename = "contextFilterableField", default)]
-    pub context_filterable_field: String,
-    #[serde(default)]
-    pub error: String,
-    #[serde(rename = "hideOnError", default)]
-    pub hide_on_error: bool,
-    #[serde(rename = "includeContext", default)]
-    pub include_context: bool,
+    #[serde(rename = "cacheData", default, skip_serializing_if = "Option::is_none")]
+    pub cache_data: Option<bool>,
+    #[serde(
+        rename = "contextFilterableField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub context_filterable_field: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub error: Option<String>,
+    #[serde(
+        rename = "hideOnError",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub hide_on_error: Option<bool>,
+    #[serde(
+        rename = "includeContext",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub include_context: Option<bool>,
     #[serde(rename = "reportName", default)]
     pub report_name: String,
-    #[serde(rename = "showTitle", default)]
-    pub show_title: bool,
-    #[serde(default)]
-    pub size: ReportChartComponentSize,
+    #[serde(rename = "showTitle", default, skip_serializing_if = "Option::is_none")]
+    pub show_title: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub size: Option<ReportChartComponentSize>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ReportColorRange {
-    #[serde(default)]
-    pub aggregate: ReportSummaryType,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub aggregate: Option<ReportSummaryType>,
     #[serde(rename = "columnName", default)]
     pub column_name: String,
-    #[serde(rename = "highBreakpoint", default)]
-    pub high_breakpoint: f64,
+    #[serde(
+        rename = "highBreakpoint",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub high_breakpoint: Option<f64>,
     #[serde(rename = "highColor", default)]
     pub high_color: String,
-    #[serde(rename = "lowBreakpoint", default)]
-    pub low_breakpoint: f64,
+    #[serde(
+        rename = "lowBreakpoint",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub low_breakpoint: Option<f64>,
     #[serde(rename = "lowColor", default)]
     pub low_color: String,
     #[serde(rename = "midColor", default)]
@@ -888,12 +1339,24 @@ pub struct ReportColumn {
     pub aggregate_types: Vec<ReportSummaryType>,
     #[serde(default)]
     pub field: String,
-    #[serde(rename = "isExtendedColumn", default)]
-    pub is_extended_column: bool,
-    #[serde(rename = "reverseColors", default)]
-    pub reverse_colors: bool,
-    #[serde(rename = "showChanges", default)]
-    pub show_changes: bool,
+    #[serde(
+        rename = "isExtendedColumn",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_extended_column: Option<bool>,
+    #[serde(
+        rename = "reverseColors",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub reverse_colors: Option<bool>,
+    #[serde(
+        rename = "showChanges",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_changes: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -920,8 +1383,8 @@ pub struct ReportCustomDetailFormula {
     pub calculated_formula: String,
     #[serde(rename = "dataType", default)]
     pub data_type: String,
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "developerName", default)]
     pub developer_name: String,
     #[serde(default)]
@@ -946,12 +1409,16 @@ pub struct ReportDataCategoryFilter {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ReportFilter {
-    #[serde(rename = "booleanFilter", default)]
-    pub boolean_filter: String,
+    #[serde(
+        rename = "booleanFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub boolean_filter: Option<String>,
     #[serde(rename = "criteriaItems", default)]
     pub criteria_items: Vec<ReportFilterItem>,
-    #[serde(default)]
-    pub language: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub language: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -960,24 +1427,32 @@ pub struct ReportFilter {
 pub struct ReportFilterItem {
     #[serde(default)]
     pub column: String,
-    #[serde(rename = "columnToColumn", default)]
-    pub column_to_column: bool,
-    #[serde(rename = "isUnlocked", default)]
-    pub is_unlocked: bool,
+    #[serde(
+        rename = "columnToColumn",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub column_to_column: Option<bool>,
+    #[serde(
+        rename = "isUnlocked",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_unlocked: Option<bool>,
     #[serde(default)]
     pub operator: serde_json::Value,
-    #[serde(default)]
-    pub snapshot: String,
-    #[serde(default)]
-    pub value: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub snapshot: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub value: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ReportFormattingRule {
-    #[serde(default)]
-    pub aggregate: ReportSummaryType,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub aggregate: Option<ReportSummaryType>,
     #[serde(rename = "columnName", default)]
     pub column_name: String,
     #[serde(default)]
@@ -988,28 +1463,48 @@ pub struct ReportFormattingRule {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ReportFormattingRuleValue {
-    #[serde(rename = "backgroundColor", default)]
-    pub background_color: String,
-    #[serde(rename = "rangeUpperBound", default)]
-    pub range_upper_bound: f64,
+    #[serde(
+        rename = "backgroundColor",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub background_color: Option<String>,
+    #[serde(
+        rename = "rangeUpperBound",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub range_upper_bound: Option<f64>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ReportGrouping {
-    #[serde(rename = "aggregateType", default)]
-    pub aggregate_type: ReportAggrType,
-    #[serde(rename = "dateGranularity", default)]
-    pub date_granularity: serde_json::Value,
+    #[serde(
+        rename = "aggregateType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub aggregate_type: Option<ReportAggrType>,
+    #[serde(
+        rename = "dateGranularity",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub date_granularity: Option<serde_json::Value>,
     #[serde(default)]
     pub field: String,
-    #[serde(rename = "sortByName", default)]
-    pub sort_by_name: String,
+    #[serde(
+        rename = "sortByName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sort_by_name: Option<String>,
     #[serde(rename = "sortOrder", default)]
     pub sort_order: serde_json::Value,
-    #[serde(rename = "sortType", default)]
-    pub sort_type: ReportSortType,
+    #[serde(rename = "sortType", default, skip_serializing_if = "Option::is_none")]
+    pub sort_type: Option<ReportSortType>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -1046,30 +1541,42 @@ pub struct ReportParam {
 pub struct ReportTimeFrameFilter {
     #[serde(rename = "dateColumn", default)]
     pub date_column: String,
-    #[serde(rename = "endDate", default)]
-    pub end_date: String,
+    #[serde(rename = "endDate", default, skip_serializing_if = "Option::is_none")]
+    pub end_date: Option<serde_json::Value>,
     #[serde(default)]
     pub interval: serde_json::Value,
-    #[serde(rename = "startDate", default)]
-    pub start_date: String,
+    #[serde(rename = "startDate", default, skip_serializing_if = "Option::is_none")]
+    pub start_date: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ReportTranslation {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    #[serde(default)]
+    pub name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ReportType {
-    #[serde(default)]
-    pub autogenerated: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub autogenerated: Option<bool>,
     #[serde(rename = "baseObject", default)]
     pub base_object: String,
-    #[serde(default)]
-    pub category: ReportTypeCategory,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub category: Option<ReportTypeCategory>,
     #[serde(default)]
     pub deployed: bool,
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub join: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub join: Option<serde_json::Value>,
     #[serde(default)]
     pub label: String,
     #[serde(default)]
@@ -1082,8 +1589,12 @@ pub struct ReportType {
 pub struct ReportTypeColumn {
     #[serde(rename = "checkedByDefault", default)]
     pub checked_by_default: bool,
-    #[serde(rename = "displayNameOverride", default)]
-    pub display_name_override: String,
+    #[serde(
+        rename = "displayNameOverride",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub display_name_override: Option<String>,
     #[serde(default)]
     pub field: String,
     #[serde(default)]
@@ -1106,8 +1617,8 @@ pub struct ReportTypeColumnTranslation {
 pub struct ReportTypeSectionTranslation {
     #[serde(default)]
     pub columns: Vec<ReportTypeColumnTranslation>,
-    #[serde(default)]
-    pub label: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
     #[serde(default)]
     pub name: String,
 }
@@ -1116,13 +1627,12 @@ pub struct ReportTypeSectionTranslation {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ReportTypeTranslation {
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub label: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
     #[serde(default)]
     pub name: String,
     #[serde(default)]
     pub sections: Vec<ReportTypeSectionTranslation>,
 }
-

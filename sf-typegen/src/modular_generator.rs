@@ -319,7 +319,7 @@ impl ModularGenerator {
 
         // Generate prelude.rs (feature-gated re-exports)
         if self.config.generate_prelude_rs {
-            self.generate_prelude_rs(output_dir, &mut result)?;
+            self.generate_prelude_rs(output_dir, &module_tracker, &mut result)?;
         }
 
         // Generate lib.rs with feature gates
@@ -680,7 +680,9 @@ impl ModularGenerator {
         // --- Emit settings/scratch_def.rs ----------------------------------------------------
         let mut content = String::new();
         content.push_str(&self.file_header());
-        content.push_str("//! Strongly-typed container for a scratch-org-definition `settings` object.\n");
+        content.push_str(
+            "//! Strongly-typed container for a scratch-org-definition `settings` object.\n",
+        );
         content.push_str("//!\n");
         content.push_str(
             "//! [`ScratchOrgSettings`] maps the `settings` map of a Salesforce scratch org\n",
@@ -703,8 +705,12 @@ impl ModularGenerator {
             "/// Contains one optional field per top-level settings type ({} total). Nested\n",
             top_level.len()
         ));
-        content.push_str("/// sub-settings (settings types that only appear inside another settings type)\n");
-        content.push_str("/// are intentionally omitted, since they are not independently deployable.\n");
+        content.push_str(
+            "/// sub-settings (settings types that only appear inside another settings type)\n",
+        );
+        content.push_str(
+            "/// are intentionally omitted, since they are not independently deployable.\n",
+        );
         content.push_str("#[derive(Debug, Clone, Default, Serialize, Deserialize)]\n");
         content.push_str("#[cfg_attr(feature = \"schemars\", derive(schemars::JsonSchema))]\n");
         content.push_str("pub struct ScratchOrgSettings {\n");
@@ -740,7 +746,10 @@ impl ModularGenerator {
         for type_name in &top_level {
             let field_name = to_snake_case(type_name);
             let member = type_name.strip_suffix("Settings").unwrap_or(type_name);
-            content.push_str(&format!("        if let Some(v) = &self.{} {{\n", field_name));
+            content.push_str(&format!(
+                "        if let Some(v) = &self.{} {{\n",
+                field_name
+            ));
             content.push_str(&format!(
                 "            files.push((\"{}\".to_string(), v.to_metadata_xml()?));\n",
                 member
@@ -1098,6 +1107,7 @@ impl ModularGenerator {
     fn generate_prelude_rs(
         &self,
         output_dir: &Path,
+        module_tracker: &ModuleTracker,
         result: &mut GenerationResult,
     ) -> anyhow::Result<()> {
         // Build a map from feature name -> top-level module (first path segment of module_path).
@@ -1110,6 +1120,14 @@ impl ModularGenerator {
                 (c.feature, top)
             })
             .collect();
+
+        // Get the set of all active features generated in the current run
+        let mut active_features = HashSet::new();
+        for submods in module_tracker.submodules.values() {
+            for (_, _, feat) in submods {
+                active_features.insert(feat.as_str());
+            }
+        }
 
         let mut content = String::new();
         content.push_str(&self.file_header());
@@ -1129,6 +1147,10 @@ impl ModularGenerator {
         // Re-export each domain feature behind its feature gate.
         // The crate path depends on whether the category lives under `metadata/` or at the top level.
         for feat in DOMAIN_FEATURES {
+            if !active_features.contains(feat) {
+                continue;
+            }
+
             let top_module = feature_to_top_module
                 .get(feat)
                 .copied()

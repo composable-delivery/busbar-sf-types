@@ -12,18 +12,22 @@ use serde::{Deserialize, Serialize};
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ReputationBranding {
-    #[serde(rename = "smallImage", default)]
-    pub small_image: String,
+    #[serde(
+        rename = "smallImage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub small_image: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ReputationLevel {
-    #[serde(default)]
-    pub branding: ReputationBranding,
-    #[serde(default)]
-    pub label: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub branding: Option<ReputationBranding>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
     #[serde(rename = "lowerThreshold", default)]
     pub lower_threshold: f64,
 }
@@ -63,4 +67,3 @@ pub struct ReputationPointsRules {
     #[serde(rename = "pointsRule", default)]
     pub points_rule: Vec<ReputationPointsRule>,
 }
-

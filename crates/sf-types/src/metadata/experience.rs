@@ -54,6 +54,7 @@ pub enum ExperienceContainerType {
     LEX,
     SCMA,
     SAPPMOBILEHOME,
+    Cama,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -108,8 +109,6 @@ pub enum SiteType {
     #[default]
     Siteforce,
     Visualforce,
-    ChatterNetwork,
-    ChatterNetworkPicasso,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -117,7 +116,6 @@ pub enum SiteType {
 pub enum SitesArchiveStatus {
     #[default]
     TemporarilyArchived,
-    Archived,
     NotArchived,
 }
 
@@ -125,62 +123,88 @@ pub enum SitesArchiveStatus {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct Community {
-    #[serde(default)]
-    pub active: bool,
-    #[serde(rename = "chatterAnswersFacebookSsoUrl", default)]
-    pub chatter_answers_facebook_sso_url: String,
-    #[serde(rename = "communityFeedPage", default)]
-    pub community_feed_page: String,
-    #[serde(rename = "dataCategoryName", default)]
-    pub data_category_name: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "emailFooterDocument", default)]
-    pub email_footer_document: String,
-    #[serde(rename = "emailHeaderDocument", default)]
-    pub email_header_document: String,
-    #[serde(rename = "emailNotificationUrl", default)]
-    pub email_notification_url: String,
-    #[serde(rename = "enableChatterAnswers", default)]
-    pub enable_chatter_answers: bool,
-    #[serde(rename = "enablePrivateQuestions", default)]
-    pub enable_private_questions: bool,
-    #[serde(rename = "expertsGroup", default)]
-    pub experts_group: String,
-    #[serde(default)]
-    pub portal: String,
-    #[serde(rename = "reputationLevels", default)]
-    pub reputation_levels: serde_json::Value,
-    #[serde(rename = "showInPortal", default)]
-    pub show_in_portal: bool,
-    #[serde(default)]
-    pub site: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CommunityAIModelMapping {
-    #[serde(rename = "modelContent", default)]
-    pub model_content: String,
-    #[serde(rename = "modelEntityType", default)]
-    pub model_entity_type: serde_json::Value,
-    #[serde(rename = "modelStatus", default)]
-    pub model_status: serde_json::Value,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "networkId", default)]
-    pub network_id: String,
-    #[serde(rename = "setupDefinition", default)]
-    pub setup_definition: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub active: Option<bool>,
+    #[serde(
+        rename = "chatterAnswersFacebookSsoUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub chatter_answers_facebook_sso_url: Option<String>,
+    #[serde(
+        rename = "communityFeedPage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub community_feed_page: Option<String>,
+    #[serde(
+        rename = "dataCategoryName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub data_category_name: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "emailFooterDocument",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub email_footer_document: Option<String>,
+    #[serde(
+        rename = "emailHeaderDocument",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub email_header_document: Option<String>,
+    #[serde(
+        rename = "emailNotificationUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub email_notification_url: Option<String>,
+    #[serde(
+        rename = "enableChatterAnswers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_chatter_answers: Option<bool>,
+    #[serde(
+        rename = "enablePrivateQuestions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_private_questions: Option<bool>,
+    #[serde(
+        rename = "expertsGroup",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub experts_group: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub portal: Option<String>,
+    #[serde(
+        rename = "reputationLevels",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub reputation_levels: Option<serde_json::Value>,
+    #[serde(
+        rename = "showInPortal",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_in_portal: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub site: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CommunityCustomThemeLayoutType {
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(default)]
     pub label: String,
 }
@@ -189,27 +213,39 @@ pub struct CommunityCustomThemeLayoutType {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CommunityRoles {
-    #[serde(rename = "customerUserRole", default)]
-    pub customer_user_role: String,
-    #[serde(rename = "employeeUserRole", default)]
-    pub employee_user_role: String,
-    #[serde(rename = "partnerUserRole", default)]
-    pub partner_user_role: String,
+    #[serde(
+        rename = "customerUserRole",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub customer_user_role: Option<String>,
+    #[serde(
+        rename = "employeeUserRole",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub employee_user_role: Option<String>,
+    #[serde(
+        rename = "partnerUserRole",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub partner_user_role: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CommunityTemplateBundleInfo {
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub image: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub image: Option<String>,
     #[serde(default)]
     pub order: f64,
     #[serde(default)]
     pub title: String,
-    #[serde(default)]
+    #[serde(rename = "type", default)]
     pub r#type: CommunityTemplateBundleInfoType,
 }
 
@@ -217,28 +253,40 @@ pub struct CommunityTemplateBundleInfo {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CommunityTemplateDefinition {
-    #[serde(rename = "baseTemplate", default)]
-    pub base_template: CommunityBaseTemplate,
+    #[serde(
+        rename = "baseTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub base_template: Option<CommunityBaseTemplate>,
     #[serde(rename = "bundlesInfo", default)]
     pub bundles_info: Vec<CommunityTemplateBundleInfo>,
     #[serde(default)]
     pub category: CommunityTemplateCategory,
-    #[serde(rename = "defaultBrandingSet", default)]
-    pub default_branding_set: String,
+    #[serde(
+        rename = "defaultBrandingSet",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_branding_set: Option<String>,
     #[serde(rename = "defaultThemeDefinition", default)]
     pub default_theme_definition: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "enableExtendedCleanUpOnDelete", default)]
-    pub enable_extended_clean_up_on_delete: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "enableExtendedCleanUpOnDelete",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_extended_clean_up_on_delete: Option<bool>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
     #[serde(rename = "navigationLinkSet", default)]
     pub navigation_link_set: Vec<serde_json::Value>,
     #[serde(rename = "pageSetting", default)]
     pub page_setting: Vec<CommunityTemplatePageSetting>,
-    #[serde(default)]
-    pub publisher: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub publisher: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -259,16 +307,24 @@ pub struct CommunityThemeDefinition {
     pub bundles_info: Vec<serde_json::Value>,
     #[serde(rename = "customThemeLayoutType", default)]
     pub custom_theme_layout_type: Vec<CommunityCustomThemeLayoutType>,
-    #[serde(rename = "defaultBrandingSet", default)]
-    pub default_branding_set: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "enableExtendedCleanUpOnDelete", default)]
-    pub enable_extended_clean_up_on_delete: bool,
+    #[serde(
+        rename = "defaultBrandingSet",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_branding_set: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "enableExtendedCleanUpOnDelete",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_extended_clean_up_on_delete: Option<bool>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(default)]
-    pub publisher: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub publisher: Option<String>,
     #[serde(rename = "themeRouteOverride", default)]
     pub theme_route_override: Vec<CommunityThemeRouteOverride>,
     #[serde(rename = "themeSetting", default)]
@@ -279,26 +335,42 @@ pub struct CommunityThemeDefinition {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CommunityThemeRouteOverride {
-    #[serde(rename = "customThemeLayoutType", default)]
-    pub custom_theme_layout_type: String,
+    #[serde(
+        rename = "customThemeLayoutType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub custom_theme_layout_type: Option<String>,
     #[serde(rename = "pageAttributes", default)]
     pub page_attributes: String,
     #[serde(rename = "pageType", default)]
     pub page_type: String,
-    #[serde(rename = "themeLayoutType", default)]
-    pub theme_layout_type: CommunityThemeLayoutType,
+    #[serde(
+        rename = "themeLayoutType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub theme_layout_type: Option<CommunityThemeLayoutType>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CommunityThemeSetting {
-    #[serde(rename = "customThemeLayoutType", default)]
-    pub custom_theme_layout_type: String,
+    #[serde(
+        rename = "customThemeLayoutType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub custom_theme_layout_type: Option<String>,
     #[serde(rename = "themeLayout", default)]
     pub theme_layout: String,
-    #[serde(rename = "themeLayoutType", default)]
-    pub theme_layout_type: CommunityThemeLayoutType,
+    #[serde(
+        rename = "themeLayoutType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub theme_layout_type: Option<CommunityThemeLayoutType>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -307,12 +379,14 @@ pub struct CommunityThemeSetting {
 pub struct CustomSite {
     #[serde(default)]
     pub active: bool,
-    #[serde(rename = "allowGuestPaymentsApi", default)]
-    pub allow_guest_payments_api: bool,
     #[serde(rename = "allowHomePage", default)]
     pub allow_home_page: bool,
-    #[serde(rename = "allowStandardAnswersPages", default)]
-    pub allow_standard_answers_pages: bool,
+    #[serde(
+        rename = "allowStandardAnswersPages",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_standard_answers_pages: Option<bool>,
     #[serde(rename = "allowStandardIdeasPages", default)]
     pub allow_standard_ideas_pages: bool,
     #[serde(rename = "allowStandardLookups", default)]
@@ -321,100 +395,212 @@ pub struct CustomSite {
     pub allow_standard_portal_pages: bool,
     #[serde(rename = "allowStandardSearch", default)]
     pub allow_standard_search: bool,
-    #[serde(rename = "analyticsTrackingCode", default)]
-    pub analytics_tracking_code: String,
-    #[serde(rename = "authorizationRequiredPage", default)]
-    pub authorization_required_page: String,
-    #[serde(rename = "bandwidthExceededPage", default)]
-    pub bandwidth_exceeded_page: String,
+    #[serde(
+        rename = "analyticsTrackingCode",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub analytics_tracking_code: Option<String>,
+    #[serde(
+        rename = "authorizationRequiredPage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub authorization_required_page: Option<String>,
+    #[serde(
+        rename = "bandwidthExceededPage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub bandwidth_exceeded_page: Option<String>,
     #[serde(rename = "browserXssProtection", default)]
     pub browser_xss_protection: bool,
-    #[serde(rename = "cachePublicVisualforcePagesInProxyServers", default)]
-    pub cache_public_visualforce_pages_in_proxy_servers: bool,
-    #[serde(rename = "changePasswordPage", default)]
-    pub change_password_page: String,
-    #[serde(rename = "chatterAnswersForgotPasswordConfirmPage", default)]
-    pub chatter_answers_forgot_password_confirm_page: String,
-    #[serde(rename = "chatterAnswersForgotPasswordPage", default)]
-    pub chatter_answers_forgot_password_page: String,
-    #[serde(rename = "chatterAnswersHelpPage", default)]
-    pub chatter_answers_help_page: String,
-    #[serde(rename = "chatterAnswersLoginPage", default)]
-    pub chatter_answers_login_page: String,
-    #[serde(rename = "chatterAnswersRegistrationPage", default)]
-    pub chatter_answers_registration_page: String,
+    #[serde(
+        rename = "cachePublicVisualforcePagesInProxyServers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub cache_public_visualforce_pages_in_proxy_servers: Option<bool>,
+    #[serde(
+        rename = "changePasswordPage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub change_password_page: Option<String>,
+    #[serde(
+        rename = "chatterAnswersForgotPasswordConfirmPage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub chatter_answers_forgot_password_confirm_page: Option<String>,
+    #[serde(
+        rename = "chatterAnswersForgotPasswordPage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub chatter_answers_forgot_password_page: Option<String>,
+    #[serde(
+        rename = "chatterAnswersHelpPage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub chatter_answers_help_page: Option<String>,
+    #[serde(
+        rename = "chatterAnswersLoginPage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub chatter_answers_login_page: Option<String>,
+    #[serde(
+        rename = "chatterAnswersRegistrationPage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub chatter_answers_registration_page: Option<String>,
     #[serde(rename = "clickjackProtectionLevel", default)]
     pub clickjack_protection_level: SiteClickjackProtectionLevel,
     #[serde(rename = "contentSniffingProtection", default)]
     pub content_sniffing_protection: bool,
     #[serde(rename = "customWebAddresses", default)]
     pub custom_web_addresses: Vec<SiteWebAddress>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "enableAuraRequests", default)]
-    pub enable_aura_requests: bool,
-    #[serde(rename = "favoriteIcon", default)]
-    pub favorite_icon: String,
-    #[serde(rename = "fileNotFoundPage", default)]
-    pub file_not_found_page: String,
-    #[serde(rename = "forgotPasswordPage", default)]
-    pub forgot_password_page: String,
-    #[serde(rename = "genericErrorPage", default)]
-    pub generic_error_page: String,
-    #[serde(rename = "guestProfile", default)]
-    pub guest_profile: String,
-    #[serde(rename = "inMaintenancePage", default)]
-    pub in_maintenance_page: String,
-    #[serde(rename = "inactiveIndexPage", default)]
-    pub inactive_index_page: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "enableAuraRequests",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_aura_requests: Option<bool>,
+    #[serde(
+        rename = "favoriteIcon",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub favorite_icon: Option<String>,
+    #[serde(
+        rename = "fileNotFoundPage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub file_not_found_page: Option<String>,
+    #[serde(
+        rename = "forgotPasswordPage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub forgot_password_page: Option<String>,
+    #[serde(
+        rename = "genericErrorPage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub generic_error_page: Option<String>,
+    #[serde(
+        rename = "guestProfile",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub guest_profile: Option<String>,
+    #[serde(
+        rename = "inMaintenancePage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub in_maintenance_page: Option<String>,
+    #[serde(
+        rename = "inactiveIndexPage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub inactive_index_page: Option<String>,
     #[serde(rename = "indexPage", default)]
     pub index_page: String,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "myProfilePage", default)]
-    pub my_profile_page: String,
-    #[serde(default)]
-    pub portal: String,
-    #[serde(rename = "redirectToCustomDomain", default)]
-    pub redirect_to_custom_domain: bool,
+    #[serde(
+        rename = "myProfilePage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub my_profile_page: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub portal: Option<String>,
+    #[serde(
+        rename = "redirectToCustomDomain",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub redirect_to_custom_domain: Option<bool>,
     #[serde(rename = "referrerPolicyOriginWhenCrossOrigin", default)]
     pub referrer_policy_origin_when_cross_origin: bool,
-    #[serde(rename = "robotsTxtPage", default)]
-    pub robots_txt_page: String,
-    #[serde(rename = "selfRegPage", default)]
-    pub self_reg_page: String,
-    #[serde(rename = "serverIsDown", default)]
-    pub server_is_down: String,
-    #[serde(rename = "siteAdmin", default)]
-    pub site_admin: String,
-    #[serde(rename = "siteGuestRecordDefaultOwner", default)]
-    pub site_guest_record_default_owner: String,
+    #[serde(
+        rename = "robotsTxtPage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub robots_txt_page: Option<String>,
+    #[serde(
+        rename = "selfRegPage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub self_reg_page: Option<String>,
+    #[serde(
+        rename = "serverIsDown",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub server_is_down: Option<String>,
+    #[serde(rename = "siteAdmin", default, skip_serializing_if = "Option::is_none")]
+    pub site_admin: Option<String>,
+    #[serde(
+        rename = "siteGuestRecordDefaultOwner",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub site_guest_record_default_owner: Option<String>,
     #[serde(rename = "siteIframeWhiteListUrls", default)]
     pub site_iframe_white_list_urls: Vec<SiteIframeWhiteListUrl>,
     #[serde(rename = "siteRedirectMappings", default)]
     pub site_redirect_mappings: Vec<SiteRedirectMapping>,
-    #[serde(rename = "siteTemplate", default)]
-    pub site_template: String,
+    #[serde(
+        rename = "siteTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub site_template: Option<String>,
     #[serde(rename = "siteType", default)]
     pub site_type: SiteType,
-    #[serde(default)]
-    pub subdomain: String,
-    #[serde(rename = "urlPathPrefix", default)]
-    pub url_path_prefix: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub subdomain: Option<String>,
+    #[serde(
+        rename = "urlPathPrefix",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub url_path_prefix: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ExperienceBundle {
-    #[serde(rename = "experienceResources", default)]
-    pub experience_resources: ExperienceResources,
+    #[serde(
+        rename = "experienceResources",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub experience_resources: Option<ExperienceResources>,
     #[serde(default)]
     pub label: String,
-    #[serde(default)]
+    #[serde(rename = "type", default)]
     pub r#type: SiteType,
-    #[serde(rename = "urlPathPrefix", default)]
-    pub url_path_prefix: String,
+    #[serde(
+        rename = "urlPathPrefix",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub url_path_prefix: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -425,7 +611,7 @@ pub struct ExperienceContainer {
     pub master_label: String,
     #[serde(default)]
     pub space: String,
-    #[serde(default)]
+    #[serde(rename = "type", default)]
     pub r#type: ExperienceContainerType,
 }
 
@@ -433,8 +619,8 @@ pub struct ExperienceContainer {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ExperiencePropertyTypeBundle {
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
     #[serde(default)]
@@ -461,9 +647,9 @@ pub struct ExperienceResource {
     pub file_name: String,
     #[serde(default)]
     pub format: String,
-    #[serde(default)]
-    pub source: String,
-    #[serde(default)]
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub source: Option<String>,
+    #[serde(rename = "type", default)]
     pub r#type: String,
 }
 
@@ -479,142 +665,372 @@ pub struct ExperienceResources {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct Network {
-    #[serde(rename = "allowInternalUserLogin", default)]
-    pub allow_internal_user_login: bool,
-    #[serde(rename = "allowMembersToFlag", default)]
-    pub allow_members_to_flag: bool,
-    #[serde(rename = "allowedExtensions", default)]
-    pub allowed_extensions: String,
-    #[serde(default)]
-    pub branding: serde_json::Value,
-    #[serde(rename = "caseCommentEmailTemplate", default)]
-    pub case_comment_email_template: String,
+    #[serde(
+        rename = "allowInternalUserLogin",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_internal_user_login: Option<bool>,
+    #[serde(
+        rename = "allowMembersToFlag",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_members_to_flag: Option<bool>,
+    #[serde(
+        rename = "allowedExtensions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allowed_extensions: Option<String>,
+    #[serde(
+        rename = "caseCommentEmailTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub case_comment_email_template: Option<String>,
     #[serde(rename = "changePasswordTemplate", default)]
     pub change_password_template: String,
-    #[serde(rename = "chgEmailVerNewTemplate", default)]
-    pub chg_email_ver_new_template: String,
-    #[serde(rename = "chgEmailVerOldTemplate", default)]
-    pub chg_email_ver_old_template: String,
-    #[serde(rename = "communityRoles", default)]
-    pub community_roles: CommunityRoles,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "deviceActEmailTemplate", default)]
-    pub device_act_email_template: String,
-    #[serde(rename = "disableReputationRecordConversations", default)]
-    pub disable_reputation_record_conversations: bool,
-    #[serde(rename = "emailFooterLogo", default)]
-    pub email_footer_logo: String,
-    #[serde(rename = "emailFooterText", default)]
-    pub email_footer_text: String,
+    #[serde(
+        rename = "chgEmailVerNewTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub chg_email_ver_new_template: Option<String>,
+    #[serde(
+        rename = "chgEmailVerOldTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub chg_email_ver_old_template: Option<String>,
+    #[serde(
+        rename = "communityRoles",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub community_roles: Option<CommunityRoles>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "deviceActEmailTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub device_act_email_template: Option<String>,
+    #[serde(
+        rename = "disableReputationRecordConversations",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub disable_reputation_record_conversations: Option<bool>,
+    #[serde(
+        rename = "emailFooterLogo",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub email_footer_logo: Option<String>,
+    #[serde(
+        rename = "emailFooterText",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub email_footer_text: Option<String>,
     #[serde(rename = "emailSenderAddress", default)]
     pub email_sender_address: String,
     #[serde(rename = "emailSenderName", default)]
     pub email_sender_name: String,
-    #[serde(rename = "embeddedLoginEnabled", default)]
-    pub embedded_login_enabled: bool,
-    #[serde(rename = "enableApexCDNCaching", default)]
-    pub enable_apex_cdn_caching: bool,
-    #[serde(rename = "enableCustomVFErrorPageOverrides", default)]
-    pub enable_custom_vf_error_page_overrides: bool,
-    #[serde(rename = "enableDirectMessages", default)]
-    pub enable_direct_messages: bool,
-    #[serde(rename = "enableExpFriendlyUrlsAsDefault", default)]
-    pub enable_exp_friendly_urls_as_default: bool,
-    #[serde(rename = "enableExperienceBundleBasedSnaOverrideEnabled", default)]
-    pub enable_experience_bundle_based_sna_override_enabled: bool,
-    #[serde(rename = "enableGuestChatter", default)]
-    pub enable_guest_chatter: bool,
-    #[serde(rename = "enableGuestFileAccess", default)]
-    pub enable_guest_file_access: bool,
-    #[serde(rename = "enableGuestMemberVisibility", default)]
-    pub enable_guest_member_visibility: bool,
-    #[serde(rename = "enableImageOptimizationCDN", default)]
-    pub enable_image_optimization_cdn: bool,
-    #[serde(rename = "enableInvitation", default)]
-    pub enable_invitation: bool,
-    #[serde(rename = "enableKnowledgeable", default)]
-    pub enable_knowledgeable: bool,
-    #[serde(rename = "enableLWRExperienceConnectedApp", default)]
-    pub enable_lwr_experience_connected_app: bool,
-    #[serde(rename = "enableMemberVisibility", default)]
-    pub enable_member_visibility: bool,
-    #[serde(rename = "enableNicknameDisplay", default)]
-    pub enable_nickname_display: bool,
-    #[serde(rename = "enablePrivateMessages", default)]
-    pub enable_private_messages: bool,
-    #[serde(rename = "enableReputation", default)]
-    pub enable_reputation: bool,
-    #[serde(rename = "enableShowAllNetworkSettings", default)]
-    pub enable_show_all_network_settings: bool,
-    #[serde(rename = "enableSiteAsContainer", default)]
-    pub enable_site_as_container: bool,
-    #[serde(rename = "enableTalkingAboutStats", default)]
-    pub enable_talking_about_stats: bool,
-    #[serde(rename = "enableTopicAssignmentRules", default)]
-    pub enable_topic_assignment_rules: bool,
-    #[serde(rename = "enableTopicSuggestions", default)]
-    pub enable_topic_suggestions: bool,
-    #[serde(rename = "enableUpDownVote", default)]
-    pub enable_up_down_vote: bool,
-    #[serde(rename = "feedChannel", default)]
-    pub feed_channel: String,
+    #[serde(
+        rename = "embeddedLoginEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub embedded_login_enabled: Option<bool>,
+    #[serde(
+        rename = "enableApexCDNCaching",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_apex_cdn_caching: Option<bool>,
+    #[serde(
+        rename = "enableCustomVFErrorPageOverrides",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_custom_vf_error_page_overrides: Option<bool>,
+    #[serde(
+        rename = "enableDirectMessages",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_direct_messages: Option<bool>,
+    #[serde(
+        rename = "enableExpFriendlyUrlsAsDefault",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_exp_friendly_urls_as_default: Option<bool>,
+    #[serde(
+        rename = "enableExperienceBundleBasedSnaOverrideEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_experience_bundle_based_sna_override_enabled: Option<bool>,
+    #[serde(
+        rename = "enableGuestChatter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_guest_chatter: Option<bool>,
+    #[serde(
+        rename = "enableGuestFileAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_guest_file_access: Option<bool>,
+    #[serde(
+        rename = "enableGuestMemberVisibility",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_guest_member_visibility: Option<bool>,
+    #[serde(
+        rename = "enableImageOptimizationCDN",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_image_optimization_cdn: Option<bool>,
+    #[serde(
+        rename = "enableInvitation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_invitation: Option<bool>,
+    #[serde(
+        rename = "enableKnowledgeable",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_knowledgeable: Option<bool>,
+    #[serde(
+        rename = "enableLWRExperienceConnectedApp",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lwr_experience_connected_app: Option<bool>,
+    #[serde(
+        rename = "enableMemberVisibility",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_member_visibility: Option<bool>,
+    #[serde(
+        rename = "enableNicknameDisplay",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_nickname_display: Option<bool>,
+    #[serde(
+        rename = "enablePrivateMessages",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_private_messages: Option<bool>,
+    #[serde(
+        rename = "enableReputation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_reputation: Option<bool>,
+    #[serde(
+        rename = "enableShowAllNetworkSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_show_all_network_settings: Option<bool>,
+    #[serde(
+        rename = "enableSiteAsContainer",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_site_as_container: Option<bool>,
+    #[serde(
+        rename = "enableTalkingAboutStats",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_talking_about_stats: Option<bool>,
+    #[serde(
+        rename = "enableTopicAssignmentRules",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_topic_assignment_rules: Option<bool>,
+    #[serde(
+        rename = "enableTopicSuggestions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_topic_suggestions: Option<bool>,
+    #[serde(
+        rename = "enableUpDownVote",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_up_down_vote: Option<bool>,
+    #[serde(
+        rename = "feedChannel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub feed_channel: Option<String>,
     #[serde(rename = "forgotPasswordTemplate", default)]
     pub forgot_password_template: String,
-    #[serde(rename = "gatherCustomerSentimentData", default)]
-    pub gather_customer_sentiment_data: bool,
-    #[serde(rename = "headlessForgotPasswordTemplate", default)]
-    pub headless_forgot_password_template: String,
-    #[serde(rename = "headlessRegistrationTemplate", default)]
-    pub headless_registration_template: String,
-    #[serde(rename = "lockoutTemplate", default)]
-    pub lockout_template: String,
-    #[serde(rename = "logoutUrl", default)]
-    pub logout_url: String,
-    #[serde(rename = "maxFileSizeKb", default)]
-    pub max_file_size_kb: f64,
-    #[serde(rename = "navigationLinkSet", default)]
-    pub navigation_link_set: serde_json::Value,
-    #[serde(rename = "networkAuthApiSettings", default)]
-    pub network_auth_api_settings: serde_json::Value,
-    #[serde(rename = "networkMemberGroups", default)]
-    pub network_member_groups: NetworkMemberGroup,
-    #[serde(rename = "networkPageOverrides", default)]
-    pub network_page_overrides: NetworkPageOverride,
-    #[serde(rename = "newSenderAddress", default)]
-    pub new_sender_address: String,
-    #[serde(rename = "picassoSite", default)]
-    pub picasso_site: String,
-    #[serde(rename = "pwdlessRegEmailTemplate", default)]
-    pub pwdless_reg_email_template: String,
-    #[serde(rename = "recommendationAudience", default)]
-    pub recommendation_audience: serde_json::Value,
-    #[serde(rename = "recommendationDefinition", default)]
-    pub recommendation_definition: serde_json::Value,
-    #[serde(rename = "reputationLevels", default)]
-    pub reputation_levels: serde_json::Value,
-    #[serde(rename = "reputationPointsRules", default)]
-    pub reputation_points_rules: serde_json::Value,
-    #[serde(rename = "selfRegMicroBatchSubErrorEmailTemplate", default)]
-    pub self_reg_micro_batch_sub_error_email_template: String,
-    #[serde(rename = "selfRegProfile", default)]
-    pub self_reg_profile: String,
-    #[serde(rename = "selfRegistration", default)]
-    pub self_registration: bool,
-    #[serde(rename = "sendWelcomeEmail", default)]
-    pub send_welcome_email: bool,
+    #[serde(
+        rename = "gatherCustomerSentimentData",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub gather_customer_sentiment_data: Option<bool>,
+    #[serde(
+        rename = "headlessForgotPasswordTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub headless_forgot_password_template: Option<String>,
+    #[serde(
+        rename = "headlessRegistrationTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub headless_registration_template: Option<String>,
+    #[serde(
+        rename = "lockoutTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub lockout_template: Option<String>,
+    #[serde(rename = "logoutUrl", default, skip_serializing_if = "Option::is_none")]
+    pub logout_url: Option<String>,
+    #[serde(
+        rename = "maxFileSizeKb",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub max_file_size_kb: Option<f64>,
+    #[serde(
+        rename = "navigationLinkSet",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub navigation_link_set: Option<serde_json::Value>,
+    #[serde(
+        rename = "networkAuthApiSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub network_auth_api_settings: Option<serde_json::Value>,
+    #[serde(
+        rename = "networkMemberGroups",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub network_member_groups: Option<NetworkMemberGroup>,
+    #[serde(
+        rename = "networkPageOverrides",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub network_page_overrides: Option<NetworkPageOverride>,
+    #[serde(
+        rename = "newSenderAddress",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub new_sender_address: Option<String>,
+    #[serde(
+        rename = "picassoSite",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub picasso_site: Option<String>,
+    #[serde(
+        rename = "pwdlessRegEmailTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub pwdless_reg_email_template: Option<String>,
+    #[serde(
+        rename = "recommendationAudience",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recommendation_audience: Option<serde_json::Value>,
+    #[serde(
+        rename = "recommendationDefinition",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recommendation_definition: Option<serde_json::Value>,
+    #[serde(
+        rename = "reputationLevels",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub reputation_levels: Option<serde_json::Value>,
+    #[serde(
+        rename = "reputationPointsRules",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub reputation_points_rules: Option<serde_json::Value>,
+    #[serde(
+        rename = "selfRegMicroBatchSubErrorEmailTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub self_reg_micro_batch_sub_error_email_template: Option<String>,
+    #[serde(
+        rename = "selfRegProfile",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub self_reg_profile: Option<String>,
+    #[serde(
+        rename = "selfRegistration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub self_registration: Option<bool>,
+    #[serde(
+        rename = "sendWelcomeEmail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub send_welcome_email: Option<bool>,
     #[serde(default)]
     pub site: String,
-    #[serde(rename = "siteArchiveStatus", default)]
-    pub site_archive_status: SitesArchiveStatus,
+    #[serde(
+        rename = "siteArchiveStatus",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub site_archive_status: Option<SitesArchiveStatus>,
     #[serde(default)]
     pub status: NetworkStatus,
     #[serde(default)]
     pub tabs: NetworkTabSet,
-    #[serde(rename = "urlPathPrefix", default)]
-    pub url_path_prefix: String,
-    #[serde(rename = "verificationTemplate", default)]
-    pub verification_template: String,
+    #[serde(
+        rename = "urlPathPrefix",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub url_path_prefix: Option<String>,
+    #[serde(
+        rename = "verificationTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub verification_template: Option<String>,
     #[serde(rename = "welcomeTemplate", default)]
     pub welcome_template: String,
 }
@@ -625,6 +1041,88 @@ pub struct Network {
 pub struct NetworkAccess {
     #[serde(rename = "ipRanges", default)]
     pub ip_ranges: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct NetworkBranding {
+    #[serde(
+        rename = "loginBackgroundImageUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub login_background_image_url: Option<String>,
+    #[serde(
+        rename = "loginFooterText",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub login_footer_text: Option<String>,
+    #[serde(rename = "loginLogo", default, skip_serializing_if = "Option::is_none")]
+    pub login_logo: Option<String>,
+    #[serde(
+        rename = "loginLogoName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub login_logo_name: Option<String>,
+    #[serde(
+        rename = "loginPrimaryColor",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub login_primary_color: Option<String>,
+    #[serde(
+        rename = "loginQuaternaryColor",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub login_quaternary_color: Option<String>,
+    #[serde(
+        rename = "loginRightFrameUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub login_right_frame_url: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub network: Option<String>,
+    #[serde(
+        rename = "pageFooter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub page_footer: Option<String>,
+    #[serde(
+        rename = "pageHeader",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub page_header: Option<String>,
+    #[serde(rename = "primaryColor", default)]
+    pub primary_color: String,
+    #[serde(rename = "primaryComplementColor", default)]
+    pub primary_complement_color: String,
+    #[serde(rename = "quaternaryColor", default)]
+    pub quaternary_color: String,
+    #[serde(rename = "quaternaryComplementColor", default)]
+    pub quaternary_complement_color: String,
+    #[serde(rename = "secondaryColor", default)]
+    pub secondary_color: String,
+    #[serde(
+        rename = "staticLogoImageUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub static_logo_image_url: Option<String>,
+    #[serde(rename = "tertiaryColor", default)]
+    pub tertiary_color: String,
+    #[serde(rename = "tertiaryComplementColor", default)]
+    pub tertiary_complement_color: String,
+    #[serde(rename = "zeronaryColor", default)]
+    pub zeronary_color: String,
+    #[serde(rename = "zeronaryComplementColor", default)]
+    pub zeronary_complement_color: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -649,16 +1147,36 @@ pub struct NetworkMemberGroup {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct NetworkPageOverride {
-    #[serde(rename = "changePasswordPageOverrideSetting", default)]
-    pub change_password_page_override_setting: NetworkPageOverrideSetting,
-    #[serde(rename = "forgotPasswordPageOverrideSetting", default)]
-    pub forgot_password_page_override_setting: NetworkPageOverrideSetting,
-    #[serde(rename = "homePageOverrideSetting", default)]
-    pub home_page_override_setting: NetworkPageOverrideSetting,
-    #[serde(rename = "loginPageOverrideSetting", default)]
-    pub login_page_override_setting: NetworkPageOverrideSetting,
-    #[serde(rename = "selfRegProfilePageOverrideSetting", default)]
-    pub self_reg_profile_page_override_setting: NetworkPageOverrideSetting,
+    #[serde(
+        rename = "changePasswordPageOverrideSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub change_password_page_override_setting: Option<NetworkPageOverrideSetting>,
+    #[serde(
+        rename = "forgotPasswordPageOverrideSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub forgot_password_page_override_setting: Option<NetworkPageOverrideSetting>,
+    #[serde(
+        rename = "homePageOverrideSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub home_page_override_setting: Option<NetworkPageOverrideSetting>,
+    #[serde(
+        rename = "loginPageOverrideSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub login_page_override_setting: Option<NetworkPageOverrideSetting>,
+    #[serde(
+        rename = "selfRegProfilePageOverrideSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub self_reg_profile_page_override_setting: Option<NetworkPageOverrideSetting>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -676,9 +1194,11 @@ pub struct NetworkTabSet {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct Site {
-    #[serde(rename = "urlPathPrefix", default)]
-    pub url_path_prefix: String,
+pub struct SiteDotCom {
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "siteType", default)]
+    pub site_type: SiteType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -695,10 +1215,10 @@ pub struct SiteIframeWhiteListUrl {
 pub struct SiteRedirectMapping {
     #[serde(default)]
     pub action: SiteRedirect,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isDynamic", default)]
-    pub is_dynamic: bool,
+    #[serde(rename = "isActive", default, skip_serializing_if = "Option::is_none")]
+    pub is_active: Option<bool>,
+    #[serde(rename = "isDynamic", default, skip_serializing_if = "Option::is_none")]
+    pub is_dynamic: Option<bool>,
     #[serde(default)]
     pub source: String,
     #[serde(default)]
@@ -709,11 +1229,10 @@ pub struct SiteRedirectMapping {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct SiteWebAddress {
-    #[serde(default)]
-    pub certificate: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub certificate: Option<String>,
     #[serde(rename = "domainName", default)]
     pub domain_name: String,
     #[serde(default)]
     pub primary: bool,
 }
-

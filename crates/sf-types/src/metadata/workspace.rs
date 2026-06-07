@@ -12,19 +12,26 @@ use serde::{Deserialize, Serialize};
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct TabLimitConfig {
-    #[serde(rename = "maxNumberOfPrimaryTabs", default)]
-    pub max_number_of_primary_tabs: String,
-    #[serde(rename = "maxNumberOfSubTabs", default)]
-    pub max_number_of_sub_tabs: String,
+    #[serde(
+        rename = "maxNumberOfPrimaryTabs",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub max_number_of_primary_tabs: Option<String>,
+    #[serde(
+        rename = "maxNumberOfSubTabs",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub max_number_of_sub_tabs: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct WorkspaceMapping {
-    #[serde(rename = "fieldName", default)]
-    pub field_name: String,
+    #[serde(rename = "fieldName", default, skip_serializing_if = "Option::is_none")]
+    pub field_name: Option<String>,
     #[serde(default)]
     pub tab: String,
 }
-

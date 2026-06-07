@@ -89,7 +89,7 @@ pub trait MetadataType: Serialize + DeserializeOwned + Send + Sync + Clone + 'st
 }
 
 /// Trait for types that support JSON serialization for scratch org definitions.
-pub trait JsonSerializable: MetadataType {
+pub trait JsonSerializable: Serialize + DeserializeOwned + Send + Sync + Clone + 'static {
     fn to_scratch_def_json(&self) -> Result<serde_json::Value, serde_json::Error> {
         serde_json::to_value(self)
     }
@@ -97,6 +97,12 @@ pub trait JsonSerializable: MetadataType {
     fn from_scratch_def_json(value: serde_json::Value) -> Result<Self, serde_json::Error> {
         serde_json::from_value(value)
     }
+}
+
+/// Core trait for Salesforce JSON-only Tooling API types (e.g., packaging).
+pub trait ToolingType: Serialize + DeserializeOwned + Send + Sync + Clone + 'static {
+    /// The Tooling API SObject name (e.g., "Package2", "Package2Version").
+    const TOOLING_TYPE_NAME: &'static str;
 }
 
 /// Trait specifically for org Settings types.
@@ -171,6 +177,23 @@ pub trait PackageComponent: MetadataType {
 }
 
 impl<T: MetadataType> PackageComponent for T {}
+
+/// Extension trait to help with generic api_name retrieval.
+pub trait ToApiName {
+    fn to_api_name(&self) -> Option<&str>;
+}
+
+impl ToApiName for String {
+    fn to_api_name(&self) -> Option<&str> {
+        Some(self.as_str())
+    }
+}
+
+impl ToApiName for Option<String> {
+    fn to_api_name(&self) -> Option<&str> {
+        self.as_deref()
+    }
+}
 "#
     .to_string()
 }
@@ -195,26 +218,51 @@ pub fn generate_all_trait_impls(
             .and_then(|m| m.get(name))
             .map(|s| s.as_str());
 
-        // Determine if it has a 'fullName' field, which usually maps to api_name
-        let has_full_name = fields_by_type
-            .get(name)
-            .map(|fields| fields.contains(&"fullName".to_string()))
+        // Check if this type belongs to the packaging category (JSON/Tooling type)
+        let is_tooling = crate::categories::find_category(name)
+            .map(|c| c.name == "packaging")
             .unwrap_or(false);
 
-        output.push_str(&generate_metadata_type_impl(
-            name,
-            has_full_name,
-            config,
-            feature_guard,
-        ));
+        if is_tooling {
+            output.push_str(&generate_tooling_type_impl(name, feature_guard));
+        } else {
+            // Determine if it has a 'fullName' field, which usually maps to api_name
+            let has_full_name = fields_by_type
+                .get(name)
+                .map(|fields| fields.contains(&"fullName".to_string()))
+                .unwrap_or(false);
 
-        // SettingsType & JsonSerializable impl if it looks like a settings type
-        if name.ends_with("Settings") {
-            output.push_str(&generate_settings_type_impl(name, feature_guard));
+            output.push_str(&generate_metadata_type_impl(
+                name,
+                has_full_name,
+                config,
+                feature_guard,
+            ));
+
+            // SettingsType & JsonSerializable impl if it looks like a settings type
+            if name.ends_with("Settings") {
+                output.push_str(&generate_settings_type_impl(name, feature_guard));
+            }
         }
     }
 
     output
+}
+
+fn generate_tooling_type_impl(name: &str, feature_guard: Option<&str>) -> String {
+    let cfg_line = feature_guard
+        .map(|f| format!("#[cfg(feature = \"{}\")]\n", f))
+        .unwrap_or_default();
+
+    format!(
+        r#"
+{cfg_line}impl crate::traits::ToolingType for {name} {{
+    const TOOLING_TYPE_NAME: &'static str = "{name}";
+}}
+
+{cfg_line}impl crate::traits::JsonSerializable for {name} {{}}
+"#
+    )
 }
 
 fn generate_metadata_type_impl(
@@ -233,7 +281,8 @@ fn generate_metadata_type_impl(
     let supports_wildcard = true;
 
     let api_name_impl = if has_full_name {
-        r#"        Some(&self.full_name)"#
+        r#"        use crate::traits::ToApiName;
+        self.full_name.to_api_name()"#
     } else {
         r#"        None"#
     };

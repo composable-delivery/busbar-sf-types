@@ -45,6 +45,9 @@ pub enum ConnectedAppOauthAccessScope {
     CDP,
     EinsteinGPT,
     PwdlessLogin,
+    MCP,
+    SCRT,
+    DataCloudUserClaims,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -56,6 +59,7 @@ pub enum ExternalServiceRegistrationProviderType {
     SchemaInferred,
     Standard,
     ExternalConnector,
+    CustomExternalConnector,
     Heroku,
     Anypoint,
     ApexRest,
@@ -65,6 +69,8 @@ pub enum ExternalServiceRegistrationProviderType {
     NamedQuery,
     ModelContextProtocol,
     AuraEnabled,
+    ContextDef,
+    AgentToAgent,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -72,12 +78,8 @@ pub enum ExternalServiceRegistrationProviderType {
 pub enum NamedCredentialParamType {
     #[default]
     Url,
-    UrlQueryParameter,
     HttpHeader,
-    HttpCookie,
     ClientCertificate,
-    ServerCertificate,
-    FormulaVariable,
     Authentication,
     OutboundNetworkConnection,
     AllowedManagedPackageNamespaces,
@@ -88,6 +90,8 @@ pub enum NamedCredentialParamType {
     ManagedByComponent,
     ConnectionStatus,
     SfHttpRequestExtensionName,
+    NamedCredentialOptions,
+    ManagedByNamespace,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -95,10 +99,8 @@ pub enum NamedCredentialParamType {
 pub enum NamedCredentialType {
     #[default]
     Legacy,
-    AnonymousEndpoint,
     SecuredEndpoint,
     PrivateEndpoint,
-    Credentials,
     Standard,
 }
 
@@ -108,48 +110,78 @@ pub enum NamedCredentialType {
 pub struct ConnectedApp {
     #[serde(default)]
     pub attributes: Vec<ConnectedAppAttribute>,
-    #[serde(default)]
-    pub canvas: serde_json::Value,
-    #[serde(rename = "canvasConfig", default)]
-    pub canvas_config: ConnectedAppCanvasConfig,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub canvas: Option<serde_json::Value>,
+    #[serde(
+        rename = "canvasConfig",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub canvas_config: Option<ConnectedAppCanvasConfig>,
     #[serde(rename = "contactEmail", default)]
     pub contact_email: String,
-    #[serde(rename = "contactPhone", default)]
-    pub contact_phone: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "iconUrl", default)]
-    pub icon_url: String,
-    #[serde(rename = "infoUrl", default)]
-    pub info_url: String,
+    #[serde(
+        rename = "contactPhone",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub contact_phone: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "iconUrl", default, skip_serializing_if = "Option::is_none")]
+    pub icon_url: Option<String>,
+    #[serde(rename = "infoUrl", default, skip_serializing_if = "Option::is_none")]
+    pub info_url: Option<String>,
     #[serde(rename = "ipRanges", default)]
     pub ip_ranges: Vec<ConnectedAppIpRange>,
     #[serde(default)]
     pub label: String,
-    #[serde(rename = "logoUrl", default)]
-    pub logo_url: String,
-    #[serde(rename = "mobileAppConfig", default)]
-    pub mobile_app_config: ConnectedAppMobileDetailConfig,
-    #[serde(rename = "mobileStartUrl", default)]
-    pub mobile_start_url: String,
-    #[serde(rename = "oauthConfig", default)]
-    pub oauth_config: ConnectedAppOauthConfig,
-    #[serde(rename = "oauthPolicy", default)]
-    pub oauth_policy: ConnectedAppOauthPolicy,
+    #[serde(rename = "logoUrl", default, skip_serializing_if = "Option::is_none")]
+    pub logo_url: Option<String>,
+    #[serde(
+        rename = "mobileAppConfig",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub mobile_app_config: Option<ConnectedAppMobileDetailConfig>,
+    #[serde(
+        rename = "mobileStartUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub mobile_start_url: Option<String>,
+    #[serde(
+        rename = "oauthConfig",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub oauth_config: Option<ConnectedAppOauthConfig>,
+    #[serde(
+        rename = "oauthPolicy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub oauth_policy: Option<ConnectedAppOauthPolicy>,
     #[serde(rename = "permissionSetName", default)]
     pub permission_set_name: Vec<String>,
-    #[serde(default)]
-    pub plugin: String,
-    #[serde(rename = "pluginExecutionUser", default)]
-    pub plugin_execution_user: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub plugin: Option<String>,
     #[serde(rename = "profileName", default)]
     pub profile_name: Vec<String>,
-    #[serde(rename = "samlConfig", default)]
-    pub saml_config: ConnectedAppSamlConfig,
-    #[serde(rename = "sessionPolicy", default)]
-    pub session_policy: ConnectedAppSessionPolicy,
-    #[serde(rename = "startUrl", default)]
-    pub start_url: String,
+    #[serde(
+        rename = "samlConfig",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub saml_config: Option<ConnectedAppSamlConfig>,
+    #[serde(
+        rename = "sessionPolicy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub session_policy: Option<ConnectedAppSessionPolicy>,
+    #[serde(rename = "startUrl", default, skip_serializing_if = "Option::is_none")]
+    pub start_url: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -170,22 +202,30 @@ pub struct ConnectedAppCanvasConfig {
     pub access_method: serde_json::Value,
     #[serde(rename = "canvasUrl", default)]
     pub canvas_url: String,
-    #[serde(rename = "lifecycleClass", default)]
-    pub lifecycle_class: String,
+    #[serde(
+        rename = "lifecycleClass",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub lifecycle_class: Option<String>,
     #[serde(default)]
     pub locations: Vec<serde_json::Value>,
     #[serde(default)]
     pub options: Vec<serde_json::Value>,
-    #[serde(rename = "samlInitiationMethod", default)]
-    pub saml_initiation_method: serde_json::Value,
+    #[serde(
+        rename = "samlInitiationMethod",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub saml_initiation_method: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ConnectedAppIpRange {
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(default)]
     pub end: String,
     #[serde(default)]
@@ -196,28 +236,68 @@ pub struct ConnectedAppIpRange {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ConnectedAppMobileDetailConfig {
-    #[serde(rename = "applicationBinaryFile", default)]
-    pub application_binary_file: String,
-    #[serde(rename = "applicationBinaryFileName", default)]
-    pub application_binary_file_name: String,
-    #[serde(rename = "applicationBundleIdentifier", default)]
-    pub application_bundle_identifier: String,
-    #[serde(rename = "applicationFileLength", default)]
-    pub application_file_length: f64,
-    #[serde(rename = "applicationIconFile", default)]
-    pub application_icon_file: String,
-    #[serde(rename = "applicationIconFileName", default)]
-    pub application_icon_file_name: String,
-    #[serde(rename = "applicationInstallUrl", default)]
-    pub application_install_url: String,
+    #[serde(
+        rename = "applicationBinaryFile",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub application_binary_file: Option<String>,
+    #[serde(
+        rename = "applicationBinaryFileName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub application_binary_file_name: Option<String>,
+    #[serde(
+        rename = "applicationBundleIdentifier",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub application_bundle_identifier: Option<String>,
+    #[serde(
+        rename = "applicationFileLength",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub application_file_length: Option<f64>,
+    #[serde(
+        rename = "applicationIconFile",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub application_icon_file: Option<String>,
+    #[serde(
+        rename = "applicationIconFileName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub application_icon_file_name: Option<String>,
+    #[serde(
+        rename = "applicationInstallUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub application_install_url: Option<String>,
     #[serde(rename = "devicePlatform", default)]
     pub device_platform: serde_json::Value,
-    #[serde(rename = "deviceType", default)]
-    pub device_type: serde_json::Value,
-    #[serde(rename = "minimumOsVersion", default)]
-    pub minimum_os_version: String,
-    #[serde(rename = "privateApp", default)]
-    pub private_app: bool,
+    #[serde(
+        rename = "deviceType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub device_type: Option<serde_json::Value>,
+    #[serde(
+        rename = "minimumOsVersion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub minimum_os_version: Option<String>,
+    #[serde(
+        rename = "privateApp",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub private_app: Option<bool>,
     #[serde(default)]
     pub version: String,
 }
@@ -242,64 +322,156 @@ pub struct ConnectedAppOauthAssetToken {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ConnectedAppOauthConfig {
-    #[serde(rename = "assetTokenConfig", default)]
-    pub asset_token_config: ConnectedAppOauthAssetToken,
+    #[serde(
+        rename = "assetTokenConfig",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub asset_token_config: Option<ConnectedAppOauthAssetToken>,
     #[serde(rename = "callbackUrl", default)]
     pub callback_url: String,
-    #[serde(default)]
-    pub certificate: String,
-    #[serde(rename = "consumerKey", default)]
-    pub consumer_key: String,
-    #[serde(rename = "consumerSecret", default)]
-    pub consumer_secret: String,
-    #[serde(rename = "idTokenConfig", default)]
-    pub id_token_config: ConnectedAppOauthIdToken,
-    #[serde(rename = "isAdminApproved", default)]
-    pub is_admin_approved: bool,
-    #[serde(rename = "isClientCredentialEnabled", default)]
-    pub is_client_credential_enabled: bool,
-    #[serde(rename = "isCodeCredentialEnabled", default)]
-    pub is_code_credential_enabled: bool,
-    #[serde(rename = "isCodeCredentialPostOnly", default)]
-    pub is_code_credential_post_only: bool,
-    #[serde(rename = "isConsumerSecretOptional", default)]
-    pub is_consumer_secret_optional: bool,
-    #[serde(rename = "isIntrospectAllTokens", default)]
-    pub is_introspect_all_tokens: bool,
-    #[serde(rename = "isNamedUserJwtEnabled", default)]
-    pub is_named_user_jwt_enabled: bool,
-    #[serde(rename = "isPkceRequired", default)]
-    pub is_pkce_required: bool,
-    #[serde(rename = "isRefreshTokenRotationEnabled", default)]
-    pub is_refresh_token_rotation_enabled: bool,
-    #[serde(rename = "isSecretRequiredForRefreshToken", default)]
-    pub is_secret_required_for_refresh_token: bool,
-    #[serde(rename = "isSecretRequiredForTokenExchange", default)]
-    pub is_secret_required_for_token_exchange: bool,
-    #[serde(rename = "isTokenExchangeEnabled", default)]
-    pub is_token_exchange_enabled: bool,
-    #[serde(rename = "oauthClientCredentialUser", default)]
-    pub oauth_client_credential_user: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub certificate: Option<String>,
+    #[serde(
+        rename = "consumerKey",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub consumer_key: Option<String>,
+    #[serde(
+        rename = "consumerSecret",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub consumer_secret: Option<String>,
+    #[serde(
+        rename = "idTokenConfig",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub id_token_config: Option<ConnectedAppOauthIdToken>,
+    #[serde(
+        rename = "isAdminApproved",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_admin_approved: Option<bool>,
+    #[serde(
+        rename = "isClientCredentialEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_client_credential_enabled: Option<bool>,
+    #[serde(
+        rename = "isCodeCredentialEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_code_credential_enabled: Option<bool>,
+    #[serde(
+        rename = "isCodeCredentialPostOnly",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_code_credential_post_only: Option<bool>,
+    #[serde(
+        rename = "isConsumerSecretOptional",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_consumer_secret_optional: Option<bool>,
+    #[serde(
+        rename = "isIntrospectAllTokens",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_introspect_all_tokens: Option<bool>,
+    #[serde(
+        rename = "isNamedUserJwtEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_named_user_jwt_enabled: Option<bool>,
+    #[serde(
+        rename = "isPkceRequired",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_pkce_required: Option<bool>,
+    #[serde(
+        rename = "isRefreshTokenRotationEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_refresh_token_rotation_enabled: Option<bool>,
+    #[serde(
+        rename = "isSecretRequiredForRefreshToken",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_secret_required_for_refresh_token: Option<bool>,
+    #[serde(
+        rename = "isSecretRequiredForTokenExchange",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_secret_required_for_token_exchange: Option<bool>,
+    #[serde(
+        rename = "isTokenExchangeEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_token_exchange_enabled: Option<bool>,
+    #[serde(
+        rename = "oauthClientCredentialUser",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub oauth_client_credential_user: Option<String>,
     #[serde(default)]
     pub scopes: Vec<ConnectedAppOauthAccessScope>,
-    #[serde(rename = "singleLogoutUrl", default)]
-    pub single_logout_url: String,
+    #[serde(
+        rename = "singleLogoutUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub single_logout_url: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ConnectedAppOauthIdToken {
-    #[serde(rename = "idTokenAudience", default)]
-    pub id_token_audience: String,
-    #[serde(rename = "idTokenIncludeAttributes", default)]
-    pub id_token_include_attributes: bool,
-    #[serde(rename = "idTokenIncludeCustomPerms", default)]
-    pub id_token_include_custom_perms: bool,
-    #[serde(rename = "idTokenIncludeStandardClaims", default)]
-    pub id_token_include_standard_claims: bool,
-    #[serde(rename = "idTokenValidity", default)]
-    pub id_token_validity: f64,
+    #[serde(
+        rename = "idTokenAudience",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub id_token_audience: Option<String>,
+    #[serde(
+        rename = "idTokenIncludeAttributes",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub id_token_include_attributes: Option<bool>,
+    #[serde(
+        rename = "idTokenIncludeCustomPerms",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub id_token_include_custom_perms: Option<bool>,
+    #[serde(
+        rename = "idTokenIncludeStandardClaims",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub id_token_include_standard_claims: Option<bool>,
+    #[serde(
+        rename = "idTokenValidity",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub id_token_validity: Option<f64>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -308,12 +480,20 @@ pub struct ConnectedAppOauthIdToken {
 pub struct ConnectedAppOauthPolicy {
     #[serde(rename = "ipRelaxation", default)]
     pub ip_relaxation: String,
-    #[serde(rename = "isTokenExchangeFlowEnabled", default)]
-    pub is_token_exchange_flow_enabled: bool,
+    #[serde(
+        rename = "isTokenExchangeFlowEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_token_exchange_flow_enabled: Option<bool>,
     #[serde(rename = "refreshTokenPolicy", default)]
     pub refresh_token_policy: String,
-    #[serde(rename = "singleLogoutUrl", default)]
-    pub single_logout_url: String,
+    #[serde(
+        rename = "singleLogoutUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub single_logout_url: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -322,26 +502,54 @@ pub struct ConnectedAppOauthPolicy {
 pub struct ConnectedAppSamlConfig {
     #[serde(rename = "acsUrl", default)]
     pub acs_url: String,
-    #[serde(default)]
-    pub certificate: String,
-    #[serde(rename = "encryptionCertificate", default)]
-    pub encryption_certificate: String,
-    #[serde(rename = "encryptionType", default)]
-    pub encryption_type: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub certificate: Option<String>,
+    #[serde(
+        rename = "encryptionCertificate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub encryption_certificate: Option<String>,
+    #[serde(
+        rename = "encryptionType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub encryption_type: Option<serde_json::Value>,
     #[serde(rename = "entityUrl", default)]
     pub entity_url: String,
-    #[serde(default)]
-    pub issuer: String,
-    #[serde(rename = "samlIdpSLOBindingEnum", default)]
-    pub saml_idp_slo_binding_enum: serde_json::Value,
-    #[serde(rename = "samlNameIdFormat", default)]
-    pub saml_name_id_format: serde_json::Value,
-    #[serde(rename = "samlSigningAlgoType", default)]
-    pub saml_signing_algo_type: serde_json::Value,
-    #[serde(rename = "samlSloUrl", default)]
-    pub saml_slo_url: String,
-    #[serde(rename = "samlSubjectCustomAttr", default)]
-    pub saml_subject_custom_attr: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub issuer: Option<String>,
+    #[serde(
+        rename = "samlIdpSLOBindingEnum",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub saml_idp_slo_binding_enum: Option<serde_json::Value>,
+    #[serde(
+        rename = "samlNameIdFormat",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub saml_name_id_format: Option<serde_json::Value>,
+    #[serde(
+        rename = "samlSigningAlgoType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub saml_signing_algo_type: Option<serde_json::Value>,
+    #[serde(
+        rename = "samlSloUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub saml_slo_url: Option<String>,
+    #[serde(
+        rename = "samlSubjectCustomAttr",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub saml_subject_custom_attr: Option<String>,
     #[serde(rename = "samlSubjectType", default)]
     pub saml_subject_type: serde_json::Value,
 }
@@ -350,44 +558,92 @@ pub struct ConnectedAppSamlConfig {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ConnectedAppSessionPolicy {
-    #[serde(rename = "policyAction", default)]
-    pub policy_action: String,
-    #[serde(rename = "sessionLevel", default)]
-    pub session_level: String,
-    #[serde(rename = "sessionTimeout", default)]
-    pub session_timeout: f64,
+    #[serde(
+        rename = "policyAction",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub policy_action: Option<String>,
+    #[serde(
+        rename = "sessionLevel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub session_level: Option<String>,
+    #[serde(
+        rename = "sessionTimeout",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub session_timeout: Option<f64>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CspTrustedSite {
-    #[serde(rename = "canAccessCamera", default)]
-    pub can_access_camera: bool,
-    #[serde(rename = "canAccessMicrophone", default)]
-    pub can_access_microphone: bool,
-    #[serde(default)]
-    pub context: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
+    #[serde(
+        rename = "canAccessCamera",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_access_camera: Option<bool>,
+    #[serde(
+        rename = "canAccessMicrophone",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_access_microphone: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub context: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "endpointUrl", default)]
     pub endpoint_url: String,
     #[serde(rename = "isActive", default)]
     pub is_active: bool,
-    #[serde(rename = "isApplicableToConnectSrc", default)]
-    pub is_applicable_to_connect_src: bool,
-    #[serde(rename = "isApplicableToFontSrc", default)]
-    pub is_applicable_to_font_src: bool,
-    #[serde(rename = "isApplicableToFrameSrc", default)]
-    pub is_applicable_to_frame_src: bool,
-    #[serde(rename = "isApplicableToImgSrc", default)]
-    pub is_applicable_to_img_src: bool,
-    #[serde(rename = "isApplicableToMediaSrc", default)]
-    pub is_applicable_to_media_src: bool,
-    #[serde(rename = "isApplicableToStyleSrc", default)]
-    pub is_applicable_to_style_src: bool,
-    #[serde(rename = "mobileExtension", default)]
-    pub mobile_extension: String,
+    #[serde(
+        rename = "isApplicableToConnectSrc",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_applicable_to_connect_src: Option<bool>,
+    #[serde(
+        rename = "isApplicableToFontSrc",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_applicable_to_font_src: Option<bool>,
+    #[serde(
+        rename = "isApplicableToFrameSrc",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_applicable_to_frame_src: Option<bool>,
+    #[serde(
+        rename = "isApplicableToImgSrc",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_applicable_to_img_src: Option<bool>,
+    #[serde(
+        rename = "isApplicableToMediaSrc",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_applicable_to_media_src: Option<bool>,
+    #[serde(
+        rename = "isApplicableToStyleSrc",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_applicable_to_style_src: Option<bool>,
+    #[serde(
+        rename = "mobileExtension",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub mobile_extension: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -398,14 +654,18 @@ pub struct EventRelayConfig {
     pub destination_resource_name: String,
     #[serde(rename = "eventChannel", default)]
     pub event_channel: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "relayOption", default)]
-    pub relay_option: String,
-    #[serde(default)]
-    pub state: serde_json::Value,
-    #[serde(rename = "usageType", default)]
-    pub usage_type: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    #[serde(
+        rename = "relayOption",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub relay_option: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub state: Option<serde_json::Value>,
+    #[serde(rename = "usageType", default, skip_serializing_if = "Option::is_none")]
+    pub usage_type: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -414,8 +674,8 @@ pub struct EventRelayConfig {
 pub struct ExternalCredential {
     #[serde(rename = "authenticationProtocol", default)]
     pub authentication_protocol: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "externalCredentialParameters", default)]
     pub external_credential_parameters: Vec<serde_json::Value>,
     #[serde(default)]
@@ -426,44 +686,72 @@ pub struct ExternalCredential {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ExternalDataSource {
-    #[serde(rename = "authProvider", default)]
-    pub auth_provider: String,
-    #[serde(default)]
-    pub certificate: String,
-    #[serde(rename = "customConfiguration", default)]
-    pub custom_configuration: String,
+    #[serde(
+        rename = "authProvider",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub auth_provider: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub certificate: Option<String>,
+    #[serde(
+        rename = "customConfiguration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub custom_configuration: Option<String>,
     #[serde(rename = "customHttpHeaders", default)]
     pub custom_http_headers: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub endpoint: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub endpoint: Option<String>,
     #[serde(rename = "externalDataSrcDescriptors", default)]
     pub external_data_src_descriptors: Vec<serde_json::Value>,
-    #[serde(rename = "isWritable", default)]
-    pub is_writable: bool,
+    #[serde(
+        rename = "isWritable",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_writable: Option<bool>,
     #[serde(default)]
     pub label: String,
-    #[serde(rename = "namedCredential", default)]
-    pub named_credential: String,
-    #[serde(rename = "oauthRefreshToken", default)]
-    pub oauth_refresh_token: String,
-    #[serde(rename = "oauthScope", default)]
-    pub oauth_scope: String,
-    #[serde(rename = "oauthToken", default)]
-    pub oauth_token: String,
-    #[serde(default)]
-    pub password: String,
+    #[serde(
+        rename = "namedCredential",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub named_credential: Option<String>,
+    #[serde(
+        rename = "oauthRefreshToken",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub oauth_refresh_token: Option<String>,
+    #[serde(
+        rename = "oauthScope",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub oauth_scope: Option<String>,
+    #[serde(
+        rename = "oauthToken",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub oauth_token: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub password: Option<String>,
     #[serde(rename = "principalType", default)]
     pub principal_type: serde_json::Value,
     #[serde(default)]
     pub protocol: serde_json::Value,
-    #[serde(default)]
-    pub repository: String,
-    #[serde(default)]
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub repository: Option<String>,
+    #[serde(rename = "type", default)]
     pub r#type: serde_json::Value,
-    #[serde(default)]
-    pub username: String,
-    #[serde(default)]
-    pub version: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub username: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub version: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -480,140 +768,310 @@ pub struct ExternalServiceOperation {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ExternalServiceRegistration {
-    #[serde(rename = "catalogedApiVersion", default)]
-    pub cataloged_api_version: String,
-    #[serde(default)]
-    pub description: String,
+    #[serde(
+        rename = "catalogedApiVersion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub cataloged_api_version: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(default)]
     pub label: String,
-    #[serde(rename = "namedCredential", default)]
-    pub named_credential: String,
-    #[serde(rename = "namedCredentialReference", default)]
-    pub named_credential_reference: String,
+    #[serde(
+        rename = "namedCredential",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub named_credential: Option<String>,
+    #[serde(
+        rename = "namedCredentialReference",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub named_credential_reference: Option<String>,
     #[serde(default)]
     pub operations: Vec<ExternalServiceOperation>,
-    #[serde(rename = "providerAssetEndpoint", default)]
-    pub provider_asset_endpoint: String,
-    #[serde(rename = "registrationProvider", default)]
-    pub registration_provider: String,
-    #[serde(rename = "registrationProviderType", default)]
-    pub registration_provider_type: ExternalServiceRegistrationProviderType,
-    #[serde(default)]
-    pub schema: String,
-    #[serde(rename = "schemaAbsoluteUrl", default)]
-    pub schema_absolute_url: String,
-    #[serde(rename = "schemaType", default)]
-    pub schema_type: String,
-    #[serde(rename = "schemaUploadFileExtension", default)]
-    pub schema_upload_file_extension: String,
-    #[serde(rename = "schemaUploadFileName", default)]
-    pub schema_upload_file_name: String,
-    #[serde(rename = "schemaUrl", default)]
-    pub schema_url: String,
-    #[serde(rename = "serviceBinding", default)]
-    pub service_binding: String,
-    #[serde(rename = "serviceDescriptor", default)]
-    pub service_descriptor: String,
+    #[serde(
+        rename = "providerAssetEndpoint",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub provider_asset_endpoint: Option<String>,
+    #[serde(
+        rename = "registrationProvider",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub registration_provider: Option<String>,
+    #[serde(
+        rename = "registrationProviderAsset",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub registration_provider_asset: Option<String>,
+    #[serde(
+        rename = "registrationProviderType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub registration_provider_type: Option<ExternalServiceRegistrationProviderType>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub schema: Option<String>,
+    #[serde(
+        rename = "schemaAbsoluteUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub schema_absolute_url: Option<String>,
+    #[serde(
+        rename = "schemaType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub schema_type: Option<String>,
+    #[serde(
+        rename = "schemaUploadFileExtension",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub schema_upload_file_extension: Option<String>,
+    #[serde(
+        rename = "schemaUploadFileName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub schema_upload_file_name: Option<String>,
+    #[serde(rename = "schemaUrl", default, skip_serializing_if = "Option::is_none")]
+    pub schema_url: Option<String>,
+    #[serde(
+        rename = "serviceBinding",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub service_binding: Option<String>,
+    #[serde(
+        rename = "serviceDescriptor",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub service_descriptor: Option<String>,
     #[serde(default)]
     pub status: String,
-    #[serde(rename = "systemVersion", default)]
-    pub system_version: f64,
+    #[serde(
+        rename = "systemVersion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub system_version: Option<f64>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct NamedCredential {
-    #[serde(rename = "allowMergeFieldsInBody", default)]
-    pub allow_merge_fields_in_body: bool,
-    #[serde(rename = "allowMergeFieldsInHeader", default)]
-    pub allow_merge_fields_in_header: bool,
-    #[serde(rename = "authProvider", default)]
-    pub auth_provider: String,
-    #[serde(rename = "authTokenEndpointUrl", default)]
-    pub auth_token_endpoint_url: String,
-    #[serde(rename = "awsAccessKey", default)]
-    pub aws_access_key: String,
-    #[serde(rename = "awsAccessSecret", default)]
-    pub aws_access_secret: String,
-    #[serde(rename = "awsRegion", default)]
-    pub aws_region: String,
-    #[serde(rename = "awsService", default)]
-    pub aws_service: String,
-    #[serde(rename = "calloutStatus", default)]
-    pub callout_status: serde_json::Value,
-    #[serde(default)]
-    pub certificate: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub endpoint: String,
-    #[serde(rename = "generateAuthorizationHeader", default)]
-    pub generate_authorization_header: bool,
-    #[serde(rename = "jwtAudience", default)]
-    pub jwt_audience: String,
-    #[serde(rename = "jwtFormulaSubject", default)]
-    pub jwt_formula_subject: String,
-    #[serde(rename = "jwtIssuer", default)]
-    pub jwt_issuer: String,
-    #[serde(rename = "jwtSigningCertificate", default)]
-    pub jwt_signing_certificate: String,
-    #[serde(rename = "jwtTextSubject", default)]
-    pub jwt_text_subject: String,
-    #[serde(rename = "jwtValidityPeriodSeconds", default)]
-    pub jwt_validity_period_seconds: f64,
+    #[serde(
+        rename = "allowMergeFieldsInBody",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_merge_fields_in_body: Option<bool>,
+    #[serde(
+        rename = "allowMergeFieldsInHeader",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_merge_fields_in_header: Option<bool>,
+    #[serde(
+        rename = "authProvider",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub auth_provider: Option<String>,
+    #[serde(
+        rename = "authTokenEndpointUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub auth_token_endpoint_url: Option<String>,
+    #[serde(
+        rename = "awsAccessKey",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub aws_access_key: Option<String>,
+    #[serde(
+        rename = "awsAccessSecret",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub aws_access_secret: Option<String>,
+    #[serde(rename = "awsRegion", default, skip_serializing_if = "Option::is_none")]
+    pub aws_region: Option<String>,
+    #[serde(
+        rename = "awsService",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub aws_service: Option<String>,
+    #[serde(
+        rename = "calloutStatus",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub callout_status: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub certificate: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub endpoint: Option<String>,
+    #[serde(
+        rename = "generateAuthorizationHeader",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub generate_authorization_header: Option<bool>,
+    #[serde(
+        rename = "jwtAudience",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub jwt_audience: Option<String>,
+    #[serde(
+        rename = "jwtFormulaSubject",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub jwt_formula_subject: Option<String>,
+    #[serde(rename = "jwtIssuer", default, skip_serializing_if = "Option::is_none")]
+    pub jwt_issuer: Option<String>,
+    #[serde(
+        rename = "jwtSigningCertificate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub jwt_signing_certificate: Option<String>,
+    #[serde(
+        rename = "jwtTextSubject",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub jwt_text_subject: Option<String>,
+    #[serde(
+        rename = "jwtValidityPeriodSeconds",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub jwt_validity_period_seconds: Option<f64>,
     #[serde(default)]
     pub label: String,
     #[serde(rename = "namedCredentialParameters", default)]
     pub named_credential_parameters: Vec<NamedCredentialParameter>,
-    #[serde(rename = "namedCredentialType", default)]
-    pub named_credential_type: NamedCredentialType,
-    #[serde(rename = "oauthRefreshToken", default)]
-    pub oauth_refresh_token: String,
-    #[serde(rename = "oauthScope", default)]
-    pub oauth_scope: String,
-    #[serde(rename = "oauthToken", default)]
-    pub oauth_token: String,
-    #[serde(rename = "outboundNetworkConnection", default)]
-    pub outbound_network_connection: String,
-    #[serde(default)]
-    pub password: String,
-    #[serde(rename = "principalType", default)]
-    pub principal_type: serde_json::Value,
-    #[serde(default)]
-    pub protocol: serde_json::Value,
-    #[serde(default)]
-    pub username: String,
+    #[serde(
+        rename = "namedCredentialType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub named_credential_type: Option<NamedCredentialType>,
+    #[serde(
+        rename = "oauthRefreshToken",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub oauth_refresh_token: Option<String>,
+    #[serde(
+        rename = "oauthScope",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub oauth_scope: Option<String>,
+    #[serde(
+        rename = "oauthToken",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub oauth_token: Option<String>,
+    #[serde(
+        rename = "outboundNetworkConnection",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub outbound_network_connection: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub password: Option<String>,
+    #[serde(
+        rename = "principalType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub principal_type: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub protocol: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub username: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct NamedCredentialParameter {
-    #[serde(default)]
-    pub certificate: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "externalCredential", default)]
-    pub external_credential: String,
-    #[serde(rename = "globalNamedPrincipalCredential", default)]
-    pub global_named_principal_credential: bool,
-    #[serde(rename = "managedFeatureEnabledCallout", default)]
-    pub managed_feature_enabled_callout: bool,
-    #[serde(rename = "outboundNetworkConnection", default)]
-    pub outbound_network_connection: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub certificate: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "externalCredential",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub external_credential: Option<String>,
+    #[serde(
+        rename = "globalNamedPrincipalCredential",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub global_named_principal_credential: Option<bool>,
+    #[serde(
+        rename = "managedFeatureEnabledCallout",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub managed_feature_enabled_callout: Option<bool>,
+    #[serde(
+        rename = "outboundNetworkConnection",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub outbound_network_connection: Option<String>,
     #[serde(rename = "parameterName", default)]
     pub parameter_name: String,
     #[serde(rename = "parameterType", default)]
     pub parameter_type: NamedCredentialParamType,
-    #[serde(rename = "parameterValue", default)]
-    pub parameter_value: String,
-    #[serde(rename = "readOnlyNamedCredential", default)]
-    pub read_only_named_credential: bool,
-    #[serde(rename = "sequenceNumber", default)]
-    pub sequence_number: f64,
-    #[serde(rename = "systemUserNamedCredential", default)]
-    pub system_user_named_credential: bool,
+    #[serde(
+        rename = "parameterValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub parameter_value: Option<String>,
+    #[serde(
+        rename = "readOnlyNamedCredential",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub read_only_named_credential: Option<bool>,
+    #[serde(
+        rename = "sequenceNumber",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sequence_number: Option<f64>,
+    #[serde(
+        rename = "systemUserNamedCredential",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub system_user_named_credential: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -622,8 +1080,8 @@ pub struct NamedCredentialParameter {
 pub struct PlatformEventChannel {
     #[serde(rename = "channelType", default)]
     pub channel_type: serde_json::Value,
-    #[serde(rename = "eventType", default)]
-    pub event_type: serde_json::Value,
+    #[serde(rename = "eventType", default, skip_serializing_if = "Option::is_none")]
+    pub event_type: Option<serde_json::Value>,
     #[serde(default)]
     pub label: String,
 }
@@ -636,8 +1094,12 @@ pub struct PlatformEventChannelMember {
     pub enriched_fields: Vec<serde_json::Value>,
     #[serde(rename = "eventChannel", default)]
     pub event_channel: String,
-    #[serde(rename = "filterExpression", default)]
-    pub filter_expression: String,
+    #[serde(
+        rename = "filterExpression",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub filter_expression: Option<String>,
     #[serde(rename = "selectedEntity", default)]
     pub selected_entity: String,
 }
@@ -646,8 +1108,8 @@ pub struct PlatformEventChannelMember {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct RemoteSiteSetting {
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "disableProtocolSecurity", default)]
     pub disable_protocol_security: bool,
     #[serde(rename = "isActive", default)]
@@ -655,4 +1117,3 @@ pub struct RemoteSiteSetting {
     #[serde(default)]
     pub url: String,
 }
-

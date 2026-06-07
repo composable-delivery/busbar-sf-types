@@ -13,27 +13,7 @@ use serde::{Deserialize, Serialize};
 pub enum DiscoveryAIModelStatus {
     #[default]
     Disabled,
-    Uploading,
-    UploadFailed,
-    UploadCompleted,
-    Validating,
-    ValidationFailed,
-    ValidationCompleted,
     Enabled,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DiscoveryAIModelTransformationType {
-    #[default]
-    TypographicClustering,
-    SentimentAnalysis,
-    FreeTextClustering,
-    NumericalImputation,
-    CategoricalImputation,
-    TimeSeriesForecast,
-    ExtractMonthOfYear,
-    ExtractDayOfWeek,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -110,9 +90,6 @@ pub enum DiscoveryModelRuntimeType {
     #[default]
     Discovery,
     H2O,
-    Py36Tensorflow244,
-    Py37Tensorflow270,
-    Py37Scikitlearn102,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -150,40 +127,42 @@ pub enum DiscoveryPushbackType {
     Direct,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DiscoveryStoryAutopilotStatus {
-    #[default]
-    Enabled,
-    Disabled,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DiscoveryStoryOutcomeGoal {
-    #[default]
-    Minimize,
-    Maximize,
-    None,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DiscoveryStoryOutcomeType {
-    #[default]
-    Count,
-    Text,
-    Categorical,
-    Number,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DiscoveryStorySourceType {
-    #[default]
-    AnalyticsDataset,
-    Report,
-    LiveDataset,
+#[serde(rename_all = "camelCase")]
+pub struct DiscoveryAIModel {
+    #[serde(rename = "algorithmType", default)]
+    pub algorithm_type: DiscoveryAlgorithmType,
+    #[serde(
+        rename = "classificationThreshold",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub classification_threshold: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "modelFields", default)]
+    pub model_fields: Vec<DiscoveryModelField>,
+    #[serde(rename = "modelRuntimeType", default)]
+    pub model_runtime_type: DiscoveryModelRuntimeType,
+    #[serde(rename = "predictedField", default)]
+    pub predicted_field: String,
+    #[serde(rename = "predictionType", default)]
+    pub prediction_type: DiscoveryPredictionType,
+    #[serde(rename = "sourceType", default)]
+    pub source_type: DiscoveryModelSourceType,
+    #[serde(default)]
+    pub status: DiscoveryAIModelStatus,
+    #[serde(
+        rename = "trainingMetrics",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub training_metrics: Option<String>,
+    #[serde(default)]
+    pub transformations: Vec<DiscoveryModelTransform>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -192,8 +171,8 @@ pub enum DiscoveryStorySourceType {
 pub struct DiscoveryCustomPrescribableFieldDefinition {
     #[serde(default)]
     pub filters: Vec<DiscoveryFilter>,
-    #[serde(default)]
-    pub template: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub template: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -204,8 +183,12 @@ pub struct DiscoveryDeployedModel {
     pub active: bool,
     #[serde(rename = "aiModel", default)]
     pub ai_model: String,
-    #[serde(rename = "classificationThreshold", default)]
-    pub classification_threshold: f64,
+    #[serde(
+        rename = "classificationThreshold",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub classification_threshold: Option<f64>,
     #[serde(rename = "fieldMappings", default)]
     pub field_mappings: Vec<DiscoveryFieldMap>,
     #[serde(default)]
@@ -226,12 +209,20 @@ pub struct DiscoveryFieldMap {
     pub mapped_field: String,
     #[serde(rename = "modelField", default)]
     pub model_field: String,
-    #[serde(rename = "sobjectFieldJoinKey", default)]
-    pub sobject_field_join_key: String,
-    #[serde(default)]
-    pub source: String,
-    #[serde(rename = "sourceFieldJoinKey", default)]
-    pub source_field_join_key: String,
+    #[serde(
+        rename = "sobjectFieldJoinKey",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sobject_field_join_key: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub source: Option<String>,
+    #[serde(
+        rename = "sourceFieldJoinKey",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub source_field_join_key: Option<String>,
     #[serde(rename = "sourceType", default)]
     pub source_type: DiscoveryFieldMapSourceType,
 }
@@ -244,8 +235,8 @@ pub struct DiscoveryFilter {
     pub field: String,
     #[serde(default)]
     pub operator: DiscoveryFilterOperator,
-    #[serde(default)]
-    pub r#type: DiscoveryFilterFieldType,
+    #[serde(rename = "type", default, skip_serializing_if = "Option::is_none")]
+    pub r#type: Option<DiscoveryFilterFieldType>,
     #[serde(default)]
     pub values: Vec<DiscoveryFilterValue>,
 }
@@ -254,7 +245,7 @@ pub struct DiscoveryFilter {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DiscoveryFilterValue {
-    #[serde(default)]
+    #[serde(rename = "type", default)]
     pub r#type: DiscoveryFilterValueType,
     #[serde(default)]
     pub value: String,
@@ -276,12 +267,24 @@ pub struct DiscoveryGoal {
     pub outcome: DiscoveryGoalOutcome,
     #[serde(rename = "predictionType", default)]
     pub prediction_type: DiscoveryPredictionType,
-    #[serde(rename = "pushbackField", default)]
-    pub pushback_field: String,
-    #[serde(rename = "pushbackType", default)]
-    pub pushback_type: DiscoveryPushbackType,
-    #[serde(rename = "subscribedEntity", default)]
-    pub subscribed_entity: String,
+    #[serde(
+        rename = "pushbackField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub pushback_field: Option<String>,
+    #[serde(
+        rename = "pushbackType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub pushback_type: Option<DiscoveryPushbackType>,
+    #[serde(
+        rename = "subscribedEntity",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub subscribed_entity: Option<String>,
     #[serde(rename = "terminalStateFilters", default)]
     pub terminal_state_filters: Vec<DiscoveryFilter>,
 }
@@ -296,37 +299,57 @@ pub struct DiscoveryGoalOutcome {
     pub field_label: String,
     #[serde(default)]
     pub goal: DiscoveryOutcomeGoal,
-    #[serde(rename = "mappedField", default)]
-    pub mapped_field: String,
+    #[serde(
+        rename = "mappedField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub mapped_field: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DiscoveryModelCard {
-    #[serde(rename = "contactEmail", default)]
-    pub contact_email: String,
-    #[serde(rename = "contactName", default)]
-    pub contact_name: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub sections: String,
+    #[serde(
+        rename = "contactEmail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub contact_email: Option<String>,
+    #[serde(
+        rename = "contactName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub contact_name: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub sections: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DiscoveryModelField {
-    #[serde(rename = "isDisparateImpact", default)]
-    pub is_disparate_impact: bool,
-    #[serde(rename = "isSensitive", default)]
-    pub is_sensitive: bool,
+    #[serde(
+        rename = "isDisparateImpact",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_disparate_impact: Option<bool>,
+    #[serde(
+        rename = "isSensitive",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_sensitive: Option<bool>,
     #[serde(default)]
     pub label: String,
     #[serde(default)]
     pub name: String,
-    #[serde(default)]
+    #[serde(rename = "type", default)]
     pub r#type: DiscoveryModelFieldType,
     #[serde(default)]
     pub values: Vec<String>,
@@ -336,14 +359,14 @@ pub struct DiscoveryModelField {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DiscoveryModelTransform {
-    #[serde(default)]
-    pub config: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub config: Option<String>,
     #[serde(rename = "sourceFieldNames", default)]
     pub source_field_names: Vec<String>,
     #[serde(rename = "targetFieldNames", default)]
     pub target_field_names: Vec<String>,
-    #[serde(default)]
-    pub r#type: DiscoveryAIModelTransformationType,
+    #[serde(rename = "type", default)]
+    pub r#type: serde_json::Value,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -359,18 +382,55 @@ pub struct DiscoveryPrescribableField {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct DiscoveryStory {
+    #[serde(default)]
+    pub application: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub autopilot: Option<serde_json::Value>,
+    #[serde(
+        rename = "classificationThreshold",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub classification_threshold: Option<f64>,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub outcome: DiscoveryStoryOutcome,
+    #[serde(rename = "sourceContainer", default)]
+    pub source_container: String,
+    #[serde(rename = "sourceType", default)]
+    pub source_type: serde_json::Value,
+    #[serde(
+        rename = "validationContainer",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub validation_container: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct DiscoveryStoryOutcome {
-    #[serde(rename = "failureValue", default)]
-    pub failure_value: String,
+    #[serde(
+        rename = "failureValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub failure_value: Option<String>,
     #[serde(default)]
     pub field: String,
     #[serde(default)]
-    pub goal: DiscoveryStoryOutcomeGoal,
+    pub goal: serde_json::Value,
     #[serde(default)]
     pub label: String,
-    #[serde(rename = "successValue", default)]
-    pub success_value: String,
-    #[serde(default)]
-    pub r#type: DiscoveryStoryOutcomeType,
+    #[serde(
+        rename = "successValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub success_value: Option<String>,
+    #[serde(rename = "type", default)]
+    pub r#type: serde_json::Value,
 }
-

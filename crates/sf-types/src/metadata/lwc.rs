@@ -33,36 +33,80 @@ pub struct AuraDefinition {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct AuraDefinitionBundle {
-    #[serde(rename = "SVGContent", default)]
-    pub svg_content: String,
-    #[serde(rename = "apiVersion", default)]
-    pub api_version: f64,
-    #[serde(rename = "auraDefinitions", default)]
-    pub aura_definitions: AuraDefinitions,
-    #[serde(rename = "controllerContent", default)]
-    pub controller_content: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "designContent", default)]
-    pub design_content: String,
-    #[serde(rename = "documentationContent", default)]
-    pub documentation_content: String,
-    #[serde(rename = "helperContent", default)]
-    pub helper_content: String,
-    #[serde(default)]
-    pub markup: String,
-    #[serde(rename = "modelContent", default)]
-    pub model_content: String,
+    #[serde(
+        rename = "SVGContent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub svg_content: Option<String>,
+    #[serde(
+        rename = "apiVersion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub api_version: Option<f64>,
+    #[serde(
+        rename = "auraDefinitions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub aura_definitions: Option<AuraDefinitions>,
+    #[serde(
+        rename = "controllerContent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub controller_content: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "designContent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub design_content: Option<String>,
+    #[serde(
+        rename = "documentationContent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub documentation_content: Option<String>,
+    #[serde(
+        rename = "helperContent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub helper_content: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub markup: Option<String>,
+    #[serde(
+        rename = "modelContent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub model_content: Option<String>,
     #[serde(rename = "packageVersions", default)]
     pub package_versions: Vec<serde_json::Value>,
-    #[serde(rename = "rendererContent", default)]
-    pub renderer_content: String,
-    #[serde(rename = "styleContent", default)]
-    pub style_content: String,
-    #[serde(rename = "testsuiteContent", default)]
-    pub testsuite_content: String,
-    #[serde(default)]
-    pub r#type: AuraBundleType,
+    #[serde(
+        rename = "rendererContent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub renderer_content: Option<String>,
+    #[serde(
+        rename = "styleContent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub style_content: Option<String>,
+    #[serde(
+        rename = "testsuiteContent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub testsuite_content: Option<String>,
+    #[serde(rename = "type", default, skip_serializing_if = "Option::is_none")]
+    pub r#type: Option<AuraBundleType>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -77,28 +121,52 @@ pub struct AuraDefinitions {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct LightningComponentBundle {
-    #[serde(default)]
-    pub ai: String,
-    #[serde(rename = "apiVersion", default)]
-    pub api_version: f64,
-    #[serde(default)]
-    pub capabilities: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isExplicitImport", default)]
-    pub is_explicit_import: bool,
-    #[serde(rename = "isExposed", default)]
-    pub is_exposed: bool,
-    #[serde(rename = "lwcResources", default)]
-    pub lwc_resources: serde_json::Value,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "runtimeNamespace", default)]
-    pub runtime_namespace: String,
-    #[serde(rename = "targetConfigs", default)]
-    pub target_configs: String,
-    #[serde(default)]
-    pub targets: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub ai: Option<String>,
+    #[serde(
+        rename = "apiVersion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub api_version: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub capabilities: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "isExplicitImport",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_explicit_import: Option<bool>,
+    #[serde(rename = "isExposed", default, skip_serializing_if = "Option::is_none")]
+    pub is_exposed: Option<bool>,
+    #[serde(
+        rename = "lwcResources",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub lwc_resources: Option<serde_json::Value>,
+    #[serde(
+        rename = "masterLabel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub master_label: Option<String>,
+    #[serde(
+        rename = "runtimeNamespace",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub runtime_namespace: Option<String>,
+    #[serde(
+        rename = "targetConfigs",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub target_configs: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub targets: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -107,26 +175,38 @@ pub struct LightningComponentBundle {
 pub struct LightningExperienceTheme {
     #[serde(rename = "defaultBrandingSet", default)]
     pub default_branding_set: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "designSystemVersion", default)]
-    pub design_system_version: serde_json::Value,
-    #[serde(rename = "isDarkModeEnabled", default)]
-    pub is_dark_mode_enabled: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "designSystemVersion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub design_system_version: Option<serde_json::Value>,
+    #[serde(
+        rename = "isDarkModeEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_dark_mode_enabled: Option<bool>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "shouldOverrideLoadingImage", default)]
-    pub should_override_loading_image: bool,
+    #[serde(
+        rename = "shouldOverrideLoadingImage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub should_override_loading_image: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct LightningMessageChannel {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isExposed", default)]
-    pub is_exposed: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "isExposed", default, skip_serializing_if = "Option::is_none")]
+    pub is_exposed: Option<bool>,
     #[serde(rename = "lightningMessageFields", default)]
     pub lightning_message_fields: Vec<serde_json::Value>,
     #[serde(rename = "masterLabel", default)]
@@ -137,19 +217,34 @@ pub struct LightningMessageChannel {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct LightningOnboardingConfig {
-    #[serde(rename = "collaborationGroup", default)]
-    pub collaboration_group: String,
-    #[serde(rename = "customQuestion", default)]
-    pub custom_question: String,
-    #[serde(rename = "feedbackFormDaysFrequency", default)]
-    pub feedback_form_days_frequency: f64,
+    #[serde(
+        rename = "collaborationGroup",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub collaboration_group: Option<String>,
+    #[serde(
+        rename = "customQuestion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub custom_question: Option<String>,
+    #[serde(
+        rename = "feedbackFormDaysFrequency",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub feedback_form_days_frequency: Option<f64>,
     #[serde(rename = "isCustom", default)]
     pub is_custom: bool,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "promptDelayTime", default)]
-    pub prompt_delay_time: f64,
+    #[serde(
+        rename = "promptDelayTime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub prompt_delay_time: Option<f64>,
     #[serde(rename = "sendFeedbackToSalesforce", default)]
     pub send_feedback_to_salesforce: bool,
 }
-

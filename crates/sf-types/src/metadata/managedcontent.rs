@@ -14,42 +14,54 @@ pub enum ManagedContentSpaceModuleStatusEnum {
     #[default]
     ENABLED,
     DISABLED,
-    ERROR,
-    INVALID,
-    STANDBY,
-    NOT_INSTALLED,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ManagedContentNodeType {
-    #[serde(rename = "helpText", default)]
-    pub help_text: String,
-    #[serde(rename = "isLocalizable", default)]
-    pub is_localizable: bool,
-    #[serde(rename = "isRequired", default)]
-    pub is_required: bool,
+    #[serde(rename = "helpText", default, skip_serializing_if = "Option::is_none")]
+    pub help_text: Option<String>,
+    #[serde(
+        rename = "isLocalizable",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_localizable: Option<bool>,
+    #[serde(
+        rename = "isRequired",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_required: Option<bool>,
     #[serde(rename = "nodeLabel", default)]
     pub node_label: String,
     #[serde(rename = "nodeName", default)]
     pub node_name: String,
     #[serde(rename = "nodeType", default)]
     pub node_type: serde_json::Value,
-    #[serde(rename = "placeholderText", default)]
-    pub placeholder_text: String,
+    #[serde(
+        rename = "placeholderText",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub placeholder_text: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ManagedContentType {
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "developerName", default)]
     pub developer_name: String,
-    #[serde(rename = "isMetadataContent", default)]
-    pub is_metadata_content: bool,
+    #[serde(
+        rename = "isMetadataContent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_metadata_content: Option<bool>,
     #[serde(rename = "managedContentNodeTypes", default)]
     pub managed_content_node_types: Vec<ManagedContentNodeType>,
     #[serde(rename = "masterLabel", default)]
@@ -59,33 +71,27 @@ pub struct ManagedContentType {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ManagedContentTypeBundle {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "schemaBody", default)]
-    pub schema_body: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct ManagedEventSubscription {
-    #[serde(rename = "defaultReplay", default)]
-    pub default_replay: serde_json::Value,
-    #[serde(rename = "errorRecoveryReplay", default)]
-    pub error_recovery_replay: serde_json::Value,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub state: serde_json::Value,
-    #[serde(rename = "topicName", default)]
-    pub topic_name: String,
-    #[serde(default)]
-    pub version: String,
+    #[serde(
+        rename = "defaultReplay",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_replay: Option<serde_json::Value>,
+    #[serde(
+        rename = "errorRecoveryReplay",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub error_recovery_replay: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub state: Option<serde_json::Value>,
+    #[serde(rename = "topicName", default, skip_serializing_if = "Option::is_none")]
+    pub topic_name: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub version: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -111,4 +117,3 @@ pub struct ManagedTopics {
     #[serde(rename = "managedTopic", default)]
     pub managed_topic: Vec<ManagedTopic>,
 }
-

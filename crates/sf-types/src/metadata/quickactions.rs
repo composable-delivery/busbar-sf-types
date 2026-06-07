@@ -53,27 +53,13 @@ pub enum ActionLinkUserVisibility {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActionPlanTemplateType {
-    #[default]
-    Industries,
-    Retail,
-    Sales,
-    ITSM,
-    PrvdEngmtCompliance,
-    KAM,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum QuickActionLabel {
     #[default]
-    Custom,
     LogACall,
     LogANote,
     New,
     NewRecordType,
     Update,
-    UpdateRecordType,
     NewChild,
     NewChildRecordType,
     CreateNew,
@@ -118,38 +104,22 @@ pub enum QuickActionLabel {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum QuickActionParameterType {
-    #[default]
-    Input,
-    Output,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum QuickActionType {
     #[default]
     Create,
     VisualforcePage,
     Post,
     SendEmail,
-    Email,
     LogACall,
-    CaseComment,
-    ChangeStatus,
     SocialPost,
     Canvas,
     Update,
-    MobileSmartActions,
-    MobileCreateFull,
-    ChangePriority,
-    ChangeDueDate,
     LightningComponent,
     LightningWebComponent,
     Flow,
     MobileExtension,
     Quip,
     SendConversationMessage,
-    Copilot,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -168,10 +138,14 @@ pub struct ActionLauncherItemDef {
     pub master_label: String,
     #[serde(rename = "subType", default)]
     pub sub_type: String,
-    #[serde(default)]
+    #[serde(rename = "type", default)]
     pub r#type: String,
-    #[serde(rename = "versionNumber", default)]
-    pub version_number: String,
+    #[serde(
+        rename = "versionNumber",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub version_number: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -184,8 +158,12 @@ pub struct ActionLinkGroupTemplate {
     pub category: serde_json::Value,
     #[serde(rename = "executionsAllowed", default)]
     pub executions_allowed: ActionLinkExecutionsAllowed,
-    #[serde(rename = "hoursUntilExpiration", default)]
-    pub hours_until_expiration: f64,
+    #[serde(
+        rename = "hoursUntilExpiration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub hours_until_expiration: Option<f64>,
     #[serde(rename = "isPublished", default)]
     pub is_published: bool,
     #[serde(default)]
@@ -198,14 +176,14 @@ pub struct ActionLinkGroupTemplate {
 pub struct ActionLinkTemplate {
     #[serde(rename = "actionUrl", default)]
     pub action_url: String,
-    #[serde(default)]
-    pub headers: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub headers: Option<String>,
     #[serde(rename = "isConfirmationRequired", default)]
     pub is_confirmation_required: bool,
     #[serde(rename = "isGroupDefault", default)]
     pub is_group_default: bool,
-    #[serde(default)]
-    pub label: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
     #[serde(rename = "labelKey", default)]
     pub label_key: String,
     #[serde(rename = "linkType", default)]
@@ -214,10 +192,14 @@ pub struct ActionLinkTemplate {
     pub method: ActionLinkHttpMethod,
     #[serde(default)]
     pub position: f64,
-    #[serde(rename = "requestBody", default)]
-    pub request_body: String,
-    #[serde(rename = "userAlias", default)]
-    pub user_alias: String,
+    #[serde(
+        rename = "requestBody",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub request_body: Option<String>,
+    #[serde(rename = "userAlias", default, skip_serializing_if = "Option::is_none")]
+    pub user_alias: Option<String>,
     #[serde(rename = "userVisibility", default)]
     pub user_visibility: ActionLinkUserVisibility,
 }
@@ -230,26 +212,42 @@ pub struct ActionPlanTemplate {
     pub action_plan_template_item: Vec<ActionPlanTemplateItem>,
     #[serde(rename = "actionPlanTemplateItemDependencies", default)]
     pub action_plan_template_item_dependencies: Vec<ActionPlanTemplateItemDependency>,
-    #[serde(rename = "actionPlanType", default)]
-    pub action_plan_type: ActionPlanTemplateType,
-    #[serde(default)]
-    pub category: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "estimatedCompletionDays", default)]
-    pub estimated_completion_days: f64,
-    #[serde(rename = "fileBasedTemplatePath", default)]
-    pub file_based_template_path: String,
+    #[serde(
+        rename = "actionPlanType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub action_plan_type: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub category: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "estimatedCompletionDays",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub estimated_completion_days: Option<f64>,
+    #[serde(
+        rename = "fileBasedTemplatePath",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub file_based_template_path: Option<String>,
     #[serde(rename = "isAdHocItemCreationEnabled", default)]
     pub is_ad_hoc_item_creation_enabled: bool,
     #[serde(default)]
     pub name: String,
-    #[serde(rename = "sourceType", default)]
-    pub source_type: String,
-    #[serde(default)]
-    pub status: String,
-    #[serde(default)]
-    pub subcategory: String,
+    #[serde(
+        rename = "sourceType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub source_type: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub status: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub subcategory: Option<String>,
     #[serde(rename = "targetEntityType", default)]
     pub target_entity_type: String,
     #[serde(rename = "uniqueName", default)]
@@ -262,10 +260,18 @@ pub struct ActionPlanTemplate {
 pub struct ActionPlanTemplateItem {
     #[serde(rename = "actionPlanTemplateItemValue", default)]
     pub action_plan_template_item_value: Vec<ActionPlanTemplateItemValue>,
-    #[serde(rename = "displayOrder", default)]
-    pub display_order: f64,
-    #[serde(rename = "isRequired", default)]
-    pub is_required: bool,
+    #[serde(
+        rename = "displayOrder",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub display_order: Option<f64>,
+    #[serde(
+        rename = "isRequired",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_required: Option<bool>,
     #[serde(rename = "itemEntityType", default)]
     pub item_entity_type: String,
     #[serde(default)]
@@ -296,46 +302,26 @@ pub struct ActionPlanTemplateItemValue {
     pub item_entity_type: String,
     #[serde(default)]
     pub name: String,
-    #[serde(rename = "valueFormula", default)]
-    pub value_formula: String,
-    #[serde(rename = "valueLiteral", default)]
-    pub value_literal: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GlobalPicklist {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "globalPicklistValues", default)]
-    pub global_picklist_values: Vec<GlobalPicklistValue>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub sorted: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GlobalPicklistValue {
-    #[serde(default)]
-    pub color: String,
-    #[serde(default)]
-    pub default: bool,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
+    #[serde(
+        rename = "valueFormula",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub value_formula: Option<String>,
+    #[serde(
+        rename = "valueLiteral",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub value_literal: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct GlobalQuickActionTranslation {
-    #[serde(default)]
-    pub aspect: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub aspect: Option<String>,
     #[serde(default)]
     pub label: String,
     #[serde(default)]
@@ -346,52 +332,98 @@ pub struct GlobalQuickActionTranslation {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct QuickAction {
-    #[serde(rename = "actionSubtype", default)]
-    pub action_subtype: serde_json::Value,
-    #[serde(default)]
-    pub canvas: String,
-    #[serde(default)]
-    pub description: String,
+    #[serde(
+        rename = "actionSubtype",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub action_subtype: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub canvas: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "fieldOverrides", default)]
     pub field_overrides: Vec<serde_json::Value>,
-    #[serde(rename = "flowDefinition", default)]
-    pub flow_definition: String,
-    #[serde(default)]
-    pub height: f64,
-    #[serde(default)]
-    pub icon: String,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "lightningComponent", default)]
-    pub lightning_component: String,
-    #[serde(rename = "lightningWebComponent", default)]
-    pub lightning_web_component: String,
+    #[serde(
+        rename = "flowDefinition",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub flow_definition: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub height: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub icon: Option<String>,
+    #[serde(
+        rename = "isProtected",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_protected: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    #[serde(
+        rename = "lightningComponent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub lightning_component: Option<String>,
+    #[serde(
+        rename = "lightningWebComponent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub lightning_web_component: Option<String>,
     #[serde(rename = "optionsCreateFeedItem", default)]
     pub options_create_feed_item: bool,
-    #[serde(default)]
-    pub page: String,
-    #[serde(rename = "quickActionLayout", default)]
-    pub quick_action_layout: QuickActionLayout,
-    #[serde(rename = "quickActionParameters", default)]
-    pub quick_action_parameters: Vec<QuickActionParameters>,
-    #[serde(rename = "quickActionSendEmailOptions", default)]
-    pub quick_action_send_email_options: QuickActionSendEmailOptions,
-    #[serde(rename = "standardLabel", default)]
-    pub standard_label: QuickActionLabel,
-    #[serde(rename = "successMessage", default)]
-    pub success_message: String,
-    #[serde(rename = "targetObject", default)]
-    pub target_object: String,
-    #[serde(rename = "targetParentField", default)]
-    pub target_parent_field: String,
-    #[serde(rename = "targetRecordType", default)]
-    pub target_record_type: String,
-    #[serde(default)]
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub page: Option<String>,
+    #[serde(
+        rename = "quickActionLayout",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub quick_action_layout: Option<QuickActionLayout>,
+    #[serde(
+        rename = "quickActionSendEmailOptions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub quick_action_send_email_options: Option<QuickActionSendEmailOptions>,
+    #[serde(
+        rename = "standardLabel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub standard_label: Option<QuickActionLabel>,
+    #[serde(
+        rename = "successMessage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub success_message: Option<String>,
+    #[serde(
+        rename = "targetObject",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub target_object: Option<String>,
+    #[serde(
+        rename = "targetParentField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub target_parent_field: Option<String>,
+    #[serde(
+        rename = "targetRecordType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub target_record_type: Option<String>,
+    #[serde(rename = "type", default)]
     pub r#type: QuickActionType,
-    #[serde(default)]
-    pub width: f64,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub width: Option<f64>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -416,44 +448,32 @@ pub struct QuickActionLayoutColumn {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct QuickActionLayoutItem {
-    #[serde(rename = "emptySpace", default)]
-    pub empty_space: bool,
-    #[serde(default)]
-    pub field: String,
-    #[serde(rename = "uiBehavior", default)]
-    pub ui_behavior: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct QuickActionParameters {
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub r#type: QuickActionParameterType,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct QuickActionParametersTranslation {
-    #[serde(default)]
-    pub aspect: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub value: String,
+    #[serde(
+        rename = "emptySpace",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub empty_space: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub field: Option<String>,
+    #[serde(
+        rename = "uiBehavior",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub ui_behavior: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct QuickActionSendEmailOptions {
-    #[serde(rename = "defaultEmailTemplateName", default)]
-    pub default_email_template_name: String,
+    #[serde(
+        rename = "defaultEmailTemplateName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_email_template_name: Option<String>,
     #[serde(rename = "ignoreDefaultEmailTemplateSubject", default)]
     pub ignore_default_email_template_subject: bool,
 }
@@ -462,13 +482,10 @@ pub struct QuickActionSendEmailOptions {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct QuickActionTranslation {
-    #[serde(default)]
-    pub aspect: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub aspect: Option<String>,
     #[serde(default)]
     pub label: String,
     #[serde(default)]
     pub name: String,
-    #[serde(rename = "quickActionParametersTranslation", default)]
-    pub quick_action_parameters_translation: Vec<QuickActionParametersTranslation>,
 }
-

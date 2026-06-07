@@ -28,16 +28,32 @@ pub enum CustomSettingsType {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CustomApplicationComponent {
-    #[serde(rename = "buttonIconUrl", default)]
-    pub button_icon_url: String,
-    #[serde(rename = "buttonStyle", default)]
-    pub button_style: String,
-    #[serde(rename = "buttonText", default)]
-    pub button_text: String,
-    #[serde(rename = "buttonWidth", default)]
-    pub button_width: f64,
-    #[serde(default)]
-    pub height: f64,
+    #[serde(
+        rename = "buttonIconUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub button_icon_url: Option<String>,
+    #[serde(
+        rename = "buttonStyle",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub button_style: Option<String>,
+    #[serde(
+        rename = "buttonText",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub button_text: Option<String>,
+    #[serde(
+        rename = "buttonWidth",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub button_width: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub height: Option<f64>,
     #[serde(rename = "isHeightFixed", default)]
     pub is_height_fixed: bool,
     #[serde(rename = "isHidden", default)]
@@ -46,62 +62,26 @@ pub struct CustomApplicationComponent {
     pub is_width_fixed: bool,
     #[serde(rename = "visualforcePage", default)]
     pub visualforce_page: String,
-    #[serde(default)]
-    pub width: f64,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub width: Option<f64>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CustomConsoleComponents {
-    #[serde(rename = "primaryTabComponents", default)]
-    pub primary_tab_components: serde_json::Value,
-    #[serde(rename = "subtabComponents", default)]
-    pub subtab_components: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomDataType {
-    #[serde(rename = "customDataTypeComponents", default)]
-    pub custom_data_type_components: Vec<CustomDataTypeComponent>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "displayFormula", default)]
-    pub display_formula: String,
-    #[serde(rename = "editComponentsOnSeparateLines", default)]
-    pub edit_components_on_separate_lines: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "rightAligned", default)]
-    pub right_aligned: bool,
-    #[serde(rename = "supportComponentsInReports", default)]
-    pub support_components_in_reports: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomDataTypeComponent {
-    #[serde(rename = "developerSuffix", default)]
-    pub developer_suffix: String,
-    #[serde(rename = "enforceFieldRequiredness", default)]
-    pub enforce_field_requiredness: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub length: f64,
-    #[serde(default)]
-    pub precision: f64,
-    #[serde(default)]
-    pub scale: f64,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: serde_json::Value,
-    #[serde(rename = "sortPriority", default)]
-    pub sort_priority: f64,
-    #[serde(default)]
-    pub r#type: serde_json::Value,
+    #[serde(
+        rename = "primaryTabComponents",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub primary_tab_components: Option<serde_json::Value>,
+    #[serde(
+        rename = "subtabComponents",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub subtab_components: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -118,22 +98,22 @@ pub struct CustomHelpMenuSection {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CustomHttpHeader {
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "headerFieldName", default)]
     pub header_field_name: String,
     #[serde(rename = "headerFieldValue", default)]
     pub header_field_value: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
+    #[serde(rename = "isActive", default, skip_serializing_if = "Option::is_none")]
+    pub is_active: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CustomLabel {
-    #[serde(default)]
-    pub categories: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub categories: Option<String>,
     #[serde(default)]
     pub language: String,
     #[serde(default)]
@@ -166,12 +146,12 @@ pub struct CustomLabels {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CustomMetadata {
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub protected: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub protected: Option<bool>,
     #[serde(default)]
     pub values: Vec<CustomMetadataValue>,
 }
@@ -182,8 +162,8 @@ pub struct CustomMetadata {
 pub struct CustomMetadataValue {
     #[serde(default)]
     pub field: String,
-    #[serde(default)]
-    pub value: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub value: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -194,8 +174,12 @@ pub struct CustomNotificationActionDefinition {
     pub action_label: String,
     #[serde(rename = "actionName", default)]
     pub action_name: String,
-    #[serde(rename = "actionTarget", default)]
-    pub action_target: String,
+    #[serde(
+        rename = "actionTarget",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub action_target: Option<String>,
     #[serde(rename = "actionType", default)]
     pub action_type: serde_json::Value,
 }
@@ -218,16 +202,16 @@ pub struct CustomNotificationType {
     pub action_groups: Vec<CustomNotificationActionGroup>,
     #[serde(rename = "customNotifTypeName", default)]
     pub custom_notif_type_name: String,
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(default)]
     pub desktop: bool,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
     #[serde(default)]
     pub mobile: bool,
-    #[serde(default)]
-    pub slack: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub slack: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -236,46 +220,82 @@ pub struct CustomNotificationType {
 pub struct CustomPageWebLink {
     #[serde(default)]
     pub availability: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "displayType", default)]
     pub display_type: serde_json::Value,
-    #[serde(rename = "encodingKey", default)]
-    pub encoding_key: serde_json::Value,
-    #[serde(rename = "hasMenubar", default)]
-    pub has_menubar: bool,
-    #[serde(rename = "hasScrollbars", default)]
-    pub has_scrollbars: bool,
-    #[serde(rename = "hasToolbar", default)]
-    pub has_toolbar: bool,
-    #[serde(default)]
-    pub height: f64,
-    #[serde(rename = "isResizable", default)]
-    pub is_resizable: bool,
+    #[serde(
+        rename = "encodingKey",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub encoding_key: Option<serde_json::Value>,
+    #[serde(
+        rename = "hasMenubar",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub has_menubar: Option<bool>,
+    #[serde(
+        rename = "hasScrollbars",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub has_scrollbars: Option<bool>,
+    #[serde(
+        rename = "hasToolbar",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub has_toolbar: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub height: Option<f64>,
+    #[serde(
+        rename = "isResizable",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_resizable: Option<bool>,
     #[serde(rename = "linkType", default)]
     pub link_type: serde_json::Value,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
+    #[serde(
+        rename = "masterLabel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub master_label: Option<String>,
     #[serde(rename = "openType", default)]
     pub open_type: serde_json::Value,
-    #[serde(default)]
-    pub page: String,
-    #[serde(default)]
-    pub position: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub page: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub position: Option<serde_json::Value>,
     #[serde(default)]
     pub protected: bool,
-    #[serde(rename = "requireRowSelection", default)]
-    pub require_row_selection: bool,
-    #[serde(default)]
-    pub scontrol: String,
-    #[serde(rename = "showsLocation", default)]
-    pub shows_location: bool,
-    #[serde(rename = "showsStatus", default)]
-    pub shows_status: bool,
-    #[serde(default)]
-    pub url: String,
-    #[serde(default)]
-    pub width: f64,
+    #[serde(
+        rename = "requireRowSelection",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub require_row_selection: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub scontrol: Option<String>,
+    #[serde(
+        rename = "showsLocation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub shows_location: Option<bool>,
+    #[serde(
+        rename = "showsStatus",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub shows_status: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub url: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub width: Option<f64>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -292,12 +312,20 @@ pub struct CustomPageWebLinkTranslation {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CustomPermission {
-    #[serde(rename = "connectedApp", default)]
-    pub connected_app: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "externalClientApplication", default)]
-    pub external_client_application: String,
+    #[serde(
+        rename = "connectedApp",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub connected_app: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "externalClientApplication",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub external_client_application: Option<String>,
     #[serde(rename = "isLicensed", default)]
     pub is_licensed: bool,
     #[serde(default)]
@@ -322,36 +350,64 @@ pub struct CustomPermissionDependencyRequired {
 pub struct CustomTab {
     #[serde(rename = "actionOverrides", default)]
     pub action_overrides: Vec<serde_json::Value>,
-    #[serde(rename = "auraComponent", default)]
-    pub aura_component: String,
-    #[serde(rename = "customObject", default)]
-    pub custom_object: bool,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "flexiPage", default)]
-    pub flexi_page: String,
-    #[serde(rename = "frameHeight", default)]
-    pub frame_height: f64,
-    #[serde(rename = "hasSidebar", default)]
-    pub has_sidebar: bool,
-    #[serde(default)]
-    pub icon: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "lwcComponent", default)]
-    pub lwc_component: String,
-    #[serde(default)]
-    pub motif: String,
-    #[serde(default)]
-    pub page: String,
-    #[serde(default)]
-    pub scontrol: String,
-    #[serde(rename = "splashPageLink", default)]
-    pub splash_page_link: String,
-    #[serde(default)]
-    pub url: String,
-    #[serde(rename = "urlEncodingKey", default)]
-    pub url_encoding_key: serde_json::Value,
+    #[serde(
+        rename = "auraComponent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub aura_component: Option<String>,
+    #[serde(
+        rename = "customObject",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub custom_object: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "flexiPage", default, skip_serializing_if = "Option::is_none")]
+    pub flexi_page: Option<String>,
+    #[serde(
+        rename = "frameHeight",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub frame_height: Option<f64>,
+    #[serde(
+        rename = "hasSidebar",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub has_sidebar: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub icon: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    #[serde(
+        rename = "lwcComponent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub lwc_component: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub motif: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub page: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub scontrol: Option<String>,
+    #[serde(
+        rename = "splashPageLink",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub splash_page_link: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub url: Option<String>,
+    #[serde(
+        rename = "urlEncodingKey",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub url_encoding_key: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -363,4 +419,3 @@ pub struct CustomTabTranslation {
     #[serde(default)]
     pub name: String,
 }
-

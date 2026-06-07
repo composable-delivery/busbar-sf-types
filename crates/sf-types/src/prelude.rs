@@ -80,9 +80,6 @@ pub use crate::metadata::servicecatalog::*;
 #[cfg(feature = "messaging")]
 pub use crate::metadata::messaging::*;
 
-#[cfg(feature = "loyalty")]
-pub use crate::metadata::loyalty::*;
-
 #[cfg(feature = "identity")]
 pub use crate::metadata::identity::*;
 
@@ -130,9 +127,6 @@ pub use crate::metadata::commerce::*;
 
 #[cfg(feature = "fieldmappings")]
 pub use crate::metadata::fieldmappings::*;
-
-#[cfg(feature = "copilot")]
-pub use crate::metadata::copilot::*;
 
 #[cfg(feature = "forecasting")]
 pub use crate::metadata::forecasting::*;
@@ -197,9 +191,6 @@ pub use crate::metadata::digitalexperience::*;
 #[cfg(feature = "briefcase")]
 pub use crate::metadata::briefcase::*;
 
-#[cfg(feature = "lifesciences")]
-pub use crate::metadata::lifesciences::*;
-
 #[cfg(feature = "translations")]
 pub use crate::metadata::translations::*;
 
@@ -217,9 +208,6 @@ pub use crate::metadata::feed::*;
 
 #[cfg(feature = "codecoverage")]
 pub use crate::metadata::codecoverage::*;
-
-#[cfg(feature = "slack")]
-pub use crate::metadata::slack::*;
 
 #[cfg(feature = "explainability")]
 pub use crate::metadata::explainability::*;
@@ -245,9 +233,6 @@ pub use crate::metadata::conditions::*;
 #[cfg(feature = "policies")]
 pub use crate::metadata::policies::*;
 
-#[cfg(feature = "features")]
-pub use crate::metadata::features::*;
-
 #[cfg(feature = "mappings")]
 pub use crate::metadata::mappings::*;
 
@@ -259,9 +244,6 @@ pub use crate::metadata::lightning::*;
 
 #[cfg(feature = "workspace")]
 pub use crate::metadata::workspace::*;
-
-#[cfg(feature = "standard")]
-pub use crate::metadata::standard::*;
 
 #[cfg(feature = "full")]
 pub use crate::uncategorized::*;

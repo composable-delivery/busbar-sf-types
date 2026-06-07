@@ -12,104 +12,138 @@ use serde::{Deserialize, Serialize};
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct AIReplyRecommendationsSettings {
-    #[serde(rename = "enableAIReplyRecommendations", default)]
-    pub enable_ai_reply_recommendations: bool,
-    #[serde(rename = "enableGenReplyRecommendations", default)]
-    pub enable_gen_reply_recommendations: bool,
-    #[serde(rename = "enableServiceEinsteinGPTGrounding", default)]
-    pub enable_service_einstein_gpt_grounding: bool,
-    #[serde(rename = "enableServiceRepliesPause", default)]
-    pub enable_service_replies_pause: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AccountForecastSettings {
-    #[serde(rename = "accountFilterId", default)]
-    pub account_filter_id: String,
-    #[serde(rename = "accountForecastFormulas", default)]
-    pub account_forecast_formulas: Vec<serde_json::Value>,
-    #[serde(rename = "acctPrdctPrdFrcstVolCnt", default)]
-    pub acct_prdct_prd_frcst_vol_cnt: f64,
-    #[serde(rename = "calculationFrequency", default)]
-    pub calculation_frequency: serde_json::Value,
-    #[serde(rename = "displayDuration", default)]
-    pub display_duration: f64,
-    #[serde(rename = "displayedForecastMetrics", default)]
-    pub displayed_forecast_metrics: String,
-    #[serde(rename = "displayedRevenueMetrics", default)]
-    pub displayed_revenue_metrics: String,
-    #[serde(rename = "editableAtStartOfPeriod", default)]
-    pub editable_at_start_of_period: bool,
-    #[serde(rename = "editsAllowedFor", default)]
-    pub edits_allowed_for: f64,
-    #[serde(rename = "forecastFrequency", default)]
-    pub forecast_frequency: serde_json::Value,
-    #[serde(rename = "objectMapping", default)]
-    pub object_mapping: serde_json::Value,
-    #[serde(rename = "opportunityItemScheduleEnabled", default)]
-    pub opportunity_item_schedule_enabled: bool,
-    #[serde(rename = "opportunityProbabilityEnabled", default)]
-    pub opportunity_probability_enabled: bool,
-    #[serde(rename = "primaryNotifEmailAddress", default)]
-    pub primary_notif_email_address: String,
-    #[serde(rename = "productFilterId", default)]
-    pub product_filter_id: String,
-    #[serde(rename = "recalculateAllFrcstCnt", default)]
-    pub recalculate_all_frcst_cnt: f64,
-    #[serde(rename = "regenerateForecastCnt", default)]
-    pub regenerate_forecast_cnt: f64,
-    #[serde(rename = "salesAgreementFilterId", default)]
-    pub sales_agreement_filter_id: String,
-    #[serde(rename = "secondaryNotifEmailAddress", default)]
-    pub secondary_notif_email_address: String,
-    #[serde(rename = "startingPeriod", default)]
-    pub starting_period: f64,
+    #[serde(
+        rename = "enableAIReplyRecommendations",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ai_reply_recommendations: Option<bool>,
+    #[serde(
+        rename = "enableGenReplyRecommendations",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_gen_reply_recommendations: Option<bool>,
+    #[serde(
+        rename = "enableServiceEinsteinGPTGrounding",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_service_einstein_gpt_grounding: Option<bool>,
+    #[serde(
+        rename = "enableServiceRepliesAutoTranslate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_service_replies_auto_translate: Option<bool>,
+    #[serde(
+        rename = "enableServiceRepliesPause",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_service_replies_pause: Option<bool>,
+    #[serde(
+        rename = "hideSRPostButton",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub hide_sr_post_button: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct AccountIntelligenceSettings {
-    #[serde(rename = "enableAccountLogos", default)]
-    pub enable_account_logos: bool,
-    #[serde(rename = "enableAutomatedAccountFields", default)]
-    pub enable_automated_account_fields: bool,
-    #[serde(rename = "enableNewsStories", default)]
-    pub enable_news_stories: bool,
+    #[serde(
+        rename = "enableAccountLogos",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_account_logos: Option<bool>,
+    #[serde(
+        rename = "enableAutomatedAccountFields",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_automated_account_fields: Option<bool>,
+    #[serde(
+        rename = "enableNewsStories",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_news_stories: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct AccountPlanSettings {
-    #[serde(rename = "enableAccountPlan", default)]
-    pub enable_account_plan: bool,
+    #[serde(
+        rename = "enableAccountPlan",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_account_plan: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct AccountSettings {
-    #[serde(rename = "enableAccountDiscovery", default)]
-    pub enable_account_discovery: bool,
-    #[serde(rename = "enableAccountHistoryTracking", default)]
-    pub enable_account_history_tracking: bool,
-    #[serde(rename = "enableAccountInsightsInMobile", default)]
-    pub enable_account_insights_in_mobile: bool,
-    #[serde(rename = "enableAccountOwnerReport", default)]
-    pub enable_account_owner_report: bool,
-    #[serde(rename = "enableAccountTeams", default)]
-    pub enable_account_teams: bool,
-    #[serde(rename = "enableContactHistoryTracking", default)]
-    pub enable_contact_history_tracking: bool,
-    #[serde(rename = "enableRelateContactToMultipleAccounts", default)]
-    pub enable_relate_contact_to_multiple_accounts: bool,
-    #[serde(rename = "enableReportsToOnPersonAccount", default)]
-    pub enable_reports_to_on_person_account: bool,
-    #[serde(rename = "showViewHierarchyLink", default)]
-    pub show_view_hierarchy_link: bool,
+    #[serde(
+        rename = "enableAccountDiscovery",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_account_discovery: Option<bool>,
+    #[serde(
+        rename = "enableAccountHistoryTracking",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_account_history_tracking: Option<bool>,
+    #[serde(
+        rename = "enableAccountInsightsInMobile",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_account_insights_in_mobile: Option<bool>,
+    #[serde(
+        rename = "enableAccountOwnerReport",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_account_owner_report: Option<bool>,
+    #[serde(
+        rename = "enableAccountTeams",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_account_teams: Option<bool>,
+    #[serde(
+        rename = "enableContactHistoryTracking",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_contact_history_tracking: Option<bool>,
+    #[serde(
+        rename = "enableRelateContactToMultipleAccounts",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_relate_contact_to_multiple_accounts: Option<bool>,
+    #[serde(
+        rename = "enableReportsToOnPersonAccount",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_reports_to_on_person_account: Option<bool>,
+    #[serde(
+        rename = "showViewHierarchyLink",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_view_hierarchy_link: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -128,104 +162,240 @@ pub struct AccountSharingRuleSettings {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct AccountingSettings {
-    #[serde(rename = "enableAccountingSubledger", default)]
-    pub enable_accounting_subledger: bool,
-    #[serde(rename = "enableFinancePeriod", default)]
-    pub enable_finance_period: bool,
-    #[serde(rename = "enablePaymentMethodAdjust", default)]
-    pub enable_payment_method_adjust: bool,
-    #[serde(rename = "enableScheduledJob", default)]
-    pub enable_scheduled_job: bool,
-    #[serde(rename = "enableSkipReversalLogic", default)]
-    pub enable_skip_reversal_logic: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AcctMgrTargetSettings {
-    #[serde(rename = "acctMgrPeriodicTargetDstrCnt", default)]
-    pub acct_mgr_periodic_target_dstr_cnt: f64,
-    #[serde(rename = "periodType", default)]
-    pub period_type: serde_json::Value,
-    #[serde(rename = "pricebookId", default)]
-    pub pricebook_id: String,
-    #[serde(rename = "teamMemberHierarchyType", default)]
-    pub team_member_hierarchy_type: serde_json::Value,
+    #[serde(
+        rename = "enableAccountingSubledger",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_accounting_subledger: Option<bool>,
+    #[serde(
+        rename = "enableAslDataCloud",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_asl_data_cloud: Option<bool>,
+    #[serde(
+        rename = "enableFinancePeriod",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_finance_period: Option<bool>,
+    #[serde(
+        rename = "enablePaymentMethodAdjust",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_payment_method_adjust: Option<bool>,
+    #[serde(
+        rename = "enableScheduledJob",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_scheduled_job: Option<bool>,
+    #[serde(
+        rename = "enableSkipReversalLogic",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_skip_reversal_logic: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ActionsSettings {
-    #[serde(rename = "enableDefaultQuickActionsOn", default)]
-    pub enable_default_quick_actions_on: bool,
-    #[serde(rename = "enableMdpEnabled", default)]
-    pub enable_mdp_enabled: bool,
-    #[serde(rename = "enableOfflineWebLinks", default)]
-    pub enable_offline_web_links: bool,
-    #[serde(rename = "enableThirdPartyActions", default)]
-    pub enable_third_party_actions: bool,
+    #[serde(
+        rename = "enableDefaultQuickActionsOn",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_default_quick_actions_on: Option<bool>,
+    #[serde(
+        rename = "enableMdpEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_mdp_enabled: Option<bool>,
+    #[serde(
+        rename = "enableOfflineWebLinks",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_offline_web_links: Option<bool>,
+    #[serde(
+        rename = "enableThirdPartyActions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_third_party_actions: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ActivitiesSettings {
-    #[serde(rename = "allowUsersToRelateMultipleContactsToTasksAndEvents", default)]
-    pub allow_users_to_relate_multiple_contacts_to_tasks_and_events: bool,
-    #[serde(rename = "autoRelateEventAttendees", default)]
-    pub auto_relate_event_attendees: bool,
-    #[serde(rename = "enableActivityReminders", default)]
-    pub enable_activity_reminders: bool,
-    #[serde(rename = "enableCalendarHomeLWC", default)]
-    pub enable_calendar_home_lwc: bool,
-    #[serde(rename = "enableClickCreateEvents", default)]
-    pub enable_click_create_events: bool,
-    #[serde(rename = "enableDragAndDropScheduling", default)]
-    pub enable_drag_and_drop_scheduling: bool,
-    #[serde(rename = "enableEmailTracking", default)]
-    pub enable_email_tracking: bool,
-    #[serde(rename = "enableFlowTaskNotifsViaApex", default)]
-    pub enable_flow_task_notifs_via_apex: bool,
-    #[serde(rename = "enableGroupTasks", default)]
-    pub enable_group_tasks: bool,
-    #[serde(rename = "enableHideChildEventsPreference", default)]
-    pub enable_hide_child_events_preference: bool,
-    #[serde(rename = "enableListViewScheduling", default)]
-    pub enable_list_view_scheduling: bool,
-    #[serde(rename = "enableLogNote", default)]
-    pub enable_log_note: bool,
-    #[serde(rename = "enableMLSingleClientProfile", default)]
-    pub enable_ml_single_client_profile: bool,
-    #[serde(rename = "enableMultidayEvents", default)]
-    pub enable_multiday_events: bool,
-    #[serde(rename = "enableRecurringEvents", default)]
-    pub enable_recurring_events: bool,
-    #[serde(rename = "enableRecurringTasks", default)]
-    pub enable_recurring_tasks: bool,
-    #[serde(rename = "enableRollUpActivToContactsAcct", default)]
-    pub enable_roll_up_activ_to_contacts_acct: bool,
-    #[serde(rename = "enableSidebarCalendarShortcut", default)]
-    pub enable_sidebar_calendar_shortcut: bool,
-    #[serde(rename = "enableSimpleTaskCreateUI", default)]
-    pub enable_simple_task_create_ui: bool,
-    #[serde(rename = "enableTimelineCompDateSort", default)]
-    pub enable_timeline_comp_date_sort: bool,
-    #[serde(rename = "enableUNSTaskDelegatedToNotifications", default)]
-    pub enable_uns_task_delegated_to_notifications: bool,
-    #[serde(rename = "enableUserListViewCalendars", default)]
-    pub enable_user_list_view_calendars: bool,
-    #[serde(rename = "meetingRequestsLogo", default)]
-    pub meeting_requests_logo: String,
-    #[serde(rename = "showCustomLogoMeetingRequests", default)]
-    pub show_custom_logo_meeting_requests: bool,
-    #[serde(rename = "showEventDetailsMultiUserCalendar", default)]
-    pub show_event_details_multi_user_calendar: bool,
-    #[serde(rename = "showHomePageHoverLinksForEvents", default)]
-    pub show_home_page_hover_links_for_events: bool,
-    #[serde(rename = "showMyTasksHoverLinks", default)]
-    pub show_my_tasks_hover_links: bool,
+    #[serde(
+        rename = "allowUsersToRelateMultipleContactsToTasksAndEvents",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_users_to_relate_multiple_contacts_to_tasks_and_events: Option<bool>,
+    #[serde(
+        rename = "autoRelateEventAttendees",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub auto_relate_event_attendees: Option<bool>,
+    #[serde(
+        rename = "enableActivityReminders",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_activity_reminders: Option<bool>,
+    #[serde(
+        rename = "enableCalendarHomeLWC",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_calendar_home_lwc: Option<bool>,
+    #[serde(
+        rename = "enableClickCreateEvents",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_click_create_events: Option<bool>,
+    #[serde(
+        rename = "enableDragAndDropScheduling",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_drag_and_drop_scheduling: Option<bool>,
+    #[serde(
+        rename = "enableEmailTracking",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_email_tracking: Option<bool>,
+    #[serde(
+        rename = "enableFlowTaskNotifsViaApex",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_flow_task_notifs_via_apex: Option<bool>,
+    #[serde(
+        rename = "enableGroupTasks",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_group_tasks: Option<bool>,
+    #[serde(
+        rename = "enableHideChildEventsPreference",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_hide_child_events_preference: Option<bool>,
+    #[serde(
+        rename = "enableListViewScheduling",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_list_view_scheduling: Option<bool>,
+    #[serde(
+        rename = "enableLogNote",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_log_note: Option<bool>,
+    #[serde(
+        rename = "enableMLSingleClientProfile",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ml_single_client_profile: Option<bool>,
+    #[serde(
+        rename = "enableMultidayEvents",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_multiday_events: Option<bool>,
+    #[serde(
+        rename = "enableRecurringEvents",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_recurring_events: Option<bool>,
+    #[serde(
+        rename = "enableRecurringTasks",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_recurring_tasks: Option<bool>,
+    #[serde(
+        rename = "enableRollUpActivToContactsAcct",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_roll_up_activ_to_contacts_acct: Option<bool>,
+    #[serde(
+        rename = "enableSidebarCalendarShortcut",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sidebar_calendar_shortcut: Option<bool>,
+    #[serde(
+        rename = "enableSimpleTaskCreateUI",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_simple_task_create_ui: Option<bool>,
+    #[serde(
+        rename = "enableTimelineCompDateSort",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_timeline_comp_date_sort: Option<bool>,
+    #[serde(
+        rename = "enableUNSTaskDelegatedToNotifications",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_uns_task_delegated_to_notifications: Option<bool>,
+    #[serde(
+        rename = "enableUserListViewCalendars",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_user_list_view_calendars: Option<bool>,
+    #[serde(
+        rename = "meetingRequestsLogo",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub meeting_requests_logo: Option<String>,
+    #[serde(
+        rename = "showCustomLogoMeetingRequests",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_custom_logo_meeting_requests: Option<bool>,
+    #[serde(
+        rename = "showEventDetailsMultiUserCalendar",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_event_details_multi_user_calendar: Option<bool>,
+    #[serde(
+        rename = "showHomePageHoverLinksForEvents",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_home_page_hover_links_for_events: Option<bool>,
+    #[serde(
+        rename = "showMyTasksHoverLinks",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_my_tasks_hover_links: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -252,292 +422,824 @@ pub struct AdjustmentsSettings {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct AgentPlatformSettings {
-    #[serde(rename = "enableAgentPlatform", default)]
-    pub enable_agent_platform: bool,
+    #[serde(
+        rename = "enableAgentPlatform",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_agent_platform: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AgentforceAccountManagementSettings {
+    #[serde(
+        rename = "enableAccountManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_account_management: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct AgentforceForDevelopersSettings {
-    #[serde(rename = "agentforceForDevelopersOptOut", default)]
-    pub agentforce_for_developers_opt_out: bool,
+    #[serde(
+        rename = "agentforceForDevelopersOptOut",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub agentforce_for_developers_opt_out: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct Ai4mSettings {
-    #[serde(rename = "enableEinsteinMCDesiger", default)]
-    pub enable_einstein_mc_desiger: bool,
-    #[serde(rename = "enableStoEmailPooledModel", default)]
-    pub enable_sto_email_pooled_model: bool,
-    #[serde(rename = "enableUmaEef", default)]
-    pub enable_uma_eef: bool,
-    #[serde(rename = "enableUmaEefWhatsappSetting", default)]
-    pub enable_uma_eef_whatsapp_setting: bool,
-    #[serde(rename = "enableUmaEes", default)]
-    pub enable_uma_ees: bool,
-    #[serde(rename = "enableUmaEesSmsSetting", default)]
-    pub enable_uma_ees_sms_setting: bool,
-    #[serde(rename = "enableUmaEesWhatsappSetting", default)]
-    pub enable_uma_ees_whatsapp_setting: bool,
-    #[serde(rename = "enableUmaGlobalModel", default)]
-    pub enable_uma_global_model: bool,
-    #[serde(rename = "enableUmaSto", default)]
-    pub enable_uma_sto: bool,
+    #[serde(
+        rename = "enableEinsteinMCDesiger",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_mc_desiger: Option<bool>,
+    #[serde(
+        rename = "enableStoEmailPooledModel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sto_email_pooled_model: Option<bool>,
+    #[serde(
+        rename = "enableUmaEef",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_uma_eef: Option<bool>,
+    #[serde(
+        rename = "enableUmaEefWhatsappSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_uma_eef_whatsapp_setting: Option<bool>,
+    #[serde(
+        rename = "enableUmaEes",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_uma_ees: Option<bool>,
+    #[serde(
+        rename = "enableUmaEesSmsSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_uma_ees_sms_setting: Option<bool>,
+    #[serde(
+        rename = "enableUmaEesWhatsappSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_uma_ees_whatsapp_setting: Option<bool>,
+    #[serde(
+        rename = "enableUmaEmg",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_uma_emg: Option<bool>,
+    #[serde(
+        rename = "enableUmaGlobalModel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_uma_global_model: Option<bool>,
+    #[serde(
+        rename = "enableUmaSto",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_uma_sto: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct AnalyticsSettings {
-    #[serde(rename = "alwaysGenPreviews", default)]
-    pub always_gen_previews: bool,
-    #[serde(rename = "analyticsAdoptionMetadata", default)]
-    pub analytics_adoption_metadata: bool,
-    #[serde(rename = "autoInstallApps", default)]
-    pub auto_install_apps: bool,
-    #[serde(rename = "bundleCachingOptOut", default)]
-    pub bundle_caching_opt_out: bool,
-    #[serde(rename = "canAccessAnalyticsViaAPI", default)]
-    pub can_access_analytics_via_api: bool,
-    #[serde(rename = "canAnnotateDashboards", default)]
-    pub can_annotate_dashboards: bool,
-    #[serde(rename = "canEnableSavedView", default)]
-    pub can_enable_saved_view: bool,
-    #[serde(rename = "canExploreDataConversationally", default)]
-    pub can_explore_data_conversationally: bool,
-    #[serde(rename = "canShareAppsWithCommunities", default)]
-    pub can_share_apps_with_communities: bool,
-    #[serde(rename = "canViewThumbnailAssets", default)]
-    pub can_view_thumbnail_assets: bool,
-    #[serde(rename = "cdpQueryCachingOptIn", default)]
-    pub cdp_query_caching_opt_in: bool,
-    #[serde(rename = "concurrencyLimitSharing", default)]
-    pub concurrency_limit_sharing: bool,
-    #[serde(rename = "disableIncrementalDatasetCreation", default)]
-    pub disable_incremental_dataset_creation: bool,
-    #[serde(rename = "enableAmazonRedshiftOutputConnector", default)]
-    pub enable_amazon_redshift_output_connector: bool,
-    #[serde(rename = "enableAnalyticsEncryption", default)]
-    pub enable_analytics_encryption: bool,
-    #[serde(rename = "enableAnalyticsSharingEnable", default)]
-    pub enable_analytics_sharing_enable: bool,
-    #[serde(rename = "enableAutoCompleteCombo", default)]
-    pub enable_auto_complete_combo: bool,
-    #[serde(rename = "enableAutonomousExperience", default)]
-    pub enable_autonomous_experience: bool,
-    #[serde(rename = "enableAzureDLGen2OutputConnector", default)]
-    pub enable_azure_dl_gen_2_output_connector: bool,
-    #[serde(rename = "enableC360GlobalProfileData", default)]
-    pub enable_c_360_global_profile_data: bool,
-    #[serde(rename = "enableCreateLegacyDataflows", default)]
-    pub enable_create_legacy_dataflows: bool,
-    #[serde(rename = "enableCrmaDataCloudIntegration", default)]
-    pub enable_crma_data_cloud_integration: bool,
-    #[serde(rename = "enableCrtSetupLightningUiPref", default)]
-    pub enable_crt_setup_lightning_ui_pref: bool,
-    #[serde(rename = "enableDashboardComponentSnapshot", default)]
-    pub enable_dashboard_component_snapshot: bool,
-    #[serde(rename = "enableDashboardFlexiTable", default)]
-    pub enable_dashboard_flexi_table: bool,
-    #[serde(rename = "enableDashboardSubOrgEmailPref", default)]
-    pub enable_dashboard_sub_org_email_pref: bool,
-    #[serde(rename = "enableDashboardToPDFEnable", default)]
-    pub enable_dashboard_to_pdf_enable: bool,
-    #[serde(rename = "enableDataCloudReportingPref", default)]
-    pub enable_data_cloud_reporting_pref: bool,
-    #[serde(rename = "enableEmailReportsToPortalUsers", default)]
-    pub enable_email_reports_to_portal_users: bool,
-    #[serde(rename = "enableFirebirdEditor", default)]
-    pub enable_firebird_editor: bool,
-    #[serde(rename = "enableFloatingReportHeaders", default)]
-    pub enable_floating_report_headers: bool,
-    #[serde(rename = "enableIncludeDisclaimerMessage", default)]
-    pub enable_include_disclaimer_message: bool,
-    #[serde(rename = "enableIncrementalUpsert", default)]
-    pub enable_incremental_upsert: bool,
-    #[serde(rename = "enableInsights", default)]
-    pub enable_insights: bool,
-    #[serde(rename = "enableInsightsHCMode", default)]
-    pub enable_insights_hc_mode: bool,
-    #[serde(rename = "enableLightningReportBuilder", default)]
-    pub enable_lightning_report_builder: bool,
-    #[serde(rename = "enableLotusNotesImages", default)]
-    pub enable_lotus_notes_images: bool,
-    #[serde(rename = "enableMassEnableReportBuilder", default)]
-    pub enable_mass_enable_report_builder: bool,
-    #[serde(rename = "enableNewChartsEngine", default)]
-    pub enable_new_charts_engine: bool,
-    #[serde(rename = "enableNullDimension", default)]
-    pub enable_null_dimension: bool,
-    #[serde(rename = "enableOrgCanSeeLivePreviews", default)]
-    pub enable_org_can_see_live_previews: bool,
-    #[serde(rename = "enableOrgCanViewTableau", default)]
-    pub enable_org_can_view_tableau: bool,
-    #[serde(rename = "enableOrgCanViewThumbnailForOA", default)]
-    pub enable_org_can_view_thumbnail_for_oa: bool,
-    #[serde(rename = "enableOrgHasMobileOfflineEnabled", default)]
-    pub enable_org_has_mobile_offline_enabled: bool,
-    #[serde(rename = "enableOrgHasWatchlistEnabled", default)]
-    pub enable_org_has_watchlist_enabled: bool,
-    #[serde(rename = "enableOrgWideEmailNotification", default)]
-    pub enable_org_wide_email_notification: bool,
-    #[serde(rename = "enablePupparazziForNotifications", default)]
-    pub enable_pupparazzi_for_notifications: bool,
-    #[serde(rename = "enableQueryLiveConnectors", default)]
-    pub enable_query_live_connectors: bool,
-    #[serde(rename = "enableRemoveFooterForRepDisplay", default)]
-    pub enable_remove_footer_for_rep_display: bool,
-    #[serde(rename = "enableRemoveFooterFromRepExp", default)]
-    pub enable_remove_footer_from_rep_exp: bool,
-    #[serde(rename = "enableReportCdnPref", default)]
-    pub enable_report_cdn_pref: bool,
-    #[serde(rename = "enableReportEscapeCharsPref", default)]
-    pub enable_report_escape_chars_pref: bool,
-    #[serde(rename = "enableReportHideXlsExportPref", default)]
-    pub enable_report_hide_xls_export_pref: bool,
-    #[serde(rename = "enableReportInlineEditPref", default)]
-    pub enable_report_inline_edit_pref: bool,
-    #[serde(rename = "enableReportNotificationsEnable", default)]
-    pub enable_report_notifications_enable: bool,
-    #[serde(rename = "enableReportSubOrgEmailPref", default)]
-    pub enable_report_sub_org_email_pref: bool,
-    #[serde(rename = "enableReportingOnSDMPref", default)]
-    pub enable_reporting_on_sdm_pref: bool,
-    #[serde(rename = "enableRequestPrioritySchdl", default)]
-    pub enable_request_priority_schdl: bool,
-    #[serde(rename = "enableS1AnalyticsEclairEnable", default)]
-    pub enable_s_1_analytics_eclair_enable: bool,
-    #[serde(rename = "enableS3OutputConnector", default)]
-    pub enable_s_3_output_connector: bool,
-    #[serde(rename = "enableSFXJoinedReportsEnable", default)]
-    pub enable_sfx_joined_reports_enable: bool,
-    #[serde(rename = "enableSalesforceOutputConnector", default)]
-    pub enable_salesforce_output_connector: bool,
-    #[serde(rename = "enableSecureImageSharing", default)]
-    pub enable_secure_image_sharing: bool,
-    #[serde(rename = "enableShowHighContrastChart", default)]
-    pub enable_show_high_contrast_chart: bool,
-    #[serde(rename = "enableSnowflakeOutputConnector", default)]
-    pub enable_snowflake_output_connector: bool,
-    #[serde(rename = "enableSummaryFilterOrgPref", default)]
-    pub enable_summary_filter_org_pref: bool,
-    #[serde(rename = "enableTableauHyperOutputConnector", default)]
-    pub enable_tableau_hyper_output_connector: bool,
-    #[serde(rename = "enableUseOldChartsLookAndFeel", default)]
-    pub enable_use_old_charts_look_and_feel: bool,
-    #[serde(rename = "enableUseReportTableSettingPref", default)]
-    pub enable_use_report_table_setting_pref: bool,
-    #[serde(rename = "enableWaveAssetsNewDateVersion", default)]
-    pub enable_wave_assets_new_date_version: bool,
-    #[serde(rename = "enableWaveCustomFiscal", default)]
-    pub enable_wave_custom_fiscal: bool,
-    #[serde(rename = "enableWaveIndexMVDim", default)]
-    pub enable_wave_index_mv_dim: bool,
-    #[serde(rename = "enableWaveIndexMVDimV2", default)]
-    pub enable_wave_index_mv_dim_v_2: bool,
-    #[serde(rename = "enableWaveMultiCurrency", default)]
-    pub enable_wave_multi_currency: bool,
-    #[serde(rename = "enableWaveRecordNavigation", default)]
-    pub enable_wave_record_navigation: bool,
-    #[serde(rename = "enableWaveReplication", default)]
-    pub enable_wave_replication: bool,
-    #[serde(rename = "enableWaveSharingInheritance", default)]
-    pub enable_wave_sharing_inheritance: bool,
-    #[serde(rename = "enableWaveSqlCFIndexing", default)]
-    pub enable_wave_sql_cf_indexing: bool,
-    #[serde(rename = "enableWaveTrendedDatasetCleanup", default)]
-    pub enable_wave_trended_dataset_cleanup: bool,
-    #[serde(rename = "enableWriteToDataCloud", default)]
-    pub enable_write_to_data_cloud: bool,
-    #[serde(rename = "etlOrchestrationPref", default)]
-    pub etl_orchestration_pref: bool,
-    #[serde(rename = "incrementalUpsertEnabled", default)]
-    pub incremental_upsert_enabled: bool,
-    #[serde(rename = "isDiscoveryOptimizationEnabled", default)]
-    pub is_discovery_optimization_enabled: bool,
-    #[serde(rename = "isHighVolumePushbackEnabled", default)]
-    pub is_high_volume_pushback_enabled: bool,
-    #[serde(rename = "maxHoursAppInProgress", default)]
-    pub max_hours_app_in_progress: f64,
-    #[serde(rename = "queryCachingOptOut", default)]
-    pub query_caching_opt_out: bool,
-    #[serde(rename = "recipeDirectDataPref", default)]
-    pub recipe_direct_data_pref: bool,
-    #[serde(rename = "recipeFiscalPref", default)]
-    pub recipe_fiscal_pref: bool,
-    #[serde(rename = "recipePreCachingOptOut", default)]
-    pub recipe_pre_caching_opt_out: bool,
-    #[serde(rename = "recipeStagedDataPref", default)]
-    pub recipe_staged_data_pref: bool,
-    #[serde(rename = "replaceBlankMeasuresWithNulls", default)]
-    pub replace_blank_measures_with_nulls: bool,
-    #[serde(rename = "setWaveIsYearEndFiscalYear", default)]
-    pub set_wave_is_year_end_fiscal_year: bool,
-    #[serde(rename = "sonicEnabled", default)]
-    pub sonic_enabled: bool,
-    #[serde(rename = "turnOnTimeZones", default)]
-    pub turn_on_time_zones: bool,
+    #[serde(
+        rename = "alwaysGenPreviews",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub always_gen_previews: Option<bool>,
+    #[serde(
+        rename = "analyticsAdoptionMetadata",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub analytics_adoption_metadata: Option<bool>,
+    #[serde(
+        rename = "autoInstallApps",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub auto_install_apps: Option<bool>,
+    #[serde(
+        rename = "bundleCachingOptOut",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub bundle_caching_opt_out: Option<bool>,
+    #[serde(
+        rename = "canAccessAnalyticsViaAPI",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_access_analytics_via_api: Option<bool>,
+    #[serde(
+        rename = "canAnnotateDashboards",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_annotate_dashboards: Option<bool>,
+    #[serde(
+        rename = "canEnableSavedView",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_enable_saved_view: Option<bool>,
+    #[serde(
+        rename = "canExploreDataConversationally",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_explore_data_conversationally: Option<bool>,
+    #[serde(
+        rename = "canShareAppsWithCommunities",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_share_apps_with_communities: Option<bool>,
+    #[serde(
+        rename = "canViewThumbnailAssets",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_view_thumbnail_assets: Option<bool>,
+    #[serde(
+        rename = "cdpQueryCachingOptIn",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub cdp_query_caching_opt_in: Option<bool>,
+    #[serde(
+        rename = "concurrencyLimitSharing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub concurrency_limit_sharing: Option<bool>,
+    #[serde(
+        rename = "disableIncrementalDatasetCreation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub disable_incremental_dataset_creation: Option<bool>,
+    #[serde(
+        rename = "enableAmazonRedshiftOutputConnector",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_amazon_redshift_output_connector: Option<bool>,
+    #[serde(
+        rename = "enableAnalyticsEncryption",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_analytics_encryption: Option<bool>,
+    #[serde(
+        rename = "enableAnalyticsSharingEnable",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_analytics_sharing_enable: Option<bool>,
+    #[serde(
+        rename = "enableAutoCompleteCombo",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_auto_complete_combo: Option<bool>,
+    #[serde(
+        rename = "enableAutonomousExperience",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_autonomous_experience: Option<bool>,
+    #[serde(
+        rename = "enableAzureDLGen2OutputConnector",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_azure_dl_gen_2_output_connector: Option<bool>,
+    #[serde(
+        rename = "enableC360GlobalProfileData",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_c_360_global_profile_data: Option<bool>,
+    #[serde(
+        rename = "enableCreateLegacyDataflows",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_create_legacy_dataflows: Option<bool>,
+    #[serde(
+        rename = "enableCrmaDataCloudIntegration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_crma_data_cloud_integration: Option<bool>,
+    #[serde(
+        rename = "enableCrtSetupLightningUiPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_crt_setup_lightning_ui_pref: Option<bool>,
+    #[serde(
+        rename = "enableDashboardComponentSnapshot",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dashboard_component_snapshot: Option<bool>,
+    #[serde(
+        rename = "enableDashboardFlexiTable",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dashboard_flexi_table: Option<bool>,
+    #[serde(
+        rename = "enableDashboardSubOrgEmailPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dashboard_sub_org_email_pref: Option<bool>,
+    #[serde(
+        rename = "enableDashboardToPDFEnable",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dashboard_to_pdf_enable: Option<bool>,
+    #[serde(
+        rename = "enableDataCloudReportingPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_data_cloud_reporting_pref: Option<bool>,
+    #[serde(
+        rename = "enableEmailReportsToPortalUsers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_email_reports_to_portal_users: Option<bool>,
+    #[serde(
+        rename = "enableFirebirdEditor",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_firebird_editor: Option<bool>,
+    #[serde(
+        rename = "enableFloatingReportHeaders",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_floating_report_headers: Option<bool>,
+    #[serde(
+        rename = "enableIncludeDisclaimerMessage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_include_disclaimer_message: Option<bool>,
+    #[serde(
+        rename = "enableIncrementalUpsert",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_incremental_upsert: Option<bool>,
+    #[serde(
+        rename = "enableInsights",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_insights: Option<bool>,
+    #[serde(
+        rename = "enableInsightsHCMode",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_insights_hc_mode: Option<bool>,
+    #[serde(
+        rename = "enableLightningReportBuilder",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lightning_report_builder: Option<bool>,
+    #[serde(
+        rename = "enableLotusNotesImages",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lotus_notes_images: Option<bool>,
+    #[serde(
+        rename = "enableMassEnableReportBuilder",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_mass_enable_report_builder: Option<bool>,
+    #[serde(
+        rename = "enableNewChartsEngine",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_new_charts_engine: Option<bool>,
+    #[serde(
+        rename = "enableNullDimension",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_null_dimension: Option<bool>,
+    #[serde(
+        rename = "enableOrgCanSeeLivePreviews",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_org_can_see_live_previews: Option<bool>,
+    #[serde(
+        rename = "enableOrgCanViewTableau",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_org_can_view_tableau: Option<bool>,
+    #[serde(
+        rename = "enableOrgCanViewThumbnailForOA",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_org_can_view_thumbnail_for_oa: Option<bool>,
+    #[serde(
+        rename = "enableOrgHasMobileOfflineEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_org_has_mobile_offline_enabled: Option<bool>,
+    #[serde(
+        rename = "enableOrgHasWatchlistEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_org_has_watchlist_enabled: Option<bool>,
+    #[serde(
+        rename = "enableOrgWideEmailNotification",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_org_wide_email_notification: Option<bool>,
+    #[serde(
+        rename = "enablePupparazziForNotifications",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pupparazzi_for_notifications: Option<bool>,
+    #[serde(
+        rename = "enableQueryLiveConnectors",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_query_live_connectors: Option<bool>,
+    #[serde(
+        rename = "enableRemoveFooterForRepDisplay",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_remove_footer_for_rep_display: Option<bool>,
+    #[serde(
+        rename = "enableRemoveFooterFromRepExp",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_remove_footer_from_rep_exp: Option<bool>,
+    #[serde(
+        rename = "enableReportCdnPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_report_cdn_pref: Option<bool>,
+    #[serde(
+        rename = "enableReportCustomTextExportPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_report_custom_text_export_pref: Option<bool>,
+    #[serde(
+        rename = "enableReportEscapeCharsPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_report_escape_chars_pref: Option<bool>,
+    #[serde(
+        rename = "enableReportHideXlsExportPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_report_hide_xls_export_pref: Option<bool>,
+    #[serde(
+        rename = "enableReportInlineEditPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_report_inline_edit_pref: Option<bool>,
+    #[serde(
+        rename = "enableReportInterfacePref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_report_interface_pref: Option<bool>,
+    #[serde(
+        rename = "enableReportNotificationsEnable",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_report_notifications_enable: Option<bool>,
+    #[serde(
+        rename = "enableReportSubOrgEmailPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_report_sub_org_email_pref: Option<bool>,
+    #[serde(
+        rename = "enableReportingOnSDMPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_reporting_on_sdm_pref: Option<bool>,
+    #[serde(
+        rename = "enableRequestPrioritySchdl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_request_priority_schdl: Option<bool>,
+    #[serde(
+        rename = "enableS1AnalyticsEclairEnable",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_s_1_analytics_eclair_enable: Option<bool>,
+    #[serde(
+        rename = "enableS3OutputConnector",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_s_3_output_connector: Option<bool>,
+    #[serde(
+        rename = "enableSFXJoinedReportsEnable",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sfx_joined_reports_enable: Option<bool>,
+    #[serde(
+        rename = "enableSalesforceOutputConnector",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_salesforce_output_connector: Option<bool>,
+    #[serde(
+        rename = "enableSecureImageSharing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_secure_image_sharing: Option<bool>,
+    #[serde(
+        rename = "enableShowHighContrastChart",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_show_high_contrast_chart: Option<bool>,
+    #[serde(
+        rename = "enableSnowflakeOutputConnector",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_snowflake_output_connector: Option<bool>,
+    #[serde(
+        rename = "enableSummaryFilterOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_summary_filter_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableTableauHyperOutputConnector",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_tableau_hyper_output_connector: Option<bool>,
+    #[serde(
+        rename = "enableUseOldChartsLookAndFeel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_use_old_charts_look_and_feel: Option<bool>,
+    #[serde(
+        rename = "enableWaveAssetsNewDateVersion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_wave_assets_new_date_version: Option<bool>,
+    #[serde(
+        rename = "enableWaveCustomFiscal",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_wave_custom_fiscal: Option<bool>,
+    #[serde(
+        rename = "enableWaveIndexMVDim",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_wave_index_mv_dim: Option<bool>,
+    #[serde(
+        rename = "enableWaveIndexMVDimV2",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_wave_index_mv_dim_v_2: Option<bool>,
+    #[serde(
+        rename = "enableWaveMultiCurrency",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_wave_multi_currency: Option<bool>,
+    #[serde(
+        rename = "enableWaveRecordNavigation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_wave_record_navigation: Option<bool>,
+    #[serde(
+        rename = "enableWaveReplication",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_wave_replication: Option<bool>,
+    #[serde(
+        rename = "enableWaveSharingInheritance",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_wave_sharing_inheritance: Option<bool>,
+    #[serde(
+        rename = "enableWaveSqlCFIndexing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_wave_sql_cf_indexing: Option<bool>,
+    #[serde(
+        rename = "enableWaveTrendedDatasetCleanup",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_wave_trended_dataset_cleanup: Option<bool>,
+    #[serde(
+        rename = "enableWriteToDataCloud",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_write_to_data_cloud: Option<bool>,
+    #[serde(
+        rename = "etlOrchestrationPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub etl_orchestration_pref: Option<bool>,
+    #[serde(
+        rename = "incrementalUpsertEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub incremental_upsert_enabled: Option<bool>,
+    #[serde(
+        rename = "isDiscoveryOptimizationEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_discovery_optimization_enabled: Option<bool>,
+    #[serde(
+        rename = "isHighVolumePushbackEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_high_volume_pushback_enabled: Option<bool>,
+    #[serde(
+        rename = "maxHoursAppInProgress",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub max_hours_app_in_progress: Option<f64>,
+    #[serde(
+        rename = "queryCachingOptOut",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub query_caching_opt_out: Option<bool>,
+    #[serde(
+        rename = "recipeDirectDataPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recipe_direct_data_pref: Option<bool>,
+    #[serde(
+        rename = "recipeFiscalPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recipe_fiscal_pref: Option<bool>,
+    #[serde(
+        rename = "recipePreCachingOptOut",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recipe_pre_caching_opt_out: Option<bool>,
+    #[serde(
+        rename = "recipeStagedDataPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recipe_staged_data_pref: Option<bool>,
+    #[serde(
+        rename = "replaceBlankMeasuresWithNulls",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub replace_blank_measures_with_nulls: Option<bool>,
+    #[serde(
+        rename = "setWaveIsYearEndFiscalYear",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub set_wave_is_year_end_fiscal_year: Option<bool>,
+    #[serde(
+        rename = "sonicEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sonic_enabled: Option<bool>,
+    #[serde(
+        rename = "turnOnTimeZones",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub turn_on_time_zones: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ApexLimitSettings {
+    #[serde(rename = "apexLimit", default)]
+    pub apex_limit: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ApexSettings {
-    #[serde(rename = "defaultQueueableDelay", default)]
-    pub default_queueable_delay: f64,
-    #[serde(rename = "enableAggregateCodeCoverageOnly", default)]
-    pub enable_aggregate_code_coverage_only: bool,
-    #[serde(rename = "enableApexAccessRightsPref", default)]
-    pub enable_apex_access_rights_pref: bool,
-    #[serde(rename = "enableApexApprovalLockUnlock", default)]
-    pub enable_apex_approval_lock_unlock: bool,
-    #[serde(rename = "enableApexCtrlImplicitWithSharingPref", default)]
-    pub enable_apex_ctrl_implicit_with_sharing_pref: bool,
-    #[serde(rename = "enableApexPropertyGetterPref", default)]
-    pub enable_apex_property_getter_pref: bool,
-    #[serde(rename = "enableAuraApexCtrlAuthUserAccessCheckPref", default)]
-    pub enable_aura_apex_ctrl_auth_user_access_check_pref: bool,
-    #[serde(rename = "enableAuraApexCtrlGuestUserAccessCheckPref", default)]
-    pub enable_aura_apex_ctrl_guest_user_access_check_pref: bool,
-    #[serde(rename = "enableCompileOnDeploy", default)]
-    pub enable_compile_on_deploy: bool,
-    #[serde(rename = "enableDebugLogsDuringDeployment", default)]
-    pub enable_debug_logs_during_deployment: bool,
-    #[serde(rename = "enableDisableParallelApexTesting", default)]
-    pub enable_disable_parallel_apex_testing: bool,
-    #[serde(rename = "enableGaplessTestAutoNum", default)]
-    pub enable_gapless_test_auto_num: bool,
-    #[serde(rename = "enableMngdCtrlActionAccessPref", default)]
-    pub enable_mngd_ctrl_action_access_pref: bool,
-    #[serde(rename = "enableNonCertifiedApexMdCrud", default)]
-    pub enable_non_certified_apex_md_crud: bool,
-    #[serde(rename = "enableRestrictCommunityExecAnon", default)]
-    pub enable_restrict_community_exec_anon: bool,
-    #[serde(rename = "enableSecureNoArgConstructorPref", default)]
-    pub enable_secure_no_arg_constructor_pref: bool,
-    #[serde(rename = "enableTestSetupSkipTestResults", default)]
-    pub enable_test_setup_skip_test_results: bool,
+    #[serde(
+        rename = "defaultQueueableDelay",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_queueable_delay: Option<f64>,
+    #[serde(
+        rename = "enableAggregateCodeCoverageOnly",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_aggregate_code_coverage_only: Option<bool>,
+    #[serde(
+        rename = "enableApexAccessRightsPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_apex_access_rights_pref: Option<bool>,
+    #[serde(
+        rename = "enableApexApprovalLockUnlock",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_apex_approval_lock_unlock: Option<bool>,
+    #[serde(
+        rename = "enableApexCtrlImplicitWithSharingPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_apex_ctrl_implicit_with_sharing_pref: Option<bool>,
+    #[serde(
+        rename = "enableApexPropertyGetterPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_apex_property_getter_pref: Option<bool>,
+    #[serde(
+        rename = "enableAuraApexCtrlAuthUserAccessCheckPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_aura_apex_ctrl_auth_user_access_check_pref: Option<bool>,
+    #[serde(
+        rename = "enableAuraApexCtrlGuestUserAccessCheckPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_aura_apex_ctrl_guest_user_access_check_pref: Option<bool>,
+    #[serde(
+        rename = "enableCompileOnDeploy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_compile_on_deploy: Option<bool>,
+    #[serde(
+        rename = "enableDebugLogsDuringDeployment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_debug_logs_during_deployment: Option<bool>,
+    #[serde(
+        rename = "enableDisableParallelApexTesting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_disable_parallel_apex_testing: Option<bool>,
+    #[serde(
+        rename = "enableGaplessTestAutoNum",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_gapless_test_auto_num: Option<bool>,
+    #[serde(
+        rename = "enableMngdCtrlActionAccessPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_mngd_ctrl_action_access_pref: Option<bool>,
+    #[serde(
+        rename = "enableNonCertifiedApexMdCrud",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_non_certified_apex_md_crud: Option<bool>,
+    #[serde(
+        rename = "enableRestrictCommunityExecAnon",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_restrict_community_exec_anon: Option<bool>,
+    #[serde(
+        rename = "enableSecureNoArgConstructorPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_secure_no_arg_constructor_pref: Option<bool>,
+    #[serde(
+        rename = "enableTestSetupSkipTestResults",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_test_setup_skip_test_results: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct AppAnalyticsSettings {
-    #[serde(rename = "enableAppAnalyticsOptOut", default)]
-    pub enable_app_analytics_opt_out: bool,
-    #[serde(rename = "enableSimulationMode", default)]
-    pub enable_simulation_mode: bool,
+    #[serde(
+        rename = "enableAppAnalyticsOptOut",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_app_analytics_opt_out: Option<bool>,
+    #[serde(
+        rename = "enableSimulationMode",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_simulation_mode: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct AppExperienceSettings {
-    #[serde(rename = "doesHideAllAppsInAppLauncher", default)]
-    pub does_hide_all_apps_in_app_launcher: bool,
+    #[serde(
+        rename = "doesHideAllAppsInAppLauncher",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_hide_all_apps_in_app_launcher: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -546,118 +1248,388 @@ pub struct AppExperienceSettings {
 pub struct AppSettings {
     #[serde(rename = "connectedAppName", default)]
     pub connected_app_name: String,
-    #[serde(default)]
-    pub enabled: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub enabled: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AppointmentBookingSettings {
+    #[serde(
+        rename = "autoTerritoryPicker",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub auto_territory_picker: Option<bool>,
+    #[serde(rename = "customCSS", default, skip_serializing_if = "Option::is_none")]
+    pub custom_css: Option<String>,
+    #[serde(
+        rename = "defaultOperatingHours",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_operating_hours: Option<String>,
+    #[serde(
+        rename = "idealThreshold",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub ideal_threshold: Option<f64>,
+    #[serde(
+        rename = "lazyLoadBookingInHours",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub lazy_load_booking_in_hours: Option<f64>,
+    #[serde(
+        rename = "minimumGrade",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub minimum_grade: Option<f64>,
+    #[serde(
+        rename = "recommendedThreshold",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recommended_threshold: Option<f64>,
+    #[serde(
+        rename = "schedulingPolicyId",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub scheduling_policy_id: Option<String>,
+    #[serde(
+        rename = "showGoldenSlots",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_golden_slots: Option<bool>,
+    #[serde(
+        rename = "showGradeExplanation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_grade_explanation: Option<bool>,
+    #[serde(
+        rename = "showMoreOptions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_more_options: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct AssociationEngineSettings {
-    #[serde(rename = "enableAssociationEngine", default)]
-    pub enable_association_engine: bool,
+    #[serde(
+        rename = "enableAssociationEngine",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_association_engine: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct AutomatedContactsSettings {
-    #[serde(rename = "enableAddContactAutomatically", default)]
-    pub enable_add_contact_automatically: bool,
-    #[serde(rename = "enableAddContactRoleAutomatically", default)]
-    pub enable_add_contact_role_automatically: bool,
-    #[serde(rename = "enableAddContactRoleWithSuggestion", default)]
-    pub enable_add_contact_role_with_suggestion: bool,
-    #[serde(rename = "enableAddContactWithSuggestion", default)]
-    pub enable_add_contact_with_suggestion: bool,
+    #[serde(
+        rename = "enableAddContactAutomatically",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_add_contact_automatically: Option<bool>,
+    #[serde(
+        rename = "enableAddContactRoleAutomatically",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_add_contact_role_automatically: Option<bool>,
+    #[serde(
+        rename = "enableAddContactRoleWithSuggestion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_add_contact_role_with_suggestion: Option<bool>,
+    #[serde(
+        rename = "enableAddContactWithSuggestion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_add_contact_with_suggestion: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AutomatorConfigSettings {
+    #[serde(rename = "automatorConfig", default)]
+    pub automator_config: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct BillingSettings {
-    #[serde(rename = "acctRecGlAccount", default)]
-    pub acct_rec_gl_account: String,
-    #[serde(rename = "billingContextDefinition", default)]
-    pub billing_context_definition: String,
-    #[serde(rename = "billingContextSourceMapping", default)]
-    pub billing_context_source_mapping: String,
-    #[serde(rename = "billingIntraCtxtSrcMapping", default)]
-    pub billing_intra_ctxt_src_mapping: String,
-    #[serde(rename = "defaultAPClosureDPEDefnName", default)]
-    pub default_ap_closure_dpe_defn_name: String,
-    #[serde(rename = "defaultApplyCreditMemoFlow", default)]
-    pub default_apply_credit_memo_flow: String,
-    #[serde(rename = "defaultBillingTreatment", default)]
-    pub default_billing_treatment: String,
-    #[serde(rename = "defaultEmailTemplate", default)]
-    pub default_email_template: String,
-    #[serde(rename = "defaultInvPreviewTemplate", default)]
-    pub default_inv_preview_template: String,
-    #[serde(rename = "defaultInvoiceDocTemplate", default)]
-    pub default_invoice_doc_template: String,
-    #[serde(rename = "defaultLegalEntity", default)]
-    pub default_legal_entity: String,
-    #[serde(rename = "defaultTaxTreatment", default)]
-    pub default_tax_treatment: String,
-    #[serde(rename = "enableBillingSetup", default)]
-    pub enable_billing_setup: bool,
-    #[serde(rename = "enableCrMemoApplicationToPostedInvoices", default)]
-    pub enable_cr_memo_application_to_posted_invoices: bool,
-    #[serde(rename = "enableForeignExchangeTrxnJrnlCreation", default)]
-    pub enable_foreign_exchange_trxn_jrnl_creation: bool,
-    #[serde(rename = "enableInvoiceEmailDelivery", default)]
-    pub enable_invoice_email_delivery: bool,
-    #[serde(rename = "enableInvoicePdfGeneration", default)]
-    pub enable_invoice_pdf_generation: bool,
-    #[serde(rename = "enableInvoiceSequenceService", default)]
-    pub enable_invoice_sequence_service: bool,
-    #[serde(rename = "enableNegInvoiceLnConversionToCrMemoLn", default)]
-    pub enable_neg_invoice_ln_conversion_to_cr_memo_ln: bool,
-    #[serde(rename = "enablePaymentSchedulesAndItemsCreation", default)]
-    pub enable_payment_schedules_and_items_creation: bool,
-    #[serde(rename = "enableTransactionJournalCreation", default)]
-    pub enable_transaction_journal_creation: bool,
-    #[serde(rename = "enableTransactionsApplicationToInvoices", default)]
-    pub enable_transactions_application_to_invoices: bool,
-    #[serde(rename = "enableTrxnAmountsStorageInCorpCurrency", default)]
-    pub enable_trxn_amounts_storage_in_corp_currency: bool,
-    #[serde(rename = "realisedGainGlAccount", default)]
-    pub realised_gain_gl_account: String,
-    #[serde(rename = "realisedLossGlAccount", default)]
-    pub realised_loss_gl_account: String,
-    #[serde(rename = "sendTo", default)]
-    pub send_to: String,
-    #[serde(rename = "unrealisedGainGlAccount", default)]
-    pub unrealised_gain_gl_account: String,
-    #[serde(rename = "unrealisedLossGlAccount", default)]
-    pub unrealised_loss_gl_account: String,
+    #[serde(
+        rename = "acctRecGlAccount",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub acct_rec_gl_account: Option<String>,
+    #[serde(
+        rename = "billingContextDefinition",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub billing_context_definition: Option<String>,
+    #[serde(
+        rename = "billingContextSourceMapping",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub billing_context_source_mapping: Option<String>,
+    #[serde(
+        rename = "billingIntraCtxtSrcMapping",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub billing_intra_ctxt_src_mapping: Option<String>,
+    #[serde(
+        rename = "defaultAPClosureDPEDefnName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_ap_closure_dpe_defn_name: Option<String>,
+    #[serde(
+        rename = "defaultApplyCreditMemoFlow",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_apply_credit_memo_flow: Option<String>,
+    #[serde(
+        rename = "defaultBillingTreatment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_billing_treatment: Option<String>,
+    #[serde(
+        rename = "defaultEmailTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_email_template: Option<String>,
+    #[serde(
+        rename = "defaultFxGLDPEDefnName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_fx_gldpe_defn_name: Option<String>,
+    #[serde(
+        rename = "defaultInvPreviewTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_inv_preview_template: Option<String>,
+    #[serde(
+        rename = "defaultInvoiceDocTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_invoice_doc_template: Option<String>,
+    #[serde(
+        rename = "defaultLeapReopDPEDefnName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_leap_reop_dpe_defn_name: Option<String>,
+    #[serde(
+        rename = "defaultLeapSumDPEDefnName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_leap_sum_dpe_defn_name: Option<String>,
+    #[serde(
+        rename = "defaultLegalEntity",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_legal_entity: Option<String>,
+    #[serde(
+        rename = "defaultTaxTreatment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_tax_treatment: Option<String>,
+    #[serde(
+        rename = "enableBillingDisputeManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_billing_dispute_management: Option<bool>,
+    #[serde(
+        rename = "enableBillingSetup",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_billing_setup: Option<bool>,
+    #[serde(
+        rename = "enableCrMemoApplicationToPostedInvoices",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cr_memo_application_to_posted_invoices: Option<bool>,
+    #[serde(
+        rename = "enableCreditMemoSequenceService",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_credit_memo_sequence_service: Option<bool>,
+    #[serde(
+        rename = "enableFailedPaymentsRetry",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_failed_payments_retry: Option<bool>,
+    #[serde(
+        rename = "enableForeignExchangeTrxnJrnlCreation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_foreign_exchange_trxn_jrnl_creation: Option<bool>,
+    #[serde(
+        rename = "enableInvoiceEmailDelivery",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_invoice_email_delivery: Option<bool>,
+    #[serde(
+        rename = "enableInvoicePdfGeneration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_invoice_pdf_generation: Option<bool>,
+    #[serde(
+        rename = "enableInvoiceSequenceService",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_invoice_sequence_service: Option<bool>,
+    #[serde(
+        rename = "enableNegInvoiceLnConversionToCrMemoLn",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_neg_invoice_ln_conversion_to_cr_memo_ln: Option<bool>,
+    #[serde(
+        rename = "enablePaymentSchedulesAndItemsCreation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_payment_schedules_and_items_creation: Option<bool>,
+    #[serde(
+        rename = "enableTransactionJournalCreation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_transaction_journal_creation: Option<bool>,
+    #[serde(
+        rename = "enableTransactionsApplicationToInvoices",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_transactions_application_to_invoices: Option<bool>,
+    #[serde(
+        rename = "enableTrxnAmountsStorageInCorpCurrency",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_trxn_amounts_storage_in_corp_currency: Option<bool>,
+    #[serde(
+        rename = "realisedGainGlAccount",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub realised_gain_gl_account: Option<String>,
+    #[serde(
+        rename = "realisedLossGlAccount",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub realised_loss_gl_account: Option<String>,
+    #[serde(
+        rename = "ruleBasedCrAndPymtAppln",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub rule_based_cr_and_pymt_appln: Option<String>,
+    #[serde(rename = "sendTo", default, skip_serializing_if = "Option::is_none")]
+    pub send_to: Option<String>,
+    #[serde(
+        rename = "unrealisedGainGlAccount",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub unrealised_gain_gl_account: Option<String>,
+    #[serde(
+        rename = "unrealisedLossGlAccount",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub unrealised_loss_gl_account: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct BlockchainSettings {
-    #[serde(rename = "enableBcp", default)]
-    pub enable_bcp: bool,
-    #[serde(rename = "enableEtpNft", default)]
-    pub enable_etp_nft: bool,
+    #[serde(rename = "enableBcp", default, skip_serializing_if = "Option::is_none")]
+    pub enable_bcp: Option<bool>,
+    #[serde(
+        rename = "enableEtpNft",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_etp_nft: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct BotSettings {
-    #[serde(rename = "enableBots", default)]
-    pub enable_bots: bool,
+    #[serde(
+        rename = "enableBots",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_bots: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct BranchManagementSettings {
-    #[serde(rename = "associateAccountWithBranch", default)]
-    pub associate_account_with_branch: bool,
+    #[serde(
+        rename = "associateAccountWithBranch",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub associate_account_with_branch: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BrandKitSettings {
+    #[serde(
+        rename = "enableBrandCenterSetup",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_brand_center_setup: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -674,412 +1646,1020 @@ pub struct BusinessHoursSettings {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CampaignSettings {
-    #[serde(rename = "aiAttributionTimeframe", default)]
-    pub ai_attribution_timeframe: f64,
-    #[serde(rename = "enableAIAttribution", default)]
-    pub enable_ai_attribution: bool,
-    #[serde(rename = "enableAccountsAsCM", default)]
-    pub enable_accounts_as_cm: bool,
-    #[serde(rename = "enableAutoCampInfluenceDisabled", default)]
-    pub enable_auto_camp_influence_disabled: bool,
-    #[serde(rename = "enableB2bmaCampaignInfluence2", default)]
-    pub enable_b_2_bma_campaign_influence_2: bool,
-    #[serde(rename = "enableCampaignHistoryTrackEnabled", default)]
-    pub enable_campaign_history_track_enabled: bool,
-    #[serde(rename = "enableCampaignInfluence2", default)]
-    pub enable_campaign_influence_2: bool,
-    #[serde(rename = "enableCampaignMemberTWCF", default)]
-    pub enable_campaign_member_twcf: bool,
-    #[serde(rename = "enableEKAI", default)]
-    pub enable_ekai: bool,
-    #[serde(rename = "enableOpportunityInfluence", default)]
-    pub enable_opportunity_influence: bool,
-    #[serde(rename = "enableSuppressNoValueCI2", default)]
-    pub enable_suppress_no_value_ci_2: bool,
+    #[serde(
+        rename = "aiAttributionTimeframe",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub ai_attribution_timeframe: Option<f64>,
+    #[serde(
+        rename = "enableAIAttribution",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ai_attribution: Option<bool>,
+    #[serde(
+        rename = "enableAccountsAsCM",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_accounts_as_cm: Option<bool>,
+    #[serde(
+        rename = "enableAutoCampInfluenceDisabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_auto_camp_influence_disabled: Option<bool>,
+    #[serde(
+        rename = "enableB2bmaCampaignInfluence2",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_b_2_bma_campaign_influence_2: Option<bool>,
+    #[serde(
+        rename = "enableCampaignHistoryTrackEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_campaign_history_track_enabled: Option<bool>,
+    #[serde(
+        rename = "enableCampaignInfluence2",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_campaign_influence_2: Option<bool>,
+    #[serde(
+        rename = "enableCampaignMemberTWCF",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_campaign_member_twcf: Option<bool>,
+    #[serde(
+        rename = "enableEKAI",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ekai: Option<bool>,
+    #[serde(
+        rename = "enableOpportunityInfluence",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_opportunity_influence: Option<bool>,
+    #[serde(
+        rename = "enableSuppressNoValueCI2",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_suppress_no_value_ci_2: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CareBenefitVerifySettings {
-    #[serde(rename = "codeSetType", default)]
-    pub code_set_type: String,
-    #[serde(rename = "defaultNpi", default)]
-    pub default_npi: String,
-    #[serde(rename = "generalPlanServiceTypeCode", default)]
-    pub general_plan_service_type_code: String,
-    #[serde(rename = "isDefault", default)]
-    pub is_default: bool,
+    #[serde(
+        rename = "codeSetType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub code_set_type: Option<String>,
+    #[serde(
+        rename = "defaultNpi",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_npi: Option<String>,
+    #[serde(
+        rename = "generalPlanServiceTypeCode",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub general_plan_service_type_code: Option<String>,
+    #[serde(rename = "isDefault", default, skip_serializing_if = "Option::is_none")]
+    pub is_default: Option<bool>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "organizationName", default)]
-    pub organization_name: String,
-    #[serde(rename = "serviceApexClass", default)]
-    pub service_apex_class: String,
-    #[serde(rename = "serviceNamedCredential", default)]
-    pub service_named_credential: String,
-    #[serde(rename = "serviceTypeSourceSystem", default)]
-    pub service_type_source_system: String,
-    #[serde(rename = "uriPath", default)]
-    pub uri_path: String,
+    #[serde(
+        rename = "organizationName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub organization_name: Option<String>,
+    #[serde(
+        rename = "serviceApexClass",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub service_apex_class: Option<String>,
+    #[serde(
+        rename = "serviceNamedCredential",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub service_named_credential: Option<String>,
+    #[serde(
+        rename = "serviceTypeSourceSystem",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub service_type_source_system: Option<String>,
+    #[serde(rename = "uriPath", default, skip_serializing_if = "Option::is_none")]
+    pub uri_path: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CaseSettings {
-    #[serde(rename = "caseAssignNotificationTemplate", default)]
-    pub case_assign_notification_template: String,
-    #[serde(rename = "caseAutoProcUser", default)]
-    pub case_auto_proc_user: bool,
-    #[serde(rename = "caseCloseNotificationTemplate", default)]
-    pub case_close_notification_template: String,
-    #[serde(rename = "caseCommentNotificationTemplate", default)]
-    pub case_comment_notification_template: String,
-    #[serde(rename = "caseCreateNotificationTemplate", default)]
-    pub case_create_notification_template: String,
+    #[serde(
+        rename = "caseAssignNotificationTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub case_assign_notification_template: Option<String>,
+    #[serde(
+        rename = "caseAutoProcUser",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub case_auto_proc_user: Option<bool>,
+    #[serde(
+        rename = "caseCloseNotificationTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub case_close_notification_template: Option<String>,
+    #[serde(
+        rename = "caseCommentNotificationTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub case_comment_notification_template: Option<String>,
+    #[serde(
+        rename = "caseCreateNotificationTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub case_create_notification_template: Option<String>,
     #[serde(rename = "caseFeedItemSettings", default)]
     pub case_feed_item_settings: Vec<FeedItemSettings>,
-    #[serde(rename = "caseFeedReadUnreadLtng", default)]
-    pub case_feed_read_unread_ltng: bool,
-    #[serde(rename = "caseMergeInLightning", default)]
-    pub case_merge_in_lightning: bool,
-    #[serde(rename = "closeCaseThroughStatusChange", default)]
-    pub close_case_through_status_change: bool,
-    #[serde(rename = "defaultCaseFeedLayoutOn", default)]
-    pub default_case_feed_layout_on: bool,
-    #[serde(rename = "defaultCaseOwner", default)]
-    pub default_case_owner: String,
-    #[serde(rename = "defaultCaseOwnerType", default)]
-    pub default_case_owner_type: String,
-    #[serde(rename = "defaultCaseUser", default)]
-    pub default_case_user: String,
-    #[serde(rename = "emailActionDefaultsHandlerClass", default)]
-    pub email_action_defaults_handler_class: String,
-    #[serde(rename = "emailToCase", default)]
-    pub email_to_case: EmailToCaseSettings,
-    #[serde(rename = "enableCaseFeed", default)]
-    pub enable_case_feed: bool,
-    #[serde(rename = "enableCaseSwarming", default)]
-    pub enable_case_swarming: bool,
-    #[serde(rename = "enableCollapseEmailThread", default)]
-    pub enable_collapse_email_thread: bool,
-    #[serde(rename = "enableDraftEmails", default)]
-    pub enable_draft_emails: bool,
-    #[serde(rename = "enableEarlyEscalationRuleTriggers", default)]
-    pub enable_early_escalation_rule_triggers: bool,
-    #[serde(rename = "enableEmailActionDefaultsHandler", default)]
-    pub enable_email_action_defaults_handler: bool,
-    #[serde(rename = "enableEmailContactOnCasePost", default)]
-    pub enable_email_contact_on_case_post: bool,
-    #[serde(rename = "enableEscalateQfiToCaseInternal", default)]
-    pub enable_escalate_qfi_to_case_internal: bool,
-    #[serde(rename = "enableEscalateQfiToCaseNetworks", default)]
-    pub enable_escalate_qfi_to_case_networks: bool,
-    #[serde(rename = "enableExtNetworksCaseFeedEnabled", default)]
-    pub enable_ext_networks_case_feed_enabled: bool,
-    #[serde(rename = "enableMultiLangSolnSrchCSS", default)]
-    pub enable_multi_lang_soln_srch_css: bool,
-    #[serde(rename = "enableMultiLangSolnSrchPKB", default)]
-    pub enable_multi_lang_soln_srch_pkb: bool,
-    #[serde(rename = "enableMultiLangSolution", default)]
-    pub enable_multi_lang_solution: bool,
-    #[serde(rename = "enableSolutionCategory", default)]
-    pub enable_solution_category: bool,
-    #[serde(rename = "enableSolutionInlineCategory", default)]
-    pub enable_solution_inline_category: bool,
-    #[serde(rename = "enableSolutionShortSummary", default)]
-    pub enable_solution_short_summary: bool,
-    #[serde(rename = "enableSuggestedArticlesApplication", default)]
-    pub enable_suggested_articles_application: bool,
-    #[serde(rename = "enableSuggestedArticlesCustomerPortal", default)]
-    pub enable_suggested_articles_customer_portal: bool,
-    #[serde(rename = "enableSuggestedArticlesPartnerPortal", default)]
-    pub enable_suggested_articles_partner_portal: bool,
-    #[serde(rename = "enableSuggestedSolutions", default)]
-    pub enable_suggested_solutions: bool,
-    #[serde(rename = "escalateCaseBefore", default)]
-    pub escalate_case_before: bool,
-    #[serde(rename = "genericMessageEnabled", default)]
-    pub generic_message_enabled: bool,
-    #[serde(rename = "hidePublicInCaseComment", default)]
-    pub hide_public_in_case_comment: bool,
-    #[serde(rename = "keepCaseMergeRecords", default)]
-    pub keep_case_merge_records: bool,
-    #[serde(rename = "keepRecordTypeOnAssignmentRule", default)]
-    pub keep_record_type_on_assignment_rule: bool,
-    #[serde(rename = "notifyContactOnCaseComment", default)]
-    pub notify_contact_on_case_comment: bool,
-    #[serde(rename = "notifyDefaultCaseOwner", default)]
-    pub notify_default_case_owner: bool,
-    #[serde(rename = "notifyOwnerOnCaseComment", default)]
-    pub notify_owner_on_case_comment: bool,
-    #[serde(rename = "notifyOwnerOnCaseOwnerChange", default)]
-    pub notify_owner_on_case_owner_change: bool,
-    #[serde(rename = "predictiveSupportEnabled", default)]
-    pub predictive_support_enabled: bool,
-    #[serde(rename = "rtaCaseComment", default)]
-    pub rta_case_comment: bool,
-    #[serde(rename = "rtaCaseDescription", default)]
-    pub rta_case_description: bool,
-    #[serde(rename = "showEmailAttachmentsInCaseAttachmentsRL", default)]
-    pub show_email_attachments_in_case_attachments_rl: bool,
-    #[serde(rename = "showFewerCloseActions", default)]
-    pub show_fewer_close_actions: bool,
-    #[serde(rename = "systemUserEmail", default)]
-    pub system_user_email: String,
-    #[serde(rename = "useSystemEmailAddress", default)]
-    pub use_system_email_address: bool,
-    #[serde(rename = "useSystemUserAsDefaultCaseUser", default)]
-    pub use_system_user_as_default_case_user: bool,
-    #[serde(rename = "visibleInCssCheckbox", default)]
-    pub visible_in_css_checkbox: bool,
-    #[serde(rename = "webToCase", default)]
-    pub web_to_case: WebToCaseSettings,
+    #[serde(
+        rename = "caseFeedReadUnreadLtng",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub case_feed_read_unread_ltng: Option<bool>,
+    #[serde(
+        rename = "caseMergeInLightning",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub case_merge_in_lightning: Option<bool>,
+    #[serde(
+        rename = "caseTimelineConfigs",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub case_timeline_configs: Option<bool>,
+    #[serde(
+        rename = "closeCaseThroughStatusChange",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub close_case_through_status_change: Option<bool>,
+    #[serde(
+        rename = "defaultCaseFeedLayoutOn",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_case_feed_layout_on: Option<bool>,
+    #[serde(
+        rename = "defaultCaseOwner",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_case_owner: Option<String>,
+    #[serde(
+        rename = "defaultCaseOwnerType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_case_owner_type: Option<String>,
+    #[serde(
+        rename = "defaultCaseUser",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_case_user: Option<String>,
+    #[serde(
+        rename = "emailActionDefaultsHandlerClass",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub email_action_defaults_handler_class: Option<String>,
+    #[serde(
+        rename = "emailToCase",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub email_to_case: Option<EmailToCaseSettings>,
+    #[serde(
+        rename = "enableCaseCommentTranslation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_case_comment_translation: Option<bool>,
+    #[serde(
+        rename = "enableCaseFeed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_case_feed: Option<bool>,
+    #[serde(
+        rename = "enableCaseSwarming",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_case_swarming: Option<bool>,
+    #[serde(
+        rename = "enableCollapseEmailThread",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_collapse_email_thread: Option<bool>,
+    #[serde(
+        rename = "enableDraftEmails",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_draft_emails: Option<bool>,
+    #[serde(
+        rename = "enableEarlyEscalationRuleTriggers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_early_escalation_rule_triggers: Option<bool>,
+    #[serde(
+        rename = "enableEmailActionDefaultsHandler",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_email_action_defaults_handler: Option<bool>,
+    #[serde(
+        rename = "enableEmailContactOnCasePost",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_email_contact_on_case_post: Option<bool>,
+    #[serde(
+        rename = "enableEscalateQfiToCaseInternal",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_escalate_qfi_to_case_internal: Option<bool>,
+    #[serde(
+        rename = "enableEscalateQfiToCaseNetworks",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_escalate_qfi_to_case_networks: Option<bool>,
+    #[serde(
+        rename = "enableExtNetworksCaseFeedEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ext_networks_case_feed_enabled: Option<bool>,
+    #[serde(
+        rename = "enableMultiLangSolnSrchCSS",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_multi_lang_soln_srch_css: Option<bool>,
+    #[serde(
+        rename = "enableMultiLangSolnSrchPKB",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_multi_lang_soln_srch_pkb: Option<bool>,
+    #[serde(
+        rename = "enableMultiLangSolution",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_multi_lang_solution: Option<bool>,
+    #[serde(
+        rename = "enableSolutionCategory",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_solution_category: Option<bool>,
+    #[serde(
+        rename = "enableSolutionInlineCategory",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_solution_inline_category: Option<bool>,
+    #[serde(
+        rename = "enableSolutionShortSummary",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_solution_short_summary: Option<bool>,
+    #[serde(
+        rename = "enableSuggestedArticlesApplication",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_suggested_articles_application: Option<bool>,
+    #[serde(
+        rename = "enableSuggestedArticlesCustomerPortal",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_suggested_articles_customer_portal: Option<bool>,
+    #[serde(
+        rename = "enableSuggestedArticlesPartnerPortal",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_suggested_articles_partner_portal: Option<bool>,
+    #[serde(
+        rename = "enableSuggestedSolutions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_suggested_solutions: Option<bool>,
+    #[serde(
+        rename = "escalateCaseBefore",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub escalate_case_before: Option<bool>,
+    #[serde(
+        rename = "genericMessageEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub generic_message_enabled: Option<bool>,
+    #[serde(
+        rename = "hidePublicInCaseComment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub hide_public_in_case_comment: Option<bool>,
+    #[serde(
+        rename = "keepCaseMergeRecords",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub keep_case_merge_records: Option<bool>,
+    #[serde(
+        rename = "keepRecordTypeOnAssignmentRule",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub keep_record_type_on_assignment_rule: Option<bool>,
+    #[serde(
+        rename = "notifyContactOnCaseComment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub notify_contact_on_case_comment: Option<bool>,
+    #[serde(
+        rename = "notifyDefaultCaseOwner",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub notify_default_case_owner: Option<bool>,
+    #[serde(
+        rename = "notifyOwnerOnCaseComment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub notify_owner_on_case_comment: Option<bool>,
+    #[serde(
+        rename = "notifyOwnerOnCaseOwnerChange",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub notify_owner_on_case_owner_change: Option<bool>,
+    #[serde(
+        rename = "predictiveSupportEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub predictive_support_enabled: Option<bool>,
+    #[serde(
+        rename = "rtaCaseComment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub rta_case_comment: Option<bool>,
+    #[serde(
+        rename = "rtaCaseDescription",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub rta_case_description: Option<bool>,
+    #[serde(
+        rename = "showEmailAttachmentsInCaseAttachmentsRL",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_email_attachments_in_case_attachments_rl: Option<bool>,
+    #[serde(
+        rename = "showFewerCloseActions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_fewer_close_actions: Option<bool>,
+    #[serde(
+        rename = "systemUserEmail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub system_user_email: Option<String>,
+    #[serde(
+        rename = "useSystemEmailAddress",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub use_system_email_address: Option<bool>,
+    #[serde(
+        rename = "useSystemUserAsDefaultCaseUser",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub use_system_user_as_default_case_user: Option<bool>,
+    #[serde(
+        rename = "visibleInCssCheckbox",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub visible_in_css_checkbox: Option<bool>,
+    #[serde(rename = "webToCase", default, skip_serializing_if = "Option::is_none")]
+    pub web_to_case: Option<WebToCaseSettings>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ChannelRevMgmtSettings {
-    #[serde(rename = "enableDesignRegistration", default)]
-    pub enable_design_registration: bool,
-    #[serde(rename = "enablePriceProtection", default)]
-    pub enable_price_protection: bool,
+    #[serde(
+        rename = "enableDesignRegistration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_design_registration: Option<bool>,
+    #[serde(
+        rename = "enablePriceProtection",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_price_protection: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ChatterAnswersSettings {
-    #[serde(rename = "emailFollowersOnBestAnswer", default)]
-    pub email_followers_on_best_answer: bool,
-    #[serde(rename = "emailFollowersOnReply", default)]
-    pub email_followers_on_reply: bool,
-    #[serde(rename = "emailOwnerOnPrivateReply", default)]
-    pub email_owner_on_private_reply: bool,
-    #[serde(rename = "emailOwnerOnReply", default)]
-    pub email_owner_on_reply: bool,
-    #[serde(rename = "enableAnswerViaEmail", default)]
-    pub enable_answer_via_email: bool,
+    #[serde(
+        rename = "emailFollowersOnBestAnswer",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub email_followers_on_best_answer: Option<bool>,
+    #[serde(
+        rename = "emailFollowersOnReply",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub email_followers_on_reply: Option<bool>,
+    #[serde(
+        rename = "emailOwnerOnPrivateReply",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub email_owner_on_private_reply: Option<bool>,
+    #[serde(
+        rename = "emailOwnerOnReply",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub email_owner_on_reply: Option<bool>,
+    #[serde(
+        rename = "enableAnswerViaEmail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_answer_via_email: Option<bool>,
     #[serde(rename = "enableChatterAnswers", default)]
     pub enable_chatter_answers: bool,
-    #[serde(rename = "enableFacebookSSO", default)]
-    pub enable_facebook_sso: bool,
-    #[serde(rename = "enableInlinePublisher", default)]
-    pub enable_inline_publisher: bool,
-    #[serde(rename = "enableReputation", default)]
-    pub enable_reputation: bool,
-    #[serde(rename = "enableRichTextEditor", default)]
-    pub enable_rich_text_editor: bool,
-    #[serde(rename = "facebookAuthProvider", default)]
-    pub facebook_auth_provider: String,
-    #[serde(rename = "showInPortals", default)]
-    pub show_in_portals: bool,
+    #[serde(
+        rename = "enableFacebookSSO",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_facebook_sso: Option<bool>,
+    #[serde(
+        rename = "enableInlinePublisher",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_inline_publisher: Option<bool>,
+    #[serde(
+        rename = "enableReputation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_reputation: Option<bool>,
+    #[serde(
+        rename = "enableRichTextEditor",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_rich_text_editor: Option<bool>,
+    #[serde(
+        rename = "facebookAuthProvider",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub facebook_auth_provider: Option<String>,
+    #[serde(
+        rename = "showInPortals",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_in_portals: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ChatterEmailsMDSettings {
-    #[serde(rename = "enableChatterDigestEmailsApiOnly", default)]
-    pub enable_chatter_digest_emails_api_only: bool,
-    #[serde(rename = "enableChatterEmailAttachment", default)]
-    pub enable_chatter_email_attachment: bool,
-    #[serde(rename = "enableCollaborationEmail", default)]
-    pub enable_collaboration_email: bool,
-    #[serde(rename = "enableDisplayAppDownloadBadges", default)]
-    pub enable_display_app_download_badges: bool,
-    #[serde(rename = "enableEmailReplyToChatter", default)]
-    pub enable_email_reply_to_chatter: bool,
-    #[serde(rename = "enableEmailToChatter", default)]
-    pub enable_email_to_chatter: bool,
-    #[serde(rename = "noQnOwnNotifyOnCaseCmt", default)]
-    pub no_qn_own_notify_on_case_cmt: bool,
-    #[serde(rename = "noQnOwnNotifyOnRep", default)]
-    pub no_qn_own_notify_on_rep: bool,
-    #[serde(rename = "noQnSubNotifyOnBestR", default)]
-    pub no_qn_sub_notify_on_best_r: bool,
-    #[serde(rename = "noQnSubNotifyOnRep", default)]
-    pub no_qn_sub_notify_on_rep: bool,
+    #[serde(
+        rename = "enableChatterDigestEmailsApiOnly",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_chatter_digest_emails_api_only: Option<bool>,
+    #[serde(
+        rename = "enableChatterEmailAttachment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_chatter_email_attachment: Option<bool>,
+    #[serde(
+        rename = "enableCollaborationEmail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_collaboration_email: Option<bool>,
+    #[serde(
+        rename = "enableDisplayAppDownloadBadges",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_display_app_download_badges: Option<bool>,
+    #[serde(
+        rename = "enableEmailReplyToChatter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_email_reply_to_chatter: Option<bool>,
+    #[serde(
+        rename = "enableEmailToChatter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_email_to_chatter: Option<bool>,
+    #[serde(
+        rename = "noQnOwnNotifyOnCaseCmt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub no_qn_own_notify_on_case_cmt: Option<bool>,
+    #[serde(
+        rename = "noQnOwnNotifyOnRep",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub no_qn_own_notify_on_rep: Option<bool>,
+    #[serde(
+        rename = "noQnSubNotifyOnBestR",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub no_qn_sub_notify_on_best_r: Option<bool>,
+    #[serde(
+        rename = "noQnSubNotifyOnRep",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub no_qn_sub_notify_on_rep: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ChatterSettings {
-    #[serde(rename = "allowChatterGroupArchiving", default)]
-    pub allow_chatter_group_archiving: bool,
-    #[serde(rename = "allowRecordsInChatterGroup", default)]
-    pub allow_records_in_chatter_group: bool,
-    #[serde(rename = "enableApprovalRequest", default)]
-    pub enable_approval_request: bool,
-    #[serde(rename = "enableCaseFeedRelativeTimestamps", default)]
-    pub enable_case_feed_relative_timestamps: bool,
-    #[serde(rename = "enableChatter", default)]
-    pub enable_chatter: bool,
-    #[serde(rename = "enableChatterEmoticons", default)]
-    pub enable_chatter_emoticons: bool,
-    #[serde(rename = "enableFeedEdit", default)]
-    pub enable_feed_edit: bool,
-    #[serde(rename = "enableFeedPinning", default)]
-    pub enable_feed_pinning: bool,
-    #[serde(rename = "enableFeedsDraftPosts", default)]
-    pub enable_feeds_draft_posts: bool,
-    #[serde(rename = "enableFeedsRichText", default)]
-    pub enable_feeds_rich_text: bool,
-    #[serde(rename = "enableInviteCsnUsers", default)]
-    pub enable_invite_csn_users: bool,
-    #[serde(rename = "enableOutOfOfficeEnabledPref", default)]
-    pub enable_out_of_office_enabled_pref: bool,
-    #[serde(rename = "enableRichLinkPreviewsInFeed", default)]
-    pub enable_rich_link_previews_in_feed: bool,
-    #[serde(rename = "enableTodayRecsInFeed", default)]
-    pub enable_today_recs_in_feed: bool,
-    #[serde(rename = "unlistedGroupsEnabled", default)]
-    pub unlisted_groups_enabled: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ClaimFinancialSettings {
-    #[serde(rename = "claimCovPendingAuthStatus", default)]
-    pub claim_cov_pending_auth_status: String,
-    #[serde(rename = "claimPendingAuthorityStatus", default)]
-    pub claim_pending_authority_status: String,
-    #[serde(rename = "clmCovPymtDtlPendAuthSts", default)]
-    pub clm_cov_pymt_dtl_pend_auth_sts: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
+    #[serde(
+        rename = "allowChatterGroupArchiving",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_chatter_group_archiving: Option<bool>,
+    #[serde(
+        rename = "allowRecordsInChatterGroup",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_records_in_chatter_group: Option<bool>,
+    #[serde(
+        rename = "enableApprovalRequest",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_approval_request: Option<bool>,
+    #[serde(
+        rename = "enableCaseFeedRelativeTimestamps",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_case_feed_relative_timestamps: Option<bool>,
+    #[serde(
+        rename = "enableChatter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_chatter: Option<bool>,
+    #[serde(
+        rename = "enableChatterEmoticons",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_chatter_emoticons: Option<bool>,
+    #[serde(
+        rename = "enableFeedEdit",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_feed_edit: Option<bool>,
+    #[serde(
+        rename = "enableFeedPinning",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_feed_pinning: Option<bool>,
+    #[serde(
+        rename = "enableFeedsDraftPosts",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_feeds_draft_posts: Option<bool>,
+    #[serde(
+        rename = "enableFeedsRichText",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_feeds_rich_text: Option<bool>,
+    #[serde(
+        rename = "enableInviteCsnUsers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_invite_csn_users: Option<bool>,
+    #[serde(
+        rename = "enableOutOfOfficeEnabledPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_out_of_office_enabled_pref: Option<bool>,
+    #[serde(
+        rename = "enableRichLinkPreviewsInFeed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_rich_link_previews_in_feed: Option<bool>,
+    #[serde(
+        rename = "enableTodayRecsInFeed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_today_recs_in_feed: Option<bool>,
+    #[serde(
+        rename = "unlistedGroupsEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub unlisted_groups_enabled: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ClaimMgmtFoundationEnabledSettings {
-    #[serde(rename = "enableWarrantyClaimMgmt", default)]
-    pub enable_warranty_claim_mgmt: bool,
+    #[serde(
+        rename = "enableWarrantyClaimMgmt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_warranty_claim_mgmt: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CodeBuilderSettings {
-    #[serde(rename = "enableCodeBuilder", default)]
-    pub enable_code_builder: bool,
+    #[serde(
+        rename = "enableCodeBuilder",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_code_builder: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CollectionsDashboardSettings {
-    #[serde(rename = "enableCollectionsDashboard", default)]
-    pub enable_collections_dashboard: bool,
+    #[serde(
+        rename = "enableCollectionsDashboard",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_collections_dashboard: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CommerceSettings {
-    #[serde(rename = "buyerGroupExtensibility", default)]
-    pub buyer_group_extensibility: bool,
-    #[serde(rename = "commerceAnalyticsEnabled", default)]
-    pub commerce_analytics_enabled: bool,
-    #[serde(rename = "commerceAppEnabled", default)]
-    pub commerce_app_enabled: bool,
-    #[serde(rename = "commerceConciergeEnabled", default)]
-    pub commerce_concierge_enabled: bool,
-    #[serde(rename = "commerceCopilotEcomEnabled", default)]
-    pub commerce_copilot_ecom_enabled: bool,
-    #[serde(rename = "commerceDCSegmentEnabled", default)]
-    pub commerce_dc_segment_enabled: bool,
-    #[serde(rename = "commerceDiscoveryExpansion", default)]
-    pub commerce_discovery_expansion: bool,
-    #[serde(rename = "commerceEnabled", default)]
-    pub commerce_enabled: bool,
-    #[serde(rename = "commerceNGPEnabled", default)]
-    pub commerce_ngp_enabled: bool,
-    #[serde(rename = "commerceRLMSubs", default)]
-    pub commerce_rlm_subs: bool,
-    #[serde(rename = "convCommShopCopilotEnabled", default)]
-    pub conv_comm_shop_copilot_enabled: bool,
-    #[serde(rename = "generateInvPerSubscription", default)]
-    pub generate_inv_per_subscription: bool,
-    #[serde(rename = "lowestUnitPriceTracking", default)]
-    pub lowest_unit_price_tracking: bool,
-    #[serde(rename = "messagingEngagementDataKit", default)]
-    pub messaging_engagement_data_kit: bool,
+    #[serde(
+        rename = "b2CMerchantAgentEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub b_2_c_merchant_agent_enabled: Option<bool>,
+    #[serde(
+        rename = "buyerGroupExtensibility",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub buyer_group_extensibility: Option<bool>,
+    #[serde(
+        rename = "commerceAnalyticsEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub commerce_analytics_enabled: Option<bool>,
+    #[serde(
+        rename = "commerceAppEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub commerce_app_enabled: Option<bool>,
+    #[serde(
+        rename = "commerceConciergeEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub commerce_concierge_enabled: Option<bool>,
+    #[serde(
+        rename = "commerceCopilotEcomEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub commerce_copilot_ecom_enabled: Option<bool>,
+    #[serde(
+        rename = "commerceDCSegmentEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub commerce_dc_segment_enabled: Option<bool>,
+    #[serde(
+        rename = "commerceDiscoveryExpansion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub commerce_discovery_expansion: Option<bool>,
+    #[serde(
+        rename = "commerceEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub commerce_enabled: Option<bool>,
+    #[serde(
+        rename = "commerceNGPEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub commerce_ngp_enabled: Option<bool>,
+    #[serde(
+        rename = "commerceRLMSubs",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub commerce_rlm_subs: Option<bool>,
+    #[serde(
+        rename = "convCommShopCopilotEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub conv_comm_shop_copilot_enabled: Option<bool>,
+    #[serde(
+        rename = "enableCheckoutHSOIPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_checkout_hsoi_pref: Option<bool>,
+    #[serde(
+        rename = "extendCommerceContext",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub extend_commerce_context: Option<bool>,
+    #[serde(
+        rename = "generateInvPerSubscription",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub generate_inv_per_subscription: Option<bool>,
+    #[serde(
+        rename = "lowestUnitPriceTracking",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub lowest_unit_price_tracking: Option<bool>,
+    #[serde(
+        rename = "messagingEngagementDataKit",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub messaging_engagement_data_kit: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CommsServiceConsoleSettings {
-    #[serde(rename = "enableCommsServiceConsole", default)]
-    pub enable_comms_service_console: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CommsUpsellSettings {
-    #[serde(rename = "enableCommsUpsell", default)]
-    pub enable_comms_upsell: bool,
+    #[serde(
+        rename = "enableCommsServiceConsole",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_comms_service_console: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CommunitiesSettings {
-    #[serde(rename = "applyLoginPageTypeToEmbeddedLogin", default)]
-    pub apply_login_page_type_to_embedded_login: bool,
-    #[serde(rename = "blockEmbeddedLoginUnknownURLRedirect", default)]
-    pub block_embedded_login_unknown_url_redirect: bool,
-    #[serde(rename = "canModerateAllFeedPosts", default)]
-    pub can_moderate_all_feed_posts: bool,
-    #[serde(rename = "canModerateInternalFeedPosts", default)]
-    pub can_moderate_internal_feed_posts: bool,
-    #[serde(rename = "embeddedVisualforcePages", default)]
-    pub embedded_visualforce_pages: bool,
-    #[serde(rename = "enableCommunityWorkspaces", default)]
-    pub enable_community_workspaces: bool,
-    #[serde(rename = "enableCspContactVisibilityPref", default)]
-    pub enable_csp_contact_visibility_pref: bool,
-    #[serde(rename = "enableCspNotesOnAccConPref", default)]
-    pub enable_csp_notes_on_acc_con_pref: bool,
-    #[serde(rename = "enableEnablePRM", default)]
-    pub enable_enable_prm: bool,
-    #[serde(rename = "enableExternalAccHierPref", default)]
-    pub enable_external_acc_hier_pref: bool,
-    #[serde(rename = "enableGuestPermDisOptOutCruc", default)]
-    pub enable_guest_perm_dis_opt_out_cruc: bool,
-    #[serde(rename = "enableGuestSecurityOptOutCruc", default)]
-    pub enable_guest_security_opt_out_cruc: bool,
-    #[serde(rename = "enableGuvSecurityOptOutPref", default)]
-    pub enable_guv_security_opt_out_pref: bool,
-    #[serde(rename = "enableInviteChatterGuestEnabled", default)]
-    pub enable_invite_chatter_guest_enabled: bool,
-    #[serde(rename = "enableNameFieldsUserPIIEnabled", default)]
-    pub enable_name_fields_user_pii_enabled: bool,
-    #[serde(rename = "enableNetPortalUserReportOpts", default)]
-    pub enable_net_portal_user_report_opts: bool,
-    #[serde(rename = "enableNetworksEnabled", default)]
-    pub enable_networks_enabled: bool,
-    #[serde(rename = "enableOotbProfExtUserOpsEnable", default)]
-    pub enable_ootb_prof_ext_user_ops_enable: bool,
-    #[serde(rename = "enablePRMAccRelPref", default)]
-    pub enable_prm_acc_rel_pref: bool,
-    #[serde(rename = "enablePowerCustomerCaseStatus", default)]
-    pub enable_power_customer_case_status: bool,
-    #[serde(rename = "enablePreventBadgeGuestAccess", default)]
-    pub enable_prevent_badge_guest_access: bool,
-    #[serde(rename = "enableRelaxPartnerAccountFieldPref", default)]
-    pub enable_relax_partner_account_field_pref: bool,
-    #[serde(rename = "enableUnsupportedBrowserModalPref", default)]
-    pub enable_unsupported_browser_modal_pref: bool,
-    #[serde(rename = "enableUsernameUniqForOrgPref", default)]
-    pub enable_username_uniq_for_org_pref: bool,
+    #[serde(
+        rename = "applyLoginPageTypeToEmbeddedLogin",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub apply_login_page_type_to_embedded_login: Option<bool>,
+    #[serde(
+        rename = "blockEmbeddedLoginUnknownURLRedirect",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub block_embedded_login_unknown_url_redirect: Option<bool>,
+    #[serde(
+        rename = "canModerateAllFeedPosts",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_moderate_all_feed_posts: Option<bool>,
+    #[serde(
+        rename = "canModerateInternalFeedPosts",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_moderate_internal_feed_posts: Option<bool>,
+    #[serde(
+        rename = "embeddedVisualforcePages",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub embedded_visualforce_pages: Option<bool>,
+    #[serde(
+        rename = "enableCommunityWorkspaces",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_community_workspaces: Option<bool>,
+    #[serde(
+        rename = "enableCspContactVisibilityPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_csp_contact_visibility_pref: Option<bool>,
+    #[serde(
+        rename = "enableCspNotesOnAccConPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_csp_notes_on_acc_con_pref: Option<bool>,
+    #[serde(
+        rename = "enableEnablePRM",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_enable_prm: Option<bool>,
+    #[serde(
+        rename = "enableExternalAccHierPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_external_acc_hier_pref: Option<bool>,
+    #[serde(
+        rename = "enableGuestPermDisOptOutCruc",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_guest_perm_dis_opt_out_cruc: Option<bool>,
+    #[serde(
+        rename = "enableGuestSecurityOptOutCruc",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_guest_security_opt_out_cruc: Option<bool>,
+    #[serde(
+        rename = "enableGuvSecurityOptOutPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_guv_security_opt_out_pref: Option<bool>,
+    #[serde(
+        rename = "enableInviteChatterGuestEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_invite_chatter_guest_enabled: Option<bool>,
+    #[serde(
+        rename = "enableNameFieldsUserPIIEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_name_fields_user_pii_enabled: Option<bool>,
+    #[serde(
+        rename = "enableNetPortalUserReportOpts",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_net_portal_user_report_opts: Option<bool>,
+    #[serde(
+        rename = "enableNetworksEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_networks_enabled: Option<bool>,
+    #[serde(
+        rename = "enableOotbProfExtUserOpsEnable",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ootb_prof_ext_user_ops_enable: Option<bool>,
+    #[serde(
+        rename = "enablePRMAccRelPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_prm_acc_rel_pref: Option<bool>,
+    #[serde(
+        rename = "enablePowerCustomerCaseStatus",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_power_customer_case_status: Option<bool>,
+    #[serde(
+        rename = "enablePreventBadgeGuestAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_prevent_badge_guest_access: Option<bool>,
+    #[serde(
+        rename = "enableRelaxPartnerAccountFieldPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_relax_partner_account_field_pref: Option<bool>,
+    #[serde(
+        rename = "enableUnsupportedBrowserModalPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_unsupported_browser_modal_pref: Option<bool>,
+    #[serde(
+        rename = "enableUsernameUniqForOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_username_uniq_for_org_pref: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -1088,714 +2668,1708 @@ pub struct CommunitiesSettings {
 pub struct CompanySettings {
     #[serde(rename = "enableCustomFiscalYear", default)]
     pub enable_custom_fiscal_year: bool,
-    #[serde(rename = "fiscalYear", default)]
-    pub fiscal_year: FiscalYearSettings,
+    #[serde(
+        rename = "fiscalYear",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub fiscal_year: Option<FiscalYearSettings>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ConnectedAppSettings {
-    #[serde(rename = "enableAdminApprovedAppsOnly", default)]
-    pub enable_admin_approved_apps_only: bool,
-    #[serde(rename = "enableAdminApprovedAppsOnlyForExternalUser", default)]
-    pub enable_admin_approved_apps_only_for_external_user: bool,
-    #[serde(rename = "enableSkipUserProvisioningWizardWelcomePage", default)]
-    pub enable_skip_user_provisioning_wizard_welcome_page: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ConsentBannerSettings {
-    #[serde(rename = "allowButtonColor", default)]
-    pub allow_button_color: String,
-    #[serde(rename = "allowButtonTextColor", default)]
-    pub allow_button_text_color: String,
-    #[serde(rename = "bannerColor", default)]
-    pub banner_color: String,
-    #[serde(rename = "bannerFontFamily", default)]
-    pub banner_font_family: serde_json::Value,
-    #[serde(rename = "bannerMessage", default)]
-    pub banner_message: String,
-    #[serde(rename = "bannerPosition", default)]
-    pub banner_position: serde_json::Value,
-    #[serde(rename = "bannerTextColor", default)]
-    pub banner_text_color: String,
-    #[serde(rename = "declineButtonColor", default)]
-    pub decline_button_color: String,
-    #[serde(rename = "declineButtonTextColor", default)]
-    pub decline_button_text_color: String,
-    #[serde(rename = "infoText", default)]
-    pub info_text: String,
-    #[serde(rename = "infoUrl", default)]
-    pub info_url: String,
-    #[serde(rename = "privacyPolicyText", default)]
-    pub privacy_policy_text: String,
-    #[serde(rename = "privacyPolicyUrl", default)]
-    pub privacy_policy_url: String,
+    #[serde(
+        rename = "enableAdminApprovedAppsOnly",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_admin_approved_apps_only: Option<bool>,
+    #[serde(
+        rename = "enableAdminApprovedAppsOnlyForExternalUser",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_admin_approved_apps_only_for_external_user: Option<bool>,
+    #[serde(
+        rename = "enableSkipUserProvisioningWizardWelcomePage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_skip_user_provisioning_wizard_welcome_page: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ContentSettings {
-    #[serde(rename = "enableCMSC2CConnections", default)]
-    pub enable_cmsc_2_c_connections: bool,
-    #[serde(rename = "enableChatterFileLink", default)]
-    pub enable_chatter_file_link: bool,
-    #[serde(rename = "enableContent", default)]
-    pub enable_content: bool,
-    #[serde(rename = "enableContentAutoAssign", default)]
-    pub enable_content_auto_assign: bool,
-    #[serde(rename = "enableContentDistForPortalUsers", default)]
-    pub enable_content_dist_for_portal_users: bool,
-    #[serde(rename = "enableContentDistPwOptionsBit1", default)]
-    pub enable_content_dist_pw_options_bit_1: bool,
-    #[serde(rename = "enableContentDistPwOptionsBit2", default)]
-    pub enable_content_dist_pw_options_bit_2: bool,
-    #[serde(rename = "enableContentDistribution", default)]
-    pub enable_content_distribution: bool,
-    #[serde(rename = "enableContentHubAWSS3Pref", default)]
-    pub enable_content_hub_awss_3_pref: bool,
-    #[serde(rename = "enableContentHubUploadAWSS3Pref", default)]
-    pub enable_content_hub_upload_awss_3_pref: bool,
-    #[serde(rename = "enableContentSupportMultiLanguage", default)]
-    pub enable_content_support_multi_language: bool,
-    #[serde(rename = "enableContentWorkspaceAccess", default)]
-    pub enable_content_workspace_access: bool,
-    #[serde(rename = "enableDeleteFileInContentPacks", default)]
-    pub enable_delete_file_in_content_packs: bool,
-    #[serde(rename = "enableFileIngestToDataCloud", default)]
-    pub enable_file_ingest_to_data_cloud: bool,
-    #[serde(rename = "enableFileShareSetByRecord", default)]
-    pub enable_file_share_set_by_record: bool,
-    #[serde(rename = "enableFilesUsrShareNetRestricted", default)]
-    pub enable_files_usr_share_net_restricted: bool,
-    #[serde(rename = "enableJPGPreviews", default)]
-    pub enable_jpg_previews: bool,
-    #[serde(rename = "enableLWCFileUpload", default)]
-    pub enable_lwc_file_upload: bool,
-    #[serde(rename = "enableLWCFileUploadInFlows", default)]
-    pub enable_lwc_file_upload_in_flows: bool,
-    #[serde(rename = "enableLibraryManagedFiles", default)]
-    pub enable_library_managed_files: bool,
-    #[serde(rename = "enableShowChatterFilesInContent", default)]
-    pub enable_show_chatter_files_in_content: bool,
-    #[serde(rename = "enableSiteGuestUserToUploadFiles", default)]
-    pub enable_site_guest_user_to_upload_files: bool,
-    #[serde(rename = "enableUploadFilesOnAttachments", default)]
-    pub enable_upload_files_on_attachments: bool,
-    #[serde(rename = "setValidContentTypeForAtchDocDownload", default)]
-    pub set_valid_content_type_for_atch_doc_download: bool,
-    #[serde(rename = "skipContentAssetTriggers", default)]
-    pub skip_content_asset_triggers: bool,
-    #[serde(rename = "skipContentAssetTriggersOnDeploy", default)]
-    pub skip_content_asset_triggers_on_deploy: bool,
+    #[serde(
+        rename = "enableCMSC2CConnections",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cmsc_2_c_connections: Option<bool>,
+    #[serde(
+        rename = "enableChatterFileLink",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_chatter_file_link: Option<bool>,
+    #[serde(
+        rename = "enableContent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_content: Option<bool>,
+    #[serde(
+        rename = "enableContentAutoAssign",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_content_auto_assign: Option<bool>,
+    #[serde(
+        rename = "enableContentDistForPortalUsers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_content_dist_for_portal_users: Option<bool>,
+    #[serde(
+        rename = "enableContentDistPwOptionsBit1",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_content_dist_pw_options_bit_1: Option<bool>,
+    #[serde(
+        rename = "enableContentDistPwOptionsBit2",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_content_dist_pw_options_bit_2: Option<bool>,
+    #[serde(
+        rename = "enableContentDistribution",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_content_distribution: Option<bool>,
+    #[serde(
+        rename = "enableContentHubAWSS3Pref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_content_hub_awss_3_pref: Option<bool>,
+    #[serde(
+        rename = "enableContentHubUploadAWSS3Pref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_content_hub_upload_awss_3_pref: Option<bool>,
+    #[serde(
+        rename = "enableContentSupportMultiLanguage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_content_support_multi_language: Option<bool>,
+    #[serde(
+        rename = "enableContentWorkspaceAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_content_workspace_access: Option<bool>,
+    #[serde(
+        rename = "enableDeleteFileInContentPacks",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_delete_file_in_content_packs: Option<bool>,
+    #[serde(
+        rename = "enableFileIngestToDataCloud",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_file_ingest_to_data_cloud: Option<bool>,
+    #[serde(
+        rename = "enableFileShareSetByRecord",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_file_share_set_by_record: Option<bool>,
+    #[serde(
+        rename = "enableFilesUsrShareNetRestricted",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_files_usr_share_net_restricted: Option<bool>,
+    #[serde(
+        rename = "enableJPGPreviews",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_jpg_previews: Option<bool>,
+    #[serde(
+        rename = "enableLWCFileUpload",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lwc_file_upload: Option<bool>,
+    #[serde(
+        rename = "enableLWCFileUploadInFlows",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lwc_file_upload_in_flows: Option<bool>,
+    #[serde(
+        rename = "enableLibraryManagedFiles",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_library_managed_files: Option<bool>,
+    #[serde(
+        rename = "enableShowChatterFilesInContent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_show_chatter_files_in_content: Option<bool>,
+    #[serde(
+        rename = "enableSiteGuestUserToUploadFiles",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_site_guest_user_to_upload_files: Option<bool>,
+    #[serde(
+        rename = "enableUploadFilesOnAttachments",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_upload_files_on_attachments: Option<bool>,
+    #[serde(
+        rename = "setValidContentTypeForAtchDocDownload",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub set_valid_content_type_for_atch_doc_download: Option<bool>,
+    #[serde(
+        rename = "skipContentAssetTriggers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub skip_content_asset_triggers: Option<bool>,
+    #[serde(
+        rename = "skipContentAssetTriggersOnDeploy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub skip_content_asset_triggers_on_deploy: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ContractSettings {
-    #[serde(rename = "autoCalculateEndDate", default)]
-    pub auto_calculate_end_date: bool,
-    #[serde(rename = "autoExpirationDelay", default)]
-    pub auto_expiration_delay: String,
-    #[serde(rename = "autoExpirationRecipient", default)]
-    pub auto_expiration_recipient: String,
-    #[serde(rename = "autoExpireContracts", default)]
-    pub auto_expire_contracts: bool,
-    #[serde(rename = "enableContractHistoryTracking", default)]
-    pub enable_contract_history_tracking: bool,
-    #[serde(rename = "notifyOwnersOnContractExpiration", default)]
-    pub notify_owners_on_contract_expiration: bool,
+    #[serde(
+        rename = "autoCalculateEndDate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub auto_calculate_end_date: Option<bool>,
+    #[serde(
+        rename = "autoExpirationDelay",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub auto_expiration_delay: Option<String>,
+    #[serde(
+        rename = "autoExpirationRecipient",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub auto_expiration_recipient: Option<String>,
+    #[serde(
+        rename = "autoExpireContracts",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub auto_expire_contracts: Option<bool>,
+    #[serde(
+        rename = "enableContractHistoryTracking",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_contract_history_tracking: Option<bool>,
+    #[serde(
+        rename = "notifyOwnersOnContractExpiration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub notify_owners_on_contract_expiration: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ConversationServiceIntegrationSettings {
-    #[serde(rename = "enableConvoCatchUpForAgents", default)]
-    pub enable_convo_catch_up_for_agents: bool,
-    #[serde(rename = "enableConvoCatchUpForServiceAssistant", default)]
-    pub enable_convo_catch_up_for_service_assistant: bool,
-    #[serde(rename = "enableConvoCatchUpForSupervisors", default)]
-    pub enable_convo_catch_up_for_supervisors: bool,
-    #[serde(rename = "enableTranslationForAgents", default)]
-    pub enable_translation_for_agents: bool,
+    #[serde(
+        rename = "enableConvoCatchUpForAgents",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_convo_catch_up_for_agents: Option<bool>,
+    #[serde(
+        rename = "enableConvoCatchUpForServiceAssistant",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_convo_catch_up_for_service_assistant: Option<bool>,
+    #[serde(
+        rename = "enableConvoCatchUpForSupervisors",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_convo_catch_up_for_supervisors: Option<bool>,
+    #[serde(
+        rename = "enableTranslationForAgents",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_translation_for_agents: Option<bool>,
+    #[serde(
+        rename = "enableWriteWithAiForAgents",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_write_with_ai_for_agents: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ConversationalIntelligenceSettings {
-    #[serde(rename = "enableCallCoaching", default)]
-    pub enable_call_coaching: bool,
-    #[serde(rename = "enableCallCoachingZoom", default)]
-    pub enable_call_coaching_zoom: bool,
-    #[serde(rename = "enableCallExplorer", default)]
-    pub enable_call_explorer: bool,
-    #[serde(rename = "enableCallSummarization", default)]
-    pub enable_call_summarization: bool,
-    #[serde(rename = "enableConversationMining", default)]
-    pub enable_conversation_mining: bool,
-    #[serde(rename = "enableDiarizationPref", default)]
-    pub enable_diarization_pref: bool,
-    #[serde(rename = "enableECIOOTBFlows", default)]
-    pub enable_eciootb_flows: bool,
-    #[serde(rename = "enableGenerativeConvInsights", default)]
-    pub enable_generative_conv_insights: bool,
-    #[serde(rename = "enableManualUpload", default)]
-    pub enable_manual_upload: bool,
-    #[serde(rename = "enableOpptyMatching", default)]
-    pub enable_oppty_matching: bool,
-    #[serde(rename = "enableRealtimeInsights", default)]
-    pub enable_realtime_insights: bool,
-    #[serde(rename = "enableUnifiedActivities", default)]
-    pub enable_unified_activities: bool,
+    #[serde(
+        rename = "enableCallCoaching",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_call_coaching: Option<bool>,
+    #[serde(
+        rename = "enableCallCoachingZoom",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_call_coaching_zoom: Option<bool>,
+    #[serde(
+        rename = "enableCallExplorer",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_call_explorer: Option<bool>,
+    #[serde(
+        rename = "enableCallSummarization",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_call_summarization: Option<bool>,
+    #[serde(
+        rename = "enableConversationMining",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_conversation_mining: Option<bool>,
+    #[serde(
+        rename = "enableDiarizationPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_diarization_pref: Option<bool>,
+    #[serde(
+        rename = "enableECIOOTBFlows",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_eciootb_flows: Option<bool>,
+    #[serde(
+        rename = "enableGenerativeConvInsights",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_generative_conv_insights: Option<bool>,
+    #[serde(
+        rename = "enableManualUpload",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_manual_upload: Option<bool>,
+    #[serde(
+        rename = "enableOpptyMatching",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_oppty_matching: Option<bool>,
+    #[serde(
+        rename = "enableRealtimeInsights",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_realtime_insights: Option<bool>,
+    #[serde(
+        rename = "enableUnifiedActivities",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_unified_activities: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CriteriaSettings {
+    #[serde(rename = "criteriaSetting", default)]
+    pub criteria_setting: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CurrencySettings {
-    #[serde(rename = "enableCurrencyEffectiveDates", default)]
-    pub enable_currency_effective_dates: bool,
-    #[serde(rename = "enableCurrencySymbolWithMultiCurrency", default)]
-    pub enable_currency_symbol_with_multi_currency: bool,
-    #[serde(rename = "enableMultiCurrency", default)]
-    pub enable_multi_currency: bool,
-    #[serde(rename = "isMultiCurrencyActivationAllowed", default)]
-    pub is_multi_currency_activation_allowed: bool,
-    #[serde(rename = "isParenCurrencyConvDisabled", default)]
-    pub is_paren_currency_conv_disabled: bool,
+    #[serde(
+        rename = "enableCurrencyEffectiveDates",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_currency_effective_dates: Option<bool>,
+    #[serde(
+        rename = "enableCurrencySymbolWithMultiCurrency",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_currency_symbol_with_multi_currency: Option<bool>,
+    #[serde(
+        rename = "enableMultiCurrency",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_multi_currency: Option<bool>,
+    #[serde(
+        rename = "isMultiCurrencyActivationAllowed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_multi_currency_activation_allowed: Option<bool>,
+    #[serde(
+        rename = "isParenCurrencyConvDisabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_paren_currency_conv_disabled: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CustomAddressFieldSettings {
-    #[serde(rename = "enableCustomAddressField", default)]
-    pub enable_custom_address_field: bool,
+    #[serde(
+        rename = "enableCustomAddressField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_custom_address_field: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CustomerDataPlatformSettings {
-    #[serde(rename = "enableCustomerDataPlatform", default)]
-    pub enable_customer_data_platform: bool,
+    #[serde(
+        rename = "enableCustomerDataPlatform",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_customer_data_platform: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct CustomizablePropensityScoringSettings {
-    #[serde(rename = "enableCpsPref", default)]
-    pub enable_cps_pref: bool,
+    #[serde(
+        rename = "enableCpsPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cps_pref: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DashboardMobileSettings {
-    #[serde(rename = "enableDashboardIPadApp", default)]
-    pub enable_dashboard_i_pad_app: bool,
+    #[serde(
+        rename = "enableDashboardIPadApp",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dashboard_i_pad_app: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DataDotComSettings {
-    #[serde(rename = "enableAccountExportButtonOff", default)]
-    pub enable_account_export_button_off: bool,
-    #[serde(rename = "enableAccountImportButtonOff", default)]
-    pub enable_account_import_button_off: bool,
-    #[serde(rename = "enableAllowDupeContactFromLead", default)]
-    pub enable_allow_dupe_contact_from_lead: bool,
-    #[serde(rename = "enableAllowDupeLeadFromContact", default)]
-    pub enable_allow_dupe_lead_from_contact: bool,
-    #[serde(rename = "enableContactExportButtonOff", default)]
-    pub enable_contact_export_button_off: bool,
-    #[serde(rename = "enableContactImportButtonOff", default)]
-    pub enable_contact_import_button_off: bool,
-    #[serde(rename = "enableDDCSocialKeyEnabled", default)]
-    pub enable_ddc_social_key_enabled: bool,
-    #[serde(rename = "enableDataDotComCleanEnabled", default)]
-    pub enable_data_dot_com_clean_enabled: bool,
-    #[serde(rename = "enableDataDotComOptOutsEnabled", default)]
-    pub enable_data_dot_com_opt_outs_enabled: bool,
-    #[serde(rename = "enableDatacloudAPIEnabled", default)]
-    pub enable_datacloud_api_enabled: bool,
+    #[serde(
+        rename = "enableAccountExportButtonOff",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_account_export_button_off: Option<bool>,
+    #[serde(
+        rename = "enableAccountImportButtonOff",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_account_import_button_off: Option<bool>,
+    #[serde(
+        rename = "enableAllowDupeContactFromLead",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_allow_dupe_contact_from_lead: Option<bool>,
+    #[serde(
+        rename = "enableAllowDupeLeadFromContact",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_allow_dupe_lead_from_contact: Option<bool>,
+    #[serde(
+        rename = "enableContactExportButtonOff",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_contact_export_button_off: Option<bool>,
+    #[serde(
+        rename = "enableContactImportButtonOff",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_contact_import_button_off: Option<bool>,
+    #[serde(
+        rename = "enableDDCSocialKeyEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ddc_social_key_enabled: Option<bool>,
+    #[serde(
+        rename = "enableDataDotComCleanEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_data_dot_com_clean_enabled: Option<bool>,
+    #[serde(
+        rename = "enableDataDotComOptOutsEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_data_dot_com_opt_outs_enabled: Option<bool>,
+    #[serde(
+        rename = "enableDatacloudAPIEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_datacloud_api_enabled: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DataImportManagementSettings {
-    #[serde(rename = "enableDataConnectorHubspot", default)]
-    pub enable_data_connector_hubspot: bool,
-    #[serde(rename = "enableEasyImport", default)]
-    pub enable_easy_import: bool,
+    #[serde(
+        rename = "enableDataConnectorHubspot",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_data_connector_hubspot: Option<bool>,
+    #[serde(
+        rename = "enableEasyImport",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_easy_import: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DeploymentSettings {
-    #[serde(rename = "doesSkipAsyncApexValidation", default)]
-    pub does_skip_async_apex_validation: bool,
+    #[serde(
+        rename = "doesSkipAsyncApexValidation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_skip_async_apex_validation: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DevHubSettings {
-    #[serde(rename = "enableALMSimpleDeployDataPref", default)]
-    pub enable_alm_simple_deploy_data_pref: bool,
-    #[serde(rename = "enableALMSimpleDeployPref", default)]
-    pub enable_alm_simple_deploy_pref: bool,
-    #[serde(rename = "enableDevOpsCenter", default)]
-    pub enable_dev_ops_center: bool,
-    #[serde(rename = "enableDevOpsCenterGA", default)]
-    pub enable_dev_ops_center_ga: bool,
-    #[serde(rename = "enablePackaging2", default)]
-    pub enable_packaging_2: bool,
-    #[serde(rename = "enableScratchOrgManagementPref", default)]
-    pub enable_scratch_org_management_pref: bool,
-    #[serde(rename = "enableScratchOrgSnapshotPref", default)]
-    pub enable_scratch_org_snapshot_pref: bool,
-    #[serde(rename = "enableShapeExportPref", default)]
-    pub enable_shape_export_pref: bool,
+    #[serde(
+        rename = "enableALMDevopsCorePref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_alm_devops_core_pref: Option<bool>,
+    #[serde(
+        rename = "enableALMSimpleDeployDataPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_alm_simple_deploy_data_pref: Option<bool>,
+    #[serde(
+        rename = "enableALMSimpleDeployPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_alm_simple_deploy_pref: Option<bool>,
+    #[serde(
+        rename = "enableDevOpsCenter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dev_ops_center: Option<bool>,
+    #[serde(
+        rename = "enableDevOpsCenterGA",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dev_ops_center_ga: Option<bool>,
+    #[serde(
+        rename = "enablePackaging2",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_packaging_2: Option<bool>,
+    #[serde(
+        rename = "enableScratchOrgManagementPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_scratch_org_management_pref: Option<bool>,
+    #[serde(
+        rename = "enableScratchOrgSnapshotPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_scratch_org_snapshot_pref: Option<bool>,
+    #[serde(
+        rename = "enableShapeExportPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_shape_export_pref: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DictionariesSettings {
+    #[serde(default)]
+    pub dictionary: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DiscoverySettings {
-    #[serde(rename = "einsteinAR4ConvOnDmndRecs", default)]
-    pub einstein_ar_4_conv_on_dmnd_recs: bool,
-    #[serde(rename = "einsteinARForConvo", default)]
-    pub einstein_ar_for_convo: bool,
-    #[serde(rename = "enableEinsteinAnswersPref", default)]
-    pub enable_einstein_answers_pref: bool,
-    #[serde(rename = "enableEinsteinArticleRecommendations", default)]
-    pub enable_einstein_article_recommendations: bool,
-    #[serde(rename = "enableEinsteinArticleRecommendationsOnDC", default)]
-    pub enable_einstein_article_recommendations_on_dc: bool,
+    #[serde(
+        rename = "einsteinAR4ConvOnDmndRecs",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub einstein_ar_4_conv_on_dmnd_recs: Option<bool>,
+    #[serde(
+        rename = "einsteinARForConvo",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub einstein_ar_for_convo: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinAnswersPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_answers_pref: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinArticleRecommendations",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_article_recommendations: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinArticleRecommendationsOnDC",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_article_recommendations_on_dc: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DocumentChecklistSettings {
-    #[serde(rename = "dciCSharingOptimization", default)]
-    pub dci_c_sharing_optimization: bool,
-    #[serde(rename = "dciCustomSharing", default)]
-    pub dci_custom_sharing: bool,
-    #[serde(rename = "deleteDCIWithFiles", default)]
-    pub delete_dci_with_files: bool,
-    #[serde(rename = "enhancedDocValCmp", default)]
-    pub enhanced_doc_val_cmp: bool,
+    #[serde(
+        rename = "dciCSharingOptimization",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub dci_c_sharing_optimization: Option<bool>,
+    #[serde(
+        rename = "dciCustomSharing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub dci_custom_sharing: Option<bool>,
+    #[serde(
+        rename = "deleteDCIWithFiles",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub delete_dci_with_files: Option<bool>,
+    #[serde(
+        rename = "enhancedDocValCmp",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enhanced_doc_val_cmp: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DripFeedConfigSettings {
+    #[serde(
+        rename = "tasksToDispatch",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub tasks_to_dispatch: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub value: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DxGlobalTermsSettings {
-    #[serde(rename = "dxGlobalTermsAccepted", default)]
-    pub dx_global_terms_accepted: bool,
+    #[serde(
+        rename = "dxGlobalTermsAccepted",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub dx_global_terms_accepted: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DynamicFormsSettings {
-    #[serde(rename = "enableFormsOnMobile", default)]
-    pub enable_forms_on_mobile: bool,
+    #[serde(
+        rename = "enableFormsOnMobile",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_forms_on_mobile: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct DynamicFulfillmentOrchestratorSettings {
-    #[serde(rename = "enableDFOFallout", default)]
-    pub enable_dfo_fallout: bool,
-    #[serde(rename = "enableDFOJeopardy", default)]
-    pub enable_dfo_jeopardy: bool,
-    #[serde(rename = "enableDFOPref", default)]
-    pub enable_dfo_pref: bool,
-    #[serde(rename = "enableDROBulkDequeUsingMQ", default)]
-    pub enable_dro_bulk_deque_using_mq: bool,
-    #[serde(rename = "enableDROFutureDatedTasks", default)]
-    pub enable_dro_future_dated_tasks: bool,
-    #[serde(rename = "enableDROInflightRequest", default)]
-    pub enable_dro_inflight_request: bool,
-    #[serde(rename = "enableDROTaskSource", default)]
-    pub enable_dro_task_source: bool,
+    #[serde(
+        rename = "enableDFOFallout",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dfo_fallout: Option<bool>,
+    #[serde(
+        rename = "enableDFOJeopardy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dfo_jeopardy: Option<bool>,
+    #[serde(
+        rename = "enableDFOPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dfo_pref: Option<bool>,
+    #[serde(
+        rename = "enableDROBulkDequeUsingMQ",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dro_bulk_deque_using_mq: Option<bool>,
+    #[serde(
+        rename = "enableDROFutureDatedTasks",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dro_future_dated_tasks: Option<bool>,
+    #[serde(
+        rename = "enableDROInflightRequest",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dro_inflight_request: Option<bool>,
+    #[serde(
+        rename = "enableDROTaskSource",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dro_task_source: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DynamicGanttSettings {
+    #[serde(rename = "dynamicGantt", default)]
+    pub dynamic_gantt: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EACSettings {
-    #[serde(rename = "addRcCompToFlexiPages", default)]
-    pub add_rc_comp_to_flexi_pages: bool,
-    #[serde(rename = "autoContactCreationPref", default)]
-    pub auto_contact_creation_pref: bool,
-    #[serde(rename = "autoContactEnrichmentPref", default)]
-    pub auto_contact_enrichment_pref: bool,
-    #[serde(rename = "autoPopulateGoogleMeetLinks", default)]
-    pub auto_populate_google_meet_links: bool,
-    #[serde(rename = "automatedEmailFilter", default)]
-    pub automated_email_filter: bool,
-    #[serde(rename = "dSThresholdNotification", default)]
-    pub d_s_threshold_notification: bool,
-    #[serde(rename = "enableActivityAnalyticsPref", default)]
-    pub enable_activity_analytics_pref: bool,
-    #[serde(rename = "enableActivityCapture", default)]
-    pub enable_activity_capture: bool,
-    #[serde(rename = "enableActivityMetrics", default)]
-    pub enable_activity_metrics: bool,
-    #[serde(rename = "enableActivitySyncEngine", default)]
-    pub enable_activity_sync_engine: bool,
-    #[serde(rename = "enableEACForEveryonePref", default)]
-    pub enable_eac_for_everyone_pref: bool,
-    #[serde(rename = "enableEnforceEacSharingPref", default)]
-    pub enable_enforce_eac_sharing_pref: bool,
-    #[serde(rename = "enableInboxActivitySharing", default)]
-    pub enable_inbox_activity_sharing: bool,
-    #[serde(rename = "enableInsightsInTimeline", default)]
-    pub enable_insights_in_timeline: bool,
-    #[serde(rename = "enableInsightsInTimelineEacStd", default)]
-    pub enable_insights_in_timeline_eac_std: bool,
-    #[serde(rename = "enableUnifiedActivitiesPref", default)]
-    pub enable_unified_activities_pref: bool,
-    #[serde(rename = "provisionProductivityFeatures", default)]
-    pub provision_productivity_features: bool,
-    #[serde(rename = "relationshipGraphPref", default)]
-    pub relationship_graph_pref: bool,
-    #[serde(rename = "s2XSvcAccEmail", default)]
-    pub s_2_x_svc_acc_email: bool,
-    #[serde(rename = "salesforceEventsOnlyPref", default)]
-    pub salesforce_events_only_pref: bool,
-    #[serde(rename = "sensitiveEmailFilter", default)]
-    pub sensitive_email_filter: bool,
-    #[serde(rename = "showEACCalendarPref", default)]
-    pub show_eac_calendar_pref: bool,
-    #[serde(rename = "syncEmailToCoreActivity", default)]
-    pub sync_email_to_core_activity: bool,
-    #[serde(rename = "syncInternalEvents", default)]
-    pub sync_internal_events: bool,
+    #[serde(
+        rename = "addRcCompToFlexiPages",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub add_rc_comp_to_flexi_pages: Option<bool>,
+    #[serde(
+        rename = "autoContactCreationPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub auto_contact_creation_pref: Option<bool>,
+    #[serde(
+        rename = "autoContactEnrichmentPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub auto_contact_enrichment_pref: Option<bool>,
+    #[serde(
+        rename = "autoPopulateGoogleMeetLinks",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub auto_populate_google_meet_links: Option<bool>,
+    #[serde(
+        rename = "automatedEmailFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub automated_email_filter: Option<bool>,
+    #[serde(
+        rename = "dSThresholdNotification",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub d_s_threshold_notification: Option<bool>,
+    #[serde(
+        rename = "enableActivityAnalyticsPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_activity_analytics_pref: Option<bool>,
+    #[serde(
+        rename = "enableActivityCapture",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_activity_capture: Option<bool>,
+    #[serde(
+        rename = "enableActivityMetrics",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_activity_metrics: Option<bool>,
+    #[serde(
+        rename = "enableActivitySyncEngine",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_activity_sync_engine: Option<bool>,
+    #[serde(
+        rename = "enableEACForEveryonePref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_eac_for_everyone_pref: Option<bool>,
+    #[serde(
+        rename = "enableEnforceEacSharingPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_enforce_eac_sharing_pref: Option<bool>,
+    #[serde(
+        rename = "enableInboxActivitySharing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_inbox_activity_sharing: Option<bool>,
+    #[serde(
+        rename = "enableInsightsInTimeline",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_insights_in_timeline: Option<bool>,
+    #[serde(
+        rename = "enableInsightsInTimelineEacStd",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_insights_in_timeline_eac_std: Option<bool>,
+    #[serde(
+        rename = "enableUnifiedActivitiesPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_unified_activities_pref: Option<bool>,
+    #[serde(
+        rename = "provisionProductivityFeatures",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub provision_productivity_features: Option<bool>,
+    #[serde(
+        rename = "relationshipGraphPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub relationship_graph_pref: Option<bool>,
+    #[serde(
+        rename = "s2XSvcAccEmail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub s_2_x_svc_acc_email: Option<bool>,
+    #[serde(
+        rename = "salesforceEventsOnlyPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub salesforce_events_only_pref: Option<bool>,
+    #[serde(
+        rename = "sensitiveEmailFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sensitive_email_filter: Option<bool>,
+    #[serde(
+        rename = "showEACCalendarPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_eac_calendar_pref: Option<bool>,
+    #[serde(
+        rename = "syncEmailToCoreActivity",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sync_email_to_core_activity: Option<bool>,
+    #[serde(
+        rename = "syncInternalEvents",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sync_internal_events: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EinsteinAISettings {
-    #[serde(rename = "enableAIFeedbackWithDC", default)]
-    pub enable_ai_feedback_with_dc: bool,
-    #[serde(rename = "enableAITrustInputToxicityDetection", default)]
-    pub enable_ai_trust_input_toxicity_detection: bool,
-    #[serde(rename = "enableAITrustPromptInjectionDetection", default)]
-    pub enable_ai_trust_prompt_injection_detection: bool,
-    #[serde(rename = "enableAgentHealthMonitoring", default)]
-    pub enable_agent_health_monitoring: bool,
-    #[serde(rename = "enableAgentHealthMonitoringGA", default)]
-    pub enable_agent_health_monitoring_ga: bool,
-    #[serde(rename = "enablePBHideScopedNotif", default)]
-    pub enable_pb_hide_scoped_notif: bool,
-    #[serde(rename = "enablePBPromptPerformanceMetrics", default)]
-    pub enable_pb_prompt_performance_metrics: bool,
-    #[serde(rename = "enableTrustPIIMasking", default)]
-    pub enable_trust_pii_masking: bool,
+    #[serde(
+        rename = "enableAIFeedbackWithDC",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ai_feedback_with_dc: Option<bool>,
+    #[serde(
+        rename = "enableAITrustInputToxicityDetection",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ai_trust_input_toxicity_detection: Option<bool>,
+    #[serde(
+        rename = "enableAITrustPromptInjectionDetection",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ai_trust_prompt_injection_detection: Option<bool>,
+    #[serde(
+        rename = "enableAgentHealthMonitoring",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_agent_health_monitoring: Option<bool>,
+    #[serde(
+        rename = "enableAgentHealthMonitoringGA",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_agent_health_monitoring_ga: Option<bool>,
+    #[serde(
+        rename = "enablePBHideScopedNotif",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pb_hide_scoped_notif: Option<bool>,
+    #[serde(
+        rename = "enablePBPromptPerformanceMetrics",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pb_prompt_performance_metrics: Option<bool>,
+    #[serde(
+        rename = "enableTrustPIIMasking",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_trust_pii_masking: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EinsteinAgentSettings {
-    #[serde(rename = "einsteinAgentRecommendations", default)]
-    pub einstein_agent_recommendations: bool,
-    #[serde(rename = "reRunAttributeBasedRules", default)]
-    pub re_run_attribute_based_rules: bool,
-    #[serde(rename = "runAssignmentRules", default)]
-    pub run_assignment_rules: bool,
-    #[serde(rename = "summarizationCopilot", default)]
-    pub summarization_copilot: bool,
-    #[serde(rename = "summarizationRecs", default)]
-    pub summarization_recs: bool,
-    #[serde(rename = "voiceWrapUpRecs", default)]
-    pub voice_wrap_up_recs: bool,
+    #[serde(
+        rename = "einsteinAgentRecommendations",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub einstein_agent_recommendations: Option<bool>,
+    #[serde(
+        rename = "reRunAttributeBasedRules",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub re_run_attribute_based_rules: Option<bool>,
+    #[serde(
+        rename = "runAssignmentRules",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub run_assignment_rules: Option<bool>,
+    #[serde(
+        rename = "summarizationCopilot",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub summarization_copilot: Option<bool>,
+    #[serde(
+        rename = "summarizationRecs",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub summarization_recs: Option<bool>,
+    #[serde(
+        rename = "unifiedSummarization",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub unified_summarization: Option<bool>,
+    #[serde(
+        rename = "voiceWrapUpRecs",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub voice_wrap_up_recs: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EinsteinAssistantSettings {
-    #[serde(rename = "enableEinsteinAssistantDataExtractionEnabled", default)]
-    pub enable_einstein_assistant_data_extraction_enabled: bool,
-    #[serde(rename = "enableEinsteinAssistantEnabled", default)]
-    pub enable_einstein_assistant_enabled: bool,
-    #[serde(rename = "enableEinsteinEnableVoiceLogging", default)]
-    pub enable_einstein_enable_voice_logging: bool,
+    #[serde(
+        rename = "enableEinsteinAssistantDataExtractionEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_assistant_data_extraction_enabled: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinAssistantEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_assistant_enabled: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinEnableVoiceLogging",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_enable_voice_logging: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EinsteinCopilotSettings {
-    #[serde(rename = "enableEinsteinGptCopilot", default)]
-    pub enable_einstein_gpt_copilot: bool,
+    #[serde(
+        rename = "enableEinsteinGptCopilot",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_gpt_copilot: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EinsteinDealInsightsSettings {
-    #[serde(rename = "enableUnlikelyToCloseThisMonth", default)]
-    pub enable_unlikely_to_close_this_month: bool,
+    #[serde(
+        rename = "enableUnlikelyToCloseThisMonth",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_unlikely_to_close_this_month: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EinsteinDocumentCaptureSettings {
-    #[serde(rename = "enableEinsteinDocumentReader", default)]
-    pub enable_einstein_document_reader: bool,
+    #[serde(
+        rename = "enableEinsteinDocumentReader",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_document_reader: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EinsteinGptSettings {
-    #[serde(rename = "disableAIProvAWSBedrock", default)]
-    pub disable_ai_prov_aws_bedrock: bool,
-    #[serde(rename = "disableAIProvAzureOpenAI", default)]
-    pub disable_ai_prov_azure_open_ai: bool,
-    #[serde(rename = "disableAIProvOpenAI", default)]
-    pub disable_ai_prov_open_ai: bool,
-    #[serde(rename = "disableAIProvVertexGemini", default)]
-    pub disable_ai_prov_vertex_gemini: bool,
-    #[serde(rename = "disableAIProviderRegionFallback", default)]
-    pub disable_ai_provider_region_fallback: bool,
-    #[serde(rename = "enableAIModelBeta", default)]
-    pub enable_ai_model_beta: bool,
-    #[serde(rename = "enableEinsteinGPTDeployPromptTemplatesAsActive", default)]
-    pub enable_einstein_gpt_deploy_prompt_templates_as_active: bool,
-    #[serde(rename = "enableEinsteinGptAllowUnsafePTInputChanges", default)]
-    pub enable_einstein_gpt_allow_unsafe_pt_input_changes: bool,
-    #[serde(rename = "enableEinsteinGptGlobalLangSupport", default)]
-    pub enable_einstein_gpt_global_lang_support: bool,
-    #[serde(rename = "enableEinsteinGptPlatform", default)]
-    pub enable_einstein_gpt_platform: bool,
-    #[serde(rename = "enableEnhancedPromptSecurity", default)]
-    pub enable_enhanced_prompt_security: bool,
+    #[serde(
+        rename = "disableAIProvAWSBedrock",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub disable_ai_prov_aws_bedrock: Option<bool>,
+    #[serde(
+        rename = "disableAIProvAzureOpenAI",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub disable_ai_prov_azure_open_ai: Option<bool>,
+    #[serde(
+        rename = "disableAIProvOpenAI",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub disable_ai_prov_open_ai: Option<bool>,
+    #[serde(
+        rename = "disableAIProvVertexGemini",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub disable_ai_prov_vertex_gemini: Option<bool>,
+    #[serde(
+        rename = "disableAIProviderRegionFallback",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub disable_ai_provider_region_fallback: Option<bool>,
+    #[serde(
+        rename = "enableAIModelBeta",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ai_model_beta: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinGPTDeployPromptTemplatesAsActive",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_gpt_deploy_prompt_templates_as_active: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinGptAllowUnsafePTInputChanges",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_gpt_allow_unsafe_pt_input_changes: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinGptGlobalLangSupport",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_gpt_global_lang_support: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinGptPlatform",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_gpt_platform: Option<bool>,
+    #[serde(
+        rename = "enableEnhancedPromptSecurity",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_enhanced_prompt_security: Option<bool>,
+    #[serde(
+        rename = "enablePBJinjaSyntaxBeta",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pb_jinja_syntax_beta: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EmailAdministrationSettings {
-    #[serde(rename = "enableComplianceBcc", default)]
-    pub enable_compliance_bcc: bool,
-    #[serde(rename = "enableEmailConsentManagement", default)]
-    pub enable_email_consent_management: bool,
-    #[serde(rename = "enableEmailSenderIdCompliance", default)]
-    pub enable_email_sender_id_compliance: bool,
-    #[serde(rename = "enableEmailSpfCompliance", default)]
-    pub enable_email_spf_compliance: bool,
-    #[serde(rename = "enableEmailToSalesforce", default)]
-    pub enable_email_to_salesforce: bool,
-    #[serde(rename = "enableEmailTrackingIPBlocklist", default)]
-    pub enable_email_tracking_ip_blocklist: bool,
-    #[serde(rename = "enableEmailWorkflowApproval", default)]
-    pub enable_email_workflow_approval: bool,
-    #[serde(rename = "enableEnhancedEmailEnabled", default)]
-    pub enable_enhanced_email_enabled: bool,
-    #[serde(rename = "enableHandleBouncedEmails", default)]
-    pub enable_handle_bounced_emails: bool,
-    #[serde(rename = "enableHtmlEmail", default)]
-    pub enable_html_email: bool,
-    #[serde(rename = "enableInternationalEmailAddresses", default)]
-    pub enable_international_email_addresses: bool,
-    #[serde(rename = "enableListEmailLogActivities", default)]
-    pub enable_list_email_log_activities: bool,
-    #[serde(rename = "enableResendBouncedEmails", default)]
-    pub enable_resend_bounced_emails: bool,
-    #[serde(rename = "enableRestrictTlsToDomains", default)]
-    pub enable_restrict_tls_to_domains: bool,
-    #[serde(rename = "enableSendThroughGmailPref", default)]
-    pub enable_send_through_gmail_pref: bool,
-    #[serde(rename = "enableSendViaExchangePref", default)]
-    pub enable_send_via_exchange_pref: bool,
-    #[serde(rename = "enableSendViaGmailPref", default)]
-    pub enable_send_via_gmail_pref: bool,
-    #[serde(rename = "enableTinyMceSalesEmailEnabled", default)]
-    pub enable_tiny_mce_sales_email_enabled: bool,
-    #[serde(rename = "enableUseOrgFootersForExtTrans", default)]
-    pub enable_use_org_footers_for_ext_trans: bool,
-    #[serde(rename = "enableVerifyEmailDomainByDkim", default)]
-    pub enable_verify_email_domain_by_dkim: bool,
-    #[serde(rename = "sendEmailsEvenWhenAutomationUpdatesSameRecord", default)]
-    pub send_emails_even_when_automation_updates_same_record: bool,
-    #[serde(rename = "sendMassEmailNotification", default)]
-    pub send_mass_email_notification: bool,
-    #[serde(rename = "sendTextOnlySystemEmails", default)]
-    pub send_text_only_system_emails: bool,
+    #[serde(
+        rename = "enableComplianceBcc",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_compliance_bcc: Option<bool>,
+    #[serde(
+        rename = "enableEmailConsentManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_email_consent_management: Option<bool>,
+    #[serde(
+        rename = "enableEmailSenderIdCompliance",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_email_sender_id_compliance: Option<bool>,
+    #[serde(
+        rename = "enableEmailSpfCompliance",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_email_spf_compliance: Option<bool>,
+    #[serde(
+        rename = "enableEmailToSalesforce",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_email_to_salesforce: Option<bool>,
+    #[serde(
+        rename = "enableEmailTrackingIPBlocklist",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_email_tracking_ip_blocklist: Option<bool>,
+    #[serde(
+        rename = "enableEmailWorkflowApproval",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_email_workflow_approval: Option<bool>,
+    #[serde(
+        rename = "enableEnhancedEmailEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_enhanced_email_enabled: Option<bool>,
+    #[serde(
+        rename = "enableHandleBouncedEmails",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_handle_bounced_emails: Option<bool>,
+    #[serde(
+        rename = "enableHtmlEmail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_html_email: Option<bool>,
+    #[serde(
+        rename = "enableInternationalEmailAddresses",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_international_email_addresses: Option<bool>,
+    #[serde(
+        rename = "enableListEmailLogActivities",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_list_email_log_activities: Option<bool>,
+    #[serde(
+        rename = "enableResendBouncedEmails",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_resend_bounced_emails: Option<bool>,
+    #[serde(
+        rename = "enableRestrictTlsToDomains",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_restrict_tls_to_domains: Option<bool>,
+    #[serde(
+        rename = "enableSendThroughGmailPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_send_through_gmail_pref: Option<bool>,
+    #[serde(
+        rename = "enableSendViaExchangePref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_send_via_exchange_pref: Option<bool>,
+    #[serde(
+        rename = "enableSendViaGmailPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_send_via_gmail_pref: Option<bool>,
+    #[serde(
+        rename = "enableTinyMceSalesEmailEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_tiny_mce_sales_email_enabled: Option<bool>,
+    #[serde(
+        rename = "enableUseOrgFootersForExtTrans",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_use_org_footers_for_ext_trans: Option<bool>,
+    #[serde(
+        rename = "enableVerifyEmailDomainByDkim",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_verify_email_domain_by_dkim: Option<bool>,
+    #[serde(
+        rename = "sendEmailsEvenWhenAutomationUpdatesSameRecord",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub send_emails_even_when_automation_updates_same_record: Option<bool>,
+    #[serde(
+        rename = "sendMassEmailNotification",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub send_mass_email_notification: Option<bool>,
+    #[serde(
+        rename = "sendTextOnlySystemEmails",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub send_text_only_system_emails: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EmailAuthorizationSettings {
+    #[serde(
+        rename = "enableSubstituteFromAddress",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_substitute_from_address: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EmailIntegrationSettings {
-    #[serde(rename = "doesEmailLogAsEmailMessageInOutlook", default)]
-    pub does_email_log_as_email_message_in_outlook: bool,
-    #[serde(rename = "doesGmailStayConnectedToSalesforce", default)]
-    pub does_gmail_stay_connected_to_salesforce: bool,
-    #[serde(rename = "enableContactAndEventSync", default)]
-    pub enable_contact_and_event_sync: bool,
-    #[serde(rename = "enableContextualEverywhere", default)]
-    pub enable_contextual_everywhere: bool,
-    #[serde(rename = "enableEmailTrackingInMobile", default)]
-    pub enable_email_tracking_in_mobile: bool,
-    #[serde(rename = "enableEngageForOutlook", default)]
-    pub enable_engage_for_outlook: bool,
-    #[serde(rename = "enableExtensionHostUnrestricted", default)]
-    pub enable_extension_host_unrestricted: bool,
-    #[serde(rename = "enableGmailIntegration", default)]
-    pub enable_gmail_integration: bool,
-    #[serde(rename = "enableInboxInternalEmailTracking", default)]
-    pub enable_inbox_internal_email_tracking: bool,
-    #[serde(rename = "enableInboxMobileIntune", default)]
-    pub enable_inbox_mobile_intune: bool,
-    #[serde(rename = "enableInboxUseGraphApi", default)]
-    pub enable_inbox_use_graph_api: bool,
-    #[serde(rename = "enableOutlookIntegration", default)]
-    pub enable_outlook_integration: bool,
-    #[serde(rename = "enableOutlookMobileIntegration", default)]
-    pub enable_outlook_mobile_integration: bool,
-    #[serde(rename = "enableProductivityFeatures", default)]
-    pub enable_productivity_features: bool,
-    #[serde(rename = "enableSupplementalContactInfoInMobile", default)]
-    pub enable_supplemental_contact_info_in_mobile: bool,
-    #[serde(rename = "isLayoutCustomizationAllowed", default)]
-    pub is_layout_customization_allowed: bool,
-    #[serde(rename = "orgIsSyncingEventsOutbound", default)]
-    pub org_is_syncing_events_outbound: bool,
-    #[serde(rename = "shouldUseTrustedDomainsList", default)]
-    pub should_use_trusted_domains_list: bool,
+    #[serde(
+        rename = "doesEmailLogAsEmailMessageInOutlook",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_email_log_as_email_message_in_outlook: Option<bool>,
+    #[serde(
+        rename = "doesGmailStayConnectedToSalesforce",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_gmail_stay_connected_to_salesforce: Option<bool>,
+    #[serde(
+        rename = "enableContactAndEventSync",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_contact_and_event_sync: Option<bool>,
+    #[serde(
+        rename = "enableContextualEverywhere",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_contextual_everywhere: Option<bool>,
+    #[serde(
+        rename = "enableEmailTrackingInMobile",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_email_tracking_in_mobile: Option<bool>,
+    #[serde(
+        rename = "enableEngageForOutlook",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_engage_for_outlook: Option<bool>,
+    #[serde(
+        rename = "enableExtensionHostUnrestricted",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_extension_host_unrestricted: Option<bool>,
+    #[serde(
+        rename = "enableGmailIntegration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_gmail_integration: Option<bool>,
+    #[serde(
+        rename = "enableInboxInternalEmailTracking",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_inbox_internal_email_tracking: Option<bool>,
+    #[serde(
+        rename = "enableInboxMobileIntune",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_inbox_mobile_intune: Option<bool>,
+    #[serde(
+        rename = "enableInboxUseGraphApi",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_inbox_use_graph_api: Option<bool>,
+    #[serde(
+        rename = "enableOutlookIntegration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_outlook_integration: Option<bool>,
+    #[serde(
+        rename = "enableOutlookMobileIntegration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_outlook_mobile_integration: Option<bool>,
+    #[serde(
+        rename = "enableProductivityFeatures",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_productivity_features: Option<bool>,
+    #[serde(
+        rename = "enableSupplementalContactInfoInMobile",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_supplemental_contact_info_in_mobile: Option<bool>,
+    #[serde(
+        rename = "isLayoutCustomizationAllowed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_layout_customization_allowed: Option<bool>,
+    #[serde(
+        rename = "orgIsSyncingEventsOutbound",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub org_is_syncing_events_outbound: Option<bool>,
+    #[serde(
+        rename = "shouldUseTrustedDomainsList",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub should_use_trusted_domains_list: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EmailTemplateSettings {
-    #[serde(rename = "enableTemplateEnhancedFolderPref", default)]
-    pub enable_template_enhanced_folder_pref: bool,
+    #[serde(
+        rename = "enableTemplateEnhancedFolderPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_template_enhanced_folder_pref: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EmailToCaseSettings {
-    #[serde(rename = "enableE2CAttachmentAsFile", default)]
-    pub enable_e_2_c_attachment_as_file: bool,
-    #[serde(rename = "enableE2CDeduplicateAttachments", default)]
-    pub enable_e_2_c_deduplicate_attachments: bool,
-    #[serde(rename = "enableE2CExternalServer", default)]
-    pub enable_e_2_c_external_server: bool,
-    #[serde(rename = "enableE2CSourceTracking", default)]
-    pub enable_e_2_c_source_tracking: bool,
-    #[serde(rename = "enableEmailToCase", default)]
-    pub enable_email_to_case: bool,
-    #[serde(rename = "enableEmailTranslation", default)]
-    pub enable_email_translation: bool,
-    #[serde(rename = "enableHtmlEmail", default)]
-    pub enable_html_email: bool,
-    #[serde(rename = "enableNewToReadTriggers", default)]
-    pub enable_new_to_read_triggers: bool,
-    #[serde(rename = "enableOnDemandEmailToCase", default)]
-    pub enable_on_demand_email_to_case: bool,
-    #[serde(rename = "enableThreadIDInBody", default)]
-    pub enable_thread_id_in_body: bool,
-    #[serde(rename = "enableThreadIDInSubject", default)]
-    pub enable_thread_id_in_subject: bool,
-    #[serde(rename = "enableThreadTokenInBody", default)]
-    pub enable_thread_token_in_body: bool,
-    #[serde(rename = "enableThreadTokenInSubject", default)]
-    pub enable_thread_token_in_subject: bool,
-    #[serde(rename = "movingEmailEnabled", default)]
-    pub moving_email_enabled: bool,
-    #[serde(rename = "notifyOwnerOnNewCaseEmail", default)]
-    pub notify_owner_on_new_case_email: bool,
-    #[serde(rename = "notifySenderE2CError", default)]
-    pub notify_sender_e_2_c_error: bool,
-    #[serde(rename = "overEmailLimitAction", default)]
-    pub over_email_limit_action: serde_json::Value,
-    #[serde(rename = "preQuoteSignature", default)]
-    pub pre_quote_signature: bool,
-    #[serde(rename = "replyWithNewContentOnly", default)]
-    pub reply_with_new_content_only: bool,
+    #[serde(
+        rename = "enableE2CAttachmentAsFile",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_e_2_c_attachment_as_file: Option<bool>,
+    #[serde(
+        rename = "enableE2CDeduplicateAttachments",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_e_2_c_deduplicate_attachments: Option<bool>,
+    #[serde(
+        rename = "enableE2CExternalServer",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_e_2_c_external_server: Option<bool>,
+    #[serde(
+        rename = "enableE2CSourceTracking",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_e_2_c_source_tracking: Option<bool>,
+    #[serde(
+        rename = "enableEmailToCase",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_email_to_case: Option<bool>,
+    #[serde(
+        rename = "enableHtmlEmail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_html_email: Option<bool>,
+    #[serde(
+        rename = "enableNewToReadTriggers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_new_to_read_triggers: Option<bool>,
+    #[serde(
+        rename = "enableOnDemandEmailToCase",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_on_demand_email_to_case: Option<bool>,
+    #[serde(
+        rename = "enableThreadIDInBody",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_thread_id_in_body: Option<bool>,
+    #[serde(
+        rename = "enableThreadIDInSubject",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_thread_id_in_subject: Option<bool>,
+    #[serde(
+        rename = "enableThreadTokenInBody",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_thread_token_in_body: Option<bool>,
+    #[serde(
+        rename = "enableThreadTokenInSubject",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_thread_token_in_subject: Option<bool>,
+    #[serde(
+        rename = "movingEmailEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub moving_email_enabled: Option<bool>,
+    #[serde(
+        rename = "notifyOwnerOnNewCaseEmail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub notify_owner_on_new_case_email: Option<bool>,
+    #[serde(
+        rename = "notifySenderE2CError",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub notify_sender_e_2_c_error: Option<bool>,
+    #[serde(
+        rename = "overEmailLimitAction",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub over_email_limit_action: Option<serde_json::Value>,
+    #[serde(
+        rename = "preQuoteSignature",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub pre_quote_signature: Option<bool>,
+    #[serde(
+        rename = "replyWithNewContentOnly",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub reply_with_new_content_only: Option<bool>,
     #[serde(rename = "routingAddresses", default)]
     pub routing_addresses: Vec<serde_json::Value>,
-    #[serde(rename = "showServiceEmailOpenPrompt", default)]
-    pub show_service_email_open_prompt: bool,
-    #[serde(rename = "showWordCountInComposer", default)]
-    pub show_word_count_in_composer: bool,
-    #[serde(rename = "unauthorizedSenderAction", default)]
-    pub unauthorized_sender_action: serde_json::Value,
-    #[serde(rename = "useEmailHeadersForThreading", default)]
-    pub use_email_headers_for_threading: bool,
+    #[serde(
+        rename = "showServiceEmailOpenPrompt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_service_email_open_prompt: Option<bool>,
+    #[serde(
+        rename = "showWordCountInComposer",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_word_count_in_composer: Option<bool>,
+    #[serde(
+        rename = "unauthorizedSenderAction",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub unauthorized_sender_action: Option<serde_json::Value>,
+    #[serde(
+        rename = "useEmailHeadersForThreading",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub use_email_headers_for_threading: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EmbeddedServiceAppointmentSettings {
-    #[serde(rename = "appointmentConfirmImg", default)]
-    pub appointment_confirm_img: String,
+    #[serde(
+        rename = "appointmentConfirmImg",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub appointment_confirm_img: Option<String>,
     #[serde(default)]
     pub enabled: bool,
-    #[serde(rename = "homeImg", default)]
-    pub home_img: String,
-    #[serde(rename = "logoImg", default)]
-    pub logo_img: String,
-    #[serde(rename = "shouldShowExistingAppointment", default)]
-    pub should_show_existing_appointment: bool,
-    #[serde(rename = "shouldShowNewAppointment", default)]
-    pub should_show_new_appointment: bool,
+    #[serde(rename = "homeImg", default, skip_serializing_if = "Option::is_none")]
+    pub home_img: Option<String>,
+    #[serde(rename = "logoImg", default, skip_serializing_if = "Option::is_none")]
+    pub logo_img: Option<String>,
+    #[serde(
+        rename = "shouldShowExistingAppointment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub should_show_existing_appointment: Option<bool>,
+    #[serde(
+        rename = "shouldShowNewAppointment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub should_show_new_appointment: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EmbeddedServiceMenuSettings {
-    #[serde(default)]
-    pub branding: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub branding: Option<String>,
     #[serde(rename = "embeddedServiceCustomLabels", default)]
     pub embedded_service_custom_labels: Vec<serde_json::Value>,
     #[serde(rename = "embeddedServiceCustomizations", default)]
     pub embedded_service_customizations: Vec<serde_json::Value>,
     #[serde(rename = "embeddedServiceMenuItems", default)]
     pub embedded_service_menu_items: Vec<serde_json::Value>,
-    #[serde(rename = "isEnabled", default)]
-    pub is_enabled: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub site: String,
+    #[serde(rename = "isEnabled", default, skip_serializing_if = "Option::is_none")]
+    pub is_enabled: Option<bool>,
+    #[serde(
+        rename = "masterLabel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub master_label: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub site: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EmergencySettings {
+    #[serde(
+        rename = "breadcrumbsValidity",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub breadcrumbs_validity: Option<f64>,
+    #[serde(
+        rename = "chatterAvailability",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub chatter_availability: Option<bool>,
+    #[serde(
+        rename = "chatterDestination",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub chatter_destination: Option<String>,
+    #[serde(
+        rename = "emergencyDueDateOffset",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub emergency_due_date_offset: Option<f64>,
+    #[serde(
+        rename = "goodAvailabilityGrade",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub good_availability_grade: Option<f64>,
+    #[serde(
+        rename = "idealAvailabilityGrade",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub ideal_availability_grade: Option<f64>,
+    #[serde(
+        rename = "pinService",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub pin_service: Option<bool>,
+    #[serde(
+        rename = "schedulingPolicyId",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub scheduling_policy_id: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EmployeeFieldAccessSettings {
-    #[serde(rename = "enableEmployeeFieldMaskDefaults", default)]
-    pub enable_employee_field_mask_defaults: bool,
-    #[serde(rename = "enableEmployeeFieldMasking", default)]
-    pub enable_employee_field_masking: bool,
+    #[serde(
+        rename = "enableEmployeeFieldMaskDefaults",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_employee_field_mask_defaults: Option<bool>,
+    #[serde(
+        rename = "enableEmployeeFieldMasking",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_employee_field_masking: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -1804,84 +4378,176 @@ pub struct EmployeeFieldAccessSettings {
 pub struct EmployeeUserSettings {
     #[serde(rename = "emailEncoding", default)]
     pub email_encoding: String,
-    #[serde(rename = "enableEmployeeAutoCreateUser", default)]
-    pub enable_employee_auto_create_user: bool,
-    #[serde(rename = "enableEmployeeIsSourceOfTruth", default)]
-    pub enable_employee_is_source_of_truth: bool,
-    #[serde(default)]
-    pub permset: String,
+    #[serde(
+        rename = "enableEmployeeAutoCreateUser",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_employee_auto_create_user: Option<bool>,
+    #[serde(
+        rename = "enableEmployeeIsSourceOfTruth",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_employee_is_source_of_truth: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub permset: Option<String>,
     #[serde(default)]
     pub profile: String,
-    #[serde(rename = "usernameSuffix", default)]
-    pub username_suffix: String,
+    #[serde(
+        rename = "usernameSuffix",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub username_suffix: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EncryptionKeySettings {
-    #[serde(rename = "canEncryptTransactionalDatabase", default)]
-    pub can_encrypt_transactional_database: bool,
-    #[serde(rename = "canExternalKeyManagement", default)]
-    pub can_external_key_management: bool,
-    #[serde(rename = "canManageDataCloudKeys", default)]
-    pub can_manage_data_cloud_keys: bool,
-    #[serde(rename = "canOptOutOfDerivationWithBYOK", default)]
-    pub can_opt_out_of_derivation_with_byok: bool,
-    #[serde(rename = "enableCacheOnlyKeys", default)]
-    pub enable_cache_only_keys: bool,
-    #[serde(rename = "enableReplayDetection", default)]
-    pub enable_replay_detection: bool,
+    #[serde(
+        rename = "canEncryptTransactionalDatabase",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_encrypt_transactional_database: Option<bool>,
+    #[serde(
+        rename = "canExternalKeyManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_external_key_management: Option<bool>,
+    #[serde(
+        rename = "canManageDataCloudKeys",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_manage_data_cloud_keys: Option<bool>,
+    #[serde(
+        rename = "canOptOutOfDerivationWithBYOK",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_opt_out_of_derivation_with_byok: Option<bool>,
+    #[serde(
+        rename = "enableCacheOnlyKeys",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cache_only_keys: Option<bool>,
+    #[serde(
+        rename = "enableReplayDetection",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_replay_detection: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EnhancedNotesSettings {
-    #[serde(rename = "enableEnhancedNotes", default)]
-    pub enable_enhanced_notes: bool,
-    #[serde(rename = "enableTasksOnEnhancedNotes", default)]
-    pub enable_tasks_on_enhanced_notes: bool,
+    #[serde(
+        rename = "enableEnhancedNotes",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_enhanced_notes: Option<bool>,
+    #[serde(
+        rename = "enableTasksOnEnhancedNotes",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_tasks_on_enhanced_notes: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EntitlementSettings {
-    #[serde(rename = "assetLookupLimitedToActiveEntitlementsOnAccount", default)]
-    pub asset_lookup_limited_to_active_entitlements_on_account: bool,
-    #[serde(rename = "assetLookupLimitedToActiveEntitlementsOnContact", default)]
-    pub asset_lookup_limited_to_active_entitlements_on_contact: bool,
-    #[serde(rename = "assetLookupLimitedToSameAccount", default)]
-    pub asset_lookup_limited_to_same_account: bool,
-    #[serde(rename = "assetLookupLimitedToSameContact", default)]
-    pub asset_lookup_limited_to_same_contact: bool,
+    #[serde(
+        rename = "assetLookupLimitedToActiveEntitlementsOnAccount",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub asset_lookup_limited_to_active_entitlements_on_account: Option<bool>,
+    #[serde(
+        rename = "assetLookupLimitedToActiveEntitlementsOnContact",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub asset_lookup_limited_to_active_entitlements_on_contact: Option<bool>,
+    #[serde(
+        rename = "assetLookupLimitedToSameAccount",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub asset_lookup_limited_to_same_account: Option<bool>,
+    #[serde(
+        rename = "assetLookupLimitedToSameContact",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub asset_lookup_limited_to_same_contact: Option<bool>,
     #[serde(rename = "enableEntitlementVersioning", default)]
     pub enable_entitlement_versioning: bool,
     #[serde(rename = "enableEntitlements", default)]
     pub enable_entitlements: bool,
-    #[serde(rename = "enableMilestoneFeedItem", default)]
-    pub enable_milestone_feed_item: bool,
-    #[serde(rename = "enableMilestoneStoppedTime", default)]
-    pub enable_milestone_stopped_time: bool,
-    #[serde(rename = "entitlementLookupLimitedToActiveStatus", default)]
-    pub entitlement_lookup_limited_to_active_status: bool,
-    #[serde(rename = "entitlementLookupLimitedToSameAccount", default)]
-    pub entitlement_lookup_limited_to_same_account: bool,
-    #[serde(rename = "entitlementLookupLimitedToSameAsset", default)]
-    pub entitlement_lookup_limited_to_same_asset: bool,
-    #[serde(rename = "entitlementLookupLimitedToSameContact", default)]
-    pub entitlement_lookup_limited_to_same_contact: bool,
-    #[serde(rename = "ignoreMilestoneBusinessHours", default)]
-    pub ignore_milestone_business_hours: bool,
+    #[serde(
+        rename = "enableMilestoneFeedItem",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_milestone_feed_item: Option<bool>,
+    #[serde(
+        rename = "enableMilestoneStoppedTime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_milestone_stopped_time: Option<bool>,
+    #[serde(
+        rename = "entitlementLookupLimitedToActiveStatus",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub entitlement_lookup_limited_to_active_status: Option<bool>,
+    #[serde(
+        rename = "entitlementLookupLimitedToSameAccount",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub entitlement_lookup_limited_to_same_account: Option<bool>,
+    #[serde(
+        rename = "entitlementLookupLimitedToSameAsset",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub entitlement_lookup_limited_to_same_asset: Option<bool>,
+    #[serde(
+        rename = "entitlementLookupLimitedToSameContact",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub entitlement_lookup_limited_to_same_contact: Option<bool>,
+    #[serde(
+        rename = "ignoreMilestoneBusinessHours",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub ignore_milestone_business_hours: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EssentialsSettings {
-    #[serde(rename = "emailConnectorEnabled", default)]
-    pub email_connector_enabled: bool,
+    #[serde(
+        rename = "emailConnectorEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub email_connector_enabled: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -1896,104 +4562,298 @@ pub struct EventLogObjectSettings {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EventSettings {
-    #[serde(rename = "bypassMeteringBlock", default)]
-    pub bypass_metering_block: bool,
-    #[serde(rename = "enableApexLimitEvents", default)]
-    pub enable_apex_limit_events: bool,
-    #[serde(rename = "enableDeleteMonitoringData", default)]
-    pub enable_delete_monitoring_data: bool,
-    #[serde(rename = "enableDynamicStreamingChannel", default)]
-    pub enable_dynamic_streaming_channel: bool,
-    #[serde(rename = "enableEventLogGeneration", default)]
-    pub enable_event_log_generation: bool,
-    #[serde(rename = "enableEventLogWaveIntegration", default)]
-    pub enable_event_log_wave_integration: bool,
-    #[serde(rename = "enableLightningLoggerEvents", default)]
-    pub enable_lightning_logger_events: bool,
-    #[serde(rename = "enableLoginForensics", default)]
-    pub enable_login_forensics: bool,
-    #[serde(rename = "enableStreamingApi", default)]
-    pub enable_streaming_api: bool,
-    #[serde(rename = "enableTransactionSecurityPolicies", default)]
-    pub enable_transaction_security_policies: bool,
-    #[serde(rename = "eventLogRetentionDuration", default)]
-    pub event_log_retention_duration: f64,
+    #[serde(
+        rename = "bypassMeteringBlock",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub bypass_metering_block: Option<bool>,
+    #[serde(
+        rename = "enableApexLimitEvents",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_apex_limit_events: Option<bool>,
+    #[serde(
+        rename = "enableDeleteMonitoringData",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_delete_monitoring_data: Option<bool>,
+    #[serde(
+        rename = "enableDynamicStreamingChannel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dynamic_streaming_channel: Option<bool>,
+    #[serde(
+        rename = "enableEventLogGeneration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_event_log_generation: Option<bool>,
+    #[serde(
+        rename = "enableEventLogWaveIntegration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_event_log_wave_integration: Option<bool>,
+    #[serde(
+        rename = "enableLightningLoggerEvents",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lightning_logger_events: Option<bool>,
+    #[serde(
+        rename = "enableLoginForensics",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_login_forensics: Option<bool>,
+    #[serde(
+        rename = "enableStreamingApi",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_streaming_api: Option<bool>,
+    #[serde(
+        rename = "enableTransactionSecurityPolicies",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_transaction_security_policies: Option<bool>,
+    #[serde(
+        rename = "eventLogRetentionDuration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub event_log_retention_duration: Option<f64>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EvfSettings {
-    #[serde(rename = "enableCopilotAnalytics", default)]
-    pub enable_copilot_analytics: bool,
+    #[serde(
+        rename = "enableCopilotAnalytics",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_copilot_analytics: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ExperienceBundleSettings {
-    #[serde(rename = "enableExperienceBundleMetadata", default)]
-    pub enable_experience_bundle_metadata: bool,
+    #[serde(
+        rename = "enableExperienceBundleMetadata",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_experience_bundle_metadata: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ExternalClientAppSettings {
-    #[serde(rename = "enableClientSecretInRestApiAccess", default)]
-    pub enable_client_secret_in_rest_api_access: bool,
-    #[serde(rename = "enableConsumerSecretApiAccess", default)]
-    pub enable_consumer_secret_api_access: bool,
-    #[serde(rename = "enablePackageEcaOauthFromDevOrg", default)]
-    pub enable_package_eca_oauth_from_dev_org: bool,
+    #[serde(
+        rename = "enableClientSecretInRestApiAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_client_secret_in_rest_api_access: Option<bool>,
+    #[serde(
+        rename = "enableConsumerSecretApiAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_consumer_secret_api_access: Option<bool>,
+    #[serde(
+        rename = "enablePackageEcaOauthFromDevOrg",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_package_eca_oauth_from_dev_org: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExtlClntAppAttestSettings {
+    #[serde(
+        rename = "attestConfigLink",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub attest_config_link: Option<String>,
+    #[serde(rename = "attestServiceType", default)]
+    pub attest_service_type: serde_json::Value,
+    #[serde(rename = "externalClientApplication", default)]
+    pub external_client_application: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExtlClntAppCanvasSettings {
+    #[serde(
+        rename = "accessMethod",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub access_method: Option<serde_json::Value>,
+    #[serde(rename = "canvasLocationOptions", default)]
+    pub canvas_location_options: Vec<serde_json::Value>,
+    #[serde(rename = "canvasOptions", default)]
+    pub canvas_options: Vec<serde_json::Value>,
+    #[serde(rename = "canvasUrl", default)]
+    pub canvas_url: String,
+    #[serde(rename = "externalClientApplication", default)]
+    pub external_client_application: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    #[serde(
+        rename = "lifeCycleHandler",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub life_cycle_handler: Option<String>,
+    #[serde(
+        rename = "samlInitiationMethod",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub saml_initiation_method: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ExtlClntAppGlobalOauthSettings {
-    #[serde(rename = "callbackUrl", default)]
-    pub callback_url: String,
-    #[serde(default)]
-    pub certificate: String,
-    #[serde(rename = "consumerKey", default)]
-    pub consumer_key: String,
-    #[serde(rename = "consumerSecret", default)]
-    pub consumer_secret: String,
+    #[serde(
+        rename = "callbackUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub callback_url: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub certificate: Option<String>,
+    #[serde(
+        rename = "consumerKey",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub consumer_key: Option<String>,
+    #[serde(
+        rename = "consumerSecret",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub consumer_secret: Option<String>,
     #[serde(rename = "externalClientApplication", default)]
     pub external_client_application: String,
-    #[serde(rename = "idTokenConfig", default)]
-    pub id_token_config: serde_json::Value,
-    #[serde(rename = "isClientCredentialsFlowEnabled", default)]
-    pub is_client_credentials_flow_enabled: bool,
-    #[serde(rename = "isCodeCredFlowEnabled", default)]
-    pub is_code_cred_flow_enabled: bool,
-    #[serde(rename = "isCodeCredPostOnly", default)]
-    pub is_code_cred_post_only: bool,
-    #[serde(rename = "isConsumerSecretOptional", default)]
-    pub is_consumer_secret_optional: bool,
-    #[serde(rename = "isDeviceFlowEnabled", default)]
-    pub is_device_flow_enabled: bool,
-    #[serde(rename = "isIntrospectAllTokens", default)]
-    pub is_introspect_all_tokens: bool,
-    #[serde(rename = "isNamedUserJwtEnabled", default)]
-    pub is_named_user_jwt_enabled: bool,
-    #[serde(rename = "isPkceRequired", default)]
-    pub is_pkce_required: bool,
-    #[serde(rename = "isRefreshTokenRotationEnabled", default)]
-    pub is_refresh_token_rotation_enabled: bool,
-    #[serde(rename = "isSecretRequiredForRefreshToken", default)]
-    pub is_secret_required_for_refresh_token: bool,
-    #[serde(rename = "isSecretRequiredForTokenExchange", default)]
-    pub is_secret_required_for_token_exchange: bool,
-    #[serde(rename = "isTokenExchangeEnabled", default)]
-    pub is_token_exchange_enabled: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "shouldRotateConsumerKey", default)]
-    pub should_rotate_consumer_key: bool,
-    #[serde(rename = "shouldRotateConsumerSecret", default)]
-    pub should_rotate_consumer_secret: bool,
+    #[serde(
+        rename = "idTokenConfig",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub id_token_config: Option<serde_json::Value>,
+    #[serde(
+        rename = "isClientCredentialsFlowEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_client_credentials_flow_enabled: Option<bool>,
+    #[serde(
+        rename = "isCodeCredFlowEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_code_cred_flow_enabled: Option<bool>,
+    #[serde(
+        rename = "isCodeCredPostOnly",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_code_cred_post_only: Option<bool>,
+    #[serde(
+        rename = "isConsumerSecretOptional",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_consumer_secret_optional: Option<bool>,
+    #[serde(
+        rename = "isDeviceFlowEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_device_flow_enabled: Option<bool>,
+    #[serde(
+        rename = "isEnforceRefreshTokenTTL",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_enforce_refresh_token_ttl: Option<bool>,
+    #[serde(
+        rename = "isIntrospectAllTokens",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_introspect_all_tokens: Option<bool>,
+    #[serde(
+        rename = "isNamedUserJwtEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_named_user_jwt_enabled: Option<bool>,
+    #[serde(
+        rename = "isPkceRequired",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_pkce_required: Option<bool>,
+    #[serde(
+        rename = "isRefreshTokenRotationEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_refresh_token_rotation_enabled: Option<bool>,
+    #[serde(
+        rename = "isSecretRequiredForRefreshToken",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_secret_required_for_refresh_token: Option<bool>,
+    #[serde(
+        rename = "isSecretRequiredForTokenExchange",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_secret_required_for_token_exchange: Option<bool>,
+    #[serde(
+        rename = "isTokenExchangeEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_token_exchange_enabled: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    #[serde(
+        rename = "shouldRotateConsumerKey",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub should_rotate_consumer_key: Option<bool>,
+    #[serde(
+        rename = "shouldRotateConsumerSecret",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub should_rotate_consumer_secret: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -2004,8 +4864,8 @@ pub struct ExtlClntAppMobileSettings {
     pub external_client_application: String,
     #[serde(rename = "isScreenLockEnabled", default)]
     pub is_screen_lock_enabled: bool,
-    #[serde(default)]
-    pub label: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -2014,8 +4874,8 @@ pub struct ExtlClntAppMobileSettings {
 pub struct ExtlClntAppNotificationSettings {
     #[serde(rename = "externalClientApplication", default)]
     pub external_client_application: String,
-    #[serde(default)]
-    pub label: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
     #[serde(rename = "notificationTypes", default)]
     pub notification_types: Vec<serde_json::Value>,
 }
@@ -2023,35 +4883,87 @@ pub struct ExtlClntAppNotificationSettings {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct ExtlClntAppOauthSecuritySettings {
+    #[serde(rename = "externalClientApplication", default)]
+    pub external_client_application: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    #[serde(rename = "tokenIpRanges", default)]
+    pub token_ip_ranges: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct ExtlClntAppOauthSettings {
-    #[serde(rename = "areAttributesIncludedInAssetToken", default)]
-    pub are_attributes_included_in_asset_token: bool,
-    #[serde(rename = "areCustomPermsIncludedInAssetToken", default)]
-    pub are_custom_perms_included_in_asset_token: bool,
-    #[serde(rename = "assetTokenAudiences", default)]
-    pub asset_token_audiences: String,
-    #[serde(rename = "assetTokenSigningCertificate", default)]
-    pub asset_token_signing_certificate: String,
-    #[serde(rename = "assetTokenValidity", default)]
-    pub asset_token_validity: f64,
-    #[serde(rename = "clientAssertionCertificate", default)]
-    pub client_assertion_certificate: String,
-    #[serde(rename = "commaSeparatedCustomScopes", default)]
-    pub comma_separated_custom_scopes: String,
-    #[serde(rename = "commaSeparatedOauthScopes", default)]
-    pub comma_separated_oauth_scopes: String,
+    #[serde(
+        rename = "areAttributesIncludedInAssetToken",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub are_attributes_included_in_asset_token: Option<bool>,
+    #[serde(
+        rename = "areCustomPermsIncludedInAssetToken",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub are_custom_perms_included_in_asset_token: Option<bool>,
+    #[serde(
+        rename = "assetTokenAudiences",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub asset_token_audiences: Option<String>,
+    #[serde(
+        rename = "assetTokenSigningCertificate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub asset_token_signing_certificate: Option<String>,
+    #[serde(
+        rename = "assetTokenValidity",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub asset_token_validity: Option<f64>,
+    #[serde(
+        rename = "clientAssertionCertificate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub client_assertion_certificate: Option<String>,
+    #[serde(
+        rename = "commaSeparatedCustomScopes",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub comma_separated_custom_scopes: Option<String>,
+    #[serde(
+        rename = "commaSeparatedOauthScopes",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub comma_separated_oauth_scopes: Option<String>,
     #[serde(rename = "customAttributes", default)]
     pub custom_attributes: Vec<serde_json::Value>,
     #[serde(rename = "externalClientApplication", default)]
     pub external_client_application: String,
-    #[serde(rename = "isFirstPartyAppEnabled", default)]
-    pub is_first_party_app_enabled: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "oauthLink", default)]
-    pub oauth_link: String,
-    #[serde(rename = "singleLogoutUrl", default)]
-    pub single_logout_url: String,
+    #[serde(
+        rename = "isFirstPartyAppEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_first_party_app_enabled: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    #[serde(rename = "oauthLink", default, skip_serializing_if = "Option::is_none")]
+    pub oauth_link: Option<String>,
+    #[serde(
+        rename = "singleLogoutUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub single_logout_url: Option<String>,
     #[serde(rename = "trustedIpRanges", default)]
     pub trusted_ip_ranges: Vec<serde_json::Value>,
 }
@@ -2060,16 +4972,28 @@ pub struct ExtlClntAppOauthSettings {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ExtlClntAppPushSettings {
-    #[serde(rename = "androidPushConfig", default)]
-    pub android_push_config: serde_json::Value,
-    #[serde(rename = "applePushConfig", default)]
-    pub apple_push_config: serde_json::Value,
+    #[serde(
+        rename = "androidPushConfig",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub android_push_config: Option<serde_json::Value>,
+    #[serde(
+        rename = "applePushConfig",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub apple_push_config: Option<serde_json::Value>,
     #[serde(rename = "externalClientApplication", default)]
     pub external_client_application: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "pushConfigLink", default)]
-    pub push_config_link: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    #[serde(
+        rename = "pushConfigLink",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub push_config_link: Option<String>,
     #[serde(rename = "pushServiceType", default)]
     pub push_service_type: serde_json::Value,
 }
@@ -2077,53 +5001,19 @@ pub struct ExtlClntAppPushSettings {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ExtlClntAppSampleSettings {
-    #[serde(rename = "devicePlatform", default)]
-    pub device_platform: serde_json::Value,
-    #[serde(rename = "deviceType", default)]
-    pub device_type: serde_json::Value,
-    #[serde(rename = "externalClientApplication", default)]
-    pub external_client_application: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "minimumOsVersion", default)]
-    pub minimum_os_version: String,
-    #[serde(rename = "policy1", default)]
-    pub policy_1: String,
-    #[serde(rename = "policy1DevManaged", default)]
-    pub policy_1_dev_managed: bool,
-    #[serde(rename = "policy2", default)]
-    pub policy_2: String,
-    #[serde(rename = "policy2DevManaged", default)]
-    pub policy_2_dev_managed: bool,
-    #[serde(default)]
-    pub version: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FTestAccessSettings {
-    #[serde(rename = "enableTestPref", default)]
-    pub enable_test_pref: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FTestSettings {
-    #[serde(rename = "enableTestPref", default)]
-    pub enable_test_pref: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct FeedItemSettings {
-    #[serde(rename = "characterLimit", default)]
-    pub character_limit: f64,
-    #[serde(rename = "displayFormat", default)]
-    pub display_format: serde_json::Value,
+    #[serde(
+        rename = "characterLimit",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub character_limit: Option<f64>,
+    #[serde(
+        rename = "displayFormat",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub display_format: Option<serde_json::Value>,
     #[serde(rename = "feedItemType", default)]
     pub feed_item_type: serde_json::Value,
 }
@@ -2132,94 +5022,230 @@ pub struct FeedItemSettings {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct FieldServiceSettings {
-    #[serde(rename = "advancedDataSyncOrgPreference", default)]
-    pub advanced_data_sync_org_preference: bool,
-    #[serde(rename = "apptAssistantExpiration", default)]
-    pub appt_assistant_expiration: f64,
-    #[serde(rename = "apptAssistantInfoUrl", default)]
-    pub appt_assistant_info_url: String,
-    #[serde(rename = "apptAssistantRadiusUnitValue", default)]
-    pub appt_assistant_radius_unit_value: serde_json::Value,
-    #[serde(rename = "apptAssistantRadiusValue", default)]
-    pub appt_assistant_radius_value: f64,
-    #[serde(rename = "apptAssistantStatus", default)]
-    pub appt_assistant_status: String,
-    #[serde(rename = "canPopulateGoogleAddress", default)]
-    pub can_populate_google_address: bool,
-    #[serde(rename = "canSendAppCenterCrashReports", default)]
-    pub can_send_app_center_crash_reports: bool,
-    #[serde(rename = "canStoreMobileAnalytics", default)]
-    pub can_store_mobile_analytics: bool,
-    #[serde(rename = "canceledDefaultStatus", default)]
-    pub canceled_default_status: String,
-    #[serde(rename = "cannotCompleteDefaultStatus", default)]
-    pub cannot_complete_default_status: String,
-    #[serde(rename = "completedDefaultStatus", default)]
-    pub completed_default_status: String,
-    #[serde(rename = "deepLinkPublicSecurityKey", default)]
-    pub deep_link_public_security_key: String,
-    #[serde(rename = "dispatchedDefaultStatus", default)]
-    pub dispatched_default_status: String,
-    #[serde(rename = "doesAllowEditSaForCrew", default)]
-    pub does_allow_edit_sa_for_crew: bool,
-    #[serde(rename = "doesAvlCalcInclOvertime", default)]
-    pub does_avl_calc_incl_overtime: bool,
-    #[serde(rename = "doesAvlCalcInclPrimOnly", default)]
-    pub does_avl_calc_incl_prim_only: bool,
-    #[serde(rename = "doesShareSaParentWoWithAr", default)]
-    pub does_share_sa_parent_wo_with_ar: bool,
-    #[serde(rename = "doesShareSaWithAr", default)]
-    pub does_share_sa_with_ar: bool,
-    #[serde(rename = "enableAdvancedDataSync", default)]
-    pub enable_advanced_data_sync: bool,
-    #[serde(rename = "enableBatchWindow", default)]
-    pub enable_batch_window: bool,
-    #[serde(rename = "enableDocumentBuilder", default)]
-    pub enable_document_builder: bool,
-    #[serde(rename = "enableFloatingWorkOrder", default)]
-    pub enable_floating_work_order: bool,
-    #[serde(rename = "enableLsdkMode", default)]
-    pub enable_lsdk_mode: bool,
-    #[serde(rename = "enablePopulateWorkOrderAddress", default)]
-    pub enable_populate_work_order_address: bool,
-    #[serde(rename = "enableStandbyMode", default)]
-    pub enable_standby_mode: bool,
-    #[serde(rename = "enableWorkOrders", default)]
-    pub enable_work_orders: bool,
-    #[serde(rename = "enableWorkPlansAutoGeneration", default)]
-    pub enable_work_plans_auto_generation: bool,
-    #[serde(rename = "enableWorkStepManualStatusUpdate", default)]
-    pub enable_work_step_manual_status_update: bool,
-    #[serde(rename = "enrouteStatus", default)]
-    pub enroute_status: String,
-    #[serde(rename = "fieldServiceNotificationsOrgPref", default)]
-    pub field_service_notifications_org_pref: bool,
-    #[serde(rename = "fieldServiceOrgPref", default)]
-    pub field_service_org_pref: bool,
-    #[serde(rename = "inProgressDefaultStatus", default)]
-    pub in_progress_default_status: String,
-    #[serde(rename = "isGeoCodeSyncEnabled", default)]
-    pub is_geo_code_sync_enabled: bool,
-    #[serde(rename = "isLocationHistoryEnabled", default)]
-    pub is_location_history_enabled: bool,
-    #[serde(rename = "mobileFeedbackEmails", default)]
-    pub mobile_feedback_emails: String,
-    #[serde(rename = "noneDefaultStatus", default)]
-    pub none_default_status: String,
-    #[serde(rename = "o2EngineEnabled", default)]
-    pub o_2_engine_enabled: bool,
+    #[serde(
+        rename = "advancedDataSyncOrgPreference",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub advanced_data_sync_org_preference: Option<bool>,
+    #[serde(
+        rename = "apptAssistantExpiration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub appt_assistant_expiration: Option<f64>,
+    #[serde(
+        rename = "apptAssistantInfoUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub appt_assistant_info_url: Option<String>,
+    #[serde(
+        rename = "apptAssistantRadiusUnitValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub appt_assistant_radius_unit_value: Option<serde_json::Value>,
+    #[serde(
+        rename = "apptAssistantRadiusValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub appt_assistant_radius_value: Option<f64>,
+    #[serde(
+        rename = "apptAssistantStatus",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub appt_assistant_status: Option<String>,
+    #[serde(
+        rename = "canPopulateGoogleAddress",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_populate_google_address: Option<bool>,
+    #[serde(
+        rename = "canSendAppCenterCrashReports",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_send_app_center_crash_reports: Option<bool>,
+    #[serde(
+        rename = "canStoreMobileAnalytics",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_store_mobile_analytics: Option<bool>,
+    #[serde(
+        rename = "deepLinkPublicSecurityKey",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub deep_link_public_security_key: Option<String>,
+    #[serde(
+        rename = "doesAllowEditSaForCrew",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_allow_edit_sa_for_crew: Option<bool>,
+    #[serde(
+        rename = "doesAvlCalcInclOvertime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_avl_calc_incl_overtime: Option<bool>,
+    #[serde(
+        rename = "doesAvlCalcInclPrimOnly",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_avl_calc_incl_prim_only: Option<bool>,
+    #[serde(
+        rename = "doesShareSaParentWoWithAr",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_share_sa_parent_wo_with_ar: Option<bool>,
+    #[serde(
+        rename = "doesShareSaWithAr",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_share_sa_with_ar: Option<bool>,
+    #[serde(
+        rename = "enableAdvancedDataSync",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_advanced_data_sync: Option<bool>,
+    #[serde(
+        rename = "enableBatchWindow",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_batch_window: Option<bool>,
+    #[serde(
+        rename = "enableDocumentBuilder",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_document_builder: Option<bool>,
+    #[serde(
+        rename = "enableFloatingWorkOrder",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_floating_work_order: Option<bool>,
+    #[serde(
+        rename = "enableLsdkMode",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lsdk_mode: Option<bool>,
+    #[serde(
+        rename = "enablePopulateWorkOrderAddress",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_populate_work_order_address: Option<bool>,
+    #[serde(
+        rename = "enableServiceAppointmentLifecycle",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_service_appointment_lifecycle: Option<bool>,
+    #[serde(
+        rename = "enableStandbyMode",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_standby_mode: Option<bool>,
+    #[serde(
+        rename = "enableWorkOrders",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_work_orders: Option<bool>,
+    #[serde(
+        rename = "enableWorkPlansAutoGeneration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_work_plans_auto_generation: Option<bool>,
+    #[serde(
+        rename = "enableWorkStepManualStatusUpdate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_work_step_manual_status_update: Option<bool>,
+    #[serde(
+        rename = "enrouteStatus",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enroute_status: Option<String>,
+    #[serde(
+        rename = "fieldServiceNotificationsOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub field_service_notifications_org_pref: Option<bool>,
+    #[serde(
+        rename = "fieldServiceOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub field_service_org_pref: Option<bool>,
+    #[serde(
+        rename = "isGeoCodeSyncEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_geo_code_sync_enabled: Option<bool>,
+    #[serde(
+        rename = "isLocationHistoryEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_location_history_enabled: Option<bool>,
+    #[serde(
+        rename = "mobileFeedbackEmails",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub mobile_feedback_emails: Option<String>,
+    #[serde(
+        rename = "o2EngineEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub o_2_engine_enabled: Option<bool>,
     #[serde(rename = "objectMappingItem", default)]
     pub object_mapping_item: Vec<serde_json::Value>,
-    #[serde(rename = "optimizationServiceAccess", default)]
-    pub optimization_service_access: bool,
-    #[serde(rename = "overrideDefaultLwcStyling", default)]
-    pub override_default_lwc_styling: bool,
-    #[serde(rename = "scheduledDefaultStatus", default)]
-    pub scheduled_default_status: String,
-    #[serde(rename = "serviceAppointmentsDueDateOffsetOrgValue", default)]
-    pub service_appointments_due_date_offset_org_value: f64,
-    #[serde(rename = "workOrderDurationSource", default)]
-    pub work_order_duration_source: serde_json::Value,
+    #[serde(
+        rename = "optimizationServiceAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub optimization_service_access: Option<bool>,
+    #[serde(
+        rename = "overrideDefaultLwcStyling",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub override_default_lwc_styling: Option<bool>,
+    #[serde(
+        rename = "serviceAppointmentsDueDateOffsetOrgValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub service_appointments_due_date_offset_org_value: Option<f64>,
+    #[serde(
+        rename = "workOrderDurationSource",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub work_order_duration_source: Option<serde_json::Value>,
     #[serde(rename = "workOrderLineItemSearchFields", default)]
     pub work_order_line_item_search_fields: Vec<String>,
     #[serde(rename = "workOrderSearchFields", default)]
@@ -2240,76 +5266,192 @@ pub struct FileUploadAndDownloadSecuritySettings {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct FilesConnectSettings {
-    #[serde(rename = "enableContentHubAllowed", default)]
-    pub enable_content_hub_allowed: bool,
-    #[serde(rename = "enableContentHubCvtLinksAllowed", default)]
-    pub enable_content_hub_cvt_links_allowed: bool,
-    #[serde(rename = "enableContentHubEOSearchLayout", default)]
-    pub enable_content_hub_eo_search_layout: bool,
+    #[serde(
+        rename = "enableContentHubAllowed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_content_hub_allowed: Option<bool>,
+    #[serde(
+        rename = "enableContentHubCvtLinksAllowed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_content_hub_cvt_links_allowed: Option<bool>,
+    #[serde(
+        rename = "enableContentHubEOSearchLayout",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_content_hub_eo_search_layout: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct FiscalYearSettings {
-    #[serde(rename = "fiscalYearNameBasedOn", default)]
-    pub fiscal_year_name_based_on: String,
-    #[serde(rename = "startMonth", default)]
-    pub start_month: String,
+    #[serde(
+        rename = "fiscalYearNameBasedOn",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub fiscal_year_name_based_on: Option<String>,
+    #[serde(
+        rename = "startMonth",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub start_month: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct FlowSettings {
-    #[serde(rename = "canDebugFlowAsAnotherUser", default)]
-    pub can_debug_flow_as_another_user: bool,
-    #[serde(rename = "doesEnforceApexCpuTimeLimit", default)]
-    pub does_enforce_apex_cpu_time_limit: bool,
-    #[serde(rename = "doesFormulaEnforceDataAccess", default)]
-    pub does_formula_enforce_data_access: bool,
-    #[serde(rename = "doesFormulaGenerateHtmlOutput", default)]
-    pub does_formula_generate_html_output: bool,
-    #[serde(rename = "enableEmailSimpleRespectProfiles", default)]
-    pub enable_email_simple_respect_profiles: bool,
-    #[serde(rename = "enableEmailsimpleSecureProfiles", default)]
-    pub enable_emailsimple_secure_profiles: bool,
-    #[serde(rename = "enableFlowBREncodedFixEnabled", default)]
-    pub enable_flow_br_encoded_fix_enabled: bool,
-    #[serde(rename = "enableFlowCustomPropertyEditor", default)]
-    pub enable_flow_custom_property_editor: bool,
-    #[serde(rename = "enableFlowDeployAsActiveEnabled", default)]
-    pub enable_flow_deploy_as_active_enabled: bool,
-    #[serde(rename = "enableFlowFieldFilterEnabled", default)]
-    pub enable_flow_field_filter_enabled: bool,
-    #[serde(rename = "enableFlowFormulasFixEnabled", default)]
-    pub enable_flow_formulas_fix_enabled: bool,
-    #[serde(rename = "enableFlowInterviewSharingEnabled", default)]
-    pub enable_flow_interview_sharing_enabled: bool,
-    #[serde(rename = "enableFlowNullPreviousValueFix", default)]
-    pub enable_flow_null_previous_value_fix: bool,
-    #[serde(rename = "enableFlowPauseEnabled", default)]
-    pub enable_flow_pause_enabled: bool,
-    #[serde(rename = "enableFlowReactiveChoiceOptions", default)]
-    pub enable_flow_reactive_choice_options: bool,
-    #[serde(rename = "enableFlowReactiveScreens", default)]
-    pub enable_flow_reactive_screens: bool,
-    #[serde(rename = "enableFlowUseApexExceptionEmail", default)]
-    pub enable_flow_use_apex_exception_email: bool,
-    #[serde(rename = "enableFlowViaRestUsesUserCtxt", default)]
-    pub enable_flow_via_rest_uses_user_ctxt: bool,
-    #[serde(rename = "enableLightningRuntimeEnabled", default)]
-    pub enable_lightning_runtime_enabled: bool,
-    #[serde(rename = "isApexPluginAccessModifierRespected", default)]
-    pub is_apex_plugin_access_modifier_respected: bool,
-    #[serde(rename = "isEnhancedFlowListViewVisible", default)]
-    pub is_enhanced_flow_list_view_visible: bool,
-    #[serde(rename = "isFlowBlockAccessToSessionIDEnabled", default)]
-    pub is_flow_block_access_to_session_id_enabled: bool,
-    #[serde(rename = "isManageFlowRequiredForAutomationCharts", default)]
-    pub is_manage_flow_required_for_automation_charts: bool,
-    #[serde(rename = "isSupportRollbackOnErrorForApexInvocableActionsEnabled", default)]
-    pub is_support_rollback_on_error_for_apex_invocable_actions_enabled: bool,
+    #[serde(
+        rename = "canDebugFlowAsAnotherUser",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_debug_flow_as_another_user: Option<bool>,
+    #[serde(
+        rename = "doesEnforceApexCpuTimeLimit",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_enforce_apex_cpu_time_limit: Option<bool>,
+    #[serde(
+        rename = "doesFormulaEnforceDataAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_formula_enforce_data_access: Option<bool>,
+    #[serde(
+        rename = "doesFormulaGenerateHtmlOutput",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_formula_generate_html_output: Option<bool>,
+    #[serde(
+        rename = "enableEmailSimpleRespectProfiles",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_email_simple_respect_profiles: Option<bool>,
+    #[serde(
+        rename = "enableEmailsimpleSecureProfiles",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_emailsimple_secure_profiles: Option<bool>,
+    #[serde(
+        rename = "enableFlowBREncodedFixEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_flow_br_encoded_fix_enabled: Option<bool>,
+    #[serde(
+        rename = "enableFlowCustomPropertyEditor",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_flow_custom_property_editor: Option<bool>,
+    #[serde(
+        rename = "enableFlowDeployAsActiveEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_flow_deploy_as_active_enabled: Option<bool>,
+    #[serde(
+        rename = "enableFlowFieldFilterEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_flow_field_filter_enabled: Option<bool>,
+    #[serde(
+        rename = "enableFlowFormulasFixEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_flow_formulas_fix_enabled: Option<bool>,
+    #[serde(
+        rename = "enableFlowInterviewSharingEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_flow_interview_sharing_enabled: Option<bool>,
+    #[serde(
+        rename = "enableFlowNullPreviousValueFix",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_flow_null_previous_value_fix: Option<bool>,
+    #[serde(
+        rename = "enableFlowPauseEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_flow_pause_enabled: Option<bool>,
+    #[serde(
+        rename = "enableFlowReactiveChoiceOptions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_flow_reactive_choice_options: Option<bool>,
+    #[serde(
+        rename = "enableFlowReactiveScreens",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_flow_reactive_screens: Option<bool>,
+    #[serde(
+        rename = "enableFlowUseApexExceptionEmail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_flow_use_apex_exception_email: Option<bool>,
+    #[serde(
+        rename = "enableFlowViaRestUsesUserCtxt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_flow_via_rest_uses_user_ctxt: Option<bool>,
+    #[serde(
+        rename = "enableLightningRuntimeEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lightning_runtime_enabled: Option<bool>,
+    #[serde(
+        rename = "isApexPluginAccessModifierRespected",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_apex_plugin_access_modifier_respected: Option<bool>,
+    #[serde(
+        rename = "isEnhancedFlowListViewVisible",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_enhanced_flow_list_view_visible: Option<bool>,
+    #[serde(
+        rename = "isFlowBlockAccessToSessionIDEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_flow_block_access_to_session_id_enabled: Option<bool>,
+    #[serde(
+        rename = "isManageFlowRequiredForAutomationCharts",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_manage_flow_required_for_automation_charts: Option<bool>,
+    #[serde(
+        rename = "isSupportRollbackOnErrorForApexInvocableActionsEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_support_rollback_on_error_for_apex_invocable_actions_enabled: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -2328,8 +5470,12 @@ pub struct ForecastRangeSettings {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ForecastingDisplayedFamilySettings {
-    #[serde(rename = "productFamily", default)]
-    pub product_family: String,
+    #[serde(
+        rename = "productFamily",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub product_family: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -2360,10 +5506,18 @@ pub struct ForecastingObjectListUnselectedSettings {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ForecastingSettings {
-    #[serde(rename = "defaultToPersonalCurrency", default)]
-    pub default_to_personal_currency: bool,
-    #[serde(rename = "enableForecasts", default)]
-    pub enable_forecasts: bool,
+    #[serde(
+        rename = "defaultToPersonalCurrency",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_to_personal_currency: Option<bool>,
+    #[serde(
+        rename = "enableForecasts",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_forecasts: Option<bool>,
     #[serde(rename = "forecastingCategoryMappings", default)]
     pub forecasting_category_mappings: Vec<serde_json::Value>,
     #[serde(rename = "forecastingDisplayedFamilySettings", default)]
@@ -2434,124 +5588,338 @@ pub struct ForecastingTypeSettings {
     pub opportunity_list_fields_selected_settings: OpportunityListFieldsSelectedSettings,
     #[serde(rename = "opportunityListFieldsUnselectedSettings", default)]
     pub opportunity_list_fields_unselected_settings: OpportunityListFieldsUnselectedSettings,
-    #[serde(rename = "opportunitySplitName", default)]
-    pub opportunity_split_name: String,
+    #[serde(
+        rename = "opportunitySplitName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub opportunity_split_name: Option<String>,
     #[serde(rename = "ownerAdjustableCategoryApiNames", default)]
     pub owner_adjustable_category_api_names: Vec<String>,
-    #[serde(rename = "territory2ModelName", default)]
-    pub territory_2_model_name: String,
+    #[serde(
+        rename = "territory2ModelName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub territory_2_model_name: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct FormulaSettings {
-    #[serde(rename = "enableDSTAwareDatevalue", default)]
-    pub enable_dst_aware_datevalue: bool,
+    #[serde(
+        rename = "enableDSTAwareDatevalue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dst_aware_datevalue: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct GRCIntelligenceUddSettings {
+    #[serde(
+        rename = "enablePolicyAuthoringAI",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_policy_authoring_ai: Option<bool>,
+    #[serde(
+        rename = "enableProactAsstForRisk",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_proact_asst_for_risk: Option<bool>,
+    #[serde(
+        rename = "enableProactSummaryForRisk",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_proact_summary_for_risk: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct GeneralConfigSettings {
+    #[serde(rename = "generalConfig", default)]
+    pub general_config: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct GeocodeSettings {
+    #[serde(
+        rename = "alertOnCalloutFailure",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub alert_on_callout_failure: Option<bool>,
+    #[serde(rename = "useSFMaps", default, skip_serializing_if = "Option::is_none")]
+    pub use_sf_maps: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct GoogleAppsSettings {
-    #[serde(rename = "enableGmailButtons", default)]
-    pub enable_gmail_buttons: bool,
-    #[serde(rename = "enableGmailButtonsAndLinks", default)]
-    pub enable_gmail_buttons_and_links: bool,
-    #[serde(rename = "enableGmailLinks", default)]
-    pub enable_gmail_links: bool,
-    #[serde(rename = "enableGoogleDocs", default)]
-    pub enable_google_docs: bool,
-    #[serde(rename = "enableGoogleDocsTab", default)]
-    pub enable_google_docs_tab: bool,
-    #[serde(rename = "enableGoogleTalk", default)]
-    pub enable_google_talk: bool,
-    #[serde(rename = "googleAppsDomain", default)]
-    pub google_apps_domain: String,
-    #[serde(rename = "googleAppsDomainLinked", default)]
-    pub google_apps_domain_linked: bool,
-    #[serde(rename = "googleAppsDomainValidated", default)]
-    pub google_apps_domain_validated: bool,
+    #[serde(
+        rename = "enableGmailButtons",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_gmail_buttons: Option<bool>,
+    #[serde(
+        rename = "enableGmailButtonsAndLinks",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_gmail_buttons_and_links: Option<bool>,
+    #[serde(
+        rename = "enableGmailLinks",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_gmail_links: Option<bool>,
+    #[serde(
+        rename = "enableGoogleDocs",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_google_docs: Option<bool>,
+    #[serde(
+        rename = "enableGoogleDocsTab",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_google_docs_tab: Option<bool>,
+    #[serde(
+        rename = "enableGoogleTalk",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_google_talk: Option<bool>,
+    #[serde(
+        rename = "googleAppsDomain",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub google_apps_domain: Option<String>,
+    #[serde(
+        rename = "googleAppsDomainLinked",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub google_apps_domain_linked: Option<bool>,
+    #[serde(
+        rename = "googleAppsDomainValidated",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub google_apps_domain_validated: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct HerokuAppLinkSettings {
-    #[serde(rename = "enableHerokuAppLink", default)]
-    pub enable_heroku_app_link: bool,
+    #[serde(
+        rename = "enableHerokuAppLink",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_heroku_app_link: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct HighVelocitySalesSettings {
-    #[serde(rename = "enableACAutoSendEmail", default)]
-    pub enable_ac_auto_send_email: bool,
-    #[serde(rename = "enableACChangeTargetAssignee", default)]
-    pub enable_ac_change_target_assignee: bool,
-    #[serde(rename = "enableACSkipWeekends", default)]
-    pub enable_ac_skip_weekends: bool,
-    #[serde(rename = "enableAutoBdrEmailPref", default)]
-    pub enable_auto_bdr_email_pref: bool,
-    #[serde(rename = "enableAutoBdrVoicePref", default)]
-    pub enable_auto_bdr_voice_pref: bool,
-    #[serde(rename = "enableBusinessHours", default)]
-    pub enable_business_hours: bool,
-    #[serde(rename = "enableCadenceVariantTestingPref", default)]
-    pub enable_cadence_variant_testing_pref: bool,
-    #[serde(rename = "enableChgTgtAssigneeUsrPermPref", default)]
-    pub enable_chg_tgt_assignee_usr_perm_pref: bool,
-    #[serde(rename = "enableDispositionCategory", default)]
-    pub enable_disposition_category: bool,
-    #[serde(rename = "enableEinsteinSdrEmailPref", default)]
-    pub enable_einstein_sdr_email_pref: bool,
-    #[serde(rename = "enableEngagementWaveAnalyticsPref", default)]
-    pub enable_engagement_wave_analytics_pref: bool,
-    #[serde(rename = "enableHighVelocitySales", default)]
-    pub enable_high_velocity_sales: bool,
-    #[serde(rename = "enableHighVelocitySalesSetup", default)]
-    pub enable_high_velocity_sales_setup: bool,
-    #[serde(rename = "enableInvoiceAttributionPref", default)]
-    pub enable_invoice_attribution_pref: bool,
-    #[serde(rename = "enableLogACallForCTIPref", default)]
-    pub enable_log_a_call_for_cti_pref: bool,
-    #[serde(rename = "enableLogTasksForLinkedInPref", default)]
-    pub enable_log_tasks_for_linked_in_pref: bool,
-    #[serde(rename = "enableMultipleCadencesPref", default)]
-    pub enable_multiple_cadences_pref: bool,
-    #[serde(rename = "enableOpportunityAttributionPermPref", default)]
-    pub enable_opportunity_attribution_perm_pref: bool,
-    #[serde(rename = "enableProspectingCenterPref", default)]
-    pub enable_prospecting_center_pref: bool,
-    #[serde(rename = "enableQuickCadenceAutoSendEmail", default)]
-    pub enable_quick_cadence_auto_send_email: bool,
-    #[serde(rename = "enableTaskLoggingPref", default)]
-    pub enable_task_logging_pref: bool,
+    #[serde(
+        rename = "enableACAutoSendEmail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ac_auto_send_email: Option<bool>,
+    #[serde(
+        rename = "enableACChangeTargetAssignee",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ac_change_target_assignee: Option<bool>,
+    #[serde(
+        rename = "enableACSkipWeekends",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ac_skip_weekends: Option<bool>,
+    #[serde(
+        rename = "enableAutoBdrEmailPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_auto_bdr_email_pref: Option<bool>,
+    #[serde(
+        rename = "enableAutoBdrVoicePref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_auto_bdr_voice_pref: Option<bool>,
+    #[serde(
+        rename = "enableBusinessHours",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_business_hours: Option<bool>,
+    #[serde(
+        rename = "enableCadenceVariantTestingPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cadence_variant_testing_pref: Option<bool>,
+    #[serde(
+        rename = "enableChgTgtAssigneeUsrPermPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_chg_tgt_assignee_usr_perm_pref: Option<bool>,
+    #[serde(
+        rename = "enableDispositionCategory",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_disposition_category: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinSdrEmailPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_sdr_email_pref: Option<bool>,
+    #[serde(
+        rename = "enableEngagementWaveAnalyticsPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_engagement_wave_analytics_pref: Option<bool>,
+    #[serde(
+        rename = "enableHighVelocitySales",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_high_velocity_sales: Option<bool>,
+    #[serde(
+        rename = "enableHighVelocitySalesSetup",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_high_velocity_sales_setup: Option<bool>,
+    #[serde(
+        rename = "enableInvoiceAttributionPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_invoice_attribution_pref: Option<bool>,
+    #[serde(
+        rename = "enableLogACallForCTIPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_log_a_call_for_cti_pref: Option<bool>,
+    #[serde(
+        rename = "enableLogTasksForLinkedInPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_log_tasks_for_linked_in_pref: Option<bool>,
+    #[serde(
+        rename = "enableMultipleCadencesPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_multiple_cadences_pref: Option<bool>,
+    #[serde(
+        rename = "enableOpportunityAttributionPermPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_opportunity_attribution_perm_pref: Option<bool>,
+    #[serde(
+        rename = "enableProspectingCenterPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_prospecting_center_pref: Option<bool>,
+    #[serde(
+        rename = "enableQuickCadenceAutoSendEmail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_quick_cadence_auto_send_email: Option<bool>,
+    #[serde(
+        rename = "enableTaskLoggingPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_task_logging_pref: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct IdeasSettings {
-    #[serde(rename = "enableChatterProfile", default)]
-    pub enable_chatter_profile: bool,
-    #[serde(rename = "enableHtmlIdea", default)]
-    pub enable_html_idea: bool,
-    #[serde(rename = "enableIdeaMultipleCategory", default)]
-    pub enable_idea_multiple_category: bool,
-    #[serde(rename = "enableIdeaThemes", default)]
-    pub enable_idea_themes: bool,
-    #[serde(rename = "enableIdeas", default)]
-    pub enable_ideas: bool,
-    #[serde(rename = "enableIdeasControllerExtensions", default)]
-    pub enable_ideas_controller_extensions: bool,
-    #[serde(rename = "enableIdeasReputation", default)]
-    pub enable_ideas_reputation: bool,
-    #[serde(rename = "halfLife", default)]
-    pub half_life: f64,
-    #[serde(rename = "ideasProfilePage", default)]
-    pub ideas_profile_page: String,
+    #[serde(
+        rename = "enableChatterProfile",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_chatter_profile: Option<bool>,
+    #[serde(
+        rename = "enableHtmlIdea",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_html_idea: Option<bool>,
+    #[serde(
+        rename = "enableIdeaMultipleCategory",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_idea_multiple_category: Option<bool>,
+    #[serde(
+        rename = "enableIdeaThemes",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_idea_themes: Option<bool>,
+    #[serde(
+        rename = "enableIdeas",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ideas: Option<bool>,
+    #[serde(
+        rename = "enableIdeasControllerExtensions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ideas_controller_extensions: Option<bool>,
+    #[serde(
+        rename = "enableIdeasReputation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ideas_reputation: Option<bool>,
+    #[serde(rename = "halfLife", default, skip_serializing_if = "Option::is_none")]
+    pub half_life: Option<f64>,
+    #[serde(
+        rename = "ideasProfilePage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub ideas_profile_page: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -2576,128 +5944,360 @@ pub struct IframeWhiteListUrlSettings {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct IncidentMgmtSettings {
-    #[serde(rename = "enableAiKnowledgeCreation", default)]
-    pub enable_ai_knowledge_creation: bool,
-    #[serde(rename = "enableAlertBroadcastType", default)]
-    pub enable_alert_broadcast_type: bool,
-    #[serde(rename = "enableAutoClosureOfChildIncident", default)]
-    pub enable_auto_closure_of_child_incident: bool,
-    #[serde(rename = "enableAutoCreationOfProblem", default)]
-    pub enable_auto_creation_of_problem: bool,
-    #[serde(rename = "enableChangePriorityMatrix", default)]
-    pub enable_change_priority_matrix: bool,
-    #[serde(rename = "enableChangePriorityOverride", default)]
-    pub enable_change_priority_override: bool,
-    #[serde(rename = "enableChangeRequestValidations", default)]
-    pub enable_change_request_validations: bool,
-    #[serde(rename = "enableChatToIncidentAi", default)]
-    pub enable_chat_to_incident_ai: bool,
-    #[serde(rename = "enableCnfgItemCopyForRecords", default)]
-    pub enable_cnfg_item_copy_for_records: bool,
-    #[serde(rename = "enableDedupE2IncidentAttachment", default)]
-    pub enable_dedup_e_2_incident_attachment: bool,
-    #[serde(rename = "enableEmailBroadcastType", default)]
-    pub enable_email_broadcast_type: bool,
-    #[serde(rename = "enableEmailToIncident", default)]
-    pub enable_email_to_incident: bool,
-    #[serde(rename = "enableEmailToIncidentAi", default)]
-    pub enable_email_to_incident_ai: bool,
-    #[serde(rename = "enableITSMChangeMgmt", default)]
-    pub enable_itsm_change_mgmt: bool,
-    #[serde(rename = "enableITSMIncidentMgmt", default)]
-    pub enable_itsm_incident_mgmt: bool,
-    #[serde(rename = "enableITSMMajorIncParent", default)]
-    pub enable_itsm_major_inc_parent: bool,
-    #[serde(rename = "enableITSMProblemMgmt", default)]
-    pub enable_itsm_problem_mgmt: bool,
-    #[serde(rename = "enableIncPriorityMatrix", default)]
-    pub enable_inc_priority_matrix: bool,
-    #[serde(rename = "enableIncPriorityOverride", default)]
-    pub enable_inc_priority_override: bool,
-    #[serde(rename = "enableIncidentMgmt", default)]
-    pub enable_incident_mgmt: bool,
-    #[serde(rename = "enableIncidentValidations", default)]
-    pub enable_incident_validations: bool,
-    #[serde(rename = "enableProbPriorityMatrix", default)]
-    pub enable_prob_priority_matrix: bool,
-    #[serde(rename = "enableProbPriorityOverride", default)]
-    pub enable_prob_priority_override: bool,
-    #[serde(rename = "enableProblemValidations", default)]
-    pub enable_problem_validations: bool,
-    #[serde(rename = "enableRiskAssessment", default)]
-    pub enable_risk_assessment: bool,
-    #[serde(rename = "enableSaveE2IncidentAttachment", default)]
-    pub enable_save_e_2_incident_attachment: bool,
-    #[serde(rename = "enableSiteBannerBroadcastType", default)]
-    pub enable_site_banner_broadcast_type: bool,
-    #[serde(rename = "enableSlackBroadcastType", default)]
-    pub enable_slack_broadcast_type: bool,
+    #[serde(
+        rename = "enableAiKnowledgeCreation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ai_knowledge_creation: Option<bool>,
+    #[serde(
+        rename = "enableAlertBroadcastType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_alert_broadcast_type: Option<bool>,
+    #[serde(
+        rename = "enableAutoClosureOfChildIncident",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_auto_closure_of_child_incident: Option<bool>,
+    #[serde(
+        rename = "enableAutoCreationOfProblem",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_auto_creation_of_problem: Option<bool>,
+    #[serde(
+        rename = "enableChangePriorityMatrix",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_change_priority_matrix: Option<bool>,
+    #[serde(
+        rename = "enableChangePriorityOverride",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_change_priority_override: Option<bool>,
+    #[serde(
+        rename = "enableChangeRequestValidations",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_change_request_validations: Option<bool>,
+    #[serde(
+        rename = "enableChatToIncidentAi",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_chat_to_incident_ai: Option<bool>,
+    #[serde(
+        rename = "enableChgCnfcltForMaintSchd",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_chg_cnfclt_for_maint_schd: Option<bool>,
+    #[serde(
+        rename = "enableChgCnflctForChgOwner",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_chg_cnflct_for_chg_owner: Option<bool>,
+    #[serde(
+        rename = "enableChgCnflctForCnfgItems",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_chg_cnflct_for_cnfg_items: Option<bool>,
+    #[serde(
+        rename = "enableChgCnflctForMoratSchd",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_chg_cnflct_for_morat_schd: Option<bool>,
+    #[serde(
+        rename = "enableChgRqstCnflctDetection",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_chg_rqst_cnflct_detection: Option<bool>,
+    #[serde(
+        rename = "enableCnfgItemCopyForRecords",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cnfg_item_copy_for_records: Option<bool>,
+    #[serde(
+        rename = "enableDedupE2IncidentAttachment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dedup_e_2_incident_attachment: Option<bool>,
+    #[serde(
+        rename = "enableEmailBroadcastType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_email_broadcast_type: Option<bool>,
+    #[serde(
+        rename = "enableEmailToIncident",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_email_to_incident: Option<bool>,
+    #[serde(
+        rename = "enableEmailToIncidentAi",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_email_to_incident_ai: Option<bool>,
+    #[serde(
+        rename = "enableEnterpriseKnowledge",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_enterprise_knowledge: Option<bool>,
+    #[serde(
+        rename = "enableITSMChangeMgmt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_itsm_change_mgmt: Option<bool>,
+    #[serde(
+        rename = "enableITSMIncidentMgmt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_itsm_incident_mgmt: Option<bool>,
+    #[serde(
+        rename = "enableITSMMajorIncParent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_itsm_major_inc_parent: Option<bool>,
+    #[serde(
+        rename = "enableITSMProblemMgmt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_itsm_problem_mgmt: Option<bool>,
+    #[serde(
+        rename = "enableIncPriorityMatrix",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_inc_priority_matrix: Option<bool>,
+    #[serde(
+        rename = "enableIncPriorityOverride",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_inc_priority_override: Option<bool>,
+    #[serde(
+        rename = "enableIncidentMgmt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_incident_mgmt: Option<bool>,
+    #[serde(
+        rename = "enableIncidentValidations",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_incident_validations: Option<bool>,
+    #[serde(
+        rename = "enableMiawForRequestorAgent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_miaw_for_requestor_agent: Option<bool>,
+    #[serde(
+        rename = "enablePrivilegeAssignment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_privilege_assignment: Option<bool>,
+    #[serde(
+        rename = "enableProbPriorityMatrix",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_prob_priority_matrix: Option<bool>,
+    #[serde(
+        rename = "enableProbPriorityOverride",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_prob_priority_override: Option<bool>,
+    #[serde(
+        rename = "enableProblemValidations",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_problem_validations: Option<bool>,
+    #[serde(
+        rename = "enableRiskAssessment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_risk_assessment: Option<bool>,
+    #[serde(
+        rename = "enableSaveE2IncidentAttachment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_save_e_2_incident_attachment: Option<bool>,
+    #[serde(
+        rename = "enableSiteBannerBroadcastType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_site_banner_broadcast_type: Option<bool>,
+    #[serde(
+        rename = "enableSlackBroadcastType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_slack_broadcast_type: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct IncludeEstTaxInQuoteCPQSettings {
-    #[serde(rename = "enableQuoteEstimatedTaxCPQ", default)]
-    pub enable_quote_estimated_tax_cpq: bool,
+    #[serde(
+        rename = "enableQuoteEstimatedTaxCPQ",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_quote_estimated_tax_cpq: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct IncludeEstTaxInQuoteSettings {
-    #[serde(rename = "enableQuoteEstimatedTax", default)]
-    pub enable_quote_estimated_tax: bool,
+    #[serde(
+        rename = "enableQuoteEstimatedTax",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_quote_estimated_tax: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct IndustriesAutomotiveSettings {
-    #[serde(rename = "enableAutoAgentsPilot", default)]
-    pub enable_auto_agents_pilot: bool,
-    #[serde(rename = "enableAutomotiveAgents", default)]
-    pub enable_automotive_agents: bool,
-    #[serde(rename = "enableAutomotiveAppraisals", default)]
-    pub enable_automotive_appraisals: bool,
-    #[serde(rename = "enableAutomotiveCloud", default)]
-    pub enable_automotive_cloud: bool,
-    #[serde(rename = "enableAutomotiveScheduler", default)]
-    pub enable_automotive_scheduler: bool,
-    #[serde(rename = "enableAutomotiveServiceExcellence", default)]
-    pub enable_automotive_service_excellence: bool,
-    #[serde(rename = "enableConnectedVehSrvcsCmpnt", default)]
-    pub enable_connected_veh_srvcs_cmpnt: bool,
-    #[serde(rename = "enableDealerEssntlsAutomotive", default)]
-    pub enable_dealer_essntls_automotive: bool,
-    #[serde(rename = "enableGenAiForAutoPilot", default)]
-    pub enable_gen_ai_for_auto_pilot: bool,
+    #[serde(
+        rename = "enableAutoAgentsPilot",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_auto_agents_pilot: Option<bool>,
+    #[serde(
+        rename = "enableAutomotiveAgents",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_automotive_agents: Option<bool>,
+    #[serde(
+        rename = "enableAutomotiveAppraisals",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_automotive_appraisals: Option<bool>,
+    #[serde(
+        rename = "enableAutomotiveCloud",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_automotive_cloud: Option<bool>,
+    #[serde(
+        rename = "enableAutomotiveScheduler",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_automotive_scheduler: Option<bool>,
+    #[serde(
+        rename = "enableAutomotiveServiceExcellence",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_automotive_service_excellence: Option<bool>,
+    #[serde(
+        rename = "enableConnectedVehSrvcsCmpnt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_connected_veh_srvcs_cmpnt: Option<bool>,
+    #[serde(
+        rename = "enableDealerEssntlsAutomotive",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dealer_essntls_automotive: Option<bool>,
+    #[serde(
+        rename = "enableGenAiForAutoPilot",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_gen_ai_for_auto_pilot: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct IndustriesChannelPartnerInventorySettings {
-    #[serde(rename = "enableChannelPartnerInventoryTracking", default)]
-    pub enable_channel_partner_inventory_tracking: bool,
+    #[serde(
+        rename = "enableChannelPartnerInventoryTracking",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_channel_partner_inventory_tracking: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct IndustriesConnectedServiceSettings {
-    #[serde(rename = "enablePrebuiltCmpntTlmtryMgmt", default)]
-    pub enable_prebuilt_cmpnt_tlmtry_mgmt: bool,
-    #[serde(rename = "enableTelemetryDefActnMgmt", default)]
-    pub enable_telemetry_def_actn_mgmt: bool,
+    #[serde(
+        rename = "enablePrebuiltCmpntTlmtryMgmt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_prebuilt_cmpnt_tlmtry_mgmt: Option<bool>,
+    #[serde(
+        rename = "enableTelemetryDefActnMgmt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_telemetry_def_actn_mgmt: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct IndustriesConstraintsSettings {
+    #[serde(
+        rename = "enableAdvancedConfigurator",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_advanced_configurator: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct IndustriesContextSettings {
-    #[serde(rename = "enableContextDefinitions", default)]
-    pub enable_context_definitions: bool,
+    #[serde(
+        rename = "enableContextDefinitions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_context_definitions: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -2711,1007 +6311,3091 @@ pub struct IndustriesEinsteinFeatureSettings {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct IndustriesEnergyUtilitiesMultiSiteSettings {
+    #[serde(
+        rename = "autoQuoteFlowApiNameOrgValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub auto_quote_flow_api_name_org_value: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct IndustriesEventOrchSettings {
-    #[serde(rename = "enableEventOrchDecisionTable", default)]
-    pub enable_event_orch_decision_table: bool,
+    #[serde(
+        rename = "enableEventOrchDecisionTable",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_event_orch_decision_table: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct IndustriesFieldServiceSettings {
-    #[serde(rename = "enableAutomotiveServiceCampaignManagement", default)]
-    pub enable_automotive_service_campaign_management: bool,
-    #[serde(rename = "enableIndustriesFieldService", default)]
-    pub enable_industries_field_service: bool,
+    #[serde(
+        rename = "enableAutomotiveServiceCampaignManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_automotive_service_campaign_management: Option<bool>,
+    #[serde(
+        rename = "enableIndustriesFieldService",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_industries_field_service: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct IndustriesGamificationSettings {
-    #[serde(rename = "enableGamification", default)]
-    pub enable_gamification: bool,
+    #[serde(
+        rename = "enableGamification",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_gamification: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct IndustriesLoyaltySettings {
-    #[serde(rename = "enableAutomaticMemberTierAssessmentSelection", default)]
-    pub enable_automatic_member_tier_assessment_selection: bool,
-    #[serde(rename = "enableAutomaticVoucherCodeGeneration", default)]
-    pub enable_automatic_voucher_code_generation: bool,
-    #[serde(rename = "enableConfigureClubs", default)]
-    pub enable_configure_clubs: bool,
-    #[serde(rename = "enableFixedTypeNQPAggregation", default)]
-    pub enable_fixed_type_nqp_aggregation: bool,
-    #[serde(rename = "enableLoyaltyApiAccessForExternalSiteUsers", default)]
-    pub enable_loyalty_api_access_for_external_site_users: bool,
-    #[serde(rename = "enableLoyaltyGenerativeAi", default)]
-    pub enable_loyalty_generative_ai: bool,
-    #[serde(rename = "enableLoyaltyRedeemedPointsExpirationInfoPref", default)]
-    pub enable_loyalty_redeemed_points_expiration_info_pref: bool,
-    #[serde(rename = "enableLoyaltyRulesVerifyCdpMemberSegment", default)]
-    pub enable_loyalty_rules_verify_cdp_member_segment: bool,
-    #[serde(rename = "enableLoyaltyServiceExcellence", default)]
-    pub enable_loyalty_service_excellence: bool,
-    #[serde(rename = "enableNQPRealTimePointBalance", default)]
-    pub enable_nqp_real_time_point_balance: bool,
-    #[serde(rename = "enableNegativePointBalance", default)]
-    pub enable_negative_point_balance: bool,
-    #[serde(rename = "enableNonQualifyingPointsConsolidation", default)]
-    pub enable_non_qualifying_points_consolidation: bool,
-    #[serde(rename = "enablePointsLifecycleTracking", default)]
-    pub enable_points_lifecycle_tracking: bool,
-    #[serde(rename = "enablePromSetupProcRuleStatusInheritDplymt", default)]
-    pub enable_prom_setup_proc_rule_status_inherit_dplymt: bool,
-    #[serde(rename = "enableQPRealTimePointBalance", default)]
-    pub enable_qp_real_time_point_balance: bool,
-    #[serde(rename = "enableSegmentQueryApiMultipleDataSpace", default)]
-    pub enable_segment_query_api_multiple_data_space: bool,
-    #[serde(rename = "enableSegmentQueryByDataGraph", default)]
-    pub enable_segment_query_by_data_graph: bool,
-    #[serde(rename = "enableTransferPointsToMemberGroupsRealtime", default)]
-    pub enable_transfer_points_to_member_groups_realtime: bool,
-    #[serde(rename = "enableUsePromPtyUsageForEngmtTrail", default)]
-    pub enable_use_prom_pty_usage_for_engmt_trail: bool,
+    #[serde(
+        rename = "enableAutomaticMemberTierAssessmentSelection",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_automatic_member_tier_assessment_selection: Option<bool>,
+    #[serde(
+        rename = "enableAutomaticVoucherCodeGeneration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_automatic_voucher_code_generation: Option<bool>,
+    #[serde(
+        rename = "enableConfigureClubs",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_configure_clubs: Option<bool>,
+    #[serde(
+        rename = "enableFixedTypeNQPAggregation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_fixed_type_nqp_aggregation: Option<bool>,
+    #[serde(
+        rename = "enableLoyaltyApiAccessForExternalSiteUsers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_loyalty_api_access_for_external_site_users: Option<bool>,
+    #[serde(
+        rename = "enableLoyaltyGenerativeAi",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_loyalty_generative_ai: Option<bool>,
+    #[serde(
+        rename = "enableLoyaltyRedeemedPointsExpirationInfoPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_loyalty_redeemed_points_expiration_info_pref: Option<bool>,
+    #[serde(
+        rename = "enableLoyaltyRulesVerifyCdpMemberSegment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_loyalty_rules_verify_cdp_member_segment: Option<bool>,
+    #[serde(
+        rename = "enableLoyaltyServiceExcellence",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_loyalty_service_excellence: Option<bool>,
+    #[serde(
+        rename = "enableNQPRealTimePointBalance",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_nqp_real_time_point_balance: Option<bool>,
+    #[serde(
+        rename = "enableNegativePointBalance",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_negative_point_balance: Option<bool>,
+    #[serde(
+        rename = "enableNonQualifyingPointsConsolidation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_non_qualifying_points_consolidation: Option<bool>,
+    #[serde(
+        rename = "enablePointsLifecycleTracking",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_points_lifecycle_tracking: Option<bool>,
+    #[serde(
+        rename = "enableProcessTraceableTrxnAsync",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_process_traceable_trxn_async: Option<bool>,
+    #[serde(
+        rename = "enablePromSetupProcRuleStatusInheritDplymt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_prom_setup_proc_rule_status_inherit_dplymt: Option<bool>,
+    #[serde(
+        rename = "enableQPRealTimePointBalance",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_qp_real_time_point_balance: Option<bool>,
+    #[serde(
+        rename = "enableSegmentQueryApiMultipleDataSpace",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_segment_query_api_multiple_data_space: Option<bool>,
+    #[serde(
+        rename = "enableSegmentQueryByDataGraph",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_segment_query_by_data_graph: Option<bool>,
+    #[serde(
+        rename = "enableTransferPointsToMemberGroupsRealtime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_transfer_points_to_member_groups_realtime: Option<bool>,
+    #[serde(
+        rename = "enableUsePromPtyUsageForEngmtTrail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_use_prom_pty_usage_for_engmt_trail: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct IndustriesLsCommercialSettings {
-    #[serde(rename = "enableLsPtntSuptPgmGenAIPref", default)]
-    pub enable_ls_ptnt_supt_pgm_gen_ai_pref: bool,
+    #[serde(
+        rename = "enableLsPtntSuptPgmGenAIPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ls_ptnt_supt_pgm_gen_ai_pref: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct IndustriesManufacturingSettings {
-    #[serde(rename = "enableConnectedAssetSrvcsCmpnt", default)]
-    pub enable_connected_asset_srvcs_cmpnt: bool,
-    #[serde(rename = "enableFleetManagement", default)]
-    pub enable_fleet_management: bool,
-    #[serde(rename = "enableIndManufacturing", default)]
-    pub enable_ind_manufacturing: bool,
-    #[serde(rename = "enableIndustriesMfgAccountForecast", default)]
-    pub enable_industries_mfg_account_forecast: bool,
-    #[serde(rename = "enableIndustriesMfgAdvForecast", default)]
-    pub enable_industries_mfg_adv_forecast: bool,
-    #[serde(rename = "enableIndustriesMfgIAS", default)]
-    pub enable_industries_mfg_ias: bool,
-    #[serde(rename = "enableIndustriesMfgProgram", default)]
-    pub enable_industries_mfg_program: bool,
-    #[serde(rename = "enableIndustriesMfgTargets", default)]
-    pub enable_industries_mfg_targets: bool,
-    #[serde(rename = "enableMfgAgents", default)]
-    pub enable_mfg_agents: bool,
-    #[serde(rename = "enableMfgAgentsPilot", default)]
-    pub enable_mfg_agents_pilot: bool,
-    #[serde(rename = "enablePartnerLeadManagement", default)]
-    pub enable_partner_lead_management: bool,
-    #[serde(rename = "enablePartnerPerformanceManagement", default)]
-    pub enable_partner_performance_management: bool,
-    #[serde(rename = "enablePartnerVisitManagement", default)]
-    pub enable_partner_visit_management: bool,
-    #[serde(rename = "enablePtnrLeadMgmtMappings", default)]
-    pub enable_ptnr_lead_mgmt_mappings: bool,
-    #[serde(rename = "enableRevMgmtForSlsAgr", default)]
-    pub enable_rev_mgmt_for_sls_agr: bool,
-    #[serde(rename = "enableVehAndAstLending", default)]
-    pub enable_veh_and_ast_lending: bool,
-    #[serde(rename = "enableVehAssetFinAddtnlCmpnts", default)]
-    pub enable_veh_asset_fin_addtnl_cmpnts: bool,
-    #[serde(rename = "enableVehicleAndAssetFinance", default)]
-    pub enable_vehicle_and_asset_finance: bool,
+    #[serde(
+        rename = "enableConnectedAssetSrvcsCmpnt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_connected_asset_srvcs_cmpnt: Option<bool>,
+    #[serde(
+        rename = "enableFleetManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_fleet_management: Option<bool>,
+    #[serde(
+        rename = "enableFundingWorkbench",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_funding_workbench: Option<bool>,
+    #[serde(
+        rename = "enableIndManufacturing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ind_manufacturing: Option<bool>,
+    #[serde(
+        rename = "enableIndustriesMfgAccountForecast",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_industries_mfg_account_forecast: Option<bool>,
+    #[serde(
+        rename = "enableIndustriesMfgAdvForecast",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_industries_mfg_adv_forecast: Option<bool>,
+    #[serde(
+        rename = "enableIndustriesMfgIAS",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_industries_mfg_ias: Option<bool>,
+    #[serde(
+        rename = "enableIndustriesMfgProgram",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_industries_mfg_program: Option<bool>,
+    #[serde(
+        rename = "enableIndustriesMfgTargets",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_industries_mfg_targets: Option<bool>,
+    #[serde(
+        rename = "enableMfgAgents",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_mfg_agents: Option<bool>,
+    #[serde(
+        rename = "enableMfgAgentsPilot",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_mfg_agents_pilot: Option<bool>,
+    #[serde(
+        rename = "enablePartnerLeadManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_partner_lead_management: Option<bool>,
+    #[serde(
+        rename = "enablePartnerPerformanceManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_partner_performance_management: Option<bool>,
+    #[serde(
+        rename = "enablePartnerVisitManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_partner_visit_management: Option<bool>,
+    #[serde(
+        rename = "enablePtnrLeadMgmtMappings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ptnr_lead_mgmt_mappings: Option<bool>,
+    #[serde(
+        rename = "enableRevMgmtForSlsAgr",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_rev_mgmt_for_sls_agr: Option<bool>,
+    #[serde(
+        rename = "enableVehAndAstLending",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_veh_and_ast_lending: Option<bool>,
+    #[serde(
+        rename = "enableVehAssetFinAddtnlCmpnts",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_veh_asset_fin_addtnl_cmpnts: Option<bool>,
+    #[serde(
+        rename = "enableVehicleAndAssetFinance",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_vehicle_and_asset_finance: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct IndustriesMfgSampleManagementSettings {
+    #[serde(
+        rename = "enableSampleManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sample_management: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct IndustriesPricingSettings {
-    #[serde(rename = "enableDebugPriceLogs", default)]
-    pub enable_debug_price_logs: bool,
-    #[serde(rename = "enableHighAvailability", default)]
-    pub enable_high_availability: bool,
-    #[serde(rename = "enableHighestPriceCompliance", default)]
-    pub enable_highest_price_compliance: bool,
-    #[serde(rename = "enableLowestPriceCompliance", default)]
-    pub enable_lowest_price_compliance: bool,
-    #[serde(rename = "enablePriceGuidanceAccess", default)]
-    pub enable_price_guidance_access: bool,
-    #[serde(rename = "enablePricingProcParallelization", default)]
-    pub enable_pricing_proc_parallelization: bool,
-    #[serde(rename = "enablePricingWaterfall", default)]
-    pub enable_pricing_waterfall: bool,
-    #[serde(rename = "enablePricingWaterfallPersistence", default)]
-    pub enable_pricing_waterfall_persistence: bool,
-    #[serde(rename = "enableSalesforcePricing", default)]
-    pub enable_salesforce_pricing: bool,
+    #[serde(
+        rename = "enableAbpLog",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_abp_log: Option<bool>,
+    #[serde(
+        rename = "enableDebugPriceLogs",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_debug_price_logs: Option<bool>,
+    #[serde(
+        rename = "enableDerivedPricingLog",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_derived_pricing_log: Option<bool>,
+    #[serde(
+        rename = "enableHighAvailability",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_high_availability: Option<bool>,
+    #[serde(
+        rename = "enableHighestPriceCompliance",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_highest_price_compliance: Option<bool>,
+    #[serde(
+        rename = "enableLargeQuoteLog",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_large_quote_log: Option<bool>,
+    #[serde(
+        rename = "enableLargeTransactionPricing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_large_transaction_pricing: Option<bool>,
+    #[serde(
+        rename = "enableLowestPriceCompliance",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lowest_price_compliance: Option<bool>,
+    #[serde(
+        rename = "enablePriceGuidanceAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_price_guidance_access: Option<bool>,
+    #[serde(
+        rename = "enablePricingProcParallelization",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pricing_proc_parallelization: Option<bool>,
+    #[serde(
+        rename = "enablePricingWaterfall",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pricing_waterfall: Option<bool>,
+    #[serde(
+        rename = "enablePricingWaterfallPersistence",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pricing_waterfall_persistence: Option<bool>,
+    #[serde(
+        rename = "enablePromotionLog",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_promotion_log: Option<bool>,
+    #[serde(
+        rename = "enablePropagationLog",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_propagation_log: Option<bool>,
+    #[serde(
+        rename = "enableSalesforcePricing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_salesforce_pricing: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct IndustriesRatingSettings {
-    #[serde(rename = "enableRating", default)]
-    pub enable_rating: bool,
-    #[serde(rename = "enableRatingWaterfall", default)]
-    pub enable_rating_waterfall: bool,
-    #[serde(rename = "enableRatingWaterfallPersistence", default)]
-    pub enable_rating_waterfall_persistence: bool,
+    #[serde(
+        rename = "enableRating",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_rating: Option<bool>,
+    #[serde(
+        rename = "enableRatingWaterfall",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_rating_waterfall: Option<bool>,
+    #[serde(
+        rename = "enableRatingWaterfallPersistence",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_rating_waterfall_persistence: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct IndustriesSettings {
-    #[serde(rename = "allowBenefitAssignmentWithInactiveProgramEnrollment", default)]
-    pub allow_benefit_assignment_with_inactive_program_enrollment: bool,
-    #[serde(rename = "allowMultipleProducersToWorkOnSamePolicy", default)]
-    pub allow_multiple_producers_to_work_on_same_policy: bool,
-    #[serde(rename = "appointmentDistributionOrgPref", default)]
-    pub appointment_distribution_org_pref: bool,
-    #[serde(rename = "brwrCntctFrExtrnlSrcsPref", default)]
-    pub brwr_cntct_fr_extrnl_srcs_pref: bool,
-    #[serde(rename = "captureResourceUtilizationOrgPref", default)]
-    pub capture_resource_utilization_org_pref: bool,
-    #[serde(rename = "clctnAndRecoveryAgntPref", default)]
-    pub clctn_and_recovery_agnt_pref: bool,
-    #[serde(rename = "collectionAsaAgentPref", default)]
-    pub collection_asa_agent_pref: bool,
-    #[serde(rename = "createCustomerPropertyFromLAProperty", default)]
-    pub create_customer_property_from_la_property: bool,
-    #[serde(rename = "createFSCAssetFromLAAsset", default)]
-    pub create_fsc_asset_from_la_asset: bool,
-    #[serde(rename = "createFSCAssetFromLAProperty", default)]
-    pub create_fsc_asset_from_la_property: bool,
-    #[serde(rename = "createFSCLiabilityFromLAFinancial", default)]
-    pub create_fsc_liability_from_la_financial: bool,
-    #[serde(rename = "createFSCLiabilityFromLALiability", default)]
-    pub create_fsc_liability_from_la_liability: bool,
-    #[serde(rename = "createFinancialAccountFromLAAsset", default)]
-    pub create_financial_account_from_la_asset: bool,
-    #[serde(rename = "createFinancialAccountFromLALiability", default)]
-    pub create_financial_account_from_la_liability: bool,
-    #[serde(rename = "createFinancialAccountsFromLAFinancials", default)]
-    pub create_financial_accounts_from_la_financials: bool,
-    #[serde(rename = "createFinancialAccountsFromLAProperty", default)]
-    pub create_financial_accounts_from_la_property: bool,
-    #[serde(rename = "enableAIAccelerator", default)]
-    pub enable_ai_accelerator: bool,
-    #[serde(rename = "enableAWSTextractAnalyzeIDPref", default)]
-    pub enable_aws_textract_analyze_id_pref: bool,
-    #[serde(rename = "enableAWSTextractQueriesPref", default)]
-    pub enable_aws_textract_queries_pref: bool,
-    #[serde(rename = "enableAWSTextractTablesPref", default)]
-    pub enable_aws_textract_tables_pref: bool,
-    #[serde(rename = "enableAcademicInsightsAI", default)]
-    pub enable_academic_insights_ai: bool,
-    #[serde(rename = "enableAcademicOperations", default)]
-    pub enable_academic_operations: bool,
-    #[serde(rename = "enableAccessToMasterListOfCoverageTypes", default)]
-    pub enable_access_to_master_list_of_coverage_types: bool,
-    #[serde(rename = "enableAccountBasedSharing", default)]
-    pub enable_account_based_sharing: bool,
-    #[serde(rename = "enableAccountScoreEnabled", default)]
-    pub enable_account_score_enabled: bool,
-    #[serde(rename = "enableActionPlanTaskComment", default)]
-    pub enable_action_plan_task_comment: bool,
-    #[serde(rename = "enableActionableList", default)]
-    pub enable_actionable_list: bool,
-    #[serde(rename = "enableActionableListOrgPref", default)]
-    pub enable_actionable_list_org_pref: bool,
-    #[serde(rename = "enableAdvancedScheduling", default)]
-    pub enable_advanced_scheduling: bool,
-    #[serde(rename = "enableAdvancementGenAI", default)]
-    pub enable_advancement_gen_ai: bool,
-    #[serde(rename = "enableAdverseEvents", default)]
-    pub enable_adverse_events: bool,
-    #[serde(rename = "enableAdvisingAgent", default)]
-    pub enable_advising_agent: bool,
-    #[serde(rename = "enableAdvisingSummaryAI", default)]
-    pub enable_advising_summary_ai: bool,
-    #[serde(rename = "enableAlumniRelations", default)]
-    pub enable_alumni_relations: bool,
-    #[serde(rename = "enableAnyResourceTypeOrgPref", default)]
-    pub enable_any_resource_type_org_pref: bool,
-    #[serde(rename = "enableAppAlerts", default)]
-    pub enable_app_alerts: bool,
-    #[serde(rename = "enableAppFrmAnywhereOrgPref", default)]
-    pub enable_app_frm_anywhere_org_pref: bool,
-    #[serde(rename = "enableAppInviteOrgPref", default)]
-    pub enable_app_invite_org_pref: bool,
-    #[serde(rename = "enableApplnDecStdSharing", default)]
-    pub enable_appln_dec_std_sharing: bool,
-    #[serde(rename = "enableAppraisalMgmt", default)]
-    pub enable_appraisal_mgmt: bool,
-    #[serde(rename = "enableAutoComplaintSummaryPref", default)]
-    pub enable_auto_complaint_summary_pref: bool,
-    #[serde(rename = "enableB2B", default)]
-    pub enable_b_2_b: bool,
-    #[serde(rename = "enableB2BAccountPlan", default)]
-    pub enable_b_2_b_account_plan: bool,
-    #[serde(rename = "enableB2BEinstein", default)]
-    pub enable_b_2_b_einstein: bool,
-    #[serde(rename = "enableB2BRMAgent", default)]
-    pub enable_b_2_brm_agent: bool,
-    #[serde(rename = "enableBatchIDExtractAndTransform", default)]
-    pub enable_batch_id_extract_and_transform: bool,
-    #[serde(rename = "enableBatchIntelligentDocExtrctPref", default)]
-    pub enable_batch_intelligent_doc_extrct_pref: bool,
-    #[serde(rename = "enableBehavioralHealthAppPref", default)]
-    pub enable_behavioral_health_app_pref: bool,
-    #[serde(rename = "enableBenefitAndGoalSharingPref", default)]
-    pub enable_benefit_and_goal_sharing_pref: bool,
-    #[serde(rename = "enableBenefitManagementPreference", default)]
-    pub enable_benefit_management_preference: bool,
-    #[serde(rename = "enableBlockResourceAvailabilityOrgPref", default)]
-    pub enable_block_resource_availability_org_pref: bool,
-    #[serde(rename = "enableBusinessHierarchyPref", default)]
-    pub enable_business_hierarchy_pref: bool,
-    #[serde(rename = "enableBusinessMessenger", default)]
-    pub enable_business_messenger: bool,
-    #[serde(rename = "enableCBSFAnyWordSearch", default)]
-    pub enable_cbsf_any_word_search: bool,
-    #[serde(rename = "enableCPBestConTimeSharing", default)]
-    pub enable_cp_best_con_time_sharing: bool,
-    #[serde(rename = "enableCPSocialCustomSharing", default)]
-    pub enable_cp_social_custom_sharing: bool,
-    #[serde(rename = "enableCSRDReportingOrgPref", default)]
-    pub enable_csrd_reporting_org_pref: bool,
-    #[serde(rename = "enableCalculationDetail", default)]
-    pub enable_calculation_detail: bool,
-    #[serde(rename = "enableCalculationUsingParentPolicyOnly", default)]
-    pub enable_calculation_using_parent_policy_only: bool,
-    #[serde(rename = "enableCallReportAdminContextPref", default)]
-    pub enable_call_report_admin_context_pref: bool,
-    #[serde(rename = "enableCandidateMatching", default)]
-    pub enable_candidate_matching: bool,
-    #[serde(rename = "enableCapacitySchedulingPref", default)]
-    pub enable_capacity_scheduling_pref: bool,
-    #[serde(rename = "enableCareGapPrefSetting", default)]
-    pub enable_care_gap_pref_setting: bool,
-    #[serde(rename = "enableCareMgmtSlackAccess", default)]
-    pub enable_care_mgmt_slack_access: bool,
-    #[serde(rename = "enableCarePlansPreference", default)]
-    pub enable_care_plans_preference: bool,
-    #[serde(rename = "enableCareTaskSharingSetting", default)]
-    pub enable_care_task_sharing_setting: bool,
-    #[serde(rename = "enableCaseProceedingsPref", default)]
-    pub enable_case_proceedings_pref: bool,
-    #[serde(rename = "enableCaseReferralPref", default)]
-    pub enable_case_referral_pref: bool,
-    #[serde(rename = "enableCdpSalesExcellence", default)]
-    pub enable_cdp_sales_excellence: bool,
-    #[serde(rename = "enableCdsAppFormProdSiteUsers", default)]
-    pub enable_cds_app_form_prod_site_users: bool,
-    #[serde(rename = "enableCdsAppFormSiteUsers", default)]
-    pub enable_cds_app_form_site_users: bool,
-    #[serde(rename = "enableCdsApplicationForm", default)]
-    pub enable_cds_application_form: bool,
-    #[serde(rename = "enableCdsApplicationFormProduct", default)]
-    pub enable_cds_application_form_product: bool,
-    #[serde(rename = "enableCdsAssetDataSharingParticipant", default)]
-    pub enable_cds_asset_data_sharing_participant: bool,
-    #[serde(rename = "enableCdsAssetDataSharingParticipantExprc", default)]
-    pub enable_cds_asset_data_sharing_participant_exprc: bool,
-    #[serde(rename = "enableCdsDeleteCOPRecordByParentOwner", default)]
-    pub enable_cds_delete_cop_record_by_parent_owner: bool,
-    #[serde(rename = "enableCdsPartyProfile", default)]
-    pub enable_cds_party_profile: bool,
-    #[serde(rename = "enableCdsPartyProfileSiteUsers", default)]
-    pub enable_cds_party_profile_site_users: bool,
-    #[serde(rename = "enableChurnPredictionRT", default)]
-    pub enable_churn_prediction_rt: bool,
-    #[serde(rename = "enableClaimMgmt", default)]
-    pub enable_claim_mgmt: bool,
-    #[serde(rename = "enableClinicalDataModel", default)]
-    pub enable_clinical_data_model: bool,
-    #[serde(rename = "enableCollectionFLowOps", default)]
-    pub enable_collection_f_low_ops: bool,
-    #[serde(rename = "enableCollectionRiskScoringCFE", default)]
-    pub enable_collection_risk_scoring_cfe: bool,
-    #[serde(rename = "enableCollectionTimeline", default)]
-    pub enable_collection_timeline: bool,
-    #[serde(rename = "enableComparisonViewAI", default)]
-    pub enable_comparison_view_ai: bool,
-    #[serde(rename = "enableCompliantDataSharingForAccount", default)]
-    pub enable_compliant_data_sharing_for_account: bool,
-    #[serde(rename = "enableCompliantDataSharingForBudget", default)]
-    pub enable_compliant_data_sharing_for_budget: bool,
-    #[serde(rename = "enableCompliantDataSharingForBudgetSiteUsers", default)]
-    pub enable_compliant_data_sharing_for_budget_site_users: bool,
-    #[serde(rename = "enableCompliantDataSharingForCustomObjects", default)]
-    pub enable_compliant_data_sharing_for_custom_objects: bool,
-    #[serde(rename = "enableCompliantDataSharingForFinancialDeal", default)]
-    pub enable_compliant_data_sharing_for_financial_deal: bool,
-    #[serde(rename = "enableCompliantDataSharingForFundingAward", default)]
-    pub enable_compliant_data_sharing_for_funding_award: bool,
-    #[serde(rename = "enableCompliantDataSharingForFundingAwardSiteUsers", default)]
-    pub enable_compliant_data_sharing_for_funding_award_site_users: bool,
-    #[serde(rename = "enableCompliantDataSharingForFundingOpportunity", default)]
-    pub enable_compliant_data_sharing_for_funding_opportunity: bool,
-    #[serde(rename = "enableCompliantDataSharingForFundingOpportunitySiteUsers", default)]
-    pub enable_compliant_data_sharing_for_funding_opportunity_site_users: bool,
-    #[serde(rename = "enableCompliantDataSharingForIndividualApplication", default)]
-    pub enable_compliant_data_sharing_for_individual_application: bool,
-    #[serde(rename = "enableCompliantDataSharingForIndividualApplicationSiteUsers", default)]
-    pub enable_compliant_data_sharing_for_individual_application_site_users: bool,
-    #[serde(rename = "enableCompliantDataSharingForIndividualApplicationTask", default)]
-    pub enable_compliant_data_sharing_for_individual_application_task: bool,
-    #[serde(rename = "enableCompliantDataSharingForIndividualApplicationTaskSiteUsers", default)]
-    pub enable_compliant_data_sharing_for_individual_application_task_site_users: bool,
-    #[serde(rename = "enableCompliantDataSharingForInteraction", default)]
-    pub enable_compliant_data_sharing_for_interaction: bool,
-    #[serde(rename = "enableCompliantDataSharingForInteractionSummary", default)]
-    pub enable_compliant_data_sharing_for_interaction_summary: bool,
-    #[serde(rename = "enableCompliantDataSharingForOpportunity", default)]
-    pub enable_compliant_data_sharing_for_opportunity: bool,
-    #[serde(rename = "enableCompliantDataSharingForPreliminaryApplicationRef", default)]
-    pub enable_compliant_data_sharing_for_preliminary_application_ref: bool,
-    #[serde(rename = "enableCompliantDataSharingForPreliminaryApplicationRefSiteUsers", default)]
-    pub enable_compliant_data_sharing_for_preliminary_application_ref_site_users: bool,
-    #[serde(rename = "enableComprehendMedical", default)]
-    pub enable_comprehend_medical: bool,
-    #[serde(rename = "enableContactCenterAccess", default)]
-    pub enable_contact_center_access: bool,
-    #[serde(rename = "enableContractMgmtPref", default)]
-    pub enable_contract_mgmt_pref: bool,
-    #[serde(rename = "enableContractSearchPref", default)]
-    pub enable_contract_search_pref: bool,
-    #[serde(rename = "enableContractsAIPref", default)]
-    pub enable_contracts_ai_pref: bool,
-    #[serde(rename = "enableCourseSearchAgent", default)]
-    pub enable_course_search_agent: bool,
-    #[serde(rename = "enableCreateMultiAttendeeEventOrgPref", default)]
-    pub enable_create_multi_attendee_event_org_pref: bool,
-    #[serde(rename = "enableCrisisCenterAccess", default)]
-    pub enable_crisis_center_access: bool,
-    #[serde(rename = "enableCriteriaBasedSearchAndFilter", default)]
-    pub enable_criteria_based_search_and_filter: bool,
-    #[serde(rename = "enableCustomFlowsOnCycleCount", default)]
-    pub enable_custom_flows_on_cycle_count: bool,
-    #[serde(rename = "enableCustomFlowsOnExpiryPage", default)]
-    pub enable_custom_flows_on_expiry_page: bool,
-    #[serde(rename = "enableDCHEnGpt", default)]
-    pub enable_dch_en_gpt: bool,
-    #[serde(rename = "enableDCHEnGptAccuracy", default)]
-    pub enable_dch_en_gpt_accuracy: bool,
-    #[serde(rename = "enableDCHEnGptFirstDraft", default)]
-    pub enable_dch_en_gpt_first_draft: bool,
-    #[serde(rename = "enableDCHEnGptIL", default)]
-    pub enable_dch_en_gpt_il: bool,
-    #[serde(rename = "enableDCHEnGptSearch", default)]
-    pub enable_dch_en_gpt_search: bool,
-    #[serde(rename = "enableDCHGoogleAddOn", default)]
-    pub enable_dch_google_add_on: bool,
-    #[serde(rename = "enableDCHMSO365AddIn", default)]
-    pub enable_dchmso_365_add_in: bool,
-    #[serde(rename = "enableDFDataCapture", default)]
-    pub enable_df_data_capture: bool,
-    #[serde(rename = "enableDataCloudEventsOnTimeline", default)]
-    pub enable_data_cloud_events_on_timeline: bool,
-    #[serde(rename = "enableDataTrueUpPreference", default)]
-    pub enable_data_true_up_preference: bool,
-    #[serde(rename = "enableDeDupeForDSPref", default)]
-    pub enable_de_dupe_for_ds_pref: bool,
-    #[serde(rename = "enableDealManagement", default)]
-    pub enable_deal_management: bool,
-    #[serde(rename = "enableDeleteCustomObjectParticipantRecordCompliantDataSharing", default)]
-    pub enable_delete_custom_object_participant_record_compliant_data_sharing: bool,
-    #[serde(rename = "enableDepriveSoqlAccessGuestUserOrgPref", default)]
-    pub enable_deprive_soql_access_guest_user_org_pref: bool,
-    #[serde(rename = "enableDepriveSoqlAccessOrgPref", default)]
-    pub enable_deprive_soql_access_org_pref: bool,
-    #[serde(rename = "enableDigitalInsurancePolicyRnwl", default)]
-    pub enable_digital_insurance_policy_rnwl: bool,
-    #[serde(rename = "enableDigitalLendingPref", default)]
-    pub enable_digital_lending_pref: bool,
-    #[serde(rename = "enableDigitalLendingReadOnlyOrgPref", default)]
-    pub enable_digital_lending_read_only_org_pref: bool,
-    #[serde(rename = "enableDisbursementPreference", default)]
-    pub enable_disbursement_preference: bool,
-    #[serde(rename = "enableDiscoveryFrameworkMetadata", default)]
-    pub enable_discovery_framework_metadata: bool,
-    #[serde(rename = "enableDiscoveryFrwrkSampleTemplate", default)]
-    pub enable_discovery_frwrk_sample_template: bool,
-    #[serde(rename = "enableDiseaseCaseClassificationPref", default)]
-    pub enable_disease_case_classification_pref: bool,
-    #[serde(rename = "enableDiseaseSurveillancePref", default)]
-    pub enable_disease_surveillance_pref: bool,
-    #[serde(rename = "enableDisplaySummaryOnTimeline", default)]
-    pub enable_display_summary_on_timeline: bool,
-    #[serde(rename = "enableDontSharePartyprofWPortalOrgPref", default)]
-    pub enable_dont_share_partyprof_w_portal_org_pref: bool,
-    #[serde(rename = "enableDpeProviderSearchSettingsOrgPref", default)]
-    pub enable_dpe_provider_search_settings_org_pref: bool,
-    #[serde(rename = "enableDropInAppointmentsOrgPref", default)]
-    pub enable_drop_in_appointments_org_pref: bool,
-    #[serde(rename = "enableDropInFallbackMechOrgPref", default)]
-    pub enable_drop_in_fallback_mech_org_pref: bool,
-    #[serde(rename = "enableDropInSkillMatchingOrgPref", default)]
-    pub enable_drop_in_skill_matching_org_pref: bool,
-    #[serde(rename = "enableEDCSkillsGenerator", default)]
-    pub enable_edc_skills_generator: bool,
-    #[serde(rename = "enableEGPTInsuranceCmpntPref", default)]
-    pub enable_egpt_insurance_cmpnt_pref: bool,
-    #[serde(rename = "enableESGReportingOrgPref", default)]
-    pub enable_esg_reporting_org_pref: bool,
-    #[serde(rename = "enableEUCoreAI", default)]
-    pub enable_eu_core_ai: bool,
-    #[serde(rename = "enableEUCoreServiceAppOn", default)]
-    pub enable_eu_core_service_app_on: bool,
-    #[serde(rename = "enableEUSales", default)]
-    pub enable_eu_sales: bool,
-    #[serde(rename = "enableEUTariffFeature", default)]
-    pub enable_eu_tariff_feature: bool,
-    #[serde(rename = "enableEduAdvncdAcadOper", default)]
-    pub enable_edu_advncd_acad_oper: bool,
-    #[serde(rename = "enableEducationCloud", default)]
-    pub enable_education_cloud: bool,
-    #[serde(rename = "enableEinsteinAiAutofillPref", default)]
-    pub enable_einstein_ai_autofill_pref: bool,
-    #[serde(rename = "enableEinsteinDocReader", default)]
-    pub enable_einstein_doc_reader: bool,
-    #[serde(rename = "enableEinsteinVisits", default)]
-    pub enable_einstein_visits: bool,
-    #[serde(rename = "enableEngagementVisualsAI", default)]
-    pub enable_engagement_visuals_ai: bool,
-    #[serde(rename = "enableEnhancedQuestionCreation", default)]
-    pub enable_enhanced_question_creation: bool,
-    #[serde(rename = "enableEnhancedUIForISPref", default)]
-    pub enable_enhanced_ui_for_is_pref: bool,
-    #[serde(rename = "enableEpcDeleteAccess", default)]
-    pub enable_epc_delete_access: bool,
-    #[serde(rename = "enableEventManagementOrgPref", default)]
-    pub enable_event_management_org_pref: bool,
-    #[serde(rename = "enableEventWriteOrgPref", default)]
-    pub enable_event_write_org_pref: bool,
-    #[serde(rename = "enableEvidenceManagementPref", default)]
-    pub enable_evidence_management_pref: bool,
-    #[serde(rename = "enableExistingHealthCloudOrg", default)]
-    pub enable_existing_health_cloud_org: bool,
-    #[serde(rename = "enableFSCInsuranceReport", default)]
-    pub enable_fsc_insurance_report: bool,
-    #[serde(rename = "enableFSCInsuranceServiceConsole", default)]
-    pub enable_fsc_insurance_service_console: bool,
-    #[serde(rename = "enableFinSummaryRollupMgmt", default)]
-    pub enable_fin_summary_rollup_mgmt: bool,
-    #[serde(rename = "enableFinancialAccountMgmt", default)]
-    pub enable_financial_account_mgmt: bool,
-    #[serde(rename = "enableFinancialDealCallReportCmpPref", default)]
-    pub enable_financial_deal_call_report_cmp_pref: bool,
-    #[serde(rename = "enableFinancialDealCallReportPref", default)]
-    pub enable_financial_deal_call_report_pref: bool,
-    #[serde(rename = "enableFinancialDealRoleHierarchy", default)]
-    pub enable_financial_deal_role_hierarchy: bool,
-    #[serde(rename = "enableFormFramework", default)]
-    pub enable_form_framework: bool,
-    #[serde(rename = "enableFundraising", default)]
-    pub enable_fundraising: bool,
-    #[serde(rename = "enableGenAIAssessmentQuestions", default)]
-    pub enable_gen_ai_assessment_questions: bool,
-    #[serde(rename = "enableGiftAgreement", default)]
-    pub enable_gift_agreement: bool,
-    #[serde(rename = "enableGiftEntryGrid", default)]
-    pub enable_gift_entry_grid: bool,
-    #[serde(rename = "enableGiftPlanning", default)]
-    pub enable_gift_planning: bool,
-    #[serde(rename = "enableGnrcDisclsFrmwrk", default)]
-    pub enable_gnrc_discls_frmwrk: bool,
-    #[serde(rename = "enableGoalsAgent", default)]
-    pub enable_goals_agent: bool,
-    #[serde(rename = "enableGrantmaking", default)]
-    pub enable_grantmaking: bool,
-    #[serde(rename = "enableGroupMembershipPref", default)]
-    pub enable_group_membership_pref: bool,
-    #[serde(rename = "enableHCReferralScoring", default)]
-    pub enable_hc_referral_scoring: bool,
-    #[serde(rename = "enableHcCorePatientConsole", default)]
-    pub enable_hc_core_patient_console: bool,
-    #[serde(rename = "enableHcStdRelationshipJunctions", default)]
-    pub enable_hc_std_relationship_junctions: bool,
-    #[serde(rename = "enableHealthCloudGenAIPref", default)]
-    pub enable_health_cloud_gen_ai_pref: bool,
-    #[serde(rename = "enableHighScaleRuleProcessingPref", default)]
-    pub enable_high_scale_rule_processing_pref: bool,
-    #[serde(rename = "enableHlsClinicalDcsnSuptAccessOrgPreference", default)]
-    pub enable_hls_clinical_dcsn_supt_access_org_preference: bool,
-    #[serde(rename = "enableHlsFhirSubscriptionSetting", default)]
-    pub enable_hls_fhir_subscription_setting: bool,
-    #[serde(rename = "enableHlsUmDtrSetting", default)]
-    pub enable_hls_um_dtr_setting: bool,
-    #[serde(rename = "enableHomeHealth", default)]
-    pub enable_home_health: bool,
-    #[serde(rename = "enableHomeHlthRschdFlowRcntVer", default)]
-    pub enable_home_hlth_rschd_flow_rcnt_ver: bool,
-    #[serde(rename = "enableIAMPatchModifyPref", default)]
-    pub enable_iam_patch_modify_pref: bool,
-    #[serde(rename = "enableIESentimentAnalysis", default)]
-    pub enable_ie_sentiment_analysis: bool,
-    #[serde(rename = "enableIndCrossObjChangelog", default)]
-    pub enable_ind_cross_obj_changelog: bool,
-    #[serde(rename = "enableIndustriesAssessment", default)]
-    pub enable_industries_assessment: bool,
-    #[serde(rename = "enableIndustriesAssessmentGuestOrgPref", default)]
-    pub enable_industries_assessment_guest_org_pref: bool,
-    #[serde(rename = "enableIndustriesAssessmentPrefill", default)]
-    pub enable_industries_assessment_prefill: bool,
-    #[serde(rename = "enableIndustriesCaptchaVerification", default)]
-    pub enable_industries_captcha_verification: bool,
-    #[serde(rename = "enableIndustriesIntegrationOrchestratorPref", default)]
-    pub enable_industries_integration_orchestrator_pref: bool,
-    #[serde(rename = "enableIndustriesKYC", default)]
-    pub enable_industries_kyc: bool,
-    #[serde(rename = "enableIndustriesLPIPreference", default)]
-    pub enable_industries_lpi_preference: bool,
-    #[serde(rename = "enableIndustriesOnboarding", default)]
-    pub enable_industries_onboarding: bool,
-    #[serde(rename = "enableIndustriesRebates", default)]
-    pub enable_industries_rebates: bool,
-    #[serde(rename = "enableIndustriesShipAndDebit", default)]
-    pub enable_industries_ship_and_debit: bool,
-    #[serde(rename = "enableIndustriesStageManagementPref", default)]
-    pub enable_industries_stage_management_pref: bool,
-    #[serde(rename = "enableInformationLibrary", default)]
-    pub enable_information_library: bool,
-    #[serde(rename = "enableIntegratedCareManagementSetting", default)]
-    pub enable_integrated_care_management_setting: bool,
-    #[serde(rename = "enableIntelligentDocExtractPref", default)]
-    pub enable_intelligent_doc_extract_pref: bool,
-    #[serde(rename = "enableInteractionCstmSharingPref", default)]
-    pub enable_interaction_cstm_sharing_pref: bool,
-    #[serde(rename = "enableInteractionRoleHierarchy", default)]
-    pub enable_interaction_role_hierarchy: bool,
-    #[serde(rename = "enableInteractionSummaryPref", default)]
-    pub enable_interaction_summary_pref: bool,
-    #[serde(rename = "enableInteractionSummaryRoleHierarchy", default)]
-    pub enable_interaction_summary_role_hierarchy: bool,
-    #[serde(rename = "enableInvestigativeCaseMgmntPrf", default)]
-    pub enable_investigative_case_mgmnt_prf: bool,
-    #[serde(rename = "enableLSC4CEDocumentManagement", default)]
-    pub enable_lsc_4_ce_document_management: bool,
-    #[serde(rename = "enableLSC4CEEDetailing", default)]
-    pub enable_lsc_4_cee_detailing: bool,
-    #[serde(rename = "enableLSC4CEEmailAndTemplate", default)]
-    pub enable_lsc_4_ce_email_and_template: bool,
-    #[serde(rename = "enableLSC4CEKeyAccountManagement", default)]
-    pub enable_lsc_4_ce_key_account_management: bool,
-    #[serde(rename = "enableLSC4CEMedInsights", default)]
-    pub enable_lsc_4_ce_med_insights: bool,
-    #[serde(rename = "enableLSC4CEPackage", default)]
-    pub enable_lsc_4_ce_package: bool,
-    #[serde(rename = "enableLSC4CERemoteEngagement", default)]
-    pub enable_lsc_4_ce_remote_engagement: bool,
-    #[serde(rename = "enableLSC4CEVisits", default)]
-    pub enable_lsc_4_ce_visits: bool,
-    #[serde(rename = "enableLifeSciGenericWorkflow", default)]
-    pub enable_life_sci_generic_workflow: bool,
-    #[serde(rename = "enableLifeSciInquiry", default)]
-    pub enable_life_sci_inquiry: bool,
-    #[serde(rename = "enableLifeSciListsAndFilters", default)]
-    pub enable_life_sci_lists_and_filters: bool,
-    #[serde(rename = "enableLifeSciencesActivityPlan", default)]
-    pub enable_life_sciences_activity_plan: bool,
-    #[serde(rename = "enableLifeSciencesClinialTrailManagement", default)]
-    pub enable_life_sciences_clinial_trail_management: bool,
-    #[serde(rename = "enableLifeSciencesConsent", default)]
-    pub enable_life_sciences_consent: bool,
-    #[serde(rename = "enableLifeSciencesCustomerEngagementBase", default)]
-    pub enable_life_sciences_customer_engagement_base: bool,
-    #[serde(rename = "enableLifeSciencesMergeManagement", default)]
-    pub enable_life_sciences_merge_management: bool,
-    #[serde(rename = "enableLifeSciencesProviderEngagementCompliance", default)]
-    pub enable_life_sciences_provider_engagement_compliance: bool,
-    #[serde(rename = "enableLifeSciencesSiteManagement", default)]
-    pub enable_life_sciences_site_management: bool,
-    #[serde(rename = "enableLsSiteMgmtSiteSelAgent", default)]
-    pub enable_ls_site_mgmt_site_sel_agent: bool,
-    #[serde(rename = "enableLsSiteMgmtSummarization", default)]
-    pub enable_ls_site_mgmt_summarization: bool,
-    #[serde(rename = "enableManyToManyRelationships", default)]
-    pub enable_many_to_many_relationships: bool,
-    #[serde(rename = "enableMaterialityAssessment", default)]
-    pub enable_materiality_assessment: bool,
-    #[serde(rename = "enableMcgSetting", default)]
-    pub enable_mcg_setting: bool,
-    #[serde(rename = "enableMedRecSetting", default)]
-    pub enable_med_rec_setting: bool,
-    #[serde(rename = "enableMediaAddInvSlotToPlan", default)]
-    pub enable_media_add_inv_slot_to_plan: bool,
-    #[serde(rename = "enableMediaConfigSetupEnabled", default)]
-    pub enable_media_config_setup_enabled: bool,
-    #[serde(rename = "enableMedicalDeviceEnabled", default)]
-    pub enable_medical_device_enabled: bool,
-    #[serde(rename = "enableMedicationManagementEnabled", default)]
-    pub enable_medication_management_enabled: bool,
-    #[serde(rename = "enableMentoring", default)]
-    pub enable_mentoring: bool,
-    #[serde(rename = "enableMicrosoftWordAddInEnabled", default)]
-    pub enable_microsoft_word_add_in_enabled: bool,
-    #[serde(rename = "enableMortgageRlaTotalsOrgPref", default)]
-    pub enable_mortgage_rla_totals_org_pref: bool,
-    #[serde(rename = "enableMulesoftFhirR4Apis", default)]
-    pub enable_mulesoft_fhir_r_4_apis: bool,
-    #[serde(rename = "enableMultiResourceOrgPref", default)]
-    pub enable_multi_resource_org_pref: bool,
-    #[serde(rename = "enableMultipleCareProgramEnrolleeOrgPref", default)]
-    pub enable_multiple_care_program_enrollee_org_pref: bool,
-    #[serde(rename = "enableMultipleTopicsForShiftsOrgPref", default)]
-    pub enable_multiple_topics_for_shifts_org_pref: bool,
-    #[serde(rename = "enableNZCENCarbonAccounting", default)]
-    pub enable_nzcen_carbon_accounting: bool,
-    #[serde(rename = "enableNZCENGPTDCHIL", default)]
-    pub enable_nzcengptdchil: bool,
-    #[serde(rename = "enableNZCENScope3ProcHub", default)]
-    pub enable_nzcen_scope_3_proc_hub: bool,
-    #[serde(rename = "enableNZCMngEnrgyAttrCr", default)]
-    pub enable_nzc_mng_enrgy_attr_cr: bool,
-    #[serde(rename = "enableNZCMngEsgPgm", default)]
-    pub enable_nzc_mng_esg_pgm: bool,
-    #[serde(rename = "enableNZCWithEinstein", default)]
-    pub enable_nzc_with_einstein: bool,
-    #[serde(rename = "enableNewTimelineSetupFlow", default)]
-    pub enable_new_timeline_setup_flow: bool,
-    #[serde(rename = "enableNextBestAction", default)]
-    pub enable_next_best_action: bool,
-    #[serde(rename = "enableNextBestCustomer", default)]
-    pub enable_next_best_customer: bool,
-    #[serde(rename = "enableNextBestMessage", default)]
-    pub enable_next_best_message: bool,
-    #[serde(rename = "enableNonprofitCloudAgent", default)]
-    pub enable_nonprofit_cloud_agent: bool,
-    #[serde(rename = "enableNonprofitGenAI", default)]
-    pub enable_nonprofit_gen_ai: bool,
-    #[serde(rename = "enableObjectDetection", default)]
-    pub enable_object_detection: bool,
-    #[serde(rename = "enableOnDemandRecordRollupPref", default)]
-    pub enable_on_demand_record_rollup_pref: bool,
-    #[serde(rename = "enableOutcomes", default)]
-    pub enable_outcomes: bool,
-    #[serde(rename = "enableOverbookingOrgPref", default)]
-    pub enable_overbooking_org_pref: bool,
-    #[serde(rename = "enableOverbookingWithGroupOrgPref", default)]
-    pub enable_overbooking_with_group_org_pref: bool,
-    #[serde(rename = "enablePATSTerritoryBasedSharing", default)]
-    pub enable_pats_territory_based_sharing: bool,
-    #[serde(rename = "enablePCMConfigRules", default)]
-    pub enable_pcm_config_rules: bool,
-    #[serde(rename = "enablePartyProfileParentSharingOrgPref", default)]
-    pub enable_party_profile_parent_sharing_org_pref: bool,
-    #[serde(rename = "enablePartyprofParentMultiSharingOrgPref", default)]
-    pub enable_partyprof_parent_multi_sharing_org_pref: bool,
-    #[serde(rename = "enablePatientAppointmentSchedulingOrgPref", default)]
-    pub enable_patient_appointment_scheduling_org_pref: bool,
-    #[serde(rename = "enablePatientServicesOrchestration", default)]
-    pub enable_patient_services_orchestration: bool,
-    #[serde(rename = "enablePersonAcctAddrSync", default)]
-    pub enable_person_acct_addr_sync: bool,
-    #[serde(rename = "enablePhilResearchAgent", default)]
-    pub enable_phil_research_agent: bool,
-    #[serde(rename = "enablePolicyAdministration", default)]
-    pub enable_policy_administration: bool,
-    #[serde(rename = "enablePolicyAgentPref", default)]
-    pub enable_policy_agent_pref: bool,
-    #[serde(rename = "enablePositionRecruitmentPref", default)]
-    pub enable_position_recruitment_pref: bool,
-    #[serde(rename = "enablePreBookedFallbackMechOrgPref", default)]
-    pub enable_pre_booked_fallback_mech_org_pref: bool,
-    #[serde(rename = "enablePrefillMcgAssessmentSetting", default)]
-    pub enable_prefill_mcg_assessment_setting: bool,
-    #[serde(rename = "enablePrimaryProviderRestriction", default)]
-    pub enable_primary_provider_restriction: bool,
-    #[serde(rename = "enableProdTerrAlgnPrtHrchyAcc", default)]
-    pub enable_prod_terr_algn_prt_hrchy_acc: bool,
-    #[serde(rename = "enableProgramCohorts", default)]
-    pub enable_program_cohorts: bool,
-    #[serde(rename = "enableProviderManagementPref", default)]
-    pub enable_provider_management_pref: bool,
-    #[serde(rename = "enableProviderMgmtHealthCarePref", default)]
-    pub enable_provider_mgmt_health_care_pref: bool,
-    #[serde(rename = "enableProviderMgmtSharingPref", default)]
-    pub enable_provider_mgmt_sharing_pref: bool,
-    #[serde(rename = "enableProviderSearchForGuestUser", default)]
-    pub enable_provider_search_for_guest_user: bool,
-    #[serde(rename = "enableProviderSearchPreciseMatch", default)]
-    pub enable_provider_search_precise_match: bool,
-    #[serde(rename = "enableProviderSearchSyncOrgPref", default)]
-    pub enable_provider_search_sync_org_pref: bool,
-    #[serde(rename = "enableProviderSummarization", default)]
-    pub enable_provider_summarization: bool,
-    #[serde(rename = "enablePssBnftMgmtSklCmtyPref", default)]
-    pub enable_pss_bnft_mgmt_skl_cmty_pref: bool,
-    #[serde(rename = "enablePssCmplntMgmtSklCmtyPref", default)]
-    pub enable_pss_cmplnt_mgmt_skl_cmty_pref: bool,
-    #[serde(rename = "enablePubSectrCmplMgmtSklPref", default)]
-    pub enable_pub_sectr_cmpl_mgmt_skl_pref: bool,
-    #[serde(rename = "enablePubSectrCmplntMgmtSklPref", default)]
-    pub enable_pub_sectr_cmplnt_mgmt_skl_pref: bool,
-    #[serde(rename = "enablePulseChecks", default)]
-    pub enable_pulse_checks: bool,
-    #[serde(rename = "enableRBLUsingCalcService", default)]
-    pub enable_rbl_using_calc_service: bool,
-    #[serde(rename = "enableRecordRollup", default)]
-    pub enable_record_rollup: bool,
-    #[serde(rename = "enableReferralManagementApp", default)]
-    pub enable_referral_management_app: bool,
-    #[serde(rename = "enableReferralScoring", default)]
-    pub enable_referral_scoring: bool,
-    #[serde(rename = "enableReminders", default)]
-    pub enable_reminders: bool,
-    #[serde(rename = "enableRetailPos", default)]
-    pub enable_retail_pos: bool,
-    #[serde(rename = "enableRosterFileFeatureOrgPreference", default)]
-    pub enable_roster_file_feature_org_preference: bool,
-    #[serde(rename = "enableSCAllocScorEmssnSpentAmt", default)]
-    pub enable_sc_alloc_scor_emssn_spent_amt: bool,
-    #[serde(rename = "enableSCAssignFootprint", default)]
-    pub enable_sc_assign_footprint: bool,
-    #[serde(rename = "enableSCBEIEnabled", default)]
-    pub enable_scbei_enabled: bool,
-    #[serde(rename = "enableSCCarbonAccounting", default)]
-    pub enable_sc_carbon_accounting: bool,
-    #[serde(rename = "enableSCCarbonCreditAlloc", default)]
-    pub enable_sc_carbon_credit_alloc: bool,
-    #[serde(rename = "enableSCCreateFootprint", default)]
-    pub enable_sc_create_footprint: bool,
-    #[serde(rename = "enableSCDGF", default)]
-    pub enable_scdgf: bool,
-    #[serde(rename = "enableSCEmssnsForecasting", default)]
-    pub enable_sc_emssns_forecasting: bool,
-    #[serde(rename = "enableSCExpansionUseCase", default)]
-    pub enable_sc_expansion_use_case: bool,
-    #[serde(rename = "enableSCExpansionUseCaseMultiLevel", default)]
-    pub enable_sc_expansion_use_case_multi_level: bool,
-    #[serde(rename = "enableSCExternalEngMgmt", default)]
-    pub enable_sc_external_eng_mgmt: bool,
-    #[serde(rename = "enableSCGenrateCnsmpRcd", default)]
-    pub enable_sc_genrate_cnsmp_rcd: bool,
-    #[serde(rename = "enableSCSNGManagement", default)]
-    pub enable_scsng_management: bool,
-    #[serde(rename = "enableSCScope3HubEnabled", default)]
-    pub enable_sc_scope_3_hub_enabled: bool,
-    #[serde(rename = "enableSCSnGAffiliates", default)]
-    pub enable_sc_sn_g_affiliates: bool,
-    #[serde(rename = "enableSCSplitCnsmpRcd", default)]
-    pub enable_sc_split_cnsmp_rcd: bool,
-    #[serde(rename = "enableSCTargetSetting", default)]
-    pub enable_sc_target_setting: bool,
-    #[serde(rename = "enableSCWasteManagement", default)]
-    pub enable_sc_waste_management: bool,
-    #[serde(rename = "enableSCWaterManagement", default)]
-    pub enable_sc_water_management: bool,
-    #[serde(rename = "enableSampleLimits", default)]
-    pub enable_sample_limits: bool,
-    #[serde(rename = "enableSaveActionsForInternalAssessmentsSetting", default)]
-    pub enable_save_actions_for_internal_assessments_setting: bool,
-    #[serde(rename = "enableSaveAssessmentAsDraft", default)]
-    pub enable_save_assessment_as_draft: bool,
-    #[serde(rename = "enableSchedulerPaymentsPref", default)]
-    pub enable_scheduler_payments_pref: bool,
-    #[serde(rename = "enableScoringFrameworkCRMAPref", default)]
-    pub enable_scoring_framework_crma_pref: bool,
-    #[serde(rename = "enableScoringFrameworkOrgPref", default)]
-    pub enable_scoring_framework_org_pref: bool,
-    #[serde(rename = "enableSentimentAnalysis", default)]
-    pub enable_sentiment_analysis: bool,
-    #[serde(rename = "enableShareSaWithArOrgPref", default)]
-    pub enable_share_sa_with_ar_org_pref: bool,
-    #[serde(rename = "enableSlackForCib", default)]
-    pub enable_slack_for_cib: bool,
-    #[serde(rename = "enableSmartAsmtQstnGeneration", default)]
-    pub enable_smart_asmt_qstn_generation: bool,
-    #[serde(rename = "enableSmartTags", default)]
-    pub enable_smart_tags: bool,
-    #[serde(rename = "enableSourceCodeGeneration", default)]
-    pub enable_source_code_generation: bool,
-    #[serde(rename = "enableStageAssignmentRulesReEvaluation", default)]
-    pub enable_stage_assignment_rules_re_evaluation: bool,
-    #[serde(rename = "enableStudentGoals", default)]
-    pub enable_student_goals: bool,
-    #[serde(rename = "enableStudentManagement", default)]
-    pub enable_student_management: bool,
-    #[serde(rename = "enableStudentRecruitmentAgent", default)]
-    pub enable_student_recruitment_agent: bool,
-    #[serde(rename = "enableStudentSuccess", default)]
-    pub enable_student_success: bool,
-    #[serde(rename = "enableSuggestedAssessmentSetting", default)]
-    pub enable_suggested_assessment_setting: bool,
-    #[serde(rename = "enableSustainabilityCloud", default)]
-    pub enable_sustainability_cloud: bool,
-    #[serde(rename = "enableSyncInteractionsPref", default)]
-    pub enable_sync_interactions_pref: bool,
-    #[serde(rename = "enableTearSheetPref", default)]
-    pub enable_tear_sheet_pref: bool,
-    #[serde(rename = "enableTextExtract", default)]
-    pub enable_text_extract: bool,
-    #[serde(rename = "enableTimelineCachePref", default)]
-    pub enable_timeline_cache_pref: bool,
-    #[serde(rename = "enableTimelinePref", default)]
-    pub enable_timeline_pref: bool,
-    #[serde(rename = "enableTlntRcrtMgmtRcrutSklPref", default)]
-    pub enable_tlnt_rcrt_mgmt_rcrut_skl_pref: bool,
-    #[serde(rename = "enableTlntRcrtMgmtSklCmtyPref", default)]
-    pub enable_tlnt_rcrt_mgmt_skl_cmty_pref: bool,
-    #[serde(rename = "enableTopicOrTemplate", default)]
-    pub enable_topic_or_template: bool,
-    #[serde(rename = "enableTopicTimeSlot", default)]
-    pub enable_topic_time_slot: bool,
-    #[serde(rename = "enableTrackApplicationsPref", default)]
-    pub enable_track_applications_pref: bool,
-    #[serde(rename = "enableTrialManagementRandomization", default)]
-    pub enable_trial_management_randomization: bool,
-    #[serde(rename = "enableTurnOffDsclsReprtPbsrName", default)]
-    pub enable_turn_off_dscls_reprt_pbsr_name: bool,
-    #[serde(rename = "enableUMPayerAppAccessOrgPreference", default)]
-    pub enable_um_payer_app_access_org_preference: bool,
-    #[serde(rename = "enableVideoVisitsOrgPref", default)]
-    pub enable_video_visits_org_pref: bool,
-    #[serde(rename = "enableVisitCalendarSync", default)]
-    pub enable_visit_calendar_sync: bool,
-    #[serde(rename = "enableVisitInventoryEnabled", default)]
-    pub enable_visit_inventory_enabled: bool,
-    #[serde(rename = "enableVisitPlanningAndExecutionAction", default)]
-    pub enable_visit_planning_and_execution_action: bool,
-    #[serde(rename = "enableVolunteerManagement", default)]
-    pub enable_volunteer_management: bool,
-    #[serde(rename = "enableVolunteerManagementAI", default)]
-    pub enable_volunteer_management_ai: bool,
-    #[serde(rename = "enableWaitlistManagementPref", default)]
-    pub enable_waitlist_management_pref: bool,
-    #[serde(rename = "enableWealthManagementAIPref", default)]
-    pub enable_wealth_management_ai_pref: bool,
-    #[serde(rename = "isCustomDpeTxObsProviderSearchEnabled", default)]
-    pub is_custom_dpe_tx_obs_provider_search_enabled: bool,
-    #[serde(rename = "loanApplicantAddressAutoCreation", default)]
-    pub loan_applicant_address_auto_creation: bool,
-    #[serde(rename = "loanApplicantAutoCreation", default)]
-    pub loan_applicant_auto_creation: bool,
-    #[serde(rename = "mortgageSalesforceSharing", default)]
-    pub mortgage_salesforce_sharing: bool,
-    #[serde(rename = "nonProfitCloudEmbeddedAI", default)]
-    pub non_profit_cloud_embedded_ai: bool,
-    #[serde(rename = "partyProfMultiShrPrtnrsOrgPref", default)]
-    pub party_prof_multi_shr_prtnrs_org_pref: bool,
-    #[serde(rename = "rlaEditIfAccHasEdit", default)]
-    pub rla_edit_if_acc_has_edit: bool,
-    #[serde(rename = "showCollectionContactAndAccount", default)]
-    pub show_collection_contact_and_account: bool,
-    #[serde(rename = "transformRBLtoDPE", default)]
-    pub transform_rb_lto_dpe: bool,
+    #[serde(
+        rename = "allowBenefitAssignmentWithInactiveProgramEnrollment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_benefit_assignment_with_inactive_program_enrollment: Option<bool>,
+    #[serde(
+        rename = "allowMultipleProducersToWorkOnSamePolicy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_multiple_producers_to_work_on_same_policy: Option<bool>,
+    #[serde(
+        rename = "appointmentDistributionOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub appointment_distribution_org_pref: Option<bool>,
+    #[serde(
+        rename = "brwrCntctFrExtrnlSrcsPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub brwr_cntct_fr_extrnl_srcs_pref: Option<bool>,
+    #[serde(
+        rename = "captureResourceUtilizationOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub capture_resource_utilization_org_pref: Option<bool>,
+    #[serde(
+        rename = "clctnAndRecoveryAgntPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub clctn_and_recovery_agnt_pref: Option<bool>,
+    #[serde(
+        rename = "collDialerCampaignPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub coll_dialer_campaign_pref: Option<bool>,
+    #[serde(
+        rename = "collectionAsaAgentPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub collection_asa_agent_pref: Option<bool>,
+    #[serde(
+        rename = "createCustomerPropertyFromLAProperty",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub create_customer_property_from_la_property: Option<bool>,
+    #[serde(
+        rename = "createFSCAssetFromLAAsset",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub create_fsc_asset_from_la_asset: Option<bool>,
+    #[serde(
+        rename = "createFSCAssetFromLAProperty",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub create_fsc_asset_from_la_property: Option<bool>,
+    #[serde(
+        rename = "createFSCLiabilityFromLAFinancial",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub create_fsc_liability_from_la_financial: Option<bool>,
+    #[serde(
+        rename = "createFSCLiabilityFromLALiability",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub create_fsc_liability_from_la_liability: Option<bool>,
+    #[serde(
+        rename = "createFinancialAccountFromLAAsset",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub create_financial_account_from_la_asset: Option<bool>,
+    #[serde(
+        rename = "createFinancialAccountFromLALiability",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub create_financial_account_from_la_liability: Option<bool>,
+    #[serde(
+        rename = "createFinancialAccountsFromLAFinancials",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub create_financial_accounts_from_la_financials: Option<bool>,
+    #[serde(
+        rename = "createFinancialAccountsFromLAProperty",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub create_financial_accounts_from_la_property: Option<bool>,
+    #[serde(
+        rename = "enableAIAccelerator",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ai_accelerator: Option<bool>,
+    #[serde(
+        rename = "enableAWSTextractAnalyzeIDPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_aws_textract_analyze_id_pref: Option<bool>,
+    #[serde(
+        rename = "enableAWSTextractQueriesPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_aws_textract_queries_pref: Option<bool>,
+    #[serde(
+        rename = "enableAWSTextractTablesPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_aws_textract_tables_pref: Option<bool>,
+    #[serde(
+        rename = "enableAcademicInsightsAI",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_academic_insights_ai: Option<bool>,
+    #[serde(
+        rename = "enableAcademicOperations",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_academic_operations: Option<bool>,
+    #[serde(
+        rename = "enableAccessToMasterListOfCoverageTypes",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_access_to_master_list_of_coverage_types: Option<bool>,
+    #[serde(
+        rename = "enableAccountBasedSharing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_account_based_sharing: Option<bool>,
+    #[serde(
+        rename = "enableAccountScoreEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_account_score_enabled: Option<bool>,
+    #[serde(
+        rename = "enableActionPlanTaskComment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_action_plan_task_comment: Option<bool>,
+    #[serde(
+        rename = "enableActionableList",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_actionable_list: Option<bool>,
+    #[serde(
+        rename = "enableActionableListOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_actionable_list_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableAdvancedScheduling",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_advanced_scheduling: Option<bool>,
+    #[serde(
+        rename = "enableAdvancementGenAI",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_advancement_gen_ai: Option<bool>,
+    #[serde(
+        rename = "enableAdverseEvents",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_adverse_events: Option<bool>,
+    #[serde(
+        rename = "enableAdvisingAgent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_advising_agent: Option<bool>,
+    #[serde(
+        rename = "enableAdvisingSummaryAI",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_advising_summary_ai: Option<bool>,
+    #[serde(
+        rename = "enableAlumniRelations",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_alumni_relations: Option<bool>,
+    #[serde(
+        rename = "enableAnyResourceTypeOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_any_resource_type_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableAppAlerts",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_app_alerts: Option<bool>,
+    #[serde(
+        rename = "enableAppFrmAnywhereOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_app_frm_anywhere_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableAppInviteOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_app_invite_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableApplnDecStdSharing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_appln_dec_std_sharing: Option<bool>,
+    #[serde(
+        rename = "enableAppraisalMgmt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_appraisal_mgmt: Option<bool>,
+    #[serde(
+        rename = "enableAutoApprovePASetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_auto_approve_pa_setting: Option<bool>,
+    #[serde(
+        rename = "enableAutoComplaintSummaryPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_auto_complaint_summary_pref: Option<bool>,
+    #[serde(
+        rename = "enableAutoSaveMcgAssmtSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_auto_save_mcg_assmt_setting: Option<bool>,
+    #[serde(rename = "enableB2B", default, skip_serializing_if = "Option::is_none")]
+    pub enable_b_2_b: Option<bool>,
+    #[serde(
+        rename = "enableB2BAccountPlan",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_b_2_b_account_plan: Option<bool>,
+    #[serde(
+        rename = "enableB2BEinstein",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_b_2_b_einstein: Option<bool>,
+    #[serde(
+        rename = "enableB2BRMAgent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_b_2_brm_agent: Option<bool>,
+    #[serde(
+        rename = "enableBatchIDExtractAndTransform",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_batch_id_extract_and_transform: Option<bool>,
+    #[serde(
+        rename = "enableBatchIntelligentDocExtrctPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_batch_intelligent_doc_extrct_pref: Option<bool>,
+    #[serde(
+        rename = "enableBehavioralHealthAppPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_behavioral_health_app_pref: Option<bool>,
+    #[serde(
+        rename = "enableBenefitAndGoalSharingPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_benefit_and_goal_sharing_pref: Option<bool>,
+    #[serde(
+        rename = "enableBenefitManagementPreference",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_benefit_management_preference: Option<bool>,
+    #[serde(
+        rename = "enableBlockResourceAvailabilityOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_block_resource_availability_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableBusinessHierarchyPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_business_hierarchy_pref: Option<bool>,
+    #[serde(
+        rename = "enableBusinessMessenger",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_business_messenger: Option<bool>,
+    #[serde(
+        rename = "enableCBSFAnyWordSearch",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cbsf_any_word_search: Option<bool>,
+    #[serde(
+        rename = "enableCPBestConTimeSharing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cp_best_con_time_sharing: Option<bool>,
+    #[serde(
+        rename = "enableCPSocialCustomSharing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cp_social_custom_sharing: Option<bool>,
+    #[serde(
+        rename = "enableCSRDReportingOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_csrd_reporting_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableCalculationDetail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_calculation_detail: Option<bool>,
+    #[serde(
+        rename = "enableCalculationUsingParentPolicyOnly",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_calculation_using_parent_policy_only: Option<bool>,
+    #[serde(
+        rename = "enableCallReportAdminContextPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_call_report_admin_context_pref: Option<bool>,
+    #[serde(
+        rename = "enableCandidateMatching",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_candidate_matching: Option<bool>,
+    #[serde(
+        rename = "enableCapacitySchedulingPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_capacity_scheduling_pref: Option<bool>,
+    #[serde(
+        rename = "enableCareGapPrefSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_care_gap_pref_setting: Option<bool>,
+    #[serde(
+        rename = "enableCareMgmtSlackAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_care_mgmt_slack_access: Option<bool>,
+    #[serde(
+        rename = "enableCarePlansPreference",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_care_plans_preference: Option<bool>,
+    #[serde(
+        rename = "enableCareTaskSharingSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_care_task_sharing_setting: Option<bool>,
+    #[serde(
+        rename = "enableCaseProceedingsPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_case_proceedings_pref: Option<bool>,
+    #[serde(
+        rename = "enableCaseReferralPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_case_referral_pref: Option<bool>,
+    #[serde(
+        rename = "enableCdpSalesExcellence",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cdp_sales_excellence: Option<bool>,
+    #[serde(
+        rename = "enableCdsAppFormProdSiteUsers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cds_app_form_prod_site_users: Option<bool>,
+    #[serde(
+        rename = "enableCdsAppFormSiteUsers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cds_app_form_site_users: Option<bool>,
+    #[serde(
+        rename = "enableCdsApplicationForm",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cds_application_form: Option<bool>,
+    #[serde(
+        rename = "enableCdsApplicationFormProduct",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cds_application_form_product: Option<bool>,
+    #[serde(
+        rename = "enableCdsAssetDataSharingParticipant",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cds_asset_data_sharing_participant: Option<bool>,
+    #[serde(
+        rename = "enableCdsAssetDataSharingParticipantExprc",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cds_asset_data_sharing_participant_exprc: Option<bool>,
+    #[serde(
+        rename = "enableCdsDeleteCOPRecordByParentOwner",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cds_delete_cop_record_by_parent_owner: Option<bool>,
+    #[serde(
+        rename = "enableCdsPartyProfile",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cds_party_profile: Option<bool>,
+    #[serde(
+        rename = "enableCdsPartyProfileSiteUsers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cds_party_profile_site_users: Option<bool>,
+    #[serde(
+        rename = "enableChurnPredictionRT",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_churn_prediction_rt: Option<bool>,
+    #[serde(
+        rename = "enableClaimMgmt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_claim_mgmt: Option<bool>,
+    #[serde(
+        rename = "enableClinicalDataModel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_clinical_data_model: Option<bool>,
+    #[serde(
+        rename = "enableCmplntMgmtSklCoCmtyPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cmplnt_mgmt_skl_co_cmty_pref: Option<bool>,
+    #[serde(
+        rename = "enableCollectionFLowOps",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_collection_f_low_ops: Option<bool>,
+    #[serde(
+        rename = "enableCollectionRiskScoringCFE",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_collection_risk_scoring_cfe: Option<bool>,
+    #[serde(
+        rename = "enableCollectionTimeline",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_collection_timeline: Option<bool>,
+    #[serde(
+        rename = "enableComparisonViewAI",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_comparison_view_ai: Option<bool>,
+    #[serde(
+        rename = "enableCompliantDataSharingForAccount",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_compliant_data_sharing_for_account: Option<bool>,
+    #[serde(
+        rename = "enableCompliantDataSharingForBudget",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_compliant_data_sharing_for_budget: Option<bool>,
+    #[serde(
+        rename = "enableCompliantDataSharingForBudgetSiteUsers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_compliant_data_sharing_for_budget_site_users: Option<bool>,
+    #[serde(
+        rename = "enableCompliantDataSharingForCustomObjects",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_compliant_data_sharing_for_custom_objects: Option<bool>,
+    #[serde(
+        rename = "enableCompliantDataSharingForFinancialDeal",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_compliant_data_sharing_for_financial_deal: Option<bool>,
+    #[serde(
+        rename = "enableCompliantDataSharingForFundingAward",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_compliant_data_sharing_for_funding_award: Option<bool>,
+    #[serde(
+        rename = "enableCompliantDataSharingForFundingAwardSiteUsers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_compliant_data_sharing_for_funding_award_site_users: Option<bool>,
+    #[serde(
+        rename = "enableCompliantDataSharingForFundingOpportunity",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_compliant_data_sharing_for_funding_opportunity: Option<bool>,
+    #[serde(
+        rename = "enableCompliantDataSharingForFundingOpportunitySiteUsers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_compliant_data_sharing_for_funding_opportunity_site_users: Option<bool>,
+    #[serde(
+        rename = "enableCompliantDataSharingForIndividualApplication",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_compliant_data_sharing_for_individual_application: Option<bool>,
+    #[serde(
+        rename = "enableCompliantDataSharingForIndividualApplicationSiteUsers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_compliant_data_sharing_for_individual_application_site_users: Option<bool>,
+    #[serde(
+        rename = "enableCompliantDataSharingForIndividualApplicationTask",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_compliant_data_sharing_for_individual_application_task: Option<bool>,
+    #[serde(
+        rename = "enableCompliantDataSharingForIndividualApplicationTaskSiteUsers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_compliant_data_sharing_for_individual_application_task_site_users: Option<bool>,
+    #[serde(
+        rename = "enableCompliantDataSharingForInteraction",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_compliant_data_sharing_for_interaction: Option<bool>,
+    #[serde(
+        rename = "enableCompliantDataSharingForInteractionSummary",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_compliant_data_sharing_for_interaction_summary: Option<bool>,
+    #[serde(
+        rename = "enableCompliantDataSharingForOpportunity",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_compliant_data_sharing_for_opportunity: Option<bool>,
+    #[serde(
+        rename = "enableCompliantDataSharingForPreliminaryApplicationRef",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_compliant_data_sharing_for_preliminary_application_ref: Option<bool>,
+    #[serde(
+        rename = "enableCompliantDataSharingForPreliminaryApplicationRefSiteUsers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_compliant_data_sharing_for_preliminary_application_ref_site_users: Option<bool>,
+    #[serde(
+        rename = "enableComprehendMedical",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_comprehend_medical: Option<bool>,
+    #[serde(
+        rename = "enableContactCenterAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_contact_center_access: Option<bool>,
+    #[serde(
+        rename = "enableContractMgmtPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_contract_mgmt_pref: Option<bool>,
+    #[serde(
+        rename = "enableContractSearchPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_contract_search_pref: Option<bool>,
+    #[serde(
+        rename = "enableContractsAIPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_contracts_ai_pref: Option<bool>,
+    #[serde(
+        rename = "enableCourseOpsAgent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_course_ops_agent: Option<bool>,
+    #[serde(
+        rename = "enableCourseSearchAgent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_course_search_agent: Option<bool>,
+    #[serde(
+        rename = "enableCreateMultiAttendeeEventOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_create_multi_attendee_event_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableCrisisCenterAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_crisis_center_access: Option<bool>,
+    #[serde(
+        rename = "enableCriteriaBasedSearchAndFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_criteria_based_search_and_filter: Option<bool>,
+    #[serde(
+        rename = "enableCustomFlowsOnCycleCount",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_custom_flows_on_cycle_count: Option<bool>,
+    #[serde(
+        rename = "enableCustomFlowsOnExpiryPage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_custom_flows_on_expiry_page: Option<bool>,
+    #[serde(
+        rename = "enableDCHEnGpt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dch_en_gpt: Option<bool>,
+    #[serde(
+        rename = "enableDCHEnGptAccuracy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dch_en_gpt_accuracy: Option<bool>,
+    #[serde(
+        rename = "enableDCHEnGptFirstDraft",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dch_en_gpt_first_draft: Option<bool>,
+    #[serde(
+        rename = "enableDCHEnGptIL",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dch_en_gpt_il: Option<bool>,
+    #[serde(
+        rename = "enableDCHEnGptSearch",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dch_en_gpt_search: Option<bool>,
+    #[serde(
+        rename = "enableDCHGoogleAddOn",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dch_google_add_on: Option<bool>,
+    #[serde(
+        rename = "enableDCHMSO365AddIn",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dchmso_365_add_in: Option<bool>,
+    #[serde(
+        rename = "enableDFDataCapture",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_df_data_capture: Option<bool>,
+    #[serde(
+        rename = "enableDataCloudEventsOnTimeline",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_data_cloud_events_on_timeline: Option<bool>,
+    #[serde(
+        rename = "enableDataTrueUpPreference",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_data_true_up_preference: Option<bool>,
+    #[serde(
+        rename = "enableDeDupeForDSPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_de_dupe_for_ds_pref: Option<bool>,
+    #[serde(
+        rename = "enableDealManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_deal_management: Option<bool>,
+    #[serde(
+        rename = "enableDeleteCustomObjectParticipantRecordCompliantDataSharing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_delete_custom_object_participant_record_compliant_data_sharing: Option<bool>,
+    #[serde(
+        rename = "enableDepriveSoqlAccessGuestUserOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_deprive_soql_access_guest_user_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableDepriveSoqlAccessOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_deprive_soql_access_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableDigitalInsurancePolicyRnwl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_digital_insurance_policy_rnwl: Option<bool>,
+    #[serde(
+        rename = "enableDigitalLendingPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_digital_lending_pref: Option<bool>,
+    #[serde(
+        rename = "enableDigitalLendingReadOnlyOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_digital_lending_read_only_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableDisbursementPreference",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_disbursement_preference: Option<bool>,
+    #[serde(
+        rename = "enableDiscoveryFrameworkMetadata",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_discovery_framework_metadata: Option<bool>,
+    #[serde(
+        rename = "enableDiscoveryFrwrkSampleTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_discovery_frwrk_sample_template: Option<bool>,
+    #[serde(
+        rename = "enableDiseaseCaseClassificationPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_disease_case_classification_pref: Option<bool>,
+    #[serde(
+        rename = "enableDiseaseSurveillancePref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_disease_surveillance_pref: Option<bool>,
+    #[serde(
+        rename = "enableDisplaySummaryOnTimeline",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_display_summary_on_timeline: Option<bool>,
+    #[serde(
+        rename = "enableDonorSupportAgentBeta",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_donor_support_agent_beta: Option<bool>,
+    #[serde(
+        rename = "enableDontSharePartyprofWPortalOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dont_share_partyprof_w_portal_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableDpeProviderSearchSettingsOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dpe_provider_search_settings_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableDropInAppointmentsOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_drop_in_appointments_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableDropInFallbackMechOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_drop_in_fallback_mech_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableDropInSimplifiedViewOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_drop_in_simplified_view_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableDropInSkillMatchingOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_drop_in_skill_matching_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableDupePriorAuthDetectionSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_dupe_prior_auth_detection_setting: Option<bool>,
+    #[serde(
+        rename = "enableEDCSkillsGenerator",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_edc_skills_generator: Option<bool>,
+    #[serde(
+        rename = "enableEGPTInsuranceCmpntPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_egpt_insurance_cmpnt_pref: Option<bool>,
+    #[serde(
+        rename = "enableESGReportingOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_esg_reporting_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableEUCoreAI",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_eu_core_ai: Option<bool>,
+    #[serde(
+        rename = "enableEUCoreServiceAppOn",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_eu_core_service_app_on: Option<bool>,
+    #[serde(
+        rename = "enableEUMultisiteFeature",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_eu_multisite_feature: Option<bool>,
+    #[serde(
+        rename = "enableEUSales",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_eu_sales: Option<bool>,
+    #[serde(
+        rename = "enableEUTariffFeature",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_eu_tariff_feature: Option<bool>,
+    #[serde(
+        rename = "enableEduAdvncdAcadOper",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_edu_advncd_acad_oper: Option<bool>,
+    #[serde(
+        rename = "enableEducationCloud",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_education_cloud: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinAiAutofillPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_ai_autofill_pref: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinDocReader",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_doc_reader: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinVisits",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_visits: Option<bool>,
+    #[serde(
+        rename = "enableEngagementVisualsAI",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_engagement_visuals_ai: Option<bool>,
+    #[serde(
+        rename = "enableEnhancedQuestionCreation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_enhanced_question_creation: Option<bool>,
+    #[serde(
+        rename = "enableEnhancedSaveResponsesPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_enhanced_save_responses_pref: Option<bool>,
+    #[serde(
+        rename = "enableEnhancedUIForISPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_enhanced_ui_for_is_pref: Option<bool>,
+    #[serde(
+        rename = "enableEpcDeleteAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_epc_delete_access: Option<bool>,
+    #[serde(
+        rename = "enableEventManagementOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_event_management_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableEventWriteOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_event_write_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableEvidenceManagementPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_evidence_management_pref: Option<bool>,
+    #[serde(
+        rename = "enableExistingHealthCloudOrg",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_existing_health_cloud_org: Option<bool>,
+    #[serde(
+        rename = "enableFSCInsuranceReport",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_fsc_insurance_report: Option<bool>,
+    #[serde(
+        rename = "enableFSCInsuranceServiceConsole",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_fsc_insurance_service_console: Option<bool>,
+    #[serde(
+        rename = "enableFinSummaryRollupMgmt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_fin_summary_rollup_mgmt: Option<bool>,
+    #[serde(
+        rename = "enableFinancialAccountMgmt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_financial_account_mgmt: Option<bool>,
+    #[serde(
+        rename = "enableFinancialDealCallReportCmpPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_financial_deal_call_report_cmp_pref: Option<bool>,
+    #[serde(
+        rename = "enableFinancialDealCallReportPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_financial_deal_call_report_pref: Option<bool>,
+    #[serde(
+        rename = "enableFinancialDealRoleHierarchy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_financial_deal_role_hierarchy: Option<bool>,
+    #[serde(
+        rename = "enableFlexibleHierarchyPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_flexible_hierarchy_pref: Option<bool>,
+    #[serde(
+        rename = "enableFormFramework",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_form_framework: Option<bool>,
+    #[serde(
+        rename = "enableFundraising",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_fundraising: Option<bool>,
+    #[serde(
+        rename = "enableGenAIAssessmentQuestions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_gen_ai_assessment_questions: Option<bool>,
+    #[serde(
+        rename = "enableGiftAgreement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_gift_agreement: Option<bool>,
+    #[serde(
+        rename = "enableGiftEntryGrid",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_gift_entry_grid: Option<bool>,
+    #[serde(
+        rename = "enableGiftPlanning",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_gift_planning: Option<bool>,
+    #[serde(
+        rename = "enableGnrcDisclsFrmwrk",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_gnrc_discls_frmwrk: Option<bool>,
+    #[serde(
+        rename = "enableGoalsAgent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_goals_agent: Option<bool>,
+    #[serde(
+        rename = "enableGrantmaking",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_grantmaking: Option<bool>,
+    #[serde(
+        rename = "enableGroupMembershipPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_group_membership_pref: Option<bool>,
+    #[serde(
+        rename = "enableHCReferralScoring",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_hc_referral_scoring: Option<bool>,
+    #[serde(
+        rename = "enableHcCorePatientConsole",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_hc_core_patient_console: Option<bool>,
+    #[serde(
+        rename = "enableHcStdRelationshipJunctions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_hc_std_relationship_junctions: Option<bool>,
+    #[serde(
+        rename = "enableHealthCloudGenAIPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_health_cloud_gen_ai_pref: Option<bool>,
+    #[serde(
+        rename = "enableHighScaleRuleProcessingPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_high_scale_rule_processing_pref: Option<bool>,
+    #[serde(
+        rename = "enableHlsClinicalDcsnSuptAccessOrgPreference",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_hls_clinical_dcsn_supt_access_org_preference: Option<bool>,
+    #[serde(
+        rename = "enableHlsFhirSubscriptionSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_hls_fhir_subscription_setting: Option<bool>,
+    #[serde(
+        rename = "enableHlsUmDtrSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_hls_um_dtr_setting: Option<bool>,
+    #[serde(
+        rename = "enableHomeHealth",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_home_health: Option<bool>,
+    #[serde(
+        rename = "enableHomeHlthRschdFlowRcntVer",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_home_hlth_rschd_flow_rcnt_ver: Option<bool>,
+    #[serde(
+        rename = "enableIAMPatchModifyPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_iam_patch_modify_pref: Option<bool>,
+    #[serde(
+        rename = "enableIESentimentAnalysis",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ie_sentiment_analysis: Option<bool>,
+    #[serde(
+        rename = "enableIndCrossObjChangelog",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ind_cross_obj_changelog: Option<bool>,
+    #[serde(
+        rename = "enableIndustriesAssessment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_industries_assessment: Option<bool>,
+    #[serde(
+        rename = "enableIndustriesAssessmentGuestOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_industries_assessment_guest_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableIndustriesAssessmentPrefill",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_industries_assessment_prefill: Option<bool>,
+    #[serde(
+        rename = "enableIndustriesCaptchaVerification",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_industries_captcha_verification: Option<bool>,
+    #[serde(
+        rename = "enableIndustriesIntegrationOrchestratorPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_industries_integration_orchestrator_pref: Option<bool>,
+    #[serde(
+        rename = "enableIndustriesKYC",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_industries_kyc: Option<bool>,
+    #[serde(
+        rename = "enableIndustriesLPIPreference",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_industries_lpi_preference: Option<bool>,
+    #[serde(
+        rename = "enableIndustriesOnboarding",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_industries_onboarding: Option<bool>,
+    #[serde(
+        rename = "enableIndustriesRebates",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_industries_rebates: Option<bool>,
+    #[serde(
+        rename = "enableIndustriesShipAndDebit",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_industries_ship_and_debit: Option<bool>,
+    #[serde(
+        rename = "enableIndustriesStageManagementPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_industries_stage_management_pref: Option<bool>,
+    #[serde(
+        rename = "enableInformationLibrary",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_information_library: Option<bool>,
+    #[serde(
+        rename = "enableInsDocRelationship",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ins_doc_relationship: Option<bool>,
+    #[serde(
+        rename = "enableInsuranceCoexistence",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_insurance_coexistence: Option<bool>,
+    #[serde(
+        rename = "enableIntegratedCareManagementSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_integrated_care_management_setting: Option<bool>,
+    #[serde(
+        rename = "enableIntelligentDocExtractPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_intelligent_doc_extract_pref: Option<bool>,
+    #[serde(
+        rename = "enableInteractionCstmSharingPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_interaction_cstm_sharing_pref: Option<bool>,
+    #[serde(
+        rename = "enableInteractionRoleHierarchy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_interaction_role_hierarchy: Option<bool>,
+    #[serde(
+        rename = "enableInteractionSummaryPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_interaction_summary_pref: Option<bool>,
+    #[serde(
+        rename = "enableInteractionSummaryRoleHierarchy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_interaction_summary_role_hierarchy: Option<bool>,
+    #[serde(
+        rename = "enableInvestigativeCaseMgmntPrf",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_investigative_case_mgmnt_prf: Option<bool>,
+    #[serde(
+        rename = "enableLSC4CEDocumentManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lsc_4_ce_document_management: Option<bool>,
+    #[serde(
+        rename = "enableLSC4CEEDetailing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lsc_4_cee_detailing: Option<bool>,
+    #[serde(
+        rename = "enableLSC4CEEmailAndTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lsc_4_ce_email_and_template: Option<bool>,
+    #[serde(
+        rename = "enableLSC4CEKeyAccountManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lsc_4_ce_key_account_management: Option<bool>,
+    #[serde(
+        rename = "enableLSC4CEMedInsights",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lsc_4_ce_med_insights: Option<bool>,
+    #[serde(
+        rename = "enableLSC4CEPackage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lsc_4_ce_package: Option<bool>,
+    #[serde(
+        rename = "enableLSC4CERemoteEngagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lsc_4_ce_remote_engagement: Option<bool>,
+    #[serde(
+        rename = "enableLSC4CEVisits",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lsc_4_ce_visits: Option<bool>,
+    #[serde(
+        rename = "enableLSCAdminConsolePerms",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lsc_admin_console_perms: Option<bool>,
+    #[serde(
+        rename = "enableLifeSciFieldEvents",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_life_sci_field_events: Option<bool>,
+    #[serde(
+        rename = "enableLifeSciGenericWorkflow",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_life_sci_generic_workflow: Option<bool>,
+    #[serde(
+        rename = "enableLifeSciInquiry",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_life_sci_inquiry: Option<bool>,
+    #[serde(
+        rename = "enableLifeSciListsAndFilters",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_life_sci_lists_and_filters: Option<bool>,
+    #[serde(
+        rename = "enableLifeSciencesActivityPlan",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_life_sciences_activity_plan: Option<bool>,
+    #[serde(
+        rename = "enableLifeSciencesClinialTrailManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_life_sciences_clinial_trail_management: Option<bool>,
+    #[serde(
+        rename = "enableLifeSciencesConsent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_life_sciences_consent: Option<bool>,
+    #[serde(
+        rename = "enableLifeSciencesCustomerEngagementBase",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_life_sciences_customer_engagement_base: Option<bool>,
+    #[serde(
+        rename = "enableLifeSciencesMergeManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_life_sciences_merge_management: Option<bool>,
+    #[serde(
+        rename = "enableLifeSciencesProviderEngagementCompliance",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_life_sciences_provider_engagement_compliance: Option<bool>,
+    #[serde(
+        rename = "enableLifeSciencesSiteManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_life_sciences_site_management: Option<bool>,
+    #[serde(
+        rename = "enableLsSiteMgmtSiteSelAgent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ls_site_mgmt_site_sel_agent: Option<bool>,
+    #[serde(
+        rename = "enableLsSiteMgmtSummarization",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ls_site_mgmt_summarization: Option<bool>,
+    #[serde(
+        rename = "enableManyToManyRelationships",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_many_to_many_relationships: Option<bool>,
+    #[serde(
+        rename = "enableMaterialityAssessment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_materiality_assessment: Option<bool>,
+    #[serde(
+        rename = "enableMcgAsmtSugRespSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_mcg_asmt_sug_resp_setting: Option<bool>,
+    #[serde(
+        rename = "enableMcgSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_mcg_setting: Option<bool>,
+    #[serde(
+        rename = "enableMedRecSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_med_rec_setting: Option<bool>,
+    #[serde(
+        rename = "enableMediaAddInvSlotToPlan",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_media_add_inv_slot_to_plan: Option<bool>,
+    #[serde(
+        rename = "enableMediaConfigSetupEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_media_config_setup_enabled: Option<bool>,
+    #[serde(
+        rename = "enableMedicalDeviceEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_medical_device_enabled: Option<bool>,
+    #[serde(
+        rename = "enableMedicationManagementEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_medication_management_enabled: Option<bool>,
+    #[serde(
+        rename = "enableMentoring",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_mentoring: Option<bool>,
+    #[serde(
+        rename = "enableMicrosoftWordAddInEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_microsoft_word_add_in_enabled: Option<bool>,
+    #[serde(
+        rename = "enableMortgageRlaTotalsOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_mortgage_rla_totals_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableMulesoftFhirR4Apis",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_mulesoft_fhir_r_4_apis: Option<bool>,
+    #[serde(
+        rename = "enableMultiResourceOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_multi_resource_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableMultipleCareProgramEnrolleeOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_multiple_care_program_enrollee_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableMultipleTopicsForShiftsOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_multiple_topics_for_shifts_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableNZCENCarbonAccounting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_nzcen_carbon_accounting: Option<bool>,
+    #[serde(
+        rename = "enableNZCENGPTDCHIL",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_nzcengptdchil: Option<bool>,
+    #[serde(
+        rename = "enableNZCENScope3ProcHub",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_nzcen_scope_3_proc_hub: Option<bool>,
+    #[serde(
+        rename = "enableNZCMngEnrgyAttrCr",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_nzc_mng_enrgy_attr_cr: Option<bool>,
+    #[serde(
+        rename = "enableNZCMngEsgPgm",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_nzc_mng_esg_pgm: Option<bool>,
+    #[serde(
+        rename = "enableNZCWithEinstein",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_nzc_with_einstein: Option<bool>,
+    #[serde(
+        rename = "enableNewTimelineSetupFlow",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_new_timeline_setup_flow: Option<bool>,
+    #[serde(
+        rename = "enableNextBestAction",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_next_best_action: Option<bool>,
+    #[serde(
+        rename = "enableNextBestCustomer",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_next_best_customer: Option<bool>,
+    #[serde(
+        rename = "enableNextBestMessage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_next_best_message: Option<bool>,
+    #[serde(
+        rename = "enableNonprofitCloudAgent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_nonprofit_cloud_agent: Option<bool>,
+    #[serde(
+        rename = "enableNonprofitGenAI",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_nonprofit_gen_ai: Option<bool>,
+    #[serde(
+        rename = "enableObjectDetection",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_object_detection: Option<bool>,
+    #[serde(
+        rename = "enableOnDemandRecordRollupPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_on_demand_record_rollup_pref: Option<bool>,
+    #[serde(
+        rename = "enableOutcomes",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_outcomes: Option<bool>,
+    #[serde(
+        rename = "enableOverbookingOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_overbooking_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableOverbookingWithGroupOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_overbooking_with_group_org_pref: Option<bool>,
+    #[serde(
+        rename = "enablePATSTerritoryBasedSharing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pats_territory_based_sharing: Option<bool>,
+    #[serde(
+        rename = "enablePCMConfigRules",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pcm_config_rules: Option<bool>,
+    #[serde(
+        rename = "enablePartyProfileDataValidityPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_party_profile_data_validity_pref: Option<bool>,
+    #[serde(
+        rename = "enablePartyProfileParentSharingOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_party_profile_parent_sharing_org_pref: Option<bool>,
+    #[serde(
+        rename = "enablePartyprofParentMultiSharingOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_partyprof_parent_multi_sharing_org_pref: Option<bool>,
+    #[serde(
+        rename = "enablePathwayPlannerRealTimeValidation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pathway_planner_real_time_validation: Option<bool>,
+    #[serde(
+        rename = "enablePatientAppointmentSchedulingOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_patient_appointment_scheduling_org_pref: Option<bool>,
+    #[serde(
+        rename = "enablePatientServicesOrchestration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_patient_services_orchestration: Option<bool>,
+    #[serde(
+        rename = "enablePaymentsIntegrationPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_payments_integration_pref: Option<bool>,
+    #[serde(
+        rename = "enablePersonAcctAddrSync",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_person_acct_addr_sync: Option<bool>,
+    #[serde(
+        rename = "enablePhilResearchAgent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_phil_research_agent: Option<bool>,
+    #[serde(
+        rename = "enablePolicyAdministration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_policy_administration: Option<bool>,
+    #[serde(
+        rename = "enablePolicyAgentPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_policy_agent_pref: Option<bool>,
+    #[serde(
+        rename = "enablePositionRecruitmentPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_position_recruitment_pref: Option<bool>,
+    #[serde(
+        rename = "enablePreBookedFallbackMechOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pre_booked_fallback_mech_org_pref: Option<bool>,
+    #[serde(
+        rename = "enablePrefillMcgAssessmentSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_prefill_mcg_assessment_setting: Option<bool>,
+    #[serde(
+        rename = "enablePrimaryProviderRestriction",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_primary_provider_restriction: Option<bool>,
+    #[serde(
+        rename = "enableProdAdminBusinessGrpFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_prod_admin_business_grp_filter: Option<bool>,
+    #[serde(
+        rename = "enableProdTerrAlgnPrtHrchyAcc",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_prod_terr_algn_prt_hrchy_acc: Option<bool>,
+    #[serde(
+        rename = "enableProdTerrAvlRecSharing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_prod_terr_avl_rec_sharing: Option<bool>,
+    #[serde(
+        rename = "enableProgramCohorts",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_program_cohorts: Option<bool>,
+    #[serde(
+        rename = "enableProviderManagementPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_provider_management_pref: Option<bool>,
+    #[serde(
+        rename = "enableProviderMgmtHealthCarePref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_provider_mgmt_health_care_pref: Option<bool>,
+    #[serde(
+        rename = "enableProviderMgmtSharingPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_provider_mgmt_sharing_pref: Option<bool>,
+    #[serde(
+        rename = "enableProviderSearchForGuestUser",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_provider_search_for_guest_user: Option<bool>,
+    #[serde(
+        rename = "enableProviderSearchPreciseMatch",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_provider_search_precise_match: Option<bool>,
+    #[serde(
+        rename = "enableProviderSearchSyncOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_provider_search_sync_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableProviderSummarization",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_provider_summarization: Option<bool>,
+    #[serde(
+        rename = "enablePssBnftMgmtSklCmtyPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pss_bnft_mgmt_skl_cmty_pref: Option<bool>,
+    #[serde(
+        rename = "enablePssBnftMgmtSklCoCmtyPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pss_bnft_mgmt_skl_co_cmty_pref: Option<bool>,
+    #[serde(
+        rename = "enablePssCmplntMgmtSklCmtyPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pss_cmplnt_mgmt_skl_cmty_pref: Option<bool>,
+    #[serde(
+        rename = "enablePssLPISklCmtyPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pss_lpi_skl_cmty_pref: Option<bool>,
+    #[serde(
+        rename = "enablePubSectrCmplMgmtSklPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pub_sectr_cmpl_mgmt_skl_pref: Option<bool>,
+    #[serde(
+        rename = "enablePubSectrCmplntMgmtSklPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pub_sectr_cmplnt_mgmt_skl_pref: Option<bool>,
+    #[serde(
+        rename = "enablePulseChecks",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pulse_checks: Option<bool>,
+    #[serde(
+        rename = "enableRBLUsingCalcService",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_rbl_using_calc_service: Option<bool>,
+    #[serde(
+        rename = "enableRecordAlertCustomSharingPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_record_alert_custom_sharing_pref: Option<bool>,
+    #[serde(
+        rename = "enableRecordRollup",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_record_rollup: Option<bool>,
+    #[serde(
+        rename = "enableReferralManagementApp",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_referral_management_app: Option<bool>,
+    #[serde(
+        rename = "enableReferralScoring",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_referral_scoring: Option<bool>,
+    #[serde(
+        rename = "enableReminders",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_reminders: Option<bool>,
+    #[serde(
+        rename = "enableRetailPos",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_retail_pos: Option<bool>,
+    #[serde(
+        rename = "enableRosterFileFeatureOrgPreference",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_roster_file_feature_org_preference: Option<bool>,
+    #[serde(
+        rename = "enableSCAllocScorEmssnSpentAmt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sc_alloc_scor_emssn_spent_amt: Option<bool>,
+    #[serde(
+        rename = "enableSCAssignFootprint",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sc_assign_footprint: Option<bool>,
+    #[serde(
+        rename = "enableSCBEIEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_scbei_enabled: Option<bool>,
+    #[serde(
+        rename = "enableSCCarbonAccounting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sc_carbon_accounting: Option<bool>,
+    #[serde(
+        rename = "enableSCCarbonCreditAlloc",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sc_carbon_credit_alloc: Option<bool>,
+    #[serde(
+        rename = "enableSCCreateFootprint",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sc_create_footprint: Option<bool>,
+    #[serde(
+        rename = "enableSCDGF",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_scdgf: Option<bool>,
+    #[serde(
+        rename = "enableSCEmssnsForecasting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sc_emssns_forecasting: Option<bool>,
+    #[serde(
+        rename = "enableSCExpansionUseCase",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sc_expansion_use_case: Option<bool>,
+    #[serde(
+        rename = "enableSCExpansionUseCaseMultiLevel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sc_expansion_use_case_multi_level: Option<bool>,
+    #[serde(
+        rename = "enableSCExternalEngMgmt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sc_external_eng_mgmt: Option<bool>,
+    #[serde(
+        rename = "enableSCGenrateCnsmpRcd",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sc_genrate_cnsmp_rcd: Option<bool>,
+    #[serde(
+        rename = "enableSCSNGManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_scsng_management: Option<bool>,
+    #[serde(
+        rename = "enableSCScope3HubEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sc_scope_3_hub_enabled: Option<bool>,
+    #[serde(
+        rename = "enableSCSnGAffiliates",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sc_sn_g_affiliates: Option<bool>,
+    #[serde(
+        rename = "enableSCSplitCnsmpRcd",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sc_split_cnsmp_rcd: Option<bool>,
+    #[serde(
+        rename = "enableSCTargetSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sc_target_setting: Option<bool>,
+    #[serde(
+        rename = "enableSCWasteManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sc_waste_management: Option<bool>,
+    #[serde(
+        rename = "enableSCWaterManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sc_water_management: Option<bool>,
+    #[serde(
+        rename = "enableSampleLimits",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sample_limits: Option<bool>,
+    #[serde(
+        rename = "enableSaveActionsForInternalAssessmentsSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_save_actions_for_internal_assessments_setting: Option<bool>,
+    #[serde(
+        rename = "enableSaveAssessmentAsDraft",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_save_assessment_as_draft: Option<bool>,
+    #[serde(
+        rename = "enableSchedulerPaymentsPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_scheduler_payments_pref: Option<bool>,
+    #[serde(
+        rename = "enableScoringFrameworkCRMAPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_scoring_framework_crma_pref: Option<bool>,
+    #[serde(
+        rename = "enableScoringFrameworkOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_scoring_framework_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableSentimentAnalysis",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sentiment_analysis: Option<bool>,
+    #[serde(
+        rename = "enableShareSaWithArOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_share_sa_with_ar_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableSlackForCib",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_slack_for_cib: Option<bool>,
+    #[serde(
+        rename = "enableSmartAsmtQstnGeneration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_smart_asmt_qstn_generation: Option<bool>,
+    #[serde(
+        rename = "enableSmartTags",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_smart_tags: Option<bool>,
+    #[serde(
+        rename = "enableSourceCodeGeneration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_source_code_generation: Option<bool>,
+    #[serde(
+        rename = "enableStageAssignmentRulesReEvaluation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_stage_assignment_rules_re_evaluation: Option<bool>,
+    #[serde(
+        rename = "enableStuFinancials",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_stu_financials: Option<bool>,
+    #[serde(
+        rename = "enableStudentFinAgent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_student_fin_agent: Option<bool>,
+    #[serde(
+        rename = "enableStudentGoals",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_student_goals: Option<bool>,
+    #[serde(
+        rename = "enableStudentManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_student_management: Option<bool>,
+    #[serde(
+        rename = "enableStudentRecruitmentAgent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_student_recruitment_agent: Option<bool>,
+    #[serde(
+        rename = "enableStudentSuccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_student_success: Option<bool>,
+    #[serde(
+        rename = "enableSuggRespForInternalAssmt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sugg_resp_for_internal_assmt: Option<bool>,
+    #[serde(
+        rename = "enableSuggestedAssessmentSetting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_suggested_assessment_setting: Option<bool>,
+    #[serde(
+        rename = "enableSustainabilityCloud",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sustainability_cloud: Option<bool>,
+    #[serde(
+        rename = "enableSyncInteractionsPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sync_interactions_pref: Option<bool>,
+    #[serde(
+        rename = "enableTRcrtMgmtSklCoCmtyPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_t_rcrt_mgmt_skl_co_cmty_pref: Option<bool>,
+    #[serde(
+        rename = "enableTearSheetPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_tear_sheet_pref: Option<bool>,
+    #[serde(
+        rename = "enableTextExtract",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_text_extract: Option<bool>,
+    #[serde(
+        rename = "enableTimelineCachePref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_timeline_cache_pref: Option<bool>,
+    #[serde(
+        rename = "enableTimelinePref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_timeline_pref: Option<bool>,
+    #[serde(
+        rename = "enableTlntRcrtMgmtRcrutSklPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_tlnt_rcrt_mgmt_rcrut_skl_pref: Option<bool>,
+    #[serde(
+        rename = "enableTlntRcrtMgmtSklCmtyPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_tlnt_rcrt_mgmt_skl_cmty_pref: Option<bool>,
+    #[serde(
+        rename = "enableTopicOrTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_topic_or_template: Option<bool>,
+    #[serde(
+        rename = "enableTopicTimeSlot",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_topic_time_slot: Option<bool>,
+    #[serde(
+        rename = "enableTrackApplicationsPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_track_applications_pref: Option<bool>,
+    #[serde(
+        rename = "enableTrialManagementRandomization",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_trial_management_randomization: Option<bool>,
+    #[serde(
+        rename = "enableTurnOffDsclsReprtPbsrName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_turn_off_dscls_reprt_pbsr_name: Option<bool>,
+    #[serde(
+        rename = "enableUMPayerAppAccessOrgPreference",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_um_payer_app_access_org_preference: Option<bool>,
+    #[serde(
+        rename = "enableVideoVisitsOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_video_visits_org_pref: Option<bool>,
+    #[serde(
+        rename = "enableVisitCalendarSync",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_visit_calendar_sync: Option<bool>,
+    #[serde(
+        rename = "enableVisitInventoryEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_visit_inventory_enabled: Option<bool>,
+    #[serde(
+        rename = "enableVisitPlanningAndExecutionAction",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_visit_planning_and_execution_action: Option<bool>,
+    #[serde(
+        rename = "enableVolunteerManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_volunteer_management: Option<bool>,
+    #[serde(
+        rename = "enableVolunteerManagementAI",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_volunteer_management_ai: Option<bool>,
+    #[serde(
+        rename = "enableWaitlistManagementPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_waitlist_management_pref: Option<bool>,
+    #[serde(
+        rename = "enableWealthManagementAIPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_wealth_management_ai_pref: Option<bool>,
+    #[serde(
+        rename = "enforceInsuranceUniqueProductCode",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enforce_insurance_unique_product_code: Option<bool>,
+    #[serde(
+        rename = "isCustomDpeTxObsProviderSearchEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_custom_dpe_tx_obs_provider_search_enabled: Option<bool>,
+    #[serde(
+        rename = "loanApplicantAddressAutoCreation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub loan_applicant_address_auto_creation: Option<bool>,
+    #[serde(
+        rename = "loanApplicantAutoCreation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub loan_applicant_auto_creation: Option<bool>,
+    #[serde(
+        rename = "mortgageSalesforceSharing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub mortgage_salesforce_sharing: Option<bool>,
+    #[serde(
+        rename = "nonProfitCloudEmbeddedAI",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub non_profit_cloud_embedded_ai: Option<bool>,
+    #[serde(
+        rename = "participantRecordDeactivateUser",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub participant_record_deactivate_user: Option<String>,
+    #[serde(
+        rename = "partyProfMultiShrPrtnrsOrgPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub party_prof_multi_shr_prtnrs_org_pref: Option<bool>,
+    #[serde(
+        rename = "rlaEditIfAccHasEdit",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub rla_edit_if_acc_has_edit: Option<bool>,
+    #[serde(
+        rename = "showCollectionContactAndAccount",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_collection_contact_and_account: Option<bool>,
+    #[serde(
+        rename = "transformRBLtoDPE",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub transform_rb_lto_dpe: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct IndustriesUnifiedInventorySettings {
-    #[serde(rename = "enableBatchManagement", default)]
-    pub enable_batch_management: bool,
-    #[serde(rename = "enableInventoryCount", default)]
-    pub enable_inventory_count: bool,
-    #[serde(rename = "enableProductInventoryOperations", default)]
-    pub enable_product_inventory_operations: bool,
+    #[serde(
+        rename = "enableBatchManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_batch_management: Option<bool>,
+    #[serde(
+        rename = "enableInventoryCount",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_inventory_count: Option<bool>,
+    #[serde(
+        rename = "enableProductInventoryOperations",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_product_inventory_operations: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct IndustriesUnifiedPromotionsSettings {
-    #[serde(rename = "enableGlobalPromotionsEvaluation", default)]
-    pub enable_global_promotions_evaluation: bool,
-    #[serde(rename = "enableGlobalPromotionsForRevenueCloud", default)]
-    pub enable_global_promotions_for_revenue_cloud: bool,
-    #[serde(rename = "enableGlobalPromotionsProductCatalogManagement", default)]
-    pub enable_global_promotions_product_catalog_management: bool,
-    #[serde(rename = "enableUnifiedPromotions", default)]
-    pub enable_unified_promotions: bool,
+    #[serde(
+        rename = "enableGlblPrmtConstraintModel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_glbl_prmt_constraint_model: Option<bool>,
+    #[serde(
+        rename = "enableGlobalPromotionsEvaluation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_global_promotions_evaluation: Option<bool>,
+    #[serde(
+        rename = "enableGlobalPromotionsForRevenueCloud",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_global_promotions_for_revenue_cloud: Option<bool>,
+    #[serde(
+        rename = "enableGlobalPromotionsProductCatalogManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_global_promotions_product_catalog_management: Option<bool>,
+    #[serde(
+        rename = "enableUnifiedPromotions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_unified_promotions: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct IndustriesUsageSettings {
-    #[serde(rename = "enableUsage", default)]
-    pub enable_usage: bool,
-    #[serde(rename = "enableUsageReleaseTask258", default)]
-    pub enable_usage_release_task_258: bool,
+    #[serde(
+        rename = "enableUsage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_usage: Option<bool>,
+    #[serde(
+        rename = "enableUsageReleaseTask258",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_usage_release_task_258: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct IndustriesVectorSearchSettings {
+    #[serde(
+        rename = "enableIndustriesVectorSearch",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_industries_vector_search: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct InsuranceBrokerageSettings {
-    #[serde(rename = "enableBrokerage", default)]
-    pub enable_brokerage: bool,
+    #[serde(
+        rename = "brokerageTransGranularity",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub brokerage_trans_granularity: Option<String>,
+    #[serde(
+        rename = "enableBrokerage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_brokerage: Option<bool>,
+    #[serde(
+        rename = "insBrkBillingCtxDef",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub ins_brk_billing_ctx_def: Option<String>,
+    #[serde(
+        rename = "insBrkBillingCtxIntraSrcMap",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub ins_brk_billing_ctx_intra_src_map: Option<String>,
+    #[serde(
+        rename = "insBrkBillingCtxSchedGrpMap",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub ins_brk_billing_ctx_sched_grp_map: Option<String>,
+    #[serde(
+        rename = "insBrkBillingCtxTnxMapping",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub ins_brk_billing_ctx_tnx_mapping: Option<String>,
+    #[serde(
+        rename = "iptEnabledForBrokerage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub ipt_enabled_for_brokerage: Option<bool>,
+    #[serde(
+        rename = "iptdEnabledForBrokerage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub iptd_enabled_for_brokerage: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct InterestTaggingSettings {
-    #[serde(rename = "enableInterestTagging", default)]
-    pub enable_interest_tagging: bool,
+    #[serde(
+        rename = "enableInterestTagging",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_interest_tagging: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct InvLatePymntRiskCalcSettings {
-    #[serde(rename = "enableInvLatePymntRiskCalc", default)]
-    pub enable_inv_late_pymnt_risk_calc: bool,
+    #[serde(
+        rename = "enableInvLatePymntRiskCalc",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_inv_late_pymnt_risk_calc: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct InventoryAllocationSettings {
+    #[serde(
+        rename = "enableInventoryAllocation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_inventory_allocation: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct InventoryReplenishmentSettings {
-    #[serde(rename = "enableInventoryReplenishment", default)]
-    pub enable_inventory_replenishment: bool,
+    #[serde(
+        rename = "enableInventoryReplenishment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_inventory_replenishment: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct InventorySettings {
-    #[serde(rename = "enableOCIB2CIntegration", default)]
-    pub enable_ocib_2_c_integration: bool,
-    #[serde(rename = "enableOmniChannelInventory", default)]
-    pub enable_omni_channel_inventory: bool,
+    #[serde(
+        rename = "enableOCIB2CIntegration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ocib_2_c_integration: Option<bool>,
+    #[serde(
+        rename = "enableOmniChannelInventory",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_omni_channel_inventory: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct InvocableActionSettings {
-    #[serde(rename = "isPartialSaveAllowed", default)]
-    pub is_partial_save_allowed: bool,
+    #[serde(
+        rename = "isPartialSaveAllowed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_partial_save_allowed: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct IoTSettings {
-    #[serde(rename = "enableIoT", default)]
-    pub enable_io_t: bool,
-    #[serde(rename = "enableIoTInsightsPilot", default)]
-    pub enable_io_t_insights_pilot: bool,
-    #[serde(rename = "enableIoTUsageEmail", default)]
-    pub enable_io_t_usage_email: bool,
+    #[serde(rename = "enableIoT", default, skip_serializing_if = "Option::is_none")]
+    pub enable_io_t: Option<bool>,
+    #[serde(
+        rename = "enableIoTInsightsPilot",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_io_t_insights_pilot: Option<bool>,
+    #[serde(
+        rename = "enableIoTUsageEmail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_io_t_usage_email: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct KnowledgeAnswerSettings {
-    #[serde(rename = "assignTo", default)]
-    pub assign_to: String,
-    #[serde(rename = "defaultArticleType", default)]
-    pub default_article_type: String,
-    #[serde(rename = "enableArticleCreation", default)]
-    pub enable_article_creation: bool,
+    #[serde(rename = "assignTo", default, skip_serializing_if = "Option::is_none")]
+    pub assign_to: Option<String>,
+    #[serde(
+        rename = "defaultArticleType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_article_type: Option<String>,
+    #[serde(
+        rename = "enableArticleCreation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_article_creation: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -3726,30 +9410,70 @@ pub struct KnowledgeCaseFieldsSettings {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct KnowledgeCaseSettings {
-    #[serde(rename = "articlePDFCreationProfile", default)]
-    pub article_pdf_creation_profile: String,
-    #[serde(rename = "articlePublicSharingCommunities", default)]
-    pub article_public_sharing_communities: KnowledgeCommunitiesSettings,
-    #[serde(rename = "articlePublicSharingSites", default)]
-    pub article_public_sharing_sites: KnowledgeSitesSettings,
-    #[serde(rename = "articlePublicSharingSitesChatterAnswers", default)]
-    pub article_public_sharing_sites_chatter_answers: KnowledgeSitesSettings,
-    #[serde(rename = "assignTo", default)]
-    pub assign_to: String,
-    #[serde(rename = "customizationClass", default)]
-    pub customization_class: String,
-    #[serde(rename = "defaultContributionArticleType", default)]
-    pub default_contribution_article_type: String,
-    #[serde(default)]
-    pub editor: serde_json::Value,
-    #[serde(rename = "enableArticleCreation", default)]
-    pub enable_article_creation: bool,
-    #[serde(rename = "enableArticlePublicSharingSites", default)]
-    pub enable_article_public_sharing_sites: bool,
-    #[serde(rename = "enableCaseDataCategoryMapping", default)]
-    pub enable_case_data_category_mapping: bool,
-    #[serde(rename = "useProfileForPDFCreation", default)]
-    pub use_profile_for_pdf_creation: bool,
+    #[serde(
+        rename = "articlePDFCreationProfile",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub article_pdf_creation_profile: Option<String>,
+    #[serde(
+        rename = "articlePublicSharingCommunities",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub article_public_sharing_communities: Option<KnowledgeCommunitiesSettings>,
+    #[serde(
+        rename = "articlePublicSharingSites",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub article_public_sharing_sites: Option<KnowledgeSitesSettings>,
+    #[serde(
+        rename = "articlePublicSharingSitesChatterAnswers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub article_public_sharing_sites_chatter_answers: Option<KnowledgeSitesSettings>,
+    #[serde(rename = "assignTo", default, skip_serializing_if = "Option::is_none")]
+    pub assign_to: Option<String>,
+    #[serde(
+        rename = "customizationClass",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub customization_class: Option<String>,
+    #[serde(
+        rename = "defaultContributionArticleType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_contribution_article_type: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub editor: Option<serde_json::Value>,
+    #[serde(
+        rename = "enableArticleCreation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_article_creation: Option<bool>,
+    #[serde(
+        rename = "enableArticlePublicSharingSites",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_article_public_sharing_sites: Option<bool>,
+    #[serde(
+        rename = "enableCaseDataCategoryMapping",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_case_data_category_mapping: Option<bool>,
+    #[serde(
+        rename = "useProfileForPDFCreation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub use_profile_for_pdf_creation: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -3764,10 +9488,18 @@ pub struct KnowledgeCommunitiesSettings {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct KnowledgeGenerationSettings {
-    #[serde(rename = "enableKSUsingHybridSearch", default)]
-    pub enable_ks_using_hybrid_search: bool,
-    #[serde(rename = "enableKnowledgeGeneration", default)]
-    pub enable_knowledge_generation: bool,
+    #[serde(
+        rename = "enableKSUsingHybridSearch",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ks_using_hybrid_search: Option<bool>,
+    #[serde(
+        rename = "enableKnowledgeGeneration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_knowledge_generation: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -3782,52 +9514,132 @@ pub struct KnowledgeLanguageSettings {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct KnowledgeSettings {
-    #[serde(default)]
-    pub answers: KnowledgeAnswerSettings,
-    #[serde(default)]
-    pub cases: KnowledgeCaseSettings,
-    #[serde(rename = "defaultLanguage", default)]
-    pub default_language: String,
-    #[serde(rename = "enableChatterQuestionKBDeflection", default)]
-    pub enable_chatter_question_kb_deflection: bool,
-    #[serde(rename = "enableCreateEditOnArticlesTab", default)]
-    pub enable_create_edit_on_articles_tab: bool,
-    #[serde(rename = "enableExternalMediaContent", default)]
-    pub enable_external_media_content: bool,
-    #[serde(rename = "enableKbStandardSharing", default)]
-    pub enable_kb_standard_sharing: bool,
-    #[serde(rename = "enableKnowledge", default)]
-    pub enable_knowledge: bool,
-    #[serde(rename = "enableKnowledgeAgentContribution", default)]
-    pub enable_knowledge_agent_contribution: bool,
-    #[serde(rename = "enableKnowledgeAnswersPromotion", default)]
-    pub enable_knowledge_answers_promotion: bool,
-    #[serde(rename = "enableKnowledgeArticleTextHighlights", default)]
-    pub enable_knowledge_article_text_highlights: bool,
-    #[serde(rename = "enableKnowledgeCaseRL", default)]
-    pub enable_knowledge_case_rl: bool,
-    #[serde(rename = "enableKnowledgeKeywordAutoComplete", default)]
-    pub enable_knowledge_keyword_auto_complete: bool,
-    #[serde(rename = "enableKnowledgeTitleAutoComplete", default)]
-    pub enable_knowledge_title_auto_complete: bool,
-    #[serde(rename = "enableLightningKbAutoLoadRichTextField", default)]
-    pub enable_lightning_kb_auto_load_rich_text_field: bool,
-    #[serde(rename = "enableLightningKnowledge", default)]
-    pub enable_lightning_knowledge: bool,
-    #[serde(default)]
-    pub languages: KnowledgeLanguageSettings,
-    #[serde(rename = "showArticleSummariesCustomerPortal", default)]
-    pub show_article_summaries_customer_portal: bool,
-    #[serde(rename = "showArticleSummariesInternalApp", default)]
-    pub show_article_summaries_internal_app: bool,
-    #[serde(rename = "showArticleSummariesPartnerPortal", default)]
-    pub show_article_summaries_partner_portal: bool,
-    #[serde(rename = "showValidationStatusField", default)]
-    pub show_validation_status_field: bool,
-    #[serde(rename = "suggestedArticles", default)]
-    pub suggested_articles: KnowledgeSuggestedArticlesSettings,
-    #[serde(rename = "votingEnabled", default)]
-    pub voting_enabled: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub answers: Option<KnowledgeAnswerSettings>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub cases: Option<KnowledgeCaseSettings>,
+    #[serde(
+        rename = "defaultLanguage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_language: Option<String>,
+    #[serde(
+        rename = "enableChatterQuestionKBDeflection",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_chatter_question_kb_deflection: Option<bool>,
+    #[serde(
+        rename = "enableCreateEditOnArticlesTab",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_create_edit_on_articles_tab: Option<bool>,
+    #[serde(
+        rename = "enableExternalMediaContent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_external_media_content: Option<bool>,
+    #[serde(
+        rename = "enableKbStandardSharing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_kb_standard_sharing: Option<bool>,
+    #[serde(
+        rename = "enableKnowledge",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_knowledge: Option<bool>,
+    #[serde(
+        rename = "enableKnowledgeAgentContribution",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_knowledge_agent_contribution: Option<bool>,
+    #[serde(
+        rename = "enableKnowledgeAnswersPromotion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_knowledge_answers_promotion: Option<bool>,
+    #[serde(
+        rename = "enableKnowledgeArticleTextHighlights",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_knowledge_article_text_highlights: Option<bool>,
+    #[serde(
+        rename = "enableKnowledgeCaseRL",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_knowledge_case_rl: Option<bool>,
+    #[serde(
+        rename = "enableKnowledgeKeywordAutoComplete",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_knowledge_keyword_auto_complete: Option<bool>,
+    #[serde(
+        rename = "enableKnowledgeTitleAutoComplete",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_knowledge_title_auto_complete: Option<bool>,
+    #[serde(
+        rename = "enableLightningKbAutoLoadRichTextField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lightning_kb_auto_load_rich_text_field: Option<bool>,
+    #[serde(
+        rename = "enableLightningKnowledge",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lightning_knowledge: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub languages: Option<KnowledgeLanguageSettings>,
+    #[serde(
+        rename = "showArticleSummariesCustomerPortal",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_article_summaries_customer_portal: Option<bool>,
+    #[serde(
+        rename = "showArticleSummariesInternalApp",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_article_summaries_internal_app: Option<bool>,
+    #[serde(
+        rename = "showArticleSummariesPartnerPortal",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_article_summaries_partner_portal: Option<bool>,
+    #[serde(
+        rename = "showValidationStatusField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_validation_status_field: Option<bool>,
+    #[serde(
+        rename = "suggestedArticles",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub suggested_articles: Option<KnowledgeSuggestedArticlesSettings>,
+    #[serde(
+        rename = "votingEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub voting_enabled: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -3842,14 +9654,30 @@ pub struct KnowledgeSitesSettings {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct KnowledgeSuggestedArticlesSettings {
-    #[serde(rename = "caseFields", default)]
-    pub case_fields: KnowledgeCaseFieldsSettings,
-    #[serde(rename = "useSuggestedArticlesForCase", default)]
-    pub use_suggested_articles_for_case: bool,
-    #[serde(rename = "workOrderFields", default)]
-    pub work_order_fields: KnowledgeWorkOrderFieldsSettings,
-    #[serde(rename = "workOrderLineItemFields", default)]
-    pub work_order_line_item_fields: KnowledgeWorkOrderLineItemFieldsSettings,
+    #[serde(
+        rename = "caseFields",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub case_fields: Option<KnowledgeCaseFieldsSettings>,
+    #[serde(
+        rename = "useSuggestedArticlesForCase",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub use_suggested_articles_for_case: Option<bool>,
+    #[serde(
+        rename = "workOrderFields",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub work_order_fields: Option<KnowledgeWorkOrderFieldsSettings>,
+    #[serde(
+        rename = "workOrderLineItemFields",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub work_order_line_item_fields: Option<KnowledgeWorkOrderLineItemFieldsSettings>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -3872,442 +9700,1288 @@ pub struct KnowledgeWorkOrderLineItemFieldsSettings {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct LaborCostOptimizationSettings {
-    #[serde(rename = "canShowVehicle", default)]
-    pub can_show_vehicle: bool,
-    #[serde(rename = "canShowVehicleDefinition", default)]
-    pub can_show_vehicle_definition: bool,
-    #[serde(rename = "enableTimeSheetsAndLaborCostOptimization", default)]
-    pub enable_time_sheets_and_labor_cost_optimization: bool,
-    #[serde(rename = "endTimeOffset", default)]
-    pub end_time_offset: f64,
-    #[serde(rename = "startTimeOffset", default)]
-    pub start_time_offset: f64,
+    #[serde(
+        rename = "canShowVehicle",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_show_vehicle: Option<bool>,
+    #[serde(
+        rename = "canShowVehicleDefinition",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_show_vehicle_definition: Option<bool>,
+    #[serde(
+        rename = "enableTimeSheetsAndLaborCostOptimization",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_time_sheets_and_labor_cost_optimization: Option<bool>,
+    #[serde(
+        rename = "endTimeOffset",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub end_time_offset: Option<f64>,
+    #[serde(
+        rename = "startTimeOffset",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub start_time_offset: Option<f64>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct LanguageSettings {
-    #[serde(rename = "enableCanadaIcuFormat", default)]
-    pub enable_canada_icu_format: bool,
-    #[serde(rename = "enableDataTranslation", default)]
-    pub enable_data_translation: bool,
-    #[serde(rename = "enableEndUserLanguages", default)]
-    pub enable_end_user_languages: bool,
-    #[serde(rename = "enableICULocaleDateFormat", default)]
-    pub enable_icu_locale_date_format: bool,
-    #[serde(rename = "enableLanguageExtensionPackage", default)]
-    pub enable_language_extension_package: bool,
-    #[serde(rename = "enableLocalNamesForStdObjects", default)]
-    pub enable_local_names_for_std_objects: bool,
-    #[serde(rename = "enableLocaleInsensitiveFiltering", default)]
-    pub enable_locale_insensitive_filtering: bool,
-    #[serde(rename = "enablePlatformLanguages", default)]
-    pub enable_platform_languages: bool,
-    #[serde(rename = "enableTranslationWorkbench", default)]
-    pub enable_translation_workbench: bool,
-    #[serde(rename = "useLanguageFallback", default)]
-    pub use_language_fallback: bool,
+    #[serde(
+        rename = "enableCanadaIcuFormat",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_canada_icu_format: Option<bool>,
+    #[serde(
+        rename = "enableDataTranslation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_data_translation: Option<bool>,
+    #[serde(
+        rename = "enableEndUserLanguages",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_end_user_languages: Option<bool>,
+    #[serde(
+        rename = "enableICULocaleDateFormat",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_icu_locale_date_format: Option<bool>,
+    #[serde(
+        rename = "enableLanguageExtensionPackage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_language_extension_package: Option<bool>,
+    #[serde(
+        rename = "enableLocalNamesForStdObjects",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_local_names_for_std_objects: Option<bool>,
+    #[serde(
+        rename = "enableLocaleInsensitiveFiltering",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_locale_insensitive_filtering: Option<bool>,
+    #[serde(
+        rename = "enablePlatformLanguages",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_platform_languages: Option<bool>,
+    #[serde(
+        rename = "enableTranslationWorkbench",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_translation_workbench: Option<bool>,
+    #[serde(
+        rename = "useLanguageFallback",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub use_language_fallback: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct LargeQuotesandOrdersForRlmSettings {
-    #[serde(rename = "enableLargeQuotesandOrdersForRlm", default)]
-    pub enable_large_quotesand_orders_for_rlm: bool,
+    #[serde(
+        rename = "enableLargeQuotesandOrdersForRlm",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_large_quotesand_orders_for_rlm: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct LeadConfigSettings {
-    #[serde(rename = "doesEnableLeadConvertDefaultSubjectBlankTaskCreation", default)]
-    pub does_enable_lead_convert_default_subject_blank_task_creation: bool,
-    #[serde(rename = "doesHideOpportunityInConvertLeadWindow", default)]
-    pub does_hide_opportunity_in_convert_lead_window: bool,
-    #[serde(rename = "doesPreserveLeadStatus", default)]
-    pub does_preserve_lead_status: bool,
-    #[serde(rename = "doesSelectNoOpportunityOnConvertLead", default)]
-    pub does_select_no_opportunity_on_convert_lead: bool,
-    #[serde(rename = "doesTrackHistory", default)]
-    pub does_track_history: bool,
-    #[serde(rename = "enableConversionsOnMobile", default)]
-    pub enable_conversions_on_mobile: bool,
-    #[serde(rename = "enableOrgWideMergeAndDelete", default)]
-    pub enable_org_wide_merge_and_delete: bool,
-    #[serde(rename = "shouldLeadConvertRequireValidation", default)]
-    pub should_lead_convert_require_validation: bool,
-    #[serde(rename = "shouldSendNotificationEmailWhenLeadOwnerUpdatesViaApexInLEX", default)]
-    pub should_send_notification_email_when_lead_owner_updates_via_apex_in_lex: bool,
+    #[serde(
+        rename = "doesEnableLeadConvertDefaultSubjectBlankTaskCreation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_enable_lead_convert_default_subject_blank_task_creation: Option<bool>,
+    #[serde(
+        rename = "doesHideOpportunityInConvertLeadWindow",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_hide_opportunity_in_convert_lead_window: Option<bool>,
+    #[serde(
+        rename = "doesPreserveLeadStatus",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_preserve_lead_status: Option<bool>,
+    #[serde(
+        rename = "doesSelectNoOpportunityOnConvertLead",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_select_no_opportunity_on_convert_lead: Option<bool>,
+    #[serde(
+        rename = "doesTrackHistory",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_track_history: Option<bool>,
+    #[serde(
+        rename = "enableConversionsOnMobile",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_conversions_on_mobile: Option<bool>,
+    #[serde(
+        rename = "enableOrgWideMergeAndDelete",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_org_wide_merge_and_delete: Option<bool>,
+    #[serde(
+        rename = "shouldLeadConvertRequireValidation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub should_lead_convert_require_validation: Option<bool>,
+    #[serde(
+        rename = "shouldSendNotificationEmailWhenLeadOwnerUpdatesViaApexInLEX",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub should_send_notification_email_when_lead_owner_updates_via_apex_in_lex: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct LeadConvertSettings {
-    #[serde(rename = "allowOwnerChange", default)]
-    pub allow_owner_change: bool,
+    #[serde(
+        rename = "allowOwnerChange",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_owner_change: Option<bool>,
     #[serde(rename = "objectMapping", default)]
     pub object_mapping: Vec<serde_json::Value>,
-    #[serde(rename = "opportunityCreationOptions", default)]
-    pub opportunity_creation_options: serde_json::Value,
+    #[serde(
+        rename = "opportunityCreationOptions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub opportunity_creation_options: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct LicensingSettings {
-    #[serde(rename = "enableAutoCreateLicenseDefinition", default)]
-    pub enable_auto_create_license_definition: bool,
-    #[serde(rename = "enableOnDemandProvisioning", default)]
-    pub enable_on_demand_provisioning: bool,
+    #[serde(
+        rename = "enableAutoCreateLicenseDefinition",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_auto_create_license_definition: Option<bool>,
+    #[serde(
+        rename = "enableOnDemandProvisioning",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_on_demand_provisioning: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct LightningExperienceSettings {
-    #[serde(rename = "activeThemeName", default)]
-    pub active_theme_name: String,
-    #[serde(rename = "enableAccessCheckCrucPref", default)]
-    pub enable_access_check_cruc_pref: bool,
-    #[serde(rename = "enableApiUserLtngOutAccessPref", default)]
-    pub enable_api_user_ltng_out_access_pref: bool,
-    #[serde(rename = "enableAuraBoxcarReductionPref", default)]
-    pub enable_aura_boxcar_reduction_pref: bool,
-    #[serde(rename = "enableAuraCDNPref", default)]
-    pub enable_aura_cdn_pref: bool,
-    #[serde(rename = "enableAuraSecStaticResCRUCPref", default)]
-    pub enable_aura_sec_static_res_cruc_pref: bool,
-    #[serde(rename = "enableDeferRenderingWorkspacePage", default)]
-    pub enable_defer_rendering_workspace_page: bool,
-    #[serde(rename = "enableErrorExperienceEnabled", default)]
-    pub enable_error_experience_enabled: bool,
-    #[serde(rename = "enableFeedbackInMobile", default)]
-    pub enable_feedback_in_mobile: bool,
-    #[serde(rename = "enableGoogleSheetsForSfdcEnabled", default)]
-    pub enable_google_sheets_for_sfdc_enabled: bool,
-    #[serde(rename = "enableHideOpenInQuip", default)]
-    pub enable_hide_open_in_quip: bool,
-    #[serde(rename = "enableIE11DeprecationMsgHidden", default)]
-    pub enable_ie_11_deprecation_msg_hidden: bool,
-    #[serde(rename = "enableIE11LEXCrucPref", default)]
-    pub enable_ie_11_lex_cruc_pref: bool,
-    #[serde(rename = "enableInAppLearning", default)]
-    pub enable_in_app_learning: bool,
-    #[serde(rename = "enableInAppTooltips", default)]
-    pub enable_in_app_tooltips: bool,
-    #[serde(rename = "enableLEXExtensionComponentCustomization", default)]
-    pub enable_lex_extension_component_customization: bool,
-    #[serde(rename = "enableLEXExtensionDarkMode", default)]
-    pub enable_lex_extension_dark_mode: bool,
-    #[serde(rename = "enableLEXExtensionInlineEditModifier", default)]
-    pub enable_lex_extension_inline_edit_modifier: bool,
-    #[serde(rename = "enableLEXExtensionLinkGrabber", default)]
-    pub enable_lex_extension_link_grabber: bool,
-    #[serde(rename = "enableLEXExtensionRelatedLists", default)]
-    pub enable_lex_extension_related_lists: bool,
-    #[serde(rename = "enableLEXExtensionRequiredFields", default)]
-    pub enable_lex_extension_required_fields: bool,
-    #[serde(rename = "enableLEXExtensionTrailhead", default)]
-    pub enable_lex_extension_trailhead: bool,
-    #[serde(rename = "enableLEXOnIpadEnabled", default)]
-    pub enable_lex_on_ipad_enabled: bool,
-    #[serde(rename = "enableLexEndUsersNoSwitching", default)]
-    pub enable_lex_end_users_no_switching: bool,
-    #[serde(rename = "enableLightningPreviewPref", default)]
-    pub enable_lightning_preview_pref: bool,
-    #[serde(rename = "enableNavPersonalizationOptOut", default)]
-    pub enable_nav_personalization_opt_out: bool,
-    #[serde(rename = "enableNoBackgroundNavigations", default)]
-    pub enable_no_background_navigations: bool,
-    #[serde(rename = "enableQuip", default)]
-    pub enable_quip: bool,
-    #[serde(rename = "enableRemoveThemeBrandBanner", default)]
-    pub enable_remove_theme_brand_banner: bool,
-    #[serde(rename = "enableS1BannerPref", default)]
-    pub enable_s_1_banner_pref: bool,
-    #[serde(rename = "enableS1BrowserEnabled", default)]
-    pub enable_s_1_browser_enabled: bool,
-    #[serde(rename = "enableS1DesktopEnabled", default)]
-    pub enable_s_1_desktop_enabled: bool,
-    #[serde(rename = "enableS1UiLoggingEnabled", default)]
-    pub enable_s_1_ui_logging_enabled: bool,
-    #[serde(rename = "enableSalesforceNext", default)]
-    pub enable_salesforce_next: bool,
-    #[serde(rename = "enableSidToken3rdPartyAuraApp", default)]
-    pub enable_sid_token_3_rd_party_aura_app: bool,
-    #[serde(rename = "enableSkypeChatEnabled", default)]
-    pub enable_skype_chat_enabled: bool,
-    #[serde(rename = "enableSparkAllUsers", default)]
-    pub enable_spark_all_users: bool,
-    #[serde(rename = "enableSparkConversationEnabled", default)]
-    pub enable_spark_conversation_enabled: bool,
-    #[serde(rename = "enableStackedModalManagerEnabled", default)]
-    pub enable_stacked_modal_manager_enabled: bool,
-    #[serde(rename = "enableTryLightningOptOut", default)]
-    pub enable_try_lightning_opt_out: bool,
-    #[serde(rename = "enableUseS1AlohaDesktop", default)]
-    pub enable_use_s_1_aloha_desktop: bool,
-    #[serde(rename = "enableUsersAreLightningOnly", default)]
-    pub enable_users_are_lightning_only: bool,
-    #[serde(rename = "enableWebExEnabled", default)]
-    pub enable_web_ex_enabled: bool,
-    #[serde(rename = "enableWebexAllUsers", default)]
-    pub enable_webex_all_users: bool,
-    #[serde(rename = "isLEXExtensionComponentCustomizationOff", default)]
-    pub is_lex_extension_component_customization_off: bool,
-    #[serde(rename = "isLEXExtensionDarkModeOff", default)]
-    pub is_lex_extension_dark_mode_off: bool,
-    #[serde(rename = "isLEXExtensionLinkGrabberOff", default)]
-    pub is_lex_extension_link_grabber_off: bool,
-    #[serde(rename = "isLEXExtensionOff", default)]
-    pub is_lex_extension_off: bool,
+    #[serde(
+        rename = "activeThemeName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub active_theme_name: Option<String>,
+    #[serde(
+        rename = "enableAccessCheckCrucPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_access_check_cruc_pref: Option<bool>,
+    #[serde(
+        rename = "enableApiUserLtngOutAccessPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_api_user_ltng_out_access_pref: Option<bool>,
+    #[serde(
+        rename = "enableAuraBoxcarReductionPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_aura_boxcar_reduction_pref: Option<bool>,
+    #[serde(
+        rename = "enableAuraCDNPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_aura_cdn_pref: Option<bool>,
+    #[serde(
+        rename = "enableAuraSecStaticResCRUCPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_aura_sec_static_res_cruc_pref: Option<bool>,
+    #[serde(
+        rename = "enableDeferRenderingWorkspacePage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_defer_rendering_workspace_page: Option<bool>,
+    #[serde(
+        rename = "enableErrorExperienceEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_error_experience_enabled: Option<bool>,
+    #[serde(
+        rename = "enableFeedbackInMobile",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_feedback_in_mobile: Option<bool>,
+    #[serde(
+        rename = "enableGoogleSheetsForSfdcEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_google_sheets_for_sfdc_enabled: Option<bool>,
+    #[serde(
+        rename = "enableHideOpenInQuip",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_hide_open_in_quip: Option<bool>,
+    #[serde(
+        rename = "enableIE11DeprecationMsgHidden",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ie_11_deprecation_msg_hidden: Option<bool>,
+    #[serde(
+        rename = "enableIE11LEXCrucPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ie_11_lex_cruc_pref: Option<bool>,
+    #[serde(
+        rename = "enableInAppLearning",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_in_app_learning: Option<bool>,
+    #[serde(
+        rename = "enableInAppTooltips",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_in_app_tooltips: Option<bool>,
+    #[serde(
+        rename = "enableLEXExtensionComponentCustomization",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lex_extension_component_customization: Option<bool>,
+    #[serde(
+        rename = "enableLEXExtensionDarkMode",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lex_extension_dark_mode: Option<bool>,
+    #[serde(
+        rename = "enableLEXExtensionInlineEditModifier",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lex_extension_inline_edit_modifier: Option<bool>,
+    #[serde(
+        rename = "enableLEXExtensionLinkGrabber",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lex_extension_link_grabber: Option<bool>,
+    #[serde(
+        rename = "enableLEXExtensionRelatedLists",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lex_extension_related_lists: Option<bool>,
+    #[serde(
+        rename = "enableLEXExtensionRequiredFields",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lex_extension_required_fields: Option<bool>,
+    #[serde(
+        rename = "enableLEXExtensionTrailhead",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lex_extension_trailhead: Option<bool>,
+    #[serde(
+        rename = "enableLEXOnIpadEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lex_on_ipad_enabled: Option<bool>,
+    #[serde(
+        rename = "enableLexEndUsersNoSwitching",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lex_end_users_no_switching: Option<bool>,
+    #[serde(
+        rename = "enableLightningPreviewPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lightning_preview_pref: Option<bool>,
+    #[serde(
+        rename = "enableNavPersonalizationOptOut",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_nav_personalization_opt_out: Option<bool>,
+    #[serde(
+        rename = "enableNoBackgroundNavigations",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_no_background_navigations: Option<bool>,
+    #[serde(
+        rename = "enableQuip",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_quip: Option<bool>,
+    #[serde(
+        rename = "enableRemoveThemeBrandBanner",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_remove_theme_brand_banner: Option<bool>,
+    #[serde(
+        rename = "enableS1BannerPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_s_1_banner_pref: Option<bool>,
+    #[serde(
+        rename = "enableS1BrowserEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_s_1_browser_enabled: Option<bool>,
+    #[serde(
+        rename = "enableS1DesktopEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_s_1_desktop_enabled: Option<bool>,
+    #[serde(
+        rename = "enableS1UiLoggingEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_s_1_ui_logging_enabled: Option<bool>,
+    #[serde(
+        rename = "enableSalesforceNext",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_salesforce_next: Option<bool>,
+    #[serde(
+        rename = "enableSidToken3rdPartyAuraApp",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sid_token_3_rd_party_aura_app: Option<bool>,
+    #[serde(
+        rename = "enableSkypeChatEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_skype_chat_enabled: Option<bool>,
+    #[serde(
+        rename = "enableSparkAllUsers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_spark_all_users: Option<bool>,
+    #[serde(
+        rename = "enableSparkConversationEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_spark_conversation_enabled: Option<bool>,
+    #[serde(
+        rename = "enableStackedModalManagerEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_stacked_modal_manager_enabled: Option<bool>,
+    #[serde(
+        rename = "enableTryLightningOptOut",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_try_lightning_opt_out: Option<bool>,
+    #[serde(
+        rename = "enableUseS1AlohaDesktop",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_use_s_1_aloha_desktop: Option<bool>,
+    #[serde(
+        rename = "enableUsersAreLightningOnly",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_users_are_lightning_only: Option<bool>,
+    #[serde(
+        rename = "enableWebExEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_web_ex_enabled: Option<bool>,
+    #[serde(
+        rename = "enableWebexAllUsers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_webex_all_users: Option<bool>,
+    #[serde(
+        rename = "isLEXExtensionComponentCustomizationOff",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_lex_extension_component_customization_off: Option<bool>,
+    #[serde(
+        rename = "isLEXExtensionDarkModeOff",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_lex_extension_dark_mode_off: Option<bool>,
+    #[serde(
+        rename = "isLEXExtensionLinkGrabberOff",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_lex_extension_link_grabber_off: Option<bool>,
+    #[serde(
+        rename = "isLEXExtensionOff",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_lex_extension_off: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct LiveAgentSettings {
-    #[serde(rename = "enableChatFindOrCreateEnable", default)]
-    pub enable_chat_find_or_create_enable: bool,
-    #[serde(rename = "enableLiveAgent", default)]
-    pub enable_live_agent: bool,
-    #[serde(rename = "enableQuickTextEnabled", default)]
-    pub enable_quick_text_enabled: bool,
+    #[serde(
+        rename = "enableChatFindOrCreateEnable",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_chat_find_or_create_enable: Option<bool>,
+    #[serde(
+        rename = "enableLiveAgent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_live_agent: Option<bool>,
+    #[serde(
+        rename = "enableQuickTextEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_quick_text_enabled: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct LiveMessageSettings {
-    #[serde(rename = "enableCheckCEUserPerm", default)]
-    pub enable_check_ce_user_perm: bool,
-    #[serde(rename = "enableLiveMessage", default)]
-    pub enable_live_message: bool,
+    #[serde(
+        rename = "enableCheckCEUserPerm",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_check_ce_user_perm: Option<bool>,
+    #[serde(
+        rename = "enableLiveMessage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_live_message: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LogicSettings {
+    #[serde(
+        rename = "approvedAbsences",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub approved_absences: Option<bool>,
+    #[serde(
+        rename = "defaultFirstDayOfWorkingWeek",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_first_day_of_working_week: Option<String>,
+    #[serde(
+        rename = "enableActivityLog",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_activity_log: Option<bool>,
+    #[serde(
+        rename = "enableCrewMembersSkillAggregation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_crew_members_skill_aggregation: Option<bool>,
+    #[serde(
+        rename = "enableReshuffle",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_reshuffle: Option<bool>,
+    #[serde(
+        rename = "enableServiceAppointmentSliding",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_service_appointment_sliding: Option<bool>,
+    #[serde(
+        rename = "enableStartOfDay",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_start_of_day: Option<bool>,
+    #[serde(
+        rename = "enhancedSlidingByTerritory",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enhanced_sliding_by_territory: Option<bool>,
+    #[serde(
+        rename = "failOnSchedule",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub fail_on_schedule: Option<bool>,
+    #[serde(
+        rename = "fixScheduleOverlapsFlowName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub fix_schedule_overlaps_flow_name: Option<String>,
+    #[serde(
+        rename = "flowOverlapDetection",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub flow_overlap_detection: Option<bool>,
+    #[serde(
+        rename = "includeSecondaryCalendar",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub include_secondary_calendar: Option<bool>,
+    #[serde(
+        rename = "keepScheduledByBoolForAbSchedule",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub keep_scheduled_by_bool_for_ab_schedule: Option<String>,
+    #[serde(
+        rename = "limitApexOperations",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub limit_apex_operations: Option<bool>,
+    #[serde(
+        rename = "lowOrHighTerritoryClassification",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub low_or_high_territory_classification: Option<String>,
+    #[serde(
+        rename = "mdtBooleanField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub mdt_boolean_field: Option<String>,
+    #[serde(
+        rename = "pinnedStatusesSF",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub pinned_statuses_sf: Option<String>,
+    #[serde(
+        rename = "saPriorityField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sa_priority_field: Option<String>,
+    #[serde(
+        rename = "scheduleToCrewsAndIndividuals",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub schedule_to_crews_and_individuals: Option<bool>,
+    #[serde(
+        rename = "searchSlotMaxDays",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub search_slot_max_days: Option<f64>,
+    #[serde(
+        rename = "showRegisterBtn",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_register_btn: Option<bool>,
+    #[serde(
+        rename = "travelSpeed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub travel_speed: Option<f64>,
+    #[serde(
+        rename = "travelSpeedUnit",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub travel_speed_unit: Option<String>,
+    #[serde(
+        rename = "travelTimeBuffer",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub travel_time_buffer: Option<f64>,
+    #[serde(
+        rename = "use1To100PriorityScale",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub use_1_to_100_priority_scale: Option<bool>,
+    #[serde(
+        rename = "useNewMstDataModel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub use_new_mst_data_model: Option<bool>,
+    #[serde(
+        rename = "useO2AsFallbackEngine",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub use_o_2_as_fallback_engine: Option<bool>,
+    #[serde(
+        rename = "useO2ForAllTerritories",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub use_o_2_for_all_territories: Option<bool>,
+    #[serde(
+        rename = "usePredictive",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub use_predictive: Option<bool>,
+    #[serde(rename = "useSlr", default, skip_serializing_if = "Option::is_none")]
+    pub use_slr: Option<bool>,
+    #[serde(
+        rename = "visitingHoursTimezoneFromOh",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub visiting_hours_timezone_from_oh: Option<bool>,
+    #[serde(
+        rename = "woPriorityField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub wo_priority_field: Option<String>,
+    #[serde(
+        rename = "woliPriorityField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub woli_priority_field: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct MacroSettings {
-    #[serde(rename = "contextualMacroFiltering", default)]
-    pub contextual_macro_filtering: bool,
-    #[serde(rename = "enableAdvancedSearch", default)]
-    pub enable_advanced_search: bool,
-    #[serde(rename = "macrosInFolders", default)]
-    pub macros_in_folders: bool,
+    #[serde(
+        rename = "contextualMacroFiltering",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub contextual_macro_filtering: Option<bool>,
+    #[serde(
+        rename = "enableAdvancedSearch",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_advanced_search: Option<bool>,
+    #[serde(
+        rename = "macrosInFolders",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub macros_in_folders: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct MailMergeSettings {
-    #[serde(rename = "enableExtendedMailMerge", default)]
-    pub enable_extended_mail_merge: bool,
-    #[serde(rename = "saveMailMergeDocsAsSalesforceDocs", default)]
-    pub save_mail_merge_docs_as_salesforce_docs: bool,
+    #[serde(
+        rename = "enableExtendedMailMerge",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_extended_mail_merge: Option<bool>,
+    #[serde(
+        rename = "saveMailMergeDocsAsSalesforceDocs",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub save_mail_merge_docs_as_salesforce_docs: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MapReportSettings {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub color: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub icon: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
+    #[serde(rename = "reportId", default, skip_serializing_if = "Option::is_none")]
+    pub report_id: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct MapsAndLocationSettings {
-    #[serde(rename = "enableAddressAutoComplete", default)]
-    pub enable_address_auto_complete: bool,
-    #[serde(rename = "enableMapsAndLocation", default)]
-    pub enable_maps_and_location: bool,
+    #[serde(
+        rename = "enableAddressAutoComplete",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_address_auto_complete: Option<bool>,
+    #[serde(
+        rename = "enableMapsAndLocation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_maps_and_location: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct MediaAdSalesSettings {
-    #[serde(rename = "enableMediaAdSales", default)]
-    pub enable_media_ad_sales: bool,
+    #[serde(
+        rename = "enableMediaAdSales",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_media_ad_sales: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct MediaAgentSettings {
-    #[serde(rename = "enableMediaAdOppSummaryEnabled", default)]
-    pub enable_media_ad_opp_summary_enabled: bool,
-    #[serde(rename = "enableMediaProposalAgentEnabled", default)]
-    pub enable_media_proposal_agent_enabled: bool,
+    #[serde(
+        rename = "enableMediaAdOppSummaryEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_media_ad_opp_summary_enabled: Option<bool>,
+    #[serde(
+        rename = "enableMediaProposalAgentEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_media_proposal_agent_enabled: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct MeetingsSettings {
-    #[serde(rename = "enableSalesforceMeetings", default)]
-    pub enable_salesforce_meetings: bool,
-    #[serde(rename = "enableSalesforceMeetingsSyncCheck", default)]
-    pub enable_salesforce_meetings_sync_check: bool,
-    #[serde(rename = "enableZoomVideoConference", default)]
-    pub enable_zoom_video_conference: bool,
+    #[serde(
+        rename = "enableSalesforceMeetings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_salesforce_meetings: Option<bool>,
+    #[serde(
+        rename = "enableSalesforceMeetingsSyncCheck",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_salesforce_meetings_sync_check: Option<bool>,
+    #[serde(
+        rename = "enableZoomVideoConference",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_zoom_video_conference: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct MfgServiceConsoleSettings {
-    #[serde(rename = "enableMfgServiceConsole", default)]
-    pub enable_mfg_service_console: bool,
+    #[serde(
+        rename = "enableMfgServiceConsole",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_mfg_service_console: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct MobileSettings {
-    #[serde(rename = "dashboardMobile", default)]
-    pub dashboard_mobile: DashboardMobileSettings,
-    #[serde(rename = "enableImportContactFromDevice", default)]
-    pub enable_import_contact_from_device: bool,
-    #[serde(rename = "enableOfflineDraftsEnabled", default)]
-    pub enable_offline_drafts_enabled: bool,
-    #[serde(rename = "enablePopulateNameManuallyInToday", default)]
-    pub enable_populate_name_manually_in_today: bool,
-    #[serde(rename = "enableS1EncryptedStoragePref2", default)]
-    pub enable_s_1_encrypted_storage_pref_2: bool,
-    #[serde(rename = "enableS1OfflinePref", default)]
-    pub enable_s_1_offline_pref: bool,
+    #[serde(
+        rename = "dashboardMobile",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub dashboard_mobile: Option<DashboardMobileSettings>,
+    #[serde(
+        rename = "enableImportContactFromDevice",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_import_contact_from_device: Option<bool>,
+    #[serde(
+        rename = "enableOfflineDraftsEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_offline_drafts_enabled: Option<bool>,
+    #[serde(
+        rename = "enablePopulateNameManuallyInToday",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_populate_name_manually_in_today: Option<bool>,
+    #[serde(
+        rename = "enableS1EncryptedStoragePref2",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_s_1_encrypted_storage_pref_2: Option<bool>,
+    #[serde(
+        rename = "enableS1OfflinePref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_s_1_offline_pref: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct MyDomainSettings {
-    #[serde(rename = "areLegacyRedirectsMaintained", default)]
-    pub are_legacy_redirects_maintained: bool,
-    #[serde(rename = "areLgcyRdirMaintainedWntr26", default)]
-    pub are_lgcy_rdir_maintained_wntr_26: bool,
-    #[serde(rename = "canOnlyLoginWithMyDomainUrl", default)]
-    pub can_only_login_with_my_domain_url: bool,
-    #[serde(rename = "doesApiLoginRequireOrgDomain", default)]
-    pub does_api_login_require_org_domain: bool,
-    #[serde(rename = "doesWarnOnForceComRedirect", default)]
-    pub does_warn_on_force_com_redirect: bool,
-    #[serde(rename = "doesWarnOnRedirect", default)]
-    pub does_warn_on_redirect: bool,
-    #[serde(rename = "domainPartition", default)]
-    pub domain_partition: serde_json::Value,
-    #[serde(rename = "edgeRoutingMethod", default)]
-    pub edge_routing_method: serde_json::Value,
-    #[serde(rename = "enableCrossDomainPreviewCookies", default)]
-    pub enable_cross_domain_preview_cookies: bool,
-    #[serde(rename = "enableEdgeDuringRollout", default)]
-    pub enable_edge_during_rollout: bool,
-    #[serde(rename = "enableExtendedRedirections", default)]
-    pub enable_extended_redirections: bool,
-    #[serde(rename = "enableLegacyRedirections", default)]
-    pub enable_legacy_redirections: bool,
-    #[serde(rename = "enableNativeBrowserForAuthOnAndroid", default)]
-    pub enable_native_browser_for_auth_on_android: bool,
-    #[serde(rename = "enableNativeBrowserForAuthOnIos", default)]
-    pub enable_native_browser_for_auth_on_ios: bool,
-    #[serde(rename = "enableShareBrowserSessionAndroidForAuth", default)]
-    pub enable_share_browser_session_android_for_auth: bool,
-    #[serde(rename = "enableShareBrowserSessionIOSForAuth", default)]
-    pub enable_share_browser_session_ios_for_auth: bool,
-    #[serde(rename = "instancedUrlRedirectHandling", default)]
-    pub instanced_url_redirect_handling: serde_json::Value,
-    #[serde(rename = "isFirstPartyCookieUseRequired", default)]
-    pub is_first_party_cookie_use_required: bool,
-    #[serde(rename = "isIcorInstApiTrafficBlocked", default)]
-    pub is_icor_inst_api_traffic_blocked: bool,
-    #[serde(rename = "isInstancedApiTrafficBlocked", default)]
-    pub is_instanced_api_traffic_blocked: bool,
-    #[serde(rename = "logRedirections", default)]
-    pub log_redirections: bool,
-    #[serde(rename = "myDomainName", default)]
-    pub my_domain_name: String,
-    #[serde(rename = "myDomainSuffix", default)]
-    pub my_domain_suffix: serde_json::Value,
-    #[serde(rename = "onboardCustomerSpecificSuffix", default)]
-    pub onboard_customer_specific_suffix: bool,
-    #[serde(rename = "redirectForceComSiteUrls", default)]
-    pub redirect_force_com_site_urls: bool,
-    #[serde(rename = "redirectPriorMyDomain", default)]
-    pub redirect_prior_my_domain: bool,
-    #[serde(rename = "use3rdPartyCookieBlockingCompatibleHostnames", default)]
-    pub use_3_rd_party_cookie_blocking_compatible_hostnames: bool,
-    #[serde(rename = "useEdge", default)]
-    pub use_edge: bool,
-    #[serde(rename = "useEnhancedDomainsInSandbox", default)]
-    pub use_enhanced_domains_in_sandbox: bool,
-    #[serde(rename = "useStabilizedMyDomainHostnames", default)]
-    pub use_stabilized_my_domain_hostnames: bool,
-    #[serde(rename = "useStabilizedSandboxMyDomainHostnames", default)]
-    pub use_stabilized_sandbox_my_domain_hostnames: bool,
+    #[serde(
+        rename = "areLegacyRedirectsMaintained",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub are_legacy_redirects_maintained: Option<bool>,
+    #[serde(
+        rename = "areLgcyRdirMaintainedWntr26",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub are_lgcy_rdir_maintained_wntr_26: Option<bool>,
+    #[serde(
+        rename = "canOnlyLoginWithMyDomainUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_only_login_with_my_domain_url: Option<bool>,
+    #[serde(
+        rename = "doesApiLoginRequireOrgDomain",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_api_login_require_org_domain: Option<bool>,
+    #[serde(
+        rename = "doesWarnOnForceComRedirect",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_warn_on_force_com_redirect: Option<bool>,
+    #[serde(
+        rename = "doesWarnOnRedirect",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_warn_on_redirect: Option<bool>,
+    #[serde(
+        rename = "domainPartition",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub domain_partition: Option<serde_json::Value>,
+    #[serde(
+        rename = "edgeRoutingMethod",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub edge_routing_method: Option<serde_json::Value>,
+    #[serde(
+        rename = "enableCrossDomainPreviewCookies",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cross_domain_preview_cookies: Option<bool>,
+    #[serde(
+        rename = "enableEdgeDuringRollout",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_edge_during_rollout: Option<bool>,
+    #[serde(
+        rename = "enableExtendedRedirections",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_extended_redirections: Option<bool>,
+    #[serde(
+        rename = "enableLegacyRedirections",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_legacy_redirections: Option<bool>,
+    #[serde(
+        rename = "enableNativeBrowserForAuthOnAndroid",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_native_browser_for_auth_on_android: Option<bool>,
+    #[serde(
+        rename = "enableNativeBrowserForAuthOnIos",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_native_browser_for_auth_on_ios: Option<bool>,
+    #[serde(
+        rename = "enableShareBrowserSessionAndroidForAuth",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_share_browser_session_android_for_auth: Option<bool>,
+    #[serde(
+        rename = "enableShareBrowserSessionIOSForAuth",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_share_browser_session_ios_for_auth: Option<bool>,
+    #[serde(
+        rename = "instancedUrlRedirectHandling",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub instanced_url_redirect_handling: Option<serde_json::Value>,
+    #[serde(
+        rename = "isFirstPartyCookieUseRequired",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_first_party_cookie_use_required: Option<bool>,
+    #[serde(
+        rename = "isIcorInstApiTrafficBlocked",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_icor_inst_api_traffic_blocked: Option<bool>,
+    #[serde(
+        rename = "isInstancedApiTrafficBlocked",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_instanced_api_traffic_blocked: Option<bool>,
+    #[serde(
+        rename = "logRedirections",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub log_redirections: Option<bool>,
+    #[serde(
+        rename = "myDomainName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub my_domain_name: Option<String>,
+    #[serde(
+        rename = "myDomainSuffix",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub my_domain_suffix: Option<serde_json::Value>,
+    #[serde(
+        rename = "onboardCustomerSpecificSuffix",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub onboard_customer_specific_suffix: Option<bool>,
+    #[serde(
+        rename = "redirectForceComSiteUrls",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub redirect_force_com_site_urls: Option<bool>,
+    #[serde(
+        rename = "redirectPriorMyDomain",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub redirect_prior_my_domain: Option<bool>,
+    #[serde(
+        rename = "use3rdPartyCookieBlockingCompatibleHostnames",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub use_3_rd_party_cookie_blocking_compatible_hostnames: Option<bool>,
+    #[serde(rename = "useEdge", default, skip_serializing_if = "Option::is_none")]
+    pub use_edge: Option<bool>,
+    #[serde(
+        rename = "useEnhancedDomainsInSandbox",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub use_enhanced_domains_in_sandbox: Option<bool>,
+    #[serde(
+        rename = "useStabilizedMyDomainHostnames",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub use_stabilized_my_domain_hostnames: Option<bool>,
+    #[serde(
+        rename = "useStabilizedSandboxMyDomainHostnames",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub use_stabilized_sandbox_my_domain_hostnames: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct NameSettings {
-    #[serde(rename = "enableInformalName", default)]
-    pub enable_informal_name: bool,
-    #[serde(rename = "enableMiddleName", default)]
-    pub enable_middle_name: bool,
-    #[serde(rename = "enableNameSuffix", default)]
-    pub enable_name_suffix: bool,
+    #[serde(
+        rename = "enableInformalName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_informal_name: Option<bool>,
+    #[serde(
+        rename = "enableMiddleName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_middle_name: Option<bool>,
+    #[serde(
+        rename = "enableNameSuffix",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_name_suffix: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct NetworkAuthApiSettings {
-    #[serde(rename = "doesForgotPasswordRequireAuth", default)]
-    pub does_forgot_password_require_auth: bool,
-    #[serde(rename = "doesPasswordLoginRequireAuth", default)]
-    pub does_password_login_require_auth: bool,
-    #[serde(rename = "doesPwdlessLoginRequireAuth", default)]
-    pub does_pwdless_login_require_auth: bool,
-    #[serde(rename = "doesRegistrationRequireAuth", default)]
-    pub does_registration_require_auth: bool,
+    #[serde(
+        rename = "doesForgotPasswordRequireAuth",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_forgot_password_require_auth: Option<bool>,
+    #[serde(
+        rename = "doesPasswordLoginRequireAuth",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_password_login_require_auth: Option<bool>,
+    #[serde(
+        rename = "doesPwdlessLoginRequireAuth",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_pwdless_login_require_auth: Option<bool>,
+    #[serde(
+        rename = "doesRegistrationRequireAuth",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_registration_require_auth: Option<bool>,
     #[serde(rename = "emailTmplsAllowlist", default)]
     pub email_tmpls_allowlist: Vec<serde_json::Value>,
-    #[serde(rename = "headlessDiscoveryExecutionUser", default)]
-    pub headless_discovery_execution_user: String,
-    #[serde(rename = "headlessDiscoveryHandler", default)]
-    pub headless_discovery_handler: String,
-    #[serde(rename = "isFirstPartyAppsAllowed", default)]
-    pub is_first_party_apps_allowed: bool,
-    #[serde(rename = "isForgotPwdAllowed", default)]
-    pub is_forgot_pwd_allowed: bool,
-    #[serde(rename = "isForgotPwdEmailTemplateAllowlistingEnabled", default)]
-    pub is_forgot_pwd_email_template_allowlisting_enabled: bool,
-    #[serde(rename = "isHeadlessUserRegistrationAllowed", default)]
-    pub is_headless_user_registration_allowed: bool,
-    #[serde(rename = "isPwdlessLoginAllowed", default)]
-    pub is_pwdless_login_allowed: bool,
-    #[serde(rename = "isRecaptchaRequiredForgotPwd", default)]
-    pub is_recaptcha_required_forgot_pwd: bool,
-    #[serde(rename = "isRecaptchaRequiredPwdlessLogin", default)]
-    pub is_recaptcha_required_pwdless_login: bool,
-    #[serde(rename = "isRecaptchaRequiredRgstr", default)]
-    pub is_recaptcha_required_rgstr: bool,
-    #[serde(rename = "isUniversalClientRgstrAllowed", default)]
-    pub is_universal_client_rgstr_allowed: bool,
-    #[serde(rename = "isUserDisambiguationAllowedForgotPwd", default)]
-    pub is_user_disambiguation_allowed_forgot_pwd: bool,
-    #[serde(rename = "isUserDisambiguationAllowedUsernamePwd", default)]
-    pub is_user_disambiguation_allowed_username_pwd: bool,
-    #[serde(rename = "maxPasswordResetAttempts", default)]
-    pub max_password_reset_attempts: f64,
-    #[serde(rename = "recaptchaScoreThreshold", default)]
-    pub recaptcha_score_threshold: f64,
-    #[serde(rename = "recaptchaSecretKey", default)]
-    pub recaptcha_secret_key: String,
-    #[serde(rename = "registrationExecutionUser", default)]
-    pub registration_execution_user: String,
-    #[serde(rename = "registrationHandler", default)]
-    pub registration_handler: String,
-    #[serde(rename = "registrationUserDefaultProfile", default)]
-    pub registration_user_default_profile: String,
+    #[serde(
+        rename = "headlessDiscoveryExecutionUser",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub headless_discovery_execution_user: Option<String>,
+    #[serde(
+        rename = "headlessDiscoveryHandler",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub headless_discovery_handler: Option<String>,
+    #[serde(
+        rename = "isFirstPartyAppsAllowed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_first_party_apps_allowed: Option<bool>,
+    #[serde(
+        rename = "isForgotPwdAllowed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_forgot_pwd_allowed: Option<bool>,
+    #[serde(
+        rename = "isForgotPwdEmailTemplateAllowlistingEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_forgot_pwd_email_template_allowlisting_enabled: Option<bool>,
+    #[serde(
+        rename = "isHeadlessUserRegistrationAllowed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_headless_user_registration_allowed: Option<bool>,
+    #[serde(
+        rename = "isPwdlessLoginAllowed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_pwdless_login_allowed: Option<bool>,
+    #[serde(
+        rename = "isRecaptchaRequiredForgotPwd",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_recaptcha_required_forgot_pwd: Option<bool>,
+    #[serde(
+        rename = "isRecaptchaRequiredPwdlessLogin",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_recaptcha_required_pwdless_login: Option<bool>,
+    #[serde(
+        rename = "isRecaptchaRequiredRgstr",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_recaptcha_required_rgstr: Option<bool>,
+    #[serde(
+        rename = "isUniversalClientRgstrAllowed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_universal_client_rgstr_allowed: Option<bool>,
+    #[serde(
+        rename = "isUserDisambiguationAllowedForgotPwd",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_user_disambiguation_allowed_forgot_pwd: Option<bool>,
+    #[serde(
+        rename = "isUserDisambiguationAllowedUsernamePwd",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_user_disambiguation_allowed_username_pwd: Option<bool>,
+    #[serde(
+        rename = "maxPasswordResetAttempts",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub max_password_reset_attempts: Option<f64>,
+    #[serde(
+        rename = "recaptchaScoreThreshold",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recaptcha_score_threshold: Option<f64>,
+    #[serde(
+        rename = "recaptchaSecretKey",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recaptcha_secret_key: Option<String>,
+    #[serde(
+        rename = "registrationExecutionUser",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub registration_execution_user: Option<String>,
+    #[serde(
+        rename = "registrationHandler",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub registration_handler: Option<String>,
+    #[serde(
+        rename = "registrationUserDefaultProfile",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub registration_user_default_profile: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -4316,8 +10990,12 @@ pub struct NetworkAuthApiSettings {
 pub struct NotificationTypeSettings {
     #[serde(rename = "appSettings", default)]
     pub app_settings: Vec<AppSettings>,
-    #[serde(rename = "notificationChannels", default)]
-    pub notification_channels: serde_json::Value,
+    #[serde(
+        rename = "notificationChannels",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub notification_channels: Option<serde_json::Value>,
     #[serde(rename = "notificationType", default)]
     pub notification_type: String,
 }
@@ -4326,92 +11004,206 @@ pub struct NotificationTypeSettings {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct NotificationsSettings {
-    #[serde(rename = "enableActvityReminderBrowserNotifs", default)]
-    pub enable_actvity_reminder_browser_notifs: bool,
-    #[serde(rename = "enableMobileAppPushNotifications", default)]
-    pub enable_mobile_app_push_notifications: bool,
-    #[serde(rename = "enableNotifications", default)]
-    pub enable_notifications: bool,
+    #[serde(
+        rename = "enableActvityReminderBrowserNotifs",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_actvity_reminder_browser_notifs: Option<bool>,
+    #[serde(
+        rename = "enableMobileAppPushNotifications",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_mobile_app_push_notifications: Option<bool>,
+    #[serde(
+        rename = "enableNotifications",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_notifications: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct OauthOidcSettings {
-    #[serde(rename = "agentAuthLinking", default)]
-    pub agent_auth_linking: bool,
-    #[serde(rename = "blockOAuthUnPwFlow", default)]
-    pub block_o_auth_un_pw_flow: bool,
-    #[serde(rename = "blockOAuthUsrAgtFlow", default)]
-    pub block_o_auth_usr_agt_flow: bool,
-    #[serde(rename = "isPkceRequired", default)]
-    pub is_pkce_required: bool,
-    #[serde(rename = "oAuthCdCrdtFlowEnable", default)]
-    pub o_auth_cd_crdt_flow_enable: bool,
+    #[serde(
+        rename = "agentAuthLinking",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub agent_auth_linking: Option<bool>,
+    #[serde(
+        rename = "blockOAuthUnPwFlow",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub block_o_auth_un_pw_flow: Option<bool>,
+    #[serde(
+        rename = "blockOAuthUsrAgtFlow",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub block_o_auth_usr_agt_flow: Option<bool>,
+    #[serde(
+        rename = "isPkceRequired",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_pkce_required: Option<bool>,
+    #[serde(
+        rename = "oAuthCdCrdtFlowEnable",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub o_auth_cd_crdt_flow_enable: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ObjectLinkingSettings {
-    #[serde(rename = "enableObjectLinking", default)]
-    pub enable_object_linking: bool,
+    #[serde(
+        rename = "enableObjectLinking",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_object_linking: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ObjectMappingSettings {
+    #[serde(rename = "objectMappings", default)]
+    pub object_mappings: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct OmniChannelPricingSettings {
-    #[serde(rename = "enableOmniChannelPricing", default)]
-    pub enable_omni_channel_pricing: bool,
+    #[serde(
+        rename = "enableOmniChannelPricing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_omni_channel_pricing: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct OmniChannelSettings {
-    #[serde(rename = "enableOmniAutoLoginPrompt", default)]
-    pub enable_omni_auto_login_prompt: bool,
-    #[serde(rename = "enableOmniChannel", default)]
-    pub enable_omni_channel: bool,
-    #[serde(rename = "enableOmniSecondaryRoutingPriority", default)]
-    pub enable_omni_secondary_routing_priority: bool,
-    #[serde(rename = "enableOmniSkillsRouting", default)]
-    pub enable_omni_skills_routing: bool,
-    #[serde(rename = "enableOmniStatusCapModel", default)]
-    pub enable_omni_status_cap_model: bool,
+    #[serde(
+        rename = "enableOmniAutoLoginPrompt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_omni_auto_login_prompt: Option<bool>,
+    #[serde(
+        rename = "enableOmniChannel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_omni_channel: Option<bool>,
+    #[serde(
+        rename = "enableOmniSecondaryRoutingPriority",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_omni_secondary_routing_priority: Option<bool>,
+    #[serde(
+        rename = "enableOmniSkillsRouting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_omni_skills_routing: Option<bool>,
+    #[serde(
+        rename = "enableOmniStatusCapModel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_omni_status_cap_model: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct OmniStudioSettings {
-    #[serde(rename = "disableRollbackFlagsPref", default)]
-    pub disable_rollback_flags_pref: bool,
-    #[serde(rename = "enableOaEventInternalWrites", default)]
-    pub enable_oa_event_internal_writes: bool,
-    #[serde(rename = "enableOaEventNotifications", default)]
-    pub enable_oa_event_notifications: bool,
-    #[serde(rename = "enableOaForCore", default)]
-    pub enable_oa_for_core: bool,
-    #[serde(rename = "enableOmniGlobalAutoNumberPref", default)]
-    pub enable_omni_global_auto_number_pref: bool,
-    #[serde(rename = "enableOmniStudioContentTest", default)]
-    pub enable_omni_studio_content_test: bool,
-    #[serde(rename = "enableOmniStudioDrVersion", default)]
-    pub enable_omni_studio_dr_version: bool,
-    #[serde(rename = "enableOmniStudioMetadata", default)]
-    pub enable_omni_studio_metadata: bool,
-    #[serde(rename = "enableStandardOmniStudioRuntime", default)]
-    pub enable_standard_omni_studio_runtime: bool,
+    #[serde(
+        rename = "disableRollbackFlagsPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub disable_rollback_flags_pref: Option<bool>,
+    #[serde(
+        rename = "enableOaEventInternalWrites",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_oa_event_internal_writes: Option<bool>,
+    #[serde(
+        rename = "enableOaEventNotifications",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_oa_event_notifications: Option<bool>,
+    #[serde(
+        rename = "enableOaForCore",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_oa_for_core: Option<bool>,
+    #[serde(
+        rename = "enableOmniGlobalAutoNumberPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_omni_global_auto_number_pref: Option<bool>,
+    #[serde(
+        rename = "enableOmniReplaceFileBasedApex",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_omni_replace_file_based_apex: Option<bool>,
+    #[serde(
+        rename = "enableOmniStudioContentTest",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_omni_studio_content_test: Option<bool>,
+    #[serde(
+        rename = "enableOmniStudioDrVersion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_omni_studio_dr_version: Option<bool>,
+    #[serde(
+        rename = "enableOmniStudioMetadata",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_omni_studio_metadata: Option<bool>,
+    #[serde(
+        rename = "enableStandardOmniStudioRuntime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_standard_omni_studio_runtime: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct OnlineSalesSettings {
-    #[serde(rename = "enableSubscriptionAppEnrolled", default)]
-    pub enable_subscription_app_enrolled: bool,
+    #[serde(
+        rename = "enableSubscriptionAppEnrolled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_subscription_app_enrolled: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -4434,390 +11226,952 @@ pub struct OpportunityListFieldsUnselectedSettings {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct OpportunityScoreSettings {
-    #[serde(rename = "enableOpportunityScoring", default)]
-    pub enable_opportunity_scoring: bool,
+    #[serde(
+        rename = "enableOpportunityScoring",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_opportunity_scoring: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct OpportunitySettings {
-    #[serde(rename = "autoActivateNewReminders", default)]
-    pub auto_activate_new_reminders: bool,
-    #[serde(rename = "customizableProductSchedulesEnabled", default)]
-    pub customizable_product_schedules_enabled: bool,
-    #[serde(rename = "doesEnforceStandardOpportunitySaveLogic", default)]
-    pub does_enforce_standard_opportunity_save_logic: bool,
-    #[serde(rename = "enableExpandedPipelineInspectionSetup", default)]
-    pub enable_expanded_pipeline_inspection_setup: bool,
-    #[serde(rename = "enableFindSimilarOpportunities", default)]
-    pub enable_find_similar_opportunities: bool,
-    #[serde(rename = "enableForecastCategoryMetrics", default)]
-    pub enable_forecast_category_metrics: bool,
-    #[serde(rename = "enableOpportunityFieldHistoryTracking", default)]
-    pub enable_opportunity_field_history_tracking: bool,
-    #[serde(rename = "enableOpportunityInsightsInMobile", default)]
-    pub enable_opportunity_insights_in_mobile: bool,
-    #[serde(rename = "enableOpportunityTeam", default)]
-    pub enable_opportunity_team: bool,
-    #[serde(rename = "enablePipelineChangesMetrics", default)]
-    pub enable_pipeline_changes_metrics: bool,
-    #[serde(rename = "enablePipelineInspection", default)]
-    pub enable_pipeline_inspection: bool,
-    #[serde(rename = "enablePipelineInspectionFlow", default)]
-    pub enable_pipeline_inspection_flow: bool,
-    #[serde(rename = "enablePipelineInspectionSingleCategoryRollup", default)]
-    pub enable_pipeline_inspection_single_category_rollup: bool,
-    #[serde(rename = "enableRevenueInsights", default)]
-    pub enable_revenue_insights: bool,
-    #[serde(rename = "enableServiceCaseInsights", default)]
-    pub enable_service_case_insights: bool,
-    #[serde(rename = "enableUpdateReminders", default)]
-    pub enable_update_reminders: bool,
-    #[serde(rename = "findSimilarOppFilter", default)]
-    pub find_similar_opp_filter: serde_json::Value,
-    #[serde(rename = "oppAmountDealMotionEnabled", default)]
-    pub opp_amount_deal_motion_enabled: bool,
-    #[serde(rename = "oppCloseDateDealMotionEnabled", default)]
-    pub opp_close_date_deal_motion_enabled: bool,
-    #[serde(rename = "promptToAddProducts", default)]
-    pub prompt_to_add_products: bool,
-    #[serde(rename = "pushCountEnabled", default)]
-    pub push_count_enabled: bool,
-    #[serde(rename = "simpleOppCreateFromContact", default)]
-    pub simple_opp_create_from_contact: bool,
-    #[serde(rename = "simpleOppCreateFromEvent", default)]
-    pub simple_opp_create_from_event: bool,
+    #[serde(
+        rename = "autoActivateNewReminders",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub auto_activate_new_reminders: Option<bool>,
+    #[serde(
+        rename = "customizableProductSchedulesEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub customizable_product_schedules_enabled: Option<bool>,
+    #[serde(
+        rename = "doesEnforceStandardOpportunitySaveLogic",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_enforce_standard_opportunity_save_logic: Option<bool>,
+    #[serde(
+        rename = "enableExpandedPipelineInspectionSetup",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_expanded_pipeline_inspection_setup: Option<bool>,
+    #[serde(
+        rename = "enableFindSimilarOpportunities",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_find_similar_opportunities: Option<bool>,
+    #[serde(
+        rename = "enableForecastCategoryMetrics",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_forecast_category_metrics: Option<bool>,
+    #[serde(
+        rename = "enableOpportunityFieldHistoryTracking",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_opportunity_field_history_tracking: Option<bool>,
+    #[serde(
+        rename = "enableOpportunityInsightsInMobile",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_opportunity_insights_in_mobile: Option<bool>,
+    #[serde(
+        rename = "enableOpportunityTeam",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_opportunity_team: Option<bool>,
+    #[serde(
+        rename = "enablePipelineChangesMetrics",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pipeline_changes_metrics: Option<bool>,
+    #[serde(
+        rename = "enablePipelineInspection",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pipeline_inspection: Option<bool>,
+    #[serde(
+        rename = "enablePipelineInspectionFlow",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pipeline_inspection_flow: Option<bool>,
+    #[serde(
+        rename = "enablePipelineInspectionSingleCategoryRollup",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pipeline_inspection_single_category_rollup: Option<bool>,
+    #[serde(
+        rename = "enableRevenueInsights",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_revenue_insights: Option<bool>,
+    #[serde(
+        rename = "enableServiceCaseInsights",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_service_case_insights: Option<bool>,
+    #[serde(
+        rename = "enableUpdateReminders",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_update_reminders: Option<bool>,
+    #[serde(
+        rename = "findSimilarOppFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub find_similar_opp_filter: Option<serde_json::Value>,
+    #[serde(
+        rename = "oppAmountDealMotionEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub opp_amount_deal_motion_enabled: Option<bool>,
+    #[serde(
+        rename = "oppCloseDateDealMotionEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub opp_close_date_deal_motion_enabled: Option<bool>,
+    #[serde(
+        rename = "promptToAddProducts",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub prompt_to_add_products: Option<bool>,
+    #[serde(
+        rename = "pushCountEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub push_count_enabled: Option<bool>,
+    #[serde(
+        rename = "simpleOppCreateFromContact",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub simple_opp_create_from_contact: Option<bool>,
+    #[serde(
+        rename = "simpleOppCreateFromEvent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub simple_opp_create_from_event: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct OptimizationSettings {
+    #[serde(rename = "optimizationSetting", default)]
+    pub optimization_setting: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct OrderManagementSettings {
-    #[serde(rename = "deliveryEstimationEnabled", default)]
-    pub delivery_estimation_enabled: bool,
-    #[serde(rename = "enableActivityFeedPerChangeOrder", default)]
-    pub enable_activity_feed_per_change_order: bool,
-    #[serde(rename = "enableB2CHighScaleOrders", default)]
-    pub enable_b_2_c_high_scale_orders: bool,
-    #[serde(rename = "enableB2CIntegration", default)]
-    pub enable_b_2_c_integration: bool,
-    #[serde(rename = "enableBillingTypeOrdSummCreation", default)]
-    pub enable_billing_type_ord_summ_creation: bool,
-    #[serde(rename = "enableDuplicateManagement", default)]
-    pub enable_duplicate_management: bool,
-    #[serde(rename = "enableHighScaleOrders", default)]
-    pub enable_high_scale_orders: bool,
-    #[serde(rename = "enableIndividualOrderItemTaxAdjustments", default)]
-    pub enable_individual_order_item_tax_adjustments: bool,
-    #[serde(rename = "enableMRURecordCaching", default)]
-    pub enable_mru_record_caching: bool,
-    #[serde(rename = "enableOMAutomation", default)]
-    pub enable_om_automation: bool,
-    #[serde(rename = "enableOrderManagement", default)]
-    pub enable_order_management: bool,
-    #[serde(rename = "enablePersonAccountsForShoppers", default)]
-    pub enable_person_accounts_for_shoppers: bool,
-    #[serde(rename = "initOMAutomation", default)]
-    pub init_om_automation: bool,
+    #[serde(
+        rename = "deliveryEstimationEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub delivery_estimation_enabled: Option<bool>,
+    #[serde(
+        rename = "enableActivityFeedPerChangeOrder",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_activity_feed_per_change_order: Option<bool>,
+    #[serde(
+        rename = "enableB2CHighScaleOrders",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_b_2_c_high_scale_orders: Option<bool>,
+    #[serde(
+        rename = "enableB2CIntegration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_b_2_c_integration: Option<bool>,
+    #[serde(
+        rename = "enableBillingTypeOrdSummCreation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_billing_type_ord_summ_creation: Option<bool>,
+    #[serde(
+        rename = "enableDuplicateManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_duplicate_management: Option<bool>,
+    #[serde(
+        rename = "enableHighScaleOrders",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_high_scale_orders: Option<bool>,
+    #[serde(
+        rename = "enableIndividualOrderItemTaxAdjustments",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_individual_order_item_tax_adjustments: Option<bool>,
+    #[serde(
+        rename = "enableMRURecordCaching",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_mru_record_caching: Option<bool>,
+    #[serde(
+        rename = "enableOMAutomation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_om_automation: Option<bool>,
+    #[serde(
+        rename = "enableOrderManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_order_management: Option<bool>,
+    #[serde(
+        rename = "enablePersonAccountsForShoppers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_person_accounts_for_shoppers: Option<bool>,
+    #[serde(
+        rename = "initOMAutomation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub init_om_automation: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct OrderSettings {
-    #[serde(rename = "enableEnhancedCommerceOrders", default)]
-    pub enable_enhanced_commerce_orders: bool,
-    #[serde(rename = "enableNegativeQuantity", default)]
-    pub enable_negative_quantity: bool,
-    #[serde(rename = "enableOptionalPricebook", default)]
-    pub enable_optional_pricebook: bool,
-    #[serde(rename = "enableOrderEvents", default)]
-    pub enable_order_events: bool,
-    #[serde(rename = "enableOrderWithMultiplePriceBooks", default)]
-    pub enable_order_with_multiple_price_books: bool,
+    #[serde(
+        rename = "enableEnhancedCommerceOrders",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_enhanced_commerce_orders: Option<bool>,
+    #[serde(
+        rename = "enableNegativeQuantity",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_negative_quantity: Option<bool>,
+    #[serde(
+        rename = "enableOptionalPricebook",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_optional_pricebook: Option<bool>,
+    #[serde(
+        rename = "enableOrderEvents",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_order_events: Option<bool>,
+    #[serde(
+        rename = "enableOrderWithMultiplePriceBooks",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_order_with_multiple_price_books: Option<bool>,
     #[serde(rename = "enableOrders", default)]
     pub enable_orders: bool,
-    #[serde(rename = "enableReductionOrders", default)]
-    pub enable_reduction_orders: bool,
-    #[serde(rename = "enableZeroQuantity", default)]
-    pub enable_zero_quantity: bool,
+    #[serde(
+        rename = "enableReductionOrders",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_reduction_orders: Option<bool>,
+    #[serde(
+        rename = "enableZeroQuantity",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_zero_quantity: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct OrgSettings {
-    #[serde(rename = "enableCustomerSuccessPortal", default)]
-    pub enable_customer_success_portal: bool,
-    #[serde(rename = "enableIncludeContractStatus", default)]
-    pub enable_include_contract_status: bool,
-    #[serde(rename = "enableMakeDeploymentsMandatory", default)]
-    pub enable_make_deployments_mandatory: bool,
-    #[serde(rename = "enableManageSelfServiceUsers", default)]
-    pub enable_manage_self_service_users: bool,
-    #[serde(rename = "enableOrgFeedSentimentAnalysis", default)]
-    pub enable_org_feed_sentiment_analysis: bool,
-    #[serde(rename = "enableRADeploymentAttributeOnly", default)]
-    pub enable_ra_deployment_attribute_only: bool,
-    #[serde(rename = "enableResetDivisionOnLogin", default)]
-    pub enable_reset_division_on_login: bool,
+    #[serde(
+        rename = "enableCustomerSuccessPortal",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_customer_success_portal: Option<bool>,
+    #[serde(
+        rename = "enableIncludeContractStatus",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_include_contract_status: Option<bool>,
+    #[serde(
+        rename = "enableMakeDeploymentsMandatory",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_make_deployments_mandatory: Option<bool>,
+    #[serde(
+        rename = "enableManageSelfServiceUsers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_manage_self_service_users: Option<bool>,
+    #[serde(
+        rename = "enableOrgFeedSentimentAnalysis",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_org_feed_sentiment_analysis: Option<bool>,
+    #[serde(
+        rename = "enableRADeploymentAttributeOnly",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ra_deployment_attribute_only: Option<bool>,
+    #[serde(
+        rename = "enableResetDivisionOnLogin",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_reset_division_on_login: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct PardotEinsteinSettings {
-    #[serde(rename = "enableCampaignInsight", default)]
-    pub enable_campaign_insight: bool,
-    #[serde(rename = "enableEngagementScore", default)]
-    pub enable_engagement_score: bool,
+    #[serde(
+        rename = "enableCampaignInsight",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_campaign_insight: Option<bool>,
+    #[serde(
+        rename = "enableEngagementScore",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_engagement_score: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct PardotSettings {
-    #[serde(rename = "enableAIEinsteinEngageFreq", default)]
-    pub enable_ai_einstein_engage_freq: bool,
-    #[serde(rename = "enableAIOptimizedSendTime", default)]
-    pub enable_ai_optimized_send_time: bool,
-    #[serde(rename = "enableAeDataConnector", default)]
-    pub enable_ae_data_connector: bool,
-    #[serde(rename = "enableB2bmaAppEnabled", default)]
-    pub enable_b_2_bma_app_enabled: bool,
-    #[serde(rename = "enableEngagementHistoryDashboards", default)]
-    pub enable_engagement_history_dashboards: bool,
-    #[serde(rename = "enableEnhancedProspectCustomFieldsSync", default)]
-    pub enable_enhanced_prospect_custom_fields_sync: bool,
-    #[serde(rename = "enablePardotAppV1Enabled", default)]
-    pub enable_pardot_app_v_1_enabled: bool,
-    #[serde(rename = "enablePardotEnabled", default)]
-    pub enable_pardot_enabled: bool,
-    #[serde(rename = "enablePardotObjectSync", default)]
-    pub enable_pardot_object_sync: bool,
-    #[serde(rename = "enableProspectActivityDataset", default)]
-    pub enable_prospect_activity_dataset: bool,
+    #[serde(
+        rename = "enableAIEinsteinEngageFreq",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ai_einstein_engage_freq: Option<bool>,
+    #[serde(
+        rename = "enableAIOptimizedSendTime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ai_optimized_send_time: Option<bool>,
+    #[serde(
+        rename = "enableAeDataConnector",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ae_data_connector: Option<bool>,
+    #[serde(
+        rename = "enableB2bmaAppEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_b_2_bma_app_enabled: Option<bool>,
+    #[serde(
+        rename = "enableEngagementHistoryDashboards",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_engagement_history_dashboards: Option<bool>,
+    #[serde(
+        rename = "enableEnhancedProspectCustomFieldsSync",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_enhanced_prospect_custom_fields_sync: Option<bool>,
+    #[serde(
+        rename = "enablePardotAppV1Enabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pardot_app_v_1_enabled: Option<bool>,
+    #[serde(
+        rename = "enablePardotEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pardot_enabled: Option<bool>,
+    #[serde(
+        rename = "enablePardotObjectSync",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pardot_object_sync: Option<bool>,
+    #[serde(
+        rename = "enableProspectActivityDataset",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_prospect_activity_dataset: Option<bool>,
+    #[serde(
+        rename = "enableUnifiedEngagementHistoryDashboards",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_unified_engagement_history_dashboards: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct PartyDataModelSettings {
-    #[serde(rename = "enableAutoSelectIndividualOnMerge", default)]
-    pub enable_auto_select_individual_on_merge: bool,
-    #[serde(rename = "enableConsentManagement", default)]
-    pub enable_consent_management: bool,
-    #[serde(rename = "enableIndividualAutoCreate", default)]
-    pub enable_individual_auto_create: bool,
+    #[serde(
+        rename = "enableAutoSelectIndividualOnMerge",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_auto_select_individual_on_merge: Option<bool>,
+    #[serde(
+        rename = "enableConsentManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_consent_management: Option<bool>,
+    #[serde(
+        rename = "enableIndividualAutoCreate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_individual_auto_create: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct PathAssistantSettings {
-    #[serde(rename = "canOverrideAutoPathCollapseWithUserPref", default)]
-    pub can_override_auto_path_collapse_with_user_pref: bool,
-    #[serde(rename = "pathAssistantEnabled", default)]
-    pub path_assistant_enabled: bool,
+    #[serde(
+        rename = "canOverrideAutoPathCollapseWithUserPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_override_auto_path_collapse_with_user_pref: Option<bool>,
+    #[serde(
+        rename = "pathAssistantEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub path_assistant_enabled: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct PaymentsManagementEnabledSettings {
-    #[serde(rename = "paymentsManagementEnabled", default)]
-    pub payments_management_enabled: bool,
+    #[serde(
+        rename = "paymentsManagementEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub payments_management_enabled: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct PaymentsSettings {
-    #[serde(rename = "enablePayments", default)]
-    pub enable_payments: bool,
+    #[serde(
+        rename = "enablePayments",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_payments: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct PaymentsSharingSettings {
-    #[serde(rename = "delegatePaymentSharingToAccount", default)]
-    pub delegate_payment_sharing_to_account: bool,
+    #[serde(
+        rename = "delegatePaymentSharingToAccount",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub delegate_payment_sharing_to_account: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PaynowStarterUpgradeEnabledSettings {
+    #[serde(
+        rename = "paynowStarterUpgradeEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub paynow_starter_upgrade_enabled: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct PicklistSettings {
-    #[serde(rename = "isPicklistApiNameEditDisabled", default)]
-    pub is_picklist_api_name_edit_disabled: bool,
+    #[serde(
+        rename = "isPicklistApiNameEditDisabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_picklist_api_name_edit_disabled: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct PlatformEncryptionSettings {
-    #[serde(rename = "canEncryptManagedPackageFields", default)]
-    pub can_encrypt_managed_package_fields: bool,
-    #[serde(rename = "enableDeterministicEncryption", default)]
-    pub enable_deterministic_encryption: bool,
-    #[serde(rename = "enableEncryptFieldHistory", default)]
-    pub enable_encrypt_field_history: bool,
-    #[serde(rename = "enableEncryptionSearchEnabled", default)]
-    pub enable_encryption_search_enabled: bool,
-    #[serde(rename = "enableEventBusEncryption", default)]
-    pub enable_event_bus_encryption: bool,
-    #[serde(rename = "isMEKForEncryptionRequired", default)]
-    pub is_mek_for_encryption_required: bool,
-    #[serde(rename = "isUseHighAssuranceKeysRequired", default)]
-    pub is_use_high_assurance_keys_required: bool,
+    #[serde(
+        rename = "canEncryptManagedPackageFields",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_encrypt_managed_package_fields: Option<bool>,
+    #[serde(
+        rename = "enableDeterministicEncryption",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_deterministic_encryption: Option<bool>,
+    #[serde(
+        rename = "enableEncryptFieldHistory",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_encrypt_field_history: Option<bool>,
+    #[serde(
+        rename = "enableEncryptionSearchEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_encryption_search_enabled: Option<bool>,
+    #[serde(
+        rename = "enableEventBusEncryption",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_event_bus_encryption: Option<bool>,
+    #[serde(
+        rename = "isMEKForEncryptionRequired",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_mek_for_encryption_required: Option<bool>,
+    #[serde(
+        rename = "isUseHighAssuranceKeysRequired",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_use_high_assurance_keys_required: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct PlatformEventSettings {
-    #[serde(rename = "enableEnhancedUsageMetrics", default)]
-    pub enable_enhanced_usage_metrics: bool,
+    #[serde(
+        rename = "enableEnhancedUsageMetrics",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_enhanced_usage_metrics: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct PlatformSlackSettings {
-    #[serde(rename = "enableSlackService", default)]
-    pub enable_slack_service: bool,
-    #[serde(rename = "enableSlackServiceAlerts", default)]
-    pub enable_slack_service_alerts: bool,
-    #[serde(rename = "slackCapabilitiesEnabled", default)]
-    pub slack_capabilities_enabled: bool,
+    #[serde(
+        rename = "enableSlackService",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_slack_service: Option<bool>,
+    #[serde(
+        rename = "enableSlackServiceAlerts",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_slack_service_alerts: Option<bool>,
+    #[serde(
+        rename = "slackCapabilitiesEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub slack_capabilities_enabled: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PlatformWebIdeSettings {
+    #[serde(
+        rename = "enablePlatformWebIde",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_platform_web_ide: Option<bool>,
+    #[serde(
+        rename = "platformWebIdeAsDefault",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub platform_web_ide_as_default: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct PortalsSettings {
-    #[serde(rename = "clickjackSSPLoginPage", default)]
-    pub clickjack_ssp_login_page: bool,
-    #[serde(rename = "redirectPortalLoginToHttps", default)]
-    pub redirect_portal_login_to_https: bool,
+    #[serde(
+        rename = "clickjackSSPLoginPage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub clickjack_ssp_login_page: Option<bool>,
+    #[serde(
+        rename = "redirectPortalLoginToHttps",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub redirect_portal_login_to_https: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct PredictionBuilderSettings {
-    #[serde(rename = "enablePredictionBuilder", default)]
-    pub enable_prediction_builder: bool,
-    #[serde(rename = "isPredictionBuilderStarted", default)]
-    pub is_prediction_builder_started: bool,
+    #[serde(
+        rename = "enablePredictionBuilder",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_prediction_builder: Option<bool>,
+    #[serde(
+        rename = "isPredictionBuilderStarted",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_prediction_builder_started: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct PrivacySettings {
-    #[serde(rename = "authorizationCaptureBrowser", default)]
-    pub authorization_capture_browser: bool,
-    #[serde(rename = "authorizationCaptureEmail", default)]
-    pub authorization_capture_email: bool,
-    #[serde(rename = "authorizationCaptureIp", default)]
-    pub authorization_capture_ip: bool,
-    #[serde(rename = "authorizationCaptureLocation", default)]
-    pub authorization_capture_location: bool,
-    #[serde(rename = "authorizationCustomSharing", default)]
-    pub authorization_custom_sharing: bool,
-    #[serde(rename = "authorizationCustomSharingPCU", default)]
-    pub authorization_custom_sharing_pcu: bool,
-    #[serde(rename = "authorizationLockingAndVersioning", default)]
-    pub authorization_locking_and_versioning: bool,
-    #[serde(rename = "enableConfigurableUserPIIActive", default)]
-    pub enable_configurable_user_pii_active: bool,
-    #[serde(rename = "enableConsentAuditTrail", default)]
-    pub enable_consent_audit_trail: bool,
-    #[serde(rename = "enableConsentEventStream", default)]
-    pub enable_consent_event_stream: bool,
-    #[serde(rename = "enableDefaultMetadataValues", default)]
-    pub enable_default_metadata_values: bool,
-    #[serde(rename = "enableSalesforceArchive", default)]
-    pub enable_salesforce_archive: bool,
-    #[serde(rename = "useUmaDefaultConsentRecs", default)]
-    pub use_uma_default_consent_recs: bool,
+    #[serde(
+        rename = "authorizationCaptureBrowser",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub authorization_capture_browser: Option<bool>,
+    #[serde(
+        rename = "authorizationCaptureEmail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub authorization_capture_email: Option<bool>,
+    #[serde(
+        rename = "authorizationCaptureIp",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub authorization_capture_ip: Option<bool>,
+    #[serde(
+        rename = "authorizationCaptureLocation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub authorization_capture_location: Option<bool>,
+    #[serde(
+        rename = "authorizationCustomSharing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub authorization_custom_sharing: Option<bool>,
+    #[serde(
+        rename = "authorizationCustomSharingPCU",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub authorization_custom_sharing_pcu: Option<bool>,
+    #[serde(
+        rename = "authorizationLockingAndVersioning",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub authorization_locking_and_versioning: Option<bool>,
+    #[serde(
+        rename = "enableConfigurableUserPIIActive",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_configurable_user_pii_active: Option<bool>,
+    #[serde(
+        rename = "enableConsentAuditTrail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_consent_audit_trail: Option<bool>,
+    #[serde(
+        rename = "enableConsentEventStream",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_consent_event_stream: Option<bool>,
+    #[serde(
+        rename = "enableDefaultMetadataValues",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_default_metadata_values: Option<bool>,
+    #[serde(
+        rename = "enableSalesforceArchive",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_salesforce_archive: Option<bool>,
+    #[serde(
+        rename = "useUmaDefaultConsentRecs",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub use_uma_default_consent_recs: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct PrmCoreSettings {
-    #[serde(rename = "enableAgentforceForPartners", default)]
-    pub enable_agentforce_for_partners: bool,
+    #[serde(
+        rename = "enableAgentforceForPartners",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_agentforce_for_partners: Option<bool>,
+    #[serde(
+        rename = "enableDealRegistration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_deal_registration: Option<bool>,
+    #[serde(
+        rename = "enableEnablementPRMPages",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_enablement_prm_pages: Option<bool>,
+    #[serde(
+        rename = "enableJointBusinessPlans",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_joint_business_plans: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ProductCatalogManagementSettings {
-    #[serde(rename = "productDeepCloneContextDefOrgValue", default)]
-    pub product_deep_clone_context_def_org_value: String,
-    #[serde(rename = "productDeepCloneExpressionSetOrgValue", default)]
-    pub product_deep_clone_expression_set_org_value: String,
+    #[serde(
+        rename = "productDeepCloneContextDefOrgValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub product_deep_clone_context_def_org_value: Option<String>,
+    #[serde(
+        rename = "productDeepCloneExpressionSetOrgValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub product_deep_clone_expression_set_org_value: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ProductConfiguratorSettings {
-    #[serde(rename = "enableProductConfigurator", default)]
-    pub enable_product_configurator: bool,
+    #[serde(
+        rename = "enableProductConfigurator",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_product_configurator: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ProductDiscoverySettings {
-    #[serde(rename = "discoverProductsFlowNameOrgValue", default)]
-    pub discover_products_flow_name_org_value: String,
-    #[serde(rename = "enableGuidedSelling", default)]
-    pub enable_guided_selling: bool,
-    #[serde(rename = "prodDiscBrowseContextDefOrgValue", default)]
-    pub prod_disc_browse_context_def_org_value: String,
-    #[serde(rename = "prodDiscDefaultCatalogOrgValue", default)]
-    pub prod_disc_default_catalog_org_value: String,
-    #[serde(rename = "prodDiscPricingEnabledOrgValue", default)]
-    pub prod_disc_pricing_enabled_org_value: String,
-    #[serde(rename = "prodDiscProcedureOrgValue", default)]
-    pub prod_disc_procedure_org_value: String,
-    #[serde(rename = "prodDiscQualEnabledOrgValue", default)]
-    pub prod_disc_qual_enabled_org_value: String,
-    #[serde(rename = "prodDiscQualificationOrgValue", default)]
-    pub prod_disc_qualification_org_value: String,
+    #[serde(
+        rename = "discoverProductsFlowNameOrgValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub discover_products_flow_name_org_value: Option<String>,
+    #[serde(
+        rename = "enableGuidedSelling",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_guided_selling: Option<bool>,
+    #[serde(
+        rename = "prodDiscBrowseContextDefOrgValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub prod_disc_browse_context_def_org_value: Option<String>,
+    #[serde(
+        rename = "prodDiscDefaultCatalogOrgValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub prod_disc_default_catalog_org_value: Option<String>,
+    #[serde(
+        rename = "prodDiscPricingEnabledOrgValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub prod_disc_pricing_enabled_org_value: Option<String>,
+    #[serde(
+        rename = "prodDiscProcedureOrgValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub prod_disc_procedure_org_value: Option<String>,
+    #[serde(
+        rename = "prodDiscQualEnabledOrgValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub prod_disc_qual_enabled_org_value: Option<String>,
+    #[serde(
+        rename = "prodDiscQualificationOrgValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub prod_disc_qualification_org_value: Option<String>,
+    #[serde(
+        rename = "promoContextMappingNameOrgValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub promo_context_mapping_name_org_value: Option<String>,
+    #[serde(
+        rename = "promoRuleLibraryNameOrgValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub promo_rule_library_name_org_value: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ProductSettings {
-    #[serde(rename = "enableCascadeActivateToRelatedPrices", default)]
-    pub enable_cascade_activate_to_related_prices: bool,
-    #[serde(rename = "enableMySettings", default)]
-    pub enable_my_settings: bool,
-    #[serde(rename = "enableQuantitySchedule", default)]
-    pub enable_quantity_schedule: bool,
-    #[serde(rename = "enableRevenueSchedule", default)]
-    pub enable_revenue_schedule: bool,
+    #[serde(
+        rename = "enableCascadeActivateToRelatedPrices",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cascade_activate_to_related_prices: Option<bool>,
+    #[serde(
+        rename = "enableMySettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_my_settings: Option<bool>,
+    #[serde(
+        rename = "enableQuantitySchedule",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_quantity_schedule: Option<bool>,
+    #[serde(
+        rename = "enableRevenueSchedule",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_revenue_schedule: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PurchaseOrderMgmtSettings {
+    #[serde(
+        rename = "enablePurchaseOrderMgt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_purchase_order_mgt: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct QuickTextSettings {
-    #[serde(rename = "hideQuickTextUiInLtng", default)]
-    pub hide_quick_text_ui_in_ltng: bool,
-    #[serde(rename = "lightningQuickTextEnabled", default)]
-    pub lightning_quick_text_enabled: bool,
-    #[serde(rename = "quickTextsInFolders", default)]
-    pub quick_texts_in_folders: bool,
+    #[serde(
+        rename = "hideQuickTextUiInLtng",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub hide_quick_text_ui_in_ltng: Option<bool>,
+    #[serde(
+        rename = "lightningQuickTextEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub lightning_quick_text_enabled: Option<bool>,
+    #[serde(
+        rename = "quickTextsInFolders",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub quick_texts_in_folders: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -4834,8 +12188,12 @@ pub struct QuotasSettings {
 pub struct QuoteSettings {
     #[serde(rename = "enableQuote", default)]
     pub enable_quote: bool,
-    #[serde(rename = "enableQuotesWithoutOppEnabled", default)]
-    pub enable_quotes_without_opp_enabled: bool,
+    #[serde(
+        rename = "enableQuotesWithoutOppEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_quotes_without_opp_enabled: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -4850,136 +12208,276 @@ pub struct RealTimeEventSettings {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct RecommendationBuilderSettings {
-    #[serde(rename = "enableErbEnabledPref", default)]
-    pub enable_erb_enabled_pref: bool,
-    #[serde(rename = "enableErbStartedPref", default)]
-    pub enable_erb_started_pref: bool,
+    #[serde(
+        rename = "enableErbEnabledPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_erb_enabled_pref: Option<bool>,
+    #[serde(
+        rename = "enableErbStartedPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_erb_started_pref: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct RecordPageSettings {
-    #[serde(rename = "enableActivityRelatedList", default)]
-    pub enable_activity_related_list: bool,
-    #[serde(rename = "enableFullRecordView", default)]
-    pub enable_full_record_view: bool,
+    #[serde(
+        rename = "enableActivityRelatedList",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_activity_related_list: Option<bool>,
+    #[serde(
+        rename = "enableFullRecordView",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_full_record_view: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ReferralMarketingSettings {
-    #[serde(rename = "enableMarketingCloudIntegration", default)]
-    pub enable_marketing_cloud_integration: bool,
+    #[serde(
+        rename = "enableMarketingCloudIntegration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_marketing_cloud_integration: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ReleaseMgmtSettings {
-    #[serde(rename = "enableITSMReleaseMgmt", default)]
-    pub enable_itsm_release_mgmt: bool,
-    #[serde(rename = "enableReleaseEventCreation", default)]
-    pub enable_release_event_creation: bool,
+    #[serde(
+        rename = "enableITSMReleaseMgmt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_itsm_release_mgmt: Option<bool>,
+    #[serde(
+        rename = "enableReleaseEventCreation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_release_event_creation: Option<bool>,
+    #[serde(
+        rename = "enableReleaseValidations",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_release_validations: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct RetailExecutionSettings {
-    #[serde(rename = "enableProductHierarchy", default)]
-    pub enable_product_hierarchy: bool,
-    #[serde(rename = "enableRetailExecution", default)]
-    pub enable_retail_execution: bool,
-    #[serde(rename = "enableVisitSharing", default)]
-    pub enable_visit_sharing: bool,
+    #[serde(
+        rename = "enableProductHierarchy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_product_hierarchy: Option<bool>,
+    #[serde(
+        rename = "enableRetailExecution",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_retail_execution: Option<bool>,
+    #[serde(
+        rename = "enableVisitSharing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_visit_sharing: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct RevenueManagementSettings {
-    #[serde(rename = "enableAdvCreateOrdersFromQuote", default)]
-    pub enable_adv_create_orders_from_quote: bool,
-    #[serde(rename = "enableAdvancedDetailLinePricing", default)]
-    pub enable_advanced_detail_line_pricing: bool,
-    #[serde(rename = "enableAsIsRenewals", default)]
-    pub enable_as_is_renewals: bool,
-    #[serde(rename = "enableAutoAddDerivedAsset", default)]
-    pub enable_auto_add_derived_asset: bool,
-    #[serde(rename = "enableCoreCPQ", default)]
-    pub enable_core_cpq: bool,
-    #[serde(rename = "enableDeltaPricing", default)]
-    pub enable_delta_pricing: bool,
-    #[serde(rename = "enableGroupRamp", default)]
-    pub enable_group_ramp: bool,
-    #[serde(rename = "enableGroupRampPref", default)]
-    pub enable_group_ramp_pref: bool,
-    #[serde(rename = "enableRampDeal", default)]
-    pub enable_ramp_deal: bool,
-    #[serde(rename = "enableRevUnifiedSetup", default)]
-    pub enable_rev_unified_setup: bool,
-    #[serde(rename = "enableTransactionCloning", default)]
-    pub enable_transaction_cloning: bool,
-    #[serde(rename = "enableTransactionProcessor", default)]
-    pub enable_transaction_processor: bool,
-    #[serde(rename = "groupsEnabled", default)]
-    pub groups_enabled: bool,
-    #[serde(rename = "hidePriceRefreshNtfcn", default)]
-    pub hide_price_refresh_ntfcn: bool,
-    #[serde(rename = "relaxUniqueCipValidation", default)]
-    pub relax_unique_cip_validation: bool,
-    #[serde(rename = "skipOrgSttPricing", default)]
-    pub skip_org_stt_pricing: bool,
+    #[serde(
+        rename = "enableAdvCreateOrdersFromQuote",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_adv_create_orders_from_quote: Option<bool>,
+    #[serde(
+        rename = "enableAdvancedDetailLinePricing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_advanced_detail_line_pricing: Option<bool>,
+    #[serde(
+        rename = "enableAsIsRenewals",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_as_is_renewals: Option<bool>,
+    #[serde(
+        rename = "enableAutoAddDerivedAsset",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_auto_add_derived_asset: Option<bool>,
+    #[serde(
+        rename = "enableAutoLineItemSequencing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_auto_line_item_sequencing: Option<bool>,
+    #[serde(
+        rename = "enableContextReuse",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_context_reuse: Option<bool>,
+    #[serde(
+        rename = "enableCoreCPQ",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_core_cpq: Option<bool>,
+    #[serde(
+        rename = "enableDeltaPricing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_delta_pricing: Option<bool>,
+    #[serde(
+        rename = "enableFullEscalationHydration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_full_escalation_hydration: Option<bool>,
+    #[serde(
+        rename = "enableGroupRamp",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_group_ramp: Option<bool>,
+    #[serde(
+        rename = "enableGroupRampMultiSchedulePref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_group_ramp_multi_schedule_pref: Option<bool>,
+    #[serde(
+        rename = "enableGroupRampPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_group_ramp_pref: Option<bool>,
+    #[serde(
+        rename = "enableRampDeal",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ramp_deal: Option<bool>,
+    #[serde(
+        rename = "enableRevInstPricingDefaultPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_rev_inst_pricing_default_pref: Option<bool>,
+    #[serde(
+        rename = "enableRevUnifiedSetup",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_rev_unified_setup: Option<bool>,
+    #[serde(
+        rename = "enableRevenueAdjustment",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_revenue_adjustment: Option<bool>,
+    #[serde(
+        rename = "enableTransactionCloning",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_transaction_cloning: Option<bool>,
+    #[serde(
+        rename = "enableTransactionProcessor",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_transaction_processor: Option<bool>,
+    #[serde(
+        rename = "groupsEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub groups_enabled: Option<bool>,
+    #[serde(
+        rename = "hidePriceRefreshNtfcn",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub hide_price_refresh_ntfcn: Option<bool>,
+    #[serde(
+        rename = "relaxUniqueCipValidation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub relax_unique_cip_validation: Option<bool>,
+    #[serde(
+        rename = "skipOrgSttPricing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub skip_org_stt_pricing: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct SalesAccountAgentSettings {
-    #[serde(rename = "enableAccountAgent", default)]
-    pub enable_account_agent: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SalesAgreementSettings {
-    #[serde(rename = "actualsCalculationMode", default)]
-    pub actuals_calculation_mode: serde_json::Value,
-    #[serde(rename = "arePredfndStatusValOveride", default)]
-    pub are_predfnd_status_val_overide: bool,
-    #[serde(rename = "decimalScale", default)]
-    pub decimal_scale: f64,
-    #[serde(rename = "displayGroups", default)]
-    pub display_groups: Vec<serde_json::Value>,
-    #[serde(rename = "displayedAgreementTermsMetrics", default)]
-    pub displayed_agreement_terms_metrics: String,
-    #[serde(rename = "futureActCalcSchedules", default)]
-    pub future_act_calc_schedules: f64,
-    #[serde(rename = "isOnlyApprovalProcessUsed", default)]
-    pub is_only_approval_process_used: bool,
-    #[serde(rename = "measureDefinitions", default)]
-    pub measure_definitions: Vec<serde_json::Value>,
-    #[serde(rename = "objectMapping", default)]
-    pub object_mapping: serde_json::Value,
-    #[serde(rename = "primaryNotifEmailAddress", default)]
-    pub primary_notif_email_address: String,
-    #[serde(rename = "renewalPeriodDayCount", default)]
-    pub renewal_period_day_count: f64,
-    #[serde(rename = "secondaryNotifEmailAddress", default)]
-    pub secondary_notif_email_address: String,
+pub struct RiskMgmtSettings {
+    #[serde(
+        rename = "enableAutoResidualRiskBRE",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_auto_residual_risk_bre: Option<bool>,
+    #[serde(
+        rename = "enableItCompliance",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_it_compliance: Option<bool>,
+    #[serde(
+        rename = "enableRiskMgmt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_risk_mgmt: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct SalesDealAgentSettings {
-    #[serde(rename = "enableDealAgent", default)]
-    pub enable_deal_agent: bool,
-    #[serde(rename = "enableDealAgentAutoApproveAllTasks", default)]
-    pub enable_deal_agent_auto_approve_all_tasks: bool,
+    #[serde(
+        rename = "enableDealAgent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_deal_agent: Option<bool>,
+    #[serde(
+        rename = "enableDealAgentAutoApproveAllTasks",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_deal_agent_auto_approve_all_tasks: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -4998,32 +12496,74 @@ pub struct SalesWorkQueueSettings {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct SandboxSettings {
-    #[serde(rename = "disableSandboxExpirationEmails", default)]
-    pub disable_sandbox_expiration_emails: bool,
+    #[serde(
+        rename = "disableSandboxExpirationEmails",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub disable_sandbox_expiration_emails: Option<bool>,
+    #[serde(
+        rename = "sandboxDetailNewUIOptOut",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sandbox_detail_new_ui_opt_out: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct SceGlobalModelOptOutSettings {
-    #[serde(rename = "enableConfigurableSceGlobalModelOptOut", default)]
-    pub enable_configurable_sce_global_model_opt_out: bool,
-    #[serde(rename = "sceGlobalModelOptOut", default)]
-    pub sce_global_model_opt_out: bool,
+    #[serde(
+        rename = "enableConfigurableSceGlobalModelOptOut",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_configurable_sce_global_model_opt_out: Option<bool>,
+    #[serde(
+        rename = "sceGlobalModelOptOut",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sce_global_model_opt_out: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SchedulingRecipeSettings {
+    #[serde(rename = "schedulingRecipeSetting", default)]
+    pub scheduling_recipe_setting: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct SchemaSettings {
-    #[serde(rename = "enableAdvancedCMTSecurity", default)]
-    pub enable_advanced_cmt_security: bool,
-    #[serde(rename = "enableAdvancedCSSecurity", default)]
-    pub enable_advanced_cs_security: bool,
-    #[serde(rename = "enableListCustomSettingCreation", default)]
-    pub enable_list_custom_setting_creation: bool,
-    #[serde(rename = "enableSOSLOnCustomSettings", default)]
-    pub enable_sosl_on_custom_settings: bool,
+    #[serde(
+        rename = "enableAdvancedCMTSecurity",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_advanced_cmt_security: Option<bool>,
+    #[serde(
+        rename = "enableAdvancedCSSecurity",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_advanced_cs_security: Option<bool>,
+    #[serde(
+        rename = "enableListCustomSettingCreation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_list_custom_setting_creation: Option<bool>,
+    #[serde(
+        rename = "enableSOSLOnCustomSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sosl_on_custom_settings: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -5032,40 +12572,108 @@ pub struct SchemaSettings {
 pub struct SearchSettings {
     #[serde(rename = "documentContentSearchEnabled", default)]
     pub document_content_search_enabled: bool,
-    #[serde(rename = "enableAdvancedSearchInAlohaSidebar", default)]
-    pub enable_advanced_search_in_aloha_sidebar: bool,
-    #[serde(rename = "enableEinsteinSearchAnswersGPT", default)]
-    pub enable_einstein_search_answers_gpt: bool,
-    #[serde(rename = "enableEinsteinSearchAnswersOnDMO", default)]
-    pub enable_einstein_search_answers_on_dmo: bool,
-    #[serde(rename = "enableEinsteinSearchAssistantDialog", default)]
-    pub enable_einstein_search_assistant_dialog: bool,
-    #[serde(rename = "enableEinsteinSearchEs4kPilot", default)]
-    pub enable_einstein_search_es_4_k_pilot: bool,
-    #[serde(rename = "enableEinsteinSearchNLSFilters", default)]
-    pub enable_einstein_search_nls_filters: bool,
-    #[serde(rename = "enableEinsteinSearchNaturalLanguage", default)]
-    pub enable_einstein_search_natural_language: bool,
-    #[serde(rename = "enableEinsteinSearchPersonalization", default)]
-    pub enable_einstein_search_personalization: bool,
-    #[serde(rename = "enableEinsteinSearchQA", default)]
-    pub enable_einstein_search_qa: bool,
-    #[serde(rename = "enablePersonalTagging", default)]
-    pub enable_personal_tagging: bool,
-    #[serde(rename = "enablePublicTagging", default)]
-    pub enable_public_tagging: bool,
-    #[serde(rename = "enableQuerySuggestionPigOn", default)]
-    pub enable_query_suggestion_pig_on: bool,
-    #[serde(rename = "enableSalesforceGeneratedSynonyms", default)]
-    pub enable_salesforce_generated_synonyms: bool,
-    #[serde(rename = "enableSearchTermHistory", default)]
-    pub enable_search_term_history: bool,
-    #[serde(rename = "enableSetupSearch", default)]
-    pub enable_setup_search: bool,
-    #[serde(rename = "enableSuggestArticlesLinksOnly", default)]
-    pub enable_suggest_articles_links_only: bool,
-    #[serde(rename = "enableUseDefaultSearchEntity", default)]
-    pub enable_use_default_search_entity: bool,
+    #[serde(
+        rename = "enableAdvancedSearchInAlohaSidebar",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_advanced_search_in_aloha_sidebar: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinSearchAnswersGPT",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_search_answers_gpt: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinSearchAnswersOnDMO",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_search_answers_on_dmo: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinSearchAssistantDialog",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_search_assistant_dialog: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinSearchEs4kPilot",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_search_es_4_k_pilot: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinSearchNLSFilters",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_search_nls_filters: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinSearchNaturalLanguage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_search_natural_language: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinSearchPersonalization",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_search_personalization: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinSearchQA",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_search_qa: Option<bool>,
+    #[serde(
+        rename = "enablePersonalTagging",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_personal_tagging: Option<bool>,
+    #[serde(
+        rename = "enablePublicTagging",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_public_tagging: Option<bool>,
+    #[serde(
+        rename = "enableQuerySuggestionPigOn",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_query_suggestion_pig_on: Option<bool>,
+    #[serde(
+        rename = "enableSalesforceGeneratedSynonyms",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_salesforce_generated_synonyms: Option<bool>,
+    #[serde(
+        rename = "enableSearchTermHistory",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_search_term_history: Option<bool>,
+    #[serde(
+        rename = "enableSetupSearch",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_setup_search: Option<bool>,
+    #[serde(
+        rename = "enableSuggestArticlesLinksOnly",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_suggest_articles_links_only: Option<bool>,
+    #[serde(
+        rename = "enableUseDefaultSearchEntity",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_use_default_search_entity: Option<bool>,
     #[serde(rename = "optimizeSearchForCJKEnabled", default)]
     pub optimize_search_for_cjk_enabled: bool,
     #[serde(rename = "recentlyViewedUsersForBlankLookupEnabled", default)]
@@ -5087,9 +12695,31 @@ pub struct SearchSettings {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct SecurityAgentSettings {
+    #[serde(
+        rename = "securityAgentAgentforceEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub security_agent_agentforce_enabled: Option<bool>,
+    #[serde(
+        rename = "securityAgentBackgroundOp",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub security_agent_background_op: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct SecurityHubSettings {
-    #[serde(rename = "aiGatewayUsageMetric", default)]
-    pub ai_gateway_usage_metric: bool,
+    #[serde(
+        rename = "aiGatewayUsageMetric",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub ai_gateway_usage_metric: Option<bool>,
 }
 
 /// Represents the security settings for an organization.
@@ -5097,346 +12727,964 @@ pub struct SecurityHubSettings {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct SecuritySettings {
-    #[serde(rename = "canUsersGrantLoginAccess", default)]
-    pub can_users_grant_login_access: bool,
-    #[serde(rename = "enableAdminLoginAsAnyUser", default)]
-    pub enable_admin_login_as_any_user: bool,
-    #[serde(rename = "enableAuditFieldsInactiveOwner", default)]
-    pub enable_audit_fields_inactive_owner: bool,
-    #[serde(rename = "enableAuraSecureEvalPref", default)]
-    pub enable_aura_secure_eval_pref: bool,
-    #[serde(rename = "enableCoepHeader", default)]
-    pub enable_coep_header: bool,
-    #[serde(rename = "enableCoopHeader", default)]
-    pub enable_coop_header: bool,
-    #[serde(rename = "enableCrossOrgRedirects", default)]
-    pub enable_cross_org_redirects: bool,
-    #[serde(rename = "enablePermissionsPolicy", default)]
-    pub enable_permissions_policy: bool,
-    #[serde(rename = "enableRequireHttpsConnection", default)]
-    pub enable_require_https_connection: bool,
-    #[serde(rename = "networkAccess", default)]
-    pub network_access: serde_json::Value,
-    #[serde(rename = "passwordPolicies", default)]
-    pub password_policies: serde_json::Value,
-    #[serde(rename = "redirectBlockModeEnabled", default)]
-    pub redirect_block_mode_enabled: bool,
-    #[serde(rename = "sendCspForUncommonClients", default)]
-    pub send_csp_for_uncommon_clients: bool,
-    #[serde(rename = "sessionSettings", default)]
-    pub session_settings: SessionSettings,
-    #[serde(rename = "singleSignOnSettings", default)]
-    pub single_sign_on_settings: SingleSignOnSettings,
+    #[serde(
+        rename = "canUsersGrantLoginAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_users_grant_login_access: Option<bool>,
+    #[serde(
+        rename = "enableAdminLoginAsAnyUser",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_admin_login_as_any_user: Option<bool>,
+    #[serde(
+        rename = "enableAuditFieldsInactiveOwner",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_audit_fields_inactive_owner: Option<bool>,
+    #[serde(
+        rename = "enableAuraSecureEvalPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_aura_secure_eval_pref: Option<bool>,
+    #[serde(
+        rename = "enableCoepHeader",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_coep_header: Option<bool>,
+    #[serde(
+        rename = "enableCoopHeader",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_coop_header: Option<bool>,
+    #[serde(
+        rename = "enableCrossOrgRedirects",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cross_org_redirects: Option<bool>,
+    #[serde(
+        rename = "enablePermissionsPolicy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_permissions_policy: Option<bool>,
+    #[serde(
+        rename = "enableRequireHttpsConnection",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_require_https_connection: Option<bool>,
+    #[serde(
+        rename = "networkAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub network_access: Option<serde_json::Value>,
+    /// Settings related to password complexity, expiration, and history.
+    #[serde(
+        rename = "passwordPolicies",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub password_policies: Option<serde_json::Value>,
+    #[serde(
+        rename = "redirectBlockModeEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub redirect_block_mode_enabled: Option<bool>,
+    #[serde(
+        rename = "sendCspForUncommonClients",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub send_csp_for_uncommon_clients: Option<bool>,
+    /// Settings related to session timeouts and security.
+    #[serde(
+        rename = "sessionSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub session_settings: Option<SessionSettings>,
+    #[serde(
+        rename = "singleSignOnSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub single_sign_on_settings: Option<SingleSignOnSettings>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct SequenceServiceSettings {
-    #[serde(rename = "enableSequenceService", default)]
-    pub enable_sequence_service: bool,
+    #[serde(
+        rename = "enableSequenceService",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sequence_service: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ServiceAIRecommendationsSettings {
-    #[serde(rename = "enableServiceRecomForCase", default)]
-    pub enable_service_recom_for_case: bool,
+    #[serde(
+        rename = "enableServiceRecomConvADLPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_service_recom_conv_adl_pref: Option<bool>,
+    #[serde(
+        rename = "enableServiceRecomForCase",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_service_recom_for_case: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ServiceCloudNotificationOrchestratorSettings {
-    #[serde(rename = "enableEmailNotifications", default)]
-    pub enable_email_notifications: bool,
-    #[serde(rename = "enableInAppNotifications", default)]
-    pub enable_in_app_notifications: bool,
-    #[serde(rename = "enableNotifications", default)]
-    pub enable_notifications: bool,
-    #[serde(rename = "enableSlackNotifications", default)]
-    pub enable_slack_notifications: bool,
+    #[serde(
+        rename = "enableEmailNotifications",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_email_notifications: Option<bool>,
+    #[serde(
+        rename = "enableInAppNotifications",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_in_app_notifications: Option<bool>,
+    #[serde(
+        rename = "enableNotifications",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_notifications: Option<bool>,
+    #[serde(
+        rename = "enableSlackNotifications",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_slack_notifications: Option<bool>,
+    #[serde(
+        rename = "enableTeamsNotifications",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_teams_notifications: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ServiceCloudVoiceSettings {
-    #[serde(rename = "disableSCVTaskCreationForHVS", default)]
-    pub disable_scv_task_creation_for_hvs: bool,
-    #[serde(rename = "enableAmazonQueueManagement", default)]
-    pub enable_amazon_queue_management: bool,
-    #[serde(rename = "enableDefaultChannelForSCV", default)]
-    pub enable_default_channel_for_scv: bool,
-    #[serde(rename = "enableDigitalVoiceWhatsapp", default)]
-    pub enable_digital_voice_whatsapp: bool,
-    #[serde(rename = "enableEndUserForSCV", default)]
-    pub enable_end_user_for_scv: bool,
-    #[serde(rename = "enableOmniCapacityForSCV", default)]
-    pub enable_omni_capacity_for_scv: bool,
-    #[serde(rename = "enablePTQueueManagement", default)]
-    pub enable_pt_queue_management: bool,
-    #[serde(rename = "enablePhoneNumberMaskingForSCV", default)]
-    pub enable_phone_number_masking_for_scv: bool,
-    #[serde(rename = "enableRZoneCloudVoiceOptIn", default)]
-    pub enable_r_zone_cloud_voice_opt_in: bool,
-    #[serde(rename = "enableSCVASAContextLinkingEnabled", default)]
-    pub enable_scvasa_context_linking_enabled: bool,
-    #[serde(rename = "enableSCVBYOT", default)]
-    pub enable_scvbyot: bool,
-    #[serde(rename = "enableSCVExternalTelephony", default)]
-    pub enable_scv_external_telephony: bool,
-    #[serde(rename = "enableSCVOpenVCAsNewTabHVS", default)]
-    pub enable_scv_open_vc_as_new_tab_hvs: bool,
-    #[serde(rename = "enableSCVSupportBannerDisplayed", default)]
-    pub enable_scv_support_banner_displayed: bool,
-    #[serde(rename = "enableServiceCloudVoice", default)]
-    pub enable_service_cloud_voice: bool,
+    #[serde(
+        rename = "disableSCVTaskCreationForHVS",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub disable_scv_task_creation_for_hvs: Option<bool>,
+    #[serde(
+        rename = "enableAmazonQueueManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_amazon_queue_management: Option<bool>,
+    #[serde(
+        rename = "enableDefaultChannelForSCV",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_default_channel_for_scv: Option<bool>,
+    #[serde(
+        rename = "enableEndUserForSCV",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_end_user_for_scv: Option<bool>,
+    #[serde(
+        rename = "enableOmniCapacityForSCV",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_omni_capacity_for_scv: Option<bool>,
+    #[serde(
+        rename = "enablePTQueueManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_pt_queue_management: Option<bool>,
+    #[serde(
+        rename = "enablePhoneNumberMaskingForSCV",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_phone_number_masking_for_scv: Option<bool>,
+    #[serde(
+        rename = "enableRZoneCloudVoiceOptIn",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_r_zone_cloud_voice_opt_in: Option<bool>,
+    #[serde(
+        rename = "enableSCVBYOT",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_scvbyot: Option<bool>,
+    #[serde(
+        rename = "enableSCVExternalTelephony",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_scv_external_telephony: Option<bool>,
+    #[serde(
+        rename = "enableSCVOpenVCAsNewTabHVS",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_scv_open_vc_as_new_tab_hvs: Option<bool>,
+    #[serde(
+        rename = "enableSCVSupportBannerDisplayed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_scv_support_banner_displayed: Option<bool>,
+    #[serde(
+        rename = "enableServiceCloudVoice",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_service_cloud_voice: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ServiceItsmIntelligenceUddSettings {
-    #[serde(rename = "enableCheckIncAttrProactvAsst", default)]
-    pub enable_check_inc_attr_proactv_asst: bool,
-    #[serde(rename = "enableEinsteinAssignGrpInc", default)]
-    pub enable_einstein_assign_grp_inc: bool,
-    #[serde(rename = "enableEinsteinProbmCreationInc", default)]
-    pub enable_einstein_probm_creation_inc: bool,
-    #[serde(rename = "enableIncAsgntProactvAsst", default)]
-    pub enable_inc_asgnt_proactv_asst: bool,
-    #[serde(rename = "enableIncPrpsRsolSumProactvAsst", default)]
-    pub enable_inc_prps_rsol_sum_proactv_asst: bool,
-    #[serde(rename = "enableIncRootCseSumProactvAsst", default)]
-    pub enable_inc_root_cse_sum_proactv_asst: bool,
-    #[serde(rename = "enableIncSmlrRecProactvAsst", default)]
-    pub enable_inc_smlr_rec_proactv_asst: bool,
-    #[serde(rename = "enableIncSrvcPlanProactvAsst", default)]
-    pub enable_inc_srvc_plan_proactv_asst: bool,
-    #[serde(rename = "enableIncSummaryProactvAsst", default)]
-    pub enable_inc_summary_proactv_asst: bool,
-    #[serde(rename = "enableItSrvcsEmployeeAgent", default)]
-    pub enable_it_srvcs_employee_agent: bool,
-    #[serde(rename = "enableItSrvcsFulfillerAgent", default)]
-    pub enable_it_srvcs_fulfiller_agent: bool,
-    #[serde(rename = "enableProactvAsstforItSrvcs", default)]
-    pub enable_proactv_asstfor_it_srvcs: bool,
+    #[serde(
+        rename = "enableAsgnProbWEinstein",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_asgn_prob_w_einstein: Option<bool>,
+    #[serde(
+        rename = "enableAsocSmlrProbToProb",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_asoc_smlr_prob_to_prob: Option<bool>,
+    #[serde(
+        rename = "enableCheckIncAttrProactvAsst",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_check_inc_attr_proactv_asst: Option<bool>,
+    #[serde(
+        rename = "enableCheckProbmForAttr",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_check_probm_for_attr: Option<bool>,
+    #[serde(
+        rename = "enableCreaProbmForRootCseSum",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_crea_probm_for_root_cse_sum: Option<bool>,
+    #[serde(
+        rename = "enableCreateChgReqWithEinstein",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_create_chg_req_with_einstein: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinAssignGrpInc",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_assign_grp_inc: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinProbmCreationInc",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_probm_creation_inc: Option<bool>,
+    #[serde(
+        rename = "enableIncAsgntProactvAsst",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_inc_asgnt_proactv_asst: Option<bool>,
+    #[serde(
+        rename = "enableIncPrpsRsolSumProactvAsst",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_inc_prps_rsol_sum_proactv_asst: Option<bool>,
+    #[serde(
+        rename = "enableIncRootCseSumProactvAsst",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_inc_root_cse_sum_proactv_asst: Option<bool>,
+    #[serde(
+        rename = "enableIncSmlrRecProactvAsst",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_inc_smlr_rec_proactv_asst: Option<bool>,
+    #[serde(
+        rename = "enableIncSrvcPlanProactvAsst",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_inc_srvc_plan_proactv_asst: Option<bool>,
+    #[serde(
+        rename = "enableIncSummaryProactvAsst",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_inc_summary_proactv_asst: Option<bool>,
+    #[serde(
+        rename = "enableItSrvcsEmployeeAgent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_it_srvcs_employee_agent: Option<bool>,
+    #[serde(
+        rename = "enableItSrvcsFulfillerAgent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_it_srvcs_fulfiller_agent: Option<bool>,
+    #[serde(
+        rename = "enableProactivAsstForProbm",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_proactiv_asst_for_probm: Option<bool>,
+    #[serde(
+        rename = "enableProactvAsstforItSrvcs",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_proactv_asstfor_it_srvcs: Option<bool>,
+    #[serde(
+        rename = "enableProposSumForProbm",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_propos_sum_for_probm: Option<bool>,
+    #[serde(
+        rename = "enableQuickActnForSvcPlan",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_quick_actn_for_svc_plan: Option<bool>,
+    #[serde(
+        rename = "enableSumForProbm",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sum_for_probm: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ServiceLegalStatusesSettings {
+    #[serde(rename = "serviceLegalStatus", default)]
+    pub service_legal_status: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ServiceProcessSettings {
+    #[serde(
+        rename = "enableExposeSvcPrcArtifactsPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_expose_svc_prc_artifacts_pref: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ServiceSetupAssistantSettings {
-    #[serde(rename = "enableServiceSetupAssistant", default)]
-    pub enable_service_setup_assistant: bool,
+    #[serde(
+        rename = "enableServiceSetupAssistant",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_service_setup_assistant: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct SessionSettings {
-    #[serde(rename = "allowUserAuthenticationByCertificate", default)]
-    pub allow_user_authentication_by_certificate: bool,
-    #[serde(rename = "allowUserCertBasedAuthenticationWithOcspValidation", default)]
-    pub allow_user_cert_based_authentication_with_ocsp_validation: bool,
-    #[serde(rename = "auraBoxcarReductionPref", default)]
-    pub aura_boxcar_reduction_pref: bool,
-    #[serde(rename = "canConfirmEmailChangeInLightningCommunities", default)]
-    pub can_confirm_email_change_in_lightning_communities: bool,
-    #[serde(rename = "canConfirmIdentityBySmsOnly", default)]
-    pub can_confirm_identity_by_sms_only: bool,
-    #[serde(rename = "disableTimeoutWarning", default)]
-    pub disable_timeout_warning: bool,
-    #[serde(rename = "enableBuiltInAuthenticator", default)]
-    pub enable_built_in_authenticator: bool,
-    #[serde(rename = "enableCSPOnEmail", default)]
-    pub enable_csp_on_email: bool,
-    #[serde(rename = "enableCSRFOnGet", default)]
-    pub enable_csrf_on_get: bool,
-    #[serde(rename = "enableCSRFOnPost", default)]
-    pub enable_csrf_on_post: bool,
-    #[serde(rename = "enableCacheAndAutocomplete", default)]
-    pub enable_cache_and_autocomplete: bool,
-    #[serde(rename = "enableClickjackNonsetupSFDC", default)]
-    pub enable_clickjack_nonsetup_sfdc: bool,
-    #[serde(rename = "enableClickjackNonsetupUser", default)]
-    pub enable_clickjack_nonsetup_user: bool,
-    #[serde(rename = "enableClickjackNonsetupUserHeaderless", default)]
-    pub enable_clickjack_nonsetup_user_headerless: bool,
-    #[serde(rename = "enableClickjackSetup", default)]
-    pub enable_clickjack_setup: bool,
-    #[serde(rename = "enableCoepHeader", default)]
-    pub enable_coep_header: bool,
-    #[serde(rename = "enableContentSniffingProtection", default)]
-    pub enable_content_sniffing_protection: bool,
-    #[serde(rename = "enableCoopHeader", default)]
-    pub enable_coop_header: bool,
-    #[serde(rename = "enableLightningLogin", default)]
-    pub enable_lightning_login: bool,
-    #[serde(rename = "enableLightningLoginOnlyWithUserPerm", default)]
-    pub enable_lightning_login_only_with_user_perm: bool,
-    #[serde(rename = "enableMFADirectUILoginOptIn", default)]
-    pub enable_mfa_direct_ui_login_opt_in: bool,
-    #[serde(rename = "enableOauthCorsPolicy", default)]
-    pub enable_oauth_cors_policy: bool,
-    #[serde(rename = "enablePermissionsPolicy", default)]
-    pub enable_permissions_policy: bool,
-    #[serde(rename = "enablePostForSessions", default)]
-    pub enable_post_for_sessions: bool,
-    #[serde(rename = "enableSMSIdentity", default)]
-    pub enable_sms_identity: bool,
-    #[serde(rename = "enableU2F", default)]
-    pub enable_u_2_f: bool,
-    #[serde(rename = "enforceIpRangesEveryRequest", default)]
-    pub enforce_ip_ranges_every_request: bool,
-    #[serde(rename = "enforceUserDeviceRevoked", default)]
-    pub enforce_user_device_revoked: bool,
-    #[serde(rename = "forceLogoutOnSessionTimeout", default)]
-    pub force_logout_on_session_timeout: bool,
-    #[serde(rename = "forceRelogin", default)]
-    pub force_relogin: bool,
-    #[serde(rename = "grantCameraAccess", default)]
-    pub grant_camera_access: String,
-    #[serde(rename = "grantMicrophoneAccess", default)]
-    pub grant_microphone_access: String,
-    #[serde(rename = "hasRetainedLoginHints", default)]
-    pub has_retained_login_hints: bool,
-    #[serde(rename = "hasUserSwitching", default)]
-    pub has_user_switching: bool,
-    #[serde(rename = "hstsOnForcecomSites", default)]
-    pub hsts_on_forcecom_sites: bool,
-    #[serde(rename = "identityConfirmationOnEmailChange", default)]
-    pub identity_confirmation_on_email_change: bool,
-    #[serde(rename = "identityConfirmationOnTwoFactorRegistrationEnabled", default)]
-    pub identity_confirmation_on_two_factor_registration_enabled: bool,
-    #[serde(rename = "lockSessionsToDomain", default)]
-    pub lock_sessions_to_domain: bool,
-    #[serde(rename = "lockSessionsToIp", default)]
-    pub lock_sessions_to_ip: bool,
-    #[serde(rename = "lockerServiceAPIVersion", default)]
-    pub locker_service_api_version: String,
-    #[serde(rename = "lockerServiceCSP", default)]
-    pub locker_service_csp: bool,
-    #[serde(rename = "lockerServiceNext", default)]
-    pub locker_service_next: bool,
-    #[serde(rename = "lockerServiceNextControl", default)]
-    pub locker_service_next_control: bool,
-    #[serde(rename = "lockerTrustedMode", default)]
-    pub locker_trusted_mode: bool,
-    #[serde(rename = "lockerTrustedResources", default)]
-    pub locker_trusted_resources: String,
-    #[serde(rename = "logoutURL", default)]
-    pub logout_url: String,
-    #[serde(rename = "redirectBlockModeEnabled", default)]
-    pub redirect_block_mode_enabled: bool,
-    #[serde(rename = "redirectionWarning", default)]
-    pub redirection_warning: bool,
-    #[serde(rename = "referrerPolicy", default)]
-    pub referrer_policy: bool,
-    #[serde(rename = "referrerPolicyDirective", default)]
-    pub referrer_policy_directive: String,
-    #[serde(rename = "requireHttpOnly", default)]
-    pub require_http_only: bool,
-    #[serde(rename = "sendCspForUncommonClients", default)]
-    pub send_csp_for_uncommon_clients: bool,
-    #[serde(rename = "sessionTimeout", default)]
-    pub session_timeout: serde_json::Value,
-    #[serde(rename = "sidToken3rdPartyAuraApp", default)]
-    pub sid_token_3_rd_party_aura_app: bool,
-    #[serde(rename = "skipSFAWhenMFADirectUILogin", default)]
-    pub skip_sfa_when_mfa_direct_ui_login: bool,
-    #[serde(rename = "terminateUserSessionsWhenAdminResetsPassword", default)]
-    pub terminate_user_sessions_when_admin_resets_password: bool,
-    #[serde(rename = "untrustedRedirect", default)]
-    pub untrusted_redirect: serde_json::Value,
-    #[serde(rename = "useEAPIRateLimitForConnectAPI", default)]
-    pub use_eapi_rate_limit_for_connect_api: bool,
-    #[serde(rename = "useLocalStorageForLogoutUrl", default)]
-    pub use_local_storage_for_logout_url: bool,
-    #[serde(rename = "welcomeEmailTemplateId", default)]
-    pub welcome_email_template_id: String,
+    #[serde(
+        rename = "allowUserAuthenticationByCertificate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_user_authentication_by_certificate: Option<bool>,
+    #[serde(
+        rename = "allowUserCertBasedAuthenticationWithOcspValidation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_user_cert_based_authentication_with_ocsp_validation: Option<bool>,
+    #[serde(
+        rename = "auraBoxcarReductionPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub aura_boxcar_reduction_pref: Option<bool>,
+    #[serde(
+        rename = "canConfirmEmailChangeInLightningCommunities",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_confirm_email_change_in_lightning_communities: Option<bool>,
+    #[serde(
+        rename = "canConfirmIdentityBySmsOnly",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_confirm_identity_by_sms_only: Option<bool>,
+    #[serde(
+        rename = "disableTimeoutWarning",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub disable_timeout_warning: Option<bool>,
+    #[serde(
+        rename = "enableBuiltInAuthenticator",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_built_in_authenticator: Option<bool>,
+    #[serde(
+        rename = "enableCSPOnEmail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_csp_on_email: Option<bool>,
+    #[serde(
+        rename = "enableCSRFOnGet",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_csrf_on_get: Option<bool>,
+    #[serde(
+        rename = "enableCSRFOnPost",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_csrf_on_post: Option<bool>,
+    #[serde(
+        rename = "enableCacheAndAutocomplete",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_cache_and_autocomplete: Option<bool>,
+    #[serde(
+        rename = "enableClickjackNonsetupSFDC",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_clickjack_nonsetup_sfdc: Option<bool>,
+    #[serde(
+        rename = "enableClickjackNonsetupUser",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_clickjack_nonsetup_user: Option<bool>,
+    #[serde(
+        rename = "enableClickjackNonsetupUserHeaderless",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_clickjack_nonsetup_user_headerless: Option<bool>,
+    #[serde(
+        rename = "enableClickjackSetup",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_clickjack_setup: Option<bool>,
+    #[serde(
+        rename = "enableCoepHeader",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_coep_header: Option<bool>,
+    #[serde(
+        rename = "enableContentSniffingProtection",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_content_sniffing_protection: Option<bool>,
+    #[serde(
+        rename = "enableCoopHeader",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_coop_header: Option<bool>,
+    #[serde(
+        rename = "enableLightningLogin",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lightning_login: Option<bool>,
+    #[serde(
+        rename = "enableLightningLoginOnlyWithUserPerm",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lightning_login_only_with_user_perm: Option<bool>,
+    #[serde(
+        rename = "enableMFADirectUILoginOptIn",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_mfa_direct_ui_login_opt_in: Option<bool>,
+    #[serde(
+        rename = "enableOauthCorsPolicy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_oauth_cors_policy: Option<bool>,
+    #[serde(
+        rename = "enablePermissionsPolicy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_permissions_policy: Option<bool>,
+    #[serde(
+        rename = "enablePostForSessions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_post_for_sessions: Option<bool>,
+    #[serde(
+        rename = "enableSMSIdentity",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sms_identity: Option<bool>,
+    #[serde(rename = "enableU2F", default, skip_serializing_if = "Option::is_none")]
+    pub enable_u_2_f: Option<bool>,
+    #[serde(
+        rename = "enforceIpRangesEveryRequest",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enforce_ip_ranges_every_request: Option<bool>,
+    #[serde(
+        rename = "enforceUserDeviceRevoked",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enforce_user_device_revoked: Option<bool>,
+    #[serde(
+        rename = "forceLogoutOnSessionTimeout",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub force_logout_on_session_timeout: Option<bool>,
+    #[serde(
+        rename = "forceRelogin",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub force_relogin: Option<bool>,
+    #[serde(
+        rename = "grantCameraAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub grant_camera_access: Option<String>,
+    #[serde(
+        rename = "grantMicrophoneAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub grant_microphone_access: Option<String>,
+    #[serde(
+        rename = "hasRetainedLoginHints",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub has_retained_login_hints: Option<bool>,
+    #[serde(
+        rename = "hasUserSwitching",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub has_user_switching: Option<bool>,
+    #[serde(
+        rename = "hstsOnForcecomSites",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub hsts_on_forcecom_sites: Option<bool>,
+    #[serde(
+        rename = "identityConfirmationOnEmailChange",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub identity_confirmation_on_email_change: Option<bool>,
+    #[serde(
+        rename = "identityConfirmationOnTwoFactorRegistrationEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub identity_confirmation_on_two_factor_registration_enabled: Option<bool>,
+    #[serde(
+        rename = "lockSessionsToDomain",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub lock_sessions_to_domain: Option<bool>,
+    #[serde(
+        rename = "lockSessionsToIp",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub lock_sessions_to_ip: Option<bool>,
+    #[serde(
+        rename = "lockerServiceAPIVersion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub locker_service_api_version: Option<String>,
+    #[serde(
+        rename = "lockerServiceCSP",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub locker_service_csp: Option<bool>,
+    #[serde(
+        rename = "lockerServiceNext",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub locker_service_next: Option<bool>,
+    #[serde(
+        rename = "lockerServiceNextControl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub locker_service_next_control: Option<bool>,
+    #[serde(
+        rename = "lockerTrustedMode",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub locker_trusted_mode: Option<bool>,
+    #[serde(
+        rename = "lockerTrustedResources",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub locker_trusted_resources: Option<String>,
+    #[serde(rename = "logoutURL", default, skip_serializing_if = "Option::is_none")]
+    pub logout_url: Option<String>,
+    #[serde(
+        rename = "redirectBlockModeEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub redirect_block_mode_enabled: Option<bool>,
+    #[serde(
+        rename = "redirectionWarning",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub redirection_warning: Option<bool>,
+    #[serde(
+        rename = "referrerPolicy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub referrer_policy: Option<bool>,
+    #[serde(
+        rename = "referrerPolicyDirective",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub referrer_policy_directive: Option<String>,
+    #[serde(
+        rename = "requireHttpOnly",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub require_http_only: Option<bool>,
+    #[serde(
+        rename = "sendCspForUncommonClients",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub send_csp_for_uncommon_clients: Option<bool>,
+    #[serde(
+        rename = "sessionTimeout",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub session_timeout: Option<serde_json::Value>,
+    #[serde(
+        rename = "sidToken3rdPartyAuraApp",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sid_token_3_rd_party_aura_app: Option<bool>,
+    #[serde(
+        rename = "skipSFAWhenMFADirectUILogin",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub skip_sfa_when_mfa_direct_ui_login: Option<bool>,
+    #[serde(
+        rename = "terminateUserSessionsWhenAdminResetsPassword",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub terminate_user_sessions_when_admin_resets_password: Option<bool>,
+    #[serde(
+        rename = "untrustedRedirect",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub untrusted_redirect: Option<serde_json::Value>,
+    #[serde(
+        rename = "useEAPIRateLimitForConnectAPI",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub use_eapi_rate_limit_for_connect_api: Option<bool>,
+    #[serde(
+        rename = "useLocalStorageForLogoutUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub use_local_storage_for_logout_url: Option<bool>,
+    #[serde(
+        rename = "welcomeEmailTemplateId",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub welcome_email_template_id: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SetupCopilotSettings {
+    #[serde(
+        rename = "enableAgentForSetupBeta",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_agent_for_setup_beta: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct SharingSettings {
-    #[serde(rename = "deferGroupMembership", default)]
-    pub defer_group_membership: bool,
-    #[serde(rename = "deferSharingRules", default)]
-    pub defer_sharing_rules: bool,
-    #[serde(rename = "enableAccountRoleOptimization", default)]
-    pub enable_account_role_optimization: bool,
-    #[serde(rename = "enableAssetSharing", default)]
-    pub enable_asset_sharing: bool,
-    #[serde(rename = "enableCommunityUserVisibility", default)]
-    pub enable_community_user_visibility: bool,
-    #[serde(rename = "enableExternalSharingModel", default)]
-    pub enable_external_sharing_model: bool,
-    #[serde(rename = "enableManagerGroups", default)]
-    pub enable_manager_groups: bool,
-    #[serde(rename = "enableManualUserRecordSharing", default)]
-    pub enable_manual_user_record_sharing: bool,
-    #[serde(rename = "enablePartnerSuperUserAccess", default)]
-    pub enable_partner_super_user_access: bool,
-    #[serde(rename = "enablePortalUserCaseSharing", default)]
-    pub enable_portal_user_case_sharing: bool,
-    #[serde(rename = "enablePortalUserVisibility", default)]
-    pub enable_portal_user_visibility: bool,
-    #[serde(rename = "enableRemoveTMGroupMembership", default)]
-    pub enable_remove_tm_group_membership: bool,
-    #[serde(rename = "enableRestrictAccessLookupRecords", default)]
-    pub enable_restrict_access_lookup_records: bool,
-    #[serde(rename = "enableSecureGuestAccess", default)]
-    pub enable_secure_guest_access: bool,
-    #[serde(rename = "enableShareObjectReportTypes", default)]
-    pub enable_share_object_report_types: bool,
-    #[serde(rename = "enableStandardReportVisibility", default)]
-    pub enable_standard_report_visibility: bool,
-    #[serde(rename = "enableTerritoryForecastManager", default)]
-    pub enable_territory_forecast_manager: bool,
+    #[serde(
+        rename = "deferGroupMembership",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub defer_group_membership: Option<bool>,
+    #[serde(
+        rename = "deferSharingRules",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub defer_sharing_rules: Option<bool>,
+    #[serde(
+        rename = "enableAccountRoleOptimization",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_account_role_optimization: Option<bool>,
+    #[serde(
+        rename = "enableAssetSharing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_asset_sharing: Option<bool>,
+    #[serde(
+        rename = "enableCommunityUserVisibility",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_community_user_visibility: Option<bool>,
+    #[serde(
+        rename = "enableExternalSharingModel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_external_sharing_model: Option<bool>,
+    #[serde(
+        rename = "enableManagerGroups",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_manager_groups: Option<bool>,
+    #[serde(
+        rename = "enableManualUserRecordSharing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_manual_user_record_sharing: Option<bool>,
+    #[serde(
+        rename = "enablePartnerSuperUserAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_partner_super_user_access: Option<bool>,
+    #[serde(
+        rename = "enablePortalUserCaseSharing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_portal_user_case_sharing: Option<bool>,
+    #[serde(
+        rename = "enablePortalUserVisibility",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_portal_user_visibility: Option<bool>,
+    #[serde(
+        rename = "enableRemoveTMGroupMembership",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_remove_tm_group_membership: Option<bool>,
+    #[serde(
+        rename = "enableRestrictAccessLookupRecords",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_restrict_access_lookup_records: Option<bool>,
+    #[serde(
+        rename = "enableSecureGuestAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_secure_guest_access: Option<bool>,
+    #[serde(
+        rename = "enableShareObjectReportTypes",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_share_object_report_types: Option<bool>,
+    #[serde(
+        rename = "enableStandardReportVisibility",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_standard_report_visibility: Option<bool>,
+    #[serde(
+        rename = "enableTerritoryForecastManager",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_territory_forecast_manager: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct SingleSignOnSettings {
-    #[serde(rename = "enableCaseInsensitiveFederationID", default)]
-    pub enable_case_insensitive_federation_id: bool,
-    #[serde(rename = "enableForceDelegatedCallout", default)]
-    pub enable_force_delegated_callout: bool,
-    #[serde(rename = "enableMultipleSamlConfigs", default)]
-    pub enable_multiple_saml_configs: bool,
-    #[serde(rename = "enableSamlJitProvisioning", default)]
-    pub enable_saml_jit_provisioning: bool,
-    #[serde(rename = "enableSamlLogin", default)]
-    pub enable_saml_login: bool,
-    #[serde(rename = "isLoginWithSalesforceCredentialsDisabled", default)]
-    pub is_login_with_salesforce_credentials_disabled: bool,
+    #[serde(
+        rename = "enableCaseInsensitiveFederationID",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_case_insensitive_federation_id: Option<bool>,
+    #[serde(
+        rename = "enableForceDelegatedCallout",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_force_delegated_callout: Option<bool>,
+    #[serde(
+        rename = "enableMultipleSamlConfigs",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_multiple_saml_configs: Option<bool>,
+    #[serde(
+        rename = "enableSamlJitProvisioning",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_saml_jit_provisioning: Option<bool>,
+    #[serde(
+        rename = "enableSamlLogin",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_saml_login: Option<bool>,
+    #[serde(
+        rename = "isLoginWithSalesforceCredentialsDisabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_login_with_salesforce_credentials_disabled: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct SiteSettings {
-    #[serde(rename = "enableExpBuilderCopilot", default)]
-    pub enable_exp_builder_copilot: bool,
-    #[serde(rename = "enableProxyLoginICHeader", default)]
-    pub enable_proxy_login_ic_header: bool,
-    #[serde(rename = "enableTopicsInSites", default)]
-    pub enable_topics_in_sites: bool,
+    #[serde(
+        rename = "enableExpBuilderCopilot",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_exp_builder_copilot: Option<bool>,
+    #[serde(
+        rename = "enableProxyLoginICHeader",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_proxy_login_ic_header: Option<bool>,
+    #[serde(
+        rename = "enableTopicsInSites",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_topics_in_sites: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct SlackFeatureSettings {
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
+pub struct SoFieldMappingSettings {
+    #[serde(rename = "soFieldMapping", default)]
+    pub so_field_mapping: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -5445,308 +13693,860 @@ pub struct SlackFeatureSettings {
 pub struct SocialCustomerServiceSettings {
     #[serde(rename = "caseSubjectOption", default)]
     pub case_subject_option: serde_json::Value,
-    #[serde(rename = "enableAllFBResponseAccounts", default)]
-    pub enable_all_fb_response_accounts: bool,
-    #[serde(rename = "enableInboundProcessingConcurrency", default)]
-    pub enable_inbound_processing_concurrency: bool,
-    #[serde(rename = "enableSocialApprovals", default)]
-    pub enable_social_approvals: bool,
-    #[serde(rename = "enableSocialCaseAssignmentRules", default)]
-    pub enable_social_case_assignment_rules: bool,
-    #[serde(rename = "enableSocialCustomerService", default)]
-    pub enable_social_customer_service: bool,
-    #[serde(rename = "enableSocialPersonaHistoryTracking", default)]
-    pub enable_social_persona_history_tracking: bool,
-    #[serde(rename = "enableSocialPostHistoryTracking", default)]
-    pub enable_social_post_history_tracking: bool,
-    #[serde(rename = "enableSocialReceiveParentPost", default)]
-    pub enable_social_receive_parent_post: bool,
+    #[serde(
+        rename = "enableAllFBResponseAccounts",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_all_fb_response_accounts: Option<bool>,
+    #[serde(
+        rename = "enableInboundProcessingConcurrency",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_inbound_processing_concurrency: Option<bool>,
+    #[serde(
+        rename = "enableSocialApprovals",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_social_approvals: Option<bool>,
+    #[serde(
+        rename = "enableSocialCaseAssignmentRules",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_social_case_assignment_rules: Option<bool>,
+    #[serde(
+        rename = "enableSocialCustomerService",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_social_customer_service: Option<bool>,
+    #[serde(
+        rename = "enableSocialPersonaHistoryTracking",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_social_persona_history_tracking: Option<bool>,
+    #[serde(
+        rename = "enableSocialPostHistoryTracking",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_social_post_history_tracking: Option<bool>,
+    #[serde(
+        rename = "enableSocialReceiveParentPost",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_social_receive_parent_post: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct SourceTrackingSettings {
-    #[serde(rename = "enableSourceTrackingSandboxes", default)]
-    pub enable_source_tracking_sandboxes: bool,
+    #[serde(
+        rename = "enableSourceTrackingSandboxes",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_source_tracking_sandboxes: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct StockRotationSettings {
+    #[serde(
+        rename = "enableStockRotation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_stock_rotation: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SubscriberPackageRemoteSiteSettings {
+    #[serde(default)]
+    pub settings: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct SubscriptionManagementSettings {
-    #[serde(rename = "enableConvertNegativeInvoiceLinesToCreditMemoAndApply", default)]
-    pub enable_convert_negative_invoice_lines_to_credit_memo_and_apply: bool,
-    #[serde(rename = "enablePaymentScheduleAutomation", default)]
-    pub enable_payment_schedule_automation: bool,
-    #[serde(rename = "enableRefundAutomation", default)]
-    pub enable_refund_automation: bool,
-    #[serde(rename = "enableRevSubMgmtBlngOptOut", default)]
-    pub enable_rev_sub_mgmt_blng_opt_out: bool,
-    #[serde(rename = "enableSubscriptionManagement", default)]
-    pub enable_subscription_management: bool,
+    #[serde(
+        rename = "enableConvertNegativeInvoiceLinesToCreditMemoAndApply",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_convert_negative_invoice_lines_to_credit_memo_and_apply: Option<bool>,
+    #[serde(
+        rename = "enablePaymentScheduleAutomation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_payment_schedule_automation: Option<bool>,
+    #[serde(
+        rename = "enableRefundAutomation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_refund_automation: Option<bool>,
+    #[serde(
+        rename = "enableRevSubMgmtBlngOptOut",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_rev_sub_mgmt_blng_opt_out: Option<bool>,
+    #[serde(
+        rename = "enableSubscriptionManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_subscription_management: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct SurveySettings {
-    #[serde(rename = "enableConversationalSurveys", default)]
-    pub enable_conversational_surveys: bool,
-    #[serde(rename = "enableGenerativeAISurveys", default)]
-    pub enable_generative_ai_surveys: bool,
-    #[serde(rename = "enableIndustriesCxmEnabled", default)]
-    pub enable_industries_cxm_enabled: bool,
-    #[serde(rename = "enableSurvey", default)]
-    pub enable_survey: bool,
-    #[serde(rename = "enableSurveyInvLinkWithoutAppExtension", default)]
-    pub enable_survey_inv_link_without_app_extension: bool,
-    #[serde(rename = "enableSurveyOwnerCanManageResponse", default)]
-    pub enable_survey_owner_can_manage_response: bool,
+    #[serde(
+        rename = "enableConversationalSurveys",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_conversational_surveys: Option<bool>,
+    #[serde(
+        rename = "enableGenerativeAISurveys",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_generative_ai_surveys: Option<bool>,
+    #[serde(
+        rename = "enableIndustriesCxmEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_industries_cxm_enabled: Option<bool>,
+    #[serde(
+        rename = "enableSurvey",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_survey: Option<bool>,
+    #[serde(
+        rename = "enableSurveyInvLinkWithoutAppExtension",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_survey_inv_link_without_app_extension: Option<bool>,
+    #[serde(
+        rename = "enableSurveyOwnerCanManageResponse",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_survey_owner_can_manage_response: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SynchronizeSettings {
+    #[serde(rename = "synchronizeSetting", default)]
+    pub synchronize_setting: Vec<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct SystemNotificationSettings {
-    #[serde(rename = "disableDowntimeNotifications", default)]
-    pub disable_downtime_notifications: bool,
-    #[serde(rename = "disableMaintenanceNotifications", default)]
-    pub disable_maintenance_notifications: bool,
+    #[serde(
+        rename = "disableDowntimeNotifications",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub disable_downtime_notifications: Option<bool>,
+    #[serde(
+        rename = "disableMaintenanceNotifications",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub disable_maintenance_notifications: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct Territory2Settings {
-    #[serde(rename = "defaultAccountAccessLevel", default)]
-    pub default_account_access_level: String,
-    #[serde(rename = "defaultCaseAccessLevel", default)]
-    pub default_case_access_level: String,
-    #[serde(rename = "defaultContactAccessLevel", default)]
-    pub default_contact_access_level: String,
-    #[serde(rename = "defaultOpportunityAccessLevel", default)]
-    pub default_opportunity_access_level: String,
-    #[serde(rename = "enableTerritoryManagement2", default)]
-    pub enable_territory_management_2: bool,
-    #[serde(rename = "opportunityFilterSettings", default)]
-    pub opportunity_filter_settings: serde_json::Value,
-    #[serde(rename = "showTM2EnabledBanner", default)]
-    pub show_tm_2_enabled_banner: bool,
+    #[serde(
+        rename = "defaultAccountAccessLevel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_account_access_level: Option<String>,
+    #[serde(
+        rename = "defaultCaseAccessLevel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_case_access_level: Option<String>,
+    #[serde(
+        rename = "defaultContactAccessLevel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_contact_access_level: Option<String>,
+    #[serde(
+        rename = "defaultOpportunityAccessLevel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_opportunity_access_level: Option<String>,
+    #[serde(
+        rename = "enableTerritoryManagement2",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_territory_management_2: Option<bool>,
+    #[serde(
+        rename = "opportunityFilterSettings",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub opportunity_filter_settings: Option<serde_json::Value>,
+    #[serde(
+        rename = "showTM2EnabledBanner",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_tm_2_enabled_banner: Option<bool>,
     #[serde(rename = "supportedObjects", default)]
     pub supported_objects: Vec<serde_json::Value>,
-    #[serde(rename = "t2ForecastAccessLevel", default)]
-    pub t_2_forecast_access_level: String,
-    #[serde(rename = "tm2BypassRealignAccInsert", default)]
-    pub tm_2_bypass_realign_acc_insert: bool,
-    #[serde(rename = "tm2EnableUserAssignmentLog", default)]
-    pub tm_2_enable_user_assignment_log: bool,
+    #[serde(
+        rename = "t2ForecastAccessLevel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub t_2_forecast_access_level: Option<String>,
+    #[serde(
+        rename = "tm2BypassRealignAccInsert",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub tm_2_bypass_realign_acc_insert: Option<bool>,
+    #[serde(
+        rename = "tm2EnableUserAssignmentLog",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub tm_2_enable_user_assignment_log: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct TmfOutboundNotificationSettings {
-    #[serde(rename = "enableTMFOutboundNotification", default)]
-    pub enable_tmf_outbound_notification: bool,
+    #[serde(
+        rename = "enableTMFOutboundNotification",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_tmf_outbound_notification: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct TmshtLaborCostOptimAiSettings {
+    #[serde(
+        rename = "enableTimesheetsAI",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_timesheets_ai: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct TrailheadSettings {
-    #[serde(rename = "enableConfettiEffect", default)]
-    pub enable_confetti_effect: bool,
-    #[serde(rename = "enableMyTrailheadPref", default)]
-    pub enable_my_trailhead_pref: bool,
-    #[serde(rename = "enableTrailheadInLexTerms", default)]
-    pub enable_trailhead_in_lex_terms: bool,
+    #[serde(
+        rename = "enableConfettiEffect",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_confetti_effect: Option<bool>,
+    #[serde(
+        rename = "enableMyTrailheadPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_my_trailhead_pref: Option<bool>,
+    #[serde(
+        rename = "enableTrailheadInLexTerms",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_trailhead_in_lex_terms: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct TrialOrgSettings {
-    #[serde(rename = "enableSampleDataDeleted", default)]
-    pub enable_sample_data_deleted: bool,
+    #[serde(
+        rename = "enableSampleDataDeleted",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sample_data_deleted: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct TriggerConfigurationsSettings {
+    #[serde(rename = "triggerConfiguration", default)]
+    pub trigger_configuration: Vec<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct UIBundleSettings {
+    #[serde(
+        rename = "salesforceAppDomain",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub salesforce_app_domain: Option<bool>,
+    #[serde(
+        rename = "webAppOptIn",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub web_app_opt_in: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct UnifiedSalesIntelligenceSettings {
+    #[serde(
+        rename = "enableDealIntelligence",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_deal_intelligence: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct UserEngagementSettings {
-    #[serde(rename = "canUseAdoptionApps", default)]
-    pub can_use_adoption_apps: bool,
-    #[serde(rename = "doesScheduledSwitcherRunDaily", default)]
-    pub does_scheduled_switcher_run_daily: bool,
-    #[serde(rename = "enableCustomHelpGlobalSection", default)]
-    pub enable_custom_help_global_section: bool,
-    #[serde(rename = "enableHelpMenuShowFeedback", default)]
-    pub enable_help_menu_show_feedback: bool,
-    #[serde(rename = "enableHelpMenuShowHelp", default)]
-    pub enable_help_menu_show_help: bool,
-    #[serde(rename = "enableHelpMenuShowNewUser", default)]
-    pub enable_help_menu_show_new_user: bool,
-    #[serde(rename = "enableHelpMenuShowSearch", default)]
-    pub enable_help_menu_show_search: bool,
-    #[serde(rename = "enableHelpMenuShowSfdcContent", default)]
-    pub enable_help_menu_show_sfdc_content: bool,
-    #[serde(rename = "enableHelpMenuShowShortcut", default)]
-    pub enable_help_menu_show_shortcut: bool,
-    #[serde(rename = "enableHelpMenuShowSupport", default)]
-    pub enable_help_menu_show_support: bool,
-    #[serde(rename = "enableHelpMenuShowTrailhead", default)]
-    pub enable_help_menu_show_trailhead: bool,
-    #[serde(rename = "enableIBILOptOutDashboards", default)]
-    pub enable_ibil_opt_out_dashboards: bool,
-    #[serde(rename = "enableIBILOptOutEvents", default)]
-    pub enable_ibil_opt_out_events: bool,
-    #[serde(rename = "enableIBILOptOutReports", default)]
-    pub enable_ibil_opt_out_reports: bool,
-    #[serde(rename = "enableIBILOptOutTasks", default)]
-    pub enable_ibil_opt_out_tasks: bool,
-    #[serde(rename = "enableLexToClassicFeedbackEnable", default)]
-    pub enable_lex_to_classic_feedback_enable: bool,
-    #[serde(rename = "enableOrchestrationInSandbox", default)]
-    pub enable_orchestration_in_sandbox: bool,
-    #[serde(rename = "enableOrgUserAssistEnabled", default)]
-    pub enable_org_user_assist_enabled: bool,
-    #[serde(rename = "enableScheduledSwitcher", default)]
-    pub enable_scheduled_switcher: bool,
-    #[serde(rename = "enableSfdcProductFeedbackSurvey", default)]
-    pub enable_sfdc_product_feedback_survey: bool,
-    #[serde(rename = "enableShowSalesforceUserAssist", default)]
-    pub enable_show_salesforce_user_assist: bool,
-    #[serde(rename = "isAutoTransitionDelayed", default)]
-    pub is_auto_transition_delayed: bool,
-    #[serde(rename = "isCrucNotificationDisabled", default)]
-    pub is_cruc_notification_disabled: bool,
-    #[serde(rename = "isCustomProfileAutoTransitionDelayed", default)]
-    pub is_custom_profile_auto_transition_delayed: bool,
-    #[serde(rename = "isLEXWelcomeMatDisabled", default)]
-    pub is_lex_welcome_mat_disabled: bool,
-    #[serde(rename = "isMeetTheAssistantDisabledInClassic", default)]
-    pub is_meet_the_assistant_disabled_in_classic: bool,
-    #[serde(rename = "isMeetTheAssistantDisabledInLightning", default)]
-    pub is_meet_the_assistant_disabled_in_lightning: bool,
-    #[serde(rename = "isSmartNudgesDisabled", default)]
-    pub is_smart_nudges_disabled: bool,
-    #[serde(rename = "optimizerAppEnabled", default)]
-    pub optimizer_app_enabled: bool,
-    #[serde(rename = "suggestedForYou", default)]
-    pub suggested_for_you: bool,
+    #[serde(
+        rename = "canUseAdoptionApps",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub can_use_adoption_apps: Option<bool>,
+    #[serde(
+        rename = "doesScheduledSwitcherRunDaily",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_scheduled_switcher_run_daily: Option<bool>,
+    #[serde(
+        rename = "enableCustomHelpGlobalSection",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_custom_help_global_section: Option<bool>,
+    #[serde(
+        rename = "enableHelpMenuShowFeedback",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_help_menu_show_feedback: Option<bool>,
+    #[serde(
+        rename = "enableHelpMenuShowHelp",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_help_menu_show_help: Option<bool>,
+    #[serde(
+        rename = "enableHelpMenuShowNewUser",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_help_menu_show_new_user: Option<bool>,
+    #[serde(
+        rename = "enableHelpMenuShowSearch",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_help_menu_show_search: Option<bool>,
+    #[serde(
+        rename = "enableHelpMenuShowSfdcContent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_help_menu_show_sfdc_content: Option<bool>,
+    #[serde(
+        rename = "enableHelpMenuShowShortcut",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_help_menu_show_shortcut: Option<bool>,
+    #[serde(
+        rename = "enableHelpMenuShowSupport",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_help_menu_show_support: Option<bool>,
+    #[serde(
+        rename = "enableHelpMenuShowTrailhead",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_help_menu_show_trailhead: Option<bool>,
+    #[serde(
+        rename = "enableIBILOptOutDashboards",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ibil_opt_out_dashboards: Option<bool>,
+    #[serde(
+        rename = "enableIBILOptOutEvents",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ibil_opt_out_events: Option<bool>,
+    #[serde(
+        rename = "enableIBILOptOutReports",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ibil_opt_out_reports: Option<bool>,
+    #[serde(
+        rename = "enableIBILOptOutTasks",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_ibil_opt_out_tasks: Option<bool>,
+    #[serde(
+        rename = "enableLexToClassicFeedbackEnable",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lex_to_classic_feedback_enable: Option<bool>,
+    #[serde(
+        rename = "enableOrchestrationInSandbox",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_orchestration_in_sandbox: Option<bool>,
+    #[serde(
+        rename = "enableOrgUserAssistEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_org_user_assist_enabled: Option<bool>,
+    #[serde(
+        rename = "enableScheduledSwitcher",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_scheduled_switcher: Option<bool>,
+    #[serde(
+        rename = "enableSfdcProductFeedbackSurvey",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_sfdc_product_feedback_survey: Option<bool>,
+    #[serde(
+        rename = "enableShowSalesforceUserAssist",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_show_salesforce_user_assist: Option<bool>,
+    #[serde(
+        rename = "isAutoTransitionDelayed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_auto_transition_delayed: Option<bool>,
+    #[serde(
+        rename = "isCrucNotificationDisabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_cruc_notification_disabled: Option<bool>,
+    #[serde(
+        rename = "isCustomProfileAutoTransitionDelayed",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_custom_profile_auto_transition_delayed: Option<bool>,
+    #[serde(
+        rename = "isLEXWelcomeMatDisabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_lex_welcome_mat_disabled: Option<bool>,
+    #[serde(
+        rename = "isMeetTheAssistantDisabledInClassic",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_meet_the_assistant_disabled_in_classic: Option<bool>,
+    #[serde(
+        rename = "isMeetTheAssistantDisabledInLightning",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_meet_the_assistant_disabled_in_lightning: Option<bool>,
+    #[serde(
+        rename = "isSmartNudgesDisabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_smart_nudges_disabled: Option<bool>,
+    #[serde(
+        rename = "optimizerAppEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub optimizer_app_enabled: Option<bool>,
+    #[serde(
+        rename = "suggestedForYou",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub suggested_for_you: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct UserInterfaceSettings {
-    #[serde(rename = "alternateAlohaListView", default)]
-    pub alternate_aloha_list_view: bool,
-    #[serde(rename = "dynamicMruActionsOff", default)]
-    pub dynamic_mru_actions_off: bool,
-    #[serde(rename = "enableAsyncRelatedLists", default)]
-    pub enable_async_related_lists: bool,
-    #[serde(rename = "enableClickjackUserPageHeaderless", default)]
-    pub enable_clickjack_user_page_headerless: bool,
-    #[serde(rename = "enableCollapsibleSections", default)]
-    pub enable_collapsible_sections: bool,
-    #[serde(rename = "enableCollapsibleSideBar", default)]
-    pub enable_collapsible_side_bar: bool,
-    #[serde(rename = "enableCustomObjectTruncate", default)]
-    pub enable_custom_object_truncate: bool,
-    #[serde(rename = "enableCustomeSideBarOnAllPages", default)]
-    pub enable_custome_side_bar_on_all_pages: bool,
-    #[serde(rename = "enableDeleteFieldHistory", default)]
-    pub enable_delete_field_history: bool,
-    #[serde(rename = "enableExternalObjectAsyncRelatedLists", default)]
-    pub enable_external_object_async_related_lists: bool,
-    #[serde(rename = "enableHoverDetails", default)]
-    pub enable_hover_details: bool,
-    #[serde(rename = "enableInlineEdit", default)]
-    pub enable_inline_edit: bool,
-    #[serde(rename = "enableLightningVerticalNav", default)]
-    pub enable_lightning_vertical_nav: bool,
-    #[serde(rename = "enableNewPageLayoutEditor", default)]
-    pub enable_new_page_layout_editor: bool,
-    #[serde(rename = "enablePersonalCanvas", default)]
-    pub enable_personal_canvas: bool,
-    #[serde(rename = "enablePrintableListViews", default)]
-    pub enable_printable_list_views: bool,
-    #[serde(rename = "enableProfileCustomTabsets", default)]
-    pub enable_profile_custom_tabsets: bool,
-    #[serde(rename = "enableQuickCreate", default)]
-    pub enable_quick_create: bool,
-    #[serde(rename = "enableQuickSetupPanel", default)]
-    pub enable_quick_setup_panel: bool,
-    #[serde(rename = "enableRelatedListHovers", default)]
-    pub enable_related_list_hovers: bool,
-    #[serde(rename = "enableSldsV2", default)]
-    pub enable_slds_v_2: bool,
-    #[serde(rename = "enableSldsV2DarkModeInCosmos", default)]
-    pub enable_slds_v_2_dark_mode_in_cosmos: bool,
-    #[serde(rename = "enableSpotlight", default)]
-    pub enable_spotlight: bool,
-    #[serde(rename = "enableTabOrganizer", default)]
-    pub enable_tab_organizer: bool,
-    #[serde(rename = "enableVertNavThemedIconsEnabled", default)]
-    pub enable_vert_nav_themed_icons_enabled: bool,
-    #[serde(rename = "enableVerticalNavSeamlessSwitching", default)]
-    pub enable_vertical_nav_seamless_switching: bool,
-    #[serde(rename = "multiColumnSort", default)]
-    pub multi_column_sort: bool,
-    #[serde(rename = "multiColumnSortLv", default)]
-    pub multi_column_sort_lv: bool,
-    #[serde(rename = "multiColumnSortRl", default)]
-    pub multi_column_sort_rl: bool,
+    #[serde(
+        rename = "alternateAlohaListView",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub alternate_aloha_list_view: Option<bool>,
+    #[serde(
+        rename = "dynamicMruActionsOff",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub dynamic_mru_actions_off: Option<bool>,
+    #[serde(
+        rename = "enableAsyncRelatedLists",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_async_related_lists: Option<bool>,
+    #[serde(
+        rename = "enableClickjackUserPageHeaderless",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_clickjack_user_page_headerless: Option<bool>,
+    #[serde(
+        rename = "enableCollapsibleSections",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_collapsible_sections: Option<bool>,
+    #[serde(
+        rename = "enableCollapsibleSideBar",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_collapsible_side_bar: Option<bool>,
+    #[serde(
+        rename = "enableCustomObjectTruncate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_custom_object_truncate: Option<bool>,
+    #[serde(
+        rename = "enableCustomeSideBarOnAllPages",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_custome_side_bar_on_all_pages: Option<bool>,
+    #[serde(
+        rename = "enableDeleteFieldHistory",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_delete_field_history: Option<bool>,
+    #[serde(
+        rename = "enableEinsteinCopilotSetupCompleted",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_einstein_copilot_setup_completed: Option<bool>,
+    #[serde(
+        rename = "enableExternalObjectAsyncRelatedLists",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_external_object_async_related_lists: Option<bool>,
+    #[serde(
+        rename = "enableHoverDetails",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_hover_details: Option<bool>,
+    #[serde(
+        rename = "enableInlineEdit",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_inline_edit: Option<bool>,
+    #[serde(
+        rename = "enableLightningVerticalNav",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_lightning_vertical_nav: Option<bool>,
+    #[serde(
+        rename = "enableNewPageLayoutEditor",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_new_page_layout_editor: Option<bool>,
+    #[serde(
+        rename = "enablePersonalCanvas",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_personal_canvas: Option<bool>,
+    #[serde(
+        rename = "enablePrintableListViews",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_printable_list_views: Option<bool>,
+    #[serde(
+        rename = "enableProfileCustomTabsets",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_profile_custom_tabsets: Option<bool>,
+    #[serde(
+        rename = "enableQuickCreate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_quick_create: Option<bool>,
+    #[serde(
+        rename = "enableQuickSetupPanel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_quick_setup_panel: Option<bool>,
+    #[serde(
+        rename = "enableRelatedListHovers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_related_list_hovers: Option<bool>,
+    #[serde(
+        rename = "enableSldsV2",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_slds_v_2: Option<bool>,
+    #[serde(
+        rename = "enableSldsV2DarkModeInCosmos",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_slds_v_2_dark_mode_in_cosmos: Option<bool>,
+    #[serde(
+        rename = "enableSpotlight",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_spotlight: Option<bool>,
+    #[serde(
+        rename = "enableTabOrganizer",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_tab_organizer: Option<bool>,
+    #[serde(
+        rename = "enableVertNavThemedIconsEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_vert_nav_themed_icons_enabled: Option<bool>,
+    #[serde(
+        rename = "enableVerticalNavSeamlessSwitching",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_vertical_nav_seamless_switching: Option<bool>,
+    #[serde(
+        rename = "multiColumnSort",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub multi_column_sort: Option<bool>,
+    #[serde(
+        rename = "multiColumnSortLv",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub multi_column_sort_lv: Option<bool>,
+    #[serde(
+        rename = "multiColumnSortRl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub multi_column_sort_rl: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct UserManagementSettings {
-    #[serde(rename = "enableCanAnswerContainUsername", default)]
-    pub enable_can_answer_contain_username: bool,
-    #[serde(rename = "enableConcealPersonalInfo", default)]
-    pub enable_conceal_personal_info: bool,
-    #[serde(rename = "enableContactlessExternalIdentityUsers", default)]
-    pub enable_contactless_external_identity_users: bool,
-    #[serde(rename = "enableEnhancedConcealPersonalInfo", default)]
-    pub enable_enhanced_conceal_personal_info: bool,
-    #[serde(rename = "enableEnhancedPermsetMgmt", default)]
-    pub enable_enhanced_permset_mgmt: bool,
-    #[serde(rename = "enableEnhancedProfileMgmt", default)]
-    pub enable_enhanced_profile_mgmt: bool,
-    #[serde(rename = "enableEnhcUiUserAccessPolicies", default)]
-    pub enable_enhc_ui_user_access_policies: bool,
-    #[serde(rename = "enableNewProfileUI", default)]
-    pub enable_new_profile_ui: bool,
-    #[serde(rename = "enableProfileFiltering", default)]
-    pub enable_profile_filtering: bool,
-    #[serde(rename = "enableRestrictEmailDomains", default)]
-    pub enable_restrict_email_domains: bool,
-    #[serde(rename = "enableScrambleUserData", default)]
-    pub enable_scramble_user_data: bool,
-    #[serde(rename = "enableUserSelfDeactivate", default)]
-    pub enable_user_self_deactivate: bool,
-    #[serde(rename = "enhancedPermSetList", default)]
-    pub enhanced_perm_set_list: bool,
-    #[serde(rename = "enhancedUserListView", default)]
-    pub enhanced_user_list_view: bool,
-    #[serde(rename = "enhancedUserRoleListView", default)]
-    pub enhanced_user_role_list_view: bool,
-    #[serde(rename = "groupSummaryUIEnhancement", default)]
-    pub group_summary_ui_enhancement: bool,
-    #[serde(rename = "permsetsInFieldCreation", default)]
-    pub permsets_in_field_creation: bool,
-    #[serde(rename = "psaExpirationUIEnabled", default)]
-    pub psa_expiration_ui_enabled: bool,
-    #[serde(rename = "restrictedProfileCloning", default)]
-    pub restricted_profile_cloning: bool,
-    #[serde(rename = "userAccessPoliciesEnabled", default)]
-    pub user_access_policies_enabled: bool,
-    #[serde(rename = "userFieldHistoryTracking", default)]
-    pub user_field_history_tracking: bool,
+    #[serde(
+        rename = "enableCanAnswerContainUsername",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_can_answer_contain_username: Option<bool>,
+    #[serde(
+        rename = "enableConcealPersonalInfo",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_conceal_personal_info: Option<bool>,
+    #[serde(
+        rename = "enableContactlessExternalIdentityUsers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_contactless_external_identity_users: Option<bool>,
+    #[serde(
+        rename = "enableEnhancedConcealPersonalInfo",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_enhanced_conceal_personal_info: Option<bool>,
+    #[serde(
+        rename = "enableEnhancedPermsetMgmt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_enhanced_permset_mgmt: Option<bool>,
+    #[serde(
+        rename = "enableEnhancedProfileMgmt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_enhanced_profile_mgmt: Option<bool>,
+    #[serde(
+        rename = "enableEnhcUiUserAccessPolicies",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_enhc_ui_user_access_policies: Option<bool>,
+    #[serde(
+        rename = "enableNewProfileUI",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_new_profile_ui: Option<bool>,
+    #[serde(
+        rename = "enableProfileFiltering",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_profile_filtering: Option<bool>,
+    #[serde(
+        rename = "enableRestrictEmailDomains",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_restrict_email_domains: Option<bool>,
+    #[serde(
+        rename = "enableScrambleUserData",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_scramble_user_data: Option<bool>,
+    #[serde(
+        rename = "enableUserSelfDeactivate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_user_self_deactivate: Option<bool>,
+    #[serde(
+        rename = "enhancedPermSetList",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enhanced_perm_set_list: Option<bool>,
+    #[serde(
+        rename = "enhancedUserListView",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enhanced_user_list_view: Option<bool>,
+    #[serde(
+        rename = "enhancedUserRoleListView",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enhanced_user_role_list_view: Option<bool>,
+    #[serde(
+        rename = "groupSummaryUIEnhancement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub group_summary_ui_enhancement: Option<bool>,
+    #[serde(
+        rename = "permsetsInFieldCreation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub permsets_in_field_creation: Option<bool>,
+    #[serde(
+        rename = "psaExpirationUIEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub psa_expiration_ui_enabled: Option<bool>,
+    #[serde(
+        rename = "restrictedProfileCloning",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub restricted_profile_cloning: Option<bool>,
+    #[serde(
+        rename = "userAccessPoliciesEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub user_access_policies_enabled: Option<bool>,
+    #[serde(
+        rename = "userFieldHistoryTracking",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub user_field_history_tracking: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -5763,121 +14563,280 @@ pub struct ValueSettings {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct VoiceSettings {
-    #[serde(rename = "enableCallDisposition", default)]
-    pub enable_call_disposition: bool,
-    #[serde(rename = "enableConsentReminder", default)]
-    pub enable_consent_reminder: bool,
-    #[serde(rename = "enableDefaultRecording", default)]
-    pub enable_default_recording: bool,
-    #[serde(rename = "enableVoiceCallList", default)]
-    pub enable_voice_call_list: bool,
-    #[serde(rename = "enableVoiceCallRecording", default)]
-    pub enable_voice_call_recording: bool,
-    #[serde(rename = "enableVoiceCoaching", default)]
-    pub enable_voice_coaching: bool,
-    #[serde(rename = "enableVoiceConferencing", default)]
-    pub enable_voice_conferencing: bool,
-    #[serde(rename = "enableVoiceLocalPresence", default)]
-    pub enable_voice_local_presence: bool,
-    #[serde(rename = "enableVoiceMail", default)]
-    pub enable_voice_mail: bool,
-    #[serde(rename = "enableVoiceMailDrop", default)]
-    pub enable_voice_mail_drop: bool,
+    #[serde(
+        rename = "enableCallDisposition",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_call_disposition: Option<bool>,
+    #[serde(
+        rename = "enableConsentReminder",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_consent_reminder: Option<bool>,
+    #[serde(
+        rename = "enableDefaultRecording",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_default_recording: Option<bool>,
+    #[serde(
+        rename = "enableVoiceCallList",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_voice_call_list: Option<bool>,
+    #[serde(
+        rename = "enableVoiceCallRecording",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_voice_call_recording: Option<bool>,
+    #[serde(
+        rename = "enableVoiceCoaching",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_voice_coaching: Option<bool>,
+    #[serde(
+        rename = "enableVoiceConferencing",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_voice_conferencing: Option<bool>,
+    #[serde(
+        rename = "enableVoiceLocalPresence",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_voice_local_presence: Option<bool>,
+    #[serde(
+        rename = "enableVoiceMail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_voice_mail: Option<bool>,
+    #[serde(
+        rename = "enableVoiceMailDrop",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_voice_mail_drop: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct WarrantyLifecycleMgmtSettings {
-    #[serde(rename = "enableWarrantyLCMgmt", default)]
-    pub enable_warranty_lc_mgmt: bool,
+    #[serde(
+        rename = "enableWarrantyLCMgmt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_warranty_lc_mgmt: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct Web3Settings {
-    #[serde(rename = "enableMultisig", default)]
-    pub enable_multisig: bool,
+    #[serde(
+        rename = "enableMultisig",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_multisig: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct WebToCaseSettings {
-    #[serde(rename = "caseOrigin", default)]
-    pub case_origin: String,
-    #[serde(rename = "defaultResponseTemplate", default)]
-    pub default_response_template: String,
-    #[serde(rename = "enableWebToCase", default)]
-    pub enable_web_to_case: bool,
+    #[serde(
+        rename = "caseOrigin",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub case_origin: Option<String>,
+    #[serde(
+        rename = "defaultResponseTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_response_template: Option<String>,
+    #[serde(
+        rename = "enableWebToCase",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_web_to_case: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct WebToXSettings {
-    #[serde(rename = "optOutEmailForInactiveWebToCase", default)]
-    pub opt_out_email_for_inactive_web_to_case: bool,
-    #[serde(rename = "shouldHideRecordInfoInEmail", default)]
-    pub should_hide_record_info_in_email: bool,
-    #[serde(rename = "webToCaseSpamFilter", default)]
-    pub web_to_case_spam_filter: bool,
-    #[serde(rename = "webToLeadSpamFilter", default)]
-    pub web_to_lead_spam_filter: bool,
+    #[serde(
+        rename = "optOutEmailForInactiveWebToCase",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub opt_out_email_for_inactive_web_to_case: Option<bool>,
+    #[serde(
+        rename = "shouldHideRecordInfoInEmail",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub should_hide_record_info_in_email: Option<bool>,
+    #[serde(
+        rename = "webToCaseSpamFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub web_to_case_spam_filter: Option<bool>,
+    #[serde(
+        rename = "webToLeadSpamFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub web_to_lead_spam_filter: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct WorkDotComSettings {
-    #[serde(rename = "enableCoachingManagerGroupAccess", default)]
-    pub enable_coaching_manager_group_access: bool,
-    #[serde(rename = "enableGoalManagerGroupAccess", default)]
-    pub enable_goal_manager_group_access: bool,
-    #[serde(rename = "enableProfileSkills", default)]
-    pub enable_profile_skills: bool,
-    #[serde(rename = "enableProfileSkillsAddFeedPost", default)]
-    pub enable_profile_skills_add_feed_post: bool,
-    #[serde(rename = "enableProfileSkillsAutoSuggest", default)]
-    pub enable_profile_skills_auto_suggest: bool,
-    #[serde(rename = "enableProfileSkillsUsePlatform", default)]
-    pub enable_profile_skills_use_platform: bool,
-    #[serde(rename = "enableWorkBadgeDefRestrictPref", default)]
-    pub enable_work_badge_def_restrict_pref: bool,
-    #[serde(rename = "enableWorkCalibration", default)]
-    pub enable_work_calibration: bool,
-    #[serde(rename = "enableWorkCanvasPref", default)]
-    pub enable_work_canvas_pref: bool,
-    #[serde(rename = "enableWorkCertification", default)]
-    pub enable_work_certification: bool,
-    #[serde(rename = "enableWorkCertificationNotification", default)]
-    pub enable_work_certification_notification: bool,
-    #[serde(rename = "enableWorkRewardsPref", default)]
-    pub enable_work_rewards_pref: bool,
-    #[serde(rename = "enableWorkThanksPref", default)]
-    pub enable_work_thanks_pref: bool,
-    #[serde(rename = "enableWorkUseObjectivesForGoals", default)]
-    pub enable_work_use_objectives_for_goals: bool,
+    #[serde(
+        rename = "enableCoachingManagerGroupAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_coaching_manager_group_access: Option<bool>,
+    #[serde(
+        rename = "enableGoalManagerGroupAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_goal_manager_group_access: Option<bool>,
+    #[serde(
+        rename = "enableProfileSkills",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_profile_skills: Option<bool>,
+    #[serde(
+        rename = "enableProfileSkillsAddFeedPost",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_profile_skills_add_feed_post: Option<bool>,
+    #[serde(
+        rename = "enableProfileSkillsAutoSuggest",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_profile_skills_auto_suggest: Option<bool>,
+    #[serde(
+        rename = "enableProfileSkillsUsePlatform",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_profile_skills_use_platform: Option<bool>,
+    #[serde(
+        rename = "enableWorkBadgeDefRestrictPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_work_badge_def_restrict_pref: Option<bool>,
+    #[serde(
+        rename = "enableWorkCalibration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_work_calibration: Option<bool>,
+    #[serde(
+        rename = "enableWorkCanvasPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_work_canvas_pref: Option<bool>,
+    #[serde(
+        rename = "enableWorkCertification",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_work_certification: Option<bool>,
+    #[serde(
+        rename = "enableWorkCertificationNotification",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_work_certification_notification: Option<bool>,
+    #[serde(
+        rename = "enableWorkRewardsPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_work_rewards_pref: Option<bool>,
+    #[serde(
+        rename = "enableWorkThanksPref",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_work_thanks_pref: Option<bool>,
+    #[serde(
+        rename = "enableWorkUseObjectivesForGoals",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_work_use_objectives_for_goals: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct WorkforceEngagementSettings {
-    #[serde(rename = "enableHistoricalAdherence", default)]
-    pub enable_historical_adherence: bool,
-    #[serde(rename = "enableIndividualAdherence", default)]
-    pub enable_individual_adherence: bool,
-    #[serde(rename = "enableIntradayManagement", default)]
-    pub enable_intraday_management: bool,
-    #[serde(rename = "enableMachineLearningForecasting", default)]
-    pub enable_machine_learning_forecasting: bool,
-    #[serde(rename = "enableRealTimeAdherence", default)]
-    pub enable_real_time_adherence: bool,
-    #[serde(rename = "enableWorkforceEngagement", default)]
-    pub enable_workforce_engagement: bool,
-    #[serde(rename = "enableWorkforceEngagementConfiguration", default)]
-    pub enable_workforce_engagement_configuration: bool,
+    #[serde(
+        rename = "enableHistoricalAdherence",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_historical_adherence: Option<bool>,
+    #[serde(
+        rename = "enableIndividualAdherence",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_individual_adherence: Option<bool>,
+    #[serde(
+        rename = "enableIntradayManagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_intraday_management: Option<bool>,
+    #[serde(
+        rename = "enableMachineLearningForecasting",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_machine_learning_forecasting: Option<bool>,
+    #[serde(
+        rename = "enableRealTimeAdherence",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_real_time_adherence: Option<bool>,
+    #[serde(
+        rename = "enableWorkforceEngagement",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_workforce_engagement: Option<bool>,
+    #[serde(
+        rename = "enableWorkforceEngagementConfiguration",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_workforce_engagement_configuration: Option<bool>,
 }
-

@@ -52,12 +52,16 @@ pub struct ApprovalAction {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ApprovalEntryCriteria {
-    #[serde(rename = "booleanFilter", default)]
-    pub boolean_filter: String,
+    #[serde(
+        rename = "booleanFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub boolean_filter: Option<String>,
     #[serde(rename = "criteriaItems", default)]
     pub criteria_items: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub formula: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub formula: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -74,72 +78,156 @@ pub struct ApprovalPageField {
 pub struct ApprovalProcess {
     #[serde(default)]
     pub active: bool,
-    #[serde(rename = "allowRecall", default)]
-    pub allow_recall: bool,
+    #[serde(
+        rename = "allowRecall",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_recall: Option<bool>,
     #[serde(rename = "allowedSubmitters", default)]
     pub allowed_submitters: Vec<ApprovalSubmitter>,
-    #[serde(rename = "approvalPageFields", default)]
-    pub approval_page_fields: ApprovalPageField,
+    #[serde(
+        rename = "approvalPageFields",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub approval_page_fields: Option<ApprovalPageField>,
     #[serde(rename = "approvalStep", default)]
     pub approval_step: Vec<ApprovalStep>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "emailTemplate", default)]
-    pub email_template: String,
-    #[serde(rename = "enableMobileDeviceAccess", default)]
-    pub enable_mobile_device_access: bool,
-    #[serde(rename = "entryCriteria", default)]
-    pub entry_criteria: ApprovalEntryCriteria,
-    #[serde(rename = "finalApprovalActions", default)]
-    pub final_approval_actions: ApprovalAction,
-    #[serde(rename = "finalApprovalRecordLock", default)]
-    pub final_approval_record_lock: bool,
-    #[serde(rename = "finalRejectionActions", default)]
-    pub final_rejection_actions: ApprovalAction,
-    #[serde(rename = "finalRejectionRecordLock", default)]
-    pub final_rejection_record_lock: bool,
-    #[serde(rename = "initialSubmissionActions", default)]
-    pub initial_submission_actions: ApprovalAction,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "emailTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub email_template: Option<String>,
+    #[serde(
+        rename = "enableMobileDeviceAccess",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enable_mobile_device_access: Option<bool>,
+    #[serde(
+        rename = "entryCriteria",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub entry_criteria: Option<ApprovalEntryCriteria>,
+    #[serde(
+        rename = "finalApprovalActions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub final_approval_actions: Option<ApprovalAction>,
+    #[serde(
+        rename = "finalApprovalRecordLock",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub final_approval_record_lock: Option<bool>,
+    #[serde(
+        rename = "finalRejectionActions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub final_rejection_actions: Option<ApprovalAction>,
+    #[serde(
+        rename = "finalRejectionRecordLock",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub final_rejection_record_lock: Option<bool>,
+    #[serde(
+        rename = "initialSubmissionActions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub initial_submission_actions: Option<ApprovalAction>,
     #[serde(default)]
     pub label: String,
-    #[serde(rename = "nextAutomatedApprover", default)]
-    pub next_automated_approver: serde_json::Value,
-    #[serde(rename = "postTemplate", default)]
-    pub post_template: String,
-    #[serde(rename = "processOrder", default)]
-    pub process_order: f64,
-    #[serde(rename = "recallActions", default)]
-    pub recall_actions: ApprovalAction,
+    #[serde(
+        rename = "nextAutomatedApprover",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub next_automated_approver: Option<serde_json::Value>,
+    #[serde(
+        rename = "postTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub post_template: Option<String>,
+    #[serde(
+        rename = "processOrder",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub process_order: Option<f64>,
+    #[serde(
+        rename = "recallActions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recall_actions: Option<ApprovalAction>,
     #[serde(rename = "recordEditability", default)]
     pub record_editability: serde_json::Value,
-    #[serde(rename = "showApprovalHistory", default)]
-    pub show_approval_history: bool,
+    #[serde(
+        rename = "showApprovalHistory",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_approval_history: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ApprovalStep {
-    #[serde(rename = "allowDelegate", default)]
-    pub allow_delegate: bool,
-    #[serde(rename = "approvalActions", default)]
-    pub approval_actions: ApprovalAction,
+    #[serde(
+        rename = "allowDelegate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_delegate: Option<bool>,
+    #[serde(
+        rename = "approvalActions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub approval_actions: Option<ApprovalAction>,
     #[serde(rename = "assignedApprover", default)]
     pub assigned_approver: ApprovalStepApprover,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "entryCriteria", default)]
-    pub entry_criteria: ApprovalEntryCriteria,
-    #[serde(rename = "ifCriteriaNotMet", default)]
-    pub if_criteria_not_met: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "entryCriteria",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub entry_criteria: Option<ApprovalEntryCriteria>,
+    #[serde(
+        rename = "ifCriteriaNotMet",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub if_criteria_not_met: Option<serde_json::Value>,
     #[serde(default)]
     pub label: String,
     #[serde(default)]
     pub name: String,
-    #[serde(rename = "rejectBehavior", default)]
-    pub reject_behavior: ApprovalStepRejectBehavior,
-    #[serde(rename = "rejectionActions", default)]
-    pub rejection_actions: ApprovalAction,
+    #[serde(
+        rename = "rejectBehavior",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub reject_behavior: Option<ApprovalStepRejectBehavior>,
+    #[serde(
+        rename = "rejectionActions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub rejection_actions: Option<ApprovalAction>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -148,15 +236,19 @@ pub struct ApprovalStep {
 pub struct ApprovalStepApprover {
     #[serde(default)]
     pub approver: Vec<serde_json::Value>,
-    #[serde(rename = "whenMultipleApprovers", default)]
-    pub when_multiple_approvers: serde_json::Value,
+    #[serde(
+        rename = "whenMultipleApprovers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub when_multiple_approvers: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ApprovalStepRejectBehavior {
-    #[serde(default)]
+    #[serde(rename = "type", default)]
     pub r#type: serde_json::Value,
 }
 
@@ -164,9 +256,9 @@ pub struct ApprovalStepRejectBehavior {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ApprovalSubmitter {
-    #[serde(default)]
-    pub submitter: String,
-    #[serde(default)]
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub submitter: Option<String>,
+    #[serde(rename = "type", default)]
     pub r#type: serde_json::Value,
 }
 
@@ -174,8 +266,8 @@ pub struct ApprovalSubmitter {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct AssignmentRule {
-    #[serde(default)]
-    pub active: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub active: Option<bool>,
     #[serde(rename = "ruleEntry", default)]
     pub rule_entry: Vec<serde_json::Value>,
 }
@@ -192,8 +284,8 @@ pub struct AssignmentRules {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct AutoResponseRule {
-    #[serde(default)]
-    pub active: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub active: Option<bool>,
     #[serde(rename = "ruleEntry", default)]
     pub rule_entry: Vec<serde_json::Value>,
 }
@@ -214,14 +306,22 @@ pub struct DuplicateRule {
     pub action_on_insert: serde_json::Value,
     #[serde(rename = "actionOnUpdate", default)]
     pub action_on_update: serde_json::Value,
-    #[serde(rename = "alertText", default)]
-    pub alert_text: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "duplicateRuleFilter", default)]
-    pub duplicate_rule_filter: serde_json::Value,
-    #[serde(rename = "duplicateRuleMatchRules", default)]
-    pub duplicate_rule_match_rules: Vec<serde_json::Value>,
+    #[serde(rename = "alertText", default, skip_serializing_if = "Option::is_none")]
+    pub alert_text: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "duplicateRuleFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub duplicate_rule_filter: Option<serde_json::Value>,
+    #[serde(
+        rename = "duplicateRuleMatchRules",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub duplicate_rule_match_rules: Option<Vec<serde_json::Value>>,
     #[serde(rename = "isActive", default)]
     pub is_active: bool,
     #[serde(rename = "masterLabel", default)]
@@ -240,8 +340,8 @@ pub struct DuplicateRule {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct EscalationRule {
-    #[serde(default)]
-    pub active: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub active: Option<bool>,
     #[serde(rename = "ruleEntry", default)]
     pub rule_entry: Vec<serde_json::Value>,
 }
@@ -258,10 +358,14 @@ pub struct EscalationRules {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct MatchingRule {
-    #[serde(rename = "booleanFilter", default)]
-    pub boolean_filter: String,
-    #[serde(default)]
-    pub description: String,
+    #[serde(
+        rename = "booleanFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub boolean_filter: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(default)]
     pub label: String,
     #[serde(rename = "matchingRuleItems", default)]
@@ -283,23 +387,23 @@ pub struct MatchingRules {
 #[serde(rename_all = "camelCase")]
 pub struct Workflow {
     #[serde(default)]
-    pub alerts: Vec<serde_json::Value>,
+    pub alerts: Vec<WorkflowAlert>,
     #[serde(rename = "fieldUpdates", default)]
-    pub field_updates: Vec<serde_json::Value>,
+    pub field_updates: Vec<WorkflowFieldUpdate>,
     #[serde(rename = "flowActions", default)]
-    pub flow_actions: Vec<serde_json::Value>,
+    pub flow_actions: Vec<WorkflowFlowAction>,
     #[serde(rename = "flowAutomation", default)]
-    pub flow_automation: Vec<serde_json::Value>,
+    pub flow_automation: Vec<WorkflowFlowAutomation>,
     #[serde(rename = "knowledgePublishes", default)]
-    pub knowledge_publishes: Vec<serde_json::Value>,
+    pub knowledge_publishes: Vec<WorkflowKnowledgePublish>,
     #[serde(rename = "outboundMessages", default)]
-    pub outbound_messages: Vec<serde_json::Value>,
+    pub outbound_messages: Vec<WorkflowOutboundMessage>,
     #[serde(default)]
     pub rules: Vec<WorkflowRule>,
     #[serde(default)]
-    pub send: Vec<serde_json::Value>,
+    pub send: Vec<WorkflowSend>,
     #[serde(default)]
-    pub tasks: Vec<serde_json::Value>,
+    pub tasks: Vec<WorkflowTask>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -308,20 +412,116 @@ pub struct Workflow {
 pub struct WorkflowActionReference {
     #[serde(default)]
     pub name: String,
-    #[serde(default)]
+    #[serde(rename = "type", default)]
     pub r#type: WorkflowActionType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct WorkflowAlert {
+    #[serde(rename = "ccEmails", default)]
+    pub cc_emails: Vec<String>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub protected: bool,
+    #[serde(default)]
+    pub recipients: Vec<WorkflowEmailRecipient>,
+    #[serde(
+        rename = "senderAddress",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sender_address: Option<String>,
+    #[serde(
+        rename = "senderType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub sender_type: Option<serde_json::Value>,
+    #[serde(default)]
+    pub template: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct WorkflowEmailRecipient {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub field: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub recipient: Option<String>,
+    #[serde(rename = "type", default)]
+    pub r#type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WorkflowFieldUpdate {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(default)]
     pub field: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub formula: Option<String>,
+    #[serde(
+        rename = "literalValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub literal_value: Option<String>,
+    #[serde(
+        rename = "lookupValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub lookup_value: Option<String>,
+    #[serde(
+        rename = "lookupValueType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub lookup_value_type: Option<serde_json::Value>,
     #[serde(default)]
-    pub recipient: String,
+    pub name: String,
+    #[serde(rename = "notifyAssignee", default)]
+    pub notify_assignee: bool,
     #[serde(default)]
-    pub r#type: serde_json::Value,
+    pub operation: serde_json::Value,
+    #[serde(default)]
+    pub protected: bool,
+    #[serde(
+        rename = "reevaluateOnChange",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub reevaluate_on_change: Option<bool>,
+    #[serde(
+        rename = "targetObject",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub target_object: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WorkflowFlowAction {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default)]
+    pub flow: String,
+    #[serde(rename = "flowInputs", default)]
+    pub flow_inputs: Vec<WorkflowFlowActionParameter>,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub language: Option<String>,
+    #[serde(default)]
+    pub protected: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -330,8 +530,112 @@ pub struct WorkflowEmailRecipient {
 pub struct WorkflowFlowActionParameter {
     #[serde(default)]
     pub name: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub value: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WorkflowFlowAutomation {
+    #[serde(
+        rename = "activeOrLastInactiveVersion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub active_or_last_inactive_version: Option<String>,
+    #[serde(
+        rename = "activeOrLatestVersion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub active_or_latest_version: Option<String>,
+    #[serde(
+        rename = "activeVersion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub active_version: Option<String>,
+    #[serde(
+        rename = "fireflyGuid",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub firefly_guid: Option<String>,
+    #[serde(
+        rename = "isFlowAccessEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_flow_access_enabled: Option<bool>,
+    #[serde(
+        rename = "latestVersion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub latest_version: Option<String>,
+    #[serde(
+        rename = "masterLabel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub master_label: Option<String>,
+    #[serde(
+        rename = "migratedFrom",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub migrated_from: Option<String>,
+    #[serde(
+        rename = "objectType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub object_type: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WorkflowKnowledgePublish {
     #[serde(default)]
-    pub value: String,
+    pub action: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub language: Option<String>,
+    #[serde(default)]
+    pub protected: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WorkflowOutboundMessage {
+    #[serde(rename = "apiVersion", default)]
+    pub api_version: f64,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "endpointUrl", default)]
+    pub endpoint_url: String,
+    #[serde(default)]
+    pub fields: Vec<String>,
+    #[serde(rename = "includeSessionId", default)]
+    pub include_session_id: bool,
+    #[serde(rename = "integrationUser", default)]
+    pub integration_user: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub protected: bool,
+    #[serde(
+        rename = "useDeadLetterQueue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub use_dead_letter_queue: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -342,16 +646,24 @@ pub struct WorkflowRule {
     pub actions: Vec<WorkflowActionReference>,
     #[serde(default)]
     pub active: bool,
-    #[serde(rename = "booleanFilter", default)]
-    pub boolean_filter: String,
+    #[serde(
+        rename = "booleanFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub boolean_filter: Option<String>,
     #[serde(rename = "criteriaItems", default)]
     pub criteria_items: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "failedMigrationToolVersion", default)]
-    pub failed_migration_tool_version: String,
-    #[serde(default)]
-    pub formula: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "failedMigrationToolVersion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub failed_migration_tool_version: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub formula: Option<String>,
     #[serde(rename = "triggerType", default)]
     pub trigger_type: WorkflowTriggerTypes,
     #[serde(rename = "workflowTimeTriggers", default)]
@@ -361,13 +673,63 @@ pub struct WorkflowRule {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct WorkflowTaskTranslation {
+pub struct WorkflowSend {
     #[serde(default)]
-    pub description: String,
+    pub action: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(default)]
-    pub name: String,
+    pub label: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub language: Option<String>,
+    #[serde(default)]
+    pub protected: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WorkflowTask {
+    #[serde(
+        rename = "assignedTo",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub assigned_to: Option<String>,
+    #[serde(rename = "assignedToType", default)]
+    pub assigned_to_type: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "dueDateOffset", default)]
+    pub due_date_offset: f64,
+    #[serde(rename = "notifyAssignee", default)]
+    pub notify_assignee: bool,
+    #[serde(
+        rename = "offsetFromField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub offset_from_field: Option<String>,
+    #[serde(default)]
+    pub priority: String,
+    #[serde(default)]
+    pub protected: bool,
+    #[serde(default)]
+    pub status: String,
     #[serde(default)]
     pub subject: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WorkflowTaskTranslation {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default)]
+    pub name: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub subject: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -376,11 +738,18 @@ pub struct WorkflowTaskTranslation {
 pub struct WorkflowTimeTrigger {
     #[serde(default)]
     pub actions: Vec<WorkflowActionReference>,
-    #[serde(rename = "offsetFromField", default)]
-    pub offset_from_field: String,
-    #[serde(rename = "timeLength", default)]
-    pub time_length: String,
+    #[serde(
+        rename = "offsetFromField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub offset_from_field: Option<String>,
+    #[serde(
+        rename = "timeLength",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub time_length: Option<String>,
     #[serde(rename = "workflowTimeTriggerUnit", default)]
     pub workflow_time_trigger_unit: WorkflowTimeUnits,
 }
-

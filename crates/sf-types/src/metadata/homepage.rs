@@ -12,22 +12,26 @@ use serde::{Deserialize, Serialize};
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct HomePageComponent {
-    #[serde(default)]
-    pub body: String,
-    #[serde(default)]
-    pub height: f64,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub body: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub height: Option<f64>,
     #[serde(default)]
     pub links: Vec<String>,
-    #[serde(default)]
-    pub page: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub page: Option<String>,
     #[serde(rename = "pageComponentType", default)]
     pub page_component_type: serde_json::Value,
-    #[serde(rename = "showLabel", default)]
-    pub show_label: bool,
-    #[serde(rename = "showScrollbars", default)]
-    pub show_scrollbars: bool,
-    #[serde(default)]
-    pub width: serde_json::Value,
+    #[serde(rename = "showLabel", default, skip_serializing_if = "Option::is_none")]
+    pub show_label: Option<bool>,
+    #[serde(
+        rename = "showScrollbars",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub show_scrollbars: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub width: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -39,4 +43,3 @@ pub struct HomePageLayout {
     #[serde(rename = "wideComponents", default)]
     pub wide_components: Vec<String>,
 }
-

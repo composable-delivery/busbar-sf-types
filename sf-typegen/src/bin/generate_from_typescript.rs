@@ -83,6 +83,39 @@ fn main() -> Result<()> {
         type_definitions.interface_types.len()
     );
 
+    // Locate and parse @salesforce/packaging interfaces if present
+    let packaging_dir = Path::new("node_modules/@salesforce/packaging/lib/interfaces");
+    if packaging_dir.exists() {
+        println!("\n📦 Found @salesforce/packaging. Parsing Packaging-specific types...");
+        if let Ok(entries) = fs::read_dir(packaging_dir) {
+            for entry in entries.flatten() {
+                let path = entry.path();
+                if path.is_file() && path.to_str().map(|s| s.ends_with(".d.ts")).unwrap_or(false) {
+                    let file_name = path.file_name().and_then(|s| s.to_str()).unwrap_or("");
+                    if file_name == "index.d.ts" {
+                        continue;
+                    }
+                    if let Ok(pkg_source) = fs::read_to_string(&path) {
+                        if let Ok(pkg_defs) = parse_and_extract(&pkg_source) {
+                            println!(
+                                "   ✓ Extracted {} enums and {} structs from {}",
+                                pkg_defs.union_types.len(),
+                                pkg_defs.interface_types.len(),
+                                file_name
+                            );
+                            type_definitions.union_types.extend(pkg_defs.union_types);
+                            type_definitions
+                                .interface_types
+                                .extend(pkg_defs.interface_types);
+                            type_definitions.type_aliases.extend(pkg_defs.type_aliases);
+                            type_definitions.descriptions.extend(pkg_defs.descriptions);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     // Fallback: use regex to extract struct fields if oxc didn't get them
     if type_definitions.interface_types.is_empty() {
         println!("📝 Falling back to regex extraction for struct fields...");
@@ -324,86 +357,32 @@ fn parse_and_extract(source: &str) -> Result<TypeDefinitions> {
         println!("⚠️  Parser warnings: {} (continuing anyway)", errors.len());
     }
 
+    println!("🔍 Program statements count: {}", program.body.len());
+    for (i, stmt) in program.body.iter().enumerate().take(20) {
+        // Just format as debug but keep it short
+        let s = format!("{:?}", stmt);
+        println!(
+            "   - Stmt {}: {}",
+            i,
+            if s.len() > 100 {
+                format!("{}...", &s[..100])
+            } else {
+                s
+            }
+        );
+    }
+
     let mut union_types = HashMap::new();
     let mut interface_types = HashMap::new();
     let mut type_aliases = HashMap::new();
     let mut descriptions = HashMap::new();
 
-    // Walk through all statements in the program
-    for stmt in &program.body {
-        if let Statement::ExportNamedDeclaration(export) = stmt {
-            // Handle interfaces (Salesforce uses these for almost everything now)
-            if let Some(Declaration::TSInterfaceDeclaration(interface)) = &export.declaration {
-                let type_name = interface.id.name.to_string();
-                let mut fields = Vec::new();
-                for member in &interface.body.body {
-                    if let TSSignature::TSPropertySignature(prop) = member {
-                        extract_property_signature(prop, &mut fields);
-                    }
-                }
-                interface_types.insert(type_name.clone(), fields);
-            }
-
-            if let Some(Declaration::TSTypeAliasDeclaration(type_alias)) = &export.declaration {
-                let type_name = type_alias.id.name.to_string();
-
-                // Capture the full type expression for dependency analysis
-                let type_expr = extract_type_expr(&type_alias.type_annotation);
-                type_aliases.insert(type_name.clone(), type_expr);
-
-                // Check if it's a single string literal type (e.g., export type ElementType = 'Float')
-                if let TSType::TSLiteralType(lit) = &type_alias.type_annotation {
-                    if let TSLiteral::StringLiteral(s) = &lit.literal {
-                        union_types.insert(type_name.clone(), vec![s.value.to_string()]);
-                    }
-                }
-
-                // Check if it's a union type (enum) - ONLY string literal unions
-                if let TSType::TSUnionType(union) = &type_alias.type_annotation {
-                    let mut variants = Vec::new();
-                    let mut is_string_union = true;
-
-                    for t in &union.types {
-                        if let TSType::TSLiteralType(lit) = t {
-                            if let TSLiteral::StringLiteral(s) = &lit.literal {
-                                variants.push(s.value.to_string());
-                            } else {
-                                is_string_union = false;
-                                break;
-                            }
-                        } else {
-                            is_string_union = false;
-                            break;
-                        }
-                    }
-
-                    if is_string_union && !variants.is_empty() {
-                        union_types.insert(type_name.clone(), variants);
-                    }
-                }
-
-                // Check if it's an intersection type (struct extending Metadata)
-                if let TSType::TSIntersectionType(intersection) = &type_alias.type_annotation {
-                    for t in &intersection.types {
-                        if let TSType::TSTypeLiteral(type_lit) = t {
-                            let fields = extract_fields_from_type_lit(type_lit);
-                            if !fields.is_empty() {
-                                interface_types.insert(type_name.clone(), fields);
-                            }
-                        }
-                    }
-                }
-
-                // Check for plain type literals (structs not extending Metadata)
-                if let TSType::TSTypeLiteral(type_lit) = &type_alias.type_annotation {
-                    let fields = extract_fields_from_type_lit(type_lit);
-                    if !fields.is_empty() {
-                        interface_types.insert(type_name.clone(), fields);
-                    }
-                }
-            }
-        }
-    }
+    extract_from_statements(
+        &program.body,
+        &mut union_types,
+        &mut interface_types,
+        &mut type_aliases,
+    );
 
     println!("   - Union types (enums): {}", union_types.len());
     println!("   - Interface types (structs): {}", interface_types.len());
@@ -436,6 +415,164 @@ fn parse_and_extract(source: &str) -> Result<TypeDefinitions> {
     })
 }
 
+fn extract_from_statements(
+    statements: &[Statement],
+    union_types: &mut HashMap<String, Vec<String>>,
+    interface_types: &mut HashMap<String, Vec<FieldDef>>,
+    type_aliases: &mut HashMap<String, TypeExpr>,
+) {
+    for stmt in statements {
+        if let Some(decl) = stmt.as_declaration() {
+            extract_from_declaration(decl, union_types, interface_types, type_aliases);
+            continue;
+        }
+        match stmt {
+            Statement::ExportNamedDeclaration(export) => {
+                if let Some(decl) = &export.declaration {
+                    extract_from_declaration(decl, union_types, interface_types, type_aliases);
+                }
+            }
+            Statement::ExportDefaultDeclaration(export_decl) => {
+                if let ExportDefaultDeclarationKind::TSInterfaceDeclaration(interface) =
+                    &export_decl.declaration
+                {
+                    extract_from_interface(interface, interface_types);
+                }
+            }
+            _ => {}
+        }
+    }
+}
+
+fn extract_from_declaration(
+    decl: &Declaration,
+    union_types: &mut HashMap<String, Vec<String>>,
+    interface_types: &mut HashMap<String, Vec<FieldDef>>,
+    type_aliases: &mut HashMap<String, TypeExpr>,
+) {
+    match decl {
+        Declaration::TSInterfaceDeclaration(interface) => {
+            extract_from_interface(interface, interface_types);
+        }
+        Declaration::TSTypeAliasDeclaration(type_alias) => {
+            extract_from_type_alias(type_alias, union_types, interface_types, type_aliases);
+        }
+        Declaration::TSModuleDeclaration(module) => {
+            extract_from_module(module, union_types, interface_types, type_aliases);
+        }
+        _ => {}
+    }
+}
+
+fn extract_from_module(
+    module: &TSModuleDeclaration,
+    union_types: &mut HashMap<String, Vec<String>>,
+    interface_types: &mut HashMap<String, Vec<FieldDef>>,
+    type_aliases: &mut HashMap<String, TypeExpr>,
+) {
+    if let Some(body) = &module.body {
+        match body {
+            TSModuleDeclarationBody::TSModuleBlock(block) => {
+                extract_from_statements(&block.body, union_types, interface_types, type_aliases);
+            }
+            TSModuleDeclarationBody::TSModuleDeclaration(nested_module) => {
+                extract_from_module(nested_module, union_types, interface_types, type_aliases);
+            }
+        }
+    }
+}
+
+fn extract_from_interface(
+    interface: &TSInterfaceDeclaration,
+    interface_types: &mut HashMap<String, Vec<FieldDef>>,
+) {
+    let type_name = interface.id.name.to_string();
+    let mut fields = Vec::new();
+    for member in &interface.body.body {
+        if let TSSignature::TSPropertySignature(prop) = member {
+            extract_property_signature(prop, &mut fields);
+        }
+    }
+    interface_types.insert(type_name, fields);
+}
+
+fn extract_from_type_alias(
+    type_alias: &TSTypeAliasDeclaration,
+    union_types: &mut HashMap<String, Vec<String>>,
+    interface_types: &mut HashMap<String, Vec<FieldDef>>,
+    type_aliases: &mut HashMap<String, TypeExpr>,
+) {
+    let type_name = type_alias.id.name.to_string();
+
+    if type_name == "Package2" {
+        println!(
+            "DEBUG: Found Package2 type alias annotation: {:?}",
+            type_alias.type_annotation
+        );
+    }
+
+    // Capture the full type expression for dependency analysis
+    let type_expr = extract_type_expr(&type_alias.type_annotation);
+    type_aliases.insert(type_name.clone(), type_expr);
+
+    // Check if it's a single string literal type (e.g., export type ElementType = 'Float')
+    if let TSType::TSLiteralType(lit) = &type_alias.type_annotation {
+        if let TSLiteral::StringLiteral(s) = &lit.literal {
+            union_types.insert(type_name.clone(), vec![s.value.to_string()]);
+        }
+    }
+
+    // Check if it's a union type (enum) - ONLY string literal unions
+    if let TSType::TSUnionType(union) = &type_alias.type_annotation {
+        let mut variants = Vec::new();
+        let mut is_string_union = true;
+
+        for t in &union.types {
+            if let TSType::TSLiteralType(lit) = t {
+                if let TSLiteral::StringLiteral(s) = &lit.literal {
+                    variants.push(s.value.to_string());
+                } else {
+                    is_string_union = false;
+                    break;
+                }
+            } else {
+                is_string_union = false;
+                break;
+            }
+        }
+
+        if is_string_union && !variants.is_empty() {
+            union_types.insert(type_name.clone(), variants);
+        }
+    }
+
+    // Check if it's an intersection type (struct extending Metadata)
+    if let TSType::TSIntersectionType(intersection) = &type_alias.type_annotation {
+        for t in &intersection.types {
+            if let TSType::TSTypeLiteral(type_lit) = t {
+                let fields = extract_fields_from_type_lit(type_lit);
+                if !fields.is_empty() {
+                    interface_types.insert(type_name.clone(), fields);
+                }
+            }
+        }
+    }
+
+    // Check for plain type literals (structs not extending Metadata)
+    if let TSType::TSTypeLiteral(type_lit) = &type_alias.type_annotation {
+        if type_name == "Package2" {
+            println!("DEBUG: Plain type literal matched for Package2!");
+        }
+        let fields = extract_fields_from_type_lit(type_lit);
+        if type_name == "Package2" {
+            println!("DEBUG: Package2 fields extracted count: {}", fields.len());
+        }
+        if !fields.is_empty() {
+            interface_types.insert(type_name.clone(), fields);
+        }
+    }
+}
+
 /// Extract fields from a TypeScript type literal
 fn extract_fields_from_type_lit(type_lit: &TSTypeLiteral) -> Vec<FieldDef> {
     let mut fields = Vec::new();
@@ -451,8 +588,13 @@ fn extract_fields_from_type_lit(type_lit: &TSTypeLiteral) -> Vec<FieldDef> {
 
 /// Extract a single property signature into a field definition
 fn extract_property_signature(prop: &TSPropertySignature, fields: &mut Vec<FieldDef>) {
-    if let PropertyKey::Identifier(ident) = &prop.key {
-        let field_name = ident.name.to_string();
+    let field_name = match &prop.key {
+        PropertyKey::Identifier(ident) => Some(ident.name.to_string()),
+        PropertyKey::StaticIdentifier(ident) => Some(ident.name.to_string()),
+        _ => None,
+    };
+
+    if let Some(field_name) = field_name {
         let optional = prop.optional;
 
         let (type_expr, type_ref, is_array) = if let Some(type_ann) = &prop.type_annotation {

@@ -22,46 +22,6 @@ pub enum RecordActionType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RecordAggregationDefinitionAggregationType {
-    #[default]
-    Record,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RecordAggregationDefinitionStatus {
-    #[default]
-    Draft,
-    Active,
-    Inactive,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RecordAggregationJoinConditionType {
-    #[default]
-    AggregateTo,
-    Intermediate,
-    AggregateFrom,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RecordAggregationObjectFilterOperator {
-    #[default]
-    Equals,
-    NotEquals,
-    LessThan,
-    LessThanOrEquals,
-    GreaterThan,
-    GreaterThanOrEquals,
-    Contains,
-    In,
-    NotIn,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum RecordAlertDataSourceType {
     #[default]
     APEX,
@@ -93,15 +53,23 @@ pub enum RecordTriggerType {
 pub struct RecordActionDefaultItem {
     #[serde(default)]
     pub action: String,
-    #[serde(rename = "isMandatory", default)]
-    pub is_mandatory: bool,
-    #[serde(rename = "isUiRemoveHidden", default)]
-    pub is_ui_remove_hidden: bool,
+    #[serde(
+        rename = "isMandatory",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_mandatory: Option<bool>,
+    #[serde(
+        rename = "isUiRemoveHidden",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_ui_remove_hidden: Option<bool>,
     #[serde(default)]
     pub pinned: serde_json::Value,
     #[serde(default)]
     pub position: f64,
-    #[serde(default)]
+    #[serde(rename = "type", default)]
     pub r#type: RecordActionType,
 }
 
@@ -111,22 +79,42 @@ pub struct RecordActionDefaultItem {
 pub struct RecordActionDeployment {
     #[serde(rename = "channelConfigurations", default)]
     pub channel_configurations: Vec<RecordActionDeploymentChannel>,
-    #[serde(rename = "componentName", default)]
-    pub component_name: serde_json::Value,
+    #[serde(
+        rename = "componentName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub component_name: Option<serde_json::Value>,
     #[serde(rename = "deploymentContexts", default)]
     pub deployment_contexts: Vec<RecordActionDeploymentContext>,
-    #[serde(rename = "hasComponents", default)]
-    pub has_components: bool,
-    #[serde(rename = "hasGuidedActions", default)]
-    pub has_guided_actions: bool,
-    #[serde(rename = "hasOmniscripts", default)]
-    pub has_omniscripts: bool,
-    #[serde(rename = "hasRecommendations", default)]
-    pub has_recommendations: bool,
+    #[serde(
+        rename = "hasComponents",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub has_components: Option<bool>,
+    #[serde(
+        rename = "hasGuidedActions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub has_guided_actions: Option<bool>,
+    #[serde(
+        rename = "hasOmniscripts",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub has_omniscripts: Option<bool>,
+    #[serde(
+        rename = "hasRecommendations",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub has_recommendations: Option<bool>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(default)]
-    pub recommendation: RecordActionRecommendation,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub recommendation: Option<RecordActionRecommendation>,
     #[serde(rename = "selectableItems", default)]
     pub selectable_items: Vec<RecordActionSelectableItem>,
 }
@@ -139,8 +127,12 @@ pub struct RecordActionDeploymentChannel {
     pub channel: serde_json::Value,
     #[serde(rename = "channelItems", default)]
     pub channel_items: Vec<RecordActionDefaultItem>,
-    #[serde(rename = "isAutopopEnabled", default)]
-    pub is_autopop_enabled: bool,
+    #[serde(
+        rename = "isAutopopEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_autopop_enabled: Option<bool>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -149,22 +141,28 @@ pub struct RecordActionDeploymentChannel {
 pub struct RecordActionDeploymentContext {
     #[serde(rename = "entityName", default)]
     pub entity_name: String,
-    #[serde(rename = "recommendationStrategy", default)]
-    pub recommendation_strategy: String,
+    #[serde(
+        rename = "recommendationStrategy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recommendation_strategy: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct RecordActionRecommendation {
-    #[serde(rename = "defaultStrategy", default)]
-    pub default_strategy: String,
+    #[serde(
+        rename = "defaultStrategy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_strategy: Option<String>,
     #[serde(rename = "hasDescription", default)]
     pub has_description: bool,
     #[serde(rename = "hasImage", default)]
     pub has_image: bool,
-    #[serde(rename = "hasRealtimeRecommendations", default)]
-    pub has_realtime_recommendations: bool,
     #[serde(rename = "hasRejectAction", default)]
     pub has_reject_action: bool,
     #[serde(rename = "hasTitle", default)]
@@ -181,111 +179,63 @@ pub struct RecordActionRecommendation {
 pub struct RecordActionSelectableItem {
     #[serde(default)]
     pub action: String,
-    #[serde(rename = "frequentActionSequenceNbr", default)]
-    pub frequent_action_sequence_nbr: f64,
-    #[serde(rename = "isFrequentAction", default)]
-    pub is_frequent_action: bool,
-    #[serde(default)]
+    #[serde(
+        rename = "frequentActionSequenceNbr",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub frequent_action_sequence_nbr: Option<f64>,
+    #[serde(
+        rename = "isFrequentAction",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_frequent_action: Option<bool>,
+    #[serde(rename = "type", default)]
     pub r#type: RecordActionType,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct RecordAggregationDefinition {
-    #[serde(rename = "aggregateFromObject", default)]
-    pub aggregate_from_object: String,
-    #[serde(rename = "aggregateToObject", default)]
-    pub aggregate_to_object: String,
-    #[serde(rename = "aggregationType", default)]
-    pub aggregation_type: RecordAggregationDefinitionAggregationType,
-    #[serde(rename = "batchProcessingDefinition", default)]
-    pub batch_processing_definition: String,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "displayName", default)]
-    pub display_name: String,
-    #[serde(rename = "onDemandProcDefinition", default)]
-    pub on_demand_proc_definition: String,
-    #[serde(rename = "recordAggregationObject", default)]
-    pub record_aggregation_object: Vec<RecordAggregationObject>,
-    #[serde(default)]
-    pub status: RecordAggregationDefinitionStatus,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RecordAggregationJoinCondition {
-    #[serde(rename = "joinField", default)]
-    pub join_field: String,
-    #[serde(rename = "navigationSequenceNumber", default)]
-    pub navigation_sequence_number: f64,
-    #[serde(rename = "relatedJoinField", default)]
-    pub related_join_field: String,
-    #[serde(rename = "relatedRecordAggregationObject", default)]
-    pub related_record_aggregation_object: String,
-    #[serde(default)]
-    pub r#type: RecordAggregationJoinConditionType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RecordAggregationObject {
-    #[serde(rename = "associatedObject", default)]
-    pub associated_object: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "filterLogic", default)]
-    pub filter_logic: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "recordAggregationJoinCondition", default)]
-    pub record_aggregation_join_condition: Vec<RecordAggregationJoinCondition>,
-    #[serde(rename = "recordAggregationObjectFilter", default)]
-    pub record_aggregation_object_filter: Vec<RecordAggregationObjectFilter>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RecordAggregationObjectFilter {
-    #[serde(rename = "associatedObjectField", default)]
-    pub associated_object_field: String,
-    #[serde(default)]
-    pub operator: RecordAggregationObjectFilterOperator,
-    #[serde(rename = "sequenceNumber", default)]
-    pub sequence_number: f64,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct RecordAlertCategory {
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub severity: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RecordAlertCategoryTranslation {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(default)]
-    pub severity: String,
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct RecordAlertDataSource {
-    #[serde(rename = "apexClass", default)]
-    pub apex_class: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
+    #[serde(rename = "apexClass", default, skip_serializing_if = "Option::is_none")]
+    pub apex_class: Option<String>,
+    #[serde(rename = "isActive", default, skip_serializing_if = "Option::is_none")]
+    pub is_active: Option<bool>,
+    #[serde(
+        rename = "isProtected",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_protected: Option<bool>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(default)]
+    #[serde(rename = "type", default)]
     pub r#type: RecordAlertDataSourceType,
 }
 
@@ -293,16 +243,38 @@ pub struct RecordAlertDataSource {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct RecordAlertTemplate {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "isProtected", default)]
-    pub is_protected: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "isProtected",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_protected: Option<bool>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "recordAlertCategory", default)]
-    pub record_alert_category: String,
+    #[serde(
+        rename = "recordAlertCategory",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub record_alert_category: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub subject: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RecordAlertTemplateTranslation {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
     #[serde(default)]
-    pub subject: String,
+    pub name: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub subject: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -319,11 +291,10 @@ pub struct RecordTypePicklistValue {
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct RecordTypeTranslation {
-    #[serde(default)]
-    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
     #[serde(default)]
     pub label: String,
     #[serde(default)]
     pub name: String,
 }
-
