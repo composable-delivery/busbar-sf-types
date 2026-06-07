@@ -634,6 +634,55 @@ pub struct PackageCreateOptions {
     pub path: String,
 }
 
+/// Request body for installing a package.
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PackageInstallCreateRequest {
+    #[serde(rename = "SubscriberPackageVersionKey", default)]
+    pub subscriber_package_version_key: String,
+    #[serde(
+        rename = "NameConflictResolution",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub name_conflict_resolution: Option<serde_json::Value>,
+    #[serde(
+        rename = "SecurityType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub security_type: Option<serde_json::Value>,
+    #[serde(
+        rename = "PackageInstallSource",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub package_install_source: Option<String>,
+    #[serde(rename = "Password", default, skip_serializing_if = "Option::is_none")]
+    pub password: Option<serde_json::Value>,
+    #[serde(rename = "EnableRss", default, skip_serializing_if = "Option::is_none")]
+    pub enable_rss: Option<bool>,
+    #[serde(
+        rename = "UpgradeType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub upgrade_type: Option<serde_json::Value>,
+    #[serde(
+        rename = "ApexCompileType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub apex_compile_type: Option<serde_json::Value>,
+    #[serde(
+        rename = "SkipHandlers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub skip_handlers: Option<serde_json::Value>,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]

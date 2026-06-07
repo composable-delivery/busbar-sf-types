@@ -129,6 +129,9 @@ fn main() -> Result<()> {
         );
     }
 
+    // Synthesize packaging utility types (e.g. PackageInstallCreateRequest) from their base types
+    resolve_packaging_utility_types(&mut type_definitions);
+
     // Build type dependency graph
     println!("\n🔗 Building type dependency graph...");
     let type_graph = build_type_graph(&type_definitions);
@@ -1326,6 +1329,53 @@ fn is_primitive_or_special(type_name: &str) -> bool {
             | "serde_json::Value"
             | "Metadata"
     )
+}
+
+/// Resolves known, complex @salesforce/packaging utility types (like PackageInstallCreateRequest)
+/// by synthesizing their field structures directly from their component interfaces.
+fn resolve_packaging_utility_types(defs: &mut TypeDefinitions) {
+    if let Some(base_fields) = defs.interface_types.get("PackageInstallRequest").cloned() {
+        let optional_picks = [
+            "ApexCompileType",
+            "EnableRss",
+            "NameConflictResolution",
+            "PackageInstallSource",
+            "Password",
+            "SecurityType",
+            "SkipHandlers",
+            "UpgradeType",
+        ];
+
+        let required_picks = ["SubscriberPackageVersionKey"];
+
+        let mut synthesized_fields = Vec::new();
+
+        for mut field in base_fields {
+            if optional_picks.contains(&field.name.as_str()) {
+                field.optional = true;
+                synthesized_fields.push(field);
+            } else if required_picks.contains(&field.name.as_str()) {
+                field.optional = false;
+                synthesized_fields.push(field);
+            }
+        }
+
+        if !synthesized_fields.is_empty() {
+            defs.interface_types.insert(
+                "PackageInstallCreateRequest".to_string(),
+                synthesized_fields,
+            );
+            defs.type_aliases.insert(
+                "PackageInstallCreateRequest".to_string(),
+                TypeExpr::named("PackageInstallCreateRequest"),
+            );
+            defs.descriptions.insert(
+                "PackageInstallCreateRequest".to_string(),
+                "Request body for installing a package.".to_string(),
+            );
+            println!("💡 Synthesized utility type PackageInstallCreateRequest from PackageInstallRequest!");
+        }
+    }
 }
 
 /// Export the graph with category information from graph-based categorization
