@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableDealAgent": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDealAgentAutoApproveAllTasks": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "SalesDealAgentSettings",
+  "type": "object"
+}

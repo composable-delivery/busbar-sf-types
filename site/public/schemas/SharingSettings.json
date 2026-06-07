@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "deferGroupMembership": {
+      "default": false,
+      "type": "boolean"
+    },
+    "deferSharingRules": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAccountRoleOptimization": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAssetSharing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCommunityUserVisibility": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableExternalSharingModel": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableManagerGroups": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableManualUserRecordSharing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePartnerSuperUserAccess": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePortalUserCaseSharing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePortalUserVisibility": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRemoveTMGroupMembership": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRestrictAccessLookupRecords": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSecureGuestAccess": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableShareObjectReportTypes": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableStandardReportVisibility": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTerritoryForecastManager": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "SharingSettings",
+  "type": "object"
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "disableRollbackFlagsPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOaEventInternalWrites": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOaEventNotifications": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOaForCore": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOmniGlobalAutoNumberPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOmniStudioContentTest": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOmniStudioDrVersion": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOmniStudioMetadata": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableStandardOmniStudioRuntime": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "OmniStudioSettings",
+  "type": "object"
+}

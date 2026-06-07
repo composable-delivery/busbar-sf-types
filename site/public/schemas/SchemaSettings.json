@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableAdvancedCMTSecurity": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAdvancedCSSecurity": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableListCustomSettingCreation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSOSLOnCustomSettings": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "SchemaSettings",
+  "type": "object"
+}

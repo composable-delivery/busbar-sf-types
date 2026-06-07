@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "caseAccessLevel": {
+      "default": "",
+      "type": "string"
+    },
+    "contactAccessLevel": {
+      "default": "",
+      "type": "string"
+    },
+    "opportunityAccessLevel": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "title": "AccountSharingRuleSettings",
+  "type": "object"
+}

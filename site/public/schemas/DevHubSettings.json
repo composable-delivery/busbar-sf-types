@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableALMSimpleDeployDataPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableALMSimpleDeployPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDevOpsCenter": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDevOpsCenterGA": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePackaging2": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableScratchOrgManagementPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableScratchOrgSnapshotPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableShapeExportPref": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "DevHubSettings",
+  "type": "object"
+}

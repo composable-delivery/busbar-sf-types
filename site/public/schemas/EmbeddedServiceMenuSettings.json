@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "branding": {
+      "default": "",
+      "type": "string"
+    },
+    "embeddedServiceCustomLabels": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "embeddedServiceCustomizations": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "embeddedServiceMenuItems": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "isEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "masterLabel": {
+      "default": "",
+      "type": "string"
+    },
+    "site": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "title": "EmbeddedServiceMenuSettings",
+  "type": "object"
+}

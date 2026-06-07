@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "active": {
+      "default": false,
+      "type": "boolean"
+    },
+    "description": {
+      "default": "",
+      "type": "string"
+    },
+    "errorConditionFormula": {
+      "default": "",
+      "type": "string"
+    },
+    "errorDisplayField": {
+      "default": "",
+      "type": "string"
+    },
+    "errorMessage": {
+      "default": "",
+      "type": "string"
+    },
+    "shouldEvaluateOnClient": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ValidationRule",
+  "type": "object"
+}

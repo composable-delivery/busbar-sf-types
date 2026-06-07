@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableCheckCEUserPerm": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLiveMessage": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "LiveMessageSettings",
+  "type": "object"
+}

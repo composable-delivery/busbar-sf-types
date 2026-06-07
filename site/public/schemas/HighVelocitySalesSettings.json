@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableACAutoSendEmail": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableACChangeTargetAssignee": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableACSkipWeekends": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAutoBdrEmailPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAutoBdrVoicePref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableBusinessHours": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCadenceVariantTestingPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableChgTgtAssigneeUsrPermPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDispositionCategory": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEinsteinSdrEmailPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEngagementWaveAnalyticsPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHighVelocitySales": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHighVelocitySalesSetup": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInvoiceAttributionPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLogACallForCTIPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLogTasksForLinkedInPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMultipleCadencesPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOpportunityAttributionPermPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProspectingCenterPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableQuickCadenceAutoSendEmail": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTaskLoggingPref": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "HighVelocitySalesSettings",
+  "type": "object"
+}

@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "addRcCompToFlexiPages": {
+      "default": false,
+      "type": "boolean"
+    },
+    "autoContactCreationPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "autoContactEnrichmentPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "autoPopulateGoogleMeetLinks": {
+      "default": false,
+      "type": "boolean"
+    },
+    "automatedEmailFilter": {
+      "default": false,
+      "type": "boolean"
+    },
+    "dSThresholdNotification": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableActivityAnalyticsPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableActivityCapture": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableActivityMetrics": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableActivitySyncEngine": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEACForEveryonePref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEnforceEacSharingPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInboxActivitySharing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInsightsInTimeline": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInsightsInTimelineEacStd": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUnifiedActivitiesPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "provisionProductivityFeatures": {
+      "default": false,
+      "type": "boolean"
+    },
+    "relationshipGraphPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "s2XSvcAccEmail": {
+      "default": false,
+      "type": "boolean"
+    },
+    "salesforceEventsOnlyPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "sensitiveEmailFilter": {
+      "default": false,
+      "type": "boolean"
+    },
+    "showEACCalendarPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "syncEmailToCoreActivity": {
+      "default": false,
+      "type": "boolean"
+    },
+    "syncInternalEvents": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "EACSettings",
+  "type": "object"
+}

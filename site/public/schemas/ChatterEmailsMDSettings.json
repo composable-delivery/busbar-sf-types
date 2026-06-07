@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableChatterDigestEmailsApiOnly": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableChatterEmailAttachment": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCollaborationEmail": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDisplayAppDownloadBadges": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEmailReplyToChatter": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEmailToChatter": {
+      "default": false,
+      "type": "boolean"
+    },
+    "noQnOwnNotifyOnCaseCmt": {
+      "default": false,
+      "type": "boolean"
+    },
+    "noQnOwnNotifyOnRep": {
+      "default": false,
+      "type": "boolean"
+    },
+    "noQnSubNotifyOnBestR": {
+      "default": false,
+      "type": "boolean"
+    },
+    "noQnSubNotifyOnRep": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ChatterEmailsMDSettings",
+  "type": "object"
+}

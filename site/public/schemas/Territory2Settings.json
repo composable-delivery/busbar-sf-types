@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "defaultAccountAccessLevel": {
+      "default": "",
+      "type": "string"
+    },
+    "defaultCaseAccessLevel": {
+      "default": "",
+      "type": "string"
+    },
+    "defaultContactAccessLevel": {
+      "default": "",
+      "type": "string"
+    },
+    "defaultOpportunityAccessLevel": {
+      "default": "",
+      "type": "string"
+    },
+    "enableTerritoryManagement2": {
+      "default": false,
+      "type": "boolean"
+    },
+    "opportunityFilterSettings": {
+      "default": null
+    },
+    "showTM2EnabledBanner": {
+      "default": false,
+      "type": "boolean"
+    },
+    "supportedObjects": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "t2ForecastAccessLevel": {
+      "default": "",
+      "type": "string"
+    },
+    "tm2BypassRealignAccInsert": {
+      "default": false,
+      "type": "boolean"
+    },
+    "tm2EnableUserAssignmentLog": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "Territory2Settings",
+  "type": "object"
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "enum": [
+    "Neuter",
+    "Masculine",
+    "Feminine",
+    "AnimateMasculine",
+    "ClassI",
+    "ClassIII",
+    "ClassV",
+    "ClassVII",
+    "ClassIX",
+    "ClassXI",
+    "ClassXIV",
+    "ClassXV",
+    "ClassXVI",
+    "ClassXVII",
+    "ClassXVIII"
+  ],
+  "title": "Gender",
+  "type": "string"
+}

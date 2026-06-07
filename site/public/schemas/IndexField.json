@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "name": {
+      "default": "",
+      "type": "string"
+    },
+    "sortDirection": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "title": "IndexField",
+  "type": "object"
+}

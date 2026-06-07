@@ -48,6 +48,10 @@ pub use common::*;
 // Core traits for type-safe API usage
 pub mod traits;
 
+// Schema registry (schemars)
+#[cfg(feature = "schemars")]
+pub mod schema_registry;
+
 // Feature-gated modules
 
 #[cfg(any(

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "active": {
+      "default": false,
+      "type": "boolean"
+    },
+    "businessProcess": {
+      "default": "",
+      "type": "string"
+    },
+    "compactLayoutAssignment": {
+      "default": "",
+      "type": "string"
+    },
+    "description": {
+      "default": "",
+      "type": "string"
+    },
+    "label": {
+      "default": "",
+      "type": "string"
+    },
+    "picklistValues": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    }
+  },
+  "title": "RecordType",
+  "type": "object"
+}

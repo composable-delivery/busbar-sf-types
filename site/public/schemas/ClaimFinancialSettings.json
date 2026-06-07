@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "claimCovPendingAuthStatus": {
+      "default": "",
+      "type": "string"
+    },
+    "claimPendingAuthorityStatus": {
+      "default": "",
+      "type": "string"
+    },
+    "clmCovPymtDtlPendAuthSts": {
+      "default": "",
+      "type": "string"
+    },
+    "masterLabel": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "title": "ClaimFinancialSettings",
+  "type": "object"
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableAccountLogos": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAutomatedAccountFields": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNewsStories": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "AccountIntelligenceSettings",
+  "type": "object"
+}

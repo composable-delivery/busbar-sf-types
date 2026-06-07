@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "allowOwnerChange": {
+      "default": false,
+      "type": "boolean"
+    },
+    "objectMapping": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "opportunityCreationOptions": {
+      "default": null
+    }
+  },
+  "title": "LeadConvertSettings",
+  "type": "object"
+}

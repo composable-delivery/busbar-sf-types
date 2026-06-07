@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "enum": [
+    "equals",
+    "notEqual",
+    "lessThan",
+    "greaterThan",
+    "lessOrEqual",
+    "greaterOrEqual",
+    "contains",
+    "notContain",
+    "startsWith",
+    "includes",
+    "excludes",
+    "within"
+  ],
+  "title": "FilterOperation",
+  "type": "string"
+}

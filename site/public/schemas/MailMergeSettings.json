@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableExtendedMailMerge": {
+      "default": false,
+      "type": "boolean"
+    },
+    "saveMailMergeDocsAsSalesforceDocs": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "MailMergeSettings",
+  "type": "object"
+}

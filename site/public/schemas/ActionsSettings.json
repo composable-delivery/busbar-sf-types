@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableDefaultQuickActionsOn": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMdpEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOfflineWebLinks": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableThirdPartyActions": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ActionsSettings",
+  "type": "object"
+}

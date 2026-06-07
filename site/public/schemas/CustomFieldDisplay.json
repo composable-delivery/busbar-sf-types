@@ -1,0 +1,33 @@
+{
+  "$defs": {
+    "CustomFieldDisplayType": {
+      "enum": [
+        "Dropdown",
+        "ColorSwatch",
+        "Pill"
+      ],
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "displayType": {
+      "$ref": "#/$defs/CustomFieldDisplayType",
+      "default": "Dropdown"
+    },
+    "fieldApiName": {
+      "default": "",
+      "type": "string"
+    },
+    "isProtected": {
+      "default": false,
+      "type": "boolean"
+    },
+    "masterLabel": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "title": "CustomFieldDisplay",
+  "type": "object"
+}

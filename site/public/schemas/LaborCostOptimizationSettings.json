@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "canShowVehicle": {
+      "default": false,
+      "type": "boolean"
+    },
+    "canShowVehicleDefinition": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTimeSheetsAndLaborCostOptimization": {
+      "default": false,
+      "type": "boolean"
+    },
+    "endTimeOffset": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "startTimeOffset": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    }
+  },
+  "title": "LaborCostOptimizationSettings",
+  "type": "object"
+}

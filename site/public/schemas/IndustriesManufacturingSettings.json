@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableConnectedAssetSrvcsCmpnt": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFleetManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndManufacturing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndustriesMfgAccountForecast": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndustriesMfgAdvForecast": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndustriesMfgIAS": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndustriesMfgProgram": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndustriesMfgTargets": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMfgAgents": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMfgAgentsPilot": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePartnerLeadManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePartnerPerformanceManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePartnerVisitManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePtnrLeadMgmtMappings": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRevMgmtForSlsAgr": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableVehAndAstLending": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableVehAssetFinAddtnlCmpnts": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableVehicleAndAssetFinance": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "IndustriesManufacturingSettings",
+  "type": "object"
+}

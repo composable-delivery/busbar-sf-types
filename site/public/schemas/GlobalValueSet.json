@@ -1,0 +1,53 @@
+{
+  "$defs": {
+    "CustomValue": {
+      "properties": {
+        "color": {
+          "default": "",
+          "type": "string"
+        },
+        "default": {
+          "default": false,
+          "type": "boolean"
+        },
+        "description": {
+          "default": "",
+          "type": "string"
+        },
+        "isActive": {
+          "default": false,
+          "type": "boolean"
+        },
+        "label": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "customValue": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/CustomValue"
+      },
+      "type": "array"
+    },
+    "description": {
+      "default": "",
+      "type": "string"
+    },
+    "masterLabel": {
+      "default": "",
+      "type": "string"
+    },
+    "sorted": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "GlobalValueSet",
+  "type": "object"
+}

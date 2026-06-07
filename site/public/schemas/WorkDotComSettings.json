@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableCoachingManagerGroupAccess": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGoalManagerGroupAccess": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProfileSkills": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProfileSkillsAddFeedPost": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProfileSkillsAutoSuggest": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProfileSkillsUsePlatform": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWorkBadgeDefRestrictPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWorkCalibration": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWorkCanvasPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWorkCertification": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWorkCertificationNotification": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWorkRewardsPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWorkThanksPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWorkUseObjectivesForGoals": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "WorkDotComSettings",
+  "type": "object"
+}

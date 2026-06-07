@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableCustomerSuccessPortal": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIncludeContractStatus": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMakeDeploymentsMandatory": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableManageSelfServiceUsers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOrgFeedSentimentAnalysis": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRADeploymentAttributeOnly": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableResetDivisionOnLogin": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "OrgSettings",
+  "type": "object"
+}

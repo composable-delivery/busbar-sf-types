@@ -1,0 +1,10 @@
+{
+  "relationships": {
+    "CustomField": {
+      "referenceTo": {
+        "relationship": "LookupRelationship",
+        "targets": ["CustomObject"]
+      }
+    }
+  }
+}

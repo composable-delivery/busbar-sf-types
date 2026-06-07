@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "buyerGroupExtensibility": {
+      "default": false,
+      "type": "boolean"
+    },
+    "commerceAnalyticsEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "commerceAppEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "commerceConciergeEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "commerceCopilotEcomEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "commerceDCSegmentEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "commerceDiscoveryExpansion": {
+      "default": false,
+      "type": "boolean"
+    },
+    "commerceEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "commerceNGPEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "commerceRLMSubs": {
+      "default": false,
+      "type": "boolean"
+    },
+    "convCommShopCopilotEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "generateInvPerSubscription": {
+      "default": false,
+      "type": "boolean"
+    },
+    "lowestUnitPriceTracking": {
+      "default": false,
+      "type": "boolean"
+    },
+    "messagingEngagementDataKit": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "CommerceSettings",
+  "type": "object"
+}

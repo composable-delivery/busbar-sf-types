@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "availability": {
+      "default": null
+    },
+    "description": {
+      "default": "",
+      "type": "string"
+    },
+    "displayType": {
+      "default": null
+    },
+    "encodingKey": {
+      "default": null
+    },
+    "hasMenubar": {
+      "default": false,
+      "type": "boolean"
+    },
+    "hasScrollbars": {
+      "default": false,
+      "type": "boolean"
+    },
+    "hasToolbar": {
+      "default": false,
+      "type": "boolean"
+    },
+    "height": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "isResizable": {
+      "default": false,
+      "type": "boolean"
+    },
+    "linkType": {
+      "default": null
+    },
+    "masterLabel": {
+      "default": "",
+      "type": "string"
+    },
+    "openType": {
+      "default": null
+    },
+    "page": {
+      "default": "",
+      "type": "string"
+    },
+    "position": {
+      "default": null
+    },
+    "protected": {
+      "default": false,
+      "type": "boolean"
+    },
+    "requireRowSelection": {
+      "default": false,
+      "type": "boolean"
+    },
+    "scontrol": {
+      "default": "",
+      "type": "string"
+    },
+    "showsLocation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "showsStatus": {
+      "default": false,
+      "type": "boolean"
+    },
+    "url": {
+      "default": "",
+      "type": "string"
+    },
+    "width": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    }
+  },
+  "title": "WebLink",
+  "type": "object"
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableConvertNegativeInvoiceLinesToCreditMemoAndApply": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePaymentScheduleAutomation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRefundAutomation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRevSubMgmtBlngOptOut": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSubscriptionManagement": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "SubscriptionManagementSettings",
+  "type": "object"
+}

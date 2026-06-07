@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "advancedDataSyncOrgPreference": {
+      "default": false,
+      "type": "boolean"
+    },
+    "apptAssistantExpiration": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "apptAssistantInfoUrl": {
+      "default": "",
+      "type": "string"
+    },
+    "apptAssistantRadiusUnitValue": {
+      "default": null
+    },
+    "apptAssistantRadiusValue": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "apptAssistantStatus": {
+      "default": "",
+      "type": "string"
+    },
+    "canPopulateGoogleAddress": {
+      "default": false,
+      "type": "boolean"
+    },
+    "canSendAppCenterCrashReports": {
+      "default": false,
+      "type": "boolean"
+    },
+    "canStoreMobileAnalytics": {
+      "default": false,
+      "type": "boolean"
+    },
+    "canceledDefaultStatus": {
+      "default": "",
+      "type": "string"
+    },
+    "cannotCompleteDefaultStatus": {
+      "default": "",
+      "type": "string"
+    },
+    "completedDefaultStatus": {
+      "default": "",
+      "type": "string"
+    },
+    "deepLinkPublicSecurityKey": {
+      "default": "",
+      "type": "string"
+    },
+    "dispatchedDefaultStatus": {
+      "default": "",
+      "type": "string"
+    },
+    "doesAllowEditSaForCrew": {
+      "default": false,
+      "type": "boolean"
+    },
+    "doesAvlCalcInclOvertime": {
+      "default": false,
+      "type": "boolean"
+    },
+    "doesAvlCalcInclPrimOnly": {
+      "default": false,
+      "type": "boolean"
+    },
+    "doesShareSaParentWoWithAr": {
+      "default": false,
+      "type": "boolean"
+    },
+    "doesShareSaWithAr": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAdvancedDataSync": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableBatchWindow": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDocumentBuilder": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFloatingWorkOrder": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLsdkMode": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePopulateWorkOrderAddress": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableStandbyMode": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWorkOrders": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWorkPlansAutoGeneration": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWorkStepManualStatusUpdate": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enrouteStatus": {
+      "default": "",
+      "type": "string"
+    },
+    "fieldServiceNotificationsOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "fieldServiceOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "inProgressDefaultStatus": {
+      "default": "",
+      "type": "string"
+    },
+    "isGeoCodeSyncEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isLocationHistoryEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "mobileFeedbackEmails": {
+      "default": "",
+      "type": "string"
+    },
+    "noneDefaultStatus": {
+      "default": "",
+      "type": "string"
+    },
+    "o2EngineEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "objectMappingItem": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "optimizationServiceAccess": {
+      "default": false,
+      "type": "boolean"
+    },
+    "overrideDefaultLwcStyling": {
+      "default": false,
+      "type": "boolean"
+    },
+    "scheduledDefaultStatus": {
+      "default": "",
+      "type": "string"
+    },
+    "serviceAppointmentsDueDateOffsetOrgValue": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "workOrderDurationSource": {
+      "default": null
+    },
+    "workOrderLineItemSearchFields": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "workOrderSearchFields": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "title": "FieldServiceSettings",
+  "type": "object"
+}

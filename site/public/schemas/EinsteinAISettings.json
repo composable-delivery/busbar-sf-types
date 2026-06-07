@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableAIFeedbackWithDC": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAITrustInputToxicityDetection": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAITrustPromptInjectionDetection": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAgentHealthMonitoring": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAgentHealthMonitoringGA": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePBHideScopedNotif": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePBPromptPerformanceMetrics": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTrustPIIMasking": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "EinsteinAISettings",
+  "type": "object"
+}

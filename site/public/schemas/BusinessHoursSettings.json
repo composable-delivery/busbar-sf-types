@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "businessHours": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "holidays": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    }
+  },
+  "title": "BusinessHoursSettings",
+  "type": "object"
+}

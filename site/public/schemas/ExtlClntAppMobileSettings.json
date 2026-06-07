@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "externalClientApplication": {
+      "default": "",
+      "type": "string"
+    },
+    "isScreenLockEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "label": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "title": "ExtlClntAppMobileSettings",
+  "type": "object"
+}

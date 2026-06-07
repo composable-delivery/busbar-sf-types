@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "disableSCVTaskCreationForHVS": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAmazonQueueManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDefaultChannelForSCV": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDigitalVoiceWhatsapp": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEndUserForSCV": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOmniCapacityForSCV": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePTQueueManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePhoneNumberMaskingForSCV": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRZoneCloudVoiceOptIn": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCVASAContextLinkingEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCVBYOT": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCVExternalTelephony": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCVOpenVCAsNewTabHVS": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCVSupportBannerDisplayed": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableServiceCloudVoice": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ServiceCloudVoiceSettings",
+  "type": "object"
+}

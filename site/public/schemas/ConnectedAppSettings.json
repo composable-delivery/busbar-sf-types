@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableAdminApprovedAppsOnly": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAdminApprovedAppsOnlyForExternalUser": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSkipUserProvisioningWizardWelcomePage": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ConnectedAppSettings",
+  "type": "object"
+}

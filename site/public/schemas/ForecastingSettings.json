@@ -1,0 +1,239 @@
+{
+  "$defs": {
+    "AdjustmentsSettings": {
+      "properties": {
+        "allowExpandedColumns": {
+          "default": false,
+          "type": "boolean"
+        },
+        "enableAdjustments": {
+          "default": false,
+          "type": "boolean"
+        },
+        "enableOwnerAdjustments": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "ForecastRangeSettings": {
+      "properties": {
+        "beginning": {
+          "default": 0.0,
+          "format": "double",
+          "type": "number"
+        },
+        "displaying": {
+          "default": 0.0,
+          "format": "double",
+          "type": "number"
+        },
+        "periodType": {
+          "default": null
+        }
+      },
+      "type": "object"
+    },
+    "ForecastingDisplayedFamilySettings": {
+      "properties": {
+        "productFamily": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ForecastingSubmissionSettings": {
+      "properties": {
+        "allowForecastingSubmissions": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "ForecastingTypeSettings": {
+      "properties": {
+        "active": {
+          "default": false,
+          "type": "boolean"
+        },
+        "displayedCategoryApiNames": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "forecastedCategoryApiNames": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "forecastingDateType": {
+          "default": null
+        },
+        "hasProductFamily": {
+          "default": false,
+          "type": "boolean"
+        },
+        "isAmount": {
+          "default": false,
+          "type": "boolean"
+        },
+        "isAvailable": {
+          "default": false,
+          "type": "boolean"
+        },
+        "isQuantity": {
+          "default": false,
+          "type": "boolean"
+        },
+        "managerAdjustableCategoryApiNames": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "masterLabel": {
+          "default": "",
+          "type": "string"
+        },
+        "name": {
+          "default": "",
+          "type": "string"
+        },
+        "opportunityListFieldsLabelMappings": {
+          "default": [],
+          "items": true,
+          "type": "array"
+        },
+        "opportunityListFieldsSelectedSettings": {
+          "$ref": "#/$defs/OpportunityListFieldsSelectedSettings",
+          "default": {
+            "field": []
+          }
+        },
+        "opportunityListFieldsUnselectedSettings": {
+          "$ref": "#/$defs/OpportunityListFieldsUnselectedSettings",
+          "default": {
+            "field": []
+          }
+        },
+        "opportunitySplitName": {
+          "default": "",
+          "type": "string"
+        },
+        "ownerAdjustableCategoryApiNames": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "territory2ModelName": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OpportunityListFieldsSelectedSettings": {
+      "properties": {
+        "field": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "OpportunityListFieldsUnselectedSettings": {
+      "properties": {
+        "field": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "QuotasSettings": {
+      "properties": {
+        "showQuotas": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "defaultToPersonalCurrency": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableForecasts": {
+      "default": false,
+      "type": "boolean"
+    },
+    "forecastingCategoryMappings": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "forecastingDisplayedFamilySettings": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ForecastingDisplayedFamilySettings"
+      },
+      "type": "array"
+    },
+    "forecastingSubmissionSettings": {
+      "$ref": "#/$defs/ForecastingSubmissionSettings",
+      "default": {
+        "allowForecastingSubmissions": false
+      }
+    },
+    "forecastingTypeSettings": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ForecastingTypeSettings"
+      },
+      "type": "array"
+    },
+    "globalAdjustmentsSettings": {
+      "$ref": "#/$defs/AdjustmentsSettings",
+      "default": {
+        "allowExpandedColumns": false,
+        "enableAdjustments": false,
+        "enableOwnerAdjustments": false
+      }
+    },
+    "globalForecastRangeSettings": {
+      "$ref": "#/$defs/ForecastRangeSettings",
+      "default": {
+        "beginning": 0.0,
+        "displaying": 0.0,
+        "periodType": null
+      }
+    },
+    "globalQuotasSettings": {
+      "$ref": "#/$defs/QuotasSettings",
+      "default": {
+        "showQuotas": false
+      }
+    }
+  },
+  "title": "ForecastingSettings",
+  "type": "object"
+}

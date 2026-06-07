@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableAIReplyRecommendations": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGenReplyRecommendations": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableServiceEinsteinGPTGrounding": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableServiceRepliesPause": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "AIReplyRecommendationsSettings",
+  "type": "object"
+}

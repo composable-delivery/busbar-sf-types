@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "autoActivateNewReminders": {
+      "default": false,
+      "type": "boolean"
+    },
+    "customizableProductSchedulesEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "doesEnforceStandardOpportunitySaveLogic": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableExpandedPipelineInspectionSetup": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFindSimilarOpportunities": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableForecastCategoryMetrics": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOpportunityFieldHistoryTracking": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOpportunityInsightsInMobile": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOpportunityTeam": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePipelineChangesMetrics": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePipelineInspection": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePipelineInspectionFlow": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePipelineInspectionSingleCategoryRollup": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRevenueInsights": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableServiceCaseInsights": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUpdateReminders": {
+      "default": false,
+      "type": "boolean"
+    },
+    "findSimilarOppFilter": {
+      "default": null
+    },
+    "oppAmountDealMotionEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "oppCloseDateDealMotionEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "promptToAddProducts": {
+      "default": false,
+      "type": "boolean"
+    },
+    "pushCountEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "simpleOppCreateFromContact": {
+      "default": false,
+      "type": "boolean"
+    },
+    "simpleOppCreateFromEvent": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "OpportunitySettings",
+  "type": "object"
+}

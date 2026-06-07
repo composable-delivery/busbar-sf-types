@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableSlackService": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSlackServiceAlerts": {
+      "default": false,
+      "type": "boolean"
+    },
+    "slackCapabilitiesEnabled": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "PlatformSlackSettings",
+  "type": "object"
+}

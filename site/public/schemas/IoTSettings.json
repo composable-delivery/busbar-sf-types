@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableIoT": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIoTInsightsPilot": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIoTUsageEmail": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "IoTSettings",
+  "type": "object"
+}

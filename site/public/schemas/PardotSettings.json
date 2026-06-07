@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableAIEinsteinEngageFreq": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAIOptimizedSendTime": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAeDataConnector": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableB2bmaAppEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEngagementHistoryDashboards": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEnhancedProspectCustomFieldsSync": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePardotAppV1Enabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePardotEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePardotObjectSync": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProspectActivityDataset": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "PardotSettings",
+  "type": "object"
+}

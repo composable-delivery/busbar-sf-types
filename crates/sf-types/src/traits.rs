@@ -58,7 +58,7 @@ pub trait MetadataType: Serialize + DeserializeOwned + Send + Sync + Clone + 'st
 }
 
 /// Trait for types that support JSON serialization for scratch org definitions.
-pub trait JsonSerializable: MetadataType {
+pub trait JsonSerializable: Serialize + DeserializeOwned + Send + Sync + Clone + 'static {
     fn to_scratch_def_json(&self) -> Result<serde_json::Value, serde_json::Error> {
         serde_json::to_value(self)
     }
@@ -66,6 +66,12 @@ pub trait JsonSerializable: MetadataType {
     fn from_scratch_def_json(value: serde_json::Value) -> Result<Self, serde_json::Error> {
         serde_json::from_value(value)
     }
+}
+
+/// Core trait for Salesforce JSON-only Tooling API types (e.g., packaging).
+pub trait ToolingType: Serialize + DeserializeOwned + Send + Sync + Clone + 'static {
+    /// The Tooling API SObject name (e.g., "Package2", "Package2Version").
+    const TOOLING_TYPE_NAME: &'static str;
 }
 
 /// Trait specifically for org Settings types.
@@ -150,3 +156,20 @@ pub trait PackageComponent: MetadataType {
 }
 
 impl<T: MetadataType> PackageComponent for T {}
+
+/// Extension trait to help with generic api_name retrieval.
+pub trait ToApiName {
+    fn to_api_name(&self) -> Option<&str>;
+}
+
+impl ToApiName for String {
+    fn to_api_name(&self) -> Option<&str> {
+        Some(self.as_str())
+    }
+}
+
+impl ToApiName for Option<String> {
+    fn to_api_name(&self) -> Option<&str> {
+        self.as_deref()
+    }
+}

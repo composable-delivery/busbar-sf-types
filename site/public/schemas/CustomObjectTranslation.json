@@ -1,0 +1,116 @@
+{
+  "$defs": {
+    "CustomFieldTranslation": {
+      "properties": {
+        "caseValues": {
+          "default": [],
+          "items": true,
+          "type": "array"
+        },
+        "gender": {
+          "default": null
+        },
+        "help": {
+          "default": "",
+          "type": "string"
+        },
+        "label": {
+          "default": "",
+          "type": "string"
+        },
+        "lookupFilter": {
+          "default": null
+        },
+        "name": {
+          "default": "",
+          "type": "string"
+        },
+        "picklistValues": {
+          "default": [],
+          "items": true,
+          "type": "array"
+        },
+        "relationshipLabel": {
+          "default": "",
+          "type": "string"
+        },
+        "startsWith": {
+          "default": null
+        }
+      },
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "caseValues": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "fieldSets": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "fields": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/CustomFieldTranslation"
+      },
+      "type": "array"
+    },
+    "gender": {
+      "default": null
+    },
+    "layouts": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "nameFieldLabel": {
+      "default": "",
+      "type": "string"
+    },
+    "quickActions": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "recordTypes": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "sharingReasons": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "standardFields": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "startsWith": {
+      "default": null
+    },
+    "validationRules": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "webLinks": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "workflowTasks": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    }
+  },
+  "title": "CustomObjectTranslation",
+  "type": "object"
+}

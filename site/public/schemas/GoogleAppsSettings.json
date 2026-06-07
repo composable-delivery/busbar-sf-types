@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableGmailButtons": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGmailButtonsAndLinks": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGmailLinks": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGoogleDocs": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGoogleDocsTab": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGoogleTalk": {
+      "default": false,
+      "type": "boolean"
+    },
+    "googleAppsDomain": {
+      "default": "",
+      "type": "string"
+    },
+    "googleAppsDomainLinked": {
+      "default": false,
+      "type": "boolean"
+    },
+    "googleAppsDomainValidated": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "GoogleAppsSettings",
+  "type": "object"
+}

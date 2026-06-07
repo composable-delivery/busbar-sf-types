@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableAutoSelectIndividualOnMerge": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableConsentManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndividualAutoCreate": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "PartyDataModelSettings",
+  "type": "object"
+}

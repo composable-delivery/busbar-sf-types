@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "acctRecGlAccount": {
+      "default": "",
+      "type": "string"
+    },
+    "billingContextDefinition": {
+      "default": "",
+      "type": "string"
+    },
+    "billingContextSourceMapping": {
+      "default": "",
+      "type": "string"
+    },
+    "billingIntraCtxtSrcMapping": {
+      "default": "",
+      "type": "string"
+    },
+    "defaultAPClosureDPEDefnName": {
+      "default": "",
+      "type": "string"
+    },
+    "defaultApplyCreditMemoFlow": {
+      "default": "",
+      "type": "string"
+    },
+    "defaultBillingTreatment": {
+      "default": "",
+      "type": "string"
+    },
+    "defaultEmailTemplate": {
+      "default": "",
+      "type": "string"
+    },
+    "defaultInvPreviewTemplate": {
+      "default": "",
+      "type": "string"
+    },
+    "defaultInvoiceDocTemplate": {
+      "default": "",
+      "type": "string"
+    },
+    "defaultLegalEntity": {
+      "default": "",
+      "type": "string"
+    },
+    "defaultTaxTreatment": {
+      "default": "",
+      "type": "string"
+    },
+    "enableBillingSetup": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCrMemoApplicationToPostedInvoices": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableForeignExchangeTrxnJrnlCreation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInvoiceEmailDelivery": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInvoicePdfGeneration": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInvoiceSequenceService": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNegInvoiceLnConversionToCrMemoLn": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePaymentSchedulesAndItemsCreation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTransactionJournalCreation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTransactionsApplicationToInvoices": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTrxnAmountsStorageInCorpCurrency": {
+      "default": false,
+      "type": "boolean"
+    },
+    "realisedGainGlAccount": {
+      "default": "",
+      "type": "string"
+    },
+    "realisedLossGlAccount": {
+      "default": "",
+      "type": "string"
+    },
+    "sendTo": {
+      "default": "",
+      "type": "string"
+    },
+    "unrealisedGainGlAccount": {
+      "default": "",
+      "type": "string"
+    },
+    "unrealisedLossGlAccount": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "title": "BillingSettings",
+  "type": "object"
+}

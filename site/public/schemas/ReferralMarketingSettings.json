@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableMarketingCloudIntegration": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ReferralMarketingSettings",
+  "type": "object"
+}

@@ -11,7 +11,7 @@ fn main() {
 
     // Create a settings object
     let settings = AccountPlanSettings {
-        enable_account_plan: true,
+        enable_account_plan: Some(true),
     };
 
     println!("1. Original struct:");
@@ -35,7 +35,7 @@ fn main() {
     // Verify roundtrip
     println!("4. Roundtrip verification:");
     println!(
-        "   enable_account_plan: {} -> {} ✓",
+        "   enable_account_plan: {:?} -> {:?} ✓",
         settings.enable_account_plan, deserialized.enable_account_plan
     );
 

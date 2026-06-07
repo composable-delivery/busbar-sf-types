@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "characterLimit": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "displayFormat": {
+      "default": null
+    },
+    "feedItemType": {
+      "default": null
+    }
+  },
+  "title": "FeedItemSettings",
+  "type": "object"
+}

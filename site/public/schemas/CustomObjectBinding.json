@@ -1,0 +1,41 @@
+{
+  "$defs": {
+    "CustomFieldBinding": {
+      "properties": {
+        "implementationField": {
+          "default": "",
+          "type": "string"
+        },
+        "interfaceField": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "fields": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/CustomFieldBinding"
+      },
+      "type": "array"
+    },
+    "implementationObject": {
+      "default": "",
+      "type": "string"
+    },
+    "interfaceObject": {
+      "default": "",
+      "type": "string"
+    },
+    "masterLabel": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "title": "CustomObjectBinding",
+  "type": "object"
+}

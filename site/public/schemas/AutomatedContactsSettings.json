@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableAddContactAutomatically": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAddContactRoleAutomatically": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAddContactRoleWithSuggestion": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAddContactWithSuggestion": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "AutomatedContactsSettings",
+  "type": "object"
+}

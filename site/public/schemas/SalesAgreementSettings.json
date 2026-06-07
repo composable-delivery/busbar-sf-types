@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "actualsCalculationMode": {
+      "default": null
+    },
+    "arePredfndStatusValOveride": {
+      "default": false,
+      "type": "boolean"
+    },
+    "decimalScale": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "displayGroups": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "displayedAgreementTermsMetrics": {
+      "default": "",
+      "type": "string"
+    },
+    "futureActCalcSchedules": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "isOnlyApprovalProcessUsed": {
+      "default": false,
+      "type": "boolean"
+    },
+    "measureDefinitions": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "objectMapping": {
+      "default": null
+    },
+    "primaryNotifEmailAddress": {
+      "default": "",
+      "type": "string"
+    },
+    "renewalPeriodDayCount": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "secondaryNotifEmailAddress": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "title": "SalesAgreementSettings",
+  "type": "object"
+}

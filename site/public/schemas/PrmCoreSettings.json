@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableAgentforceForPartners": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "PrmCoreSettings",
+  "type": "object"
+}

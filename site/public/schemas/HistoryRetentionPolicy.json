@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "archiveAfterMonths": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "archiveRetentionYears": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "description": {
+      "default": "",
+      "type": "string"
+    },
+    "gracePeriodDays": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    }
+  },
+  "title": "HistoryRetentionPolicy",
+  "type": "object"
+}

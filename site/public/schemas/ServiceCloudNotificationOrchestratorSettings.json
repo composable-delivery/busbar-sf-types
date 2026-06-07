@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableEmailNotifications": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInAppNotifications": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNotifications": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSlackNotifications": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ServiceCloudNotificationOrchestratorSettings",
+  "type": "object"
+}

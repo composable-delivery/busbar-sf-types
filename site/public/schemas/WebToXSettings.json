@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "optOutEmailForInactiveWebToCase": {
+      "default": false,
+      "type": "boolean"
+    },
+    "shouldHideRecordInfoInEmail": {
+      "default": false,
+      "type": "boolean"
+    },
+    "webToCaseSpamFilter": {
+      "default": false,
+      "type": "boolean"
+    },
+    "webToLeadSpamFilter": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "WebToXSettings",
+  "type": "object"
+}

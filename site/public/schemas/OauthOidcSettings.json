@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "agentAuthLinking": {
+      "default": false,
+      "type": "boolean"
+    },
+    "blockOAuthUnPwFlow": {
+      "default": false,
+      "type": "boolean"
+    },
+    "blockOAuthUsrAgtFlow": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isPkceRequired": {
+      "default": false,
+      "type": "boolean"
+    },
+    "oAuthCdCrdtFlowEnable": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "OauthOidcSettings",
+  "type": "object"
+}

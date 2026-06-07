@@ -1,0 +1,1 @@
+use schemars::RootSchema; fn main() { let _ : Option<RootSchema> = None; }

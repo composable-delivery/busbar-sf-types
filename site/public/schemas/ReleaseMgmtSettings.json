@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableITSMReleaseMgmt": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableReleaseEventCreation": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ReleaseMgmtSettings",
+  "type": "object"
+}

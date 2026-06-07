@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "areAttributesIncludedInAssetToken": {
+      "default": false,
+      "type": "boolean"
+    },
+    "areCustomPermsIncludedInAssetToken": {
+      "default": false,
+      "type": "boolean"
+    },
+    "assetTokenAudiences": {
+      "default": "",
+      "type": "string"
+    },
+    "assetTokenSigningCertificate": {
+      "default": "",
+      "type": "string"
+    },
+    "assetTokenValidity": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "clientAssertionCertificate": {
+      "default": "",
+      "type": "string"
+    },
+    "commaSeparatedCustomScopes": {
+      "default": "",
+      "type": "string"
+    },
+    "commaSeparatedOauthScopes": {
+      "default": "",
+      "type": "string"
+    },
+    "customAttributes": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "externalClientApplication": {
+      "default": "",
+      "type": "string"
+    },
+    "isFirstPartyAppEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "label": {
+      "default": "",
+      "type": "string"
+    },
+    "oauthLink": {
+      "default": "",
+      "type": "string"
+    },
+    "singleLogoutUrl": {
+      "default": "",
+      "type": "string"
+    },
+    "trustedIpRanges": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    }
+  },
+  "title": "ExtlClntAppOauthSettings",
+  "type": "object"
+}

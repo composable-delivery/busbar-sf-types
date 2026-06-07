@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "alternateAlohaListView": {
+      "default": false,
+      "type": "boolean"
+    },
+    "dynamicMruActionsOff": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAsyncRelatedLists": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableClickjackUserPageHeaderless": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCollapsibleSections": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCollapsibleSideBar": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCustomObjectTruncate": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCustomeSideBarOnAllPages": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDeleteFieldHistory": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableExternalObjectAsyncRelatedLists": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHoverDetails": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInlineEdit": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLightningVerticalNav": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNewPageLayoutEditor": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePersonalCanvas": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePrintableListViews": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProfileCustomTabsets": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableQuickCreate": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableQuickSetupPanel": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRelatedListHovers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSldsV2": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSldsV2DarkModeInCosmos": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSpotlight": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTabOrganizer": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableVertNavThemedIconsEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableVerticalNavSeamlessSwitching": {
+      "default": false,
+      "type": "boolean"
+    },
+    "multiColumnSort": {
+      "default": false,
+      "type": "boolean"
+    },
+    "multiColumnSortLv": {
+      "default": false,
+      "type": "boolean"
+    },
+    "multiColumnSortRl": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "UserInterfaceSettings",
+  "type": "object"
+}

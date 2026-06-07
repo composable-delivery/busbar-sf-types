@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableCMSC2CConnections": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableChatterFileLink": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContent": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContentAutoAssign": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContentDistForPortalUsers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContentDistPwOptionsBit1": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContentDistPwOptionsBit2": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContentDistribution": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContentHubAWSS3Pref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContentHubUploadAWSS3Pref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContentSupportMultiLanguage": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContentWorkspaceAccess": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDeleteFileInContentPacks": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFileIngestToDataCloud": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFileShareSetByRecord": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFilesUsrShareNetRestricted": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableJPGPreviews": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLWCFileUpload": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLWCFileUploadInFlows": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLibraryManagedFiles": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableShowChatterFilesInContent": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSiteGuestUserToUploadFiles": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUploadFilesOnAttachments": {
+      "default": false,
+      "type": "boolean"
+    },
+    "setValidContentTypeForAtchDocDownload": {
+      "default": false,
+      "type": "boolean"
+    },
+    "skipContentAssetTriggers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "skipContentAssetTriggersOnDeploy": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ContentSettings",
+  "type": "object"
+}

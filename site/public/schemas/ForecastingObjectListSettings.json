@@ -1,0 +1,66 @@
+{
+  "$defs": {
+    "ForecastingObjectListSelectedSettings": {
+      "properties": {
+        "field": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ForecastingObjectListUnselectedSettings": {
+      "properties": {
+        "field": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ForecastingTypeObjectListSettings": {
+      "properties": {
+        "forecastingObjectListLabelMappings": {
+          "default": [],
+          "items": true,
+          "type": "array"
+        },
+        "forecastingObjectListSelectedSettings": {
+          "$ref": "#/$defs/ForecastingObjectListSelectedSettings",
+          "default": {
+            "field": []
+          }
+        },
+        "forecastingObjectListUnselectedSettings": {
+          "$ref": "#/$defs/ForecastingObjectListUnselectedSettings",
+          "default": {
+            "field": []
+          }
+        },
+        "forecastingTypeDeveloperName": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "forecastingTypeObjectListSettings": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ForecastingTypeObjectListSettings"
+      },
+      "type": "array"
+    }
+  },
+  "title": "ForecastingObjectListSettings",
+  "type": "object"
+}

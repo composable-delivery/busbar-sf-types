@@ -1,0 +1,36 @@
+{
+  "$defs": {
+    "AppSettings": {
+      "properties": {
+        "connectedAppName": {
+          "default": "",
+          "type": "string"
+        },
+        "enabled": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "appSettings": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/AppSettings"
+      },
+      "type": "array"
+    },
+    "notificationChannels": {
+      "default": null
+    },
+    "notificationType": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "title": "NotificationTypeSettings",
+  "type": "object"
+}

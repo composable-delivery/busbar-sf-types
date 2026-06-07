@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "enum": [
+    "None",
+    "Scatter",
+    "ScatterGrouped",
+    "Bubble",
+    "BubbleGrouped",
+    "HorizontalBar",
+    "HorizontalBarGrouped",
+    "HorizontalBarStacked",
+    "HorizontalBarStackedTo100",
+    "VerticalColumn",
+    "VerticalColumnGrouped",
+    "VerticalColumnStacked",
+    "VerticalColumnStackedTo100",
+    "Line",
+    "LineGrouped",
+    "LineCumulative",
+    "LineCumulativeGrouped",
+    "Pie",
+    "Donut",
+    "Funnel",
+    "VerticalColumnLine",
+    "VerticalColumnGroupedLine",
+    "VerticalColumnStackedLine",
+    "Plugin"
+  ],
+  "title": "ChartType",
+  "type": "string"
+}

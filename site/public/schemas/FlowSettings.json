@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "canDebugFlowAsAnotherUser": {
+      "default": false,
+      "type": "boolean"
+    },
+    "doesEnforceApexCpuTimeLimit": {
+      "default": false,
+      "type": "boolean"
+    },
+    "doesFormulaEnforceDataAccess": {
+      "default": false,
+      "type": "boolean"
+    },
+    "doesFormulaGenerateHtmlOutput": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEmailSimpleRespectProfiles": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEmailsimpleSecureProfiles": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFlowBREncodedFixEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFlowCustomPropertyEditor": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFlowDeployAsActiveEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFlowFieldFilterEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFlowFormulasFixEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFlowInterviewSharingEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFlowNullPreviousValueFix": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFlowPauseEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFlowReactiveChoiceOptions": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFlowReactiveScreens": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFlowUseApexExceptionEmail": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFlowViaRestUsesUserCtxt": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLightningRuntimeEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isApexPluginAccessModifierRespected": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isEnhancedFlowListViewVisible": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isFlowBlockAccessToSessionIDEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isManageFlowRequiredForAutomationCharts": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isSupportRollbackOnErrorForApexInvocableActionsEnabled": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "FlowSettings",
+  "type": "object"
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "androidPushConfig": {
+      "default": null
+    },
+    "applePushConfig": {
+      "default": null
+    },
+    "externalClientApplication": {
+      "default": "",
+      "type": "string"
+    },
+    "label": {
+      "default": "",
+      "type": "string"
+    },
+    "pushConfigLink": {
+      "default": "",
+      "type": "string"
+    },
+    "pushServiceType": {
+      "default": null
+    }
+  },
+  "title": "ExtlClntAppPushSettings",
+  "type": "object"
+}

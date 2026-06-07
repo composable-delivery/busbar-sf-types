@@ -1,0 +1,86 @@
+{
+  "$defs": {
+    "KnowledgeCommunitiesSettings": {
+      "properties": {
+        "community": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "KnowledgeSitesSettings": {
+      "properties": {
+        "site": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "articlePDFCreationProfile": {
+      "default": "",
+      "type": "string"
+    },
+    "articlePublicSharingCommunities": {
+      "$ref": "#/$defs/KnowledgeCommunitiesSettings",
+      "default": {
+        "community": []
+      }
+    },
+    "articlePublicSharingSites": {
+      "$ref": "#/$defs/KnowledgeSitesSettings",
+      "default": {
+        "site": []
+      }
+    },
+    "articlePublicSharingSitesChatterAnswers": {
+      "$ref": "#/$defs/KnowledgeSitesSettings",
+      "default": {
+        "site": []
+      }
+    },
+    "assignTo": {
+      "default": "",
+      "type": "string"
+    },
+    "customizationClass": {
+      "default": "",
+      "type": "string"
+    },
+    "defaultContributionArticleType": {
+      "default": "",
+      "type": "string"
+    },
+    "editor": {
+      "default": null
+    },
+    "enableArticleCreation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableArticlePublicSharingSites": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCaseDataCategoryMapping": {
+      "default": false,
+      "type": "boolean"
+    },
+    "useProfileForPDFCreation": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "KnowledgeCaseSettings",
+  "type": "object"
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enablePrebuiltCmpntTlmtryMgmt": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTelemetryDefActnMgmt": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "IndustriesConnectedServiceSettings",
+  "type": "object"
+}

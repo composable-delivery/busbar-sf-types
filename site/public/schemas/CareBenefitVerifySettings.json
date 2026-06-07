@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "codeSetType": {
+      "default": "",
+      "type": "string"
+    },
+    "defaultNpi": {
+      "default": "",
+      "type": "string"
+    },
+    "generalPlanServiceTypeCode": {
+      "default": "",
+      "type": "string"
+    },
+    "isDefault": {
+      "default": false,
+      "type": "boolean"
+    },
+    "masterLabel": {
+      "default": "",
+      "type": "string"
+    },
+    "organizationName": {
+      "default": "",
+      "type": "string"
+    },
+    "serviceApexClass": {
+      "default": "",
+      "type": "string"
+    },
+    "serviceNamedCredential": {
+      "default": "",
+      "type": "string"
+    },
+    "serviceTypeSourceSystem": {
+      "default": "",
+      "type": "string"
+    },
+    "uriPath": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "title": "CareBenefitVerifySettings",
+  "type": "object"
+}

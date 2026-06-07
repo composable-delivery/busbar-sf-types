@@ -1,14 +1,15 @@
 # Salesforce Types Explorer - React Site
 
-This directory contains the source code for the interactive GitHub Pages site built with React, reagraph, and reablocks.
+This directory contains the completely redesigned interactive GitHub Pages site built with React, reagraph, reaviz, reablocks, and Tailwind CSS.
 
 ## Technology Stack
 
-- **React 19** - UI framework
-- **Reagraph** - WebGL-based graph visualization for interactive dependency graphs
-- **Reaviz** - Data visualization library (for potential future enhancements)
-- **Reablocks** - UI component library (ThemeProvider)
-- **Vite** - Build tool and dev server
+- **React 19.2** - UI framework
+- **Reagraph 4.30** - WebGL-based graph visualization for interactive dependency graphs
+- **Reaviz 16.1** - Data visualization library for treemap visualization
+- **Reablocks 9.2** - UI component library (Cards, Buttons, Tabs, etc.)
+- **Tailwind CSS 3.4** - Utility-first CSS framework with custom dark theme
+- **Vite 7.3** - Build tool and dev server
 
 ## Development
 
@@ -44,45 +45,54 @@ npm run build
 site/
 ├── src/
 │   ├── components/
-│   │   ├── Header.jsx           # Site header
-│   │   ├── Sidebar.jsx          # Search, filters, categories
-│   │   ├── GraphVisualization.jsx  # Reagraph-based graph display
-│   │   ├── TypeDetails.jsx      # Type information with tabs
-│   │   └── SimpleTabs.jsx       # Custom tabs component
-│   ├── App.jsx                  # Main application component
-│   ├── main.jsx                 # React entry point
-│   └── styles.css               # Global styles
+│   │   ├── Hero.jsx                # Landing page hero with search
+│   │   ├── StatsBar.jsx            # Animated statistics counters
+│   │   ├── TypeTreemap.jsx         # Reaviz treemap visualization
+│   │   ├── CategoryFilters.jsx     # Horizontal category filter pills
+│   │   ├── TypeTable.jsx           # Sortable, filterable type table
+│   │   ├── TypeNetwork.jsx         # Reagraph network visualization
+│   │   └── TypeDetailView.jsx      # Complete type detail page
+│   ├── utils/
+│   │   └── dataProcessing.js       # Data utilities and transformations
+│   ├── App.jsx                     # Main application component
+│   ├── main.jsx                    # React entry point with theme
+│   └── styles.css                  # Tailwind CSS imports only
 ├── public/
-│   └── type-graph.json          # Graph data (copied from assets/)
-└── index.html                   # HTML template
+│   ├── type-graph.json             # Graph data
+│   └── type-graph.dot              # DOT file with clusters
+├── tailwind.config.js              # Tailwind configuration
+├── postcss.config.js               # PostCSS configuration
+├── vite.config.js                  # Vite build configuration
+└── index.html                      # HTML template
 ```
 
 ## Features
 
-### Graph Visualization
-- **Interactive WebGL rendering** via reagraph
-- Click nodes to navigate to types
-- Force-directed layout
-- Overview mode showing top categories
-- Type-specific mode showing dependencies
+### Landing Page (No Type Selected)
+- **Visually Impactful Hero** - Large heading, description, and global search
+- **Animated Statistics Bar** - 6 stat cards with animated counters showing totals
+- **Category Filters** - Horizontal scrolling pills from DOT file clusters
+- **Interactive Treemap** - Reaviz treemap sized by connection count, colored by category
+- **Type Explorer Table** - Sortable, filterable table of all 2,682+ types
 
-### Type Details
-- **Tabbed interface** for Details and JSON Schema
-- Shows dependencies grouped by relationship type (Contains, Extends, Generic)
-- Lists types that depend on the selected type
-- Category and statistics
+### Type Detail View (Type Selected)
+- **Breadcrumb Navigation** - Easy return to overview
+- **Type Header Card** - Name, category badge, connection statistics
+- **Network Visualization** - Reagraph showing local dependency graph
+- **Tabbed Relationships** - Separate tabs for dependencies and dependents
+- **Clickable Navigation** - Click any related type to navigate
 
-### Search & Navigation
-- Real-time search across all types
-- Category-based browsing
-- Relationship type filters (Contains, Extends, Generic)
-- Click any dependency to navigate
+### Data Processing
+- **DOT File Parsing** - Extracts cluster categories from type-graph.dot
+- **Metadata Enrichment** - Builds comprehensive type metadata with relationships
+- **Treemap Data Generation** - Hierarchical data for visualization
+- **Search & Filter** - Fast client-side search and category filtering
 
-### Layout
-- **Graph always on top** - Appears before type details
-- Sticky sidebar with statistics
-- Responsive design
-- Clean, modern UI
+### Design
+- **Pure Tailwind CSS** - No custom CSS classes, all utility-based
+- **Dark Theme** - Optimized for data visualization with blue accents
+- **Animations** - Fade-in, slide-up, scale-in for smooth UX
+- **Responsive** - Mobile-friendly layouts
 
 ## Build Output
 
@@ -92,9 +102,41 @@ The build process:
 3. Outputs to `../docs/` directory for GitHub Pages
 4. Copies `type-graph.json` from `public/` directory
 
-## Future Enhancements
+## Design System
 
-- **JSON Schema display** - Show actual schemas when generation is implemented
-- **Graph zoom and pan** - Enhanced graph navigation
-- **Data visualizations** - Charts using reaviz for statistics
-- **Export features** - Download graphs or type information
+### Colors
+- **Primary**: Blue (#3b82f6) - Main accent color
+- **Surface**: Slate (#1e293b) - Card backgrounds
+- **Background**: Dark Slate (#0f172a) - Page background
+- **Categories**: 8 distinct colors for visual differentiation
+
+### Typography
+- **Font**: Inter (Google Fonts)
+- **Weights**: 400 (regular), 500 (medium), 600 (semibold), 700 (bold), 800 (extrabold)
+
+### Animations
+- **fade-in**: 0.5s ease-in
+- **slide-up**: 0.6s ease-out
+- **scale-in**: 0.4s ease-out
+- **Animated counters**: 2s duration with easing
+
+## Key Changes from Previous Version
+
+### Removed
+- ❌ Custom CSS (600+ lines of .css classes)
+- ❌ Old component structure (Header, Sidebar, Dashboard)
+- ❌ Dashboard-first navigation pattern
+
+### Added
+- ✅ Tailwind CSS with dark theme
+- ✅ Treemap visualization for overview
+- ✅ Category filtering from DOT clusters
+- ✅ Animated statistics
+- ✅ Data processing utilities
+- ✅ Visually impactful landing page
+
+### Improved
+- 🔄 Better UX for navigating 500+ types
+- 🔄 Clearer distinction between overview and detail views
+- 🔄 Proper use of reagraph, reaviz, and reablocks
+- 🔄 Faster, more intuitive navigation

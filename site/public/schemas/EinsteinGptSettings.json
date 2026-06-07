@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "disableAIProvAWSBedrock": {
+      "default": false,
+      "type": "boolean"
+    },
+    "disableAIProvAzureOpenAI": {
+      "default": false,
+      "type": "boolean"
+    },
+    "disableAIProvOpenAI": {
+      "default": false,
+      "type": "boolean"
+    },
+    "disableAIProvVertexGemini": {
+      "default": false,
+      "type": "boolean"
+    },
+    "disableAIProviderRegionFallback": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAIModelBeta": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEinsteinGPTDeployPromptTemplatesAsActive": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEinsteinGptAllowUnsafePTInputChanges": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEinsteinGptGlobalLangSupport": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEinsteinGptPlatform": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEnhancedPromptSecurity": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "EinsteinGptSettings",
+  "type": "object"
+}

@@ -14,7 +14,7 @@ description = "Internal TypeScript → Rust code generation utilities for busbar
 regex.workspace = true
 
 # Graph data structures for type dependency analysis
-petgraph = { version = "0.6", features = ["serde-1"] }
+petgraph = { version = "0.8.3", features = ["serde-1"] }
 
 # Serialization
 serde.workspace = true
@@ -22,11 +22,11 @@ serde_json.workspace = true
 toml = "0.9"
 
 # TypeScript AST parsing - using oxc
-oxc_parser = "0.111"
-oxc_ast = "0.111"
-oxc_allocator = "0.111"
-oxc_span = "0.111"
-oxc_diagnostics = "0.111"
+oxc_parser = "0.134.0"
+oxc_ast = "0.134.0"
+oxc_allocator = "0.134.0"
+oxc_span = "0.134.0"
+oxc_diagnostics = "0.134.0"
 
 # Code generation utilities
 convert_case = "0.11"

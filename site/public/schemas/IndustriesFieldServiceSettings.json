@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableAutomotiveServiceCampaignManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndustriesFieldService": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "IndustriesFieldServiceSettings",
+  "type": "object"
+}

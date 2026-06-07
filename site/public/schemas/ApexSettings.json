@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "defaultQueueableDelay": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "enableAggregateCodeCoverageOnly": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableApexAccessRightsPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableApexApprovalLockUnlock": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableApexCtrlImplicitWithSharingPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableApexPropertyGetterPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAuraApexCtrlAuthUserAccessCheckPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAuraApexCtrlGuestUserAccessCheckPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCompileOnDeploy": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDebugLogsDuringDeployment": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDisableParallelApexTesting": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGaplessTestAutoNum": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMngdCtrlActionAccessPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNonCertifiedApexMdCrud": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRestrictCommunityExecAnon": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSecureNoArgConstructorPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTestSetupSkipTestResults": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ApexSettings",
+  "type": "object"
+}

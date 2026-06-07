@@ -1,0 +1,1475 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "allowBenefitAssignmentWithInactiveProgramEnrollment": {
+      "default": false,
+      "type": "boolean"
+    },
+    "allowMultipleProducersToWorkOnSamePolicy": {
+      "default": false,
+      "type": "boolean"
+    },
+    "appointmentDistributionOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "brwrCntctFrExtrnlSrcsPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "captureResourceUtilizationOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "clctnAndRecoveryAgntPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "collectionAsaAgentPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "createCustomerPropertyFromLAProperty": {
+      "default": false,
+      "type": "boolean"
+    },
+    "createFSCAssetFromLAAsset": {
+      "default": false,
+      "type": "boolean"
+    },
+    "createFSCAssetFromLAProperty": {
+      "default": false,
+      "type": "boolean"
+    },
+    "createFSCLiabilityFromLAFinancial": {
+      "default": false,
+      "type": "boolean"
+    },
+    "createFSCLiabilityFromLALiability": {
+      "default": false,
+      "type": "boolean"
+    },
+    "createFinancialAccountFromLAAsset": {
+      "default": false,
+      "type": "boolean"
+    },
+    "createFinancialAccountFromLALiability": {
+      "default": false,
+      "type": "boolean"
+    },
+    "createFinancialAccountsFromLAFinancials": {
+      "default": false,
+      "type": "boolean"
+    },
+    "createFinancialAccountsFromLAProperty": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAIAccelerator": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAWSTextractAnalyzeIDPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAWSTextractQueriesPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAWSTextractTablesPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAcademicInsightsAI": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAcademicOperations": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAccessToMasterListOfCoverageTypes": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAccountBasedSharing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAccountScoreEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableActionPlanTaskComment": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableActionableList": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableActionableListOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAdvancedScheduling": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAdvancementGenAI": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAdverseEvents": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAdvisingAgent": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAdvisingSummaryAI": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAlumniRelations": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAnyResourceTypeOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAppAlerts": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAppFrmAnywhereOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAppInviteOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableApplnDecStdSharing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAppraisalMgmt": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAutoComplaintSummaryPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableB2B": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableB2BAccountPlan": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableB2BEinstein": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableB2BRMAgent": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableBatchIDExtractAndTransform": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableBatchIntelligentDocExtrctPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableBehavioralHealthAppPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableBenefitAndGoalSharingPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableBenefitManagementPreference": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableBlockResourceAvailabilityOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableBusinessHierarchyPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableBusinessMessenger": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCBSFAnyWordSearch": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCPBestConTimeSharing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCPSocialCustomSharing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCSRDReportingOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCalculationDetail": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCalculationUsingParentPolicyOnly": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCallReportAdminContextPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCandidateMatching": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCapacitySchedulingPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCareGapPrefSetting": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCareMgmtSlackAccess": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCarePlansPreference": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCareTaskSharingSetting": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCaseProceedingsPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCaseReferralPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCdpSalesExcellence": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCdsAppFormProdSiteUsers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCdsAppFormSiteUsers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCdsApplicationForm": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCdsApplicationFormProduct": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCdsAssetDataSharingParticipant": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCdsAssetDataSharingParticipantExprc": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCdsDeleteCOPRecordByParentOwner": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCdsPartyProfile": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCdsPartyProfileSiteUsers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableChurnPredictionRT": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableClaimMgmt": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableClinicalDataModel": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCollectionFLowOps": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCollectionRiskScoringCFE": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCollectionTimeline": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableComparisonViewAI": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCompliantDataSharingForAccount": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCompliantDataSharingForBudget": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCompliantDataSharingForBudgetSiteUsers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCompliantDataSharingForCustomObjects": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCompliantDataSharingForFinancialDeal": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCompliantDataSharingForFundingAward": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCompliantDataSharingForFundingAwardSiteUsers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCompliantDataSharingForFundingOpportunity": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCompliantDataSharingForFundingOpportunitySiteUsers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCompliantDataSharingForIndividualApplication": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCompliantDataSharingForIndividualApplicationSiteUsers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCompliantDataSharingForIndividualApplicationTask": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCompliantDataSharingForIndividualApplicationTaskSiteUsers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCompliantDataSharingForInteraction": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCompliantDataSharingForInteractionSummary": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCompliantDataSharingForOpportunity": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCompliantDataSharingForPreliminaryApplicationRef": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCompliantDataSharingForPreliminaryApplicationRefSiteUsers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableComprehendMedical": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContactCenterAccess": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContractMgmtPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContractSearchPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContractsAIPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCourseSearchAgent": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCreateMultiAttendeeEventOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCrisisCenterAccess": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCriteriaBasedSearchAndFilter": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCustomFlowsOnCycleCount": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCustomFlowsOnExpiryPage": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDCHEnGpt": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDCHEnGptAccuracy": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDCHEnGptFirstDraft": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDCHEnGptIL": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDCHEnGptSearch": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDCHGoogleAddOn": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDCHMSO365AddIn": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDFDataCapture": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDataCloudEventsOnTimeline": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDataTrueUpPreference": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDeDupeForDSPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDealManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDeleteCustomObjectParticipantRecordCompliantDataSharing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDepriveSoqlAccessGuestUserOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDepriveSoqlAccessOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDigitalInsurancePolicyRnwl": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDigitalLendingPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDigitalLendingReadOnlyOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDisbursementPreference": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDiscoveryFrameworkMetadata": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDiscoveryFrwrkSampleTemplate": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDiseaseCaseClassificationPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDiseaseSurveillancePref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDisplaySummaryOnTimeline": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDontSharePartyprofWPortalOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDpeProviderSearchSettingsOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDropInAppointmentsOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDropInFallbackMechOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDropInSkillMatchingOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEDCSkillsGenerator": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEGPTInsuranceCmpntPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableESGReportingOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEUCoreAI": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEUCoreServiceAppOn": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEUSales": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEUTariffFeature": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEduAdvncdAcadOper": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEducationCloud": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEinsteinAiAutofillPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEinsteinDocReader": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEinsteinVisits": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEngagementVisualsAI": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEnhancedQuestionCreation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEnhancedUIForISPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEpcDeleteAccess": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEventManagementOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEventWriteOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEvidenceManagementPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableExistingHealthCloudOrg": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFSCInsuranceReport": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFSCInsuranceServiceConsole": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFinSummaryRollupMgmt": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFinancialAccountMgmt": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFinancialDealCallReportCmpPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFinancialDealCallReportPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFinancialDealRoleHierarchy": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFormFramework": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFundraising": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGenAIAssessmentQuestions": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGiftAgreement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGiftEntryGrid": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGiftPlanning": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGnrcDisclsFrmwrk": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGoalsAgent": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGrantmaking": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGroupMembershipPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHCReferralScoring": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHcCorePatientConsole": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHcStdRelationshipJunctions": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHealthCloudGenAIPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHighScaleRuleProcessingPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHlsClinicalDcsnSuptAccessOrgPreference": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHlsFhirSubscriptionSetting": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHlsUmDtrSetting": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHomeHealth": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableHomeHlthRschdFlowRcntVer": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIAMPatchModifyPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIESentimentAnalysis": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndCrossObjChangelog": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndustriesAssessment": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndustriesAssessmentGuestOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndustriesAssessmentPrefill": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndustriesCaptchaVerification": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndustriesIntegrationOrchestratorPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndustriesKYC": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndustriesLPIPreference": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndustriesOnboarding": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndustriesRebates": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndustriesShipAndDebit": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndustriesStageManagementPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInformationLibrary": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIntegratedCareManagementSetting": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIntelligentDocExtractPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInteractionCstmSharingPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInteractionRoleHierarchy": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInteractionSummaryPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInteractionSummaryRoleHierarchy": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInvestigativeCaseMgmntPrf": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLSC4CEDocumentManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLSC4CEEDetailing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLSC4CEEmailAndTemplate": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLSC4CEKeyAccountManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLSC4CEMedInsights": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLSC4CEPackage": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLSC4CERemoteEngagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLSC4CEVisits": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLifeSciGenericWorkflow": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLifeSciInquiry": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLifeSciListsAndFilters": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLifeSciencesActivityPlan": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLifeSciencesClinialTrailManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLifeSciencesConsent": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLifeSciencesCustomerEngagementBase": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLifeSciencesMergeManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLifeSciencesProviderEngagementCompliance": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLifeSciencesSiteManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLsSiteMgmtSiteSelAgent": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableLsSiteMgmtSummarization": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableManyToManyRelationships": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMaterialityAssessment": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMcgSetting": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMedRecSetting": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMediaAddInvSlotToPlan": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMediaConfigSetupEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMedicalDeviceEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMedicationManagementEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMentoring": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMicrosoftWordAddInEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMortgageRlaTotalsOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMulesoftFhirR4Apis": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMultiResourceOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMultipleCareProgramEnrolleeOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMultipleTopicsForShiftsOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNZCENCarbonAccounting": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNZCENGPTDCHIL": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNZCENScope3ProcHub": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNZCMngEnrgyAttrCr": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNZCMngEsgPgm": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNZCWithEinstein": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNewTimelineSetupFlow": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNextBestAction": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNextBestCustomer": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNextBestMessage": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNonprofitCloudAgent": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNonprofitGenAI": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableObjectDetection": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOnDemandRecordRollupPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOutcomes": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOverbookingOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOverbookingWithGroupOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePATSTerritoryBasedSharing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePCMConfigRules": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePartyProfileParentSharingOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePartyprofParentMultiSharingOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePatientAppointmentSchedulingOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePatientServicesOrchestration": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePersonAcctAddrSync": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePhilResearchAgent": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePolicyAdministration": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePolicyAgentPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePositionRecruitmentPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePreBookedFallbackMechOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePrefillMcgAssessmentSetting": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePrimaryProviderRestriction": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProdTerrAlgnPrtHrchyAcc": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProgramCohorts": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProviderManagementPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProviderMgmtHealthCarePref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProviderMgmtSharingPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProviderSearchForGuestUser": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProviderSearchPreciseMatch": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProviderSearchSyncOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProviderSummarization": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePssBnftMgmtSklCmtyPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePssCmplntMgmtSklCmtyPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePubSectrCmplMgmtSklPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePubSectrCmplntMgmtSklPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePulseChecks": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRBLUsingCalcService": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRecordRollup": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableReferralManagementApp": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableReferralScoring": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableReminders": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRetailPos": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRosterFileFeatureOrgPreference": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCAllocScorEmssnSpentAmt": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCAssignFootprint": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCBEIEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCCarbonAccounting": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCCarbonCreditAlloc": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCCreateFootprint": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCDGF": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCEmssnsForecasting": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCExpansionUseCase": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCExpansionUseCaseMultiLevel": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCExternalEngMgmt": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCGenrateCnsmpRcd": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCSNGManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCScope3HubEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCSnGAffiliates": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCSplitCnsmpRcd": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCTargetSetting": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCWasteManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSCWaterManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSampleLimits": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSaveActionsForInternalAssessmentsSetting": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSaveAssessmentAsDraft": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSchedulerPaymentsPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableScoringFrameworkCRMAPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableScoringFrameworkOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSentimentAnalysis": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableShareSaWithArOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSlackForCib": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSmartAsmtQstnGeneration": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSmartTags": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSourceCodeGeneration": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableStageAssignmentRulesReEvaluation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableStudentGoals": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableStudentManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableStudentRecruitmentAgent": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableStudentSuccess": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSuggestedAssessmentSetting": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSustainabilityCloud": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSyncInteractionsPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTearSheetPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTextExtract": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTimelineCachePref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTimelinePref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTlntRcrtMgmtRcrutSklPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTlntRcrtMgmtSklCmtyPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTopicOrTemplate": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTopicTimeSlot": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTrackApplicationsPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTrialManagementRandomization": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTurnOffDsclsReprtPbsrName": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUMPayerAppAccessOrgPreference": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableVideoVisitsOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableVisitCalendarSync": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableVisitInventoryEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableVisitPlanningAndExecutionAction": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableVolunteerManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableVolunteerManagementAI": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWaitlistManagementPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWealthManagementAIPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isCustomDpeTxObsProviderSearchEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "loanApplicantAddressAutoCreation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "loanApplicantAutoCreation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "mortgageSalesforceSharing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "nonProfitCloudEmbeddedAI": {
+      "default": false,
+      "type": "boolean"
+    },
+    "partyProfMultiShrPrtnrsOrgPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "rlaEditIfAccHasEdit": {
+      "default": false,
+      "type": "boolean"
+    },
+    "showCollectionContactAndAccount": {
+      "default": false,
+      "type": "boolean"
+    },
+    "transformRBLtoDPE": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "IndustriesSettings",
+  "type": "object"
+}

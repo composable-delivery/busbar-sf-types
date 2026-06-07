@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableCheckIncAttrProactvAsst": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEinsteinAssignGrpInc": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEinsteinProbmCreationInc": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIncAsgntProactvAsst": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIncPrpsRsolSumProactvAsst": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIncRootCseSumProactvAsst": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIncSmlrRecProactvAsst": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIncSrvcPlanProactvAsst": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIncSummaryProactvAsst": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableItSrvcsEmployeeAgent": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableItSrvcsFulfillerAgent": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProactvAsstforItSrvcs": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ServiceItsmIntelligenceUddSettings",
+  "type": "object"
+}

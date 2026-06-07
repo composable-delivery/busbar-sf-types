@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableCanAnswerContainUsername": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableConcealPersonalInfo": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableContactlessExternalIdentityUsers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEnhancedConcealPersonalInfo": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEnhancedPermsetMgmt": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEnhancedProfileMgmt": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEnhcUiUserAccessPolicies": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableNewProfileUI": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableProfileFiltering": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRestrictEmailDomains": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableScrambleUserData": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUserSelfDeactivate": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enhancedPermSetList": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enhancedUserListView": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enhancedUserRoleListView": {
+      "default": false,
+      "type": "boolean"
+    },
+    "groupSummaryUIEnhancement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "permsetsInFieldCreation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "psaExpirationUIEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "restrictedProfileCloning": {
+      "default": false,
+      "type": "boolean"
+    },
+    "userAccessPoliciesEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "userFieldHistoryTracking": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "UserManagementSettings",
+  "type": "object"
+}

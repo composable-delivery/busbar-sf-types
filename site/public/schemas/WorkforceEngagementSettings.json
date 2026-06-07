@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableHistoricalAdherence": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIndividualAdherence": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableIntradayManagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableMachineLearningForecasting": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRealTimeAdherence": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWorkforceEngagement": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableWorkforceEngagementConfiguration": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "WorkforceEngagementSettings",
+  "type": "object"
+}

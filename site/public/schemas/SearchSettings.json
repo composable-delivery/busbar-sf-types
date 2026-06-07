@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "documentContentSearchEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAdvancedSearchInAlohaSidebar": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEinsteinSearchAnswersGPT": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEinsteinSearchAnswersOnDMO": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEinsteinSearchAssistantDialog": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEinsteinSearchEs4kPilot": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEinsteinSearchNLSFilters": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEinsteinSearchNaturalLanguage": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEinsteinSearchPersonalization": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableEinsteinSearchQA": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePersonalTagging": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enablePublicTagging": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableQuerySuggestionPigOn": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSalesforceGeneratedSynonyms": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSearchTermHistory": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSetupSearch": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableSuggestArticlesLinksOnly": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableUseDefaultSearchEntity": {
+      "default": false,
+      "type": "boolean"
+    },
+    "optimizeSearchForCJKEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "recentlyViewedUsersForBlankLookupEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "searchSettingsByObject": {
+      "default": null
+    },
+    "sidebarAutoCompleteEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "sidebarDropDownListEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "sidebarLimitToItemsIOwnCheckboxEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "singleSearchResultShortcutEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "spellCorrectKnowledgeSearchEnabled": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "SearchSettings",
+  "type": "object"
+}

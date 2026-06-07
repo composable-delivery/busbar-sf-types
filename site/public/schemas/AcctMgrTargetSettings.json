@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "acctMgrPeriodicTargetDstrCnt": {
+      "default": 0.0,
+      "format": "double",
+      "type": "number"
+    },
+    "periodType": {
+      "default": null
+    },
+    "pricebookId": {
+      "default": "",
+      "type": "string"
+    },
+    "teamMemberHierarchyType": {
+      "default": null
+    }
+  },
+  "title": "AcctMgrTargetSettings",
+  "type": "object"
+}

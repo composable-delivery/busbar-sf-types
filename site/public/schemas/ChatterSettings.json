@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "allowChatterGroupArchiving": {
+      "default": false,
+      "type": "boolean"
+    },
+    "allowRecordsInChatterGroup": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableApprovalRequest": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCaseFeedRelativeTimestamps": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableChatter": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableChatterEmoticons": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFeedEdit": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFeedPinning": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFeedsDraftPosts": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableFeedsRichText": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableInviteCsnUsers": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableOutOfOfficeEnabledPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRichLinkPreviewsInFeed": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTodayRecsInFeed": {
+      "default": false,
+      "type": "boolean"
+    },
+    "unlistedGroupsEnabled": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ChatterSettings",
+  "type": "object"
+}

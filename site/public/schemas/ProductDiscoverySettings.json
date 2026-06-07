@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "discoverProductsFlowNameOrgValue": {
+      "default": "",
+      "type": "string"
+    },
+    "enableGuidedSelling": {
+      "default": false,
+      "type": "boolean"
+    },
+    "prodDiscBrowseContextDefOrgValue": {
+      "default": "",
+      "type": "string"
+    },
+    "prodDiscDefaultCatalogOrgValue": {
+      "default": "",
+      "type": "string"
+    },
+    "prodDiscPricingEnabledOrgValue": {
+      "default": "",
+      "type": "string"
+    },
+    "prodDiscProcedureOrgValue": {
+      "default": "",
+      "type": "string"
+    },
+    "prodDiscQualEnabledOrgValue": {
+      "default": "",
+      "type": "string"
+    },
+    "prodDiscQualificationOrgValue": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "title": "ProductDiscoverySettings",
+  "type": "object"
+}

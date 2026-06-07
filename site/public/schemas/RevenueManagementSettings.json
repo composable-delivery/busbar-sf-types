@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "enableAdvCreateOrdersFromQuote": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAdvancedDetailLinePricing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAsIsRenewals": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableAutoAddDerivedAsset": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableCoreCPQ": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableDeltaPricing": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGroupRamp": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableGroupRampPref": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRampDeal": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableRevUnifiedSetup": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTransactionCloning": {
+      "default": false,
+      "type": "boolean"
+    },
+    "enableTransactionProcessor": {
+      "default": false,
+      "type": "boolean"
+    },
+    "groupsEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "hidePriceRefreshNtfcn": {
+      "default": false,
+      "type": "boolean"
+    },
+    "relaxUniqueCipValidation": {
+      "default": false,
+      "type": "boolean"
+    },
+    "skipOrgSttPricing": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "RevenueManagementSettings",
+  "type": "object"
+}

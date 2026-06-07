@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "hideQuickTextUiInLtng": {
+      "default": false,
+      "type": "boolean"
+    },
+    "lightningQuickTextEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "quickTextsInFolders": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "QuickTextSettings",
+  "type": "object"
+}

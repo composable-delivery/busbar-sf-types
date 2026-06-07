@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "callbackUrl": {
+      "default": "",
+      "type": "string"
+    },
+    "certificate": {
+      "default": "",
+      "type": "string"
+    },
+    "consumerKey": {
+      "default": "",
+      "type": "string"
+    },
+    "consumerSecret": {
+      "default": "",
+      "type": "string"
+    },
+    "externalClientApplication": {
+      "default": "",
+      "type": "string"
+    },
+    "idTokenConfig": {
+      "default": null
+    },
+    "isClientCredentialsFlowEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isCodeCredFlowEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isCodeCredPostOnly": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isConsumerSecretOptional": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isDeviceFlowEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isIntrospectAllTokens": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isNamedUserJwtEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isPkceRequired": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isRefreshTokenRotationEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isSecretRequiredForRefreshToken": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isSecretRequiredForTokenExchange": {
+      "default": false,
+      "type": "boolean"
+    },
+    "isTokenExchangeEnabled": {
+      "default": false,
+      "type": "boolean"
+    },
+    "label": {
+      "default": "",
+      "type": "string"
+    },
+    "shouldRotateConsumerKey": {
+      "default": false,
+      "type": "boolean"
+    },
+    "shouldRotateConsumerSecret": {
+      "default": false,
+      "type": "boolean"
+    }
+  },
+  "title": "ExtlClntAppGlobalOauthSettings",
+  "type": "object"
+}

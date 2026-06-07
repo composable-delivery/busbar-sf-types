@@ -1,0 +1,74 @@
+{
+  "$defs": {
+    "CustomValue": {
+      "properties": {
+        "color": {
+          "default": "",
+          "type": "string"
+        },
+        "default": {
+          "default": false,
+          "type": "boolean"
+        },
+        "description": {
+          "default": "",
+          "type": "string"
+        },
+        "isActive": {
+          "default": false,
+          "type": "boolean"
+        },
+        "label": {
+          "default": "",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ValueSetValuesDefinition": {
+      "properties": {
+        "sorted": {
+          "default": false,
+          "type": "boolean"
+        },
+        "value": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/CustomValue"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "controllingField": {
+      "default": "",
+      "type": "string"
+    },
+    "restricted": {
+      "default": false,
+      "type": "boolean"
+    },
+    "valueSetDefinition": {
+      "$ref": "#/$defs/ValueSetValuesDefinition",
+      "default": {
+        "sorted": false,
+        "value": []
+      }
+    },
+    "valueSetName": {
+      "default": "",
+      "type": "string"
+    },
+    "valueSettings": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    }
+  },
+  "title": "ValueSet",
+  "type": "object"
+}

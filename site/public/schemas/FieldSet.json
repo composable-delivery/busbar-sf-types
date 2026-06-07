@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "availableFields": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "description": {
+      "default": "",
+      "type": "string"
+    },
+    "displayedFields": {
+      "default": [],
+      "items": true,
+      "type": "array"
+    },
+    "label": {
+      "default": "",
+      "type": "string"
+    }
+  },
+  "title": "FieldSet",
+  "type": "object"
+}
