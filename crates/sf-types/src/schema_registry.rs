@@ -3080,6 +3080,8 @@ pub fn all_schema_types() -> &'static [&'static str] {
         #[cfg(feature = "packaging")]
         "PackageIdType",
         #[cfg(feature = "packaging")]
+        "PackageInstallCreateRequest",
+        #[cfg(feature = "packaging")]
         "PackageInstallOptions",
         #[cfg(feature = "packaging")]
         "PackageInstallRequest",
@@ -13221,6 +13223,13 @@ pub fn schema_for_type(type_name: &str) -> Option<Value> {
         #[cfg(feature = "packaging")]
         "PackageIdType" => Some(
             serde_json::to_value(schema_for!(crate::packaging::packages::PackageIdType)).unwrap(),
+        ),
+        #[cfg(feature = "packaging")]
+        "PackageInstallCreateRequest" => Some(
+            serde_json::to_value(schema_for!(
+                crate::packaging::packages::PackageInstallCreateRequest
+            ))
+            .unwrap(),
         ),
         #[cfg(feature = "packaging")]
         "PackageInstallOptions" => Some(
