@@ -12,750 +12,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AttestServiceType {
-    #[default]
-    Apple,
-    Android,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PushServiceType {
-    #[default]
-    Apple,
-    Android,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CategoryGroupVisibility {
-    #[default]
-    ALL,
-    NONE,
-    CUSTOM,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum InvalidMergeActionType {
-    #[default]
-    Drop,
-    Keep,
-    Override,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RoutingOwner {
-    #[default]
-    Salesforce,
-    Partner,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum StatusCode {
-    #[default]
-    ALERT_NOTIFICATION_LIMIT_EXCEEDED,
-    ALL_OR_NONE_OPERATION_ROLLED_BACK,
-    ALREADY_APPLIED,
-    ALREADY_IN_PROCESS,
-    ALREADY_REDEEMED_VOUCHER,
-    APEX_DATA_ACCESS_RESTRICTION,
-    APEX_FAILED,
-    API_TASK_INVALID_REQUEST,
-    API_TASK_LIMIT_REACHED,
-    APPLICATION_ALREADY_EXISTS,
-    ASSIGNEE_TYPE_REQUIRED,
-    ATTRIBUTE_DEFINITION_LIMIT_EXCEEDED,
-    AURA_COMPILE_ERROR,
-    AUTH_PROVIDER_NEEDS_AUTH,
-    AUTH_PROVIDER_NOT_FOUND,
-    B2B_SEARCH_ADMIN_ERROR,
-    BAD_CUSTOM_ENTITY_PARENT_DOMAIN,
-    BAD_GATEWAY,
-    BAD_LIST_UNSUBSCRIBE_DATA,
-    BAD_REQUEST,
-    BCC_NOT_ALLOWED_IF_BCC_COMPLIANCE_ENABLED,
-    BLOCKED_EXCLUSIVE,
-    BOT_INACTIVE_CONFIG,
-    CANNOT_CASCADE_PRODUCT_ACTIVE,
-    CANNOT_CHANGE_FIELD_TYPE_OF_APEX_REFERENCED_FIELD,
-    CANNOT_CHANGE_FIELD_TYPE_OF_REFERENCED_FIELD,
-    CANNOT_CREATE_ANOTHER_MANAGED_PACKAGE,
-    CANNOT_DEACTIVATE_DIVISION,
-    CANNOT_DELETE_GLOBAL_ACTION_LIST,
-    CANNOT_DELETE_LAST_DATED_CONVERSION_RATE,
-    CANNOT_DELETE_MANAGED_OBJECT,
-    CANNOT_DISABLE_LAST_ADMIN,
-    CANNOT_ENABLE_IP_RESTRICT_REQUESTS,
-    CANNOT_EXECUTE_FLOW_TRIGGER,
-    CANNOT_FREEZE_SELF,
-    CANNOT_INSERT_UPDATE_ACTIVATE_ENTITY,
-    CANNOT_MODIFY_MANAGED_OBJECT,
-    CANNOT_PASSWORD_LOCKOUT,
-    CANNOT_POST_TO_ARCHIVED_GROUP,
-    CANNOT_RENAME_APEX_REFERENCED_FIELD,
-    CANNOT_RENAME_APEX_REFERENCED_OBJECT,
-    CANNOT_RENAME_REFERENCED_FIELD,
-    CANNOT_RENAME_REFERENCED_OBJECT,
-    CANNOT_REPARENT_RECORD,
-    CANNOT_UPDATE_CONVERTED_LEAD,
-    CANNOT_UPDATE_IS_THIRD_PARTY,
-    CANNOT_UPDATE_PAYMENT_METHOD_SET,
-    CANT_DISABLE_CORP_CURRENCY,
-    CANT_UNSET_CORP_CURRENCY,
-    CART_DELIVERY_GROUP_NOT_FOUND,
-    CART_ITEM_LIMIT_EXCEEDED_FOR_COUPONS,
-    CART_ITEM_NOT_FOUND,
-    CART_NOT_FOUND,
-    CART_VALIDATION_ERROR,
-    CDS_UNCOMMITTED_WORK,
-    CHECKOUT_CONFLICT,
-    CHECKOUT_EXPIRED,
-    CHECKOUT_INVALIDATED,
-    CHECKOUT_INVENTORY_RESERVATION,
-    CHECKOUT_LOCKED,
-    CHECKOUT_NOT_FOUND,
-    CHECKOUT_UNAUTHORIZED,
-    CHECKOUT_VALIDATION,
-    CHILD_SHARE_FAILS_PARENT,
-    CIRCULAR_DEPENDENCY,
-    CLEAN_SERVICE_ERROR,
-    CLM_INSUFFICIENT_ACCESS,
-    CLM_RECORD_NOT_FOUND,
-    CLONE_FIELD_INTEGRITY_EXCEPTION,
-    CLONE_NOT_SUPPORTED,
-    CMS_FOLDER_ITEM_MOVE_FAILED,
-    COLLISION_DETECTED,
-    COMMERCE_SEARCH_INDEXING_SYSTEM_ERROR,
-    COMMERCE_SEARCH_INVALID_RESOURCE,
-    COMMERCE_SEARCH_MQ_ERROR,
-    COMMERCE_SEARCH_PROVIDER_LIMIT_EXCEEDED,
-    COMMERCE_SEARCH_RESOURCE_NOT_FOUND,
-    COMMERCE_SEARCH_UNSUPPORTED_LANGUAGE_ERROR,
-    COMMERCIAL_CONTROL_ERROR,
-    COMMUNITY_NOT_ACCESSIBLE,
-    CONFLICT,
-    CONFLICTING_ENVIRONMENT_HUB_MEMBER,
-    CONFLICTING_SSO_USER_MAPPING,
-    CONTENT_NOT_FOUND,
-    CONTENT_SEARCH_NOT_ENABLED,
-    CONTENT_TYPE_DISABLED_FOR_API,
-    CONTENT_TYPE_NOT_FOUND,
-    CONTEXT_TAG_MISSING,
-    COPILOT_INACTIVE_CONFIG,
-    COPILOT_SESSION_ENDED,
-    COUPON_REDEMPTION_LIMIT_EXCEEDED,
-    CT_DEPTH_LIMIT_EXCEEDED,
-    CT_DEVELOPER_NAME_NOT_UPDATABLE,
-    CT_ENTITY_DELETE_ERROR,
-    CT_ENTITY_SAVE_ERROR,
-    CT_INVALID_DEPTH,
-    CT_INVALID_QUERY_WORD,
-    CT_INVALID_TAXONOMY_ID,
-    CT_INVALID_TERM_ID,
-    CT_INVALID_TERM_LENGTH,
-    CT_NONEMPTY_TERM_REFERENCE,
-    CT_PARENT_TERM_CYCLE,
-    CT_TERM_SEARCH_ERROR,
-    CUSTOM_APEX_ERROR,
-    CUSTOM_CLOB_FIELD_LIMIT_EXCEEDED,
-    CUSTOM_ENTITY_OR_FIELD_LIMIT,
-    CUSTOM_FIELD_INDEX_LIMIT_EXCEEDED,
-    CUSTOM_INDEX_EXISTS,
-    CUSTOM_LINK_LIMIT_EXCEEDED,
-    CUSTOM_METADATA_LIMIT_EXCEEDED,
-    CUSTOM_METADATA_REL_FIELD_MANAGEABILITY,
-    CUSTOM_SETTINGS_LIMIT_EXCEEDED,
-    CUSTOM_TAB_LIMIT_EXCEEDED,
-    DATAASSESSMENT_CONFIG_ASSESSMENT_IN_PROGRESS_ERROR,
-    DATAASSESSMENT_CONFIG_SERVICE_ERROR,
-    DATACLOUDADDRESS_NO_RECORDS_FOUND,
-    DATACLOUDADDRESS_PROCESSING_ERROR,
-    DATACLOUDADDRESS_SERVER_ERROR,
-    DATA_MAPPING_NOT_FOUND,
-    DATA_MAPPING_SCHEMA_NOT_FOUND,
-    DATA_STREAM_INTERACTIVE_RUN_PRECONDITION_FAILED,
-    DATA_STREAM_RUN_FAILED,
-    DATA_TRANSFER_RECORD_LIMIT_EXCEEDED,
-    DATA_TRANSLATION_TOGGLED_BEFORE_INCREMENTAL_INDEX,
-    DATA_TYPE_NOT_SUPPORTED,
-    DATE_OUT_OF_RANGE,
-    DELETE_FAILED,
-    DELETE_NOT_ALLOWED,
-    DELETE_OPERATION_TOO_LARGE,
-    DELETE_REQUIRED_ON_CASCADE,
-    DEPENDENCY_EXISTS,
-    DOCUMENT_VERSION_EXISTS,
-    DUPLICATES_DETECTED,
-    DUPLICATE_CASE_SOLUTION,
-    DUPLICATE_COMM_NICKNAME,
-    DUPLICATE_CUSTOM_ENTITY_DEFINITION,
-    DUPLICATE_CUSTOM_TAB_MOTIF,
-    DUPLICATE_DEVELOPER_NAME,
-    DUPLICATE_EXTERNAL_ID,
-    DUPLICATE_MASTER_LABEL,
-    DUPLICATE_SENDER_DISPLAY_NAME,
-    DUPLICATE_USERNAME,
-    DUPLICATE_VALUE,
-    DYNAMIC_BUNDLE_REORDER_ACTION_NOT_ALLOWED,
-    EMAIL_ADDRESS_BOUNCED,
-    EMAIL_EXTERNAL_TRANSPORT_CONNECTION_ERROR,
-    EMAIL_EXTERNAL_TRANSPORT_MISSING_REQUIRED_PROPERTY_ERROR,
-    EMAIL_EXTERNAL_TRANSPORT_PERMISSION_ERROR,
-    EMAIL_EXTERNAL_TRANSPORT_TOKEN_ERROR,
-    EMAIL_EXTERNAL_TRANSPORT_TOO_LARGE_ERROR,
-    EMAIL_EXTERNAL_TRANSPORT_TOO_MANY_REQUESTS_ERROR,
-    EMAIL_EXTERNAL_TRANSPORT_UNKNOWN_ERROR,
-    EMAIL_NOT_PROCESSED_DUE_TO_PRIOR_ERROR,
-    EMAIL_OPTED_OUT,
-    EMAIL_TEMPLATE_FORMULA_ERROR,
-    EMAIL_TEMPLATE_MERGEFIELD_ACCESS_ERROR,
-    EMAIL_TEMPLATE_MERGEFIELD_ERROR,
-    EMAIL_TEMPLATE_MERGEFIELD_VALUE_ERROR,
-    EMAIL_TEMPLATE_PROCESSING_ERROR,
-    EMPTY_CATALOG,
-    EMPTY_INGESTION_JOB,
-    EMPTY_SCONTROL_FILE_NAME,
-    ENHANCED_EMAIL_TEMPLATE_COMPILATION_ERROR,
-    ENTITY_FAILED_IFLASTMODIFIED_ON_UPDATE,
-    ENTITY_IS_ARCHIVED,
-    ENTITY_IS_DELETED,
-    ENTITY_IS_LOCKED,
-    ENTITY_SAVE_ERROR,
-    ENTITY_SAVE_VALIDATION_ERROR,
-    ENVIRONMENT_HUB_MEMBERSHIP_CONFLICT,
-    ENVIRONMENT_HUB_MEMBERSHIP_ERROR_JOINING_HUB,
-    ENVIRONMENT_HUB_MEMBERSHIP_USER_ALREADY_IN_HUB,
-    ENVIRONMENT_HUB_MEMBERSHIP_USER_NOT_ORG_ADMIN,
-    ERROR_CALCULATING_EXPIRY_DATE,
-    ERROR_IN_MAILER,
-    EXCEEDED_MAX_SEMIJOIN_SUBSELECTS_WRITE,
-    EXCHANGE_WEB_SERVICES_URL_INVALID,
-    EXTERNAL_APP_DUPLICATE_CONTENT_ZONE_NAME,
-    EXTERNAL_RESOURCE_FORBIDDEN,
-    FACETABLE_ATTRIBUTE_MAX_LIMIT_EXCEEDED,
-    FAILED_ACTIVATION,
-    FAILED_DUE_TO_OTHER_INPUTS,
-    FAILED_TO_RESOLVE_MAPPING,
-    FAILED_TO_RESOLVE_SCHEMA_INFORMATION,
-    FAILED_TO_RESOLVE_UIID,
-    FIELD_CUSTOM_VALIDATION_EXCEPTION,
-    FIELD_FILTER_VALIDATION_EXCEPTION,
-    FIELD_INTEGRITY_EXCEPTION,
-    FIELD_KEYWORD_LIST_MATCH_LIMIT,
-    FIELD_MAPPING_ERROR,
-    FIELD_MODERATION_RULE_BLOCK,
-    FIELD_NOT_UPDATABLE,
-    FILE_EXTENSION_NOT_ALLOWED,
-    FILE_SIZE_LIMIT_EXCEEDED,
-    FILTERED_LOOKUP_LIMIT_EXCEEDED,
-    FIND_DUPLICATES_ERROR,
-    FLOW_EXCEPTION,
-    FORBIDDEN_EXCEPTION,
-    FUNCTIONALITY_NOT_ENABLED,
-    GET_EINSTEIN_TENANT_ERROR,
-    GUEST_INSUFFICIENT_ACCESS,
-    HAS_PUBLIC_REFERENCES,
-    HTML_FILE_UPLOAD_NOT_ALLOWED,
-    IAS_AM_AUTH_BAD_REQUEST,
-    IAS_AM_AUTH_UNAUTHORIZED,
-    IAS_INVALID_AUTH,
-    IAS_INVALID_REQUEST_PARAMETER,
-    IAS_RECORD_DOES_NOT_EXIST,
-    IAS_TENANT_NOT_PROVISIONED,
-    IAS_UNCOMMITTED_WORK,
-    IMAGE_TOO_LARGE,
-    INACTIVE_CONTEXT_DEFINITION,
-    INACTIVE_OWNER_OR_USER,
-    INACTIVE_RULE_ERROR,
-    INDEX_ITEM_LIMIT_EXCEEDED,
-    INDEX_PAYLOAD_NOT_FOUND,
-    INDEX_SINGLE_PAYLOAD_SIZE_LIMIT_EXCEEDED,
-    INGESTION_JOB_RECORDS_LIMIT_EXCEEDED,
-    INGESTION_TOTAL_FILE_SIZE_LIMIT_EXCEEDED,
-    INPUTPARAM_INCOMPATIBLE_DATATYPE,
-    INSERT_UPDATE_DELETE_NOT_ALLOWED_DURING_MAINTENANCE,
-    INSUFFICIENT_ACCESS,
-    INSUFFICIENT_ACCESS_ON_CROSS_REFERENCE_ENTITY,
-    INSUFFICIENT_ACCESS_OR_READONLY,
-    INSUFFICIENT_ACCESS_TO_INSIGHTSEXTERNALDATA,
-    INSUFFICIENT_BALANCE,
-    INSUFFICIENT_BENEFIT_REMAINING,
-    INSUFFICIENT_CREDITS,
-    INTEGRATION_CANCELLED,
-    INTERNAL_ERROR,
-    INVALID_ACCESS_LEVEL,
-    INVALID_ACCESS_TOKEN,
-    INVALID_ACCOUNT,
-    INVALID_ACTION_VERSION,
-    INVALID_API_INPUT,
-    INVALID_ARGUMENT_TYPE,
-    INVALID_ASSIGNEE_TYPE,
-    INVALID_ASSIGNMENT_RULE,
-    INVALID_AUTH_HEADER,
-    INVALID_BATCH_OPERATION,
-    INVALID_BUSINESS_HOURS_NAME,
-    INVALID_CATEGORY_NETWORK,
-    INVALID_CHECKOUT_INPUT,
-    INVALID_CONTACT,
-    INVALID_CONTENT_TYPE,
-    INVALID_CREDIT_CARD_INFO,
-    INVALID_CROSS_REFERENCE_KEY,
-    INVALID_CROSS_REFERENCE_TYPE_FOR_FIELD,
-    INVALID_CURRENCY_CONV_RATE,
-    INVALID_CURRENCY_CORP_RATE,
-    INVALID_CURRENCY_ISO,
-    INVALID_DATASET_REFERENCE_INPUT,
-    INVALID_DATA_CATEGORY_GROUP_REFERENCE,
-    INVALID_DATA_URI,
-    INVALID_EBV_OPERATION,
-    INVALID_EMAIL_ADDRESS,
-    INVALID_EMPTY_KEY_OWNER,
-    INVALID_ENTITY_FOR_MATCH_ENGINE_ERROR,
-    INVALID_ENTITY_FOR_MATCH_OPERATION_ERROR,
-    INVALID_ENTITY_FOR_UPSERT,
-    INVALID_ENVIRONMENT_HUB_MEMBER,
-    INVALID_EVENT_DELIVERY,
-    INVALID_EVENT_INPUT,
-    INVALID_EVENT_SUBSCRIPTION,
-    INVALID_EXTENSION_ID,
-    INVALID_EXTERNAL_ID_FIELD_NAME,
-    INVALID_FIELD,
-    INVALID_FIELD_FOR_INSERT_UPDATE,
-    INVALID_FIELD_WHEN_USING_TEMPLATE,
-    INVALID_FILTER_ACTION,
-    INVALID_GOOGLE_DOCS_URL,
-    INVALID_ID_FIELD,
-    INVALID_INET_ADDRESS,
-    INVALID_INPUT,
-    INVALID_INPUT_FORMAT,
-    INVALID_KEY_FIELD_INPUT,
-    INVALID_LINEITEM_CLONE_STATE,
-    INVALID_MARKUP,
-    INVALID_MASTER_OR_TRANSLATED_SOLUTION,
-    INVALID_MERCHANT_ACCOUNT_MODE,
-    INVALID_MERCHANT_ACCOUNT_MODE_OR_STATUS,
-    INVALID_MERGE_RECORD,
-    INVALID_MESSAGE_ID_REFERENCE,
-    INVALID_NAMESPACE_PREFIX,
-    INVALID_OAUTH_URL,
-    INVALID_OPERATION,
-    INVALID_OPERATOR,
-    INVALID_OR_NULL_FOR_RESTRICTED_PICKLIST,
-    INVALID_OWNER,
-    INVALID_PACKAGE_LICENSE,
-    INVALID_PACKAGE_VERSION,
-    INVALID_PARTNER_NETWORK_STATUS,
-    INVALID_PAYLOAD_VERSION,
-    INVALID_PERSON_ACCOUNT_OPERATION,
-    INVALID_PROFILE,
-    INVALID_PROMOTION,
-    INVALID_PROVIDER_TYPE,
-    INVALID_QUERY_KEY,
-    INVALID_QUERY_LOCATOR,
-    INVALID_QUERY_VALUE,
-    INVALID_READ_ONLY_USER_DML,
-    INVALID_RECEIVEDDOCUMENTID_ATTACHMENT,
-    INVALID_RECORD_ATTRIBUTE_VALUE,
-    INVALID_RECORD_STATUS,
-    INVALID_RECORD_TYPE,
-    INVALID_REFRESH_TOKEN,
-    INVALID_REORDER_PORTAL_RECORD_ASSOCIATION,
-    INVALID_REQUEST_STATE,
-    INVALID_RUNTIME_VALUE,
-    INVALID_SAVE_AS_ACTIVITY_FLAG,
-    INVALID_SCS_INBOUND_USER,
-    INVALID_SEARCH_PROVIDER_REQUEST,
-    INVALID_SESSION_ID,
-    INVALID_SETUP_OWNER,
-    INVALID_SIGNUP_COUNTRY,
-    INVALID_SIGNUP_OPTION,
-    INVALID_SITE_DELETE_EXCEPTION,
-    INVALID_SITE_FILE_IMPORTED_EXCEPTION,
-    INVALID_SITE_FILE_TYPE_EXCEPTION,
-    INVALID_SOURCE_OBJECT_ID,
-    INVALID_SOURCE_OBJECT_NAME,
-    INVALID_STATUS,
-    INVALID_SUBDOMAIN,
-    INVALID_TARGET_OBJECT_NAME,
-    INVALID_TEXT_REPRESENTATION,
-    INVALID_TYPE,
-    INVALID_TYPE_FOR_OPERATION,
-    INVALID_TYPE_ON_FIELD_IN_RECORD,
-    INVALID_UNMERGE_RECORD,
-    INVALID_USERID,
-    INVALID_USER_OBJECT,
-    IP_RANGE_LIMIT_EXCEEDED,
-    ITEM_NOT_FOUND,
-    JIGSAW_IMPORT_LIMIT_EXCEEDED,
-    LICENSE_LIMIT_EXCEEDED,
-    LIGHT_PORTAL_USER_EXCEPTION,
-    LIMIT_EXCEEDED,
-    LIST_PRICE_NOT_FOUND,
-    MALFORMED_ID,
-    MANAGER_NOT_DEFINED,
-    MAPPING_TYPE_NOT_SUPPORTED,
-    MASSMAIL_RETRY_LIMIT_EXCEEDED,
-    MASS_MAIL_LIMIT_EXCEEDED,
-    MATCH_DEFINITION_ERROR,
-    MATCH_OPERATION_ERROR,
-    MATCH_OPERATION_INVALID_ENGINE_ERROR,
-    MATCH_OPERATION_INVALID_RULE_ERROR,
-    MATCH_OPERATION_MISSING_ENGINE_ERROR,
-    MATCH_OPERATION_MISSING_OBJECT_TYPE_ERROR,
-    MATCH_OPERATION_MISSING_OPTIONS_ERROR,
-    MATCH_OPERATION_MISSING_RULE_ERROR,
-    MATCH_OPERATION_UNKNOWN_RULE_ERROR,
-    MATCH_OPERATION_UNSUPPORTED_VERSION_ERROR,
-    MATCH_PRECONDITION_FAILED,
-    MATCH_PRECONDITION_REQUIRED,
-    MATCH_RUNTIME_ERROR,
-    MATCH_SERVICE_ERROR,
-    MATCH_SERVICE_TIMED_OUT,
-    MATCH_SERVICE_UNAVAILABLE_ERROR,
-    MAXIMUM_CCEMAILS_EXCEEDED,
-    MAXIMUM_DASHBOARD_COMPONENTS_EXCEEDED,
-    MAXIMUM_HIERARCHY_CHILDREN_REACHED,
-    MAXIMUM_HIERARCHY_LEVELS_REACHED,
-    MAXIMUM_HIERARCHY_TREE_SIZE_REACHED,
-    MAXIMUM_SIZE_OF_ATTACHMENT,
-    MAXIMUM_SIZE_OF_DOCUMENT,
-    MAX_ACTIONS_PER_RULE_EXCEEDED,
-    MAX_ACTIVE_RULES_EXCEEDED,
-    MAX_APPROVAL_STEPS_EXCEEDED,
-    MAX_DEPTH_IN_FLOW_EXECUTION,
-    MAX_FORMULAS_PER_RULE_EXCEEDED,
-    MAX_LIMIT_EXCEEDED,
-    MAX_LOCALES_EXCEEDED,
-    MAX_RULES_EXCEEDED,
-    MAX_RULE_ENTRIES_EXCEEDED,
-    MAX_STREAM_SUBSCRIPTIONS_EXCEEDED,
-    MAX_TASK_DESCRIPTION_EXCEEEDED,
-    MAX_TM_RULES_EXCEEDED,
-    MAX_TM_RULE_ITEMS_EXCEEDED,
-    MAX_TRIGGERS_EXCEEDED,
-    MCONTENT_TAXONOMY_GET_ERROR,
-    MCONTENT_TAXONOMY_PUBLISH_ERROR,
-    MCONTENT_TAXONOMY_UPDATE_ERROR,
-    MERGE_FAILED,
-    METADATA_FIELD_UPDATE_ERROR,
-    METHOD_NOT_ALLOWED,
-    MISMATCHING_TYPES,
-    MISSING_ARGUMENT,
-    MISSING_OMNI_PROCESS_ID,
-    MISSING_PAYMENTS_DEPENDENCY,
-    MISSING_PAY_NOW_SITE_URL_ORG_VALUE,
-    MISSING_RECEIVEDDOCUMENTID_ATTACHMENT,
-    MISSING_RECORD,
-    MIXED_DML_OPERATION,
-    MODEL_NOT_ACTIVE,
-    MULTIPLE_CONTENT_FOUND,
-    MULTIPLE_VOUCHERS,
-    NONUNIQUE_SHIPPING_ADDRESS,
-    NOT_FOUND,
-    NOT_RECOVERABLE_SEARCH_PROVIDER_ERROR,
-    NO_ACCESS_TOKEN,
-    NO_ACCESS_TOKEN_FROM_REFRESH,
-    NO_APPLICABLE_PROCESS,
-    NO_ATTACHMENT_PERMISSION,
-    NO_AUTH_PROVIDER,
-    NO_BUSINESS_HOURS_FOUND,
-    NO_GUEST_PROFILE_ASSOCIATED_WITH_PRICE_ENGINE,
-    NO_INACTIVE_DIVISION_MEMBERS,
-    NO_INDEXABLE_PRODUCTS,
-    NO_INDEXABLE_PRODUCTS_IN_PARTIAL_BUILD,
-    NO_MASS_MAIL_PERMISSION,
-    NO_MESSAGE_TYPE_MESSAGES,
-    NO_PARTNER_PERMISSION,
-    NO_REFRESH_TOKEN,
-    NO_SEARCHABLE_PRODUCTS,
-    NO_SEARCH_ATTRIBUTES,
-    NO_SINGLE_MAIL_PERMISSION,
-    NO_SORT_PRICEBOOK_ASSOCIATED_ERROR,
-    NO_SUCH_USER_EXISTS,
-    NO_TOKEN_ENDPOINT,
-    NUMBER_OUTSIDE_VALID_RANGE,
-    NUM_HISTORY_FIELDS_BY_SOBJECT_EXCEEDED,
-    OCR_INVALID_REQUEST,
-    OPERATION_CONFLICT,
-    OPERATION_ENQUEUED,
-    OPERATION_WITH_CALLBACK_ENQUEUED,
-    OPTED_OUT_OF_MASS_MAIL,
-    OP_WITH_INVALID_USER_TYPE_EXCEPTION,
-    ORCHESTRATION_INVALID,
-    ORDER_ALREADY_SUBMITTED,
-    ORDER_MANAGEMENT_ACTION_NOT_ALLOWED,
-    ORDER_MANAGEMENT_DUPLICATE_ORDER_REFERENCE_NUMBER,
-    ORDER_MANAGEMENT_INVALID_RECORD,
-    ORDER_MANAGEMENT_RECORD_EXISTS,
-    ORDER_MANAGEMENT_RECORD_NOT_FOUND,
-    ORG_SETTING_REQUIRED,
-    PACKAGE_DISABLED,
-    PACKAGE_LICENSE_REQUIRED,
-    PACKAGING_API_INSTALL_FAILED,
-    PACKAGING_API_UNINSTALL_FAILED,
-    PALI_INVALID_ACTION_ID,
-    PALI_INVALID_ACTION_NAME,
-    PALI_INVALID_ACTION_TYPE,
-    PAL_INVALID_ASSISTANT_RECOMMENDATION_TYPE_ID,
-    PAL_INVALID_ENTITY_ID,
-    PAL_INVALID_FLEXIPAGE_ID,
-    PAL_INVALID_LAYOUT_ID,
-    PAL_INVALID_PARAMETERS,
-    PARAMETER_TOO_LARGE,
-    PARTICIPANT_RELATIONSHIP_EXISTS,
-    PAYLOAD_SIZE_EXCEEDED,
-    PAYMENTS_TOO_MANY_REQUESTS_ERROR,
-    PAYMENT_GATEWAY_DEPENDENCY_EXCEPTION,
-    PAYMENT_GATEWAY_REQUEST_EXCEPTION,
-    PA_API_EXCEPTION,
-    PA_AXIS_FAULT,
-    PA_INVALID_ID_EXCEPTION,
-    PA_NO_ACCESS_EXCEPTION,
-    PA_NO_DATA_FOUND_EXCEPTION,
-    PA_URI_SYNTAX_EXCEPTION,
-    PA_VISIBLE_ACTIONS_FILTER_ORDERING_EXCEPTION,
-    PENDING_COMMIT,
-    PICKLIST_INACTIVE_VALUES_EXCEEDED,
-    PLATFORM_EVENT_ENCRYPTION_ERROR,
-    PLATFORM_EVENT_PUBLISHING_UNAVAILABLE,
-    PLATFORM_EVENT_PUBLISH_FAILED,
-    PORTAL_NO_ACCESS,
-    PORTAL_USER_ALREADY_EXISTS_FOR_CONTACT,
-    PORTAL_USER_CREATION_RESTRICTED_WITH_ENCRYPTION,
-    PRICE_NOT_FOUND,
-    PRICING_SERVICE_MISCONFIGURATION,
-    PRIVATE_CONTACT_ON_ASSET,
-    PROCESSING_HALTED,
-    PROGRAM_PROGRESS_NOT_ACTIVE,
-    PROMOTION_NOT_FOUND,
-    QA_INVALID_CREATE_FEED_ITEM,
-    QA_INVALID_SUCCESS_MESSAGE,
-    QUERY_REFINEMENT_VALUE_LIMIT_EXCEEDED,
-    QUERY_TIMEOUT,
-    QUERY_TOKEN_COUNT_LIMIT_EXCEEDED,
-    QUICK_ACTION_LIST_ITEM_NOT_ALLOWED,
-    QUICK_ACTION_LIST_NOT_ALLOWED,
-    RECORD_CREATION_FAILED,
-    RECORD_IN_USE_BY_WORKFLOW,
-    RECORD_LOCKED,
-    RECORD_MISSING_REQUIRED_FIELD,
-    RECORD_NOT_FOUND,
-    RECORD_TYPE_LIMIT_EXCEEDED,
-    RECORD_UPDATE_FAILED,
-    RECOVERABLE_SEARCH_PROVIDER_ERROR,
-    REFRESH_FAILED,
-    RELATED_ENTITY_FILTER_VALIDATION_EXCEPTION,
-    REL_FIELD_BAD_ACCESSIBILITY,
-    REPUTATION_MINIMUM_NUMBER_NOT_REACHED,
-    REQUEST_RUNNING_TOO_LONG,
-    REQUIRED_FEATURE_MISSING,
-    REQUIRED_FIELD_MISSING,
-    REQUIRE_CONNECTED_APP_SCS,
-    REQUIRE_CONNECTED_APP_SESSION_SCS,
-    REQUIRE_RUNAS_USER,
-    RESOURCE_NOT_AVAILABLE,
-    RETRIEVE_EXCHANGE_ATTACHMENT_FAILED,
-    RETRIEVE_EXCHANGE_EMAIL_FAILED,
-    RETRIEVE_EXCHANGE_EVENT_FAILED,
-    RETRIEVE_GOOGLE_EMAIL_FAILED,
-    RETRIEVE_GOOGLE_EVENT_FAILED,
-    RETRIEVE_USER_CONFIG_ERROR,
-    ROUTES_EVALUATION_LIMIT_EXCEEDED,
-    SALESFORCE_INBOX_TRANSPORT_CONNECTION_ERROR,
-    SALESFORCE_INBOX_TRANSPORT_INVALID_INPUT_ERROR,
-    SALESFORCE_INBOX_TRANSPORT_TOKEN_ERROR,
-    SALESFORCE_INBOX_TRANSPORT_UNKNOWN_ERROR,
-    SCHEMA_OBJECT_NOT_FOUND,
-    SCREEN_POP_REQUIRED_INPUT_MISSING,
-    SEARCHABLE_ATTRIBUTE_MAX_LIMIT_EXCEEDED,
-    SEARCHABLE_FACETABLE_ATTRIBUTE_MAX_LIMIT_EXCEEDED,
-    SEARCH_INCLUDE_RULES_MAX_RULE_DEFINITION_LIMIT_EXCEEDED,
-    SEARCH_INCLUDE_RULES_MIN_RULE_DEFINITION_NOT_MET,
-    SEARCH_PROVIDER_PATH_LIMIT_EXCEEDED,
-    SEARCH_PROVIDER_REQUEST_RATE_EXCEEDED,
-    SEGMENT_COUNT_LIMIT_EXCEEDED,
-    SELF_REFERENCE_FROM_FLOW,
-    SELF_REFERENCE_FROM_TRIGGER,
-    SERVICE_EMAIL_INVALID_INPUT,
-    SERVICE_EMAIL_MISSING_RECORD,
-    SERVICE_EMAIL_UNKNOWN_EXCEPTION,
-    SERVICE_PLAN_INVALID_DATA,
-    SERVICE_PLAN_MISSING_DATA,
-    SERVICE_PLAN_UNKNOWN_EXCEPTION,
-    SERVICE_UNAVAILABLE,
-    SESSION_EXPIRED,
-    SESSION_INVALIDATED,
-    SHARE_NEEDED_FOR_CHILD_OWNER,
-    SINGLE_EMAIL_LIMIT_EXCEEDED,
-    SLACK_API_ERROR,
-    SOCIAL_ACCOUNT_NOT_FOUND,
-    SOCIAL_ACTION_INVALID,
-    SOCIAL_PERSONA_NOT_FOUND,
-    SOCIAL_POST_INVALID,
-    SOCIAL_POST_NOT_FOUND,
-    SPECIFICATION_GENERATION_EXCEPTION,
-    STANDARD_PRICE_NOT_DEFINED,
-    STORAGE_LIMIT_EXCEEDED,
-    STOREFRONT_PST_NOT_ACCEPTED,
-    STRING_TOO_LONG,
-    STXN_FULFILLMENT_NOT_INFLIGHT,
-    SUBDOMAIN_IN_USE,
-    TABSET_LIMIT_EXCEEDED,
-    TEMPLATE_NOT_ACTIVE,
-    TEMPLATE_NOT_FOUND,
-    TENANT_GROUP_NOT_FOUND,
-    TERMS_OF_SERVICE_UNREAD,
-    TERRITORY_REALIGN_IN_PROGRESS,
-    TEXT_DATA_OUTSIDE_SUPPORTED_CHARSET,
-    TEXT_TO_PICKLIST_VALUES_EXCEEDED,
-    TOO_MANY_APEX_REQUESTS,
-    TOO_MANY_ENUM_VALUE,
-    TOO_MANY_JOBS,
-    TOO_MANY_POSSIBLE_USERS_EXIST,
-    TRANSFER_REQUIRES_READ,
-    TXN_SECURITY_NO_ACCESS,
-    TYPE_NOT_FOUND,
-    UISF_ENTITY_QUERY_FAILED,
-    UISF_NO_MAPPINGS_FOUND,
-    UISF_TOKEN_NOT_FOUND,
-    UISF_UNKNOWN_EXCEPTION,
-    UISF_USER_MAPPING_FAILED,
-    UNABLE_RETRIEVE_PRICING_INFO,
-    UNABLE_TO_LOCK_RECORD,
-    UNABLE_TO_LOCK_ROW,
-    UNABLE_TO_UNLOCK_RECORD,
-    UNABLE_TO_UPDATE_RECORD_LOCK,
-    UNAUTHORIZED_EXCEPTION,
-    UNAUTHORIZED_SEARCH_PROVIDER_REQUEST,
-    UNAUTHORIZED_SHARE_ACTION,
-    UNAVAILABLE_RECORDTYPE_EXCEPTION,
-    UNAVAILABLE_REF,
-    UNCOMMITTED_WORK,
-    UNDEFINED_MAPPING_DEFINITION,
-    UNDELETE_FAILED,
-    UNKNOWN_EXCEPTION,
-    UNKNOWN_TOKEN_ERROR,
-    UNPROCESSABLE_REQUEST,
-    UNQUALIFIED_CART,
-    UNRESOLVABLE_PAY_NOW_WEBSTORE,
-    UNSAFE_HTML_CONTENT,
-    UNSPECIFIED_EMAIL_ADDRESS,
-    UNSUPPORTED_APEX_TRIGGER_OPERATON,
-    UNSUPPORTED_MODE,
-    UNSUPPORTED_PAYMENT_GATEWAY_EXCEPTION,
-    UNSUPPORTED_PAYMENT_GATEWAY_TYPE,
-    UNSUPPORTED_PAYMENT_REQUEST_TYPE,
-    UNSUPPORTED_SITE,
-    UNSUPPORTED_SITE_FILE_IMPORTED_EXCEPTION,
-    UNSUPPORTED_SOCIAL_PROVIDER,
-    UNVERIFIED_SENDER_ADDRESS,
-    UPDATE_GOOGLE_EMAIL_LABEL_FAILED,
-    USER_OWNS_PORTAL_ACCOUNT_EXCEPTION,
-    USER_WITHOUT_WEM_PERMISSION,
-    USER_WITH_APEX_SHARES_EXCEPTION,
-    VARIANT_NOT_FOUND,
-    VF_COMPILE_ERROR,
-    VOICE_CAPACITY_ERROR,
-    WEBLINK_SIZE_LIMIT_EXCEEDED,
-    WEBLINK_URL_INVALID,
-    WEM_SEGMENTS_CAN_NOT_HAVE_NON_ACTIVE_SEGMENT_TYPE,
-    WEM_SHIFT_SEGMENT_TIME_IS_OUTSIDE_OF_THE_SHIFT_DURATION,
-    WEM_USER_NOT_ORG_ADMIN,
-    WORKSPACE_NOT_FOUND,
-    WRONG_CONTROLLER_TYPE,
-    XCLEAN_DJ_MATCH_IGNORABLE_ERROR,
-    XCLEAN_DJ_MATCH_INTERNAL_DJ_ERROR,
-    XCLEAN_DJ_MATCH_NON_RETRIABLE_ERROR,
-    XCLEAN_DJ_MATCH_RETRIABLE_ERROR,
-    XCLEAN_DJ_MATCH_UNKNOWN_ERROR,
-    XCLEAN_UNEXPECTED_ERROR,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RoutingModel {
-    #[default]
-    LEAST_ACTIVE,
-    MOST_AVAILABLE,
-    EXTERNAL_ROUTING,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AssociationStatusType {
-    #[default]
-    Draft,
-    Active,
-    Inactive,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum VirtualVisitComprehendServiceType {
-    #[default]
-    ComprehendService,
-    ComprehendMedicalService,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LogCategoryLevel {
-    #[default]
-    None,
-    Finest,
-    Finer,
-    Fine,
-    Debug,
-    Info,
-    Warn,
-    Error,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AggregatorName {
-    #[default]
-    Bandwidth,
-    Inteliquent,
-    Sinch,
-    Twilio,
-    Vonage,
-    MessageBird,
-    Plivo,
-    Telnyx,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PeriodTypes {
-    #[default]
-    Month,
-    Quarter,
-    Week,
-    Year,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ModerationRuleType {
-    #[default]
-    Content,
-    Rate,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CriteriaRelationshipType {
-    #[default]
-    AllConditionsAreMet,
-    AnyConditionIsMet,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum StaticResourceCacheControl {
     #[default]
     Private,
@@ -764,115 +20,14 @@ pub enum StaticResourceCacheControl {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ItemActionType {
+pub enum CMSConnectionSourceType {
     #[default]
-    Omniscript,
-    Aura,
-    LWC,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum APIType {
-    #[default]
-    REST,
-    GraphQL,
-    gRPC,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum QuestionRestriction {
-    #[default]
-    None,
-    DoesNotContainPassword,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EmployeeUseCaseMethod {
-    #[default]
-    Get,
-    Post,
-    Put,
-    Patch,
-    Delete,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PlannerAttrMappingType {
-    #[default]
-    input,
-    output,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum TimeSheetFrequency {
-    #[default]
-    Daily,
-    Weekly,
-    EveryTwoWeeks,
-    TwiceAMonth,
-    Monthly,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum VirtualVisitVisitRegion {
-    #[default]
-    #[serde(rename = "us-east-1")]
-    us_east_1,
-    #[serde(rename = "us-east-2")]
-    us_east_2,
-    #[serde(rename = "us-west-1")]
-    us_west_1,
-    #[serde(rename = "us-west-2")]
-    us_west_2,
-    #[serde(rename = "af-south-1")]
-    af_south_1,
-    #[serde(rename = "ap-east-1")]
-    ap_east_1,
-    #[serde(rename = "ap-south-1")]
-    ap_south_1,
-    #[serde(rename = "ap-northeast-1")]
-    ap_northeast_1,
-    #[serde(rename = "ap-northeast-2")]
-    ap_northeast_2,
-    #[serde(rename = "ap-northeast-3")]
-    ap_northeast_3,
-    #[serde(rename = "ap-southeast-1")]
-    ap_southeast_1,
-    #[serde(rename = "ap-southeast-2")]
-    ap_southeast_2,
-    #[serde(rename = "ca-central-1")]
-    ca_central_1,
-    #[serde(rename = "eu-central-1")]
-    eu_central_1,
-    #[serde(rename = "eu-west-1")]
-    eu_west_1,
-    #[serde(rename = "eu-west-2")]
-    eu_west_2,
-    #[serde(rename = "eu-west-3")]
-    eu_west_3,
-    #[serde(rename = "eu-south-1")]
-    eu_south_1,
-    #[serde(rename = "eu-north-1")]
-    eu_north_1,
-    #[serde(rename = "me-south-1")]
-    me_south_1,
-    #[serde(rename = "sa-east-1")]
-    sa_east_1,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum StatusFieldMappingType {
-    #[default]
-    IN_PROGRESS,
-    PAUSED,
-    COMPLETED,
+    AEM,
+    Drupal,
+    WordPress,
+    SDL,
+    Sitecore,
+    Other,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -884,139 +39,25 @@ pub enum FormatType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum UsageTag {
-    #[default]
-    NONE,
-    KEY_QUALIFIER,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AttributeType {
-    #[default]
-    CustomPluginFunctionAttribute,
-    StandardPluginFunctionInput,
-    StandardPluginFunctionOutput,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MatchingRuleStatus {
-    #[default]
-    Inactive,
-    DeactivationFailed,
-    Activating,
-    Deactivating,
-    Active,
-    ActivationFailed,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum OutboundConnPropertyName {
-    #[default]
-    Region,
-    AwsVpcEndpointId,
-    AwsVpcEndpointServiceName,
-    DataCloudPrivateNetworkUrl,
-    DataCloudPrivateNetworkProvider,
-    DataCloudPrivateNetworkFunctionalDomain,
-    DataCloudPrivateNetworkFalconInstance,
-    DataCloudPrivateNetworkCustomUrls,
-    DataCloudPrivateNetworkAwsVpcEndpointId,
-    DataCloudPrivateNetworkAwsVpcEndpointServiceName,
-    DataCloudPrivateNetworkDefaultUrl,
-    DataCloudPrivateNetworkStatusCode,
-    DataCloudPrivateConnectDcVpcEndpointId,
-    DataCloudPrivateConnectDcDnsName,
-    TargetCloudProvider,
-    PNRSubType,
-    EndpointServiceVariant,
-    AssociatedPNRId,
-    AzureResourceId,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DupeActionType {
-    #[default]
-    Allow,
-    Block,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ApiSource {
-    #[default]
-    CONNECT,
-    CLASSIC,
-    API_CATALOG,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum NavType {
-    #[default]
-    Standard,
-    Console,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SupportedChannel {
-    #[default]
-    Email,
-    Sms,
-    WhatsApp,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PageComponentType {
-    #[default]
-    links,
-    htmlArea,
-    imageOrNote,
-    visualforcePage,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActionForSingleRecordFound {
-    #[default]
-    AutoLink,
-    PromptAgent,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FileDownloadBehavior {
-    #[default]
-    DOWNLOAD,
-    EXECUTE_IN_BROWSER,
-    HYBRID,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EncryptionScheme {
+pub enum LogType {
     #[default]
     None,
-    ProbabilisticEncryption,
-    CaseSensitiveDeterministicEncryption,
-    CaseInsensitiveDeterministicEncryption,
+    Debugonly,
+    Db,
+    Profiling,
+    Callout,
+    Detail,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LearningAchievementType {
+pub enum SourceSystemFieldRole {
     #[default]
-    LearningCourse,
-    LearningProgram,
-    AchievementGroup,
-    AchievementGroupAll,
-    Skill,
-    Custom,
+    NotApplicable,
+    Patient,
+    ServiceProvider,
+    RemoteMonitoringPatient,
+    RemoteMonitoringDevice,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -1029,10 +70,87 @@ pub enum AssociationEventType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DgtAssetMgmtPrvdLghtCpntType {
+pub enum CMSConnectionStatus {
     #[default]
-    NONE,
-    DIGITAL_ASSET_MANAGER,
+    ACTIVE,
+    INACTIVE,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SensitiveDataActionType {
+    #[default]
+    Remove,
+    Replace,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ModerationRuleAction {
+    #[default]
+    Block,
+    FreezeAndNotify,
+    Review,
+    Replace,
+    Flag,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DefinitionCreationType {
+    #[default]
+    Standard,
+    Custom,
+    System,
+    Derived,
+    Bridge,
+    Curated,
+    Segment_Membership,
+    Calculated_Insight,
+    Ml_Prediction,
+    Activation_Audience,
+    CG_Audience,
+    Ad_Audience_Insights,
+    Transform,
+    ADG,
+    External,
+    Vector_Embedding,
+    Chunk,
+    Directory_Table,
+    Semantic,
+    Problem_Records,
+    Clean_Room,
+    Deletion_Records,
+    Auxiliary,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum PropertyDisplayType {
+    #[default]
+    Lookup,
+    Picklist,
+    Text,
+    Checkbox,
+    Number,
+    Queue,
+    Date,
+    DateTime,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SendAction {
+    #[default]
+    Send,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ActionableListSourceType {
+    #[default]
+    CrmAnalytics,
+    DataCloudPlatform,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -1048,74 +166,711 @@ pub enum NextOwnerType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExtensionPointName {
+pub enum BgGeoLocationAccuracy {
     #[default]
-    Commerce_Domain_Cart_Calculate,
-    Commerce_Domain_Tax_CartCalculator,
-    Commerce_Domain_Inventory_CartCalculator,
-    Commerce_Domain_Promotions_CartCalculator,
-    Commerce_Domain_Promotions_ShippingCalculator,
-    Commerce_Domain_Pricing_CartCalculator,
-    Commerce_Domain_Shipping_CartCalculator,
-    Commerce_Domain_Inventory_Service,
-    Commerce_Domain_Pricing_Service,
-    Commerce_Domain_Tax_Service,
-    Commerce_Domain_BuyerGroup_EvaluationService,
-    Commerce_Domain_Checkout_CreateOrder,
-    Commerce_Domain_Checkout_PlaceOrder,
-    Commerce_Domain_Shipping_SplitShipment,
-    Commerce_Domain_OrderManagement_Product,
-    Commerce_Endpoint_Account_Addresses,
-    Commerce_Endpoint_Account_Address,
-    Commerce_Endpoint_Catalog_Products,
-    Commerce_Endpoint_Catalog_Product,
-    Commerce_Endpoint_Gift_Wraps,
-    Commerce_Endpoint_Search_Products,
-    Commerce_Endpoint_Search_ProductSearch,
-    Commerce_Endpoint_Search_ProductsByCategory,
-    Commerce_Endpoint_Cart_ItemCollection,
-    Commerce_Endpoint_Cart_Item,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SummaryOperations {
-    #[default]
-    count,
-    sum,
-    min,
-    max,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ChartColorPalettes {
-    #[default]
-    Default,
-    gray,
-    colorSafe,
-    unity,
-    justice,
-    nightfall,
-    sunrise,
-    bluegrass,
-    tropic,
-    heat,
-    dusk,
-    pond,
-    watermelon,
-    fire,
-    water,
-    earth,
-    accessible,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RateLimitTimePeriod {
-    #[default]
-    Short,
     Medium,
+    Coarse,
+    VeryCoarse,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum AssignmentPolicyType {
+    #[default]
+    loadBalancing,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MessageType {
+    #[default]
+    Text,
+    Facebook,
+    Line,
+    GoogleHome,
+    Alexa,
+    Omega,
+    AppleBusinessChat,
+    WeChat,
+    WebChat,
+    WhatsApp,
+    Phone,
+    EmbeddedMessaging,
+    Voice,
+    Custom,
+    InternalCopilot,
+    VoiceIntegrationPilot,
+    PstnVoice,
+    WhatsAppVoice,
+    SipVoice,
+    Email,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum TimeSheetFrequency {
+    #[default]
+    Daily,
+    Weekly,
+    EveryTwoWeeks,
+    TwiceAMonth,
+    Monthly,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SupervisorAgentStatusFilter {
+    #[default]
+    Online,
+    Away,
+    Offline,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum Expiration {
+    #[default]
+    ThirtyDays,
+    SixtyDays,
+    NinetyDays,
+    SixMonths,
+    OneYear,
+    Never,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ActionForNoRecordFound {
+    #[default]
+    CreateNewRecordAndLink,
+    PromptAgent,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MilestoneTimeUnits {
+    #[default]
+    Minutes,
+    Hours,
+    Days,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SampleLimitDiscAlertType {
+    #[default]
+    Error,
+    Warning,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RoutingType {
+    #[default]
+    Unanimous,
+    FirstResponse,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum CommunicationChannelLineType {
+    #[default]
+    ShortCode,
+    LongCode,
+    AlphaNumeric,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum EncryptionScheme {
+    #[default]
+    None,
+    ProbabilisticEncryption,
+    CaseSensitiveDeterministicEncryption,
+    CaseInsensitiveDeterministicEncryption,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum TimeIntervalSetupForMetadata {
+    #[default]
+    one,
+    five,
+    fifteen,
+    twenty,
+    thirty,
+    sixty,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum AssignmentType {
+    #[default]
+    defaultMedia,
+    customMedia,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ItemActionType {
+    #[default]
+    Omniscript,
+    Aura,
+    LWC,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum APIInstanceApprovalType {
+    #[default]
+    ManualApproval,
+    AutoApproval,
+    NoApproval,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum APIType {
+    #[default]
+    REST,
+    GraphQL,
+    gRPC,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum EmployeeUseCaseStatus {
+    #[default]
+    Draft,
+    Inactive,
+    Active,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum AccumulateResultCondInputType {
+    #[default]
+    Variable,
+    Expression,
+    String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MaxLoginAttempts {
+    #[default]
+    ThreeAttempts,
+    FiveAttempts,
+    TenAttempts,
+    NoLimit,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum TargetEntityMatchType {
+    #[default]
+    Equals,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum PluginType {
+    #[default]
+    Topic,
+    APICustomTopic,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SensitiveDataRuleVersion {
+    #[default]
+    ONE,
+    TWO,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum OrgDomainRedirectOption {
+    #[default]
+    Redirect,
+    WarnOnRedirect,
+    NoRedirect,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RRAFOperator {
+    #[default]
+    Equal,
+    Not_Equal,
+    Starts_With,
+    Contains,
+    Does_Not_Contain,
+    Less_Than,
+    Greater_Than,
+    Less_Or_Equal,
+    Greater_Or_Equal,
+    Include,
+    Exclude,
+    Within,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum VirtualVisitUsageType {
+    #[default]
+    CHIME,
+    INTELLIGENT_FORM_READER,
+    SENTIMENT_ANALYSIS,
+    KEY_PHRASE_EXTRACTION,
+    ENTITY_DETECTION,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum AttestServiceType {
+    #[default]
+    Apple,
+    Android,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum CurrencyIsoCode {
+    #[default]
+    ADP,
+    AED,
+    AFA,
+    AFN,
+    ALL,
+    AMD,
+    ANG,
+    AOA,
+    ARS,
+    ATS,
+    AUD,
+    XAV,
+    AWG,
+    AZM,
+    AZN,
+    BAM,
+    BBD,
+    BDT,
+    BEF,
+    BGL,
+    BGN,
+    BHD,
+    BIF,
+    BMD,
+    BND,
+    BOB,
+    BOV,
+    BRB,
+    BRL,
+    BSD,
+    BTN,
+    BWP,
+    BYB,
+    BYN,
+    BYR,
+    BZD,
+    CAD,
+    CDF,
+    CHF,
+    CLF,
+    CLP,
+    CNH,
+    CNY,
+    COP,
+    CRC,
+    CSD,
+    CUC,
+    CUP,
+    CVE,
+    CYP,
+    CZK,
+    DEM,
+    DJF,
+    DKK,
+    DOP,
+    DZD,
+    ECS,
+    EEK,
+    EGP,
+    ERN,
+    ESP,
+    ETB,
+    EUR,
+    FIM,
+    FJD,
+    FKP,
+    XFL,
+    FRF,
+    GBP,
+    GBT,
+    GEL,
+    GHC,
+    GHS,
+    GIP,
+    GMD,
+    GNF,
+    GRD,
+    GTQ,
+    GWP,
+    GYD,
+    HKD,
+    HNL,
+    HRD,
+    HRK,
+    HTG,
+    HUF,
+    IDR,
+    IEP,
+    ILS,
+    INR,
+    IQD,
+    IRR,
+    ISK,
+    ITL,
+    JMD,
+    JOD,
+    JPY,
+    KES,
+    KGS,
+    KHR,
+    KMF,
+    KPW,
+    KRW,
+    KWD,
+    KYD,
+    KZT,
+    LAK,
+    LBP,
+    LKR,
+    LRD,
+    LSL,
+    LTL,
+    LUF,
+    LVL,
+    LYD,
+    MAD,
+    XMA,
+    MDL,
+    MGA,
+    MGF,
+    MKD,
+    MMK,
+    MNT,
+    MOP,
+    MRO,
+    MRU,
+    MTL,
+    MUR,
+    MVR,
+    MWK,
+    MXN,
+    MXV,
+    MYR,
+    MZM,
+    MZN,
+    NAD,
+    NGN,
+    NIO,
+    NLG,
+    NOK,
+    NPR,
+    NZD,
+    OMR,
+    PAB,
+    XPA,
+    PEN,
+    PGK,
+    PHP,
+    PKR,
+    PLN,
+    PTE,
+    PYG,
+    QAR,
+    RMB,
+    ROL,
+    RON,
+    RSD,
+    RUB,
+    RUR,
+    RWF,
+    SAR,
+    SBD,
+    SCR,
+    SDD,
+    SDG,
+    SEK,
+    SGD,
+    SHP,
+    SIT,
+    SKK,
+    SLE,
+    SLL,
+    XSO,
+    SOS,
+    SRD,
+    SRG,
+    SSP,
+    STD,
+    STN,
+    SUR,
+    SVC,
+    SYP,
+    SZL,
+    THB,
+    TJR,
+    TJS,
+    TMM,
+    TMT,
+    TND,
+    TOP,
+    TPE,
+    TRL,
+    TRY,
+    TTD,
+    TWD,
+    TZS,
+    UAH,
+    UGX,
+    USD,
+    UYU,
+    UZS,
+    VEB,
+    VEF,
+    VES,
+    VND,
+    VUV,
+    WST,
+    XAF,
+    XCD,
+    XCG,
+    XOF,
+    XPF,
+    YER,
+    YUM,
+    ZAR,
+    ZMK,
+    ZMW,
+    ZWD,
+    ZWG,
+    ZWL,
+    ZIG,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum APIInstanceAccessStatus {
+    #[default]
+    Approved,
+    Pending,
+    NoStatus,
+    NotAccessible,
+    Rejected,
+    Revoked,
+    Deleted,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum LockoutInterval {
+    #[default]
+    FifteenMinutes,
+    ThirtyMinutes,
+    SixtyMinutes,
+    Forever,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FormulaFilterType {
+    #[default]
+    AllCriteriaMatch,
+    AnyCriterionMatches,
+    CustomLogicMatches,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ResponseFormatInvocableActionType {
+    #[default]
+    apex,
+    flow,
+    standardInvocableAction,
+    generatePromptResponse,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DevicePlatformType {
+    #[default]
+    ios,
+    android,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SensitiveDataRuleProcessing {
+    #[default]
+    Persist,
+    RealTime,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum PushServiceType {
+    #[default]
+    Apple,
+    Android,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum CspTrustedSiteContext {
+    #[default]
+    All,
+    LEX,
+    Communities,
+    FieldServiceMobileExtension,
+    LightningOut,
+    VisualForce,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SessionSecurityLevel {
+    #[default]
+    LOW,
+    STANDARD,
+    HIGH_ASSURANCE,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum EdgeRoutingOption {
+    #[default]
+    global,
+    regional,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ActionSubtype {
+    #[default]
+    ScreenAction,
+    Action,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RegistryProviderType {
+    #[default]
+    Price,
+    Promotions,
+    Inventory,
+    Shipment,
+    Tax,
+    Extension,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ODTItemFilterDataType {
+    #[default]
+    ADDRESS,
+    ANYTYPE,
+    BASE64,
+    BOOLEAN,
+    COMBOBOX,
+    CURRENCY,
+    DATACATEGORY,
+    GROUPREFERENCE,
+    DATE,
+    DATETIME,
+    DOUBLE,
+    EMAIL,
+    ENCRYPTEDSTRING,
+    ID,
+    INTEGER,
+    LONG,
+    MULTIPICKLIST,
+    PERCENT,
+    PHONE,
+    PICKLIST,
+    REFERENCE,
+    STRING,
+    TEXTAREA,
+    TIME,
+    URL,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ParticipantRoleAccessLevel {
+    #[default]
+    None,
+    Read,
+    Edit,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum UntrustedRedirectEnum {
+    #[default]
+    AlwaysAllowed,
+    AllowWithUserPermission,
+    NeverAllowed,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RoutingModel {
+    #[default]
+    LEAST_ACTIVE,
+    MOST_AVAILABLE,
+    EXTERNAL_ROUTING,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MatchingMethod {
+    #[default]
+    Exact,
+    FirstName,
+    LastName,
+    CompanyName,
+    Phone,
+    City,
+    Street,
+    Zip,
+    Title,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum TxnSecurityPolicyType {
+    #[default]
+    CustomApexPolicy,
+    CustomConditionBuilderPolicy,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum UploadStatus {
+    #[default]
+    complete,
+    uploading,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum PlannerAttrMappingType {
+    #[default]
+    input,
+    output,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -1138,299 +893,72 @@ pub enum ProcessSubmitterType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum JWTSessionTimeoutType {
+pub enum DupeActionType {
     #[default]
-    UserSession,
-    Custom,
+    Allow,
+    Block,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AssignmentPolicyType {
-    #[default]
-    loadBalancing,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FileType {
-    #[default]
-    UNKNOWN,
-    PDF,
-    POWER_POINT,
-    POWER_POINT_X,
-    POWER_POINT_M,
-    POWER_POINT_T,
-    WORD,
-    WORD_X,
-    WORD_M,
-    WORD_T,
-    PPS,
-    PPSX,
-    EXCEL,
-    EXCEL_X,
-    EXCEL_M,
-    EXCEL_T,
-    GOOGLE_DOCUMENT,
-    GOOGLE_PRESENTATION,
-    GOOGLE_SPREADSHEET,
-    GOOGLE_DRAWING,
-    GOOGLE_FORM,
-    GOOGLE_SCRIPT,
-    LINK,
-    SLIDE,
-    AAC,
-    ACGI,
-    AI,
-    AMR,
-    AVI,
-    BMP,
-    BOXNOTE,
-    CSV,
-    EPS,
-    EXE,
-    FLASH,
-    GIF,
-    GZIP,
-    HTM,
-    HTML,
-    HTX,
-    JPEG,
-    JPE,
-    PJP,
-    PJPEG,
-    JFIF,
-    JPG,
-    JS,
-    JSON,
-    MHTM,
-    MHTML,
-    MP3,
-    M4A,
-    M4V,
-    MP4,
-    MPEG,
-    MPG,
-    MOV,
-    MSG,
-    ODP,
-    ODS,
-    ODT,
-    OGG,
-    OGV,
-    PNG,
-    PSD,
-    RTF,
-    QUIPDOC,
-    QUIPSHEET,
-    QUIPCHAT,
-    QUIPSLIDES,
-    QUIPTEMPLATE,
-    SHTM,
-    SHTML,
-    SNOTE,
-    MCONTENT,
-    STYPI,
-    SVG,
-    SVGZ,
-    JPGZ,
-    TEXT,
-    THTML,
-    USDZ,
-    VCF,
-    VISIO,
-    VTT,
-    WMV,
-    WRF,
-    XML,
-    ZIP,
-    XZIP,
-    WMA,
-    XSN,
-    INSIGHT,
-    TRTF,
-    TXML,
-    WEBVIEW,
-    RFC822,
-    ASF,
-    DWG,
-    JAR,
-    XJS,
-    OPX,
-    XPSD,
-    TIF,
-    TIFF,
-    WAV,
-    CSS,
-    THUMB720BY480,
-    THUMB240BY180,
-    THUMB120BY90,
-    ALLTHUMBS,
-    PAGED_FLASH,
-    XMOB,
-    PACK,
-    C,
-    CPP,
-    WORDT,
-    INI,
-    JAVA,
-    LOG,
-    POWER_POINTT,
-    SQL,
-    XHTML,
-    EXCELT,
-    WEBP,
-    AVIF,
-    ICS,
-    CAF,
-    V3GP,
-    V3G2,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RegionFlagStatus {
-    #[default]
-    disabled,
-    enabled,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SensitiveDataRuleProcessing {
-    #[default]
-    Persist,
-    RealTime,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FormFactor {
-    #[default]
-    Small,
-    Medium,
-    Large,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum VisibleOrRequired {
-    #[default]
-    VisibleOptional,
-    VisibleRequired,
-    NotVisible,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActionableListKPIAggType {
-    #[default]
-    SUM,
-    COUNT,
-    MIN,
-    MAX,
-    AVG,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum Template {
-    #[default]
-    Page,
-    Tab,
-    Toc,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum Complexity {
-    #[default]
-    NoRestriction,
-    AlphaNumeric,
-    SpecialCharacters,
-    UpperLowerCaseNumeric,
-    UpperLowerCaseNumericSpecialCharacters,
-    Any3UpperLowerCaseNumericSpecialCharacters,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RegistryProviderType {
-    #[default]
-    Price,
-    Promotions,
-    Inventory,
-    Shipment,
-    Tax,
-    Extension,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LogType {
+pub enum CanvasLocationOptions {
     #[default]
     None,
-    Debugonly,
-    Db,
-    Profiling,
-    Callout,
-    Detail,
+    Chatter,
+    UserProfile,
+    Visualforce,
+    Aura,
+    Publisher,
+    ChatterFeed,
+    ServiceDesk,
+    OpenCTI,
+    AppLauncher,
+    MobileNav,
+    PageLayout,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum GatewayType {
+pub enum PlannerType {
     #[default]
-    Stripe,
-    Paypal,
-    Adyen,
-    Braintree,
-    Cybersource,
+    AiCopilot__SequentialPlannerIntentClassifier,
+    AiCopilot__ReAct,
+    AiCopilot__AgileAppDev,
+    Atlas__ConcurrentMultiAgentOrchestration,
+    SentOS__SearchAgent,
+    Atlas__VoiceAgent,
+    BYOP__waiiplanner,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SurveyQuestionType {
+pub enum CanvasOptions {
     #[default]
-    MultiChoice,
-    RadioButton,
-    FreeText,
-    Date,
-    Rating,
-    CSAT,
-    Slider,
-    Picklist,
-    NPS,
-    StackRank,
-    Currency,
-    Number,
-    DateTime,
-    Toggle,
-    MultiSelectPicklist,
-    Image,
-    Boolean,
-    ShortText,
-    Attachment,
-    Matrix,
+    HideShare,
+    HideHeader,
+    PersonalEnabled,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum UtilizationFactor {
+pub enum AggregatorName {
     #[default]
-    TotalAppointmentDuration,
-    NumberOfAppointments,
+    Bandwidth,
+    Inteliquent,
+    Sinch,
+    Twilio,
+    Vonage,
+    MessageBird,
+    Plivo,
+    Telnyx,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum TestLevel {
+pub enum ActionableListType {
     #[default]
-    NoTestRun,
-    RunSpecifiedTests,
-    RunLocalTests,
-    RunAllTestsInOrg,
-    RunRelevantTests,
+    RetailStoreList,
+    HealthcareProviderList,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -1443,331 +971,28 @@ pub enum CapacityModel {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LookupValueType {
+pub enum CMSSourceConnectionType {
     #[default]
-    User,
-    Queue,
-    RecordType,
+    Public,
+    Authenticated,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum Expiration {
+pub enum VirtualVisitComprehendServiceType {
     #[default]
-    ThirtyDays,
-    SixtyDays,
-    NinetyDays,
-    SixMonths,
-    OneYear,
-    Never,
+    ComprehendService,
+    ComprehendMedicalService,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActionableListKPIStType {
+pub enum PeriodTypes {
     #[default]
-    ACTIVE,
-    INACTIVE,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum IFrameWhitelistContext {
-    #[default]
-    VisualforcePages,
-    LightningOut,
-    Surveys,
-    DCH_ADDIN_APP,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActionableListSourceType {
-    #[default]
-    CrmAnalytics,
-    DataCloudPlatform,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SupervisorAgentStatusFilter {
-    #[default]
-    Online,
-    Away,
-    Offline,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ElementType {
-    #[default]
-    Float,
-    Text,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum WorkOrderDurationSource {
-    #[default]
-    WorkType,
-    TotalFromWorkPlan,
-    Custom,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BlankValueBehavior {
-    #[default]
-    MatchBlanks,
-    NullNotAllowed,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DupeSecurityOptionType {
-    #[default]
-    EnforceSharingRules,
-    BypassSharingRules,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ResponseFormatInvocableActionType {
-    #[default]
-    apex,
-    flow,
-    standardInvocableAction,
-    generatePromptResponse,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AccessMethod {
-    #[default]
-    Get,
-    Post,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SControlContentSource {
-    #[default]
-    HTML,
-    URL,
-    Snippet,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum TargetEntityMatchType {
-    #[default]
-    Equals,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SessionSecurityLevel {
-    #[default]
-    LOW,
-    STANDARD,
-    HIGH_ASSURANCE,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PinnedAction {
-    #[default]
-    None,
-    Top,
-    Bottom,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PsldComponentAccess {
-    #[default]
-    None,
-    Namespace,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RRAFObjectType {
-    #[default]
-    Source,
-    Target,
-    Junction,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RRADJctObjFilterLogic {
-    #[default]
-    And,
-    Or,
-    Custom,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum VirtualVisitUsageType {
-    #[default]
-    CHIME,
-    INTELLIGENT_FORM_READER,
-    SENTIMENT_ANALYSIS,
-    KEY_PHRASE_EXTRACTION,
-    ENTITY_DETECTION,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExtConvParticipantIntegDefStatus {
-    #[default]
-    Active,
-    Inactive,
-    Deleted,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExpFeedbackCollType {
-    #[default]
-    SURVEY,
-    PHONE_CALL,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EnforcementType {
-    #[default]
-    Scoping,
-    Restrict,
-    FieldRestrict,
-    D360_Restrict,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SessionTimeout {
-    #[default]
-    TwentyFourHours,
-    TwelveHours,
-    EightHours,
-    FourHours,
-    TwoHours,
-    NinetyMinutes,
-    SixtyMinutes,
-    ThirtyMinutes,
-    FifteenMinutes,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum OrgDomainRedirectOption {
-    #[default]
-    Redirect,
-    WarnOnRedirect,
-    NoRedirect,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SendAction {
-    #[default]
-    Send,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CourseWaitlistConfigType {
-    #[default]
-    EnrollmentOfferExpiration,
-    WaitlistPosition,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AttributeMappingType {
-    #[default]
-    ActionAttribute,
-    Constant,
-    Variable,
-    ContextVariable,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MilestoneTypeRecurrenceType {
-    #[default]
-    none,
-    recursIndependently,
-    recursChained,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EmployeeUseCaseStatus {
-    #[default]
-    Draft,
-    Inactive,
-    Active,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PluginType {
-    #[default]
-    Topic,
-    APICustomTopic,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum IdempotencySupportStatus {
-    #[default]
-    No,
-    Yes,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CMSConnectionStatus {
-    #[default]
-    ACTIVE,
-    INACTIVE,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PipelineInspectionMetric {
-    #[default]
-    TotalPipeline,
-    ClosedWon,
-    Commit,
-    MostLikely,
-    BestCase,
-    OpenPipeline,
-    ClosedLost,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum IterationOrder {
-    #[default]
-    Asc,
-    Desc,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CMSConnectionSourceType {
-    #[default]
-    AEM,
-    Drupal,
-    WordPress,
-    SDL,
-    Sitecore,
-    Other,
+    Month,
+    Quarter,
+    Week,
+    Year,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -2727,214 +1952,26 @@ pub enum ExtendedErrorCode {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum APIInstanceApprovalType {
+pub enum OrgDomainShard {
     #[default]
-    ManualApproval,
-    AutoApproval,
-    NoApproval,
+    none,
+    sandbox,
+    develop,
+    patch,
+    trailblaze,
+    scratch,
+    demo,
+    free,
+    sfdctest,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CriterionOperator {
+pub enum InvalidMergeActionType {
     #[default]
-    Equal,
-    NotEqual,
-    GreaterThan,
-    GreaterThanOrEqual,
-    LessThan,
-    LessThanOrEqual,
-    Contains,
-    StartsWith,
-    Includes,
-    NotIncludes,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LogCategory {
-    #[default]
-    Db,
-    Workflow,
-    Validation,
-    Callout,
-    Apex_code,
-    Apex_profiling,
-    Visualforce,
-    System,
-    Wave,
-    Nba,
-    Data_access,
-    All,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ParticipantRoleAccessLevel {
-    #[default]
-    None,
-    Read,
-    Edit,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PropertyDisplayType {
-    #[default]
-    Lookup,
-    Picklist,
-    Text,
-    Checkbox,
-    Number,
-    Queue,
-    Date,
-    DateTime,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum TaxLocaleType {
-    #[default]
-    Net,
-    Gross,
-    Automatic,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActionableListType {
-    #[default]
-    RetailStoreList,
-    HealthcareProviderList,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ItemCategory {
-    #[default]
-    dbBased,
-    fileBased,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ScreenLockTimeout {
-    #[default]
-    Never,
-    One,
-    Five,
-    Ten,
-    Thirty,
-    Sixty,
-    OneTwenty,
-    OneEighty,
-    TwoForty,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RRADSourceObjFilterLogic {
-    #[default]
-    And,
-    Or,
-    Custom,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SensitiveDataActionType {
-    #[default]
-    Remove,
-    Replace,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum TypeOfAction {
-    #[default]
-    Add,
-    Edit,
-    Delete,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ServerAuthMode {
-    #[default]
-    OAuth,
-    None,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SensitiveDataRuleVersion {
-    #[default]
-    ONE,
-    TWO,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ExecutionType {
-    #[default]
-    Sequence,
-    Priority,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EswInvitationConditionResource {
-    #[default]
-    SecondsOnPage,
-    SecondsOnSite,
-    NumberOfPageViews,
-    UrlMatch,
-    CustomVariable,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MuleSoftControlPlane {
-    #[default]
-    None,
-    US,
-    EU,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PlannerType {
-    #[default]
-    AiCopilot__SequentialPlannerIntentClassifier,
-    AiCopilot__ReAct,
-    AiCopilot__AgileAppDev,
-    Atlas__ConcurrentMultiAgentOrchestration,
-    SentOS__SearchAgent,
-    Atlas__VoiceAgent,
-    BYOP__waiiplanner,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MCNodeType {
-    #[default]
-    TEXT,
-    MTEXT,
-    RTE,
-    IMG,
-    NAMEFIELD,
-    URL,
-    DATETIME,
-    DATE,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ClientAuthMode {
-    #[default]
-    SSO,
-    Custom,
-    Mixed,
+    Drop,
+    Keep,
+    Override,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -2947,81 +1984,41 @@ pub enum PermittedUsersPolicyType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ModerationRuleAction {
+pub enum OutboundRouteType {
     #[default]
-    Block,
-    FreezeAndNotify,
-    Review,
-    Replace,
-    Flag,
+    OmniChannelFlow,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RegulatoryStatus {
+pub enum ApiSource {
     #[default]
-    CampaignInProgress,
-    CampaignSuccessful,
-    CampaignFailed,
-    TollFreeVerificationInProgress,
-    TollFreeVerificationSuccessful,
-    TollFreeVerificationFailed,
-    TaxRegistration,
+    CONNECT,
+    CLASSIC,
+    API_CATALOG,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AIScoringModelDefVersionMode {
+pub enum UtilizationFactor {
     #[default]
-    TRAIN,
-    DEPLOY,
-    TRAIN_AND_DEPLOY,
+    TotalAppointmentDuration,
+    NumberOfAppointments,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum BgGeoLocationAccuracy {
+pub enum SurfaceType {
     #[default]
-    Medium,
-    Coarse,
-    VeryCoarse,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RefreshTokenPolicyType {
-    #[default]
-    Infinite,
-    Zero,
-    SpecificLifetime,
-    SpecificInactivity,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ChartAxis {
-    #[default]
-    x,
-    y,
-    y2,
-    r,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum FormulaFilterType {
-    #[default]
-    AllCriteriaMatch,
-    AnyCriterionMatches,
-    CustomLogicMatches,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CMSSourceConnectionType {
-    #[default]
-    Public,
-    Authenticated,
+    Messaging,
+    NextGenChat,
+    ServiceEmail,
+    Telephony,
+    UnifiedEmail,
+    CustomerWebClient,
+    Test,
+    Slack,
+    Custom,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -3031,14 +2028,6 @@ pub enum DeviceType {
     phone,
     tablet,
     minitablet,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum StepRejectBehaviorType {
-    #[default]
-    RejectRequest,
-    BackToPrevious,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -3284,22 +2273,1192 @@ pub enum CountryIsoCode {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CspTrustedSiteContext {
-    #[default]
-    All,
-    LEX,
-    Communities,
-    FieldServiceMobileExtension,
-    LightningOut,
-    VisualForce,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 pub enum APIInstanceEndpointType {
     #[default]
     Discovery,
     Callout,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum TypeOfAction {
+    #[default]
+    Add,
+    Edit,
+    Delete,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum StepCriteriaNotMetType {
+    #[default]
+    ApproveRecord,
+    RejectRecord,
+    GotoNextStep,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SupportedChannel {
+    #[default]
+    Email,
+    Sms,
+    WhatsApp,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum InboundConnPropertyName {
+    #[default]
+    Region,
+    AwsVpcEndpointId,
+    SourceIpRanges,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ItemCategory {
+    #[default]
+    dbBased,
+    fileBased,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum AIScoringModelDefVersionMode {
+    #[default]
+    TRAIN,
+    DEPLOY,
+    TRAIN_AND_DEPLOY,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ScreenLockTimeout {
+    #[default]
+    Never,
+    One,
+    Five,
+    Ten,
+    Thirty,
+    Sixty,
+    OneTwenty,
+    OneEighty,
+    TwoForty,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExecutionType {
+    #[default]
+    Sequence,
+    Priority,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SessionTimeout {
+    #[default]
+    TwentyFourHours,
+    TwelveHours,
+    EightHours,
+    FourHours,
+    TwoHours,
+    NinetyMinutes,
+    SixtyMinutes,
+    ThirtyMinutes,
+    FifteenMinutes,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ProviderSearchObjectMapping {
+    #[default]
+    HealthcareProvider,
+    HealthcarePractitionerFacility,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum LookupValueType {
+    #[default]
+    User,
+    Queue,
+    RecordType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FileType {
+    #[default]
+    UNKNOWN,
+    PDF,
+    POWER_POINT,
+    POWER_POINT_X,
+    POWER_POINT_M,
+    POWER_POINT_T,
+    WORD,
+    WORD_X,
+    WORD_M,
+    WORD_T,
+    PPS,
+    PPSX,
+    EXCEL,
+    EXCEL_X,
+    EXCEL_M,
+    EXCEL_T,
+    GOOGLE_DOCUMENT,
+    GOOGLE_PRESENTATION,
+    GOOGLE_SPREADSHEET,
+    GOOGLE_DRAWING,
+    GOOGLE_FORM,
+    GOOGLE_SCRIPT,
+    LINK,
+    SLIDE,
+    AAC,
+    ACGI,
+    AI,
+    AMR,
+    AVI,
+    BMP,
+    BOXNOTE,
+    CSV,
+    EPS,
+    EXE,
+    FLASH,
+    GIF,
+    GZIP,
+    HTM,
+    HTML,
+    HTX,
+    JPEG,
+    JPE,
+    PJP,
+    PJPEG,
+    JFIF,
+    JPG,
+    JS,
+    JSON,
+    MHTM,
+    MHTML,
+    MP3,
+    M4A,
+    M4V,
+    MP4,
+    MPEG,
+    MPG,
+    MOV,
+    MSG,
+    ODP,
+    ODS,
+    ODT,
+    OGG,
+    OGV,
+    PNG,
+    PSD,
+    RTF,
+    QUIPDOC,
+    QUIPSHEET,
+    QUIPCHAT,
+    QUIPSLIDES,
+    QUIPTEMPLATE,
+    SHTM,
+    SHTML,
+    SNOTE,
+    MCONTENT,
+    STYPI,
+    SVG,
+    SVGZ,
+    JPGZ,
+    TEXT,
+    THTML,
+    USDZ,
+    VCF,
+    VISIO,
+    VTT,
+    WMV,
+    WRF,
+    XML,
+    ZIP,
+    XZIP,
+    WMA,
+    XSN,
+    INSIGHT,
+    TRTF,
+    TXML,
+    WEBVIEW,
+    RFC822,
+    ASF,
+    DWG,
+    JAR,
+    XJS,
+    OPX,
+    XPSD,
+    TIF,
+    TIFF,
+    WAV,
+    CSS,
+    THUMB720BY480,
+    THUMB240BY180,
+    THUMB120BY90,
+    ALLTHUMBS,
+    PAGED_FLASH,
+    XMOB,
+    PACK,
+    C,
+    CPP,
+    WORDT,
+    INI,
+    JAVA,
+    LOG,
+    POWER_POINTT,
+    SQL,
+    XHTML,
+    EXCELT,
+    WEBP,
+    AVIF,
+    ICS,
+    CAF,
+    V3GP,
+    V3G2,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum StatusCode {
+    #[default]
+    ALERT_NOTIFICATION_LIMIT_EXCEEDED,
+    ALL_OR_NONE_OPERATION_ROLLED_BACK,
+    ALREADY_APPLIED,
+    ALREADY_IN_PROCESS,
+    ALREADY_REDEEMED_VOUCHER,
+    APEX_DATA_ACCESS_RESTRICTION,
+    APEX_FAILED,
+    API_TASK_INVALID_REQUEST,
+    API_TASK_LIMIT_REACHED,
+    APPLICATION_ALREADY_EXISTS,
+    ASSIGNEE_TYPE_REQUIRED,
+    ATTRIBUTE_DEFINITION_LIMIT_EXCEEDED,
+    AURA_COMPILE_ERROR,
+    AUTH_PROVIDER_NEEDS_AUTH,
+    AUTH_PROVIDER_NOT_FOUND,
+    B2B_SEARCH_ADMIN_ERROR,
+    BAD_CUSTOM_ENTITY_PARENT_DOMAIN,
+    BAD_GATEWAY,
+    BAD_LIST_UNSUBSCRIBE_DATA,
+    BAD_REQUEST,
+    BCC_NOT_ALLOWED_IF_BCC_COMPLIANCE_ENABLED,
+    BLOCKED_EXCLUSIVE,
+    BOT_INACTIVE_CONFIG,
+    CANNOT_CASCADE_PRODUCT_ACTIVE,
+    CANNOT_CHANGE_FIELD_TYPE_OF_APEX_REFERENCED_FIELD,
+    CANNOT_CHANGE_FIELD_TYPE_OF_REFERENCED_FIELD,
+    CANNOT_CREATE_ANOTHER_MANAGED_PACKAGE,
+    CANNOT_DEACTIVATE_DIVISION,
+    CANNOT_DELETE_GLOBAL_ACTION_LIST,
+    CANNOT_DELETE_LAST_DATED_CONVERSION_RATE,
+    CANNOT_DELETE_MANAGED_OBJECT,
+    CANNOT_DISABLE_LAST_ADMIN,
+    CANNOT_ENABLE_IP_RESTRICT_REQUESTS,
+    CANNOT_EXECUTE_FLOW_TRIGGER,
+    CANNOT_FREEZE_SELF,
+    CANNOT_INSERT_UPDATE_ACTIVATE_ENTITY,
+    CANNOT_MODIFY_MANAGED_OBJECT,
+    CANNOT_PASSWORD_LOCKOUT,
+    CANNOT_POST_TO_ARCHIVED_GROUP,
+    CANNOT_RENAME_APEX_REFERENCED_FIELD,
+    CANNOT_RENAME_APEX_REFERENCED_OBJECT,
+    CANNOT_RENAME_REFERENCED_FIELD,
+    CANNOT_RENAME_REFERENCED_OBJECT,
+    CANNOT_REPARENT_RECORD,
+    CANNOT_UPDATE_CONVERTED_LEAD,
+    CANNOT_UPDATE_IS_THIRD_PARTY,
+    CANNOT_UPDATE_PAYMENT_METHOD_SET,
+    CANT_DISABLE_CORP_CURRENCY,
+    CANT_UNSET_CORP_CURRENCY,
+    CART_DELIVERY_GROUP_NOT_FOUND,
+    CART_ITEM_LIMIT_EXCEEDED_FOR_COUPONS,
+    CART_ITEM_NOT_FOUND,
+    CART_NOT_FOUND,
+    CART_VALIDATION_ERROR,
+    CDS_UNCOMMITTED_WORK,
+    CHECKOUT_CONFLICT,
+    CHECKOUT_EXPIRED,
+    CHECKOUT_INVALIDATED,
+    CHECKOUT_INVENTORY_RESERVATION,
+    CHECKOUT_LOCKED,
+    CHECKOUT_NOT_FOUND,
+    CHECKOUT_UNAUTHORIZED,
+    CHECKOUT_VALIDATION,
+    CHILD_SHARE_FAILS_PARENT,
+    CIRCULAR_DEPENDENCY,
+    CLEAN_SERVICE_ERROR,
+    CLM_INSUFFICIENT_ACCESS,
+    CLM_RECORD_NOT_FOUND,
+    CLONE_FIELD_INTEGRITY_EXCEPTION,
+    CLONE_NOT_SUPPORTED,
+    CMS_FOLDER_ITEM_MOVE_FAILED,
+    COLLISION_DETECTED,
+    COMMERCE_SEARCH_INDEXING_SYSTEM_ERROR,
+    COMMERCE_SEARCH_INVALID_RESOURCE,
+    COMMERCE_SEARCH_MQ_ERROR,
+    COMMERCE_SEARCH_PROVIDER_LIMIT_EXCEEDED,
+    COMMERCE_SEARCH_RESOURCE_NOT_FOUND,
+    COMMERCE_SEARCH_UNSUPPORTED_LANGUAGE_ERROR,
+    COMMERCIAL_CONTROL_ERROR,
+    COMMUNITY_NOT_ACCESSIBLE,
+    CONFLICT,
+    CONFLICTING_ENVIRONMENT_HUB_MEMBER,
+    CONFLICTING_SSO_USER_MAPPING,
+    CONTENT_NOT_FOUND,
+    CONTENT_SEARCH_NOT_ENABLED,
+    CONTENT_TYPE_DISABLED_FOR_API,
+    CONTENT_TYPE_NOT_FOUND,
+    CONTEXT_TAG_MISSING,
+    COPILOT_INACTIVE_CONFIG,
+    COPILOT_SESSION_ENDED,
+    COUPON_REDEMPTION_LIMIT_EXCEEDED,
+    CT_DEPTH_LIMIT_EXCEEDED,
+    CT_DEVELOPER_NAME_NOT_UPDATABLE,
+    CT_ENTITY_DELETE_ERROR,
+    CT_ENTITY_SAVE_ERROR,
+    CT_INVALID_DEPTH,
+    CT_INVALID_QUERY_WORD,
+    CT_INVALID_TAXONOMY_ID,
+    CT_INVALID_TERM_ID,
+    CT_INVALID_TERM_LENGTH,
+    CT_NONEMPTY_TERM_REFERENCE,
+    CT_PARENT_TERM_CYCLE,
+    CT_TERM_SEARCH_ERROR,
+    CUSTOM_APEX_ERROR,
+    CUSTOM_CLOB_FIELD_LIMIT_EXCEEDED,
+    CUSTOM_ENTITY_OR_FIELD_LIMIT,
+    CUSTOM_FIELD_INDEX_LIMIT_EXCEEDED,
+    CUSTOM_INDEX_EXISTS,
+    CUSTOM_LINK_LIMIT_EXCEEDED,
+    CUSTOM_METADATA_LIMIT_EXCEEDED,
+    CUSTOM_METADATA_REL_FIELD_MANAGEABILITY,
+    CUSTOM_SETTINGS_LIMIT_EXCEEDED,
+    CUSTOM_TAB_LIMIT_EXCEEDED,
+    DATAASSESSMENT_CONFIG_ASSESSMENT_IN_PROGRESS_ERROR,
+    DATAASSESSMENT_CONFIG_SERVICE_ERROR,
+    DATACLOUDADDRESS_NO_RECORDS_FOUND,
+    DATACLOUDADDRESS_PROCESSING_ERROR,
+    DATACLOUDADDRESS_SERVER_ERROR,
+    DATA_MAPPING_NOT_FOUND,
+    DATA_MAPPING_SCHEMA_NOT_FOUND,
+    DATA_STREAM_INTERACTIVE_RUN_PRECONDITION_FAILED,
+    DATA_STREAM_RUN_FAILED,
+    DATA_TRANSFER_RECORD_LIMIT_EXCEEDED,
+    DATA_TRANSLATION_TOGGLED_BEFORE_INCREMENTAL_INDEX,
+    DATA_TYPE_NOT_SUPPORTED,
+    DATE_OUT_OF_RANGE,
+    DELETE_FAILED,
+    DELETE_NOT_ALLOWED,
+    DELETE_OPERATION_TOO_LARGE,
+    DELETE_REQUIRED_ON_CASCADE,
+    DEPENDENCY_EXISTS,
+    DOCUMENT_VERSION_EXISTS,
+    DUPLICATES_DETECTED,
+    DUPLICATE_CASE_SOLUTION,
+    DUPLICATE_COMM_NICKNAME,
+    DUPLICATE_CUSTOM_ENTITY_DEFINITION,
+    DUPLICATE_CUSTOM_TAB_MOTIF,
+    DUPLICATE_DEVELOPER_NAME,
+    DUPLICATE_EXTERNAL_ID,
+    DUPLICATE_MASTER_LABEL,
+    DUPLICATE_SENDER_DISPLAY_NAME,
+    DUPLICATE_USERNAME,
+    DUPLICATE_VALUE,
+    DYNAMIC_BUNDLE_REORDER_ACTION_NOT_ALLOWED,
+    EMAIL_ADDRESS_BOUNCED,
+    EMAIL_EXTERNAL_TRANSPORT_CONNECTION_ERROR,
+    EMAIL_EXTERNAL_TRANSPORT_MISSING_REQUIRED_PROPERTY_ERROR,
+    EMAIL_EXTERNAL_TRANSPORT_PERMISSION_ERROR,
+    EMAIL_EXTERNAL_TRANSPORT_TOKEN_ERROR,
+    EMAIL_EXTERNAL_TRANSPORT_TOO_LARGE_ERROR,
+    EMAIL_EXTERNAL_TRANSPORT_TOO_MANY_REQUESTS_ERROR,
+    EMAIL_EXTERNAL_TRANSPORT_UNKNOWN_ERROR,
+    EMAIL_NOT_PROCESSED_DUE_TO_PRIOR_ERROR,
+    EMAIL_OPTED_OUT,
+    EMAIL_TEMPLATE_FORMULA_ERROR,
+    EMAIL_TEMPLATE_MERGEFIELD_ACCESS_ERROR,
+    EMAIL_TEMPLATE_MERGEFIELD_ERROR,
+    EMAIL_TEMPLATE_MERGEFIELD_VALUE_ERROR,
+    EMAIL_TEMPLATE_PROCESSING_ERROR,
+    EMPTY_CATALOG,
+    EMPTY_INGESTION_JOB,
+    EMPTY_SCONTROL_FILE_NAME,
+    ENHANCED_EMAIL_TEMPLATE_COMPILATION_ERROR,
+    ENTITY_FAILED_IFLASTMODIFIED_ON_UPDATE,
+    ENTITY_IS_ARCHIVED,
+    ENTITY_IS_DELETED,
+    ENTITY_IS_LOCKED,
+    ENTITY_SAVE_ERROR,
+    ENTITY_SAVE_VALIDATION_ERROR,
+    ENVIRONMENT_HUB_MEMBERSHIP_CONFLICT,
+    ENVIRONMENT_HUB_MEMBERSHIP_ERROR_JOINING_HUB,
+    ENVIRONMENT_HUB_MEMBERSHIP_USER_ALREADY_IN_HUB,
+    ENVIRONMENT_HUB_MEMBERSHIP_USER_NOT_ORG_ADMIN,
+    ERROR_CALCULATING_EXPIRY_DATE,
+    ERROR_IN_MAILER,
+    EXCEEDED_MAX_SEMIJOIN_SUBSELECTS_WRITE,
+    EXCHANGE_WEB_SERVICES_URL_INVALID,
+    EXTERNAL_APP_DUPLICATE_CONTENT_ZONE_NAME,
+    EXTERNAL_RESOURCE_FORBIDDEN,
+    FACETABLE_ATTRIBUTE_MAX_LIMIT_EXCEEDED,
+    FAILED_ACTIVATION,
+    FAILED_DUE_TO_OTHER_INPUTS,
+    FAILED_TO_RESOLVE_MAPPING,
+    FAILED_TO_RESOLVE_SCHEMA_INFORMATION,
+    FAILED_TO_RESOLVE_UIID,
+    FIELD_CUSTOM_VALIDATION_EXCEPTION,
+    FIELD_FILTER_VALIDATION_EXCEPTION,
+    FIELD_INTEGRITY_EXCEPTION,
+    FIELD_KEYWORD_LIST_MATCH_LIMIT,
+    FIELD_MAPPING_ERROR,
+    FIELD_MODERATION_RULE_BLOCK,
+    FIELD_NOT_UPDATABLE,
+    FILE_EXTENSION_NOT_ALLOWED,
+    FILE_SIZE_LIMIT_EXCEEDED,
+    FILTERED_LOOKUP_LIMIT_EXCEEDED,
+    FIND_DUPLICATES_ERROR,
+    FLOW_EXCEPTION,
+    FORBIDDEN_EXCEPTION,
+    FUNCTIONALITY_NOT_ENABLED,
+    GET_EINSTEIN_TENANT_ERROR,
+    GUEST_INSUFFICIENT_ACCESS,
+    HAS_PUBLIC_REFERENCES,
+    HTML_FILE_UPLOAD_NOT_ALLOWED,
+    IAS_AM_AUTH_BAD_REQUEST,
+    IAS_AM_AUTH_UNAUTHORIZED,
+    IAS_INVALID_AUTH,
+    IAS_INVALID_REQUEST_PARAMETER,
+    IAS_RECORD_DOES_NOT_EXIST,
+    IAS_TENANT_NOT_PROVISIONED,
+    IAS_UNCOMMITTED_WORK,
+    IMAGE_TOO_LARGE,
+    INACTIVE_CONTEXT_DEFINITION,
+    INACTIVE_OWNER_OR_USER,
+    INACTIVE_RULE_ERROR,
+    INDEX_ITEM_LIMIT_EXCEEDED,
+    INDEX_PAYLOAD_NOT_FOUND,
+    INDEX_SINGLE_PAYLOAD_SIZE_LIMIT_EXCEEDED,
+    INGESTION_JOB_RECORDS_LIMIT_EXCEEDED,
+    INGESTION_TOTAL_FILE_SIZE_LIMIT_EXCEEDED,
+    INPUTPARAM_INCOMPATIBLE_DATATYPE,
+    INSERT_UPDATE_DELETE_NOT_ALLOWED_DURING_MAINTENANCE,
+    INSUFFICIENT_ACCESS,
+    INSUFFICIENT_ACCESS_ON_CROSS_REFERENCE_ENTITY,
+    INSUFFICIENT_ACCESS_OR_READONLY,
+    INSUFFICIENT_ACCESS_TO_INSIGHTSEXTERNALDATA,
+    INSUFFICIENT_BALANCE,
+    INSUFFICIENT_BENEFIT_REMAINING,
+    INSUFFICIENT_CREDITS,
+    INTEGRATION_CANCELLED,
+    INTERNAL_ERROR,
+    INVALID_ACCESS_LEVEL,
+    INVALID_ACCESS_TOKEN,
+    INVALID_ACCOUNT,
+    INVALID_ACTION_VERSION,
+    INVALID_API_INPUT,
+    INVALID_ARGUMENT_TYPE,
+    INVALID_ASSIGNEE_TYPE,
+    INVALID_ASSIGNMENT_RULE,
+    INVALID_AUTH_HEADER,
+    INVALID_BATCH_OPERATION,
+    INVALID_BUSINESS_HOURS_NAME,
+    INVALID_CATEGORY_NETWORK,
+    INVALID_CHECKOUT_INPUT,
+    INVALID_CONTACT,
+    INVALID_CONTENT_TYPE,
+    INVALID_CREDIT_CARD_INFO,
+    INVALID_CROSS_REFERENCE_KEY,
+    INVALID_CROSS_REFERENCE_TYPE_FOR_FIELD,
+    INVALID_CURRENCY_CONV_RATE,
+    INVALID_CURRENCY_CORP_RATE,
+    INVALID_CURRENCY_ISO,
+    INVALID_DATASET_REFERENCE_INPUT,
+    INVALID_DATA_CATEGORY_GROUP_REFERENCE,
+    INVALID_DATA_URI,
+    INVALID_EBV_OPERATION,
+    INVALID_EMAIL_ADDRESS,
+    INVALID_EMPTY_KEY_OWNER,
+    INVALID_ENTITY_FOR_MATCH_ENGINE_ERROR,
+    INVALID_ENTITY_FOR_MATCH_OPERATION_ERROR,
+    INVALID_ENTITY_FOR_UPSERT,
+    INVALID_ENVIRONMENT_HUB_MEMBER,
+    INVALID_EVENT_DELIVERY,
+    INVALID_EVENT_INPUT,
+    INVALID_EVENT_SUBSCRIPTION,
+    INVALID_EXTENSION_ID,
+    INVALID_EXTERNAL_ID_FIELD_NAME,
+    INVALID_FIELD,
+    INVALID_FIELD_FOR_INSERT_UPDATE,
+    INVALID_FIELD_WHEN_USING_TEMPLATE,
+    INVALID_FILTER_ACTION,
+    INVALID_GOOGLE_DOCS_URL,
+    INVALID_ID_FIELD,
+    INVALID_INET_ADDRESS,
+    INVALID_INPUT,
+    INVALID_INPUT_FORMAT,
+    INVALID_KEY_FIELD_INPUT,
+    INVALID_LINEITEM_CLONE_STATE,
+    INVALID_MARKUP,
+    INVALID_MASTER_OR_TRANSLATED_SOLUTION,
+    INVALID_MERCHANT_ACCOUNT_MODE,
+    INVALID_MERCHANT_ACCOUNT_MODE_OR_STATUS,
+    INVALID_MERGE_RECORD,
+    INVALID_MESSAGE_ID_REFERENCE,
+    INVALID_NAMESPACE_PREFIX,
+    INVALID_OAUTH_URL,
+    INVALID_OPERATION,
+    INVALID_OPERATOR,
+    INVALID_OR_NULL_FOR_RESTRICTED_PICKLIST,
+    INVALID_OWNER,
+    INVALID_PACKAGE_LICENSE,
+    INVALID_PACKAGE_VERSION,
+    INVALID_PARTNER_NETWORK_STATUS,
+    INVALID_PAYLOAD_VERSION,
+    INVALID_PERSON_ACCOUNT_OPERATION,
+    INVALID_PROFILE,
+    INVALID_PROMOTION,
+    INVALID_PROVIDER_TYPE,
+    INVALID_QUERY_KEY,
+    INVALID_QUERY_LOCATOR,
+    INVALID_QUERY_VALUE,
+    INVALID_READ_ONLY_USER_DML,
+    INVALID_RECEIVEDDOCUMENTID_ATTACHMENT,
+    INVALID_RECORD_ATTRIBUTE_VALUE,
+    INVALID_RECORD_STATUS,
+    INVALID_RECORD_TYPE,
+    INVALID_REFRESH_TOKEN,
+    INVALID_REORDER_PORTAL_RECORD_ASSOCIATION,
+    INVALID_REQUEST_STATE,
+    INVALID_RUNTIME_VALUE,
+    INVALID_SAVE_AS_ACTIVITY_FLAG,
+    INVALID_SCS_INBOUND_USER,
+    INVALID_SEARCH_PROVIDER_REQUEST,
+    INVALID_SESSION_ID,
+    INVALID_SETUP_OWNER,
+    INVALID_SIGNUP_COUNTRY,
+    INVALID_SIGNUP_OPTION,
+    INVALID_SITE_DELETE_EXCEPTION,
+    INVALID_SITE_FILE_IMPORTED_EXCEPTION,
+    INVALID_SITE_FILE_TYPE_EXCEPTION,
+    INVALID_SOURCE_OBJECT_ID,
+    INVALID_SOURCE_OBJECT_NAME,
+    INVALID_STATUS,
+    INVALID_SUBDOMAIN,
+    INVALID_TARGET_OBJECT_NAME,
+    INVALID_TEXT_REPRESENTATION,
+    INVALID_TYPE,
+    INVALID_TYPE_FOR_OPERATION,
+    INVALID_TYPE_ON_FIELD_IN_RECORD,
+    INVALID_UNMERGE_RECORD,
+    INVALID_USERID,
+    INVALID_USER_OBJECT,
+    IP_RANGE_LIMIT_EXCEEDED,
+    ITEM_NOT_FOUND,
+    JIGSAW_IMPORT_LIMIT_EXCEEDED,
+    LICENSE_LIMIT_EXCEEDED,
+    LIGHT_PORTAL_USER_EXCEPTION,
+    LIMIT_EXCEEDED,
+    LIST_PRICE_NOT_FOUND,
+    MALFORMED_ID,
+    MANAGER_NOT_DEFINED,
+    MAPPING_TYPE_NOT_SUPPORTED,
+    MASSMAIL_RETRY_LIMIT_EXCEEDED,
+    MASS_MAIL_LIMIT_EXCEEDED,
+    MATCH_DEFINITION_ERROR,
+    MATCH_OPERATION_ERROR,
+    MATCH_OPERATION_INVALID_ENGINE_ERROR,
+    MATCH_OPERATION_INVALID_RULE_ERROR,
+    MATCH_OPERATION_MISSING_ENGINE_ERROR,
+    MATCH_OPERATION_MISSING_OBJECT_TYPE_ERROR,
+    MATCH_OPERATION_MISSING_OPTIONS_ERROR,
+    MATCH_OPERATION_MISSING_RULE_ERROR,
+    MATCH_OPERATION_UNKNOWN_RULE_ERROR,
+    MATCH_OPERATION_UNSUPPORTED_VERSION_ERROR,
+    MATCH_PRECONDITION_FAILED,
+    MATCH_PRECONDITION_REQUIRED,
+    MATCH_RUNTIME_ERROR,
+    MATCH_SERVICE_ERROR,
+    MATCH_SERVICE_TIMED_OUT,
+    MATCH_SERVICE_UNAVAILABLE_ERROR,
+    MAXIMUM_CCEMAILS_EXCEEDED,
+    MAXIMUM_DASHBOARD_COMPONENTS_EXCEEDED,
+    MAXIMUM_HIERARCHY_CHILDREN_REACHED,
+    MAXIMUM_HIERARCHY_LEVELS_REACHED,
+    MAXIMUM_HIERARCHY_TREE_SIZE_REACHED,
+    MAXIMUM_SIZE_OF_ATTACHMENT,
+    MAXIMUM_SIZE_OF_DOCUMENT,
+    MAX_ACTIONS_PER_RULE_EXCEEDED,
+    MAX_ACTIVE_RULES_EXCEEDED,
+    MAX_APPROVAL_STEPS_EXCEEDED,
+    MAX_DEPTH_IN_FLOW_EXECUTION,
+    MAX_FORMULAS_PER_RULE_EXCEEDED,
+    MAX_LIMIT_EXCEEDED,
+    MAX_LOCALES_EXCEEDED,
+    MAX_RULES_EXCEEDED,
+    MAX_RULE_ENTRIES_EXCEEDED,
+    MAX_STREAM_SUBSCRIPTIONS_EXCEEDED,
+    MAX_TASK_DESCRIPTION_EXCEEEDED,
+    MAX_TM_RULES_EXCEEDED,
+    MAX_TM_RULE_ITEMS_EXCEEDED,
+    MAX_TRIGGERS_EXCEEDED,
+    MCONTENT_TAXONOMY_GET_ERROR,
+    MCONTENT_TAXONOMY_PUBLISH_ERROR,
+    MCONTENT_TAXONOMY_UPDATE_ERROR,
+    MERGE_FAILED,
+    METADATA_FIELD_UPDATE_ERROR,
+    METHOD_NOT_ALLOWED,
+    MISMATCHING_TYPES,
+    MISSING_ARGUMENT,
+    MISSING_OMNI_PROCESS_ID,
+    MISSING_PAYMENTS_DEPENDENCY,
+    MISSING_PAY_NOW_SITE_URL_ORG_VALUE,
+    MISSING_RECEIVEDDOCUMENTID_ATTACHMENT,
+    MISSING_RECORD,
+    MIXED_DML_OPERATION,
+    MODEL_NOT_ACTIVE,
+    MULTIPLE_CONTENT_FOUND,
+    MULTIPLE_VOUCHERS,
+    NONUNIQUE_SHIPPING_ADDRESS,
+    NOT_FOUND,
+    NOT_RECOVERABLE_SEARCH_PROVIDER_ERROR,
+    NO_ACCESS_TOKEN,
+    NO_ACCESS_TOKEN_FROM_REFRESH,
+    NO_APPLICABLE_PROCESS,
+    NO_ATTACHMENT_PERMISSION,
+    NO_AUTH_PROVIDER,
+    NO_BUSINESS_HOURS_FOUND,
+    NO_GUEST_PROFILE_ASSOCIATED_WITH_PRICE_ENGINE,
+    NO_INACTIVE_DIVISION_MEMBERS,
+    NO_INDEXABLE_PRODUCTS,
+    NO_INDEXABLE_PRODUCTS_IN_PARTIAL_BUILD,
+    NO_MASS_MAIL_PERMISSION,
+    NO_MESSAGE_TYPE_MESSAGES,
+    NO_PARTNER_PERMISSION,
+    NO_REFRESH_TOKEN,
+    NO_SEARCHABLE_PRODUCTS,
+    NO_SEARCH_ATTRIBUTES,
+    NO_SINGLE_MAIL_PERMISSION,
+    NO_SORT_PRICEBOOK_ASSOCIATED_ERROR,
+    NO_SUCH_USER_EXISTS,
+    NO_TOKEN_ENDPOINT,
+    NUMBER_OUTSIDE_VALID_RANGE,
+    NUM_HISTORY_FIELDS_BY_SOBJECT_EXCEEDED,
+    OCR_INVALID_REQUEST,
+    OPERATION_CONFLICT,
+    OPERATION_ENQUEUED,
+    OPERATION_WITH_CALLBACK_ENQUEUED,
+    OPTED_OUT_OF_MASS_MAIL,
+    OP_WITH_INVALID_USER_TYPE_EXCEPTION,
+    ORCHESTRATION_INVALID,
+    ORDER_ALREADY_SUBMITTED,
+    ORDER_MANAGEMENT_ACTION_NOT_ALLOWED,
+    ORDER_MANAGEMENT_DUPLICATE_ORDER_REFERENCE_NUMBER,
+    ORDER_MANAGEMENT_INVALID_RECORD,
+    ORDER_MANAGEMENT_RECORD_EXISTS,
+    ORDER_MANAGEMENT_RECORD_NOT_FOUND,
+    ORG_SETTING_REQUIRED,
+    PACKAGE_DISABLED,
+    PACKAGE_LICENSE_REQUIRED,
+    PACKAGING_API_INSTALL_FAILED,
+    PACKAGING_API_UNINSTALL_FAILED,
+    PALI_INVALID_ACTION_ID,
+    PALI_INVALID_ACTION_NAME,
+    PALI_INVALID_ACTION_TYPE,
+    PAL_INVALID_ASSISTANT_RECOMMENDATION_TYPE_ID,
+    PAL_INVALID_ENTITY_ID,
+    PAL_INVALID_FLEXIPAGE_ID,
+    PAL_INVALID_LAYOUT_ID,
+    PAL_INVALID_PARAMETERS,
+    PARAMETER_TOO_LARGE,
+    PARTICIPANT_RELATIONSHIP_EXISTS,
+    PAYLOAD_SIZE_EXCEEDED,
+    PAYMENTS_TOO_MANY_REQUESTS_ERROR,
+    PAYMENT_GATEWAY_DEPENDENCY_EXCEPTION,
+    PAYMENT_GATEWAY_REQUEST_EXCEPTION,
+    PA_API_EXCEPTION,
+    PA_AXIS_FAULT,
+    PA_INVALID_ID_EXCEPTION,
+    PA_NO_ACCESS_EXCEPTION,
+    PA_NO_DATA_FOUND_EXCEPTION,
+    PA_URI_SYNTAX_EXCEPTION,
+    PA_VISIBLE_ACTIONS_FILTER_ORDERING_EXCEPTION,
+    PENDING_COMMIT,
+    PICKLIST_INACTIVE_VALUES_EXCEEDED,
+    PLATFORM_EVENT_ENCRYPTION_ERROR,
+    PLATFORM_EVENT_PUBLISHING_UNAVAILABLE,
+    PLATFORM_EVENT_PUBLISH_FAILED,
+    PORTAL_NO_ACCESS,
+    PORTAL_USER_ALREADY_EXISTS_FOR_CONTACT,
+    PORTAL_USER_CREATION_RESTRICTED_WITH_ENCRYPTION,
+    PRICE_NOT_FOUND,
+    PRICING_SERVICE_MISCONFIGURATION,
+    PRIVATE_CONTACT_ON_ASSET,
+    PROCESSING_HALTED,
+    PROGRAM_PROGRESS_NOT_ACTIVE,
+    PROMOTION_NOT_FOUND,
+    QA_INVALID_CREATE_FEED_ITEM,
+    QA_INVALID_SUCCESS_MESSAGE,
+    QUERY_REFINEMENT_VALUE_LIMIT_EXCEEDED,
+    QUERY_TIMEOUT,
+    QUERY_TOKEN_COUNT_LIMIT_EXCEEDED,
+    QUICK_ACTION_LIST_ITEM_NOT_ALLOWED,
+    QUICK_ACTION_LIST_NOT_ALLOWED,
+    RECORD_CREATION_FAILED,
+    RECORD_IN_USE_BY_WORKFLOW,
+    RECORD_LOCKED,
+    RECORD_MISSING_REQUIRED_FIELD,
+    RECORD_NOT_FOUND,
+    RECORD_TYPE_LIMIT_EXCEEDED,
+    RECORD_UPDATE_FAILED,
+    RECOVERABLE_SEARCH_PROVIDER_ERROR,
+    REFRESH_FAILED,
+    RELATED_ENTITY_FILTER_VALIDATION_EXCEPTION,
+    REL_FIELD_BAD_ACCESSIBILITY,
+    REPUTATION_MINIMUM_NUMBER_NOT_REACHED,
+    REQUEST_RUNNING_TOO_LONG,
+    REQUIRED_FEATURE_MISSING,
+    REQUIRED_FIELD_MISSING,
+    REQUIRE_CONNECTED_APP_SCS,
+    REQUIRE_CONNECTED_APP_SESSION_SCS,
+    REQUIRE_RUNAS_USER,
+    RESOURCE_NOT_AVAILABLE,
+    RETRIEVE_EXCHANGE_ATTACHMENT_FAILED,
+    RETRIEVE_EXCHANGE_EMAIL_FAILED,
+    RETRIEVE_EXCHANGE_EVENT_FAILED,
+    RETRIEVE_GOOGLE_EMAIL_FAILED,
+    RETRIEVE_GOOGLE_EVENT_FAILED,
+    RETRIEVE_USER_CONFIG_ERROR,
+    ROUTES_EVALUATION_LIMIT_EXCEEDED,
+    SALESFORCE_INBOX_TRANSPORT_CONNECTION_ERROR,
+    SALESFORCE_INBOX_TRANSPORT_INVALID_INPUT_ERROR,
+    SALESFORCE_INBOX_TRANSPORT_TOKEN_ERROR,
+    SALESFORCE_INBOX_TRANSPORT_UNKNOWN_ERROR,
+    SCHEMA_OBJECT_NOT_FOUND,
+    SCREEN_POP_REQUIRED_INPUT_MISSING,
+    SEARCHABLE_ATTRIBUTE_MAX_LIMIT_EXCEEDED,
+    SEARCHABLE_FACETABLE_ATTRIBUTE_MAX_LIMIT_EXCEEDED,
+    SEARCH_INCLUDE_RULES_MAX_RULE_DEFINITION_LIMIT_EXCEEDED,
+    SEARCH_INCLUDE_RULES_MIN_RULE_DEFINITION_NOT_MET,
+    SEARCH_PROVIDER_PATH_LIMIT_EXCEEDED,
+    SEARCH_PROVIDER_REQUEST_RATE_EXCEEDED,
+    SEGMENT_COUNT_LIMIT_EXCEEDED,
+    SELF_REFERENCE_FROM_FLOW,
+    SELF_REFERENCE_FROM_TRIGGER,
+    SERVICE_EMAIL_INVALID_INPUT,
+    SERVICE_EMAIL_MISSING_RECORD,
+    SERVICE_EMAIL_UNKNOWN_EXCEPTION,
+    SERVICE_PLAN_INVALID_DATA,
+    SERVICE_PLAN_MISSING_DATA,
+    SERVICE_PLAN_UNKNOWN_EXCEPTION,
+    SERVICE_UNAVAILABLE,
+    SESSION_EXPIRED,
+    SESSION_INVALIDATED,
+    SHARE_NEEDED_FOR_CHILD_OWNER,
+    SINGLE_EMAIL_LIMIT_EXCEEDED,
+    SLACK_API_ERROR,
+    SOCIAL_ACCOUNT_NOT_FOUND,
+    SOCIAL_ACTION_INVALID,
+    SOCIAL_PERSONA_NOT_FOUND,
+    SOCIAL_POST_INVALID,
+    SOCIAL_POST_NOT_FOUND,
+    SPECIFICATION_GENERATION_EXCEPTION,
+    STANDARD_PRICE_NOT_DEFINED,
+    STORAGE_LIMIT_EXCEEDED,
+    STOREFRONT_PST_NOT_ACCEPTED,
+    STRING_TOO_LONG,
+    STXN_FULFILLMENT_NOT_INFLIGHT,
+    SUBDOMAIN_IN_USE,
+    TABSET_LIMIT_EXCEEDED,
+    TEMPLATE_NOT_ACTIVE,
+    TEMPLATE_NOT_FOUND,
+    TENANT_GROUP_NOT_FOUND,
+    TERMS_OF_SERVICE_UNREAD,
+    TERRITORY_REALIGN_IN_PROGRESS,
+    TEXT_DATA_OUTSIDE_SUPPORTED_CHARSET,
+    TEXT_TO_PICKLIST_VALUES_EXCEEDED,
+    TOO_MANY_APEX_REQUESTS,
+    TOO_MANY_ENUM_VALUE,
+    TOO_MANY_JOBS,
+    TOO_MANY_POSSIBLE_USERS_EXIST,
+    TRANSFER_REQUIRES_READ,
+    TXN_SECURITY_NO_ACCESS,
+    TYPE_NOT_FOUND,
+    UISF_ENTITY_QUERY_FAILED,
+    UISF_NO_MAPPINGS_FOUND,
+    UISF_TOKEN_NOT_FOUND,
+    UISF_UNKNOWN_EXCEPTION,
+    UISF_USER_MAPPING_FAILED,
+    UNABLE_RETRIEVE_PRICING_INFO,
+    UNABLE_TO_LOCK_RECORD,
+    UNABLE_TO_LOCK_ROW,
+    UNABLE_TO_UNLOCK_RECORD,
+    UNABLE_TO_UPDATE_RECORD_LOCK,
+    UNAUTHORIZED_EXCEPTION,
+    UNAUTHORIZED_SEARCH_PROVIDER_REQUEST,
+    UNAUTHORIZED_SHARE_ACTION,
+    UNAVAILABLE_RECORDTYPE_EXCEPTION,
+    UNAVAILABLE_REF,
+    UNCOMMITTED_WORK,
+    UNDEFINED_MAPPING_DEFINITION,
+    UNDELETE_FAILED,
+    UNKNOWN_EXCEPTION,
+    UNKNOWN_TOKEN_ERROR,
+    UNPROCESSABLE_REQUEST,
+    UNQUALIFIED_CART,
+    UNRESOLVABLE_PAY_NOW_WEBSTORE,
+    UNSAFE_HTML_CONTENT,
+    UNSPECIFIED_EMAIL_ADDRESS,
+    UNSUPPORTED_APEX_TRIGGER_OPERATON,
+    UNSUPPORTED_MODE,
+    UNSUPPORTED_PAYMENT_GATEWAY_EXCEPTION,
+    UNSUPPORTED_PAYMENT_GATEWAY_TYPE,
+    UNSUPPORTED_PAYMENT_REQUEST_TYPE,
+    UNSUPPORTED_SITE,
+    UNSUPPORTED_SITE_FILE_IMPORTED_EXCEPTION,
+    UNSUPPORTED_SOCIAL_PROVIDER,
+    UNVERIFIED_SENDER_ADDRESS,
+    UPDATE_GOOGLE_EMAIL_LABEL_FAILED,
+    USER_OWNS_PORTAL_ACCOUNT_EXCEPTION,
+    USER_WITHOUT_WEM_PERMISSION,
+    USER_WITH_APEX_SHARES_EXCEPTION,
+    VARIANT_NOT_FOUND,
+    VF_COMPILE_ERROR,
+    VOICE_CAPACITY_ERROR,
+    WEBLINK_SIZE_LIMIT_EXCEEDED,
+    WEBLINK_URL_INVALID,
+    WEM_SEGMENTS_CAN_NOT_HAVE_NON_ACTIVE_SEGMENT_TYPE,
+    WEM_SHIFT_SEGMENT_TIME_IS_OUTSIDE_OF_THE_SHIFT_DURATION,
+    WEM_USER_NOT_ORG_ADMIN,
+    WORKSPACE_NOT_FOUND,
+    WRONG_CONTROLLER_TYPE,
+    XCLEAN_DJ_MATCH_IGNORABLE_ERROR,
+    XCLEAN_DJ_MATCH_INTERNAL_DJ_ERROR,
+    XCLEAN_DJ_MATCH_NON_RETRIABLE_ERROR,
+    XCLEAN_DJ_MATCH_RETRIABLE_ERROR,
+    XCLEAN_DJ_MATCH_UNKNOWN_ERROR,
+    XCLEAN_UNEXPECTED_ERROR,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum IterationOrder {
+    #[default]
+    Asc,
+    Desc,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum IFrameWhitelistContext {
+    #[default]
+    VisualforcePages,
+    LightningOut,
+    Surveys,
+    DCH_ADDIN_APP,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExpFeedbackCollType {
+    #[default]
+    SURVEY,
+    PHONE_CALL,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum IdempotencySupportStatus {
+    #[default]
+    No,
+    Yes,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FormFactor {
+    #[default]
+    Small,
+    Medium,
+    Large,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DestinationTypeForMetadata {
+    #[default]
+    LatitudeAndLongitude,
+    Address,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RRADSourceObjFilterLogic {
+    #[default]
+    And,
+    Or,
+    Custom,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum TestLevel {
+    #[default]
+    NoTestRun,
+    RunSpecifiedTests,
+    RunLocalTests,
+    RunAllTestsInOrg,
+    RunRelevantTests,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum PageComponentType {
+    #[default]
+    links,
+    htmlArea,
+    imageOrNote,
+    visualforcePage,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum AssignToLookupValueType {
+    #[default]
+    User,
+    Queue,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum NavType {
+    #[default]
+    Standard,
+    Console,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum OrgDomainProdSuffix {
+    #[default]
+    MySalesforceLimited,
+    DatabaseLimited,
+    CloudforceLimited,
+    OrgLevelCertificateLimited,
+    Restricted1,
+    MySalesforce,
+    Restricted2,
+    OrgLevelCertificate,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DaysOfWeek {
+    #[default]
+    Sunday,
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum StepRejectBehaviorType {
+    #[default]
+    RejectRequest,
+    BackToPrevious,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ElementType {
+    #[default]
+    Float,
+    Text,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum TaxLocaleType {
+    #[default]
+    Net,
+    Gross,
+    Automatic,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MilestoneTypeRecurrenceType {
+    #[default]
+    none,
+    recursIndependently,
+    recursChained,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum PipelineInspectionMetric {
+    #[default]
+    TotalPipeline,
+    ClosedWon,
+    Commit,
+    MostLikely,
+    BestCase,
+    OpenPipeline,
+    ClosedLost,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum CourseWaitlistConfigSortOrder {
+    #[default]
+    Ascending,
+    Descending,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SurveyQuestionType {
+    #[default]
+    MultiChoice,
+    RadioButton,
+    FreeText,
+    Date,
+    Rating,
+    CSAT,
+    Slider,
+    Picklist,
+    NPS,
+    StackRank,
+    Currency,
+    Number,
+    DateTime,
+    Toggle,
+    MultiSelectPicklist,
+    Image,
+    Boolean,
+    ShortText,
+    Attachment,
+    Matrix,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ModerationRuleType {
+    #[default]
+    Content,
+    Rate,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExtensionPointName {
+    #[default]
+    Commerce_Domain_Cart_Calculate,
+    Commerce_Domain_Tax_CartCalculator,
+    Commerce_Domain_Inventory_CartCalculator,
+    Commerce_Domain_Promotions_CartCalculator,
+    Commerce_Domain_Promotions_ShippingCalculator,
+    Commerce_Domain_Pricing_CartCalculator,
+    Commerce_Domain_Shipping_CartCalculator,
+    Commerce_Domain_Inventory_Service,
+    Commerce_Domain_Pricing_Service,
+    Commerce_Domain_Tax_Service,
+    Commerce_Domain_BuyerGroup_EvaluationService,
+    Commerce_Domain_Checkout_CreateOrder,
+    Commerce_Domain_Checkout_PlaceOrder,
+    Commerce_Domain_Shipping_SplitShipment,
+    Commerce_Domain_OrderManagement_Product,
+    Commerce_Endpoint_Account_Addresses,
+    Commerce_Endpoint_Account_Address,
+    Commerce_Endpoint_Catalog_Products,
+    Commerce_Endpoint_Catalog_Product,
+    Commerce_Endpoint_Gift_Wraps,
+    Commerce_Endpoint_Search_Products,
+    Commerce_Endpoint_Search_ProductSearch,
+    Commerce_Endpoint_Search_ProductsByCategory,
+    Commerce_Endpoint_Cart_ItemCollection,
+    Commerce_Endpoint_Cart_Item,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum EmployeeUseCaseMethod {
+    #[default]
+    Get,
+    Post,
+    Put,
+    Patch,
+    Delete,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum PageComponentWidth {
+    #[default]
+    narrow,
+    wide,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum AutoResponseContentType {
+    #[default]
+    TextResponse,
+    MessageDefinition,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum OutboundConnPropertyName {
+    #[default]
+    Region,
+    AwsVpcEndpointId,
+    AwsVpcEndpointServiceName,
+    DataCloudPrivateNetworkUrl,
+    DataCloudPrivateNetworkProvider,
+    DataCloudPrivateNetworkFunctionalDomain,
+    DataCloudPrivateNetworkFalconInstance,
+    DataCloudPrivateNetworkCustomUrls,
+    DataCloudPrivateNetworkAwsVpcEndpointId,
+    DataCloudPrivateNetworkAwsVpcEndpointServiceName,
+    DataCloudPrivateNetworkDefaultUrl,
+    DataCloudPrivateNetworkStatusCode,
+    DataCloudPrivateConnectDcVpcEndpointId,
+    DataCloudPrivateConnectDcDnsName,
+    TargetCloudProvider,
+    PNRSubType,
+    EndpointServiceVariant,
+    AssociatedPNRId,
+    AzureResourceId,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum WorkOrderDurationSource {
+    #[default]
+    WorkType,
+    TotalFromWorkPlan,
+    Custom,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum GatewayType {
+    #[default]
+    Stripe,
+    Paypal,
+    Adyen,
+    Braintree,
+    Cybersource,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -3319,287 +3478,66 @@ pub enum EswInvitationConditionOperator {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CanvasOptions {
+pub enum BlankValueBehavior {
     #[default]
-    HideShare,
-    HideHeader,
-    PersonalEnabled,
+    MatchBlanks,
+    NullNotAllowed,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CanvasLocationOptions {
+pub enum CategoryGroupVisibility {
+    #[default]
+    ALL,
+    NONE,
+    CUSTOM,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ActionableListKPIAggType {
+    #[default]
+    SUM,
+    COUNT,
+    MIN,
+    MAX,
+    AVG,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SourceCountryCode {
+    #[default]
+    US,
+    CA,
+    MX,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum AscAutomaticMode {
+    #[default]
+    Off,
+    Manual,
+    Semi,
+    Full,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RRADTargetObjFilterLogic {
+    #[default]
+    And,
+    Or,
+    Custom,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum PsldComponentAccess {
     #[default]
     None,
-    Chatter,
-    UserProfile,
-    Visualforce,
-    Aura,
-    Publisher,
-    ChatterFeed,
-    ServiceDesk,
-    OpenCTI,
-    AppLauncher,
-    MobileNav,
-    PageLayout,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AssociationType {
-    #[default]
-    BranchManagement,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum GeoLocationAccuracy {
-    #[default]
-    Fine,
-    Medium,
-    Coarse,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AccumulateResultOperator {
-    #[default]
-    Any,
-    Equals,
-    NotEquals,
-    LessThan,
-    LessOrEqual,
-    GreaterThan,
-    GreaterOrEqual,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SampleLimitDiscAlertType {
-    #[default]
-    Error,
-    Warning,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum TelActnDefStepAttrDataType {
-    #[default]
-    Float,
-    Integer,
-    Double,
-    Boolean,
-    String,
-    Uint8,
-    Uint16,
-    Uint32,
-    Uint64,
-    Int8,
-    Int16,
-    Int32,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CommunicationChannelLineType {
-    #[default]
-    ShortCode,
-    LongCode,
-    AlphaNumeric,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RRAFOperator {
-    #[default]
-    Equal,
-    Not_Equal,
-    Starts_With,
-    Contains,
-    Does_Not_Contain,
-    Less_Than,
-    Greater_Than,
-    Less_Or_Equal,
-    Greater_Or_Equal,
-    Include,
-    Exclude,
-    Within,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum IPAddressFeature {
-    #[default]
-    EmailIpFiltering,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MessageType {
-    #[default]
-    Text,
-    Facebook,
-    Line,
-    GoogleHome,
-    Alexa,
-    Omega,
-    AppleBusinessChat,
-    WeChat,
-    WebChat,
-    WhatsApp,
-    Phone,
-    EmbeddedMessaging,
-    Voice,
-    Custom,
-    InternalCopilot,
-    VoiceIntegrationPilot,
-    PstnVoice,
-    WhatsAppVoice,
-    SipVoice,
-    Email,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ODTItemFilterDataType {
-    #[default]
-    ADDRESS,
-    ANYTYPE,
-    BASE64,
-    BOOLEAN,
-    COMBOBOX,
-    CURRENCY,
-    DATACATEGORY,
-    GROUPREFERENCE,
-    DATE,
-    DATETIME,
-    DOUBLE,
-    EMAIL,
-    ENCRYPTEDSTRING,
-    ID,
-    INTEGER,
-    LONG,
-    MULTIPICKLIST,
-    PERCENT,
-    PHONE,
-    PICKLIST,
-    REFERENCE,
-    STRING,
-    TEXTAREA,
-    TIME,
-    URL,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum UntrustedRedirectEnum {
-    #[default]
-    AlwaysAllowed,
-    AllowWithUserPermission,
-    NeverAllowed,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActionSubtype {
-    #[default]
-    ScreenAction,
-    Action,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ConsentOwner {
-    #[default]
-    Salesforce,
-    Partner,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ProviderSearchObjectMapping {
-    #[default]
-    HealthcareProvider,
-    HealthcarePractitionerFacility,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SurfaceType {
-    #[default]
-    Messaging,
-    NextGenChat,
-    ServiceEmail,
-    Telephony,
-    UnifiedEmail,
-    CustomerWebClient,
-    Test,
-    Slack,
-    Custom,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum InputValueType {
-    #[default]
-    Variable,
-    Expression,
-    String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EscalationStartTimeType {
-    #[default]
-    CaseCreation,
-    CaseLastModified,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum IPAddressUsageScope {
-    #[default]
-    Exclusion,
-    Inclusion,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum LockoutInterval {
-    #[default]
-    FifteenMinutes,
-    ThirtyMinutes,
-    SixtyMinutes,
-    Forever,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DefinitionCreationType {
-    #[default]
-    Standard,
-    Custom,
-    System,
-    Derived,
-    Bridge,
-    Curated,
-    Segment_Membership,
-    Calculated_Insight,
-    Ml_Prediction,
-    Activation_Audience,
-    CG_Audience,
-    Ad_Audience_Insights,
-    Transform,
-    ADG,
-    External,
-    Vector_Embedding,
-    Chunk,
-    Directory_Table,
-    Semantic,
-    Problem_Records,
-    Clean_Room,
-    Deletion_Records,
-    Auxiliary,
+    Namespace,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -3629,438 +3567,43 @@ pub enum PlannerFunctionInvocableTargetType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AutoResponseContentType {
+pub enum EnforcementType {
     #[default]
-    TextResponse,
-    MessageDefinition,
+    Scoping,
+    Restrict,
+    FieldRestrict,
+    D360_Restrict,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AccumulateResultCondInputType {
+pub enum ChartColorPalettes {
     #[default]
-    Variable,
-    Expression,
-    String,
+    Default,
+    gray,
+    colorSafe,
+    unity,
+    justice,
+    nightfall,
+    sunrise,
+    bluegrass,
+    tropic,
+    heat,
+    dusk,
+    pond,
+    watermelon,
+    fire,
+    water,
+    earth,
+    accessible,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CourseWaitlistConfigSortOrder {
+pub enum ServerAuthMode {
     #[default]
-    Ascending,
-    Descending,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DevicePlatformType {
-    #[default]
-    ios,
-    android,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CleanRuleStatus {
-    #[default]
-    Inactive,
-    Active,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RoutingType {
-    #[default]
-    Unanimous,
-    FirstResponse,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum InboundConnPropertyName {
-    #[default]
-    Region,
-    AwsVpcEndpointId,
-    SourceIpRanges,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum EdgeRoutingOption {
-    #[default]
-    global,
-    regional,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AssignmentType {
-    #[default]
-    defaultMedia,
-    customMedia,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AscAutomaticMode {
-    #[default]
-    Off,
-    Manual,
-    Semi,
-    Full,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum PageComponentWidth {
-    #[default]
-    narrow,
-    wide,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum CurrencyIsoCode {
-    #[default]
-    ADP,
-    AED,
-    AFA,
-    AFN,
-    ALL,
-    AMD,
-    ANG,
-    AOA,
-    ARS,
-    ATS,
-    AUD,
-    XAV,
-    AWG,
-    AZM,
-    AZN,
-    BAM,
-    BBD,
-    BDT,
-    BEF,
-    BGL,
-    BGN,
-    BHD,
-    BIF,
-    BMD,
-    BND,
-    BOB,
-    BOV,
-    BRB,
-    BRL,
-    BSD,
-    BTN,
-    BWP,
-    BYB,
-    BYN,
-    BYR,
-    BZD,
-    CAD,
-    CDF,
-    CHF,
-    CLF,
-    CLP,
-    CNH,
-    CNY,
-    COP,
-    CRC,
-    CSD,
-    CUC,
-    CUP,
-    CVE,
-    CYP,
-    CZK,
-    DEM,
-    DJF,
-    DKK,
-    DOP,
-    DZD,
-    ECS,
-    EEK,
-    EGP,
-    ERN,
-    ESP,
-    ETB,
-    EUR,
-    FIM,
-    FJD,
-    FKP,
-    XFL,
-    FRF,
-    GBP,
-    GBT,
-    GEL,
-    GHC,
-    GHS,
-    GIP,
-    GMD,
-    GNF,
-    GRD,
-    GTQ,
-    GWP,
-    GYD,
-    HKD,
-    HNL,
-    HRD,
-    HRK,
-    HTG,
-    HUF,
-    IDR,
-    IEP,
-    ILS,
-    INR,
-    IQD,
-    IRR,
-    ISK,
-    ITL,
-    JMD,
-    JOD,
-    JPY,
-    KES,
-    KGS,
-    KHR,
-    KMF,
-    KPW,
-    KRW,
-    KWD,
-    KYD,
-    KZT,
-    LAK,
-    LBP,
-    LKR,
-    LRD,
-    LSL,
-    LTL,
-    LUF,
-    LVL,
-    LYD,
-    MAD,
-    XMA,
-    MDL,
-    MGA,
-    MGF,
-    MKD,
-    MMK,
-    MNT,
-    MOP,
-    MRO,
-    MRU,
-    MTL,
-    MUR,
-    MVR,
-    MWK,
-    MXN,
-    MXV,
-    MYR,
-    MZM,
-    MZN,
-    NAD,
-    NGN,
-    NIO,
-    NLG,
-    NOK,
-    NPR,
-    NZD,
-    OMR,
-    PAB,
-    XPA,
-    PEN,
-    PGK,
-    PHP,
-    PKR,
-    PLN,
-    PTE,
-    PYG,
-    QAR,
-    RMB,
-    ROL,
-    RON,
-    RSD,
-    RUB,
-    RUR,
-    RWF,
-    SAR,
-    SBD,
-    SCR,
-    SDD,
-    SDG,
-    SEK,
-    SGD,
-    SHP,
-    SIT,
-    SKK,
-    SLE,
-    SLL,
-    XSO,
-    SOS,
-    SRD,
-    SRG,
-    SSP,
-    STD,
-    STN,
-    SUR,
-    SVC,
-    SYP,
-    SZL,
-    THB,
-    TJR,
-    TJS,
-    TMM,
-    TMT,
-    TND,
-    TOP,
-    TPE,
-    TRL,
-    TRY,
-    TTD,
-    TWD,
-    TZS,
-    UAH,
-    UGX,
-    USD,
-    UYU,
-    UZS,
-    VEB,
-    VEF,
-    VES,
-    VND,
-    VUV,
-    WST,
-    XAF,
-    XCD,
-    XCG,
-    XOF,
-    XPF,
-    YER,
-    YUM,
-    ZAR,
-    ZMK,
-    ZMW,
-    ZWD,
-    ZWG,
-    ZWL,
-    ZIG,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MaxLoginAttempts {
-    #[default]
-    ThreeAttempts,
-    FiveAttempts,
-    TenAttempts,
-    NoLimit,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DestinationTypeForMetadata {
-    #[default]
-    LatitudeAndLongitude,
-    Address,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum UploadStatus {
-    #[default]
-    complete,
-    uploading,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum StepCriteriaNotMetType {
-    #[default]
-    ApproveRecord,
-    RejectRecord,
-    GotoNextStep,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum TimeIntervalSetupForMetadata {
-    #[default]
-    one,
-    five,
-    fifteen,
-    twenty,
-    thirty,
-    sixty,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum RRADTargetObjFilterLogic {
-    #[default]
-    And,
-    Or,
-    Custom,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum OrgDomainShard {
-    #[default]
-    none,
-    sandbox,
-    develop,
-    patch,
-    trailblaze,
-    scratch,
-    demo,
-    free,
-    sfdctest,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum OutboundRouteType {
-    #[default]
-    OmniChannelFlow,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum OrgDomainProdSuffix {
-    #[default]
-    MySalesforceLimited,
-    DatabaseLimited,
-    CloudforceLimited,
-    OrgLevelCertificateLimited,
-    Restricted1,
-    MySalesforce,
-    Restricted2,
-    OrgLevelCertificate,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum TxnSecurityPolicyType {
-    #[default]
-    CustomApexPolicy,
-    CustomConditionBuilderPolicy,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum ActionForNoRecordFound {
-    #[default]
-    CreateNewRecordAndLink,
-    PromptAgent,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MilestoneTimeUnits {
-    #[default]
-    Minutes,
-    Hours,
-    Days,
+    OAuth,
+    None,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -4074,56 +3617,214 @@ pub enum CapacityType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SourceSystemFieldRole {
+pub enum CriterionOperator {
     #[default]
-    NotApplicable,
-    Patient,
-    ServiceProvider,
-    RemoteMonitoringPatient,
-    RemoteMonitoringDevice,
+    Equal,
+    NotEqual,
+    GreaterThan,
+    GreaterThanOrEqual,
+    LessThan,
+    LessThanOrEqual,
+    Contains,
+    StartsWith,
+    Includes,
+    NotIncludes,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum AssignToLookupValueType {
+pub enum CourseWaitlistConfigType {
     #[default]
-    User,
-    Queue,
+    EnrollmentOfferExpiration,
+    WaitlistPosition,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum APIInstanceAccessStatus {
+pub enum ConsentOwner {
     #[default]
-    Approved,
-    Pending,
-    NoStatus,
-    NotAccessible,
-    Rejected,
-    Revoked,
+    Salesforce,
+    Partner,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ExtConvParticipantIntegDefStatus {
+    #[default]
+    Active,
+    Inactive,
     Deleted,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum DaysOfWeek {
+pub enum TelActnDefStepAttrDataType {
     #[default]
-    Sunday,
-    Monday,
-    Tuesday,
-    Wednesday,
-    Thursday,
-    Friday,
-    Saturday,
+    Float,
+    Integer,
+    Double,
+    Boolean,
+    String,
+    Uint8,
+    Uint16,
+    Uint32,
+    Uint64,
+    Int8,
+    Int16,
+    Int32,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum SourceCountryCode {
+pub enum LogCategory {
     #[default]
-    US,
-    CA,
-    MX,
+    Db,
+    Workflow,
+    Validation,
+    Callout,
+    Apex_code,
+    Apex_profiling,
+    Visualforce,
+    System,
+    Wave,
+    Nba,
+    Data_access,
+    All,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ChartAxis {
+    #[default]
+    x,
+    y,
+    y2,
+    r,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum CleanRuleStatus {
+    #[default]
+    Inactive,
+    Active,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RoutingOwner {
+    #[default]
+    Salesforce,
+    Partner,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum LearningAchievementType {
+    #[default]
+    LearningCourse,
+    LearningProgram,
+    AchievementGroup,
+    AchievementGroupAll,
+    Skill,
+    Custom,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum AssociationStatusType {
+    #[default]
+    Draft,
+    Active,
+    Inactive,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum IPAddressFeature {
+    #[default]
+    EmailIpFiltering,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MCNodeType {
+    #[default]
+    TEXT,
+    MTEXT,
+    RTE,
+    IMG,
+    NAMEFIELD,
+    URL,
+    DATETIME,
+    DATE,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum EswInvitationConditionResource {
+    #[default]
+    SecondsOnPage,
+    SecondsOnSite,
+    NumberOfPageViews,
+    UrlMatch,
+    CustomVariable,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum VirtualVisitVisitRegion {
+    #[default]
+    #[serde(rename = "us-east-1")]
+    us_east_1,
+    #[serde(rename = "us-east-2")]
+    us_east_2,
+    #[serde(rename = "us-west-1")]
+    us_west_1,
+    #[serde(rename = "us-west-2")]
+    us_west_2,
+    #[serde(rename = "af-south-1")]
+    af_south_1,
+    #[serde(rename = "ap-east-1")]
+    ap_east_1,
+    #[serde(rename = "ap-south-1")]
+    ap_south_1,
+    #[serde(rename = "ap-northeast-1")]
+    ap_northeast_1,
+    #[serde(rename = "ap-northeast-2")]
+    ap_northeast_2,
+    #[serde(rename = "ap-northeast-3")]
+    ap_northeast_3,
+    #[serde(rename = "ap-southeast-1")]
+    ap_southeast_1,
+    #[serde(rename = "ap-southeast-2")]
+    ap_southeast_2,
+    #[serde(rename = "ca-central-1")]
+    ca_central_1,
+    #[serde(rename = "eu-central-1")]
+    eu_central_1,
+    #[serde(rename = "eu-west-1")]
+    eu_west_1,
+    #[serde(rename = "eu-west-2")]
+    eu_west_2,
+    #[serde(rename = "eu-west-3")]
+    eu_west_3,
+    #[serde(rename = "eu-south-1")]
+    eu_south_1,
+    #[serde(rename = "eu-north-1")]
+    eu_north_1,
+    #[serde(rename = "me-south-1")]
+    me_south_1,
+    #[serde(rename = "sa-east-1")]
+    sa_east_1,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RateLimitTimePeriod {
+    #[default]
+    Short,
+    Medium,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
@@ -4136,695 +3837,588 @@ pub enum ClassificationType {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-pub enum MatchingMethod {
+pub enum Complexity {
     #[default]
-    Exact,
-    FirstName,
-    LastName,
-    CompanyName,
-    Phone,
-    City,
-    Street,
-    Zip,
-    Title,
+    NoRestriction,
+    AlphaNumeric,
+    SpecialCharacters,
+    UpperLowerCaseNumeric,
+    UpperLowerCaseNumericSpecialCharacters,
+    Any3UpperLowerCaseNumericSpecialCharacters,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ClientAuthMode {
+    #[default]
+    SSO,
+    Custom,
+    Mixed,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum AttributeType {
+    #[default]
+    CustomPluginFunctionAttribute,
+    StandardPluginFunctionInput,
+    StandardPluginFunctionOutput,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MatchingRuleStatus {
+    #[default]
+    Inactive,
+    DeactivationFailed,
+    Activating,
+    Deactivating,
+    Active,
+    ActivationFailed,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum AccessMethod {
+    #[default]
+    Get,
+    Post,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RegionFlagStatus {
+    #[default]
+    disabled,
+    enabled,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum FileDownloadBehavior {
+    #[default]
+    DOWNLOAD,
+    EXECUTE_IN_BROWSER,
+    HYBRID,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum Template {
+    #[default]
+    Page,
+    Tab,
+    Toc,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ActionableListKPIStType {
+    #[default]
+    ACTIVE,
+    INACTIVE,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum CriteriaRelationshipType {
+    #[default]
+    AllConditionsAreMet,
+    AnyConditionIsMet,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum GeoLocationAccuracy {
+    #[default]
+    Fine,
+    Medium,
+    Coarse,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum QuestionRestriction {
+    #[default]
+    None,
+    DoesNotContainPassword,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum StatusFieldMappingType {
+    #[default]
+    IN_PROGRESS,
+    PAUSED,
+    COMPLETED,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RefreshTokenPolicyType {
+    #[default]
+    Infinite,
+    Zero,
+    SpecificLifetime,
+    SpecificInactivity,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum PinnedAction {
+    #[default]
+    None,
+    Top,
+    Bottom,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum EscalationStartTimeType {
+    #[default]
+    CaseCreation,
+    CaseLastModified,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum AttributeMappingType {
+    #[default]
+    ActionAttribute,
+    Constant,
+    Variable,
+    ContextVariable,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum MuleSoftControlPlane {
+    #[default]
+    None,
+    US,
+    EU,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum LogCategoryLevel {
+    #[default]
+    None,
+    Finest,
+    Finer,
+    Fine,
+    Debug,
+    Info,
+    Warn,
+    Error,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SummaryOperations {
+    #[default]
+    count,
+    sum,
+    min,
+    max,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RRAFObjectType {
+    #[default]
+    Source,
+    Target,
+    Junction,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DupeSecurityOptionType {
+    #[default]
+    EnforceSharingRules,
+    BypassSharingRules,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum AccumulateResultOperator {
+    #[default]
+    Any,
+    Equals,
+    NotEquals,
+    LessThan,
+    LessOrEqual,
+    GreaterThan,
+    GreaterOrEqual,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum DgtAssetMgmtPrvdLghtCpntType {
+    #[default]
+    NONE,
+    DIGITAL_ASSET_MANAGER,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RRADJctObjFilterLogic {
+    #[default]
+    And,
+    Or,
+    Custom,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum SControlContentSource {
+    #[default]
+    HTML,
+    URL,
+    Snippet,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum RegulatoryStatus {
+    #[default]
+    CampaignInProgress,
+    CampaignSuccessful,
+    CampaignFailed,
+    TollFreeVerificationInProgress,
+    TollFreeVerificationSuccessful,
+    TollFreeVerificationFailed,
+    TaxRegistration,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum InputValueType {
+    #[default]
+    Variable,
+    Expression,
+    String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum UsageTag {
+    #[default]
+    NONE,
+    KEY_QUALIFIER,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum IPAddressUsageScope {
+    #[default]
+    Exclusion,
+    Inclusion,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum JWTSessionTimeoutType {
+    #[default]
+    UserSession,
+    Custom,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum ActionForSingleRecordFound {
+    #[default]
+    AutoLink,
+    PromptAgent,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum AssociationType {
+    #[default]
+    BranchManagement,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+pub enum VisibleOrRequired {
+    #[default]
+    VisibleOptional,
+    VisibleRequired,
+    NotVisible,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct AncestorRecord {
-    #[serde(rename = "Id", default)]
-    pub id: String,
+pub struct VoiceEngmtMediaFileAsgnt {
     #[serde(
-        rename = "PackageBundle",
+        rename = "assignmentType",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub package_bundle: Option<serde_json::Value>,
-    #[serde(rename = "VersionName", default)]
-    pub version_name: String,
-    #[serde(rename = "MajorVersion", default)]
-    pub major_version: String,
-    #[serde(rename = "MinorVersion", default)]
-    pub minor_version: String,
-    #[serde(rename = "IsReleased", default)]
-    pub is_released: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ListMetadataQuery {
+    pub assignment_type: Option<AssignmentType>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub folder: Option<String>,
-    #[serde(rename = "type", default)]
-    pub r#type: String,
+    pub id: Option<String>,
+    #[serde(rename = "isActive", default, skip_serializing_if = "Option::is_none")]
+    pub is_active: Option<bool>,
+    #[serde(rename = "isDefault", default, skip_serializing_if = "Option::is_none")]
+    pub is_default: Option<bool>,
+    #[serde(
+        rename = "masterLabel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub master_label: Option<String>,
+    #[serde(
+        rename = "voiceEngagementMediaFile",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub voice_engagement_media_file: Option<String>,
+    #[serde(
+        rename = "voiceEngagementMediaUsage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub voice_engagement_media_usage: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct CmsnStmtLineItemConfig {
-    #[serde(rename = "failureStatus", default)]
-    pub failure_status: String,
-    #[serde(rename = "insPolicyMatchingCriteria", default)]
-    pub ins_policy_matching_criteria: String,
+pub struct DescribeValueTypeResult {
+    #[serde(rename = "apiCreatable", default)]
+    pub api_creatable: bool,
+    #[serde(rename = "apiDeletable", default)]
+    pub api_deletable: bool,
+    #[serde(rename = "apiReadable", default)]
+    pub api_readable: bool,
+    #[serde(rename = "apiUpdatable", default)]
+    pub api_updatable: bool,
+    #[serde(
+        rename = "parentField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub parent_field: Option<ValueTypeField>,
+    #[serde(rename = "valueTypeFields", default)]
+    pub value_type_fields: Vec<ValueTypeField>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct IdeaReputationLevel {
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub value: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SharedWith {
+    #[serde(rename = "fullyQualifiedName", default)]
+    pub fully_qualified_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct GatewayProviderPaymentMethodType {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub comments: Option<String>,
+    #[serde(
+        rename = "gtwyProviderPaymentMethodType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub gtwy_provider_payment_method_type: Option<String>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "reprocessingEligibility", default)]
-    pub reprocessing_eligibility: String,
-    #[serde(rename = "successStatus", default)]
-    pub success_status: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SynonymGroup {
-    #[serde(default)]
-    pub languages: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub terms: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BundleVersionCreateOptions {
-    #[serde(default)]
-    pub connection: serde_json::Value,
-    #[serde(default)]
-    pub project: serde_json::Value,
-    #[serde(rename = "PackageBundle", default)]
-    pub package_bundle: String,
-    #[serde(rename = "MajorVersion", default)]
-    pub major_version: String,
-    #[serde(rename = "MinorVersion", default)]
-    pub minor_version: String,
-    #[serde(rename = "Ancestor", default)]
-    pub ancestor: serde_json::Value,
-    #[serde(rename = "BundleVersionComponentsPath", default)]
-    pub bundle_version_components_path: String,
     #[serde(
-        rename = "Description",
+        rename = "paymentGatewayProvider",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub description: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub polling: Option<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PostTemplate {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub default: Option<bool>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(default)]
-    pub fields: Vec<String>,
-    #[serde(default)]
-    pub label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RestrictionRule {
-    #[serde(default)]
-    pub active: bool,
+    pub payment_gateway_provider: Option<String>,
     #[serde(
-        rename = "dataspaceScope",
+        rename = "paymentMethodType",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub dataspace_scope: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(rename = "enforcementType", default)]
-    pub enforcement_type: EnforcementType,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "recordFilter", default)]
-    pub record_filter: String,
-    #[serde(rename = "targetEntity", default)]
-    pub target_entity: String,
+    pub payment_method_type: Option<String>,
     #[serde(
-        rename = "userCriteria",
+        rename = "recordType",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub user_criteria: Option<String>,
-    #[serde(default)]
-    pub version: f64,
+    pub record_type: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct IfExpression {
-    #[serde(rename = "childName", default)]
-    pub child_name: String,
-    #[serde(default)]
-    pub expression: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ApiNamedQueryParameter {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "parameterLabel", default)]
-    pub parameter_label: String,
-    #[serde(rename = "parameterName", default)]
-    pub parameter_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ReadResult {
-    #[serde(default)]
-    pub records: Vec<Metadata>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CMSConnectSource {
-    #[serde(rename = "cmsConnectAsset", default)]
-    pub cms_connect_asset: Vec<CMSConnectAsset>,
-    #[serde(rename = "cmsConnectLanguage", default)]
-    pub cms_connect_language: Vec<CMSConnectLanguage>,
+pub struct EscalationAction {
     #[serde(
-        rename = "cmsConnectPersonalization",
+        rename = "assignedTo",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub cms_connect_personalization: Option<CMSConnectPersonalization>,
-    #[serde(rename = "cmsConnectResourceType", default)]
-    pub cms_connect_resource_type: Vec<CMSConnectResourceType>,
-    #[serde(rename = "connectionType", default)]
-    pub connection_type: CMSSourceConnectionType,
-    #[serde(rename = "cssScope", default, skip_serializing_if = "Option::is_none")]
-    pub css_scope: Option<String>,
+    pub assigned_to: Option<String>,
+    #[serde(
+        rename = "assignedToTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub assigned_to_template: Option<String>,
+    #[serde(
+        rename = "assignedToType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub assigned_to_type: Option<AssignToLookupValueType>,
+    #[serde(
+        rename = "minutesToEscalation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub minutes_to_escalation: Option<f64>,
+    #[serde(
+        rename = "notifyCaseOwner",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub notify_case_owner: Option<bool>,
+    #[serde(rename = "notifyEmail", default)]
+    pub notify_email: Vec<String>,
+    #[serde(rename = "notifyTo", default, skip_serializing_if = "Option::is_none")]
+    pub notify_to: Option<String>,
+    #[serde(
+        rename = "notifyToTemplate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub notify_to_template: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CanvasMetadata {
+    #[serde(rename = "accessMethod", default)]
+    pub access_method: String,
+    #[serde(
+        rename = "canvasOptions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub canvas_options: Option<String>,
+    #[serde(rename = "canvasUrl", default)]
+    pub canvas_url: String,
+    #[serde(
+        rename = "lifecycleClass",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub lifecycle_class: Option<String>,
+    #[serde(
+        rename = "locationOptions",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub location_options: Option<String>,
+    #[serde(
+        rename = "samlInitiationMethod",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub saml_initiation_method: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AIScoringModelDefVersion {
+    #[serde(rename = "aiScoringModelDefinition", default)]
+    pub ai_scoring_model_definition: String,
+    #[serde(rename = "aiScoringSteps", default)]
+    pub ai_scoring_steps: Vec<AIScoringStep>,
     #[serde(rename = "developerName", default)]
     pub developer_name: String,
-    #[serde(
-        rename = "languageEnabled",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub language_enabled: Option<String>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(
-        rename = "namedCredential",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub named_credential: Option<String>,
-    #[serde(
-        rename = "personalizationEnabled",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub personalization_enabled: Option<String>,
-    #[serde(rename = "rootPath", default, skip_serializing_if = "Option::is_none")]
-    pub root_path: Option<String>,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: f64,
+    #[serde(rename = "modelMode", default)]
+    pub model_mode: AIScoringModelDefVersionMode,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AgentConfigSkills {
     #[serde(default)]
-    pub status: CMSConnectionStatus,
-    #[serde(rename = "type", default)]
-    pub r#type: CMSConnectionSourceType,
-    #[serde(
-        rename = "websiteUrl",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub website_url: Option<String>,
+    pub skill: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PageContextVariable {
-    #[serde(
-        rename = "SObjectType",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub s_object_type: Option<String>,
-    #[serde(rename = "dataType", default)]
-    pub data_type: serde_json::Value,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
+pub struct ContactCenterChannel {
     #[serde(default)]
-    pub label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CatalogedApi {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub descriptor: Option<String>,
+    pub channel: String,
+    #[serde(rename = "contactCenter", default)]
+    pub contact_center: String,
     #[serde(
-        rename = "externalSourceIdentifier",
+        rename = "omniCallbackFallbackQueue",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub external_source_identifier: Option<String>,
-    #[serde(default)]
-    pub instances: Vec<CatalogedApiInstance>,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "providerType", default)]
-    pub provider_type: serde_json::Value,
-    #[serde(rename = "type", default)]
-    pub r#type: APIType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct OrchestrationContext {
-    #[serde(default)]
-    pub datasets: Vec<OrchestrationContextDataset>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(default)]
-    pub events: Vec<OrchestrationContextEvent>,
-    #[serde(rename = "imageFile", default)]
-    pub image_file: String,
-    #[serde(rename = "imageScale", default)]
-    pub image_scale: f64,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "runtimeType", default)]
-    pub runtime_type: String,
+    pub omni_callback_fallback_queue: Option<String>,
     #[serde(
-        rename = "salesforceObject",
+        rename = "omniCallbackHandler",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub salesforce_object: Option<String>,
+    pub omni_callback_handler: Option<String>,
     #[serde(
-        rename = "salesforceObjectPrimaryKey",
+        rename = "voiceMailFallbackQueue",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub salesforce_object_primary_key: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ValidationRuleTranslation {
-    #[serde(rename = "errorMessage", default)]
-    pub error_message: String,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomApplicationTranslation {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub label: Option<String>,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CleanDataService {
-    #[serde(rename = "cleanRules", default)]
-    pub clean_rules: Vec<CleanRule>,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "matchEngine", default)]
-    pub match_engine: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ValueTypeField {
-    #[serde(default)]
-    pub fields: Vec<Box<ValueTypeField>>,
-    #[serde(rename = "foreignKeyDomain", default)]
-    pub foreign_key_domain: Vec<String>,
-    #[serde(rename = "isForeignKey", default)]
-    pub is_foreign_key: bool,
-    #[serde(rename = "isNameField", default)]
-    pub is_name_field: bool,
-    #[serde(rename = "minOccurs", default)]
-    pub min_occurs: f64,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "picklistValues", default)]
-    pub picklist_values: Vec<serde_json::Value>,
-    #[serde(rename = "soapType", default)]
-    pub soap_type: String,
-    #[serde(rename = "valueRequired", default)]
-    pub value_required: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BundleCreateOptions {
-    #[serde(rename = "BundleName", default)]
-    pub bundle_name: String,
-    #[serde(rename = "Description", default)]
-    pub description: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BundleComponentInstallRecord {
-    #[serde(rename = "SubscriberPackageVersion", default)]
-    pub subscriber_package_version: serde_json::Value,
+    pub voice_mail_fallback_queue: Option<String>,
     #[serde(
-        rename = "InstalledComponent",
+        rename = "voiceMailHandler",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub installed_component: Option<serde_json::Value>,
-    #[serde(rename = "SequenceOrder", default)]
-    pub sequence_order: f64,
+    pub voice_mail_handler: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct MilestoneType {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
+pub struct NextAutomatedApprover {
     #[serde(
-        rename = "recurrenceType",
+        rename = "useApproverFieldOfRecordOwner",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub recurrence_type: Option<MilestoneTypeRecurrenceType>,
+    pub use_approver_field_of_record_owner: Option<bool>,
+    #[serde(rename = "userHierarchyField", default)]
+    pub user_hierarchy_field: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct PkgBundleVerCpntUnistlReqRecord {
-    #[serde(rename = "Id", default)]
-    pub id: String,
-    #[serde(rename = "SequenceOrder", default)]
-    pub sequence_order: f64,
-    #[serde(rename = "UninstallStatus", default)]
-    pub uninstall_status: serde_json::Value,
-    #[serde(
-        rename = "PkgBundleVersionComponent",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub pkg_bundle_version_component: Option<serde_json::Value>,
-    #[serde(rename = "Error", default, skip_serializing_if = "Option::is_none")]
-    pub error: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MDFolderForArtifactOptions {
-    #[serde(
-        rename = "packageName",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub package_name: Option<String>,
-    #[serde(rename = "sourceDir", default, skip_serializing_if = "Option::is_none")]
-    pub source_dir: Option<String>,
-    #[serde(rename = "outputDir", default, skip_serializing_if = "Option::is_none")]
-    pub output_dir: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub manifest: Option<String>,
-    #[serde(
-        rename = "sourcePaths",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub source_paths: Option<Vec<String>>,
-    #[serde(
-        rename = "metadataPaths",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub metadata_paths: Option<Vec<String>>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub deploydir: Option<String>,
-    #[serde(
-        rename = "sourceApiVersion",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub source_api_version: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LearningAchievementConfig {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(rename = "iconName", default, skip_serializing_if = "Option::is_none")]
-    pub icon_name: Option<String>,
-    #[serde(
-        rename = "isProtected",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_protected: Option<bool>,
-    #[serde(rename = "learningAchievementType", default)]
-    pub learning_achievement_type: LearningAchievementType,
-    #[serde(rename = "learningAchvRecordType", default)]
-    pub learning_achv_record_type: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AncestryRepresentationProducerOptions {
-    #[serde(
-        rename = "packageNode",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub package_node: Option<serde_json::Value>,
-    #[serde(default)]
-    pub depth: f64,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub verbose: Option<bool>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub logger: Option<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EclairMap {
-    #[serde(
-        rename = "boundingBoxBottom",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub bounding_box_bottom: Option<f64>,
-    #[serde(
-        rename = "boundingBoxLeft",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub bounding_box_left: Option<f64>,
-    #[serde(
-        rename = "boundingBoxRight",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub bounding_box_right: Option<f64>,
-    #[serde(
-        rename = "boundingBoxTop",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub bounding_box_top: Option<f64>,
-    #[serde(rename = "mapLabel", default, skip_serializing_if = "Option::is_none")]
-    pub map_label: Option<String>,
-    #[serde(rename = "mapName", default)]
-    pub map_name: String,
-    #[serde(default)]
-    pub projection: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EmployeeDataSyncField {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isDefault", default)]
-    pub is_default: bool,
-    #[serde(rename = "isRequired", default)]
-    pub is_required: bool,
-    #[serde(rename = "sourceField", default)]
-    pub source_field: String,
-    #[serde(rename = "targetField", default)]
-    pub target_field: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Capabilities {
-    #[serde(default)]
-    pub capability: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct TriggerConfiguration {
-    #[serde(default)]
-    pub description: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub run: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Scontrol {
-    #[serde(rename = "contentSource", default)]
-    pub content_source: SControlContentSource,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(rename = "encodingKey", default)]
-    pub encoding_key: serde_json::Value,
-    #[serde(
-        rename = "fileContent",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub file_content: Option<String>,
-    #[serde(rename = "fileName", default, skip_serializing_if = "Option::is_none")]
-    pub file_name: Option<String>,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "supportsCaching", default)]
-    pub supports_caching: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct TimeSheetTemplate {
-    #[serde(default)]
-    pub active: bool,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(default)]
-    pub frequency: TimeSheetFrequency,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "startDate", default)]
-    pub start_date: serde_json::Value,
-    #[serde(rename = "timeSheetTemplateAssignments", default)]
-    pub time_sheet_template_assignments: Vec<TimeSheetTemplateAssignment>,
-    #[serde(rename = "workWeekEndDay", default)]
-    pub work_week_end_day: DaysOfWeek,
-    #[serde(rename = "workWeekStartDay", default)]
-    pub work_week_start_day: DaysOfWeek,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LightningTypeBundleResource {
-    #[serde(rename = "fileName", default)]
-    pub file_name: String,
-    #[serde(rename = "filePath", default)]
-    pub file_path: String,
-    #[serde(rename = "fileType", default)]
-    pub file_type: String,
-    #[serde(default)]
-    pub source: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AnlytDshbrdWdgtDynamicTkn {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub label: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub source: Option<String>,
-    #[serde(rename = "tokenName", default, skip_serializing_if = "Option::is_none")]
-    pub token_name: Option<String>,
-    #[serde(rename = "tokenSpec", default, skip_serializing_if = "Option::is_none")]
-    pub token_spec: Option<String>,
-    #[serde(rename = "type", default, skip_serializing_if = "Option::is_none")]
-    pub r#type: Option<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SynchronizeSetting {
-    #[serde(
-        rename = "displayName",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub display_name: Option<String>,
-    #[serde(
-        rename = "enforceValidations",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub enforce_validations: Option<bool>,
-    #[serde(
-        rename = "fromSalesforce",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub from_salesforce: Option<bool>,
-    #[serde(default)]
-    pub name: String,
-    #[serde(
-        rename = "toSalesforce",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub to_salesforce: Option<bool>,
+pub struct OrchestrationContextDataset {
+    #[serde(rename = "datasetType", default)]
+    pub dataset_type: String,
+    #[serde(rename = "orchestrationDataset", default)]
+    pub orchestration_dataset: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -4839,6 +4433,422 @@ pub struct ListPlacement {
     pub units: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub width: Option<f64>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LicenseDefinition {
+    #[serde(rename = "aggregationGroup", default)]
+    pub aggregation_group: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "isPublished", default)]
+    pub is_published: bool,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "licensedCustomPermissions", default)]
+    pub licensed_custom_permissions: Vec<LicensedCustomPermissions>,
+    #[serde(rename = "licensingAuthority", default)]
+    pub licensing_authority: String,
+    #[serde(rename = "licensingAuthorityProvider", default)]
+    pub licensing_authority_provider: String,
+    #[serde(rename = "minPlatformVersion", default)]
+    pub min_platform_version: f64,
+    #[serde(default)]
+    pub origin: String,
+    #[serde(default)]
+    pub revision: f64,
+    #[serde(rename = "trialLicenseDuration", default)]
+    pub trial_license_duration: f64,
+    #[serde(rename = "trialLicenseQuantity", default)]
+    pub trial_license_quantity: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Roles {
+    #[serde(default)]
+    pub role: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Role {
+    #[serde(
+        rename = "parentRole",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub parent_role: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DescribeMetadataResult {
+    #[serde(rename = "metadataObjects", default)]
+    pub metadata_objects: Vec<DescribeMetadataObject>,
+    #[serde(rename = "organizationNamespace", default)]
+    pub organization_namespace: String,
+    #[serde(rename = "partialSaveAllowed", default)]
+    pub partial_save_allowed: bool,
+    #[serde(rename = "testRequired", default)]
+    pub test_required: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct UpsertResult {
+    #[serde(default)]
+    pub created: bool,
+    #[serde(default)]
+    pub errors: Vec<Error>,
+    #[serde(rename = "fullName", default)]
+    pub full_name: String,
+    #[serde(default)]
+    pub success: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FindSimilarOppFilter {
+    #[serde(rename = "similarOpportunitiesDisplayColumns", default)]
+    pub similar_opportunities_display_columns: Vec<String>,
+    #[serde(rename = "similarOpportunitiesMatchFields", default)]
+    pub similar_opportunities_match_fields: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RedirectWhitelistUrl {
+    #[serde(default)]
+    pub url: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AIScoringModelDefinition {
+    #[serde(rename = "aiModelConfig", default)]
+    pub ai_model_config: String,
+    #[serde(rename = "aiScoringModelDefVersions", default)]
+    pub ai_scoring_model_def_versions: Vec<AIScoringModelDefVersion>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ParticipantRole {
+    #[serde(rename = "defaultAccessLevel", default)]
+    pub default_access_level: ParticipantRoleAccessLevel,
+    #[serde(rename = "isActive", default, skip_serializing_if = "Option::is_none")]
+    pub is_active: Option<bool>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "parentObject", default)]
+    pub parent_object: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DeleteResult {
+    #[serde(default)]
+    pub errors: Vec<Error>,
+    #[serde(rename = "fullName", default)]
+    pub full_name: String,
+    #[serde(default)]
+    pub success: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LicensedCustomPermissions {
+    #[serde(rename = "customPermission", default)]
+    pub custom_permission: String,
+    #[serde(rename = "licenseDefinition", default)]
+    pub license_definition: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CommunicationChannelType {
+    #[serde(rename = "channelName", default)]
+    pub channel_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Attributes {
+    #[serde(rename = "type", default)]
+    pub r#type: String,
+    #[serde(default)]
+    pub url: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ReadResult {
+    #[serde(default)]
+    pub records: Vec<Metadata>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PkgBundleVerUninstallReqQueryRecord {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "UninstallStatus", default)]
+    pub uninstall_status: serde_json::Value,
+    #[serde(rename = "PackageBundleVersionId", default)]
+    pub package_bundle_version_id: String,
+    #[serde(
+        rename = "InstalledPkgBundleVersionId",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub installed_pkg_bundle_version_id: Option<String>,
+    #[serde(
+        rename = "ValidationError",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub validation_error: Option<String>,
+    #[serde(rename = "CreatedDate", default)]
+    pub created_date: String,
+    #[serde(rename = "CreatedById", default)]
+    pub created_by_id: String,
+    #[serde(rename = "Error", default, skip_serializing_if = "Option::is_none")]
+    pub error: Option<Vec<String>>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct McpServerDefinition {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub prompts: Vec<McpServerPromptDefinition>,
+    #[serde(default)]
+    pub tools: Vec<McpServerToolDefinition>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AnimationRule {
+    #[serde(rename = "animationFrequency", default)]
+    pub animation_frequency: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "recordTypeContext", default)]
+    pub record_type_context: String,
+    #[serde(
+        rename = "recordTypeName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub record_type_name: Option<String>,
+    #[serde(rename = "sobjectType", default)]
+    pub sobject_type: String,
+    #[serde(rename = "targetField", default)]
+    pub target_field: String,
+    #[serde(rename = "targetFieldChangeToValues", default)]
+    pub target_field_change_to_values: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DependencyGraphEdge {
+    #[serde(default)]
+    pub source: String,
+    #[serde(default)]
+    pub target: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CustomShortcut {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "eventName", default)]
+    pub event_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ArticleTypeChannelDisplay {
+    #[serde(rename = "articleTypeTemplates", default)]
+    pub article_type_templates: Vec<ArticleTypeTemplate>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DependencyGraphNode {
+    #[serde(rename = "subscriberPackageVersionId", default)]
+    pub subscriber_package_version_id: String,
+    #[serde(rename = "packageName", default)]
+    pub package_name: String,
+    #[serde(default)]
+    pub version: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WebLinkTranslation {
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ModerationRule {
+    #[serde(default)]
+    pub action: ModerationRuleAction,
+    #[serde(
+        rename = "actionLimit",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub action_limit: Option<f64>,
+    #[serde(default)]
+    pub active: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "entitiesAndFields", default)]
+    pub entities_and_fields: Vec<ModeratedEntityField>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(
+        rename = "notifyLimit",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub notify_limit: Option<f64>,
+    #[serde(
+        rename = "timePeriod",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub time_period: Option<RateLimitTimePeriod>,
+    #[serde(rename = "type", default, skip_serializing_if = "Option::is_none")]
+    pub r#type: Option<ModerationRuleType>,
+    #[serde(rename = "userCriteria", default)]
+    pub user_criteria: Vec<String>,
+    #[serde(
+        rename = "userMessage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub user_message: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BundleInstallOptions {
+    #[serde(default)]
+    pub connection: serde_json::Value,
+    #[serde(default)]
+    pub project: serde_json::Value,
+    #[serde(rename = "PackageBundleVersion", default)]
+    pub package_bundle_version: String,
+    #[serde(rename = "DevelopmentOrganization", default)]
+    pub development_organization: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub polling: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RunTestFailure {
+    #[serde(default)]
+    pub id: serde_json::Value,
+    #[serde(default)]
+    pub message: String,
+    #[serde(
+        rename = "methodName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub method_name: Option<String>,
+    #[serde(default)]
+    pub name: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub namespace: Option<String>,
+    #[serde(rename = "packageName", default)]
+    pub package_name: String,
+    #[serde(
+        rename = "seeAllData",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub see_all_data: Option<bool>,
+    #[serde(
+        rename = "stackTrace",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub stack_trace: Option<String>,
+    #[serde(default)]
+    pub time: f64,
+    #[serde(rename = "type", default)]
+    pub r#type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MetadataEnrichments {
+    #[serde(
+        rename = "aiDescriptor",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub ai_descriptor: Option<MetadataAiDescriptor>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ScontrolTranslation {
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -4864,141 +4874,9 @@ pub struct Container {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct CommissionStatementConfig {
-    #[serde(
-        rename = "cmsnProcBatchPrcJobDef",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub cmsn_proc_batch_prc_job_def: Option<String>,
-    #[serde(rename = "failureStatus", default)]
-    pub failure_status: String,
-    #[serde(rename = "inProgressStatus", default)]
-    pub in_progress_status: String,
-    #[serde(
-        rename = "invalidProducerCmsnStatus",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub invalid_producer_cmsn_status: Option<String>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "partialSuccessStatus", default)]
-    pub partial_success_status: String,
-    #[serde(
-        rename = "stdCmsnProcBtchPrcJobDef",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub std_cmsn_proc_btch_prc_job_def: Option<String>,
-    #[serde(rename = "successStatus", default)]
-    pub success_status: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RpaRobotPoolMetadata {
+pub struct PrimaryTabComponents {
     #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct NextAutomatedApprover {
-    #[serde(
-        rename = "useApproverFieldOfRecordOwner",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub use_approver_field_of_record_owner: Option<bool>,
-    #[serde(rename = "userHierarchyField", default)]
-    pub user_hierarchy_field: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct McpServerDefinition {
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub prompts: Vec<McpServerPromptDefinition>,
-    #[serde(default)]
-    pub tools: Vec<McpServerToolDefinition>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MatchingRuleItem {
-    #[serde(
-        rename = "blankValueBehavior",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub blank_value_behavior: Option<BlankValueBehavior>,
-    #[serde(rename = "fieldName", default)]
-    pub field_name: String,
-    #[serde(rename = "matchingMethod", default)]
-    pub matching_method: MatchingMethod,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ReferencedDashboard {
-    #[serde(default)]
-    pub application: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(rename = "embedUrl", default)]
-    pub embed_url: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(
-        rename = "templateAssetSourceName",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub template_asset_source_name: Option<String>,
-    #[serde(default)]
-    pub visibility: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LookupFilter {
-    #[serde(default)]
-    pub active: bool,
-    #[serde(
-        rename = "booleanFilter",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub boolean_filter: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(
-        rename = "errorMessage",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub error_message: Option<String>,
-    #[serde(rename = "filterItems", default)]
-    pub filter_items: Vec<FilterItem>,
-    #[serde(
-        rename = "infoMessage",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub info_message: Option<String>,
-    #[serde(rename = "isOptional", default)]
-    pub is_optional: bool,
+    pub containers: Vec<Container>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -5044,50 +4922,6 @@ pub struct SidebarComponent {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct EclairGeoData {
-    #[serde(default)]
-    pub maps: Vec<EclairMap>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CanvasMetadata {
-    #[serde(rename = "accessMethod", default)]
-    pub access_method: String,
-    #[serde(
-        rename = "canvasOptions",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub canvas_options: Option<String>,
-    #[serde(rename = "canvasUrl", default)]
-    pub canvas_url: String,
-    #[serde(
-        rename = "lifecycleClass",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub lifecycle_class: Option<String>,
-    #[serde(
-        rename = "locationOptions",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub location_options: Option<String>,
-    #[serde(
-        rename = "samlInitiationMethod",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub saml_initiation_method: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
 pub struct AIScoringStep {
     #[serde(rename = "aiModelConfigStep", default)]
     pub ai_model_config_step: String,
@@ -5102,253 +4936,203 @@ pub struct AIScoringStep {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct LicenseDefinition {
-    #[serde(rename = "aggregationGroup", default)]
-    pub aggregation_group: String,
+pub struct CustomFeedFilter {
+    #[serde(default)]
+    pub criteria: Vec<serde_json::Value>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
-    #[serde(rename = "isPublished", default)]
-    pub is_published: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "licensedCustomPermissions", default)]
-    pub licensed_custom_permissions: Vec<LicensedCustomPermissions>,
-    #[serde(rename = "licensingAuthority", default)]
-    pub licensing_authority: String,
-    #[serde(rename = "licensingAuthorityProvider", default)]
-    pub licensing_authority_provider: String,
-    #[serde(rename = "minPlatformVersion", default)]
-    pub min_platform_version: f64,
-    #[serde(default)]
-    pub origin: String,
-    #[serde(default)]
-    pub revision: f64,
-    #[serde(rename = "trialLicenseDuration", default)]
-    pub trial_license_duration: f64,
-    #[serde(rename = "trialLicenseQuantity", default)]
-    pub trial_license_quantity: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CMSConnectResourceType {
-    #[serde(rename = "cmsConnectResourceDefinition", default)]
-    pub cms_connect_resource_definition: Vec<CMSConnectResourceDefinition>,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "resourceType", default)]
-    pub resource_type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct UIObjectRelationConfig {
-    #[serde(rename = "UIObjectRelationFieldConfigs", default)]
-    pub ui_object_relation_field_configs: Vec<UIObjectRelationFieldConfig>,
-    #[serde(rename = "contextObject", default)]
-    pub context_object: String,
-    #[serde(
-        rename = "contextObjectRecordType",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub context_object_record_type: Option<String>,
-    #[serde(
-        rename = "directRelationshipField",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub direct_relationship_field: Option<String>,
-    #[serde(
-        rename = "indirectObjectContextField",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub indirect_object_context_field: Option<String>,
-    #[serde(
-        rename = "indirectObjectRelatedField",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub indirect_object_related_field: Option<String>,
-    #[serde(
-        rename = "indirectRelationshipObject",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub indirect_relationship_object: Option<String>,
-    #[serde(rename = "isActive", default, skip_serializing_if = "Option::is_none")]
-    pub is_active: Option<bool>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "relatedObject", default)]
-    pub related_object: String,
-    #[serde(
-        rename = "relatedObjectRecordType",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub related_object_record_type: Option<String>,
-    #[serde(rename = "relationshipType", default)]
-    pub relationship_type: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CorsWhitelistOrigin {
-    #[serde(rename = "urlPattern", default)]
-    pub url_pattern: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EmployeeDataSyncProfile {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(rename = "employeeDataSyncField", default)]
-    pub employee_data_sync_field: Vec<EmployeeDataSyncField>,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
     #[serde(
         rename = "isProtected",
         default,
         skip_serializing_if = "Option::is_none"
     )]
     pub is_protected: Option<bool>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct VirtualVisitConfig {
-    #[serde(
-        rename = "comprehendServiceType",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub comprehend_service_type: Option<VirtualVisitComprehendServiceType>,
-    #[serde(
-        rename = "experienceCloudSiteUrl",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub experience_cloud_site_url: Option<String>,
-    #[serde(
-        rename = "externalMsgServiceIdentifier",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub external_msg_service_identifier: Option<String>,
-    #[serde(
-        rename = "externalRoleIdentifier",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub external_role_identifier: Option<String>,
-    #[serde(
-        rename = "externalUserIdentifier",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub external_user_identifier: Option<String>,
-    #[serde(
-        rename = "isProtected",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_protected: Option<bool>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(
-        rename = "messagingRegion",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub messaging_region: Option<String>,
-    #[serde(
-        rename = "namedCredential",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub named_credential: Option<String>,
-    #[serde(
-        rename = "storageBucketName",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub storage_bucket_name: Option<String>,
-    #[serde(rename = "usageType", default, skip_serializing_if = "Option::is_none")]
-    pub usage_type: Option<VirtualVisitUsageType>,
-    #[serde(
-        rename = "videoCallApptTypeValue",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub video_call_appt_type_value: Option<String>,
-    #[serde(
-        rename = "videoControlRegion",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub video_control_region: Option<String>,
-    #[serde(
-        rename = "visitRegion",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub visit_region: Option<VirtualVisitVisitRegion>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DependencyGraphEdge {
-    #[serde(default)]
-    pub source: String,
-    #[serde(default)]
-    pub target: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PkgBundleVersionInstallReqResult {
-    #[serde(rename = "Id", default)]
-    pub id: String,
-    #[serde(rename = "InstallStatus", default)]
-    pub install_status: serde_json::Value,
-    #[serde(rename = "ValidationError", default)]
-    pub validation_error: String,
-    #[serde(rename = "CreatedDate", default)]
-    pub created_date: String,
-    #[serde(rename = "CreatedById", default)]
-    pub created_by_id: String,
-    #[serde(rename = "Error", default, skip_serializing_if = "Option::is_none")]
-    pub error: Option<Vec<String>>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SoFieldMapping {
     #[serde(default)]
     pub label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CmsnStmtLineItemTypConfig {
+    #[serde(
+        rename = "brkrRevSpltArngLnItmTyp",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub brkr_rev_splt_arng_ln_itm_typ: Option<String>,
+    #[serde(rename = "commissionStmtLineItemType", default)]
+    pub commission_stmt_line_item_type: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(
+        rename = "prodSplitArngLineItemType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub prod_split_arng_line_item_type: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CustomApplicationTranslation {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
     #[serde(default)]
     pub name: String,
-    #[serde(rename = "objectName", default)]
-    pub object_name: String,
-    #[serde(rename = "sfFieldName", default)]
-    pub sf_field_name: String,
-    #[serde(rename = "type", default)]
-    pub r#type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct IntegArtifactDef {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "displayName", default)]
+    pub display_name: String,
+    #[serde(rename = "groupId", default)]
+    pub group_id: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RunTestsResult {
+    #[serde(rename = "apexLogId", default, skip_serializing_if = "Option::is_none")]
+    pub apex_log_id: Option<String>,
+    #[serde(rename = "codeCoverage", default)]
+    pub code_coverage: Vec<serde_json::Value>,
+    #[serde(rename = "codeCoverageWarnings", default)]
+    pub code_coverage_warnings: Vec<serde_json::Value>,
+    #[serde(default)]
+    pub failures: Vec<RunTestFailure>,
+    #[serde(rename = "flowCoverage", default)]
+    pub flow_coverage: Vec<serde_json::Value>,
+    #[serde(rename = "flowCoverageWarnings", default)]
+    pub flow_coverage_warnings: Vec<serde_json::Value>,
+    #[serde(rename = "numFailures", default)]
+    pub num_failures: f64,
+    #[serde(rename = "numTestsRun", default)]
+    pub num_tests_run: f64,
+    #[serde(default)]
+    pub successes: Vec<RunTestSuccess>,
+    #[serde(rename = "totalTime", default)]
+    pub total_time: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DuplicateRuleFilterItem {
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: f64,
+    #[serde(default)]
+    pub table: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ApiNamedQueryParameter {
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "parameterLabel", default)]
+    pub parameter_label: String,
+    #[serde(rename = "parameterName", default)]
+    pub parameter_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CountriesAndStates {
+    #[serde(default)]
+    pub countries: Vec<Country>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RetrieveResult {
+    #[serde(default)]
+    pub done: bool,
+    #[serde(
+        rename = "errorMessage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub error_message: Option<String>,
+    #[serde(
+        rename = "errorStatusCode",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub error_status_code: Option<StatusCode>,
+    #[serde(rename = "fileProperties", default)]
+    pub file_properties: Vec<FileProperties>,
+    #[serde(default)]
+    pub id: String,
+    #[serde(default)]
+    pub messages: Vec<RetrieveMessage>,
+    #[serde(default)]
+    pub status: serde_json::Value,
+    #[serde(default)]
+    pub success: bool,
+    #[serde(rename = "zipFile", default)]
+    pub zip_file: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EnrichedField {
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DefaultShortcut {
+    #[serde(default)]
+    pub action: String,
+    #[serde(default)]
+    pub active: bool,
+    #[serde(rename = "keyCommand", default)]
+    pub key_command: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PkgBundleVerCpntUnistlReqRecord {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "SequenceOrder", default)]
+    pub sequence_order: f64,
+    #[serde(rename = "UninstallStatus", default)]
+    pub uninstall_status: serde_json::Value,
+    #[serde(
+        rename = "PkgBundleVersionComponent",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub pkg_bundle_version_component: Option<serde_json::Value>,
+    #[serde(rename = "Error", default, skip_serializing_if = "Option::is_none")]
+    pub error: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct InboundNetworkConnProperty {
+    #[serde(rename = "propertyName", default)]
+    pub property_name: InboundConnPropertyName,
+    #[serde(rename = "propertyValue", default)]
+    pub property_value: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -5428,93 +5212,197 @@ pub struct DynamicGantt {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct TimeSheetTemplateAssignment {
+pub struct UIObjectRelationConfig {
+    #[serde(rename = "UIObjectRelationFieldConfigs", default)]
+    pub ui_object_relation_field_configs: Vec<UIObjectRelationFieldConfig>,
+    #[serde(rename = "contextObject", default)]
+    pub context_object: String,
     #[serde(
-        rename = "assignedTo",
+        rename = "contextObjectRecordType",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub assigned_to: Option<String>,
+    pub context_object_record_type: Option<String>,
+    #[serde(
+        rename = "directRelationshipField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub direct_relationship_field: Option<String>,
+    #[serde(
+        rename = "indirectObjectContextField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub indirect_object_context_field: Option<String>,
+    #[serde(
+        rename = "indirectObjectRelatedField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub indirect_object_related_field: Option<String>,
+    #[serde(
+        rename = "indirectRelationshipObject",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub indirect_relationship_object: Option<String>,
+    #[serde(rename = "isActive", default, skip_serializing_if = "Option::is_none")]
+    pub is_active: Option<bool>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "relatedObject", default)]
+    pub related_object: String,
+    #[serde(
+        rename = "relatedObjectRecordType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub related_object_record_type: Option<String>,
+    #[serde(rename = "relationshipType", default)]
+    pub relationship_type: serde_json::Value,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct BundleVersion {
-    #[serde(rename = "Id", default)]
-    pub id: String,
-    #[serde(rename = "PackageBundle", default)]
-    pub package_bundle: Bundle,
-    #[serde(rename = "VersionName", default)]
-    pub version_name: String,
-    #[serde(rename = "MajorVersion", default)]
-    pub major_version: String,
-    #[serde(rename = "MinorVersion", default)]
-    pub minor_version: String,
-    #[serde(rename = "Ancestor", default)]
-    pub ancestor: serde_json::Value,
-    #[serde(rename = "IsReleased", default)]
-    pub is_released: bool,
-    #[serde(rename = "CreatedDate", default)]
-    pub created_date: String,
-    #[serde(rename = "CreatedById", default)]
-    pub created_by_id: String,
-    #[serde(rename = "LastModifiedDate", default)]
-    pub last_modified_date: String,
-    #[serde(rename = "LastModifiedById", default)]
-    pub last_modified_by_id: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DuplicateRuleFilterItem {
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: f64,
+pub struct FileTypeDispositionAssignmentBean {
     #[serde(default)]
-    pub table: String,
+    pub behavior: FileDownloadBehavior,
+    #[serde(rename = "fileType", default)]
+    pub file_type: FileType,
+    #[serde(rename = "securityRiskFileType", default)]
+    pub security_risk_file_type: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct IntegArtifactDef {
+pub struct Capabilities {
     #[serde(default)]
-    pub description: String,
-    #[serde(rename = "displayName", default)]
-    pub display_name: String,
-    #[serde(rename = "groupId", default)]
-    pub group_id: String,
+    pub capability: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ScheduledRecommendation {
-    #[serde(rename = "scheduledRecommendationDetails", default)]
-    pub scheduled_recommendation_details: Vec<ScheduledRecommendationDetail>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LookupFilterTranslation {
-    #[serde(rename = "errorMessage", default)]
-    pub error_message: String,
-    #[serde(rename = "informationalMessage", default)]
-    pub informational_message: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ArticleTypeTemplate {
-    #[serde(default)]
-    pub channel: serde_json::Value,
+pub struct EmployeeDataSyncField {
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub page: Option<String>,
+    pub description: Option<String>,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "isDefault", default)]
+    pub is_default: bool,
+    #[serde(rename = "isRequired", default)]
+    pub is_required: bool,
+    #[serde(rename = "sourceField", default)]
+    pub source_field: String,
+    #[serde(rename = "targetField", default)]
+    pub target_field: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct GenOpPlanEligibilityConfig {
+    #[serde(rename = "eligibilityResultVariableName", default)]
+    pub eligibility_result_variable_name: String,
+    #[serde(
+        rename = "failureReasonOutputVariableName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub failure_reason_output_variable_name: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub flow: Option<String>,
+    #[serde(
+        rename = "isProtected",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_protected: Option<bool>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "targetIdInputVariableName", default)]
+    pub target_id_input_variable_name: String,
+    #[serde(rename = "targetObjectType", default)]
+    pub target_object_type: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ModeratedEntityField {
+    #[serde(rename = "entityName", default)]
+    pub entity_name: String,
+    #[serde(rename = "fieldName", default, skip_serializing_if = "Option::is_none")]
+    pub field_name: Option<String>,
+    #[serde(
+        rename = "keywordList",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub keyword_list: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LogInfo {
     #[serde(default)]
-    pub template: Template,
+    pub category: LogCategory,
+    #[serde(default)]
+    pub level: LogCategoryLevel,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CriteriaSetting {
+    #[serde(
+        rename = "criteriaItems",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub criteria_items: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub logic: Option<String>,
+    #[serde(default)]
+    pub name: String,
+    #[serde(
+        rename = "objectType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub object_type: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub territories: Option<String>,
+    #[serde(rename = "userType", default, skip_serializing_if = "Option::is_none")]
+    pub user_type: Option<String>,
+    #[serde(rename = "workTypes", default, skip_serializing_if = "Option::is_none")]
+    pub work_types: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Country {
+    #[serde(default)]
+    pub active: bool,
+    #[serde(rename = "integrationValue", default)]
+    pub integration_value: String,
+    #[serde(rename = "isoCode", default)]
+    pub iso_code: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "orgDefault", default)]
+    pub org_default: bool,
+    #[serde(default)]
+    pub standard: bool,
+    #[serde(default)]
+    pub states: Vec<State>,
+    #[serde(default)]
+    pub visible: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -5528,51 +5416,267 @@ pub struct RoleAndSubordinates {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ParticipantRole {
-    #[serde(rename = "defaultAccessLevel", default)]
-    pub default_access_level: ParticipantRoleAccessLevel,
-    #[serde(rename = "isActive", default, skip_serializing_if = "Option::is_none")]
-    pub is_active: Option<bool>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "parentObject", default)]
-    pub parent_object: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AccountPlanObjMeasCalcDef {
-    #[serde(default)]
-    pub conditions: Vec<AccountPlanObjMeasCalcCond>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "rollupType", default)]
-    pub rollup_type: String,
-    #[serde(default)]
-    pub status: String,
+pub struct SharedTo {
     #[serde(
-        rename = "targetField",
+        rename = "allCustomerPortalUsers",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub target_field: Option<String>,
-    #[serde(rename = "targetObject", default)]
-    pub target_object: String,
+    pub all_customer_portal_users: Option<String>,
+    #[serde(
+        rename = "allInternalUsers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub all_internal_users: Option<String>,
+    #[serde(
+        rename = "allPartnerUsers",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub all_partner_users: Option<String>,
+    #[serde(rename = "channelProgramGroup", default)]
+    pub channel_program_group: Vec<String>,
+    #[serde(rename = "channelProgramGroups", default)]
+    pub channel_program_groups: Vec<String>,
+    #[serde(default)]
+    pub group: Vec<String>,
+    #[serde(default)]
+    pub groups: Vec<String>,
+    #[serde(rename = "guestUser", default)]
+    pub guest_user: Vec<String>,
+    #[serde(rename = "managerSubordinates", default)]
+    pub manager_subordinates: Vec<String>,
+    #[serde(default)]
+    pub managers: Vec<String>,
+    #[serde(rename = "portalRole", default)]
+    pub portal_role: Vec<String>,
+    #[serde(rename = "portalRoleAndSubordinates", default)]
+    pub portal_role_and_subordinates: Vec<String>,
+    #[serde(default)]
+    pub queue: Vec<String>,
+    #[serde(default)]
+    pub role: Vec<String>,
+    #[serde(rename = "roleAndSubordinates", default)]
+    pub role_and_subordinates: Vec<String>,
+    #[serde(rename = "roleAndSubordinatesInternal", default)]
+    pub role_and_subordinates_internal: Vec<String>,
+    #[serde(default)]
+    pub roles: Vec<String>,
+    #[serde(rename = "rolesAndSubordinates", default)]
+    pub roles_and_subordinates: Vec<String>,
+    #[serde(default)]
+    pub territories: Vec<String>,
+    #[serde(rename = "territoriesAndSubordinates", default)]
+    pub territories_and_subordinates: Vec<String>,
+    #[serde(default)]
+    pub territory: Vec<String>,
+    #[serde(rename = "territoryAndSubordinates", default)]
+    pub territory_and_subordinates: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ReferralMarketingConfig {
-    #[serde(rename = "integrationSystemType", default)]
-    pub integration_system_type: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
+pub struct Attachment {
+    #[serde(default)]
+    pub content: String,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PostTemplate {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub default: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default)]
+    pub fields: Vec<String>,
+    #[serde(default)]
+    pub label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AutomatorConfig {
+    #[serde(
+        rename = "allowFilterField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_filter_field: Option<bool>,
+    #[serde(
+        rename = "allowLocations",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_locations: Option<bool>,
+    #[serde(
+        rename = "allowNoLocation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_no_location: Option<bool>,
+    #[serde(
+        rename = "allowSchedulingPolicy",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_scheduling_policy: Option<bool>,
+    #[serde(
+        rename = "allowTimeHorizon",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_time_horizon: Option<bool>,
+    #[serde(
+        rename = "allowTimeSpanBack",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_time_span_back: Option<bool>,
+    #[serde(rename = "className", default, skip_serializing_if = "Option::is_none")]
+    pub class_name: Option<String>,
+    #[serde(
+        rename = "cronExpression",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub cron_expression: Option<String>,
+    #[serde(rename = "dateRange", default, skip_serializing_if = "Option::is_none")]
+    pub date_range: Option<f64>,
+    #[serde(
+        rename = "decomposeTerritories",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub decompose_territories: Option<f64>,
+    #[serde(
+        rename = "emailNotification",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub email_notification: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub enabled: Option<bool>,
+    #[serde(
+        rename = "filterField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub filter_field: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub horizons: Option<String>,
+    #[serde(rename = "isBatch", default, skip_serializing_if = "Option::is_none")]
+    pub is_batch: Option<bool>,
+    #[serde(
+        rename = "isDecomposeTerritories",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_decompose_territories: Option<bool>,
+    #[serde(
+        rename = "isNotificationJob",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_notification_job: Option<bool>,
+    #[serde(rename = "isOaas", default, skip_serializing_if = "Option::is_none")]
+    pub is_oaas: Option<bool>,
+    #[serde(
+        rename = "jobDescription",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub job_description: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    #[serde(
+        rename = "maxObjectsCount",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub max_objects_count: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub minutes: Option<f64>,
+    #[serde(default)]
+    pub name: String,
+    #[serde(
+        rename = "noLocation",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub no_location: Option<bool>,
+    #[serde(
+        rename = "notificationInterval",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub notification_interval: Option<f64>,
+    #[serde(
+        rename = "notificationUsername",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub notification_username: Option<String>,
+    #[serde(
+        rename = "oneLocationMandatory",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub one_location_mandatory: Option<bool>,
+    #[serde(
+        rename = "runNextJob",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub run_next_job: Option<bool>,
+    #[serde(
+        rename = "schedulingPolicyId",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub scheduling_policy_id: Option<String>,
+    #[serde(
+        rename = "secondaryType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub secondary_type: Option<String>,
+    #[serde(
+        rename = "stayScheduledServicesByBoolean",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub stay_scheduled_services_by_boolean: Option<String>,
+    #[serde(
+        rename = "timeSpanBackward",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub time_span_backward: Option<f64>,
+    #[serde(
+        rename = "timeSpanForward",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub time_span_forward: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub timezone: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AgentConfigAssignments {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub profiles: Option<AgentConfigProfileAssignments>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub users: Option<AgentConfigUserAssignments>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -5600,25 +5704,73 @@ pub struct RunTestSuccess {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct CMSConnectAsset {
-    #[serde(rename = "assetPath", default)]
-    pub asset_path: String,
-    #[serde(rename = "assetType", default)]
-    pub asset_type: String,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: f64,
+pub struct KeyboardShortcuts {
+    #[serde(rename = "customShortcuts", default)]
+    pub custom_shortcuts: Vec<CustomShortcut>,
+    #[serde(rename = "defaultShortcuts", default)]
+    pub default_shortcuts: Vec<DefaultShortcut>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct FulfillmentStepType {
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
+pub struct DuplicateRuleMatchRule {
+    #[serde(rename = "matchRuleSObjectType", default)]
+    pub match_rule_s_object_type: String,
+    #[serde(rename = "matchingRule", default)]
+    pub matching_rule: String,
+    #[serde(
+        rename = "objectMapping",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub object_mapping: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AccountRelationshipShareRule {
+    #[serde(rename = "accessLevel", default)]
+    pub access_level: String,
+    #[serde(rename = "accountToCriteriaField", default)]
+    pub account_to_criteria_field: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "entityType", default)]
+    pub entity_type: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(
+        rename = "staticFormulaCriteria",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub static_formula_criteria: Option<String>,
+    #[serde(rename = "type", default)]
+    pub r#type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MetadataPackage {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "Name", default)]
+    pub name: String,
+    #[serde(rename = "NamespacePrefix", default)]
+    pub namespace_prefix: String,
+    #[serde(rename = "PackageCategory", default)]
+    pub package_category: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Orchestration {
     #[serde(default)]
-    pub handler: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
+    pub context: String,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
 }
@@ -5626,115 +5778,249 @@ pub struct FulfillmentStepType {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct CMSConnectLanguage {
-    #[serde(rename = "cmsLanguage", default)]
-    pub cms_language: String,
-    #[serde(default)]
-    pub language: String,
+pub struct ListMetadataQuery {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub folder: Option<String>,
+    #[serde(rename = "type", default)]
+    pub r#type: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct CommandAction {
-    #[serde(rename = "actionType", default)]
-    pub action_type: String,
+pub struct AgentConfigUserAssignments {
+    #[serde(default)]
+    pub user: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CmsnStmtLineItemConfig {
+    #[serde(rename = "failureStatus", default)]
+    pub failure_status: String,
+    #[serde(rename = "insPolicyMatchingCriteria", default)]
+    pub ins_policy_matching_criteria: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "reprocessingEligibility", default)]
+    pub reprocessing_eligibility: String,
+    #[serde(rename = "successStatus", default)]
+    pub success_status: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Scontrol {
+    #[serde(rename = "contentSource", default)]
+    pub content_source: SControlContentSource,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
-    #[serde(default)]
-    pub intents: Vec<CommandActionIntent>,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub parameters: Vec<CommandActionParam>,
-    #[serde(rename = "responseTemplates", default)]
-    pub response_templates: Vec<CommandActionResponse>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub target: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Role {
+    #[serde(rename = "encodingKey", default)]
+    pub encoding_key: serde_json::Value,
     #[serde(
-        rename = "parentRole",
+        rename = "fileContent",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub parent_role: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct IpRange {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub end: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub start: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct WelcomeRecommendation {
-    #[serde(
-        rename = "staticUtterance",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub static_utterance: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AncestryRepresentationProducer {
+    pub file_content: Option<String>,
+    #[serde(rename = "fileName", default, skip_serializing_if = "Option::is_none")]
+    pub file_name: Option<String>,
     #[serde(default)]
-    pub label: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub options: Option<AncestryRepresentationProducerOptions>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BundleUninstallOptions {
-    #[serde(default)]
-    pub connection: serde_json::Value,
-    #[serde(default)]
-    pub project: serde_json::Value,
-    #[serde(rename = "PackageBundleVersion", default)]
-    pub package_bundle_version: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub polling: Option<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MetadataPackageVersion {
-    #[serde(rename = "Id", default)]
-    pub id: String,
-    #[serde(rename = "MetadataPackageId", default)]
-    pub metadata_package_id: String,
-    #[serde(rename = "Name", default)]
     pub name: String,
-    #[serde(rename = "ReleaseState", default)]
-    pub release_state: serde_json::Value,
-    #[serde(rename = "MajorVersion", default)]
-    pub major_version: f64,
-    #[serde(rename = "MinorVersion", default)]
-    pub minor_version: f64,
-    #[serde(rename = "PatchVersion", default)]
-    pub patch_version: f64,
-    #[serde(rename = "BuildNumber", default)]
-    pub build_number: f64,
-    #[serde(rename = "IsDeprecated", default)]
-    pub is_deprecated: bool,
+    #[serde(rename = "supportsCaching", default)]
+    pub supports_caching: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ActnblListKeyPrfmIndDef {
+    #[serde(rename = "aggregateOperationName", default)]
+    pub aggregate_operation_name: ActionableListKPIAggType,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "fieldName", default)]
+    pub field_name: String,
+    #[serde(
+        rename = "filterExpression",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub filter_expression: Option<String>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "objectName", default)]
+    pub object_name: String,
+    #[serde(default)]
+    pub status: ActionableListKPIStType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RecAlrtDataSrcExpSetDef {
+    #[serde(rename = "expressionSetDefinition", default)]
+    pub expression_set_definition: String,
+    #[serde(rename = "expressionSetObject", default)]
+    pub expression_set_object: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(
+        rename = "isProtected",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_protected: Option<bool>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "recordAlertDataSource", default)]
+    pub record_alert_data_source: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct OpportunityListFieldsLabelMapping {
+    #[serde(default)]
+    pub field: String,
+    #[serde(default)]
+    pub label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CancelDeployResult {
+    #[serde(default)]
+    pub done: bool,
+    #[serde(default)]
+    pub id: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Keyword {
+    #[serde(default)]
+    pub keyword: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct GeneralConfig {
+    #[serde(default)]
+    pub name: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub run: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub value: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LwcResource {
+    #[serde(rename = "filePath", default)]
+    pub file_path: String,
+    #[serde(default)]
+    pub source: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SynchronizeSetting {
+    #[serde(
+        rename = "displayName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub display_name: Option<String>,
+    #[serde(
+        rename = "enforceValidations",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub enforce_validations: Option<bool>,
+    #[serde(
+        rename = "fromSalesforce",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub from_salesforce: Option<bool>,
+    #[serde(default)]
+    pub name: String,
+    #[serde(
+        rename = "toSalesforce",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub to_salesforce: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CommissionStatementConfig {
+    #[serde(
+        rename = "cmsnProcBatchPrcJobDef",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub cmsn_proc_batch_prc_job_def: Option<String>,
+    #[serde(rename = "failureStatus", default)]
+    pub failure_status: String,
+    #[serde(rename = "inProgressStatus", default)]
+    pub in_progress_status: String,
+    #[serde(
+        rename = "invalidProducerCmsnStatus",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub invalid_producer_cmsn_status: Option<String>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "partialSuccessStatus", default)]
+    pub partial_success_status: String,
+    #[serde(
+        rename = "stdCmsnProcBtchPrcJobDef",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub std_cmsn_proc_btch_prc_job_def: Option<String>,
+    #[serde(rename = "successStatus", default)]
+    pub success_status: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PkgBundleVersionInstallReq {
+    #[serde(rename = "PackageBundleVersionId", default)]
+    pub package_bundle_version_id: String,
+    #[serde(rename = "DevelopmentOrganization", default)]
+    pub development_organization: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ValidationRuleTranslation {
+    #[serde(rename = "errorMessage", default)]
+    pub error_message: String,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RoleAndSubordinatesInternal {
+    #[serde(rename = "roleAndSubordinateInternal", default)]
+    pub role_and_subordinate_internal: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -5753,996 +6039,6 @@ pub struct OutboundNetworkConnection {
     pub outbound_network_conn_properties: Vec<OutboundNetworkConnProperty>,
     #[serde(default)]
     pub status: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct OrchestrationContextDataset {
-    #[serde(rename = "datasetType", default)]
-    pub dataset_type: String,
-    #[serde(rename = "orchestrationDataset", default)]
-    pub orchestration_dataset: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ActionableListMemberStatus {
-    #[serde(rename = "iconName", default, skip_serializing_if = "Option::is_none")]
-    pub icon_name: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Error {
-    #[serde(rename = "extendedErrorDetails", default)]
-    pub extended_error_details: Vec<ExtendedErrorDetails>,
-    #[serde(default)]
-    pub fields: Vec<String>,
-    #[serde(default)]
-    pub message: String,
-    #[serde(rename = "statusCode", default)]
-    pub status_code: StatusCode,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct OrchestrationContextEvent {
-    #[serde(rename = "eventType", default)]
-    pub event_type: String,
-    #[serde(rename = "orchestrationEvent", default)]
-    pub orchestration_event: String,
-    #[serde(rename = "platformEvent", default)]
-    pub platform_event: String,
-    #[serde(rename = "platformEventPrimaryKey", default)]
-    pub platform_event_primary_key: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ItemInstance {
-    #[serde(
-        rename = "componentInstance",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub component_instance: Option<serde_json::Value>,
-    #[serde(
-        rename = "fieldInstance",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub field_instance: Option<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct IdeaReputationLevel {
-    #[serde(default)]
-    pub name: String,
-    #[serde(default)]
-    pub value: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ContactCenterChannel {
-    #[serde(default)]
-    pub channel: String,
-    #[serde(rename = "contactCenter", default)]
-    pub contact_center: String,
-    #[serde(
-        rename = "omniCallbackFallbackQueue",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub omni_callback_fallback_queue: Option<String>,
-    #[serde(
-        rename = "omniCallbackHandler",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub omni_callback_handler: Option<String>,
-    #[serde(
-        rename = "voiceMailFallbackQueue",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub voice_mail_fallback_queue: Option<String>,
-    #[serde(
-        rename = "voiceMailHandler",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub voice_mail_handler: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AgentConfigButtons {
-    #[serde(default)]
-    pub button: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ValueTranslation {
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub translation: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CommandActionIntent {
-    #[serde(default)]
-    pub phrase: String,
-    #[serde(rename = "responseTemplates", default)]
-    pub response_templates: Vec<CommandActionResponse>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomShortcut {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(rename = "eventName", default)]
-    pub event_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ChartSummary {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub aggregate: Option<serde_json::Value>,
-    #[serde(
-        rename = "axisBinding",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub axis_binding: Option<ChartAxis>,
-    #[serde(default)]
-    pub column: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AgentConfigUserAssignments {
-    #[serde(default)]
-    pub user: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct UIBundle {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(
-        rename = "isProtected",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_protected: Option<bool>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub target: Option<String>,
-    #[serde(default)]
-    pub version: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RedirectWhitelistUrl {
-    #[serde(default)]
-    pub url: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct IPAddressRange {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(rename = "endIpAddress", default)]
-    pub end_ip_address: String,
-    #[serde(rename = "ipAddressFeature", default)]
-    pub ip_address_feature: IPAddressFeature,
-    #[serde(rename = "ipAddressUsageScope", default)]
-    pub ip_address_usage_scope: IPAddressUsageScope,
-    #[serde(
-        rename = "isProtected",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_protected: Option<bool>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "startIpAddress", default)]
-    pub start_ip_address: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PkgBundleVersionInstallReq {
-    #[serde(rename = "PackageBundleVersionId", default)]
-    pub package_bundle_version_id: String,
-    #[serde(rename = "DevelopmentOrganization", default)]
-    pub development_organization: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomFeedFilter {
-    #[serde(default)]
-    pub criteria: Vec<serde_json::Value>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(
-        rename = "isProtected",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_protected: Option<bool>,
-    #[serde(default)]
-    pub label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PushNotification {
-    #[serde(rename = "fieldNames", default)]
-    pub field_names: Vec<String>,
-    #[serde(rename = "objectName", default)]
-    pub object_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RelationshipGraphDefVersion {
-    #[serde(rename = "graphDefinition", default)]
-    pub graph_definition: String,
-    #[serde(rename = "graphType", default)]
-    pub graph_type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PkgBundleVerUninstallReq {
-    #[serde(rename = "PackageBundleVersionId", default)]
-    pub package_bundle_version_id: String,
-    #[serde(
-        rename = "InstalledPkgBundleVersionId",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub installed_pkg_bundle_version_id: Option<String>,
-    #[serde(
-        rename = "ValidationError",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub validation_error: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct KeyboardShortcuts {
-    #[serde(rename = "customShortcuts", default)]
-    pub custom_shortcuts: Vec<CustomShortcut>,
-    #[serde(rename = "defaultShortcuts", default)]
-    pub default_shortcuts: Vec<DefaultShortcut>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PkgBundleVerUninstallReqResult {
-    #[serde(rename = "Id", default)]
-    pub id: String,
-    #[serde(rename = "UninstallStatus", default)]
-    pub uninstall_status: serde_json::Value,
-    #[serde(rename = "CreatedDate", default)]
-    pub created_date: String,
-    #[serde(rename = "CreatedById", default)]
-    pub created_by_id: String,
-    #[serde(rename = "Error", default, skip_serializing_if = "Option::is_none")]
-    pub error: Option<Vec<String>>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BlacklistedConsumer {
-    #[serde(rename = "blockedByApiWhitelisting", default)]
-    pub blocked_by_api_whitelisting: bool,
-    #[serde(rename = "consumerKey", default)]
-    pub consumer_key: String,
-    #[serde(rename = "consumerName", default)]
-    pub consumer_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RetrieveRequest {
-    #[serde(rename = "apiVersion", default)]
-    pub api_version: f64,
-    #[serde(rename = "packageNames", default)]
-    pub package_names: Vec<String>,
-    #[serde(rename = "rootTypesWithDependencies", default)]
-    pub root_types_with_dependencies: Vec<String>,
-    #[serde(rename = "singlePackage", default)]
-    pub single_package: bool,
-    #[serde(rename = "specificFiles", default)]
-    pub specific_files: Vec<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub unpackaged: Option<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LocalMlDomain {
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "mlIntents", default)]
-    pub ml_intents: Vec<serde_json::Value>,
-    #[serde(rename = "mlSlotClasses", default)]
-    pub ml_slot_classes: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct TimelineObjectDefinitionTranslation {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub label: Option<String>,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AIScoringModelDefinition {
-    #[serde(rename = "aiModelConfig", default)]
-    pub ai_model_config: String,
-    #[serde(rename = "aiScoringModelDefVersions", default)]
-    pub ai_scoring_model_def_versions: Vec<AIScoringModelDefVersion>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DependencyGraphData {
-    #[serde(default)]
-    pub creator: String,
-    #[serde(default)]
-    pub nodes: Vec<DependencyGraphNode>,
-    #[serde(default)]
-    pub edges: Vec<DependencyGraphEdge>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MetadataAiDescriptor {
-    #[serde(rename = "accuracyScore", default)]
-    pub accuracy_score: f64,
-    #[serde(rename = "enrichedDescription", default)]
-    pub enriched_description: String,
-    #[serde(rename = "skipEnrichment", default)]
-    pub skip_enrichment: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DelegateGroup {
-    #[serde(rename = "customObjects", default)]
-    pub custom_objects: Vec<String>,
-    #[serde(default)]
-    pub groups: Vec<String>,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "loginAccess", default)]
-    pub login_access: bool,
-    #[serde(rename = "permissionSetGroups", default)]
-    pub permission_set_groups: Vec<String>,
-    #[serde(rename = "permissionSets", default)]
-    pub permission_sets: Vec<String>,
-    #[serde(default)]
-    pub profiles: Vec<String>,
-    #[serde(default)]
-    pub roles: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AccountPlanObjMeasCalcCond {
-    #[serde(rename = "fieldName", default)]
-    pub field_name: String,
-    #[serde(default)]
-    pub operation: String,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RealTimeEvent {
-    #[serde(rename = "entityName", default)]
-    pub entity_name: String,
-    #[serde(rename = "isEnabled", default)]
-    pub is_enabled: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ModeratedEntityField {
-    #[serde(rename = "entityName", default)]
-    pub entity_name: String,
-    #[serde(rename = "fieldName", default, skip_serializing_if = "Option::is_none")]
-    pub field_name: Option<String>,
-    #[serde(
-        rename = "keywordList",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub keyword_list: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SynonymDictionary {
-    #[serde(default)]
-    pub groups: Vec<SynonymGroup>,
-    #[serde(
-        rename = "isProtected",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_protected: Option<bool>,
-    #[serde(default)]
-    pub label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MetadataEnrichments {
-    #[serde(
-        rename = "aiDescriptor",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub ai_descriptor: Option<MetadataAiDescriptor>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MilestoneCompletionCriteria {
-    #[serde(
-        rename = "criteriaBooleanFilter",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub criteria_boolean_filter: Option<String>,
-    #[serde(
-        rename = "criteriaObjectName",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub criteria_object_name: Option<String>,
-    #[serde(
-        rename = "criteriaObjectType",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub criteria_object_type: Option<String>,
-    #[serde(rename = "milestoneCriteriaFilterItems", default)]
-    pub milestone_criteria_filter_items: Vec<FilterItem>,
-    #[serde(
-        rename = "milestoneCriteriaFormula",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub milestone_criteria_formula: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomApplication {
-    #[serde(rename = "actionOverrides", default)]
-    pub action_overrides: Vec<serde_json::Value>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub brand: Option<serde_json::Value>,
-    #[serde(
-        rename = "consoleConfig",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub console_config: Option<serde_json::Value>,
-    #[serde(
-        rename = "defaultLandingTab",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub default_landing_tab: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(rename = "formFactors", default)]
-    pub form_factors: Vec<FormFactor>,
-    #[serde(
-        rename = "isNavAutoTempTabsDisabled",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_nav_auto_temp_tabs_disabled: Option<bool>,
-    #[serde(
-        rename = "isNavPersonalizationDisabled",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_nav_personalization_disabled: Option<bool>,
-    #[serde(
-        rename = "isNavTabPersistenceDisabled",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_nav_tab_persistence_disabled: Option<bool>,
-    #[serde(
-        rename = "isOmniPinnedViewEnabled",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_omni_pinned_view_enabled: Option<bool>,
-    #[serde(
-        rename = "isServiceCloudConsole",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_service_cloud_console: Option<bool>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub label: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub logo: Option<String>,
-    #[serde(rename = "navType", default, skip_serializing_if = "Option::is_none")]
-    pub nav_type: Option<NavType>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub preferences: Option<serde_json::Value>,
-    #[serde(rename = "profileActionOverrides", default)]
-    pub profile_action_overrides: Vec<serde_json::Value>,
-    #[serde(
-        rename = "setupExperience",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub setup_experience: Option<String>,
-    #[serde(rename = "subscriberTabs", default)]
-    pub subscriber_tabs: Vec<String>,
-    #[serde(default)]
-    pub tabs: Vec<String>,
-    #[serde(rename = "uiType", default, skip_serializing_if = "Option::is_none")]
-    pub ui_type: Option<serde_json::Value>,
-    #[serde(
-        rename = "utilityBar",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub utility_bar: Option<String>,
-    #[serde(
-        rename = "workspaceConfig",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub workspace_config: Option<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EmpSvcInvocableActionDef {
-    #[serde(rename = "apexInput", default, skip_serializing_if = "Option::is_none")]
-    pub apex_input: Option<String>,
-    #[serde(
-        rename = "apexOutput",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub apex_output: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(
-        rename = "developerName",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub developer_name: Option<String>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(
-        rename = "relativeEndpointUrl",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub relative_endpoint_url: Option<String>,
-    #[serde(
-        rename = "requestMethod",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub request_method: Option<EmployeeUseCaseMethod>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<EmployeeUseCaseStatus>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Group {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(
-        rename = "doesIncludeBosses",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub does_include_bosses: Option<bool>,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AgentConfigSkills {
-    #[serde(default)]
-    pub skill: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DependencyGraphNode {
-    #[serde(rename = "subscriberPackageVersionId", default)]
-    pub subscriber_package_version_id: String,
-    #[serde(rename = "packageName", default)]
-    pub package_name: String,
-    #[serde(default)]
-    pub version: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LwcResources {
-    #[serde(rename = "lwcResource", default)]
-    pub lwc_resource: Vec<LwcResource>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CmsnStmtLineItemTypConfig {
-    #[serde(
-        rename = "brkrRevSpltArngLnItmTyp",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub brkr_rev_splt_arng_ln_itm_typ: Option<String>,
-    #[serde(rename = "commissionStmtLineItemType", default)]
-    pub commission_stmt_line_item_type: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(
-        rename = "prodSplitArngLineItemType",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub prod_split_arng_line_item_type: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DgtAssetMgmtProvider {
-    #[serde(default)]
-    pub icon: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PipelineInspMetricConfigTranslation {
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ModerationRule {
-    #[serde(default)]
-    pub action: ModerationRuleAction,
-    #[serde(
-        rename = "actionLimit",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub action_limit: Option<f64>,
-    #[serde(default)]
-    pub active: bool,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(rename = "entitiesAndFields", default)]
-    pub entities_and_fields: Vec<ModeratedEntityField>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(
-        rename = "notifyLimit",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub notify_limit: Option<f64>,
-    #[serde(
-        rename = "timePeriod",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub time_period: Option<RateLimitTimePeriod>,
-    #[serde(rename = "type", default, skip_serializing_if = "Option::is_none")]
-    pub r#type: Option<ModerationRuleType>,
-    #[serde(rename = "userCriteria", default)]
-    pub user_criteria: Vec<String>,
-    #[serde(
-        rename = "userMessage",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub user_message: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MilestonePauseCriteria {
-    #[serde(
-        rename = "criteriaBooleanFilter",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub criteria_boolean_filter: Option<String>,
-    #[serde(rename = "milestoneCriteriaFilterItems", default)]
-    pub milestone_criteria_filter_items: Vec<FilterItem>,
-    #[serde(
-        rename = "milestoneCriteriaFormula",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub milestone_criteria_formula: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LightningTypeBundle {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub resources: Vec<LightningTypeBundleResource>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ActionableListDatasetColumn {
-    #[serde(
-        rename = "dataDomain",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub data_domain: Option<serde_json::Value>,
-    #[serde(rename = "dataType", default, skip_serializing_if = "Option::is_none")]
-    pub data_type: Option<serde_json::Value>,
-    #[serde(
-        rename = "displayOrder",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub display_order: Option<f64>,
-    #[serde(rename = "isDefault", default, skip_serializing_if = "Option::is_none")]
-    pub is_default: Option<bool>,
-    #[serde(
-        rename = "isGroupedByListDefObj",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_grouped_by_list_def_obj: Option<bool>,
-    #[serde(
-        rename = "isTypeAheadSearchEnabled",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_type_ahead_search_enabled: Option<bool>,
-    #[serde(
-        rename = "objectName",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub object_name: Option<String>,
-    #[serde(
-        rename = "sourceColumnApiName",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub source_column_api_name: Option<String>,
-    #[serde(
-        rename = "sourceFieldName",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub source_field_name: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LwcResource {
-    #[serde(rename = "filePath", default)]
-    pub file_path: String,
-    #[serde(default)]
-    pub source: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Bundle {
-    #[serde(rename = "BundleName", default)]
-    pub bundle_name: String,
-    #[serde(
-        rename = "Description",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub description: Option<String>,
-    #[serde(rename = "Id", default)]
-    pub id: String,
-    #[serde(rename = "IsDeleted", default)]
-    pub is_deleted: bool,
-    #[serde(rename = "CreatedDate", default)]
-    pub created_date: String,
-    #[serde(rename = "CreatedById", default)]
-    pub created_by_id: String,
-    #[serde(rename = "LastModifiedDate", default)]
-    pub last_modified_date: String,
-    #[serde(rename = "LastModifiedById", default)]
-    pub last_modified_by_id: String,
-    #[serde(rename = "SystemModstamp", default)]
-    pub system_modstamp: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ListViewFilter {
-    #[serde(default)]
-    pub field: String,
-    #[serde(default)]
-    pub operation: serde_json::Value,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub value: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CatalogedApiVersion {
-    #[serde(rename = "catalogedApi", default)]
-    pub cataloged_api: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(
-        rename = "externalSourceIdentifier",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub external_source_identifier: Option<String>,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub version: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct StaticDynamicValMapping {
-    #[serde(default)]
-    pub attribute: String,
-    #[serde(rename = "dynamicValue", default)]
-    pub dynamic_value: String,
-    #[serde(rename = "dynamicValueObject", default)]
-    pub dynamic_value_object: String,
-    #[serde(rename = "dynamicValueObjectField", default)]
-    pub dynamic_value_object_field: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "staticValue", default)]
-    pub static_value: String,
-    #[serde(rename = "staticValueObject", default)]
-    pub static_value_object: String,
-    #[serde(rename = "staticValueObjectField", default)]
-    pub static_value_object_field: String,
-    #[serde(
-        rename = "uniqueConstraintFormula",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub unique_constraint_formula: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DuplicateRuleFilter {
-    #[serde(
-        rename = "booleanFilter",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub boolean_filter: Option<String>,
-    #[serde(rename = "duplicateRuleFilterItems", default)]
-    pub duplicate_rule_filter_items: Vec<DuplicateRuleFilterItem>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -6814,185 +6110,179 @@ pub struct ExtConvParticipantIntegDef {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct TopicsForObjects {
-    #[serde(rename = "enableTopics", default)]
-    pub enable_topics: bool,
-    #[serde(rename = "entityApiName", default)]
-    pub entity_api_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DuplicateRuleMatchRule {
-    #[serde(rename = "matchRuleSObjectType", default)]
-    pub match_rule_s_object_type: String,
-    #[serde(rename = "matchingRule", default)]
-    pub matching_rule: String,
-    #[serde(
-        rename = "objectMapping",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub object_mapping: Option<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Metadata {
-    #[serde(rename = "fullName", default, skip_serializing_if = "Option::is_none")]
-    pub full_name: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct VoiceEngmtMediaFileAsgnt {
-    #[serde(
-        rename = "assignmentType",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub assignment_type: Option<AssignmentType>,
+pub struct MetadataWithContent {
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub id: Option<String>,
-    #[serde(rename = "isActive", default, skip_serializing_if = "Option::is_none")]
-    pub is_active: Option<bool>,
+    pub content: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AgentConfigButtons {
+    #[serde(default)]
+    pub button: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct TriggerConfiguration {
+    #[serde(default)]
+    pub description: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(default)]
+    pub run: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ActionableListDatasetColumn {
+    #[serde(
+        rename = "dataDomain",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub data_domain: Option<serde_json::Value>,
+    #[serde(rename = "dataType", default, skip_serializing_if = "Option::is_none")]
+    pub data_type: Option<serde_json::Value>,
+    #[serde(
+        rename = "displayOrder",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub display_order: Option<f64>,
     #[serde(rename = "isDefault", default, skip_serializing_if = "Option::is_none")]
     pub is_default: Option<bool>,
     #[serde(
-        rename = "masterLabel",
+        rename = "isGroupedByListDefObj",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub master_label: Option<String>,
+    pub is_grouped_by_list_def_obj: Option<bool>,
     #[serde(
-        rename = "voiceEngagementMediaFile",
+        rename = "isTypeAheadSearchEnabled",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub voice_engagement_media_file: Option<String>,
+    pub is_type_ahead_search_enabled: Option<bool>,
     #[serde(
-        rename = "voiceEngagementMediaUsage",
+        rename = "objectName",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub voice_engagement_media_usage: Option<String>,
+    pub object_name: Option<String>,
+    #[serde(
+        rename = "sourceColumnApiName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub source_column_api_name: Option<String>,
+    #[serde(
+        rename = "sourceFieldName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub source_field_name: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ProviderSampleLimitTemplate {
-    #[serde(rename = "discrepancyAlertType", default)]
-    pub discrepancy_alert_type: SampleLimitDiscAlertType,
+pub struct Holiday {
+    #[serde(
+        rename = "activityDate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub activity_date: Option<serde_json::Value>,
+    #[serde(rename = "businessHours", default)]
+    pub business_hours: Vec<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "endTime", default, skip_serializing_if = "Option::is_none")]
+    pub end_time: Option<serde_json::Value>,
+    #[serde(
+        rename = "isRecurring",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_recurring: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
+    #[serde(
+        rename = "recurrenceDayOfMonth",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recurrence_day_of_month: Option<f64>,
+    #[serde(rename = "recurrenceDayOfWeek", default)]
+    pub recurrence_day_of_week: Vec<String>,
+    #[serde(
+        rename = "recurrenceDayOfWeekMask",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recurrence_day_of_week_mask: Option<f64>,
+    #[serde(
+        rename = "recurrenceEndDate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recurrence_end_date: Option<serde_json::Value>,
+    #[serde(
+        rename = "recurrenceInstance",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recurrence_instance: Option<String>,
+    #[serde(
+        rename = "recurrenceInterval",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recurrence_interval: Option<f64>,
+    #[serde(
+        rename = "recurrenceMonthOfYear",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recurrence_month_of_year: Option<String>,
+    #[serde(
+        rename = "recurrenceStartDate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recurrence_start_date: Option<serde_json::Value>,
+    #[serde(
+        rename = "recurrenceType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recurrence_type: Option<String>,
+    #[serde(rename = "startTime", default, skip_serializing_if = "Option::is_none")]
+    pub start_time: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CommandActionResponse {
+    #[serde(default)]
+    pub template: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EmployeeDataSyncProfile {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "employeeDataSyncField", default)]
+    pub employee_data_sync_field: Vec<EmployeeDataSyncField>,
     #[serde(rename = "isActive", default)]
     pub is_active: bool,
-    #[serde(
-        rename = "isAdvanced",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_advanced: Option<bool>,
-    #[serde(rename = "isCloned", default, skip_serializing_if = "Option::is_none")]
-    pub is_cloned: Option<bool>,
-    #[serde(
-        rename = "isLawBased",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_law_based: Option<bool>,
-    #[serde(default)]
-    pub label: String,
-    #[serde(
-        rename = "priorityNumber",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub priority_number: Option<f64>,
-    #[serde(rename = "ruleCondition", default)]
-    pub rule_condition: String,
-    #[serde(rename = "ruleExpression", default)]
-    pub rule_expression: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AgentConfigAssignments {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub profiles: Option<AgentConfigProfileAssignments>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub users: Option<AgentConfigUserAssignments>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ExtendedErrorDetails {
-    #[serde(rename = "extendedErrorCode", default)]
-    pub extended_error_code: ExtendedErrorCode,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct InboundNetworkConnection {
-    #[serde(rename = "connectionType", default)]
-    pub connection_type: serde_json::Value,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "inboundNetworkConnProperties", default)]
-    pub inbound_network_conn_properties: Vec<InboundNetworkConnProperty>,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub status: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AIScoringModelDefVersion {
-    #[serde(rename = "aiScoringModelDefinition", default)]
-    pub ai_scoring_model_definition: String,
-    #[serde(rename = "aiScoringSteps", default)]
-    pub ai_scoring_steps: Vec<AIScoringStep>,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "modelMode", default)]
-    pub model_mode: AIScoringModelDefVersionMode,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ActionableListDefinition {
-    #[serde(rename = "actionableListDatasetColumns", default)]
-    pub actionable_list_dataset_columns: Vec<ActionableListDatasetColumn>,
-    #[serde(rename = "actionableListMemberStatuses", default)]
-    pub actionable_list_member_statuses: Vec<ActionableListMemberStatus>,
-    #[serde(
-        rename = "batchCalcJobDefinition",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub batch_calc_job_definition: Option<String>,
-    #[serde(
-        rename = "datasetName",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub dataset_name: Option<String>,
-    #[serde(rename = "edgeMart", default, skip_serializing_if = "Option::is_none")]
-    pub edge_mart: Option<String>,
-    #[serde(rename = "isActive", default, skip_serializing_if = "Option::is_none")]
-    pub is_active: Option<bool>,
     #[serde(
         rename = "isProtected",
         default,
@@ -7001,532 +6291,134 @@ pub struct ActionableListDefinition {
     pub is_protected: Option<bool>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "objectName", default)]
-    pub object_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BundleComponentInstallRecord {
+    #[serde(rename = "SubscriberPackageVersion", default)]
+    pub subscriber_package_version: serde_json::Value,
     #[serde(
-        rename = "sourceType",
+        rename = "InstalledComponent",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub source_type: Option<ActionableListSourceType>,
-    #[serde(rename = "type", default, skip_serializing_if = "Option::is_none")]
-    pub r#type: Option<ActionableListType>,
+    pub installed_component: Option<serde_json::Value>,
+    #[serde(rename = "SequenceOrder", default)]
+    pub sequence_order: f64,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct InboundNetworkConnProperty {
-    #[serde(rename = "propertyName", default)]
-    pub property_name: InboundConnPropertyName,
-    #[serde(rename = "propertyValue", default)]
-    pub property_value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FindSimilarOppFilter {
-    #[serde(rename = "similarOpportunitiesDisplayColumns", default)]
-    pub similar_opportunities_display_columns: Vec<String>,
-    #[serde(rename = "similarOpportunitiesMatchFields", default)]
-    pub similar_opportunities_match_fields: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MetadataPackage {
-    #[serde(rename = "Id", default)]
-    pub id: String,
-    #[serde(rename = "Name", default)]
-    pub name: String,
-    #[serde(rename = "NamespacePrefix", default)]
-    pub namespace_prefix: String,
-    #[serde(rename = "PackageCategory", default)]
-    pub package_category: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FileProperties {
-    #[serde(rename = "createdById", default)]
-    pub created_by_id: String,
-    #[serde(rename = "createdByName", default)]
-    pub created_by_name: String,
-    #[serde(rename = "createdDate", default)]
-    pub created_date: serde_json::Value,
-    #[serde(rename = "fileName", default)]
-    pub file_name: String,
-    #[serde(rename = "fullName", default)]
-    pub full_name: String,
-    #[serde(default)]
-    pub id: String,
-    #[serde(rename = "lastModifiedById", default)]
-    pub last_modified_by_id: String,
-    #[serde(rename = "lastModifiedByName", default)]
-    pub last_modified_by_name: String,
-    #[serde(rename = "lastModifiedDate", default)]
-    pub last_modified_date: serde_json::Value,
-    #[serde(
-        rename = "manageableState",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub manageable_state: Option<serde_json::Value>,
-    #[serde(
-        rename = "namespacePrefix",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub namespace_prefix: Option<String>,
-    #[serde(rename = "type", default)]
-    pub r#type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RunTestsResult {
-    #[serde(rename = "apexLogId", default, skip_serializing_if = "Option::is_none")]
-    pub apex_log_id: Option<String>,
-    #[serde(rename = "codeCoverage", default)]
-    pub code_coverage: Vec<serde_json::Value>,
-    #[serde(rename = "codeCoverageWarnings", default)]
-    pub code_coverage_warnings: Vec<serde_json::Value>,
-    #[serde(default)]
-    pub failures: Vec<RunTestFailure>,
-    #[serde(rename = "flowCoverage", default)]
-    pub flow_coverage: Vec<serde_json::Value>,
-    #[serde(rename = "flowCoverageWarnings", default)]
-    pub flow_coverage_warnings: Vec<serde_json::Value>,
-    #[serde(rename = "numFailures", default)]
-    pub num_failures: f64,
-    #[serde(rename = "numTestsRun", default)]
-    pub num_tests_run: f64,
-    #[serde(default)]
-    pub successes: Vec<RunTestSuccess>,
-    #[serde(rename = "totalTime", default)]
-    pub total_time: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AnimationRule {
-    #[serde(rename = "animationFrequency", default)]
-    pub animation_frequency: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "recordTypeContext", default)]
-    pub record_type_context: String,
-    #[serde(
-        rename = "recordTypeName",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub record_type_name: Option<String>,
-    #[serde(rename = "sobjectType", default)]
-    pub sobject_type: String,
-    #[serde(rename = "targetField", default)]
-    pub target_field: String,
-    #[serde(rename = "targetFieldChangeToValues", default)]
-    pub target_field_change_to_values: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CountriesAndStates {
-    #[serde(default)]
-    pub countries: Vec<Country>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DgtAssetMgmtPrvdLghtCpnt {
-    #[serde(rename = "dgtAssetMgmtProvider", default)]
-    pub dgt_asset_mgmt_provider: String,
-    #[serde(
-        rename = "lightningComponentBundle",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub lightning_component_bundle: Option<String>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "type", default)]
-    pub r#type: DgtAssetMgmtPrvdLghtCpntType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EscalationAction {
-    #[serde(
-        rename = "assignedTo",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub assigned_to: Option<String>,
-    #[serde(
-        rename = "assignedToTemplate",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub assigned_to_template: Option<String>,
-    #[serde(
-        rename = "assignedToType",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub assigned_to_type: Option<AssignToLookupValueType>,
-    #[serde(
-        rename = "minutesToEscalation",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub minutes_to_escalation: Option<f64>,
-    #[serde(
-        rename = "notifyCaseOwner",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub notify_case_owner: Option<bool>,
-    #[serde(rename = "notifyEmail", default)]
-    pub notify_email: Vec<String>,
-    #[serde(rename = "notifyTo", default, skip_serializing_if = "Option::is_none")]
-    pub notify_to: Option<String>,
-    #[serde(
-        rename = "notifyToTemplate",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub notify_to_template: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ArticleTypeChannelDisplay {
-    #[serde(rename = "articleTypeTemplates", default)]
-    pub article_type_templates: Vec<ArticleTypeTemplate>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct McpServerPromptDefinition {
-    #[serde(
-        rename = "descriptionOverride",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub description_override: Option<String>,
-    #[serde(rename = "promptName", default)]
-    pub prompt_name: String,
-    #[serde(rename = "promptTemplateName", default)]
-    pub prompt_template_name: String,
-    #[serde(
-        rename = "promptTitle",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub prompt_title: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SubtabComponents {
-    #[serde(default)]
-    pub containers: Vec<Container>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DescribeMetadataResult {
-    #[serde(rename = "metadataObjects", default)]
-    pub metadata_objects: Vec<DescribeMetadataObject>,
-    #[serde(rename = "organizationNamespace", default)]
-    pub organization_namespace: String,
-    #[serde(rename = "partialSaveAllowed", default)]
-    pub partial_save_allowed: bool,
-    #[serde(rename = "testRequired", default)]
-    pub test_required: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SaveResult {
-    #[serde(default)]
-    pub errors: Vec<Error>,
-    #[serde(rename = "fullName", default)]
-    pub full_name: String,
-    #[serde(default)]
-    pub success: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MapExpression {
-    #[serde(default)]
-    pub expression: String,
-    #[serde(default)]
-    pub name: String,
-    #[serde(rename = "type", default, skip_serializing_if = "Option::is_none")]
-    pub r#type: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MyDomainDiscoverableLogin {
-    #[serde(rename = "apexHandler", default)]
-    pub apex_handler: String,
-    #[serde(
-        rename = "executeApexHandlerAs",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub execute_apex_handler_as: Option<String>,
-    #[serde(
-        rename = "usernameLabel",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub username_label: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DeleteResult {
-    #[serde(default)]
-    pub errors: Vec<Error>,
-    #[serde(rename = "fullName", default)]
-    pub full_name: String,
-    #[serde(default)]
-    pub success: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct UIObjectRelationFieldConfig {
-    #[serde(rename = "displayLabel", default)]
-    pub display_label: String,
-    #[serde(rename = "queryText", default)]
-    pub query_text: String,
-    #[serde(rename = "rowOrder", default)]
-    pub row_order: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CMSConnectPersonalization {
-    #[serde(rename = "connectorPage", default)]
-    pub connector_page: String,
-    #[serde(rename = "connectorPageAsset", default)]
-    pub connector_page_asset: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GatewayProviderPaymentMethodType {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub comments: Option<String>,
-    #[serde(
-        rename = "gtwyProviderPaymentMethodType",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub gtwy_provider_payment_method_type: Option<String>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(
-        rename = "paymentGatewayProvider",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub payment_gateway_provider: Option<String>,
-    #[serde(
-        rename = "paymentMethodType",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub payment_method_type: Option<String>,
-    #[serde(
-        rename = "recordType",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub record_type: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PkgBundleVerUninstallReqQueryRecord {
-    #[serde(rename = "Id", default)]
-    pub id: String,
-    #[serde(rename = "UninstallStatus", default)]
-    pub uninstall_status: serde_json::Value,
-    #[serde(rename = "PackageBundleVersionId", default)]
-    pub package_bundle_version_id: String,
-    #[serde(
-        rename = "InstalledPkgBundleVersionId",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub installed_pkg_bundle_version_id: Option<String>,
-    #[serde(
-        rename = "ValidationError",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub validation_error: Option<String>,
-    #[serde(rename = "CreatedDate", default)]
-    pub created_date: String,
-    #[serde(rename = "CreatedById", default)]
-    pub created_by_id: String,
-    #[serde(rename = "Error", default, skip_serializing_if = "Option::is_none")]
-    pub error: Option<Vec<String>>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct UpsertResult {
-    #[serde(default)]
-    pub created: bool,
-    #[serde(default)]
-    pub errors: Vec<Error>,
-    #[serde(rename = "fullName", default)]
-    pub full_name: String,
-    #[serde(default)]
-    pub success: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct OutboundNetworkConnProperty {
-    #[serde(rename = "propertyName", default)]
-    pub property_name: OutboundConnPropertyName,
-    #[serde(rename = "propertyValue", default)]
-    pub property_value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CleanRule {
-    #[serde(rename = "bulkEnabled", default)]
-    pub bulk_enabled: bool,
-    #[serde(rename = "bypassTriggers", default)]
-    pub bypass_triggers: bool,
-    #[serde(rename = "bypassWorkflow", default)]
-    pub bypass_workflow: bool,
-    #[serde(default)]
-    pub description: String,
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "fieldMappings", default)]
-    pub field_mappings: Vec<serde_json::Value>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "matchRule", default)]
-    pub match_rule: String,
-    #[serde(rename = "sourceSobjectType", default)]
-    pub source_sobject_type: String,
-    #[serde(default)]
-    pub status: CleanRuleStatus,
-    #[serde(rename = "targetSobjectType", default)]
-    pub target_sobject_type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DefaultShortcut {
-    #[serde(default)]
-    pub action: String,
+pub struct LookupFilter {
     #[serde(default)]
     pub active: bool,
-    #[serde(rename = "keyCommand", default)]
-    pub key_command: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Targets {
-    #[serde(default)]
-    pub target: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RegisteredExternalService {
-    #[serde(rename = "configUrl", default, skip_serializing_if = "Option::is_none")]
-    pub config_url: Option<String>,
+    #[serde(
+        rename = "booleanFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub boolean_filter: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
     #[serde(
-        rename = "documentationUrl",
+        rename = "errorMessage",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub documentation_url: Option<String>,
+    pub error_message: Option<String>,
+    #[serde(rename = "filterItems", default)]
+    pub filter_items: Vec<FilterItem>,
     #[serde(
-        rename = "extensionPointName",
+        rename = "infoMessage",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub extension_point_name: Option<ExtensionPointName>,
-    #[serde(rename = "externalServiceProvider", default)]
-    pub external_service_provider: String,
-    #[serde(rename = "externalServiceProviderType", default)]
-    pub external_service_provider_type: RegistryProviderType,
-    #[serde(rename = "iconUri", default, skip_serializing_if = "Option::is_none")]
-    pub icon_uri: Option<String>,
-    #[serde(
-        rename = "isApplication",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_application: Option<bool>,
-    #[serde(
-        rename = "isProtected",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_protected: Option<bool>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
+    pub info_message: Option<String>,
+    #[serde(rename = "isOptional", default)]
+    pub is_optional: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct Attributes {
-    #[serde(rename = "type", default)]
-    pub r#type: String,
+pub struct PushNotification {
+    #[serde(rename = "fieldNames", default)]
+    pub field_names: Vec<String>,
+    #[serde(rename = "objectName", default)]
+    pub object_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MilestonePauseCriteria {
+    #[serde(
+        rename = "criteriaBooleanFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub criteria_boolean_filter: Option<String>,
+    #[serde(rename = "milestoneCriteriaFilterItems", default)]
+    pub milestone_criteria_filter_items: Vec<FilterItem>,
+    #[serde(
+        rename = "milestoneCriteriaFormula",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub milestone_criteria_formula: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct VendorCallCenterStatusMap {
+    #[serde(rename = "externalStatus", default)]
+    pub external_status: String,
+    #[serde(rename = "servicePresenceStatus", default)]
+    pub service_presence_status: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ChartSummary {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub aggregate: Option<serde_json::Value>,
+    #[serde(
+        rename = "axisBinding",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub axis_binding: Option<ChartAxis>,
     #[serde(default)]
-    pub url: String,
+    pub column: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MetadataPackageVersion {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "MetadataPackageId", default)]
+    pub metadata_package_id: String,
+    #[serde(rename = "Name", default)]
+    pub name: String,
+    #[serde(rename = "ReleaseState", default)]
+    pub release_state: serde_json::Value,
+    #[serde(rename = "MajorVersion", default)]
+    pub major_version: f64,
+    #[serde(rename = "MinorVersion", default)]
+    pub minor_version: f64,
+    #[serde(rename = "PatchVersion", default)]
+    pub patch_version: f64,
+    #[serde(rename = "BuildNumber", default)]
+    pub build_number: f64,
+    #[serde(rename = "IsDeprecated", default)]
+    pub is_deprecated: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -7545,388 +6437,6 @@ pub struct PipelineInspMetricConfig {
     pub master_label: String,
     #[serde(default)]
     pub metric: PipelineInspectionMetric,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BrandingSet {
-    #[serde(rename = "brandingSetProperty", default)]
-    pub branding_set_property: Vec<BrandingSetProperty>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "type", default, skip_serializing_if = "Option::is_none")]
-    pub r#type: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RoleOrTerritory {
-    #[serde(
-        rename = "caseAccessLevel",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub case_access_level: Option<String>,
-    #[serde(
-        rename = "contactAccessLevel",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub contact_access_level: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(
-        rename = "mayForecastManagerShare",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub may_forecast_manager_share: Option<bool>,
-    #[serde(default)]
-    pub name: String,
-    #[serde(
-        rename = "opportunityAccessLevel",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub opportunity_access_level: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FilterItem {
-    #[serde(default)]
-    pub field: String,
-    #[serde(default)]
-    pub operation: serde_json::Value,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub value: Option<String>,
-    #[serde(
-        rename = "valueField",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub value_field: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DescribeValueTypeResult {
-    #[serde(rename = "apiCreatable", default)]
-    pub api_creatable: bool,
-    #[serde(rename = "apiDeletable", default)]
-    pub api_deletable: bool,
-    #[serde(rename = "apiReadable", default)]
-    pub api_readable: bool,
-    #[serde(rename = "apiUpdatable", default)]
-    pub api_updatable: bool,
-    #[serde(
-        rename = "parentField",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub parent_field: Option<ValueTypeField>,
-    #[serde(rename = "valueTypeFields", default)]
-    pub value_type_fields: Vec<ValueTypeField>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CriteriaSetting {
-    #[serde(
-        rename = "criteriaItems",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub criteria_items: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub logic: Option<String>,
-    #[serde(default)]
-    pub name: String,
-    #[serde(
-        rename = "objectType",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub object_type: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub territories: Option<String>,
-    #[serde(rename = "userType", default, skip_serializing_if = "Option::is_none")]
-    pub user_type: Option<String>,
-    #[serde(rename = "workTypes", default, skip_serializing_if = "Option::is_none")]
-    pub work_types: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PasswordPolicies {
-    #[serde(
-        rename = "apiOnlyUserHomePageURL",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub api_only_user_home_page_url: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub complexity: Option<Complexity>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub expiration: Option<Expiration>,
-    #[serde(
-        rename = "historyRestriction",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub history_restriction: Option<String>,
-    #[serde(
-        rename = "lockoutInterval",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub lockout_interval: Option<LockoutInterval>,
-    #[serde(
-        rename = "maxLoginAttempts",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub max_login_attempts: Option<MaxLoginAttempts>,
-    #[serde(
-        rename = "minimumPasswordLength",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub minimum_password_length: Option<String>,
-    #[serde(
-        rename = "minimumPasswordLifetime",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub minimum_password_lifetime: Option<bool>,
-    #[serde(
-        rename = "obscureSecretAnswer",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub obscure_secret_answer: Option<bool>,
-    #[serde(
-        rename = "passwordAssistanceMessage",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub password_assistance_message: Option<String>,
-    #[serde(
-        rename = "passwordAssistanceURL",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub password_assistance_url: Option<String>,
-    #[serde(
-        rename = "questionRestriction",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub question_restriction: Option<QuestionRestriction>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CommandActionResponse {
-    #[serde(default)]
-    pub template: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Certificate {
-    #[serde(rename = "caSigned", default)]
-    pub ca_signed: bool,
-    #[serde(
-        rename = "encryptedWithPlatformEncryption",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub encrypted_with_platform_encryption: Option<bool>,
-    #[serde(
-        rename = "expirationDate",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub expiration_date: Option<serde_json::Value>,
-    #[serde(rename = "keySize", default, skip_serializing_if = "Option::is_none")]
-    pub key_size: Option<f64>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(
-        rename = "privateKeyExportable",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub private_key_exportable: Option<bool>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PkgBundleVersionCreateReq {
-    #[serde(rename = "PackageBundleId", default)]
-    pub package_bundle_id: String,
-    #[serde(rename = "VersionName", default)]
-    pub version_name: String,
-    #[serde(rename = "MajorVersion", default)]
-    pub major_version: String,
-    #[serde(rename = "MinorVersion", default)]
-    pub minor_version: String,
-    #[serde(rename = "BundleVersionComponents", default)]
-    pub bundle_version_components: String,
-    #[serde(rename = "Ancestor", default, skip_serializing_if = "Option::is_none")]
-    pub ancestor: Option<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CMSConnectResourceDefinition {
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default)]
-    pub options: f64,
-    #[serde(rename = "payloadType", default)]
-    pub payload_type: String,
-    #[serde(
-        rename = "resourceIdPath",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub resource_id_path: Option<String>,
-    #[serde(
-        rename = "resourceNamePath",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub resource_name_path: Option<String>,
-    #[serde(rename = "resourcePath", default)]
-    pub resource_path: String,
-    #[serde(
-        rename = "rootNodePath",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub root_node_path: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct QueryRecord {
-    #[serde(rename = "Id", default)]
-    pub id: String,
-    #[serde(
-        rename = "PackageBundle",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub package_bundle: Option<serde_json::Value>,
-    #[serde(rename = "VersionName", default)]
-    pub version_name: String,
-    #[serde(rename = "MajorVersion", default)]
-    pub major_version: String,
-    #[serde(rename = "MinorVersion", default)]
-    pub minor_version: String,
-    #[serde(rename = "IsReleased", default)]
-    pub is_released: bool,
-    #[serde(rename = "Ancestor", default, skip_serializing_if = "Option::is_none")]
-    pub ancestor: Option<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GeneralConfig {
-    #[serde(default)]
-    pub name: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub run: Option<bool>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub value: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct MetadataWithContent {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub content: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CatalogedApiArtifactVersionInfo {
-    #[serde(
-        rename = "releaseNotes",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub release_notes: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub revision: Option<f64>,
-    #[serde(rename = "type", default)]
-    pub r#type: String,
-    #[serde(default)]
-    pub version: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LicensedCustomPermissions {
-    #[serde(rename = "customPermission", default)]
-    pub custom_permission: String,
-    #[serde(rename = "licenseDefinition", default)]
-    pub license_definition: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BrandingSetProperty {
-    #[serde(rename = "propertyName", default)]
-    pub property_name: String,
-    #[serde(
-        rename = "propertyValue",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub property_value: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct FileTypeDispositionAssignmentBean {
-    #[serde(default)]
-    pub behavior: FileDownloadBehavior,
-    #[serde(rename = "fileType", default)]
-    pub file_type: FileType,
-    #[serde(rename = "securityRiskFileType", default)]
-    pub security_risk_file_type: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EnrichedField {
-    #[serde(default)]
-    pub name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -8130,439 +6640,89 @@ pub struct CommunicationChannelLine {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct OptimizationSetting {
+pub struct TimeSheetTemplateAssignment {
     #[serde(
-        rename = "bulkUpdateSize",
+        rename = "assignedTo",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub bulk_update_size: Option<f64>,
-    #[serde(
-        rename = "clearGantt",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub clear_gantt: Option<bool>,
-    #[serde(
-        rename = "clusterMinPoints",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub cluster_min_points: Option<f64>,
-    #[serde(
-        rename = "clusterRadius",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub cluster_radius: Option<f64>,
-    #[serde(
-        rename = "maxRuntimeSingleService",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub max_runtime_single_service: Option<f64>,
-    #[serde(
-        rename = "maximumConcurrentRequests",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub maximum_concurrent_requests: Option<f64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub name: Option<String>,
-    #[serde(
-        rename = "pinnedStatuses",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub pinned_statuses: Option<String>,
-    #[serde(
-        rename = "stayScheduledServicesByBoolean",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub stay_scheduled_services_by_boolean: Option<String>,
+    pub assigned_to: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct RoleAndSubordinatesInternal {
-    #[serde(rename = "roleAndSubordinateInternal", default)]
-    pub role_and_subordinate_internal: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct VoiceEngagementMediaUsage {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub id: Option<String>,
-    #[serde(
-        rename = "masterLabel",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub master_label: Option<String>,
-    #[serde(rename = "mediaName", default, skip_serializing_if = "Option::is_none")]
-    pub media_name: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ChoiceListValue {
-    #[serde(rename = "embeddedServiceCustomLabels", default)]
-    pub embedded_service_custom_labels: Vec<serde_json::Value>,
-    #[serde(rename = "isDefaultValue", default)]
-    pub is_default_value: bool,
-    #[serde(default)]
-    pub order: f64,
-    #[serde(rename = "valueName", default)]
-    pub value_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Keyword {
-    #[serde(default)]
-    pub keyword: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomHelpMenuItem {
-    #[serde(rename = "linkUrl", default)]
-    pub link_url: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "sortOrder", default)]
-    pub sort_order: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AccessMapping {
-    #[serde(rename = "accessLevel", default)]
-    pub access_level: String,
-    #[serde(default)]
-    pub object: String,
-    #[serde(rename = "objectField", default)]
-    pub object_field: String,
-    #[serde(rename = "userField", default)]
-    pub user_field: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GenComputingSummaryDef {
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isCommentPostEnabled", default)]
-    pub is_comment_post_enabled: bool,
-    #[serde(rename = "isFeedPostEnabled", default)]
-    pub is_feed_post_enabled: bool,
-    #[serde(rename = "isPublic", default)]
-    pub is_public: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub prompt: Option<String>,
-    #[serde(
-        rename = "relatedObject",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub related_object: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PkgBundleVersionInstallQueryRecord {
-    #[serde(rename = "Id", default)]
-    pub id: String,
-    #[serde(rename = "InstallStatus", default)]
-    pub install_status: serde_json::Value,
-    #[serde(rename = "PackageBundleVersionId", default)]
-    pub package_bundle_version_id: String,
-    #[serde(rename = "DevelopmentOrganization", default)]
-    pub development_organization: String,
-    #[serde(rename = "ValidationError", default)]
-    pub validation_error: String,
-    #[serde(rename = "CreatedDate", default)]
-    pub created_date: String,
-    #[serde(rename = "CreatedById", default)]
-    pub created_by_id: String,
-    #[serde(rename = "Error", default, skip_serializing_if = "Option::is_none")]
-    pub error: Option<Vec<String>>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Roles {
-    #[serde(default)]
-    pub role: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PersonAccountOwnerPowerUser {
-    #[serde(rename = "developerName", default)]
-    pub developer_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "portalType", default)]
-    pub portal_type: String,
-    #[serde(default)]
-    pub user: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct OpportunityListFieldsLabelMapping {
-    #[serde(default)]
-    pub field: String,
-    #[serde(default)]
-    pub label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct TimelineObjectDefinition {
-    #[serde(rename = "baseObject", default)]
-    pub base_object: String,
-    #[serde(default)]
-    pub definition: String,
-    #[serde(rename = "isActive", default, skip_serializing_if = "Option::is_none")]
-    pub is_active: Option<bool>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AgentConfigProfileAssignments {
-    #[serde(default)]
-    pub profile: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CancelDeployResult {
-    #[serde(default)]
-    pub done: bool,
-    #[serde(default)]
-    pub id: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Holiday {
-    #[serde(
-        rename = "activityDate",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub activity_date: Option<serde_json::Value>,
-    #[serde(rename = "businessHours", default)]
-    pub business_hours: Vec<String>,
+pub struct IpRange {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
-    #[serde(rename = "endTime", default, skip_serializing_if = "Option::is_none")]
-    pub end_time: Option<serde_json::Value>,
-    #[serde(
-        rename = "isRecurring",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_recurring: Option<bool>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub name: Option<String>,
-    #[serde(
-        rename = "recurrenceDayOfMonth",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub recurrence_day_of_month: Option<f64>,
-    #[serde(rename = "recurrenceDayOfWeek", default)]
-    pub recurrence_day_of_week: Vec<String>,
-    #[serde(
-        rename = "recurrenceDayOfWeekMask",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub recurrence_day_of_week_mask: Option<f64>,
-    #[serde(
-        rename = "recurrenceEndDate",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub recurrence_end_date: Option<serde_json::Value>,
-    #[serde(
-        rename = "recurrenceInstance",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub recurrence_instance: Option<String>,
-    #[serde(
-        rename = "recurrenceInterval",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub recurrence_interval: Option<f64>,
-    #[serde(
-        rename = "recurrenceMonthOfYear",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub recurrence_month_of_year: Option<String>,
-    #[serde(
-        rename = "recurrenceStartDate",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub recurrence_start_date: Option<serde_json::Value>,
-    #[serde(
-        rename = "recurrenceType",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub recurrence_type: Option<String>,
-    #[serde(rename = "startTime", default, skip_serializing_if = "Option::is_none")]
-    pub start_time: Option<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PrimaryTabComponents {
-    #[serde(default)]
-    pub containers: Vec<Container>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RelationshipGraphDefinition {
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(rename = "isTemplate", default)]
-    pub is_template: bool,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "relationshipGraphDefVersions", default)]
-    pub relationship_graph_def_versions: Vec<RelationshipGraphDefVersion>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CourseWaitlistConfig {
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "sortOrder", default, skip_serializing_if = "Option::is_none")]
-    pub sort_order: Option<CourseWaitlistConfigSortOrder>,
-    #[serde(rename = "type", default)]
-    pub r#type: CourseWaitlistConfigType,
-    #[serde(default)]
-    pub value: String,
-    #[serde(
-        rename = "waitlistPositionFieldOrder",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub waitlist_position_field_order: Option<f64>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ChoiceList {
-    #[serde(rename = "choiceListValue", default)]
-    pub choice_list_value: Vec<ChoiceListValue>,
+    pub end: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
+    pub start: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct VendorCallCenterStatusMap {
-    #[serde(rename = "externalStatus", default)]
-    pub external_status: String,
-    #[serde(rename = "servicePresenceStatus", default)]
-    pub service_presence_status: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CommunicationChannelType {
-    #[serde(rename = "channelName", default)]
-    pub channel_name: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct KeywordList {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(default)]
-    pub keywords: Vec<Keyword>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PkgBundleVersionQueryRecord {
-    #[serde(rename = "Id", default)]
-    pub id: String,
-    #[serde(rename = "RequestStatus", default)]
-    pub request_status: serde_json::Value,
-    #[serde(rename = "PackageBundle", default)]
-    pub package_bundle: Bundle,
-    #[serde(rename = "PackageBundleVersion", default)]
-    pub package_bundle_version: BundleVersion,
-    #[serde(rename = "VersionName", default)]
-    pub version_name: String,
-    #[serde(rename = "MajorVersion", default)]
-    pub major_version: String,
-    #[serde(rename = "MinorVersion", default)]
-    pub minor_version: String,
-    #[serde(rename = "Ancestor", default)]
-    pub ancestor: BundleVersion,
-    #[serde(rename = "BundleVersionComponents", default)]
-    pub bundle_version_components: String,
-    #[serde(rename = "CreatedDate", default)]
-    pub created_date: String,
-    #[serde(rename = "CreatedById", default)]
-    pub created_by_id: String,
-    #[serde(rename = "Error", default, skip_serializing_if = "Option::is_none")]
-    pub error: Option<Vec<String>>,
+pub struct MDFolderForArtifactOptions {
     #[serde(
-        rename = "ValidationError",
+        rename = "packageName",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub validation_error: Option<String>,
+    pub package_name: Option<String>,
+    #[serde(rename = "sourceDir", default, skip_serializing_if = "Option::is_none")]
+    pub source_dir: Option<String>,
+    #[serde(rename = "outputDir", default, skip_serializing_if = "Option::is_none")]
+    pub output_dir: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub manifest: Option<String>,
+    #[serde(
+        rename = "sourcePaths",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub source_paths: Option<Vec<String>>,
+    #[serde(
+        rename = "metadataPaths",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub metadata_paths: Option<Vec<String>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub deploydir: Option<String>,
+    #[serde(
+        rename = "sourceApiVersion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub source_api_version: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LightningTypeBundleResource {
+    #[serde(rename = "fileName", default)]
+    pub file_name: String,
+    #[serde(rename = "filePath", default)]
+    pub file_path: String,
+    #[serde(rename = "fileType", default)]
+    pub file_type: String,
+    #[serde(default)]
+    pub source: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct McpServerToolApiDefinition {
+    #[serde(rename = "apiIdentifier", default)]
+    pub api_identifier: String,
+    #[serde(rename = "apiSource", default)]
+    pub api_source: ApiSource,
+    #[serde(default)]
+    pub operation: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -8606,41 +6766,749 @@ pub struct MobSecurityCertPinConfig {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct State {
+pub struct AccountPlanObjMeasCalcDef {
     #[serde(default)]
-    pub active: bool,
-    #[serde(rename = "integrationValue", default)]
-    pub integration_value: String,
-    #[serde(rename = "isoCode", default)]
-    pub iso_code: String,
+    pub conditions: Vec<AccountPlanObjMeasCalcCond>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "rollupType", default)]
+    pub rollup_type: String,
     #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub standard: bool,
-    #[serde(default)]
-    pub visible: bool,
+    pub status: String,
+    #[serde(
+        rename = "targetField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub target_field: Option<String>,
+    #[serde(rename = "targetObject", default)]
+    pub target_object: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct McpServerToolDefinition {
+pub struct ChoiceList {
+    #[serde(rename = "choiceListValue", default)]
+    pub choice_list_value: Vec<ChoiceListValue>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FileProperties {
+    #[serde(rename = "createdById", default)]
+    pub created_by_id: String,
+    #[serde(rename = "createdByName", default)]
+    pub created_by_name: String,
+    #[serde(rename = "createdDate", default)]
+    pub created_date: serde_json::Value,
+    #[serde(rename = "fileName", default)]
+    pub file_name: String,
+    #[serde(rename = "fullName", default)]
+    pub full_name: String,
+    #[serde(default)]
+    pub id: String,
+    #[serde(rename = "lastModifiedById", default)]
+    pub last_modified_by_id: String,
+    #[serde(rename = "lastModifiedByName", default)]
+    pub last_modified_by_name: String,
+    #[serde(rename = "lastModifiedDate", default)]
+    pub last_modified_date: serde_json::Value,
     #[serde(
-        rename = "apiDefinition",
+        rename = "manageableState",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub api_definition: Option<McpServerToolApiDefinition>,
+    pub manageable_state: Option<serde_json::Value>,
     #[serde(
-        rename = "descriptionOverride",
+        rename = "namespacePrefix",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub description_override: Option<String>,
-    #[serde(rename = "toolName", default)]
-    pub tool_name: String,
-    #[serde(rename = "toolTitle", default, skip_serializing_if = "Option::is_none")]
-    pub tool_title: Option<String>,
+    pub namespace_prefix: Option<String>,
+    #[serde(rename = "type", default)]
+    pub r#type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AgentConfigProfileAssignments {
+    #[serde(default)]
+    pub profile: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MetadataAiDescriptor {
+    #[serde(rename = "accuracyScore", default)]
+    pub accuracy_score: f64,
+    #[serde(rename = "enrichedDescription", default)]
+    pub enriched_description: String,
+    #[serde(rename = "skipEnrichment", default)]
+    pub skip_enrichment: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RestrictionRule {
+    #[serde(default)]
+    pub active: bool,
+    #[serde(
+        rename = "dataspaceScope",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub dataspace_scope: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "enforcementType", default)]
+    pub enforcement_type: EnforcementType,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "recordFilter", default)]
+    pub record_filter: String,
+    #[serde(rename = "targetEntity", default)]
+    pub target_entity: String,
+    #[serde(
+        rename = "userCriteria",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub user_criteria: Option<String>,
+    #[serde(default)]
+    pub version: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CommandAction {
+    #[serde(rename = "actionType", default)]
+    pub action_type: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default)]
+    pub intents: Vec<CommandActionIntent>,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub parameters: Vec<CommandActionParam>,
+    #[serde(rename = "responseTemplates", default)]
+    pub response_templates: Vec<CommandActionResponse>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub target: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PipelineInspMetricConfigTranslation {
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CMSConnectResourceType {
+    #[serde(rename = "cmsConnectResourceDefinition", default)]
+    pub cms_connect_resource_definition: Vec<CMSConnectResourceDefinition>,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "resourceType", default)]
+    pub resource_type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Error {
+    #[serde(rename = "extendedErrorDetails", default)]
+    pub extended_error_details: Vec<ExtendedErrorDetails>,
+    #[serde(default)]
+    pub fields: Vec<String>,
+    #[serde(default)]
+    pub message: String,
+    #[serde(rename = "statusCode", default)]
+    pub status_code: StatusCode,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BundleCreateOptions {
+    #[serde(rename = "BundleName", default)]
+    pub bundle_name: String,
+    #[serde(rename = "Description", default)]
+    pub description: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DescribeMetadataObject {
+    #[serde(rename = "childXmlNames", default)]
+    pub child_xml_names: Vec<String>,
+    #[serde(rename = "directoryName", default)]
+    pub directory_name: String,
+    #[serde(rename = "inFolder", default)]
+    pub in_folder: bool,
+    #[serde(rename = "metaFile", default)]
+    pub meta_file: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub suffix: Option<String>,
+    #[serde(rename = "xmlName", default)]
+    pub xml_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WeightedSourceCategory {
+    #[serde(rename = "sourceCategoryApiName", default)]
+    pub source_category_api_name: String,
+    #[serde(default)]
+    pub weight: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RealTimeEvent {
+    #[serde(rename = "entityName", default)]
+    pub entity_name: String,
+    #[serde(rename = "isEnabled", default)]
+    pub is_enabled: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BrandingSetProperty {
+    #[serde(rename = "propertyName", default)]
+    pub property_name: String,
+    #[serde(
+        rename = "propertyValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub property_value: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Targets {
+    #[serde(default)]
+    pub target: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LightningTypeBundle {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub resources: Vec<LightningTypeBundleResource>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Dictionary {
+    #[serde(
+        rename = "defaultValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_value: Option<String>,
+    #[serde(rename = "fieldName", default, skip_serializing_if = "Option::is_none")]
+    pub field_name: Option<String>,
+    #[serde(default)]
+    pub name: String,
+    #[serde(
+        rename = "objectName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub object_name: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub value: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ApiNamedQuery {
+    #[serde(rename = "apiNamedQueryParameters", default)]
+    pub api_named_query_parameters: Vec<ApiNamedQueryParameter>,
+    #[serde(rename = "apiVersion", default)]
+    pub api_version: f64,
+    #[serde(rename = "body2", default)]
+    pub body_2: String,
+    #[serde(default)]
+    pub description: String,
+    #[serde(
+        rename = "isProtected",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_protected: Option<bool>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DgtAssetMgmtPrvdLghtCpnt {
+    #[serde(rename = "dgtAssetMgmtProvider", default)]
+    pub dgt_asset_mgmt_provider: String,
+    #[serde(
+        rename = "lightningComponentBundle",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub lightning_component_bundle: Option<String>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "type", default)]
+    pub r#type: DgtAssetMgmtPrvdLghtCpntType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AncestryRepresentationProducerOptions {
+    #[serde(
+        rename = "packageNode",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub package_node: Option<serde_json::Value>,
+    #[serde(default)]
+    pub depth: f64,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub verbose: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub logger: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CommandActionIntent {
+    #[serde(default)]
+    pub phrase: String,
+    #[serde(rename = "responseTemplates", default)]
+    pub response_templates: Vec<CommandActionResponse>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SynonymGroup {
+    #[serde(default)]
+    pub languages: Vec<serde_json::Value>,
+    #[serde(default)]
+    pub terms: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SoFieldMapping {
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "objectName", default)]
+    pub object_name: String,
+    #[serde(rename = "sfFieldName", default)]
+    pub sf_field_name: String,
+    #[serde(rename = "type", default)]
+    pub r#type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct TimeSheetTemplate {
+    #[serde(default)]
+    pub active: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default)]
+    pub frequency: TimeSheetFrequency,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "startDate", default)]
+    pub start_date: serde_json::Value,
+    #[serde(rename = "timeSheetTemplateAssignments", default)]
+    pub time_sheet_template_assignments: Vec<TimeSheetTemplateAssignment>,
+    #[serde(rename = "workWeekEndDay", default)]
+    pub work_week_end_day: DaysOfWeek,
+    #[serde(rename = "workWeekStartDay", default)]
+    pub work_week_start_day: DaysOfWeek,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ValueTypeField {
+    #[serde(default)]
+    pub fields: Vec<Box<ValueTypeField>>,
+    #[serde(rename = "foreignKeyDomain", default)]
+    pub foreign_key_domain: Vec<String>,
+    #[serde(rename = "isForeignKey", default)]
+    pub is_foreign_key: bool,
+    #[serde(rename = "isNameField", default)]
+    pub is_name_field: bool,
+    #[serde(rename = "minOccurs", default)]
+    pub min_occurs: f64,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "picklistValues", default)]
+    pub picklist_values: Vec<serde_json::Value>,
+    #[serde(rename = "soapType", default)]
+    pub soap_type: String,
+    #[serde(rename = "valueRequired", default)]
+    pub value_required: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PkgBundleVersionCreateReq {
+    #[serde(rename = "PackageBundleId", default)]
+    pub package_bundle_id: String,
+    #[serde(rename = "VersionName", default)]
+    pub version_name: String,
+    #[serde(rename = "MajorVersion", default)]
+    pub major_version: String,
+    #[serde(rename = "MinorVersion", default)]
+    pub minor_version: String,
+    #[serde(rename = "BundleVersionComponents", default)]
+    pub bundle_version_components: String,
+    #[serde(rename = "Ancestor", default, skip_serializing_if = "Option::is_none")]
+    pub ancestor: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ReferencedDashboard {
+    #[serde(default)]
+    pub application: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "embedUrl", default)]
+    pub embed_url: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(
+        rename = "templateAssetSourceName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub template_asset_source_name: Option<String>,
+    #[serde(default)]
+    pub visibility: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PkgBundleVersionQueryRecord {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "RequestStatus", default)]
+    pub request_status: serde_json::Value,
+    #[serde(rename = "PackageBundle", default)]
+    pub package_bundle: Bundle,
+    #[serde(rename = "PackageBundleVersion", default)]
+    pub package_bundle_version: BundleVersion,
+    #[serde(rename = "VersionName", default)]
+    pub version_name: String,
+    #[serde(rename = "MajorVersion", default)]
+    pub major_version: String,
+    #[serde(rename = "MinorVersion", default)]
+    pub minor_version: String,
+    #[serde(rename = "Ancestor", default)]
+    pub ancestor: BundleVersion,
+    #[serde(rename = "BundleVersionComponents", default)]
+    pub bundle_version_components: String,
+    #[serde(rename = "CreatedDate", default)]
+    pub created_date: String,
+    #[serde(rename = "CreatedById", default)]
+    pub created_by_id: String,
+    #[serde(rename = "Error", default, skip_serializing_if = "Option::is_none")]
+    pub error: Option<Vec<String>>,
+    #[serde(
+        rename = "ValidationError",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub validation_error: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct InboundNetworkConnection {
+    #[serde(rename = "connectionType", default)]
+    pub connection_type: serde_json::Value,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "inboundNetworkConnProperties", default)]
+    pub inbound_network_conn_properties: Vec<InboundNetworkConnProperty>,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub status: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PkgBundleVersionInstallQueryRecord {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "InstallStatus", default)]
+    pub install_status: serde_json::Value,
+    #[serde(rename = "PackageBundleVersionId", default)]
+    pub package_bundle_version_id: String,
+    #[serde(rename = "DevelopmentOrganization", default)]
+    pub development_organization: String,
+    #[serde(rename = "ValidationError", default)]
+    pub validation_error: String,
+    #[serde(rename = "CreatedDate", default)]
+    pub created_date: String,
+    #[serde(rename = "CreatedById", default)]
+    pub created_by_id: String,
+    #[serde(rename = "Error", default, skip_serializing_if = "Option::is_none")]
+    pub error: Option<Vec<String>>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EmpSvcInvocableActionDef {
+    #[serde(rename = "apexInput", default, skip_serializing_if = "Option::is_none")]
+    pub apex_input: Option<String>,
+    #[serde(
+        rename = "apexOutput",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub apex_output: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "developerName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub developer_name: Option<String>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(
+        rename = "relativeEndpointUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub relative_endpoint_url: Option<String>,
+    #[serde(
+        rename = "requestMethod",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub request_method: Option<EmployeeUseCaseMethod>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub status: Option<EmployeeUseCaseStatus>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AccountPlanObjMeasCalcCond {
+    #[serde(rename = "fieldName", default)]
+    pub field_name: String,
+    #[serde(default)]
+    pub operation: String,
+    #[serde(default)]
+    pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct UIObjectRelationFieldConfig {
+    #[serde(rename = "displayLabel", default)]
+    pub display_label: String,
+    #[serde(rename = "queryText", default)]
+    pub query_text: String,
+    #[serde(rename = "rowOrder", default)]
+    pub row_order: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct TimelineObjectDefinitionTranslation {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LearningAchievementConfig {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "iconName", default, skip_serializing_if = "Option::is_none")]
+    pub icon_name: Option<String>,
+    #[serde(
+        rename = "isProtected",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_protected: Option<bool>,
+    #[serde(rename = "learningAchievementType", default)]
+    pub learning_achievement_type: LearningAchievementType,
+    #[serde(rename = "learningAchvRecordType", default)]
+    pub learning_achv_record_type: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DgtAssetMgmtProvider {
+    #[serde(default)]
+    pub icon: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CourseWaitlistConfig {
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "sortOrder", default, skip_serializing_if = "Option::is_none")]
+    pub sort_order: Option<CourseWaitlistConfigSortOrder>,
+    #[serde(rename = "type", default)]
+    pub r#type: CourseWaitlistConfigType,
+    #[serde(default)]
+    pub value: String,
+    #[serde(
+        rename = "waitlistPositionFieldOrder",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub waitlist_position_field_order: Option<f64>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ListViewFilter {
+    #[serde(default)]
+    pub field: String,
+    #[serde(default)]
+    pub operation: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub value: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CustomIndex {
+    #[serde(
+        rename = "allowNullValues",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub allow_null_values: Option<bool>,
+    #[serde(
+        rename = "booleanIndexedValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub boolean_indexed_value: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FulfillmentStepType {
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(default)]
+    pub handler: String,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct OrchestrationContextEvent {
+    #[serde(rename = "eventType", default)]
+    pub event_type: String,
+    #[serde(rename = "orchestrationEvent", default)]
+    pub orchestration_event: String,
+    #[serde(rename = "platformEvent", default)]
+    pub platform_event: String,
+    #[serde(rename = "platformEventPrimaryKey", default)]
+    pub platform_event_primary_key: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct VoiceEngagementMediaUsage {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub id: Option<String>,
+    #[serde(
+        rename = "masterLabel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub master_label: Option<String>,
+    #[serde(rename = "mediaName", default, skip_serializing_if = "Option::is_none")]
+    pub media_name: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -8690,9 +7558,371 @@ pub struct AccountingFieldMapping {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct SharedWith {
-    #[serde(rename = "fullyQualifiedName", default)]
-    pub fully_qualified_name: String,
+pub struct PageContextVariable {
+    #[serde(
+        rename = "SObjectType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub s_object_type: Option<String>,
+    #[serde(rename = "dataType", default)]
+    pub data_type: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(default)]
+    pub label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PasswordPolicies {
+    #[serde(
+        rename = "apiOnlyUserHomePageURL",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub api_only_user_home_page_url: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub complexity: Option<Complexity>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub expiration: Option<Expiration>,
+    #[serde(
+        rename = "historyRestriction",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub history_restriction: Option<String>,
+    #[serde(
+        rename = "lockoutInterval",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub lockout_interval: Option<LockoutInterval>,
+    #[serde(
+        rename = "maxLoginAttempts",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub max_login_attempts: Option<MaxLoginAttempts>,
+    #[serde(
+        rename = "minimumPasswordLength",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub minimum_password_length: Option<String>,
+    #[serde(
+        rename = "minimumPasswordLifetime",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub minimum_password_lifetime: Option<bool>,
+    #[serde(
+        rename = "obscureSecretAnswer",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub obscure_secret_answer: Option<bool>,
+    #[serde(
+        rename = "passwordAssistanceMessage",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub password_assistance_message: Option<String>,
+    #[serde(
+        rename = "passwordAssistanceURL",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub password_assistance_url: Option<String>,
+    #[serde(
+        rename = "questionRestriction",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub question_restriction: Option<QuestionRestriction>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct VoiceEngagementMediaFile {
+    #[serde(
+        rename = "contentDocId",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub content_doc_id: Option<String>,
+    #[serde(rename = "fileName", default, skip_serializing_if = "Option::is_none")]
+    pub file_name: Option<String>,
+    #[serde(rename = "fileUrl", default, skip_serializing_if = "Option::is_none")]
+    pub file_url: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub id: Option<String>,
+    #[serde(rename = "isCustom", default, skip_serializing_if = "Option::is_none")]
+    pub is_custom: Option<bool>,
+    #[serde(
+        rename = "masterLabel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub master_label: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub message: Option<String>,
+    #[serde(
+        rename = "uploadStatus",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub upload_status: Option<UploadStatus>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct IframeWhiteListUrl {
+    #[serde(default)]
+    pub context: IFrameWhitelistContext,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub url: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ChoiceListValue {
+    #[serde(rename = "embeddedServiceCustomLabels", default)]
+    pub embedded_service_custom_labels: Vec<serde_json::Value>,
+    #[serde(rename = "isDefaultValue", default)]
+    pub is_default_value: bool,
+    #[serde(default)]
+    pub order: f64,
+    #[serde(rename = "valueName", default)]
+    pub value_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ScheduledRecommendationDetail {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub channel: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub enabled: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub rank: Option<f64>,
+    #[serde(
+        rename = "recommendationAudience",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recommendation_audience: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CMSConnectResourceDefinition {
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default)]
+    pub options: f64,
+    #[serde(rename = "payloadType", default)]
+    pub payload_type: String,
+    #[serde(
+        rename = "resourceIdPath",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub resource_id_path: Option<String>,
+    #[serde(
+        rename = "resourceNamePath",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub resource_name_path: Option<String>,
+    #[serde(rename = "resourcePath", default)]
+    pub resource_path: String,
+    #[serde(
+        rename = "rootNodePath",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub root_node_path: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ReferralMarketingConfig {
+    #[serde(rename = "integrationSystemType", default)]
+    pub integration_system_type: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EclairGeoData {
+    #[serde(default)]
+    pub maps: Vec<EclairMap>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CMSConnectLanguage {
+    #[serde(rename = "cmsLanguage", default)]
+    pub cms_language: String,
+    #[serde(default)]
+    pub language: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct OutboundNetworkConnProperty {
+    #[serde(rename = "propertyName", default)]
+    pub property_name: OutboundConnPropertyName,
+    #[serde(rename = "propertyValue", default)]
+    pub property_value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CMSConnectSource {
+    #[serde(rename = "cmsConnectAsset", default)]
+    pub cms_connect_asset: Vec<CMSConnectAsset>,
+    #[serde(rename = "cmsConnectLanguage", default)]
+    pub cms_connect_language: Vec<CMSConnectLanguage>,
+    #[serde(
+        rename = "cmsConnectPersonalization",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub cms_connect_personalization: Option<CMSConnectPersonalization>,
+    #[serde(rename = "cmsConnectResourceType", default)]
+    pub cms_connect_resource_type: Vec<CMSConnectResourceType>,
+    #[serde(rename = "connectionType", default)]
+    pub connection_type: CMSSourceConnectionType,
+    #[serde(rename = "cssScope", default, skip_serializing_if = "Option::is_none")]
+    pub css_scope: Option<String>,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(
+        rename = "languageEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub language_enabled: Option<String>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(
+        rename = "namedCredential",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub named_credential: Option<String>,
+    #[serde(
+        rename = "personalizationEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub personalization_enabled: Option<String>,
+    #[serde(rename = "rootPath", default, skip_serializing_if = "Option::is_none")]
+    pub root_path: Option<String>,
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: f64,
+    #[serde(default)]
+    pub status: CMSConnectionStatus,
+    #[serde(rename = "type", default)]
+    pub r#type: CMSConnectionSourceType,
+    #[serde(
+        rename = "websiteUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub website_url: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PkgBundleVersionInstallReqResult {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "InstallStatus", default)]
+    pub install_status: serde_json::Value,
+    #[serde(rename = "ValidationError", default)]
+    pub validation_error: String,
+    #[serde(rename = "CreatedDate", default)]
+    pub created_date: String,
+    #[serde(rename = "CreatedById", default)]
+    pub created_by_id: String,
+    #[serde(rename = "Error", default, skip_serializing_if = "Option::is_none")]
+    pub error: Option<Vec<String>>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SaveResult {
+    #[serde(default)]
+    pub errors: Vec<Error>,
+    #[serde(rename = "fullName", default)]
+    pub full_name: String,
+    #[serde(default)]
+    pub success: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DuplicateRuleFilter {
+    #[serde(
+        rename = "booleanFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub boolean_filter: Option<String>,
+    #[serde(rename = "duplicateRuleFilterItems", default)]
+    pub duplicate_rule_filter_items: Vec<DuplicateRuleFilterItem>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WelcomeRecommendation {
+    #[serde(
+        rename = "staticUtterance",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub static_utterance: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MatchingRuleItem {
+    #[serde(
+        rename = "blankValueBehavior",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub blank_value_behavior: Option<BlankValueBehavior>,
+    #[serde(rename = "fieldName", default)]
+    pub field_name: String,
+    #[serde(rename = "matchingMethod", default)]
+    pub matching_method: MatchingMethod,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -13126,429 +12356,97 @@ pub struct ApiSchemaTypes {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct WeightedSourceCategory {
-    #[serde(rename = "sourceCategoryApiName", default)]
-    pub source_category_api_name: String,
-    #[serde(default)]
-    pub weight: f64,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RetrieveMessage {
-    #[serde(rename = "fileName", default)]
-    pub file_name: String,
-    #[serde(default)]
-    pub problem: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LocalizedValue {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub aspect: Option<serde_json::Value>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub language: Option<String>,
-    #[serde(rename = "outOfDate", default, skip_serializing_if = "Option::is_none")]
-    pub out_of_date: Option<bool>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub value: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct EmbdMsgChannelInvitationCondition {
-    #[serde(rename = "conditionType", default)]
-    pub condition_type: EswInvitationConditionResource,
-    #[serde(
-        rename = "customVariableName",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub custom_variable_name: Option<String>,
-    #[serde(rename = "embeddedServiceMessagingChannel", default)]
-    pub embedded_service_messaging_channel: serde_json::Value,
-    #[serde(default)]
-    pub operand: EswInvitationConditionOperator,
-    #[serde(default)]
-    pub sequence: f64,
-    #[serde(default)]
-    pub value: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct LogInfo {
-    #[serde(default)]
-    pub category: LogCategory,
-    #[serde(default)]
-    pub level: LogCategoryLevel,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct WebLinkTranslation {
-    #[serde(default)]
-    pub label: String,
-    #[serde(default)]
-    pub name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct McpServerToolApiDefinition {
-    #[serde(rename = "apiIdentifier", default)]
-    pub api_identifier: String,
-    #[serde(rename = "apiSource", default)]
-    pub api_source: ApiSource,
-    #[serde(default)]
-    pub operation: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Country {
-    #[serde(default)]
-    pub active: bool,
-    #[serde(rename = "integrationValue", default)]
-    pub integration_value: String,
-    #[serde(rename = "isoCode", default)]
-    pub iso_code: String,
-    #[serde(default)]
-    pub label: String,
-    #[serde(rename = "orgDefault", default)]
-    pub org_default: bool,
-    #[serde(default)]
-    pub standard: bool,
-    #[serde(default)]
-    pub states: Vec<State>,
-    #[serde(default)]
-    pub visible: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct AutomatorConfig {
-    #[serde(
-        rename = "allowFilterField",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub allow_filter_field: Option<bool>,
-    #[serde(
-        rename = "allowLocations",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub allow_locations: Option<bool>,
-    #[serde(
-        rename = "allowNoLocation",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub allow_no_location: Option<bool>,
-    #[serde(
-        rename = "allowSchedulingPolicy",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub allow_scheduling_policy: Option<bool>,
-    #[serde(
-        rename = "allowTimeHorizon",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub allow_time_horizon: Option<bool>,
-    #[serde(
-        rename = "allowTimeSpanBack",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub allow_time_span_back: Option<bool>,
-    #[serde(rename = "className", default, skip_serializing_if = "Option::is_none")]
-    pub class_name: Option<String>,
-    #[serde(
-        rename = "cronExpression",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub cron_expression: Option<String>,
-    #[serde(rename = "dateRange", default, skip_serializing_if = "Option::is_none")]
-    pub date_range: Option<f64>,
-    #[serde(
-        rename = "decomposeTerritories",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub decompose_territories: Option<f64>,
-    #[serde(
-        rename = "emailNotification",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub email_notification: Option<bool>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub enabled: Option<bool>,
-    #[serde(
-        rename = "filterField",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub filter_field: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub horizons: Option<String>,
-    #[serde(rename = "isBatch", default, skip_serializing_if = "Option::is_none")]
-    pub is_batch: Option<bool>,
-    #[serde(
-        rename = "isDecomposeTerritories",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_decompose_territories: Option<bool>,
-    #[serde(
-        rename = "isNotificationJob",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_notification_job: Option<bool>,
-    #[serde(rename = "isOaas", default, skip_serializing_if = "Option::is_none")]
-    pub is_oaas: Option<bool>,
-    #[serde(
-        rename = "jobDescription",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub job_description: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub label: Option<String>,
-    #[serde(
-        rename = "maxObjectsCount",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub max_objects_count: Option<f64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub minutes: Option<f64>,
-    #[serde(default)]
-    pub name: String,
-    #[serde(
-        rename = "noLocation",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub no_location: Option<bool>,
-    #[serde(
-        rename = "notificationInterval",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub notification_interval: Option<f64>,
-    #[serde(
-        rename = "notificationUsername",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub notification_username: Option<String>,
-    #[serde(
-        rename = "oneLocationMandatory",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub one_location_mandatory: Option<bool>,
-    #[serde(
-        rename = "runNextJob",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub run_next_job: Option<bool>,
-    #[serde(
-        rename = "schedulingPolicyId",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub scheduling_policy_id: Option<String>,
-    #[serde(
-        rename = "secondaryType",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub secondary_type: Option<String>,
-    #[serde(
-        rename = "stayScheduledServicesByBoolean",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub stay_scheduled_services_by_boolean: Option<String>,
-    #[serde(
-        rename = "timeSpanBackward",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub time_span_backward: Option<f64>,
-    #[serde(
-        rename = "timeSpanForward",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub time_span_forward: Option<f64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub timezone: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CustomIndex {
-    #[serde(
-        rename = "allowNullValues",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub allow_null_values: Option<bool>,
-    #[serde(
-        rename = "booleanIndexedValue",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub boolean_indexed_value: Option<bool>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct BundleInstallOptions {
-    #[serde(default)]
-    pub connection: serde_json::Value,
-    #[serde(default)]
-    pub project: serde_json::Value,
-    #[serde(rename = "PackageBundleVersion", default)]
-    pub package_bundle_version: String,
-    #[serde(rename = "DevelopmentOrganization", default)]
-    pub development_organization: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub polling: Option<serde_json::Value>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct CommandActionParam {
-    #[serde(
-        rename = "defaultValue",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub default_value: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(default)]
-    pub name: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub required: Option<bool>,
-    #[serde(rename = "type", default)]
-    pub r#type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Orchestration {
-    #[serde(default)]
-    pub context: String,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct RetrieveResult {
-    #[serde(default)]
-    pub done: bool,
-    #[serde(
-        rename = "errorMessage",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub error_message: Option<String>,
-    #[serde(
-        rename = "errorStatusCode",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub error_status_code: Option<StatusCode>,
-    #[serde(rename = "fileProperties", default)]
-    pub file_properties: Vec<FileProperties>,
-    #[serde(default)]
+pub struct PkgBundleVerUninstallReqResult {
+    #[serde(rename = "Id", default)]
     pub id: String,
-    #[serde(default)]
-    pub messages: Vec<RetrieveMessage>,
-    #[serde(default)]
-    pub status: serde_json::Value,
-    #[serde(default)]
-    pub success: bool,
-    #[serde(rename = "zipFile", default)]
-    pub zip_file: String,
+    #[serde(rename = "UninstallStatus", default)]
+    pub uninstall_status: serde_json::Value,
+    #[serde(rename = "CreatedDate", default)]
+    pub created_date: String,
+    #[serde(rename = "CreatedById", default)]
+    pub created_by_id: String,
+    #[serde(rename = "Error", default, skip_serializing_if = "Option::is_none")]
+    pub error: Option<Vec<String>>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct RunTestFailure {
-    #[serde(default)]
-    pub id: serde_json::Value,
-    #[serde(default)]
-    pub message: String,
+pub struct Certificate {
+    #[serde(rename = "caSigned", default)]
+    pub ca_signed: bool,
     #[serde(
-        rename = "methodName",
+        rename = "encryptedWithPlatformEncryption",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub method_name: Option<String>,
+    pub encrypted_with_platform_encryption: Option<bool>,
+    #[serde(
+        rename = "expirationDate",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub expiration_date: Option<serde_json::Value>,
+    #[serde(rename = "keySize", default, skip_serializing_if = "Option::is_none")]
+    pub key_size: Option<f64>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(
+        rename = "privateKeyExportable",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub private_key_exportable: Option<bool>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EclairMap {
+    #[serde(
+        rename = "boundingBoxBottom",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub bounding_box_bottom: Option<f64>,
+    #[serde(
+        rename = "boundingBoxLeft",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub bounding_box_left: Option<f64>,
+    #[serde(
+        rename = "boundingBoxRight",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub bounding_box_right: Option<f64>,
+    #[serde(
+        rename = "boundingBoxTop",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub bounding_box_top: Option<f64>,
+    #[serde(rename = "mapLabel", default, skip_serializing_if = "Option::is_none")]
+    pub map_label: Option<String>,
+    #[serde(rename = "mapName", default)]
+    pub map_name: String,
     #[serde(default)]
-    pub name: String,
+    pub projection: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct IPAddressRange {
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub namespace: Option<String>,
-    #[serde(rename = "packageName", default)]
-    pub package_name: String,
-    #[serde(
-        rename = "seeAllData",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub see_all_data: Option<bool>,
-    #[serde(
-        rename = "stackTrace",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub stack_trace: Option<String>,
-    #[serde(default)]
-    pub time: f64,
-    #[serde(rename = "type", default)]
-    pub r#type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ApiNamedQuery {
-    #[serde(rename = "apiNamedQueryParameters", default)]
-    pub api_named_query_parameters: Vec<ApiNamedQueryParameter>,
-    #[serde(rename = "apiVersion", default)]
-    pub api_version: f64,
-    #[serde(rename = "body2", default)]
-    pub body_2: String,
-    #[serde(default)]
-    pub description: String,
+    pub description: Option<String>,
+    #[serde(rename = "endIpAddress", default)]
+    pub end_ip_address: String,
+    #[serde(rename = "ipAddressFeature", default)]
+    pub ip_address_feature: IPAddressFeature,
+    #[serde(rename = "ipAddressUsageScope", default)]
+    pub ip_address_usage_scope: IPAddressUsageScope,
     #[serde(
         rename = "isProtected",
         default,
@@ -13557,230 +12455,30 @@ pub struct ApiNamedQuery {
     pub is_protected: Option<bool>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
+    #[serde(rename = "startIpAddress", default)]
+    pub start_ip_address: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct AccountRelationshipShareRule {
-    #[serde(rename = "accessLevel", default)]
-    pub access_level: String,
-    #[serde(rename = "accountToCriteriaField", default)]
-    pub account_to_criteria_field: String,
+pub struct LookupFilterTranslation {
+    #[serde(rename = "errorMessage", default)]
+    pub error_message: String,
+    #[serde(rename = "informationalMessage", default)]
+    pub informational_message: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct KeywordList {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
-    #[serde(rename = "entityType", default)]
-    pub entity_type: String,
+    #[serde(default)]
+    pub keywords: Vec<Keyword>,
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(
-        rename = "staticFormulaCriteria",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub static_formula_criteria: Option<String>,
-    #[serde(rename = "type", default)]
-    pub r#type: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct IframeWhiteListUrl {
-    #[serde(default)]
-    pub context: IFrameWhitelistContext,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub url: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct DescribeMetadataObject {
-    #[serde(rename = "childXmlNames", default)]
-    pub child_xml_names: Vec<String>,
-    #[serde(rename = "directoryName", default)]
-    pub directory_name: String,
-    #[serde(rename = "inFolder", default)]
-    pub in_folder: bool,
-    #[serde(rename = "metaFile", default)]
-    pub meta_file: bool,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub suffix: Option<String>,
-    #[serde(rename = "xmlName", default)]
-    pub xml_name: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct GenOpPlanEligibilityConfig {
-    #[serde(rename = "eligibilityResultVariableName", default)]
-    pub eligibility_result_variable_name: String,
-    #[serde(
-        rename = "failureReasonOutputVariableName",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub failure_reason_output_variable_name: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub flow: Option<String>,
-    #[serde(
-        rename = "isProtected",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_protected: Option<bool>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "targetIdInputVariableName", default)]
-    pub target_id_input_variable_name: String,
-    #[serde(rename = "targetObjectType", default)]
-    pub target_object_type: serde_json::Value,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct SharedTo {
-    #[serde(
-        rename = "allCustomerPortalUsers",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub all_customer_portal_users: Option<String>,
-    #[serde(
-        rename = "allInternalUsers",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub all_internal_users: Option<String>,
-    #[serde(
-        rename = "allPartnerUsers",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub all_partner_users: Option<String>,
-    #[serde(rename = "channelProgramGroup", default)]
-    pub channel_program_group: Vec<String>,
-    #[serde(rename = "channelProgramGroups", default)]
-    pub channel_program_groups: Vec<String>,
-    #[serde(default)]
-    pub group: Vec<String>,
-    #[serde(default)]
-    pub groups: Vec<String>,
-    #[serde(rename = "guestUser", default)]
-    pub guest_user: Vec<String>,
-    #[serde(rename = "managerSubordinates", default)]
-    pub manager_subordinates: Vec<String>,
-    #[serde(default)]
-    pub managers: Vec<String>,
-    #[serde(rename = "portalRole", default)]
-    pub portal_role: Vec<String>,
-    #[serde(rename = "portalRoleAndSubordinates", default)]
-    pub portal_role_and_subordinates: Vec<String>,
-    #[serde(default)]
-    pub queue: Vec<String>,
-    #[serde(default)]
-    pub role: Vec<String>,
-    #[serde(rename = "roleAndSubordinates", default)]
-    pub role_and_subordinates: Vec<String>,
-    #[serde(rename = "roleAndSubordinatesInternal", default)]
-    pub role_and_subordinates_internal: Vec<String>,
-    #[serde(default)]
-    pub roles: Vec<String>,
-    #[serde(rename = "rolesAndSubordinates", default)]
-    pub roles_and_subordinates: Vec<String>,
-    #[serde(default)]
-    pub territories: Vec<String>,
-    #[serde(rename = "territoriesAndSubordinates", default)]
-    pub territories_and_subordinates: Vec<String>,
-    #[serde(default)]
-    pub territory: Vec<String>,
-    #[serde(rename = "territoryAndSubordinates", default)]
-    pub territory_and_subordinates: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ActnblListKeyPrfmIndDef {
-    #[serde(rename = "aggregateOperationName", default)]
-    pub aggregate_operation_name: ActionableListKPIAggType,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(rename = "fieldName", default)]
-    pub field_name: String,
-    #[serde(
-        rename = "filterExpression",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub filter_expression: Option<String>,
-    #[serde(rename = "masterLabel", default)]
-    pub master_label: String,
-    #[serde(rename = "objectName", default)]
-    pub object_name: String,
-    #[serde(default)]
-    pub status: ActionableListKPIStType,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct Dictionary {
-    #[serde(
-        rename = "defaultValue",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub default_value: Option<String>,
-    #[serde(rename = "fieldName", default, skip_serializing_if = "Option::is_none")]
-    pub field_name: Option<String>,
-    #[serde(default)]
-    pub name: String,
-    #[serde(
-        rename = "objectName",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub object_name: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub value: Option<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct VoiceEngagementMediaFile {
-    #[serde(
-        rename = "contentDocId",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub content_doc_id: Option<String>,
-    #[serde(rename = "fileName", default, skip_serializing_if = "Option::is_none")]
-    pub file_name: Option<String>,
-    #[serde(rename = "fileUrl", default, skip_serializing_if = "Option::is_none")]
-    pub file_url: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub id: Option<String>,
-    #[serde(rename = "isCustom", default, skip_serializing_if = "Option::is_none")]
-    pub is_custom: Option<bool>,
-    #[serde(
-        rename = "masterLabel",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub master_label: Option<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub message: Option<String>,
-    #[serde(
-        rename = "uploadStatus",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub upload_status: Option<UploadStatus>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -13822,9 +12520,111 @@ pub struct CatalogedApiInstance {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct ScontrolTranslation {
+pub struct RoleOrTerritory {
+    #[serde(
+        rename = "caseAccessLevel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub case_access_level: Option<String>,
+    #[serde(
+        rename = "contactAccessLevel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub contact_access_level: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "mayForecastManagerShare",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub may_forecast_manager_share: Option<bool>,
+    #[serde(default)]
+    pub name: String,
+    #[serde(
+        rename = "opportunityAccessLevel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub opportunity_access_level: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AccessMapping {
+    #[serde(rename = "accessLevel", default)]
+    pub access_level: String,
+    #[serde(default)]
+    pub object: String,
+    #[serde(rename = "objectField", default)]
+    pub object_field: String,
+    #[serde(rename = "userField", default)]
+    pub user_field: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MilestoneType {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "recurrenceType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub recurrence_type: Option<MilestoneTypeRecurrenceType>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct McpServerToolDefinition {
+    #[serde(
+        rename = "apiDefinition",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub api_definition: Option<McpServerToolApiDefinition>,
+    #[serde(
+        rename = "descriptionOverride",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub description_override: Option<String>,
+    #[serde(rename = "toolName", default)]
+    pub tool_name: String,
+    #[serde(rename = "toolTitle", default, skip_serializing_if = "Option::is_none")]
+    pub tool_title: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BundleUninstallOptions {
+    #[serde(default)]
+    pub connection: serde_json::Value,
+    #[serde(default)]
+    pub project: serde_json::Value,
+    #[serde(rename = "PackageBundleVersion", default)]
+    pub package_bundle_version: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub polling: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LocalMlDomain {
     #[serde(default)]
     pub label: String,
+    #[serde(rename = "mlIntents", default)]
+    pub ml_intents: Vec<serde_json::Value>,
+    #[serde(rename = "mlSlotClasses", default)]
+    pub ml_slot_classes: Vec<serde_json::Value>,
     #[serde(default)]
     pub name: String,
 }
@@ -13832,11 +12632,859 @@ pub struct ScontrolTranslation {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct Attachment {
-    #[serde(default)]
-    pub content: String,
+pub struct ScheduledRecommendation {
+    #[serde(rename = "scheduledRecommendationDetails", default)]
+    pub scheduled_recommendation_details: Vec<ScheduledRecommendationDetail>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CorsWhitelistOrigin {
+    #[serde(rename = "urlPattern", default)]
+    pub url_pattern: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RelationshipGraphDefVersion {
+    #[serde(rename = "graphDefinition", default)]
+    pub graph_definition: String,
+    #[serde(rename = "graphType", default)]
+    pub graph_type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RpaRobotPoolMetadata {
     #[serde(default)]
     pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ExtendedErrorDetails {
+    #[serde(rename = "extendedErrorCode", default)]
+    pub extended_error_code: ExtendedErrorCode,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ActionableListDefinition {
+    #[serde(rename = "actionableListDatasetColumns", default)]
+    pub actionable_list_dataset_columns: Vec<ActionableListDatasetColumn>,
+    #[serde(rename = "actionableListMemberStatuses", default)]
+    pub actionable_list_member_statuses: Vec<ActionableListMemberStatus>,
+    #[serde(
+        rename = "batchCalcJobDefinition",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub batch_calc_job_definition: Option<String>,
+    #[serde(
+        rename = "datasetName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub dataset_name: Option<String>,
+    #[serde(rename = "edgeMart", default, skip_serializing_if = "Option::is_none")]
+    pub edge_mart: Option<String>,
+    #[serde(rename = "isActive", default, skip_serializing_if = "Option::is_none")]
+    pub is_active: Option<bool>,
+    #[serde(
+        rename = "isProtected",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_protected: Option<bool>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "objectName", default)]
+    pub object_name: String,
+    #[serde(
+        rename = "sourceType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub source_type: Option<ActionableListSourceType>,
+    #[serde(rename = "type", default, skip_serializing_if = "Option::is_none")]
+    pub r#type: Option<ActionableListType>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ProviderSampleLimitTemplate {
+    #[serde(rename = "discrepancyAlertType", default)]
+    pub discrepancy_alert_type: SampleLimitDiscAlertType,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(
+        rename = "isAdvanced",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_advanced: Option<bool>,
+    #[serde(rename = "isCloned", default, skip_serializing_if = "Option::is_none")]
+    pub is_cloned: Option<bool>,
+    #[serde(
+        rename = "isLawBased",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_law_based: Option<bool>,
+    #[serde(default)]
+    pub label: String,
+    #[serde(
+        rename = "priorityNumber",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub priority_number: Option<f64>,
+    #[serde(rename = "ruleCondition", default)]
+    pub rule_condition: String,
+    #[serde(rename = "ruleExpression", default)]
+    pub rule_expression: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RelationshipGraphDefinition {
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "isTemplate", default)]
+    pub is_template: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "relationshipGraphDefVersions", default)]
+    pub relationship_graph_def_versions: Vec<RelationshipGraphDefVersion>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct FilterItem {
+    #[serde(default)]
+    pub field: String,
+    #[serde(default)]
+    pub operation: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub value: Option<String>,
+    #[serde(
+        rename = "valueField",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub value_field: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CMSConnectAsset {
+    #[serde(rename = "assetPath", default)]
+    pub asset_path: String,
+    #[serde(rename = "assetType", default)]
+    pub asset_type: String,
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ActionableListMemberStatus {
+    #[serde(rename = "iconName", default, skip_serializing_if = "Option::is_none")]
+    pub icon_name: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub status: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct UIBundle {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(
+        rename = "isProtected",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_protected: Option<bool>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub target: Option<String>,
+    #[serde(default)]
+    pub version: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Bundle {
+    #[serde(rename = "BundleName", default)]
+    pub bundle_name: String,
+    #[serde(
+        rename = "Description",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub description: Option<String>,
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "IsDeleted", default)]
+    pub is_deleted: bool,
+    #[serde(rename = "CreatedDate", default)]
+    pub created_date: String,
+    #[serde(rename = "CreatedById", default)]
+    pub created_by_id: String,
+    #[serde(rename = "LastModifiedDate", default)]
+    pub last_modified_date: String,
+    #[serde(rename = "LastModifiedById", default)]
+    pub last_modified_by_id: String,
+    #[serde(rename = "SystemModstamp", default)]
+    pub system_modstamp: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SynonymDictionary {
+    #[serde(default)]
+    pub groups: Vec<SynonymGroup>,
+    #[serde(
+        rename = "isProtected",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_protected: Option<bool>,
+    #[serde(default)]
+    pub label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Metadata {
+    #[serde(rename = "fullName", default, skip_serializing_if = "Option::is_none")]
+    pub full_name: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct IfExpression {
+    #[serde(rename = "childName", default)]
+    pub child_name: String,
+    #[serde(default)]
+    pub expression: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PkgBundleVerUninstallReq {
+    #[serde(rename = "PackageBundleVersionId", default)]
+    pub package_bundle_version_id: String,
+    #[serde(
+        rename = "InstalledPkgBundleVersionId",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub installed_pkg_bundle_version_id: Option<String>,
+    #[serde(
+        rename = "ValidationError",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub validation_error: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LwcResources {
+    #[serde(rename = "lwcResource", default)]
+    pub lwc_resource: Vec<LwcResource>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct VirtualVisitConfig {
+    #[serde(
+        rename = "comprehendServiceType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub comprehend_service_type: Option<VirtualVisitComprehendServiceType>,
+    #[serde(
+        rename = "experienceCloudSiteUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub experience_cloud_site_url: Option<String>,
+    #[serde(
+        rename = "externalMsgServiceIdentifier",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub external_msg_service_identifier: Option<String>,
+    #[serde(
+        rename = "externalRoleIdentifier",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub external_role_identifier: Option<String>,
+    #[serde(
+        rename = "externalUserIdentifier",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub external_user_identifier: Option<String>,
+    #[serde(
+        rename = "isProtected",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_protected: Option<bool>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(
+        rename = "messagingRegion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub messaging_region: Option<String>,
+    #[serde(
+        rename = "namedCredential",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub named_credential: Option<String>,
+    #[serde(
+        rename = "storageBucketName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub storage_bucket_name: Option<String>,
+    #[serde(rename = "usageType", default, skip_serializing_if = "Option::is_none")]
+    pub usage_type: Option<VirtualVisitUsageType>,
+    #[serde(
+        rename = "videoCallApptTypeValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub video_call_appt_type_value: Option<String>,
+    #[serde(
+        rename = "videoControlRegion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub video_control_region: Option<String>,
+    #[serde(
+        rename = "visitRegion",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub visit_region: Option<VirtualVisitVisitRegion>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BundleVersionCreateOptions {
+    #[serde(default)]
+    pub connection: serde_json::Value,
+    #[serde(default)]
+    pub project: serde_json::Value,
+    #[serde(rename = "PackageBundle", default)]
+    pub package_bundle: String,
+    #[serde(rename = "MajorVersion", default)]
+    pub major_version: String,
+    #[serde(rename = "MinorVersion", default)]
+    pub minor_version: String,
+    #[serde(rename = "Ancestor", default)]
+    pub ancestor: serde_json::Value,
+    #[serde(rename = "BundleVersionComponentsPath", default)]
+    pub bundle_version_components_path: String,
+    #[serde(
+        rename = "Description",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub description: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub polling: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MilestoneCompletionCriteria {
+    #[serde(
+        rename = "criteriaBooleanFilter",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub criteria_boolean_filter: Option<String>,
+    #[serde(
+        rename = "criteriaObjectName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub criteria_object_name: Option<String>,
+    #[serde(
+        rename = "criteriaObjectType",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub criteria_object_type: Option<String>,
+    #[serde(rename = "milestoneCriteriaFilterItems", default)]
+    pub milestone_criteria_filter_items: Vec<FilterItem>,
+    #[serde(
+        rename = "milestoneCriteriaFormula",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub milestone_criteria_formula: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RetrieveRequest {
+    #[serde(rename = "apiVersion", default)]
+    pub api_version: f64,
+    #[serde(rename = "packageNames", default)]
+    pub package_names: Vec<String>,
+    #[serde(rename = "rootTypesWithDependencies", default)]
+    pub root_types_with_dependencies: Vec<String>,
+    #[serde(rename = "singlePackage", default)]
+    pub single_package: bool,
+    #[serde(rename = "specificFiles", default)]
+    pub specific_files: Vec<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub unpackaged: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct QueryRecord {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(
+        rename = "PackageBundle",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub package_bundle: Option<serde_json::Value>,
+    #[serde(rename = "VersionName", default)]
+    pub version_name: String,
+    #[serde(rename = "MajorVersion", default)]
+    pub major_version: String,
+    #[serde(rename = "MinorVersion", default)]
+    pub minor_version: String,
+    #[serde(rename = "IsReleased", default)]
+    pub is_released: bool,
+    #[serde(rename = "Ancestor", default, skip_serializing_if = "Option::is_none")]
+    pub ancestor: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BundleVersion {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(rename = "PackageBundle", default)]
+    pub package_bundle: Bundle,
+    #[serde(rename = "VersionName", default)]
+    pub version_name: String,
+    #[serde(rename = "MajorVersion", default)]
+    pub major_version: String,
+    #[serde(rename = "MinorVersion", default)]
+    pub minor_version: String,
+    #[serde(rename = "Ancestor", default)]
+    pub ancestor: serde_json::Value,
+    #[serde(rename = "IsReleased", default)]
+    pub is_released: bool,
+    #[serde(rename = "CreatedDate", default)]
+    pub created_date: String,
+    #[serde(rename = "CreatedById", default)]
+    pub created_by_id: String,
+    #[serde(rename = "LastModifiedDate", default)]
+    pub last_modified_date: String,
+    #[serde(rename = "LastModifiedById", default)]
+    pub last_modified_by_id: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CMSConnectPersonalization {
+    #[serde(rename = "connectorPage", default)]
+    pub connector_page: String,
+    #[serde(rename = "connectorPageAsset", default)]
+    pub connector_page_asset: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct TopicsForObjects {
+    #[serde(rename = "enableTopics", default)]
+    pub enable_topics: bool,
+    #[serde(rename = "entityApiName", default)]
+    pub entity_api_name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CleanRule {
+    #[serde(rename = "bulkEnabled", default)]
+    pub bulk_enabled: bool,
+    #[serde(rename = "bypassTriggers", default)]
+    pub bypass_triggers: bool,
+    #[serde(rename = "bypassWorkflow", default)]
+    pub bypass_workflow: bool,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "fieldMappings", default)]
+    pub field_mappings: Vec<serde_json::Value>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "matchRule", default)]
+    pub match_rule: String,
+    #[serde(rename = "sourceSobjectType", default)]
+    pub source_sobject_type: String,
+    #[serde(default)]
+    pub status: CleanRuleStatus,
+    #[serde(rename = "targetSobjectType", default)]
+    pub target_sobject_type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SupervisorAgentConfigSkills {
+    #[serde(default)]
+    pub skill: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MapExpression {
+    #[serde(default)]
+    pub expression: String,
+    #[serde(default)]
+    pub name: String,
+    #[serde(rename = "type", default, skip_serializing_if = "Option::is_none")]
+    pub r#type: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct LocalizedValue {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub aspect: Option<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub language: Option<String>,
+    #[serde(rename = "outOfDate", default, skip_serializing_if = "Option::is_none")]
+    pub out_of_date: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub value: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AncestryRepresentationProducer {
+    #[serde(default)]
+    pub label: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub options: Option<AncestryRepresentationProducerOptions>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CommandActionParam {
+    #[serde(
+        rename = "defaultValue",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_value: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default)]
+    pub name: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub required: Option<bool>,
+    #[serde(rename = "type", default)]
+    pub r#type: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AnlytDshbrdWdgtDynamicTkn {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub source: Option<String>,
+    #[serde(rename = "tokenName", default, skip_serializing_if = "Option::is_none")]
+    pub token_name: Option<String>,
+    #[serde(rename = "tokenSpec", default, skip_serializing_if = "Option::is_none")]
+    pub token_spec: Option<String>,
+    #[serde(rename = "type", default, skip_serializing_if = "Option::is_none")]
+    pub r#type: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SubtabComponents {
+    #[serde(default)]
+    pub containers: Vec<Container>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CatalogedApi {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub descriptor: Option<String>,
+    #[serde(
+        rename = "externalSourceIdentifier",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub external_source_identifier: Option<String>,
+    #[serde(default)]
+    pub instances: Vec<CatalogedApiInstance>,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "providerType", default)]
+    pub provider_type: serde_json::Value,
+    #[serde(rename = "type", default)]
+    pub r#type: APIType,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct DependencyGraphData {
+    #[serde(default)]
+    pub creator: String,
+    #[serde(default)]
+    pub nodes: Vec<DependencyGraphNode>,
+    #[serde(default)]
+    pub edges: Vec<DependencyGraphEdge>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CatalogedApiArtifactVersionInfo {
+    #[serde(
+        rename = "releaseNotes",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub release_notes: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub revision: Option<f64>,
+    #[serde(rename = "type", default)]
+    pub r#type: String,
+    #[serde(default)]
+    pub version: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BlacklistedConsumer {
+    #[serde(rename = "blockedByApiWhitelisting", default)]
+    pub blocked_by_api_whitelisting: bool,
+    #[serde(rename = "consumerKey", default)]
+    pub consumer_key: String,
+    #[serde(rename = "consumerName", default)]
+    pub consumer_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RegisteredExternalService {
+    #[serde(rename = "configUrl", default, skip_serializing_if = "Option::is_none")]
+    pub config_url: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "documentationUrl",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub documentation_url: Option<String>,
+    #[serde(
+        rename = "extensionPointName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub extension_point_name: Option<ExtensionPointName>,
+    #[serde(rename = "externalServiceProvider", default)]
+    pub external_service_provider: String,
+    #[serde(rename = "externalServiceProviderType", default)]
+    pub external_service_provider_type: RegistryProviderType,
+    #[serde(rename = "iconUri", default, skip_serializing_if = "Option::is_none")]
+    pub icon_uri: Option<String>,
+    #[serde(
+        rename = "isApplication",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_application: Option<bool>,
+    #[serde(
+        rename = "isProtected",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_protected: Option<bool>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EmbdMsgChannelInvitationCondition {
+    #[serde(rename = "conditionType", default)]
+    pub condition_type: EswInvitationConditionResource,
+    #[serde(
+        rename = "customVariableName",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub custom_variable_name: Option<String>,
+    #[serde(rename = "embeddedServiceMessagingChannel", default)]
+    pub embedded_service_messaging_channel: serde_json::Value,
+    #[serde(default)]
+    pub operand: EswInvitationConditionOperator,
+    #[serde(default)]
+    pub sequence: f64,
+    #[serde(default)]
+    pub value: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct StaticDynamicValMapping {
+    #[serde(default)]
+    pub attribute: String,
+    #[serde(rename = "dynamicValue", default)]
+    pub dynamic_value: String,
+    #[serde(rename = "dynamicValueObject", default)]
+    pub dynamic_value_object: String,
+    #[serde(rename = "dynamicValueObjectField", default)]
+    pub dynamic_value_object_field: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "staticValue", default)]
+    pub static_value: String,
+    #[serde(rename = "staticValueObject", default)]
+    pub static_value_object: String,
+    #[serde(rename = "staticValueObjectField", default)]
+    pub static_value_object_field: String,
+    #[serde(
+        rename = "uniqueConstraintFormula",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub unique_constraint_formula: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct McpServerPromptDefinition {
+    #[serde(
+        rename = "descriptionOverride",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub description_override: Option<String>,
+    #[serde(rename = "promptName", default)]
+    pub prompt_name: String,
+    #[serde(rename = "promptTemplateName", default)]
+    pub prompt_template_name: String,
+    #[serde(
+        rename = "promptTitle",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub prompt_title: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CatalogedApiVersion {
+    #[serde(rename = "catalogedApi", default)]
+    pub cataloged_api: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "externalSourceIdentifier",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub external_source_identifier: Option<String>,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub version: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct State {
+    #[serde(default)]
+    pub active: bool,
+    #[serde(rename = "integrationValue", default)]
+    pub integration_value: String,
+    #[serde(rename = "isoCode", default)]
+    pub iso_code: String,
+    #[serde(default)]
+    pub label: String,
+    #[serde(default)]
+    pub standard: bool,
+    #[serde(default)]
+    pub visible: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -13856,47 +13504,399 @@ pub struct InboundCertificate {
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct RecAlrtDataSrcExpSetDef {
-    #[serde(rename = "expressionSetDefinition", default)]
-    pub expression_set_definition: String,
-    #[serde(rename = "expressionSetObject", default)]
-    pub expression_set_object: String,
-    #[serde(rename = "isActive", default)]
-    pub is_active: bool,
-    #[serde(
-        rename = "isProtected",
-        default,
-        skip_serializing_if = "Option::is_none"
-    )]
-    pub is_protected: Option<bool>,
+pub struct DelegateGroup {
+    #[serde(rename = "customObjects", default)]
+    pub custom_objects: Vec<String>,
+    #[serde(default)]
+    pub groups: Vec<String>,
+    #[serde(default)]
+    pub label: String,
+    #[serde(rename = "loginAccess", default)]
+    pub login_access: bool,
+    #[serde(rename = "permissionSetGroups", default)]
+    pub permission_set_groups: Vec<String>,
+    #[serde(rename = "permissionSets", default)]
+    pub permission_sets: Vec<String>,
+    #[serde(default)]
+    pub profiles: Vec<String>,
+    #[serde(default)]
+    pub roles: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ArticleTypeTemplate {
+    #[serde(default)]
+    pub channel: serde_json::Value,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub page: Option<String>,
+    #[serde(default)]
+    pub template: Template,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ValueTranslation {
     #[serde(rename = "masterLabel", default)]
     pub master_label: String,
-    #[serde(rename = "recordAlertDataSource", default)]
-    pub record_alert_data_source: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub translation: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
 #[serde(rename_all = "camelCase")]
-pub struct SupervisorAgentConfigSkills {
+pub struct OrchestrationContext {
     #[serde(default)]
-    pub skill: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct ScheduledRecommendationDetail {
+    pub datasets: Vec<OrchestrationContextDataset>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub channel: Option<serde_json::Value>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub enabled: Option<bool>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub rank: Option<f64>,
+    pub description: Option<String>,
+    #[serde(default)]
+    pub events: Vec<OrchestrationContextEvent>,
+    #[serde(rename = "imageFile", default)]
+    pub image_file: String,
+    #[serde(rename = "imageScale", default)]
+    pub image_scale: f64,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "runtimeType", default)]
+    pub runtime_type: String,
     #[serde(
-        rename = "recommendationAudience",
+        rename = "salesforceObject",
         default,
         skip_serializing_if = "Option::is_none"
     )]
-    pub recommendation_audience: Option<String>,
+    pub salesforce_object: Option<String>,
+    #[serde(
+        rename = "salesforceObjectPrimaryKey",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub salesforce_object_primary_key: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct Group {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(
+        rename = "doesIncludeBosses",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub does_include_bosses: Option<bool>,
+    #[serde(default)]
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct ItemInstance {
+    #[serde(
+        rename = "componentInstance",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub component_instance: Option<serde_json::Value>,
+    #[serde(
+        rename = "fieldInstance",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub field_instance: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CustomHelpMenuItem {
+    #[serde(rename = "linkUrl", default)]
+    pub link_url: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "sortOrder", default)]
+    pub sort_order: f64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct TimelineObjectDefinition {
+    #[serde(rename = "baseObject", default)]
+    pub base_object: String,
+    #[serde(default)]
+    pub definition: String,
+    #[serde(rename = "isActive", default, skip_serializing_if = "Option::is_none")]
+    pub is_active: Option<bool>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct OptimizationSetting {
+    #[serde(
+        rename = "bulkUpdateSize",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub bulk_update_size: Option<f64>,
+    #[serde(
+        rename = "clearGantt",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub clear_gantt: Option<bool>,
+    #[serde(
+        rename = "clusterMinPoints",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub cluster_min_points: Option<f64>,
+    #[serde(
+        rename = "clusterRadius",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub cluster_radius: Option<f64>,
+    #[serde(
+        rename = "maxRuntimeSingleService",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub max_runtime_single_service: Option<f64>,
+    #[serde(
+        rename = "maximumConcurrentRequests",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub maximum_concurrent_requests: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
+    #[serde(
+        rename = "pinnedStatuses",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub pinned_statuses: Option<String>,
+    #[serde(
+        rename = "stayScheduledServicesByBoolean",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub stay_scheduled_services_by_boolean: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CleanDataService {
+    #[serde(rename = "cleanRules", default)]
+    pub clean_rules: Vec<CleanRule>,
+    #[serde(default)]
+    pub description: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "matchEngine", default)]
+    pub match_engine: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MyDomainDiscoverableLogin {
+    #[serde(rename = "apexHandler", default)]
+    pub apex_handler: String,
+    #[serde(
+        rename = "executeApexHandlerAs",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub execute_apex_handler_as: Option<String>,
+    #[serde(
+        rename = "usernameLabel",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub username_label: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AncestorRecord {
+    #[serde(rename = "Id", default)]
+    pub id: String,
+    #[serde(
+        rename = "PackageBundle",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub package_bundle: Option<serde_json::Value>,
+    #[serde(rename = "VersionName", default)]
+    pub version_name: String,
+    #[serde(rename = "MajorVersion", default)]
+    pub major_version: String,
+    #[serde(rename = "MinorVersion", default)]
+    pub minor_version: String,
+    #[serde(rename = "IsReleased", default)]
+    pub is_released: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct RetrieveMessage {
+    #[serde(rename = "fileName", default)]
+    pub file_name: String,
+    #[serde(default)]
+    pub problem: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct CustomApplication {
+    #[serde(rename = "actionOverrides", default)]
+    pub action_overrides: Vec<serde_json::Value>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub brand: Option<serde_json::Value>,
+    #[serde(
+        rename = "consoleConfig",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub console_config: Option<serde_json::Value>,
+    #[serde(
+        rename = "defaultLandingTab",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub default_landing_tab: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "formFactors", default)]
+    pub form_factors: Vec<FormFactor>,
+    #[serde(
+        rename = "isNavAutoTempTabsDisabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_nav_auto_temp_tabs_disabled: Option<bool>,
+    #[serde(
+        rename = "isNavPersonalizationDisabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_nav_personalization_disabled: Option<bool>,
+    #[serde(
+        rename = "isNavTabPersistenceDisabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_nav_tab_persistence_disabled: Option<bool>,
+    #[serde(
+        rename = "isOmniPinnedViewEnabled",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_omni_pinned_view_enabled: Option<bool>,
+    #[serde(
+        rename = "isServiceCloudConsole",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub is_service_cloud_console: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub logo: Option<String>,
+    #[serde(rename = "navType", default, skip_serializing_if = "Option::is_none")]
+    pub nav_type: Option<NavType>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub preferences: Option<serde_json::Value>,
+    #[serde(rename = "profileActionOverrides", default)]
+    pub profile_action_overrides: Vec<serde_json::Value>,
+    #[serde(
+        rename = "setupExperience",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub setup_experience: Option<String>,
+    #[serde(rename = "subscriberTabs", default)]
+    pub subscriber_tabs: Vec<String>,
+    #[serde(default)]
+    pub tabs: Vec<String>,
+    #[serde(rename = "uiType", default, skip_serializing_if = "Option::is_none")]
+    pub ui_type: Option<serde_json::Value>,
+    #[serde(
+        rename = "utilityBar",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub utility_bar: Option<String>,
+    #[serde(
+        rename = "workspaceConfig",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub workspace_config: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct GenComputingSummaryDef {
+    #[serde(rename = "isActive", default)]
+    pub is_active: bool,
+    #[serde(rename = "isCommentPostEnabled", default)]
+    pub is_comment_post_enabled: bool,
+    #[serde(rename = "isFeedPostEnabled", default)]
+    pub is_feed_post_enabled: bool,
+    #[serde(rename = "isPublic", default)]
+    pub is_public: bool,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub prompt: Option<String>,
+    #[serde(
+        rename = "relatedObject",
+        default,
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub related_object: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PersonAccountOwnerPowerUser {
+    #[serde(rename = "developerName", default)]
+    pub developer_name: String,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "portalType", default)]
+    pub portal_type: String,
+    #[serde(default)]
+    pub user: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[cfg_attr(feature = "schemars", derive(schemars::JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct BrandingSet {
+    #[serde(rename = "brandingSetProperty", default)]
+    pub branding_set_property: Vec<BrandingSetProperty>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    #[serde(rename = "masterLabel", default)]
+    pub master_label: String,
+    #[serde(rename = "type", default, skip_serializing_if = "Option::is_none")]
+    pub r#type: Option<String>,
 }
