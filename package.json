@@ -9,7 +9,7 @@
     "url": "https://github.com/composable-delivery/busbar-sf-types"
   },
   "dependencies": {
-    "@salesforce/packaging": "^4.25.1",
-    "@salesforce/types": "^1.0.0"
+    "@salesforce/packaging": "^4.25.3",
+    "@salesforce/types": "^1.8.0"
   }
 }
