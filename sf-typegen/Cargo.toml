@@ -19,7 +19,7 @@ petgraph = { version = "0.8.3", features = ["serde-1"] }
 # Serialization
 serde.workspace = true
 serde_json.workspace = true
-toml = "0.9"
+toml = "1.1"
 
 # TypeScript AST parsing - using oxc
 oxc_parser = "0.134.0"
