@@ -104,10 +104,10 @@ jobs:
              git commit -m "chore: regenerate types for updated @salesforce/types"
              
              # Pull with rebase to handle any remote changes
-             git pull --rebase origin ${{ github.head_ref }} || {
+             git pull --rebase origin "$HEAD_REF" || {
                echo "Rebase failed, aborting rebase and trying merge"
                git rebase --abort
-               git pull origin ${{ github.head_ref }}
+               git pull origin "$HEAD_REF"
              }
              
              # Retry push up to 3 times in case of race conditions
@@ -118,9 +118,9 @@ jobs:
                else
                  if [ $i -lt 3 ]; then
                    echo "Push failed, attempt $i of 3. Pulling and retrying..."
-                   git pull --rebase origin ${{ github.head_ref }} || {
+                   git pull --rebase origin "$HEAD_REF" || {
                      git rebase --abort
-                     git pull origin ${{ github.head_ref }}
+                     git pull origin "$HEAD_REF"
                    }
                    sleep 2
                  else
@@ -143,27 +143,15 @@ jobs:
              
              git commit -m "chore: regenerate types for @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }}"
              git checkout -b "$BRANCH_NAME"
-             
-              # Retry push up to 3 times
-              for i in 1 2 3; do
-                if git push origin "$BRANCH_NAME"; then
-                  echo "Push succeeded"
-                  gh pr create \
-                    --title "chore: types for @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }} (crate v$CRATE_VERSION)" \
-                    --body $'## Generated from @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }}\n\nAutomatically generated types update.\n\n**Source**: @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }}\n**Crate Version**: '"$CRATE_VERSION"$'\n\nThis crate is fully auto-generated. No manual type definitions—only Salesforce metadata via codegen.\n\nChanges are tracked in \`.typegen-reports/\` for CI automation.' \
-                    --label "automation" \
-                    --label "types" || echo "PR may already exist"
-                  break
-               else
-                 if [ $i -lt 3 ]; then
-                   echo "Push failed, attempt $i of 3. Retrying..."
-                   sleep 2
-                 else
-                   echo "Push failed after 3 attempts"
-                   exit 1
-                 fi
-               fi
-             done
+
+             # The branch is this workflow's own, regenerated from main on
+             # every run, and no open PR uses it (checked above). A branch left
+             # by an earlier run is replaced, not merged into.
+             git push --force origin "$BRANCH_NAME"
+             gh pr create \
+               --title "chore: types for @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }} (crate v$CRATE_VERSION)" \
+               --body $'## Generated from @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }}\n\nAutomatically generated types update.\n\n**Source**: @salesforce/types@${{ steps.versions.outputs.salesforce_types_version }}\n**Crate Version**: '"$CRATE_VERSION"$'\n\nThis crate is fully auto-generated. No manual type definitions—only Salesforce metadata via codegen.\n\nChanges are tracked in \`.typegen-reports/\` for CI automation.'
           fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HEAD_REF: ${{ github.head_ref }}
